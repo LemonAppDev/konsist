@@ -15,41 +15,41 @@ class KoChildDeclarationForKoFullyQualifiedNameProviderTest {
     fun `class child fully qualified name`() {
         // given
         val sut = Konsist
-            .scopeFromFile("$appMainSourceSetProjectDirectory/sample/AppClass.kt".toOsSeparator())
+            .scopeFromFile("$appMainSourceSetProjectDirectory/fixture/AppClass.kt".toOsSeparator())
             .classes()
             .withName("ParentSuperClass")
             .children()
             .first()
 
         // then
-        sut.fullyQualifiedName shouldBeEqualTo "com.lemonappdev.sample.ParentClass"
+        sut.fullyQualifiedName shouldBeEqualTo "com.lemonappdev.fixture.ParentClass"
     }
 
     @Test
     fun `object child fully qualified name`() {
         // given
         val sut = Konsist
-            .scopeFromFile("$appMainSourceSetProjectDirectory/sample/AppClass.kt".toOsSeparator())
+            .scopeFromFile("$appMainSourceSetProjectDirectory/fixture/AppClass.kt".toOsSeparator())
             .classes()
             .withName("ParentClassForObject")
             .children()
             .first()
 
         // then
-        sut.fullyQualifiedName shouldBeEqualTo "com.lemonappdev.sample.SampleObject"
+        sut.fullyQualifiedName shouldBeEqualTo "com.lemonappdev.fixture.FixtureObject"
     }
 
     @Test
     fun `interface child fully qualified name`() {
         // given
         val sut = Konsist
-            .scopeFromFile("$appMainSourceSetProjectDirectory/sample/AppClass.kt".toOsSeparator())
+            .scopeFromFile("$appMainSourceSetProjectDirectory/fixture/AppClass.kt".toOsSeparator())
             .interfaces()
             .withName("ParentSuperInterface")
             .children()
             .first()
 
         // then
-        sut.fullyQualifiedName shouldBeEqualTo "com.lemonappdev.sample.ParentInterface"
+        sut.fullyQualifiedName shouldBeEqualTo "com.lemonappdev.fixture.ParentInterface"
     }
 }

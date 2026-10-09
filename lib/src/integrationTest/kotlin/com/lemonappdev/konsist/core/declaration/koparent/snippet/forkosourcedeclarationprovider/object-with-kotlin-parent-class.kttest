@@ -1,1 +1,1 @@
-object SampleObject : Throwable()
+object FixtureObject : Throwable()

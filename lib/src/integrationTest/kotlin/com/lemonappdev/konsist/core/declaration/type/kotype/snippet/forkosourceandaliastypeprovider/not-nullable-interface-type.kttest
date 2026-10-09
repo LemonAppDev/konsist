@@ -1,5 +1,5 @@
-import com.lemonappdev.konsist.testdata.SampleInterface
+import com.lemonappdev.konsist.testdata.FixtureInterface
 
-val sampleProperty1: SampleInterface = SampleClass()
+val fixtureProperty1: FixtureInterface = FixtureClass()
 
-class SampleClass: SampleInterface
+class FixtureClass: FixtureInterface

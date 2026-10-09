@@ -1,1 +1,1 @@
-class SampleClass<in T>
+class FixtureClass<in T>

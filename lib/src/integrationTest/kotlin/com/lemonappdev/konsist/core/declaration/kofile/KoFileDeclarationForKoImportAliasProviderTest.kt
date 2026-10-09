@@ -19,33 +19,33 @@ class KoFileDeclarationForKoImportAliasProviderTest {
         assertSoftly(sut) {
             importAliases.isEmpty() shouldBeEqualTo true
             numImportAliases shouldBeEqualTo 0
-            countImportAliases { it.name == "SampleImportAlias" } shouldBeEqualTo 0
+            countImportAliases { it.name == "FixtureImportAlias" } shouldBeEqualTo 0
             hasImportAliases() shouldBeEqualTo false
             hasImportAliasWithName(emptyList()) shouldBeEqualTo false
             hasImportAliasWithName(emptySet()) shouldBeEqualTo false
             hasImportAliasesWithAllNames(emptyList()) shouldBeEqualTo false
             hasImportAliasesWithAllNames(emptySet()) shouldBeEqualTo false
-            hasImportAliasWithName("SampleImportAlias") shouldBeEqualTo false
-            hasImportAliasWithName(listOf("SampleImportAlias")) shouldBeEqualTo false
-            hasImportAliasWithName(setOf("SampleImportAlias")) shouldBeEqualTo false
+            hasImportAliasWithName("FixtureImportAlias") shouldBeEqualTo false
+            hasImportAliasWithName(listOf("FixtureImportAlias")) shouldBeEqualTo false
+            hasImportAliasWithName(setOf("FixtureImportAlias")) shouldBeEqualTo false
             hasImportAliasesWithAllNames(
-                "SampleImportAlias1",
-                "SampleImportAlias2",
+                "FixtureImportAlias1",
+                "FixtureImportAlias2",
             ).shouldBeEqualTo(false)
             hasImportAliasesWithAllNames(
                 listOf(
-                    "SampleImportAlias1",
-                    "SampleImportAlias2",
+                    "FixtureImportAlias1",
+                    "FixtureImportAlias2",
                 ),
             ).shouldBeEqualTo(false)
             hasImportAliasesWithAllNames(
                 setOf(
-                    "SampleImportAlias1",
-                    "SampleImportAlias2",
+                    "FixtureImportAlias1",
+                    "FixtureImportAlias2",
                 ),
             ).shouldBeEqualTo(false)
-            hasImportAlias { it.name == "SampleImportAlias" } shouldBeEqualTo false
-            hasAllImportAliases { it.hasNameStartingWith("SampleImport") } shouldBeEqualTo true
+            hasImportAlias { it.name == "FixtureImportAlias" } shouldBeEqualTo false
+            hasAllImportAliases { it.hasNameStartingWith("FixtureImport") } shouldBeEqualTo true
         }
     }
 
@@ -61,56 +61,56 @@ class KoFileDeclarationForKoImportAliasProviderTest {
         assertSoftly(sut) {
             importAliases.size shouldBeEqualTo 1
             numImportAliases shouldBeEqualTo 1
-            countImportAliases { it.hasNameStartingWith("SampleImport") } shouldBeEqualTo 1
+            countImportAliases { it.hasNameStartingWith("FixtureImport") } shouldBeEqualTo 1
             hasImportAliases() shouldBeEqualTo true
             hasImportAliasWithName(emptyList()) shouldBeEqualTo true
             hasImportAliasWithName(emptySet()) shouldBeEqualTo true
             hasImportAliasesWithAllNames(emptyList()) shouldBeEqualTo true
             hasImportAliasesWithAllNames(emptySet()) shouldBeEqualTo true
-            hasImportAliasWithName("SampleImportAlias") shouldBeEqualTo true
-            hasImportAliasWithName("SampleOtherImportAlias") shouldBeEqualTo false
+            hasImportAliasWithName("FixtureImportAlias") shouldBeEqualTo true
+            hasImportAliasWithName("FixtureOtherImportAlias") shouldBeEqualTo false
             hasImportAliasWithName(
-                "SampleOtherImportAlias",
-                "SampleImportAlias",
+                "FixtureOtherImportAlias",
+                "FixtureImportAlias",
             ).shouldBeEqualTo(true)
-            hasImportAliasWithName(listOf("SampleImportAlias")) shouldBeEqualTo true
-            hasImportAliasWithName(listOf("SampleOtherImportAlias")) shouldBeEqualTo false
+            hasImportAliasWithName(listOf("FixtureImportAlias")) shouldBeEqualTo true
+            hasImportAliasWithName(listOf("FixtureOtherImportAlias")) shouldBeEqualTo false
             hasImportAliasWithName(
                 listOf(
-                    "SampleOtherImportAlias",
-                    "SampleImportAlias",
+                    "FixtureOtherImportAlias",
+                    "FixtureImportAlias",
                 ),
             ).shouldBeEqualTo(true)
-            hasImportAliasWithName(setOf("SampleImportAlias")) shouldBeEqualTo true
-            hasImportAliasWithName(setOf("SampleOtherImportAlias")) shouldBeEqualTo false
+            hasImportAliasWithName(setOf("FixtureImportAlias")) shouldBeEqualTo true
+            hasImportAliasWithName(setOf("FixtureOtherImportAlias")) shouldBeEqualTo false
             hasImportAliasWithName(
                 setOf(
-                    "SampleOtherImportAlias",
-                    "SampleImportAlias",
+                    "FixtureOtherImportAlias",
+                    "FixtureImportAlias",
                 ),
             ).shouldBeEqualTo(true)
-            hasImportAliasesWithAllNames("SampleImportAlias") shouldBeEqualTo true
+            hasImportAliasesWithAllNames("FixtureImportAlias") shouldBeEqualTo true
             hasImportAliasesWithAllNames(
-                "SampleOtherImportAlias",
-                "SampleImportAlias",
+                "FixtureOtherImportAlias",
+                "FixtureImportAlias",
             ).shouldBeEqualTo(false)
-            hasImportAliasesWithAllNames(listOf("SampleImportAlias")) shouldBeEqualTo true
+            hasImportAliasesWithAllNames(listOf("FixtureImportAlias")) shouldBeEqualTo true
             hasImportAliasesWithAllNames(
                 listOf(
-                    "SampleOtherImportAlias",
-                    "SampleImportAlias",
+                    "FixtureOtherImportAlias",
+                    "FixtureImportAlias",
                 ),
             ).shouldBeEqualTo(false)
-            hasImportAliasesWithAllNames(setOf("SampleImportAlias")) shouldBeEqualTo true
+            hasImportAliasesWithAllNames(setOf("FixtureImportAlias")) shouldBeEqualTo true
             hasImportAliasesWithAllNames(
                 setOf(
-                    "SampleOtherImportAlias",
-                    "SampleImportAlias",
+                    "FixtureOtherImportAlias",
+                    "FixtureImportAlias",
                 ),
             ).shouldBeEqualTo(false)
-            hasImportAlias { it.hasNameStartingWith("SampleImport") } shouldBeEqualTo true
-            hasImportAlias { it.name == "SampleOtherImportAlias" } shouldBeEqualTo false
-            hasAllImportAliases { it.hasNameStartingWith("SampleImport") } shouldBeEqualTo true
+            hasImportAlias { it.hasNameStartingWith("FixtureImport") } shouldBeEqualTo true
+            hasImportAlias { it.name == "FixtureOtherImportAlias" } shouldBeEqualTo false
+            hasAllImportAliases { it.hasNameStartingWith("FixtureImport") } shouldBeEqualTo true
         }
     }
 
@@ -125,61 +125,61 @@ class KoFileDeclarationForKoImportAliasProviderTest {
         // then
         assertSoftly(sut) {
             numImportAliases shouldBeEqualTo 2
-            countImportAliases { it.hasNameStartingWith("SampleImport") } shouldBeEqualTo 2
-            countImportAliases { it.name == "SampleImportAlias1" } shouldBeEqualTo 1
+            countImportAliases { it.hasNameStartingWith("FixtureImport") } shouldBeEqualTo 2
+            countImportAliases { it.name == "FixtureImportAlias1" } shouldBeEqualTo 1
             hasImportAliases() shouldBeEqualTo true
             hasImportAliasWithName(emptyList()) shouldBeEqualTo true
             hasImportAliasWithName(emptySet()) shouldBeEqualTo true
             hasImportAliasesWithAllNames(emptyList()) shouldBeEqualTo true
             hasImportAliasesWithAllNames(emptySet()) shouldBeEqualTo true
-            hasImportAliasWithName("SampleImportAlias1") shouldBeEqualTo true
-            hasImportAliasWithName("SampleOtherImportAlias") shouldBeEqualTo false
-            hasImportAliasWithName("SampleImportAlias1", "otherName") shouldBeEqualTo true
-            hasImportAliasWithName(listOf("SampleImportAlias1")) shouldBeEqualTo true
-            hasImportAliasWithName(listOf("SampleOtherImportAlias")) shouldBeEqualTo false
-            hasImportAliasWithName(listOf("SampleImportAlias1", "otherName")) shouldBeEqualTo true
-            hasImportAliasWithName(setOf("SampleImportAlias1")) shouldBeEqualTo true
-            hasImportAliasWithName(setOf("SampleOtherImportAlias")) shouldBeEqualTo false
-            hasImportAliasWithName(setOf("SampleImportAlias1", "otherName")) shouldBeEqualTo true
-            hasImportAliasesWithAllNames("SampleImportAlias1") shouldBeEqualTo true
+            hasImportAliasWithName("FixtureImportAlias1") shouldBeEqualTo true
+            hasImportAliasWithName("FixtureOtherImportAlias") shouldBeEqualTo false
+            hasImportAliasWithName("FixtureImportAlias1", "otherName") shouldBeEqualTo true
+            hasImportAliasWithName(listOf("FixtureImportAlias1")) shouldBeEqualTo true
+            hasImportAliasWithName(listOf("FixtureOtherImportAlias")) shouldBeEqualTo false
+            hasImportAliasWithName(listOf("FixtureImportAlias1", "otherName")) shouldBeEqualTo true
+            hasImportAliasWithName(setOf("FixtureImportAlias1")) shouldBeEqualTo true
+            hasImportAliasWithName(setOf("FixtureOtherImportAlias")) shouldBeEqualTo false
+            hasImportAliasWithName(setOf("FixtureImportAlias1", "otherName")) shouldBeEqualTo true
+            hasImportAliasesWithAllNames("FixtureImportAlias1") shouldBeEqualTo true
             hasImportAliasesWithAllNames(
-                "SampleImportAlias1",
-                "SampleImportAlias2",
+                "FixtureImportAlias1",
+                "FixtureImportAlias2",
             ).shouldBeEqualTo(true)
             hasImportAliasesWithAllNames(
-                "SampleImportAlias1",
-                "SampleOtherImportAlias",
+                "FixtureImportAlias1",
+                "FixtureOtherImportAlias",
             ).shouldBeEqualTo(false)
-            hasImportAliasesWithAllNames(listOf("SampleImportAlias1")) shouldBeEqualTo true
+            hasImportAliasesWithAllNames(listOf("FixtureImportAlias1")) shouldBeEqualTo true
             hasImportAliasesWithAllNames(
                 listOf(
-                    "SampleImportAlias1",
-                    "SampleImportAlias2",
+                    "FixtureImportAlias1",
+                    "FixtureImportAlias2",
                 ),
             ).shouldBeEqualTo(true)
             hasImportAliasesWithAllNames(
                 listOf(
-                    "SampleImportAlias1",
-                    "SampleOtherImportAlias",
+                    "FixtureImportAlias1",
+                    "FixtureOtherImportAlias",
                 ),
             ).shouldBeEqualTo(false)
-            hasImportAliasesWithAllNames(setOf("SampleImportAlias1")) shouldBeEqualTo true
+            hasImportAliasesWithAllNames(setOf("FixtureImportAlias1")) shouldBeEqualTo true
             hasImportAliasesWithAllNames(
                 setOf(
-                    "SampleImportAlias1",
-                    "SampleImportAlias2",
+                    "FixtureImportAlias1",
+                    "FixtureImportAlias2",
                 ),
             ).shouldBeEqualTo(true)
             hasImportAliasesWithAllNames(
                 setOf(
-                    "SampleImportAlias1",
-                    "SampleOtherImportAlias",
+                    "FixtureImportAlias1",
+                    "FixtureOtherImportAlias",
                 ),
             ).shouldBeEqualTo(false)
-            hasImportAlias { it.name == "SampleImportAlias1" } shouldBeEqualTo true
-            hasImportAlias { it.name == "SampleOtherImportAlias" } shouldBeEqualTo false
-            hasAllImportAliases { it.hasNameStartingWith("SampleImport") } shouldBeEqualTo true
-            hasAllImportAliases { it.hasNameStartingWith("SampleOtherImport") } shouldBeEqualTo false
+            hasImportAlias { it.name == "FixtureImportAlias1" } shouldBeEqualTo true
+            hasImportAlias { it.name == "FixtureOtherImportAlias" } shouldBeEqualTo false
+            hasAllImportAliases { it.hasNameStartingWith("FixtureImport") } shouldBeEqualTo true
+            hasAllImportAliases { it.hasNameStartingWith("FixtureOtherImport") } shouldBeEqualTo false
         }
     }
 
@@ -193,18 +193,18 @@ class KoFileDeclarationForKoImportAliasProviderTest {
 
         // then
         assertSoftly(sut) {
-            hasImportAliasWithName("sampleimportalias") shouldBeEqualTo false
-            hasImportAliasWithName("sampleimportalias", ignoreCase = true) shouldBeEqualTo false
-            hasImportAliasWithName(listOf("sampleimportalias")) shouldBeEqualTo false
-            hasImportAliasWithName(listOf("sampleimportalias"), ignoreCase = true) shouldBeEqualTo false
-            hasImportAliasWithName(setOf("sampleimportalias")) shouldBeEqualTo false
-            hasImportAliasWithName(setOf("sampleimportalias"), ignoreCase = true) shouldBeEqualTo false
-            hasImportAliasesWithAllNames("sampleimportalias1", "sampleimportalias2") shouldBeEqualTo false
-            hasImportAliasesWithAllNames("sampleimportalias1", "sampleimportalias2", ignoreCase = true) shouldBeEqualTo false
-            hasImportAliasesWithAllNames(listOf("sampleimportalias1", "sampleimportalias2")) shouldBeEqualTo false
-            hasImportAliasesWithAllNames(listOf("sampleimportalias1", "sampleimportalias2"), ignoreCase = true) shouldBeEqualTo false
-            hasImportAliasesWithAllNames(setOf("sampleimportalias1", "sampleimportalias2")) shouldBeEqualTo false
-            hasImportAliasesWithAllNames(setOf("sampleimportalias1", "sampleimportalias2"), ignoreCase = true) shouldBeEqualTo false
+            hasImportAliasWithName("fixtureimportalias") shouldBeEqualTo false
+            hasImportAliasWithName("fixtureimportalias", ignoreCase = true) shouldBeEqualTo false
+            hasImportAliasWithName(listOf("fixtureimportalias")) shouldBeEqualTo false
+            hasImportAliasWithName(listOf("fixtureimportalias"), ignoreCase = true) shouldBeEqualTo false
+            hasImportAliasWithName(setOf("fixtureimportalias")) shouldBeEqualTo false
+            hasImportAliasWithName(setOf("fixtureimportalias"), ignoreCase = true) shouldBeEqualTo false
+            hasImportAliasesWithAllNames("fixtureimportalias1", "fixtureimportalias2") shouldBeEqualTo false
+            hasImportAliasesWithAllNames("fixtureimportalias1", "fixtureimportalias2", ignoreCase = true) shouldBeEqualTo false
+            hasImportAliasesWithAllNames(listOf("fixtureimportalias1", "fixtureimportalias2")) shouldBeEqualTo false
+            hasImportAliasesWithAllNames(listOf("fixtureimportalias1", "fixtureimportalias2"), ignoreCase = true) shouldBeEqualTo false
+            hasImportAliasesWithAllNames(setOf("fixtureimportalias1", "fixtureimportalias2")) shouldBeEqualTo false
+            hasImportAliasesWithAllNames(setOf("fixtureimportalias1", "fixtureimportalias2"), ignoreCase = true) shouldBeEqualTo false
         }
     }
 
@@ -218,30 +218,30 @@ class KoFileDeclarationForKoImportAliasProviderTest {
 
         // then
         assertSoftly(sut) {
-            hasImportAliasWithName("sampleimportalias1") shouldBeEqualTo false
-            hasImportAliasWithName("sampleimportalias1", ignoreCase = true) shouldBeEqualTo true
+            hasImportAliasWithName("fixtureimportalias1") shouldBeEqualTo false
+            hasImportAliasWithName("fixtureimportalias1", ignoreCase = true) shouldBeEqualTo true
             hasImportAliasWithName("otherimportalias") shouldBeEqualTo false
             hasImportAliasWithName("otherimportalias", ignoreCase = true) shouldBeEqualTo false
-            hasImportAliasWithName("sampleimportalias1", "otherName") shouldBeEqualTo false
-            hasImportAliasWithName("sampleimportalias1", "otherName", ignoreCase = true) shouldBeEqualTo true
-            hasImportAliasWithName(listOf("sampleimportalias1")) shouldBeEqualTo false
-            hasImportAliasWithName(listOf("sampleimportalias1"), ignoreCase = true) shouldBeEqualTo true
+            hasImportAliasWithName("fixtureimportalias1", "otherName") shouldBeEqualTo false
+            hasImportAliasWithName("fixtureimportalias1", "otherName", ignoreCase = true) shouldBeEqualTo true
+            hasImportAliasWithName(listOf("fixtureimportalias1")) shouldBeEqualTo false
+            hasImportAliasWithName(listOf("fixtureimportalias1"), ignoreCase = true) shouldBeEqualTo true
             hasImportAliasWithName(listOf("otherimportalias")) shouldBeEqualTo false
             hasImportAliasWithName(listOf("otherimportalias"), ignoreCase = true) shouldBeEqualTo false
-            hasImportAliasWithName(listOf("sampleimportalias1", "otherName")) shouldBeEqualTo false
-            hasImportAliasWithName(listOf("sampleimportalias1", "otherName"), ignoreCase = true) shouldBeEqualTo true
-            hasImportAliasesWithAllNames("sampleimportalias1") shouldBeEqualTo false
-            hasImportAliasesWithAllNames("sampleimportalias1", ignoreCase = true) shouldBeEqualTo true
-            hasImportAliasesWithAllNames("sampleimportalias1", "sampleimportalias2") shouldBeEqualTo false
-            hasImportAliasesWithAllNames("sampleimportalias1", "sampleimportalias2", ignoreCase = true) shouldBeEqualTo true
-            hasImportAliasesWithAllNames("sampleimportalias1", "otherimportalias") shouldBeEqualTo false
-            hasImportAliasesWithAllNames("sampleimportalias1", "otherimportalias", ignoreCase = true) shouldBeEqualTo false
-            hasImportAliasesWithAllNames(listOf("sampleimportalias1")) shouldBeEqualTo false
-            hasImportAliasesWithAllNames(listOf("sampleimportalias1"), ignoreCase = true) shouldBeEqualTo true
-            hasImportAliasesWithAllNames(listOf("sampleimportalias1", "sampleimportalias2")) shouldBeEqualTo false
-            hasImportAliasesWithAllNames(listOf("sampleimportalias1", "sampleimportalias2"), ignoreCase = true) shouldBeEqualTo true
-            hasImportAliasesWithAllNames(listOf("sampleimportalias1", "otherimportalias")) shouldBeEqualTo false
-            hasImportAliasesWithAllNames(listOf("sampleimportalias1", "otherimportalias"), ignoreCase = true) shouldBeEqualTo false
+            hasImportAliasWithName(listOf("fixtureimportalias1", "otherName")) shouldBeEqualTo false
+            hasImportAliasWithName(listOf("fixtureimportalias1", "otherName"), ignoreCase = true) shouldBeEqualTo true
+            hasImportAliasesWithAllNames("fixtureimportalias1") shouldBeEqualTo false
+            hasImportAliasesWithAllNames("fixtureimportalias1", ignoreCase = true) shouldBeEqualTo true
+            hasImportAliasesWithAllNames("fixtureimportalias1", "fixtureimportalias2") shouldBeEqualTo false
+            hasImportAliasesWithAllNames("fixtureimportalias1", "fixtureimportalias2", ignoreCase = true) shouldBeEqualTo true
+            hasImportAliasesWithAllNames("fixtureimportalias1", "otherimportalias") shouldBeEqualTo false
+            hasImportAliasesWithAllNames("fixtureimportalias1", "otherimportalias", ignoreCase = true) shouldBeEqualTo false
+            hasImportAliasesWithAllNames(listOf("fixtureimportalias1")) shouldBeEqualTo false
+            hasImportAliasesWithAllNames(listOf("fixtureimportalias1"), ignoreCase = true) shouldBeEqualTo true
+            hasImportAliasesWithAllNames(listOf("fixtureimportalias1", "fixtureimportalias2")) shouldBeEqualTo false
+            hasImportAliasesWithAllNames(listOf("fixtureimportalias1", "fixtureimportalias2"), ignoreCase = true) shouldBeEqualTo true
+            hasImportAliasesWithAllNames(listOf("fixtureimportalias1", "otherimportalias")) shouldBeEqualTo false
+            hasImportAliasesWithAllNames(listOf("fixtureimportalias1", "otherimportalias"), ignoreCase = true) shouldBeEqualTo false
         }
     }
 

@@ -1,7 +1,7 @@
-class SampleTopLevelClass {
-    val sampleProperty = 6
+class FixtureTopLevelClass {
+    val fixtureProperty = 6
 
-    class SampleClass {
-        val sampleNestedProperty = ""
+    class FixtureClass {
+        val fixtureNestedProperty = ""
     }
 }

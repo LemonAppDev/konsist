@@ -1,4 +1,4 @@
 /**
- * This is a sample kdoc.
+ * This is a fixture kdoc.
  */
-interface SampleInterface
+interface FixtureInterface

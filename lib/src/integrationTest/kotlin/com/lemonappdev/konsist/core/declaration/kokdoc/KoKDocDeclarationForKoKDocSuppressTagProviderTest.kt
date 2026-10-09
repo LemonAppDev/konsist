@@ -59,8 +59,8 @@ class KoKDocDeclarationForKoKDocSuppressTagProviderTest {
         @JvmStatic
         fun provideValues() =
             listOf(
-                arguments("class-with-suppress-tag", "SampleClass"),
-                arguments("function-with-suppress-tag", "sampleMethod"),
+                arguments("class-with-suppress-tag", "FixtureClass"),
+                arguments("function-with-suppress-tag", "fixtureMethod"),
             )
     }
 }

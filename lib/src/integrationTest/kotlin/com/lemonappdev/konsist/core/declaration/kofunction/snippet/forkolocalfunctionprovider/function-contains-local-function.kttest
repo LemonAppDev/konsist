@@ -1,7 +1,7 @@
-fun sampleFunction() {
-    fun sampleLocalFunction1() {
+fun fixtureFunction() {
+    fun fixtureLocalFunction1() {
     }
 
-    fun sampleLocalFunction2() {
+    fun fixtureLocalFunction2() {
     }
 }

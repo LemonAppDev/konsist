@@ -1,7 +1,7 @@
-class SampleClass {
+class FixtureClass {
     init {
-        val sampleVariable1 = ""
+        val fixtureVariable1 = ""
 
-        var sampleVariable2 = 0
+        var fixtureVariable2 = 0
     }
 }

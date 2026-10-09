@@ -1,11 +1,11 @@
-class SampleClass {
-    companion object SampleCompanionObject1
+class FixtureClass {
+    companion object FixtureCompanionObject1
 
-    object SampleObject
+    object FixtureObject
 
-    interface SampleInterface {
-        object SampleInterfaceObject
+    interface FixtureInterface {
+        object FixtureInterfaceObject
 
-        companion object SampleCompanionObject2
+        companion object FixtureCompanionObject2
     }
 }

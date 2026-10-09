@@ -22,7 +22,7 @@ class KoTypeDeclarationForKoContainingDeclarationProviderTest {
                 ?.type
 
         // then
-        (sut?.containingDeclaration as? KoNameProvider)?.name shouldBeEqualTo "sampleProperty1"
+        (sut?.containingDeclaration as? KoNameProvider)?.name shouldBeEqualTo "fixtureProperty1"
     }
 
     private fun getSnippetFile(fileName: String) =

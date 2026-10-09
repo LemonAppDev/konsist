@@ -1,5 +1,5 @@
-interface SampleTopLevelInterface {
-    interface SampleInterface {
-        interface SampleNestedInterface
+interface FixtureTopLevelInterface {
+    interface FixtureInterface {
+        interface FixtureNestedInterface
     }
 }

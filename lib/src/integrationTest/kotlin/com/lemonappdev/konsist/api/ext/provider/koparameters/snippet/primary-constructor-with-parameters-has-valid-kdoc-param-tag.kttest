@@ -1,7 +1,7 @@
 /**
- * Sample description
+ * Fixture description
  *
- * @param sampleParameter1
- * @param sampleParameter2
+ * @param fixtureParameter1
+ * @param fixtureParameter2
  */
-class SampleClass(sampleParameter1: Int, sampleParameter2: String)
+class FixtureClass(fixtureParameter1: Int, fixtureParameter2: String)

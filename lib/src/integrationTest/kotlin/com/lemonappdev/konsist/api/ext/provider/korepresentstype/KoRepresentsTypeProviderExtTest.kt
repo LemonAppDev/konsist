@@ -5,12 +5,12 @@ import com.lemonappdev.konsist.api.ext.list.annotations
 import com.lemonappdev.konsist.api.ext.list.parameters
 import com.lemonappdev.konsist.api.ext.provider.representsTypeOf
 import com.lemonappdev.konsist.api.provider.KoRepresentsTypeProvider
+import com.lemonappdev.konsist.testdata.FixtureAnnotation
+import com.lemonappdev.konsist.testdata.FixtureClass
+import com.lemonappdev.konsist.testdata.FixtureInterface
+import com.lemonappdev.konsist.testdata.FixtureObject
+import com.lemonappdev.konsist.testdata.FixtureType
 import com.lemonappdev.konsist.testdata.NonExistingAnnotation
-import com.lemonappdev.konsist.testdata.SampleAnnotation
-import com.lemonappdev.konsist.testdata.SampleClass
-import com.lemonappdev.konsist.testdata.SampleInterface
-import com.lemonappdev.konsist.testdata.SampleObject
-import com.lemonappdev.konsist.testdata.SampleType
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
@@ -29,7 +29,7 @@ class KoRepresentsTypeProviderExtTest {
                 .first()
 
         // then
-        sut.representsTypeOf<SampleType>() shouldBeEqualTo true
+        sut.representsTypeOf<FixtureType>() shouldBeEqualTo true
     }
 
     @Test
@@ -43,7 +43,7 @@ class KoRepresentsTypeProviderExtTest {
 
         // then
         assertSoftly(sut) {
-            representsTypeOf<SampleAnnotation>() shouldBeEqualTo true
+            representsTypeOf<FixtureAnnotation>() shouldBeEqualTo true
             representsTypeOf<NonExistingAnnotation>() shouldBeEqualTo false
         }
     }
@@ -74,7 +74,7 @@ class KoRepresentsTypeProviderExtTest {
 
         // then
         assertSoftly(sut) {
-            representsTypeOf<SampleClass>() shouldBeEqualTo true
+            representsTypeOf<FixtureClass>() shouldBeEqualTo true
             representsTypeOf<String>() shouldBeEqualTo false
         }
     }
@@ -90,7 +90,7 @@ class KoRepresentsTypeProviderExtTest {
         // then
         assertSoftly(sut) {
             representsTypeOf<String>() shouldBeEqualTo true
-            representsTypeOf<SampleType>() shouldBeEqualTo false
+            representsTypeOf<FixtureType>() shouldBeEqualTo false
         }
     }
 
@@ -98,9 +98,9 @@ class KoRepresentsTypeProviderExtTest {
     @MethodSource("provideValues")
     fun `declaration-represents-type`(
         fileName: String,
-        valueForSampleClass: Boolean,
-        valueForSampleInterface: Boolean,
-        valueForSampleObject: Boolean,
+        valueForFixtureClass: Boolean,
+        valueForFixtureInterface: Boolean,
+        valueForFixtureObject: Boolean,
     ) {
         // given
         val sut =
@@ -111,9 +111,9 @@ class KoRepresentsTypeProviderExtTest {
 
         // then
         assertSoftly(sut) {
-            representsTypeOf<SampleClass>() shouldBeEqualTo valueForSampleClass
-            representsTypeOf<SampleInterface>() shouldBeEqualTo valueForSampleInterface
-            representsTypeOf<SampleObject>() shouldBeEqualTo valueForSampleObject
+            representsTypeOf<FixtureClass>() shouldBeEqualTo valueForFixtureClass
+            representsTypeOf<FixtureInterface>() shouldBeEqualTo valueForFixtureInterface
+            representsTypeOf<FixtureObject>() shouldBeEqualTo valueForFixtureObject
         }
     }
 

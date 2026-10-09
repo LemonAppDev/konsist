@@ -1,10 +1,10 @@
 import kotlin.String
 
-val sampleProperty: String
+val fixtureProperty: String
     get() {
-        class SampleClass1
+        class FixtureClass1
 
-        class SampleClass2
+        class FixtureClass2
 
         return ""
     }

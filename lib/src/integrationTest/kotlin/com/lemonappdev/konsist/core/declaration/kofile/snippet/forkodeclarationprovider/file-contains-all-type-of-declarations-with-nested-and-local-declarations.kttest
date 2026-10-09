@@ -1,45 +1,45 @@
-val sampleProperty: Boolean = true
+val fixtureProperty: Boolean = true
 
-fun sampleFunction() {
-    val sampleLocalProperty1 = 6
+fun fixtureFunction() {
+    val fixtureLocalProperty1 = 6
 
-    fun sampleLocalFunction(){
-        val sampleLocalProperty2 = true
+    fun fixtureLocalFunction(){
+        val fixtureLocalProperty2 = true
 
-        class sampleLocalClass1 {
-            fun sampleNestedFunction() {}
+        class fixtureLocalClass1 {
+            fun fixtureNestedFunction() {}
         }
     }
 
-    class sampleLocalClass2
+    class fixtureLocalClass2
 }
 
-class SampleClass {
-    val sampleNestedPropertyInsideClass = 6
+class FixtureClass {
+    val fixtureNestedPropertyInsideClass = 6
 
-    fun sampleNestedFunctionInsideClass() {
-        val sampleLocalProperty3 = true
+    fun fixtureNestedFunctionInsideClass() {
+        val fixtureLocalProperty3 = true
 
-        class sampleLocalClass3
+        class fixtureLocalClass3
     }
 
-    class sampleNestedClassInsideClass
+    class fixtureNestedClassInsideClass
 }
 
-interface SampleInterface {
-    val sampleNestedPropertyInsideInterface: String
+interface FixtureInterface {
+    val fixtureNestedPropertyInsideInterface: String
 
-    fun sampleNestedFunctionInsideInterface() {}
+    fun fixtureNestedFunctionInsideInterface() {}
 
-    class sampleNestedClassInsideInterface
+    class fixtureNestedClassInsideInterface
 }
 
-object SampleObject {
-    val sampleNestedPropertyInsideObject = 6
+object FixtureObject {
+    val fixtureNestedPropertyInsideObject = 6
 
-    fun sampleNestedFunctionInsideObject() {}
+    fun fixtureNestedFunctionInsideObject() {}
 
-    class sampleNestedClassInsideObject
+    class fixtureNestedClassInsideObject
 }
 
-typealias SampleTypeAlias = () -> Int
+typealias FixtureTypeAlias = () -> Int

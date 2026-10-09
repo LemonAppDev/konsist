@@ -1,5 +1,5 @@
-open class SampleClassWithModifier {
+open class FixtureClassWithModifier {
     @Suppress("detekt.someRule", "suppress-text")
-    fun sampleFunctionWithoutModifier() {
+    fun fixtureFunctionWithoutModifier() {
     }
 }

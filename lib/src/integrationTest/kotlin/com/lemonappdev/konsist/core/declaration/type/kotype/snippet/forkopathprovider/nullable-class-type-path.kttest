@@ -1,4 +1,4 @@
 
-import com.lemonappdev.konsist.testdata.SampleType
+import com.lemonappdev.konsist.testdata.FixtureType
 
-class SampleClass1(val sampleProperty1: SampleType?)
+class FixtureClass1(val fixtureProperty1: FixtureType?)

@@ -1,7 +1,7 @@
-class SampleOuterClass {
-    enum class SampleClass {
-        SAMPLE_CONSTANT_1,
-        SAMPLE_CONSTANT_2,
-        SAMPLE_CONSTANT_3,
+class FixtureOuterClass {
+    enum class FixtureClass {
+        FIXTURE_CONSTANT_1,
+        FIXTURE_CONSTANT_2,
+        FIXTURE_CONSTANT_3,
     }
 }

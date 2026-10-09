@@ -1,6 +1,6 @@
-var sampleProperty: String = ""
+var fixtureProperty: String = ""
     set(value) {
-        val sampleVariable = "text"
+        val fixtureVariable = "text"
 
         if (true) field = value
     }

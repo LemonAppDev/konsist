@@ -1,6 +1,6 @@
-object SampleObject {
-    val sampleProperty = ""
+object FixtureObject {
+    val fixtureProperty = ""
 
-    fun sampleFunction() {
+    fun fixtureFunction() {
     }
 }

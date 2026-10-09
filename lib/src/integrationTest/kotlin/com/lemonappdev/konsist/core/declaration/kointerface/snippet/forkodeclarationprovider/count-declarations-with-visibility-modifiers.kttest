@@ -1,7 +1,7 @@
-interface SampleTopLevelInterface {
-    val sampleDefaultProperty: String
+interface FixtureTopLevelInterface {
+    val fixtureDefaultProperty: String
 
-    public fun samplePublicFunction() {}
+    public fun fixturePublicFunction() {}
 
-    private class SamplePrivateClass
+    private class FixturePrivateClass
 }

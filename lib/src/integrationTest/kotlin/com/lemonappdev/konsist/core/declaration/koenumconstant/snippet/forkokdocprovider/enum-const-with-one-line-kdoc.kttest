@@ -1,4 +1,4 @@
-enum class SampleClass {
-    /** Sample KDoc */
-    SAMPLE_CONSTANT_1
+enum class FixtureClass {
+    /** Fixture KDoc */
+    FIXTURE_CONSTANT_1
 }

@@ -1,2 +1,2 @@
-val List<Int>.sampleProperty
+val List<Int>.fixtureProperty
     get() = listOf(1)

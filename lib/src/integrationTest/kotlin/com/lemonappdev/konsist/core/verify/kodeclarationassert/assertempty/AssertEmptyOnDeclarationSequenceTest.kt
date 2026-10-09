@@ -41,9 +41,9 @@ class AssertEmptyOnDeclarationSequenceTest {
 
         // then
         try {
-            sut.assertEmpty(testName = "sample test")
+            sut.assertEmpty(testName = "fixture test")
         } catch (e: Exception) {
-            e.message?.shouldContain("Assert 'sample test' failed.")
+            e.message?.shouldContain("Assert 'fixture test' failed.")
                 ?: throw e
         }
     }
@@ -109,8 +109,8 @@ class AssertEmptyOnDeclarationSequenceTest {
             e.message?.shouldContain(
                 "Assert 'declaration-assert-empty-error-on-list-containing-non-null-values' failed. " +
                     "Declaration list is not empty. It contains values:\n" +
-                    "├── Class SampleClass1 $filepath:1:1\n" +
-                    "└── Class SampleClass2 $filepath:3:1",
+                    "├── Class FixtureClass1 $filepath:1:1\n" +
+                    "└── Class FixtureClass2 $filepath:3:1",
             )
                 ?: throw e
         }
@@ -131,7 +131,7 @@ class AssertEmptyOnDeclarationSequenceTest {
         } catch (e: Exception) {
             val filepath =
                 "file://$rootPath/lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core/verify/kodeclarationassert/" +
-                    "assertempty/snippet/declaration-assert-empty-error-on-list-containing-null-and-non-null-values.kt:1:24"
+                    "assertempty/snippet/declaration-assert-empty-error-on-list-containing-null-and-non-null-values.kt:1:25"
 
             e.message?.shouldContain(
                 "Assert 'declaration-assert-empty-error-on-list-containing-null-and-non-null-values' failed. " +
@@ -162,7 +162,7 @@ class AssertEmptyOnDeclarationSequenceTest {
             e.message?.shouldContain(
                 "Assert 'declaration-assert-empty-error-with-custom-message' failed.\n$message\n" +
                     "Declaration list is not empty. It contains values:\n" +
-                    "└── Class SampleClass $filepath",
+                    "└── Class FixtureClass $filepath",
             )
                 ?: throw e
         }
@@ -188,7 +188,7 @@ class AssertEmptyOnDeclarationSequenceTest {
             e.message?.shouldContain(
                 "Assert 'declaration-assert-empty-error-with-custom-message-and-strict-set-to-true' failed.\n$message\n" +
                     "Declaration list is not empty. It contains values:\n" +
-                    "└── Class SampleClass $filepath",
+                    "└── Class FixtureClass $filepath",
             )
                 ?: throw e
         }

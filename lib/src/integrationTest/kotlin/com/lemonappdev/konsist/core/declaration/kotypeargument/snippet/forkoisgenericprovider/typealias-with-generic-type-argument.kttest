@@ -1,5 +1,5 @@
-import com.lemonappdev.konsist.testdata.SampleClass
+import com.lemonappdev.konsist.testdata.FixtureClass
 
-val sampleProperty1: List<SampleTypeAlias> = emptyList()
+val fixtureProperty1: List<FixtureTypeAlias> = emptyList()
 
-typealias SampleTypeAlias = Set<String>
+typealias FixtureTypeAlias = Set<String>

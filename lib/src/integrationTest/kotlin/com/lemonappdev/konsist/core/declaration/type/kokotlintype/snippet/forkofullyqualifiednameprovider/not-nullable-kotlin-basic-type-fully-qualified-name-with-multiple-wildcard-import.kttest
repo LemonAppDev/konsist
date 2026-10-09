@@ -1,4 +1,4 @@
 import kotlin.*
 import com.lemonappdev.konsist.testdata.*
 
-class SampleClass1(val sampleProperty1: String)
+class FixtureClass1(val fixtureProperty1: String)

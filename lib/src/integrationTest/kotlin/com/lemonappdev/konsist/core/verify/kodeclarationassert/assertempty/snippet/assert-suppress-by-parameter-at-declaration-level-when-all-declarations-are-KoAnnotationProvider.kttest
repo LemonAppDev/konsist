@@ -1,4 +1,4 @@
-class SampleClassText {
+class FixtureClassText {
     @Suppress("suppress-text")
-    class SampleClassWithIncorrectSuffix
+    class FixtureClassWithIncorrectSuffix
 }

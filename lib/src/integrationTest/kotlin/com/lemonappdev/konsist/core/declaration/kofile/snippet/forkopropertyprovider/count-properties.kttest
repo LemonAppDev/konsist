@@ -1,5 +1,5 @@
-internal const val sampleProperty = ""
+internal const val fixtureProperty = ""
 
-class SampleClass {
-    internal val sampleNestedProperty = ""
+class FixtureClass {
+    internal val fixtureNestedProperty = ""
 }

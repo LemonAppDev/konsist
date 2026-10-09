@@ -13,122 +13,122 @@ import org.junit.jupiter.api.Test
 
 class KoScopeFromPackageTest {
     @Test
-    fun `scopeFromPackage for com_lemonappdev_sample package`() {
+    fun `scopeFromPackage for com_lemonappdev_fixture package`() {
         // given
         val sut = Konsist
-            .scopeFromPackage("com.lemonappdev.sample")
+            .scopeFromPackage("com.lemonappdev.fixture")
             .mapToFilePaths()
 
         // then
         sut.shouldBeEqualTo(
             listOf(
-                "$appIntegrationTestSourceSetDirectory/sample/AppClassTest.kt",
-                "$appMainSourceSetDirectory/sample/AppClass.kt",
-                "$dataMainSourceSetDirectory/sample/LibClass.kt",
-                "$dataTestSourceSetDirectory/sample/LibClassSpec.kt",
-                "$rootMainSourceSetDirectory/sample/RootClass.kt",
+                "$appIntegrationTestSourceSetDirectory/fixture/AppClassTest.kt",
+                "$appMainSourceSetDirectory/fixture/AppClass.kt",
+                "$dataMainSourceSetDirectory/fixture/LibClass.kt",
+                "$dataTestSourceSetDirectory/fixture/LibClassSpec.kt",
+                "$rootMainSourceSetDirectory/fixture/RootClass.kt",
             ).toOsSeparator(),
         )
     }
 
     @Test
-    fun `scopeFromPackage for com_lemonappdev_sample package, main source set`() {
+    fun `scopeFromPackage for com_lemonappdev_fixture package, main source set`() {
         // given
         val sut = Konsist
-            .scopeFromPackage("com.lemonappdev.sample", sourceSetName = "main")
+            .scopeFromPackage("com.lemonappdev.fixture", sourceSetName = "main")
             .mapToFilePaths()
 
         // then
         sut.shouldBeEqualTo(
             listOf(
-                "$appMainSourceSetDirectory/sample/AppClass.kt",
-                "$dataMainSourceSetDirectory/sample/LibClass.kt",
-                "$rootMainSourceSetDirectory/sample/RootClass.kt",
+                "$appMainSourceSetDirectory/fixture/AppClass.kt",
+                "$dataMainSourceSetDirectory/fixture/LibClass.kt",
+                "$rootMainSourceSetDirectory/fixture/RootClass.kt",
             ).toOsSeparator(),
         )
     }
 
     @Test
-    fun `scopeFromPackage for com_lemonappdev_sample package, integrationTest source set`() {
+    fun `scopeFromPackage for com_lemonappdev_fixture package, integrationTest source set`() {
         // given
         val sut = Konsist
-            .scopeFromPackage("com.lemonappdev.sample", sourceSetName = "integrationTest")
+            .scopeFromPackage("com.lemonappdev.fixture", sourceSetName = "integrationTest")
             .mapToFilePaths()
 
         // then
         sut.shouldBeEqualTo(
             listOf(
-                "$appIntegrationTestSourceSetDirectory/sample/AppClassTest.kt",
+                "$appIntegrationTestSourceSetDirectory/fixture/AppClassTest.kt",
             ).toOsSeparator(),
         )
     }
 
     @Test
-    fun `scopeFromPackage for com_lemonappdev_sample package, test source set`() {
+    fun `scopeFromPackage for com_lemonappdev_fixture package, test source set`() {
         // given
         val sut = Konsist
-            .scopeFromPackage("com.lemonappdev.sample", sourceSetName = "test")
+            .scopeFromPackage("com.lemonappdev.fixture", sourceSetName = "test")
             .mapToFilePaths()
 
         // then
         sut.shouldBeEqualTo(
             listOf(
-                "$dataTestSourceSetDirectory/sample/LibClassSpec.kt",
+                "$dataTestSourceSetDirectory/fixture/LibClassSpec.kt",
             ).toOsSeparator(),
         )
     }
 
     @Test
-    fun `scopeFromPackage for com_lemonappdev_sample package, app module`() {
+    fun `scopeFromPackage for com_lemonappdev_fixture package, app module`() {
         // given
         val sut = Konsist
-            .scopeFromPackage("com.lemonappdev.sample", moduleName = "app")
+            .scopeFromPackage("com.lemonappdev.fixture", moduleName = "app")
             .mapToFilePaths()
 
         // then
         sut.shouldBeEqualTo(
             listOf(
-                "$appIntegrationTestSourceSetDirectory/sample/AppClassTest.kt",
-                "$appMainSourceSetDirectory/sample/AppClass.kt",
+                "$appIntegrationTestSourceSetDirectory/fixture/AppClassTest.kt",
+                "$appMainSourceSetDirectory/fixture/AppClass.kt",
             ).toOsSeparator(),
         )
     }
 
     @Test
-    fun `scopeFromPackage for com_lemonappdev_sample package, app module, main source set`() {
+    fun `scopeFromPackage for com_lemonappdev_fixture package, app module, main source set`() {
         // given
         val sut = Konsist
-            .scopeFromPackage("com.lemonappdev.sample", moduleName = "app", sourceSetName = "main")
+            .scopeFromPackage("com.lemonappdev.fixture", moduleName = "app", sourceSetName = "main")
             .mapToFilePaths()
 
         // then
         sut.shouldBeEqualTo(
             listOf(
-                "$appMainSourceSetDirectory/sample/AppClass.kt",
+                "$appMainSourceSetDirectory/fixture/AppClass.kt",
             ).toOsSeparator(),
         )
     }
 
     @Test
-    fun `scopeFromPackage for com_lemonappdev_sample package, app module, integrationTest source set`() {
+    fun `scopeFromPackage for com_lemonappdev_fixture package, app module, integrationTest source set`() {
         // given
         val sut = Konsist
-            .scopeFromPackage("com.lemonappdev.sample", moduleName = "app", sourceSetName = "integrationTest")
+            .scopeFromPackage("com.lemonappdev.fixture", moduleName = "app", sourceSetName = "integrationTest")
             .mapToFilePaths()
 
         // then
         sut.shouldBeEqualTo(
             listOf(
-                "$appIntegrationTestSourceSetDirectory/sample/AppClassTest.kt",
+                "$appIntegrationTestSourceSetDirectory/fixture/AppClassTest.kt",
             ).toOsSeparator(),
         )
     }
 
     @Test
-    fun `scopeFromPackage for com_lemonappdev_sample package, app module, test source set`() {
+    fun `scopeFromPackage for com_lemonappdev_fixture package, app module, test source set`() {
         // given
         val sut = Konsist
-            .scopeFromPackage("com.lemonappdev.sample", moduleName = "app", sourceSetName = "test")
+            .scopeFromPackage("com.lemonappdev.fixture", moduleName = "app", sourceSetName = "test")
             .mapToFilePaths()
 
         // then
@@ -136,41 +136,41 @@ class KoScopeFromPackageTest {
     }
 
     @Test
-    fun `scopeFromPackage for com_lemonappdev_sample package, data module`() {
+    fun `scopeFromPackage for com_lemonappdev_fixture package, data module`() {
         // given
         val sut = Konsist
-            .scopeFromPackage("com.lemonappdev.sample", moduleName = "data")
+            .scopeFromPackage("com.lemonappdev.fixture", moduleName = "data")
             .mapToFilePaths()
 
         // then
         sut.shouldBeEqualTo(
             listOf(
-                "$dataMainSourceSetDirectory/sample/LibClass.kt",
-                "$dataTestSourceSetDirectory/sample/LibClassSpec.kt",
+                "$dataMainSourceSetDirectory/fixture/LibClass.kt",
+                "$dataTestSourceSetDirectory/fixture/LibClassSpec.kt",
             ).toOsSeparator(),
         )
     }
 
     @Test
-    fun `scopeFromPackage for com_lemonappdev_sample package, data module, main source set`() {
+    fun `scopeFromPackage for com_lemonappdev_fixture package, data module, main source set`() {
         // given
         val sut = Konsist
-            .scopeFromPackage("com.lemonappdev.sample", moduleName = "data", sourceSetName = "main")
+            .scopeFromPackage("com.lemonappdev.fixture", moduleName = "data", sourceSetName = "main")
             .mapToFilePaths()
 
         // then
         sut.shouldBeEqualTo(
             listOf(
-                "$dataMainSourceSetDirectory/sample/LibClass.kt",
+                "$dataMainSourceSetDirectory/fixture/LibClass.kt",
             ).toOsSeparator(),
         )
     }
 
     @Test
-    fun `scopeFromPackage for com_lemonappdev_sample package, data module, integrationTest source set`() {
+    fun `scopeFromPackage for com_lemonappdev_fixture package, data module, integrationTest source set`() {
         // given
         val sut = Konsist
-            .scopeFromPackage("com.lemonappdev.sample", moduleName = "data", sourceSetName = "integrationTest")
+            .scopeFromPackage("com.lemonappdev.fixture", moduleName = "data", sourceSetName = "integrationTest")
             .mapToFilePaths()
 
         // then
@@ -178,183 +178,183 @@ class KoScopeFromPackageTest {
     }
 
     @Test
-    fun `scopeFromPackage for com_lemonappdev_sample package, data module, test source set`() {
+    fun `scopeFromPackage for com_lemonappdev_fixture package, data module, test source set`() {
         // given
         val sut = Konsist
-            .scopeFromPackage("com.lemonappdev.sample", moduleName = "data", sourceSetName = "test")
+            .scopeFromPackage("com.lemonappdev.fixture", moduleName = "data", sourceSetName = "test")
             .mapToFilePaths()
 
         // then
         sut.shouldBeEqualTo(
             listOf(
-                "$dataTestSourceSetDirectory/sample/LibClassSpec.kt",
+                "$dataTestSourceSetDirectory/fixture/LibClassSpec.kt",
             ).toOsSeparator(),
         )
     }
 
     @Test
-    fun `scopeFromPackage for com_lemonappdev_sample package, root module`() {
+    fun `scopeFromPackage for com_lemonappdev_fixture package, root module`() {
         // given
         val sut = Konsist
-            .scopeFromPackage("com.lemonappdev.sample", moduleName = "root")
+            .scopeFromPackage("com.lemonappdev.fixture", moduleName = "root")
             .mapToFilePaths()
 
         // then
         sut.shouldBeEqualTo(
             listOf(
-                "$rootMainSourceSetDirectory/sample/RootClass.kt",
+                "$rootMainSourceSetDirectory/fixture/RootClass.kt",
             ).toOsSeparator(),
         )
     }
 
     @Test
-    fun `scopeFromPackage for com_lemonappdev_sample package, root module, main source set`() {
+    fun `scopeFromPackage for com_lemonappdev_fixture package, root module, main source set`() {
         // given
         val sut = Konsist
-            .scopeFromPackage("com.lemonappdev.sample", moduleName = "root", sourceSetName = "main")
+            .scopeFromPackage("com.lemonappdev.fixture", moduleName = "root", sourceSetName = "main")
             .mapToFilePaths()
 
         // then
         sut.shouldBeEqualTo(
             listOf(
-                "$rootMainSourceSetDirectory/sample/RootClass.kt",
+                "$rootMainSourceSetDirectory/fixture/RootClass.kt",
             ).toOsSeparator(),
         )
     }
 
     @Test
-    fun `scopeFromPackage for any__sample__any package`() {
+    fun `scopeFromPackage for any__fixture__any package`() {
         // given
         val sut = Konsist
-            .scopeFromPackage("..sample..")
+            .scopeFromPackage("..fixture..")
             .mapToFilePaths()
 
         // then
         sut.shouldBeEqualTo(
             listOf(
-                "$appIntegrationTestSourceSetDirectory/sample/AppClassTest.kt",
-                "$appIntegrationTestSourceSetDirectory/sample/data/AppDataClassTest.kt",
-                "$appMainSourceSetDirectory/sample/AppClass.kt",
-                "$appMainSourceSetDirectory/sample/data/AppDataClass.kt",
-                "$dataMainSourceSetDirectory/sample/LibClass.kt",
-                "$dataMainSourceSetDirectory/sample/data/LibDataClass.kt",
-                "$dataTestSourceSetDirectory/sample/LibClassSpec.kt",
-                "$dataTestSourceSetDirectory/sample/data/LibDataClassTest.kt",
-                "$rootMainSourceSetDirectory/sample/RootClass.kt",
-                "$rootMainSourceSetDirectory/sample/data/RootDataClass.kt",
-                "$rootMainSourceSetDirectory/sample/src/RootSrcClass.kt",
+                "$appIntegrationTestSourceSetDirectory/fixture/AppClassTest.kt",
+                "$appIntegrationTestSourceSetDirectory/fixture/data/AppDataClassTest.kt",
+                "$appMainSourceSetDirectory/fixture/AppClass.kt",
+                "$appMainSourceSetDirectory/fixture/data/AppDataClass.kt",
+                "$dataMainSourceSetDirectory/fixture/LibClass.kt",
+                "$dataMainSourceSetDirectory/fixture/data/LibDataClass.kt",
+                "$dataTestSourceSetDirectory/fixture/LibClassSpec.kt",
+                "$dataTestSourceSetDirectory/fixture/data/LibDataClassTest.kt",
+                "$rootMainSourceSetDirectory/fixture/RootClass.kt",
+                "$rootMainSourceSetDirectory/fixture/data/RootDataClass.kt",
+                "$rootMainSourceSetDirectory/fixture/src/RootSrcClass.kt",
             ).toOsSeparator(),
         )
     }
 
     @Test
-    fun `scopeFromPackage for any__sample__any package, main source set`() {
+    fun `scopeFromPackage for any__fixture__any package, main source set`() {
         // given
         val sut = Konsist
-            .scopeFromPackage("..sample..", sourceSetName = "main")
+            .scopeFromPackage("..fixture..", sourceSetName = "main")
             .mapToFilePaths()
 
         // then
         sut.shouldBeEqualTo(
             listOf(
-                "$appMainSourceSetDirectory/sample/AppClass.kt",
-                "$appMainSourceSetDirectory/sample/data/AppDataClass.kt",
-                "$dataMainSourceSetDirectory/sample/LibClass.kt",
-                "$dataMainSourceSetDirectory/sample/data/LibDataClass.kt",
-                "$rootMainSourceSetDirectory/sample/RootClass.kt",
-                "$rootMainSourceSetDirectory/sample/data/RootDataClass.kt",
-                "$rootMainSourceSetDirectory/sample/src/RootSrcClass.kt",
+                "$appMainSourceSetDirectory/fixture/AppClass.kt",
+                "$appMainSourceSetDirectory/fixture/data/AppDataClass.kt",
+                "$dataMainSourceSetDirectory/fixture/LibClass.kt",
+                "$dataMainSourceSetDirectory/fixture/data/LibDataClass.kt",
+                "$rootMainSourceSetDirectory/fixture/RootClass.kt",
+                "$rootMainSourceSetDirectory/fixture/data/RootDataClass.kt",
+                "$rootMainSourceSetDirectory/fixture/src/RootSrcClass.kt",
             ).toOsSeparator(),
         )
     }
 
     @Test
-    fun `scopeFromPackage for any__sample__any package, integrationTest source set`() {
+    fun `scopeFromPackage for any__fixture__any package, integrationTest source set`() {
         // given
         val sut = Konsist
-            .scopeFromPackage("..sample..", sourceSetName = "integrationTest")
+            .scopeFromPackage("..fixture..", sourceSetName = "integrationTest")
             .mapToFilePaths()
 
         // then
         sut.shouldBeEqualTo(
             listOf(
-                "$appIntegrationTestSourceSetDirectory/sample/AppClassTest.kt",
-                "$appIntegrationTestSourceSetDirectory/sample/data/AppDataClassTest.kt",
+                "$appIntegrationTestSourceSetDirectory/fixture/AppClassTest.kt",
+                "$appIntegrationTestSourceSetDirectory/fixture/data/AppDataClassTest.kt",
             ).toOsSeparator(),
         )
     }
 
     @Test
-    fun `scopeFromPackage for any__sample__any package, test source set`() {
+    fun `scopeFromPackage for any__fixture__any package, test source set`() {
         // given
         val sut = Konsist
-            .scopeFromPackage("..sample..", sourceSetName = "test")
+            .scopeFromPackage("..fixture..", sourceSetName = "test")
             .mapToFilePaths()
 
         // then
         sut.shouldBeEqualTo(
             listOf(
-                "$dataTestSourceSetDirectory/sample/LibClassSpec.kt",
-                "$dataTestSourceSetDirectory/sample/data/LibDataClassTest.kt",
+                "$dataTestSourceSetDirectory/fixture/LibClassSpec.kt",
+                "$dataTestSourceSetDirectory/fixture/data/LibDataClassTest.kt",
             ).toOsSeparator(),
         )
     }
 
     @Test
-    fun `scopeFromPackage for any__sample__any package, app module`() {
+    fun `scopeFromPackage for any__fixture__any package, app module`() {
         // given
         val sut = Konsist
-            .scopeFromPackage("..sample..", moduleName = "app")
+            .scopeFromPackage("..fixture..", moduleName = "app")
             .mapToFilePaths()
 
         // then
         sut.shouldBeEqualTo(
             listOf(
-                "$appIntegrationTestSourceSetDirectory/sample/AppClassTest.kt",
-                "$appIntegrationTestSourceSetDirectory/sample/data/AppDataClassTest.kt",
-                "$appMainSourceSetDirectory/sample/AppClass.kt",
-                "$appMainSourceSetDirectory/sample/data/AppDataClass.kt",
+                "$appIntegrationTestSourceSetDirectory/fixture/AppClassTest.kt",
+                "$appIntegrationTestSourceSetDirectory/fixture/data/AppDataClassTest.kt",
+                "$appMainSourceSetDirectory/fixture/AppClass.kt",
+                "$appMainSourceSetDirectory/fixture/data/AppDataClass.kt",
             ).toOsSeparator(),
         )
     }
 
     @Test
-    fun `scopeFromPackage for any__sample__any package, app module, main source set`() {
+    fun `scopeFromPackage for any__fixture__any package, app module, main source set`() {
         // given
         val sut = Konsist
-            .scopeFromPackage("..sample..", moduleName = "app", sourceSetName = "main")
+            .scopeFromPackage("..fixture..", moduleName = "app", sourceSetName = "main")
             .mapToFilePaths()
 
         // then
         sut.shouldBeEqualTo(
             listOf(
-                "$appMainSourceSetDirectory/sample/AppClass.kt",
-                "$appMainSourceSetDirectory/sample/data/AppDataClass.kt",
+                "$appMainSourceSetDirectory/fixture/AppClass.kt",
+                "$appMainSourceSetDirectory/fixture/data/AppDataClass.kt",
             ).toOsSeparator(),
         )
     }
 
     @Test
-    fun `scopeFromPackage for any__sample__any package, app module, integrationTest source set`() {
+    fun `scopeFromPackage for any__fixture__any package, app module, integrationTest source set`() {
         // given
         val sut = Konsist
-            .scopeFromPackage("..sample..", moduleName = "app", sourceSetName = "integrationTest")
+            .scopeFromPackage("..fixture..", moduleName = "app", sourceSetName = "integrationTest")
             .mapToFilePaths()
 
         // then
         sut.shouldBeEqualTo(
             listOf(
-                "$appIntegrationTestSourceSetDirectory/sample/AppClassTest.kt",
-                "$appIntegrationTestSourceSetDirectory/sample/data/AppDataClassTest.kt",
+                "$appIntegrationTestSourceSetDirectory/fixture/AppClassTest.kt",
+                "$appIntegrationTestSourceSetDirectory/fixture/data/AppDataClassTest.kt",
             ).toOsSeparator(),
         )
     }
 
     @Test
-    fun `scopeFromPackage for any__sample__any package, app module, test source set`() {
+    fun `scopeFromPackage for any__fixture__any package, app module, test source set`() {
         // given
         val sut = Konsist
-            .scopeFromPackage("..sample..", moduleName = "app", sourceSetName = "test")
+            .scopeFromPackage("..fixture..", moduleName = "app", sourceSetName = "test")
             .mapToFilePaths()
 
         // then
@@ -362,44 +362,44 @@ class KoScopeFromPackageTest {
     }
 
     @Test
-    fun `scopeFromPackage for any__sample__any package, data module`() {
+    fun `scopeFromPackage for any__fixture__any package, data module`() {
         // given
         val sut = Konsist
-            .scopeFromPackage("..sample..", moduleName = "data")
+            .scopeFromPackage("..fixture..", moduleName = "data")
             .mapToFilePaths()
 
         // then
         sut.shouldBeEqualTo(
             listOf(
-                "$dataMainSourceSetDirectory/sample/LibClass.kt",
-                "$dataMainSourceSetDirectory/sample/data/LibDataClass.kt",
-                "$dataTestSourceSetDirectory/sample/LibClassSpec.kt",
-                "$dataTestSourceSetDirectory/sample/data/LibDataClassTest.kt",
+                "$dataMainSourceSetDirectory/fixture/LibClass.kt",
+                "$dataMainSourceSetDirectory/fixture/data/LibDataClass.kt",
+                "$dataTestSourceSetDirectory/fixture/LibClassSpec.kt",
+                "$dataTestSourceSetDirectory/fixture/data/LibDataClassTest.kt",
             ).toOsSeparator(),
         )
     }
 
     @Test
-    fun `scopeFromPackage for any__sample__any package, data module, main source set`() {
+    fun `scopeFromPackage for any__fixture__any package, data module, main source set`() {
         // given
         val sut = Konsist
-            .scopeFromPackage("..sample..", moduleName = "data", sourceSetName = "main")
+            .scopeFromPackage("..fixture..", moduleName = "data", sourceSetName = "main")
             .mapToFilePaths()
 
         // then
         sut.shouldBeEqualTo(
             listOf(
-                "$dataMainSourceSetDirectory/sample/LibClass.kt",
-                "$dataMainSourceSetDirectory/sample/data/LibDataClass.kt",
+                "$dataMainSourceSetDirectory/fixture/LibClass.kt",
+                "$dataMainSourceSetDirectory/fixture/data/LibDataClass.kt",
             ).toOsSeparator(),
         )
     }
 
     @Test
-    fun `scopeFromPackage for any__sample__any package, data module, integrationTest source set`() {
+    fun `scopeFromPackage for any__fixture__any package, data module, integrationTest source set`() {
         // given
         val sut = Konsist
-            .scopeFromPackage("..sample..", moduleName = "data", sourceSetName = "integrationTest")
+            .scopeFromPackage("..fixture..", moduleName = "data", sourceSetName = "integrationTest")
             .mapToFilePaths()
 
         // then
@@ -407,51 +407,51 @@ class KoScopeFromPackageTest {
     }
 
     @Test
-    fun `scopeFromPackage for any__sample__any package, data module, test source set`() {
+    fun `scopeFromPackage for any__fixture__any package, data module, test source set`() {
         // given
         val sut = Konsist
-            .scopeFromPackage("..sample..", moduleName = "data", sourceSetName = "test")
+            .scopeFromPackage("..fixture..", moduleName = "data", sourceSetName = "test")
             .mapToFilePaths()
 
         // then
         sut.shouldBeEqualTo(
             listOf(
-                "$dataTestSourceSetDirectory/sample/LibClassSpec.kt",
-                "$dataTestSourceSetDirectory/sample/data/LibDataClassTest.kt",
+                "$dataTestSourceSetDirectory/fixture/LibClassSpec.kt",
+                "$dataTestSourceSetDirectory/fixture/data/LibDataClassTest.kt",
             ).toOsSeparator(),
         )
     }
 
     @Test
-    fun `scopeFromPackage for any__sample__any package, root module`() {
+    fun `scopeFromPackage for any__fixture__any package, root module`() {
         // given
         val sut = Konsist
-            .scopeFromPackage("..sample..", moduleName = "root")
+            .scopeFromPackage("..fixture..", moduleName = "root")
             .mapToFilePaths()
 
         // then
         sut.shouldBeEqualTo(
             listOf(
-                "$rootMainSourceSetDirectory/sample/RootClass.kt",
-                "$rootMainSourceSetDirectory/sample/data/RootDataClass.kt",
-                "$rootMainSourceSetDirectory/sample/src/RootSrcClass.kt",
+                "$rootMainSourceSetDirectory/fixture/RootClass.kt",
+                "$rootMainSourceSetDirectory/fixture/data/RootDataClass.kt",
+                "$rootMainSourceSetDirectory/fixture/src/RootSrcClass.kt",
             ).toOsSeparator(),
         )
     }
 
     @Test
-    fun `scopeFromPackage for any__sample__any package, root module, main source set`() {
+    fun `scopeFromPackage for any__fixture__any package, root module, main source set`() {
         // given
         val sut = Konsist
-            .scopeFromPackage("..sample..", moduleName = "root", sourceSetName = "main")
+            .scopeFromPackage("..fixture..", moduleName = "root", sourceSetName = "main")
             .mapToFilePaths()
 
         // then
         sut.shouldBeEqualTo(
             listOf(
-                "$rootMainSourceSetDirectory/sample/RootClass.kt",
-                "$rootMainSourceSetDirectory/sample/data/RootDataClass.kt",
-                "$rootMainSourceSetDirectory/sample/src/RootSrcClass.kt",
+                "$rootMainSourceSetDirectory/fixture/RootClass.kt",
+                "$rootMainSourceSetDirectory/fixture/data/RootDataClass.kt",
+                "$rootMainSourceSetDirectory/fixture/src/RootSrcClass.kt",
             ).toOsSeparator(),
         )
     }

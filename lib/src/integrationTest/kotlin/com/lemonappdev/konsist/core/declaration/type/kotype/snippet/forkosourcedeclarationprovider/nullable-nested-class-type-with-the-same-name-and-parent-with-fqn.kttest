@@ -1,9 +1,9 @@
 interface FirstInterface {
-    class NestedClass(val arg: SampleNestedClassWithTheSameName?)
-    data class SampleNestedClassWithTheSameName(val sampleFirstParameter: String)
+    class NestedClass(val arg: FixtureNestedClassWithTheSameName?)
+    data class FixtureNestedClassWithTheSameName(val fixtureFirstParameter: String)
 }
 
 interface SecondInterface {
-    class NestedClass(val arg: SampleNestedClassWithTheSameName?)
-    data class SampleNestedClassWithTheSameName(val sampleSecondParameter: String)
+    class NestedClass(val arg: FixtureNestedClassWithTheSameName?)
+    data class FixtureNestedClassWithTheSameName(val fixtureSecondParameter: String)
 }

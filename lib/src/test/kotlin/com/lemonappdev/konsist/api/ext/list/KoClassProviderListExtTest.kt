@@ -239,7 +239,7 @@ class KoClassProviderListExtTest {
     @Test
     fun `withClassNamed(name) returns declaration with given class`() {
         // given
-        val name = "SampleName"
+        val name = "FixtureName"
         val declaration1: KoClassProvider =
             mockk {
                 every { hasClassWithName(listOf(name)) } returns true
@@ -260,8 +260,8 @@ class KoClassProviderListExtTest {
     @Test
     fun `withClassNamed(String) returns declaration with any of given classes`() {
         // given
-        val name1 = "SampleName1"
-        val name2 = "SampleName2"
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
         val declaration1: KoClassProvider =
             mockk {
                 every { hasClassWithName(listOf(name1, name2)) } returns true
@@ -282,8 +282,8 @@ class KoClassProviderListExtTest {
     @Test
     fun `withClassNamed(list of String) returns declaration with any of given classes`() {
         // given
-        val name1 = "SampleName1"
-        val name2 = "SampleName2"
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
         val declaration1: KoClassProvider =
             mockk {
                 every { hasClassWithName(listOf(name1, name2)) } returns true
@@ -305,8 +305,8 @@ class KoClassProviderListExtTest {
     @Test
     fun `withClassNamed(set of String) returns declaration with any of given classes`() {
         // given
-        val name1 = "SampleName1"
-        val name2 = "SampleName2"
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
         val declaration1: KoClassProvider =
             mockk {
                 every { hasClassWithName(setOf(name1, name2)) } returns true
@@ -328,7 +328,7 @@ class KoClassProviderListExtTest {
     @Test
     fun `withClassNamed(name) with ignore case returns declaration with given class`() {
         // given
-        val name = "SampleName"
+        val name = "FixtureName"
         val declaration1: KoClassProvider =
             mockk {
                 every { hasClassWithName(listOf(name), ignoreCase = true) } returns true
@@ -349,8 +349,8 @@ class KoClassProviderListExtTest {
     @Test
     fun `withClassNamed(list of String) with ignore case returns declaration with any of given classes`() {
         // given
-        val name1 = "SampleName1"
-        val name2 = "SampleName2"
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
         val declaration1: KoClassProvider =
             mockk {
                 every { hasClassWithName(listOf(name1, name2), ignoreCase = true) } returns true
@@ -372,7 +372,7 @@ class KoClassProviderListExtTest {
     @Test
     fun `withoutClassNamed(name) returns declaration without given class`() {
         // given
-        val name = "SampleName"
+        val name = "FixtureName"
         val declaration1: KoClassProvider =
             mockk {
                 every { hasClassWithName(listOf(name)) } returns true
@@ -393,8 +393,8 @@ class KoClassProviderListExtTest {
     @Test
     fun `withoutClassNamed(String) returns declaration without any of given classes`() {
         // given
-        val name1 = "SampleName1"
-        val name2 = "SampleName2"
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
         val declaration1: KoClassProvider =
             mockk {
                 every { hasClassWithName(listOf(name1, name2)) } returns true
@@ -415,8 +415,8 @@ class KoClassProviderListExtTest {
     @Test
     fun `withoutClassNamed(list of String) returns declaration without any of given classes`() {
         // given
-        val name1 = "SampleName1"
-        val name2 = "SampleName2"
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
         val declaration1: KoClassProvider =
             mockk {
                 every { hasClassWithName(listOf(name1, name2)) } returns true
@@ -438,8 +438,8 @@ class KoClassProviderListExtTest {
     @Test
     fun `withoutClassNamed(set of String) returns declaration without any of given classes`() {
         // given
-        val name1 = "SampleName1"
-        val name2 = "SampleName2"
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
         val declaration1: KoClassProvider =
             mockk {
                 every { hasClassWithName(setOf(name1, name2)) } returns true
@@ -461,7 +461,7 @@ class KoClassProviderListExtTest {
     @Test
     fun `withoutClassNamed(name) with ignore case returns declaration without given class`() {
         // given
-        val name = "SampleName"
+        val name = "FixtureName"
         val declaration1: KoClassProvider =
             mockk {
                 every { hasClassWithName(listOf(name), ignoreCase = true) } returns true
@@ -482,8 +482,8 @@ class KoClassProviderListExtTest {
     @Test
     fun `withoutClassNamed(list of String) with ignore case returns declaration without any of given classes`() {
         // given
-        val name1 = "SampleName1"
-        val name2 = "SampleName2"
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
         val declaration1: KoClassProvider =
             mockk {
                 every { hasClassWithName(listOf(name1, name2), ignoreCase = true) } returns true
@@ -505,7 +505,7 @@ class KoClassProviderListExtTest {
     @Test
     fun `withAllClassesNamed(name) returns declaration with given class`() {
         // given
-        val name = "SampleName"
+        val name = "FixtureName"
         val declaration1: KoClassProvider =
             mockk {
                 every { hasClassesWithAllNames(listOf(name)) } returns true
@@ -526,8 +526,8 @@ class KoClassProviderListExtTest {
     @Test
     fun `withAllClassesNamed(String) returns declaration with all given classes`() {
         // given
-        val name1 = "SampleName1"
-        val name2 = "SampleName2"
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
         val declaration1: KoClassProvider =
             mockk {
                 every { hasClassesWithAllNames(listOf(name1, name2)) } returns true
@@ -548,8 +548,8 @@ class KoClassProviderListExtTest {
     @Test
     fun `withAllClassesNamed(list of String) returns declaration with all given classes`() {
         // given
-        val name1 = "SampleName1"
-        val name2 = "SampleName2"
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
         val declaration1: KoClassProvider =
             mockk {
                 every { hasClassesWithAllNames(listOf(name1, name2)) } returns true
@@ -571,8 +571,8 @@ class KoClassProviderListExtTest {
     @Test
     fun `withAllClassesNamed(set of String) returns declaration with all given classes`() {
         // given
-        val name1 = "SampleName1"
-        val name2 = "SampleName2"
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
         val declaration1: KoClassProvider =
             mockk {
                 every { hasClassesWithAllNames(setOf(name1, name2)) } returns true
@@ -594,7 +594,7 @@ class KoClassProviderListExtTest {
     @Test
     fun `withAllClassesNamed(name) with ignore case returns declaration with given class`() {
         // given
-        val name = "SampleName"
+        val name = "FixtureName"
         val declaration1: KoClassProvider =
             mockk {
                 every { hasClassesWithAllNames(listOf(name), ignoreCase = true) } returns true
@@ -615,8 +615,8 @@ class KoClassProviderListExtTest {
     @Test
     fun `withAllClassesNamed(list of String) with ignore case returns declaration with all given classes`() {
         // given
-        val name1 = "SampleName1"
-        val name2 = "SampleName2"
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
         val declaration1: KoClassProvider =
             mockk {
                 every { hasClassesWithAllNames(listOf(name1, name2), ignoreCase = true) } returns true
@@ -638,7 +638,7 @@ class KoClassProviderListExtTest {
     @Test
     fun `withoutAllClassesNamed(name) returns declaration without given class`() {
         // given
-        val name = "SampleName"
+        val name = "FixtureName"
         val declaration1: KoClassProvider =
             mockk {
                 every { hasClassesWithAllNames(listOf(name)) } returns true
@@ -659,8 +659,8 @@ class KoClassProviderListExtTest {
     @Test
     fun `withoutAllClassesNamed(String) returns declaration without all of given classes`() {
         // given
-        val name1 = "SampleName1"
-        val name2 = "SampleName2"
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
         val declaration1: KoClassProvider =
             mockk {
                 every { hasClassesWithAllNames(listOf(name1, name2)) } returns true
@@ -681,8 +681,8 @@ class KoClassProviderListExtTest {
     @Test
     fun `withoutAllClassesNamed(list of String) returns declaration without all of given classes`() {
         // given
-        val name1 = "SampleName1"
-        val name2 = "SampleName2"
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
         val declaration1: KoClassProvider =
             mockk {
                 every { hasClassesWithAllNames(listOf(name1, name2)) } returns true
@@ -704,8 +704,8 @@ class KoClassProviderListExtTest {
     @Test
     fun `withoutAllClassesNamed(set of String) returns declaration without all of given classes`() {
         // given
-        val name1 = "SampleName1"
-        val name2 = "SampleName2"
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
         val declaration1: KoClassProvider =
             mockk {
                 every { hasClassesWithAllNames(setOf(name1, name2)) } returns true
@@ -727,7 +727,7 @@ class KoClassProviderListExtTest {
     @Test
     fun `withoutAllClassesNamed(name) with ignore case returns declaration without given class`() {
         // given
-        val name = "SampleName"
+        val name = "FixtureName"
         val declaration1: KoClassProvider =
             mockk {
                 every { hasClassesWithAllNames(listOf(name), ignoreCase = true) } returns true
@@ -748,8 +748,8 @@ class KoClassProviderListExtTest {
     @Test
     fun `withoutAllClassesNamed(list of String) with ignore case returns declaration without all of given classes`() {
         // given
-        val name1 = "SampleName1"
-        val name2 = "SampleName2"
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
         val declaration1: KoClassProvider =
             mockk {
                 every { hasClassesWithAllNames(listOf(name1, name2), ignoreCase = true) } returns true

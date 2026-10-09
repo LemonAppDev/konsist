@@ -1,10 +1,10 @@
-enum class SampleClass {
-    SAMPLE_CONSTANT_1 {
-        val sampleProperty = 0
-        override fun sampleFunction() = 1
+enum class FixtureClass {
+    FIXTURE_CONSTANT_1 {
+        val fixtureProperty = 0
+        override fun fixtureFunction() = 1
 
-        inner class SampleInnerClass
+        inner class FixtureInnerClass
     };
 
-    abstract fun sampleFunction(): Int
+    abstract fun fixtureFunction(): Int
 }

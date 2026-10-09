@@ -1,12 +1,12 @@
 val otherProperty = ""
 
-class SampleClassWithOtherProperty {
+class FixtureClassWithOtherProperty {
     val otherProperty = ""
     init {
         val otherProperty = ""
 
         @Suppress("assert-suppress-by-name-at-declaration-level-when-it-is-at-not-KoAnnotationProvider-declaration")
-        fun sampleFunctionWithoutOtherProperty(){
+        fun fixtureFunctionWithoutOtherProperty(){
 
         }
     }

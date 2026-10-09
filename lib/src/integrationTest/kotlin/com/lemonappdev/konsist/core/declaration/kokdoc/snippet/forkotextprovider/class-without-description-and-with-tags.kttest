@@ -1,26 +1,26 @@
 /**
- * @param SampleType1 The first type parameter for this class.
- * @param SampleType2 The second type parameter for this class.
- * @property sampleProperty1 The first property of the class.
- * @property sampleProperty2 The second property of the class.
- * @constructor Creates a new instance of the [SampleClass].
- * @throws IllegalArgumentException First sample description
- * @exception NullPointerException Second sample description
- * @see AnotherClass1 sample description
+ * @param FixtureType1 The first type parameter for this class.
+ * @param FixtureType2 The second type parameter for this class.
+ * @property fixtureProperty1 The first property of the class.
+ * @property fixtureProperty2 The second property of the class.
+ * @constructor Creates a new instance of the [FixtureClass].
+ * @throws IllegalArgumentException First fixture description
+ * @exception NullPointerException Second fixture description
+ * @see AnotherClass1 fixture description
  * @see AnotherClass2
  * @since 1.0.0
  * @version 1.2.3
- * @sample SampleClass.sampleMethod sample description
- * @sample SampleClass.sampleProperty
+ * @sample FixtureClass.fixtureMethod fixture description
+ * @sample FixtureClass.fixtureProperty
  * @suppress UnusedPrivateMember
  * @author Author1
  * @author Author2
  */
-class SampleClass<SampleType1, SampleType2>(private val sampleProperty1: String, val sampleProperty2: Int) {
+class FixtureClass<FixtureType1, FixtureType2>(private val fixtureProperty1: String, val fixtureProperty2: Int) {
 
-    fun sampleMethod(): Int = 6
+    fun fixtureMethod(): Int = 6
 
-    var sampleProperty: Int
+    var fixtureProperty: Int
         get() {
             return 5
         }

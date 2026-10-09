@@ -12,7 +12,7 @@ class KoNameProviderListExtTest {
     @Test
     fun `withName() returns declaration with any name`() {
         // given
-        val name1 = "sampleName"
+        val name1 = "fixtureName"
         val name2 = ""
         val declaration1: KoNameProvider =
             mockk {
@@ -34,7 +34,7 @@ class KoNameProviderListExtTest {
     @Test
     fun `withName(empty list) returns declaration with any name`() {
         // given
-        val name1 = "sampleName"
+        val name1 = "fixtureName"
         val name2 = ""
         val declaration1: KoNameProvider =
             mockk {
@@ -56,7 +56,7 @@ class KoNameProviderListExtTest {
     @Test
     fun `withoutName() returns declaration without name`() {
         // given
-        val name1 = "sampleName"
+        val name1 = "fixtureName"
         val name2 = ""
         val declaration1: KoNameProvider =
             mockk {
@@ -78,7 +78,7 @@ class KoNameProviderListExtTest {
     @Test
     fun `withoutName(empty list) returns declaration without name`() {
         // given
-        val name1 = "sampleName"
+        val name1 = "fixtureName"
         val name2 = ""
         val declaration1: KoNameProvider =
             mockk {
@@ -100,7 +100,7 @@ class KoNameProviderListExtTest {
     @Test
     fun `withName() returns declaration with given name`() {
         // given
-        val name = "sampleName1"
+        val name = "fixtureName1"
         val declaration1: KoNameProvider =
             mockk {
                 every { hasName(name) } returns true
@@ -121,8 +121,8 @@ class KoNameProviderListExtTest {
     @Test
     fun `withName() returns declarations with one of given names`() {
         // given
-        val name1 = "sampleName1"
-        val name2 = "sampleName2"
+        val name1 = "fixtureName1"
+        val name2 = "fixtureName2"
         val declaration1: KoNameProvider =
             mockk {
                 every { hasName(name1) } returns true
@@ -150,8 +150,8 @@ class KoNameProviderListExtTest {
     @Test
     fun `withName(List) returns declarations with one of given names`() {
         // given
-        val name1 = "sampleName1"
-        val name2 = "sampleName2"
+        val name1 = "fixtureName1"
+        val name2 = "fixtureName2"
         val declaration1: KoNameProvider =
             mockk {
                 every { hasName(name1) } returns true
@@ -205,7 +205,7 @@ class KoNameProviderListExtTest {
     @Test
     fun `withoutName() returns declaration without given name`() {
         // given
-        val name = "sampleName1"
+        val name = "fixtureName1"
         val declaration1: KoNameProvider =
             mockk {
                 every { hasName(name) } returns true
@@ -226,8 +226,8 @@ class KoNameProviderListExtTest {
     @Test
     fun `withoutName() returns declaration without any of given names`() {
         // given
-        val name1 = "sampleName1"
-        val name2 = "sampleName2"
+        val name1 = "fixtureName1"
+        val name2 = "fixtureName2"
         val declaration1: KoNameProvider =
             mockk {
                 every { hasName(name1) } returns true
@@ -255,8 +255,8 @@ class KoNameProviderListExtTest {
     @Test
     fun `withoutName(List) returns declarations with one of given names`() {
         // given
-        val name1 = "sampleName1"
-        val name2 = "sampleName2"
+        val name1 = "fixtureName1"
+        val name2 = "fixtureName2"
         val declaration1: KoNameProvider =
             mockk {
                 every { hasName(name1) } returns true
@@ -310,9 +310,9 @@ class KoNameProviderListExtTest {
     @Test
     fun `withName{predicate} returns declaration with name matching to predicate`() {
         // given
-        val name1 = "sampleName1"
-        val name2 = "sampleName2"
-        val prefix = "sample"
+        val name1 = "fixtureName1"
+        val name2 = "fixtureName2"
+        val prefix = "fixture"
         val suffix = "1"
         val predicate: (String) -> Boolean = { it.startsWith(prefix) && it.endsWith(suffix) }
         val declaration1: KoNameProvider =
@@ -335,9 +335,9 @@ class KoNameProviderListExtTest {
     @Test
     fun `withoutName{predicate} returns declaration without name matching to predicate`() {
         // given
-        val name1 = "sampleName1"
-        val name2 = "sampleName2"
-        val prefix = "sample"
+        val name1 = "fixtureName1"
+        val name2 = "fixtureName2"
+        val prefix = "fixture"
         val suffix = "1"
         val predicate: (String) -> Boolean = { it.startsWith(prefix) && it.endsWith(suffix) }
         val declaration1: KoNameProvider =
@@ -360,7 +360,7 @@ class KoNameProviderListExtTest {
     @Test
     fun `withNameStartingWith(empty list) returns declaration with any name`() {
         // given
-        val name1 = "sampleName"
+        val name1 = "fixtureName"
         val name2 = ""
         val declaration1: KoNameProvider =
             mockk {
@@ -382,7 +382,7 @@ class KoNameProviderListExtTest {
     @Test
     fun `withoutNameStartingWith(empty list) returns declaration with none name`() {
         // given
-        val name1 = "sampleName"
+        val name1 = "fixtureName"
         val name2 = ""
         val declaration1: KoNameProvider =
             mockk {
@@ -622,7 +622,7 @@ class KoNameProviderListExtTest {
     @Test
     fun `withNameEndingWith(empty list) returns declaration with any name`() {
         // given
-        val name1 = "sampleName"
+        val name1 = "fixtureName"
         val name2 = ""
         val declaration1: KoNameProvider =
             mockk {
@@ -644,7 +644,7 @@ class KoNameProviderListExtTest {
     @Test
     fun `withoutNameEndingWith(empty list) returns declaration with none name`() {
         // given
-        val name1 = "sampleName"
+        val name1 = "fixtureName"
         val name2 = ""
         val declaration1: KoNameProvider =
             mockk {
@@ -884,7 +884,7 @@ class KoNameProviderListExtTest {
     @Test
     fun `withNameContaining(empty list) returns declaration with any name`() {
         // given
-        val name1 = "sampleName"
+        val name1 = "fixtureName"
         val name2 = ""
         val declaration1: KoNameProvider =
             mockk {
@@ -906,7 +906,7 @@ class KoNameProviderListExtTest {
     @Test
     fun `withoutNameContaining(empty list) returns declaration with none name`() {
         // given
-        val name1 = "sampleName"
+        val name1 = "fixtureName"
         val name2 = ""
         val declaration1: KoNameProvider =
             mockk {
@@ -1146,7 +1146,7 @@ class KoNameProviderListExtTest {
     @Test
     fun `withNameMatching(empty list) returns declaration with any name`() {
         // given
-        val name1 = "sampleName"
+        val name1 = "fixtureName"
         val name2 = ""
         val declaration1: KoNameProvider =
             mockk {
@@ -1168,7 +1168,7 @@ class KoNameProviderListExtTest {
     @Test
     fun `withoutNameMatching(empty list) returns declaration with none name`() {
         // given
-        val name1 = "sampleName"
+        val name1 = "fixtureName"
         val name2 = ""
         val declaration1: KoNameProvider =
             mockk {

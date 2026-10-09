@@ -1,5 +1,5 @@
-import com.lemonappdev.konsist.testdata.SampleAnnotation
+import com.lemonappdev.konsist.testdata.FixtureAnnotation
 
-enum class SampleClass {
-    @SampleAnnotation SAMPLE_CONSTANT_1
+enum class FixtureClass {
+    @FixtureAnnotation FIXTURE_CONSTANT_1
 }

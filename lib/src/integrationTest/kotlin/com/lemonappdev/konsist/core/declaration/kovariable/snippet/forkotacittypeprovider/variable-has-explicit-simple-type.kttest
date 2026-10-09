@@ -1,4 +1,4 @@
-fun sampleFunction() {
+fun fixtureFunction() {
 
-    val sampleVariable: String = ""
+    val fixtureVariable: String = ""
 }

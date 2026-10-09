@@ -33,7 +33,7 @@ class KoImportDeclarationForKoLocationProviderTest {
                 .first()
 
         // then
-        val declaration = "Declaration:\nimport com.lemonappdev.konsist.testdata.SampleType"
+        val declaration = "Declaration:\nimport com.lemonappdev.konsist.testdata.FixtureType"
         assertSoftly(sut.locationWithText) {
             startsWith("Location: /") shouldBeEqualTo true
             contains(projectPath) shouldBeEqualTo true

@@ -20,23 +20,23 @@ class KoTypeParameterDeclarationForKoUpperBoundsProviderTest {
         assertSoftly(sut) {
             upperBounds shouldBeEqualTo emptyList()
             numUpperBounds shouldBeEqualTo 0
-            countUpperBounds { it.hasNameStartingWith("sample") } shouldBeEqualTo 0
+            countUpperBounds { it.hasNameStartingWith("fixture") } shouldBeEqualTo 0
             hasUpperBounds() shouldBeEqualTo false
             hasUpperBoundWithName(emptyList()) shouldBeEqualTo false
             hasUpperBoundWithName(emptySet()) shouldBeEqualTo false
             hasUpperBoundsWithAllNames(emptyList()) shouldBeEqualTo false
             hasUpperBoundsWithAllNames(emptySet()) shouldBeEqualTo false
-            hasUpperBoundWithName("sampleUpperBound") shouldBeEqualTo false
-            hasUpperBoundWithName("sampleupperbound", ignoreCase = true) shouldBeEqualTo false
-            hasUpperBoundWithName(listOf("sampleUpperBound")) shouldBeEqualTo false
-            hasUpperBoundWithName(listOf("sampleupperbound"), ignoreCase = true) shouldBeEqualTo false
-            hasUpperBoundWithName(setOf("sampleUpperBound")) shouldBeEqualTo false
-            hasUpperBoundWithName(setOf("sampleupperbound"), ignoreCase = true) shouldBeEqualTo false
-            hasUpperBoundsWithAllNames("sampleUpperBound1", "sampleUpperBound2") shouldBeEqualTo false
-            hasUpperBoundsWithAllNames(listOf("sampleUpperBound1", "sampleUpperBound2")) shouldBeEqualTo false
-            hasUpperBoundsWithAllNames(setOf("sampleUpperBound1", "sampleUpperBound2")) shouldBeEqualTo false
+            hasUpperBoundWithName("fixtureUpperBound") shouldBeEqualTo false
+            hasUpperBoundWithName("fixtureupperbound", ignoreCase = true) shouldBeEqualTo false
+            hasUpperBoundWithName(listOf("fixtureUpperBound")) shouldBeEqualTo false
+            hasUpperBoundWithName(listOf("fixtureupperbound"), ignoreCase = true) shouldBeEqualTo false
+            hasUpperBoundWithName(setOf("fixtureUpperBound")) shouldBeEqualTo false
+            hasUpperBoundWithName(setOf("fixtureupperbound"), ignoreCase = true) shouldBeEqualTo false
+            hasUpperBoundsWithAllNames("fixtureUpperBound1", "fixtureUpperBound2") shouldBeEqualTo false
+            hasUpperBoundsWithAllNames(listOf("fixtureUpperBound1", "fixtureUpperBound2")) shouldBeEqualTo false
+            hasUpperBoundsWithAllNames(setOf("fixtureUpperBound1", "fixtureUpperBound2")) shouldBeEqualTo false
             hasUpperBound { it.hasNameStartingWith("other") } shouldBeEqualTo false
-            hasAllUpperBounds { it.hasNameStartingWith("sample") } shouldBeEqualTo true
+            hasAllUpperBounds { it.hasNameStartingWith("fixture") } shouldBeEqualTo true
         }
     }
 
@@ -171,23 +171,23 @@ class KoTypeParameterDeclarationForKoUpperBoundsProviderTest {
         assertSoftly(sut) {
             upperBounds shouldBeEqualTo emptyList()
             numUpperBounds shouldBeEqualTo 0
-            countUpperBounds { it.hasNameStartingWith("sample") } shouldBeEqualTo 0
+            countUpperBounds { it.hasNameStartingWith("fixture") } shouldBeEqualTo 0
             hasUpperBounds() shouldBeEqualTo false
             hasUpperBoundWithName(emptyList()) shouldBeEqualTo false
             hasUpperBoundWithName(emptySet()) shouldBeEqualTo false
             hasUpperBoundsWithAllNames(emptyList()) shouldBeEqualTo false
             hasUpperBoundsWithAllNames(emptySet()) shouldBeEqualTo false
-            hasUpperBoundWithName("sampleUpperBound") shouldBeEqualTo false
-            hasUpperBoundWithName("sampleupperbound", ignoreCase = true) shouldBeEqualTo false
-            hasUpperBoundWithName(listOf("sampleUpperBound")) shouldBeEqualTo false
-            hasUpperBoundWithName(listOf("sampleupperbound"), ignoreCase = true) shouldBeEqualTo false
-            hasUpperBoundWithName(setOf("sampleUpperBound")) shouldBeEqualTo false
-            hasUpperBoundWithName(setOf("sampleupperbound"), ignoreCase = true) shouldBeEqualTo false
-            hasUpperBoundsWithAllNames("sampleUpperBound1", "sampleUpperBound2") shouldBeEqualTo false
-            hasUpperBoundsWithAllNames(listOf("sampleUpperBound1", "sampleUpperBound2")) shouldBeEqualTo false
-            hasUpperBoundsWithAllNames(setOf("sampleUpperBound1", "sampleUpperBound2")) shouldBeEqualTo false
+            hasUpperBoundWithName("fixtureUpperBound") shouldBeEqualTo false
+            hasUpperBoundWithName("fixtureupperbound", ignoreCase = true) shouldBeEqualTo false
+            hasUpperBoundWithName(listOf("fixtureUpperBound")) shouldBeEqualTo false
+            hasUpperBoundWithName(listOf("fixtureupperbound"), ignoreCase = true) shouldBeEqualTo false
+            hasUpperBoundWithName(setOf("fixtureUpperBound")) shouldBeEqualTo false
+            hasUpperBoundWithName(setOf("fixtureupperbound"), ignoreCase = true) shouldBeEqualTo false
+            hasUpperBoundsWithAllNames("fixtureUpperBound1", "fixtureUpperBound2") shouldBeEqualTo false
+            hasUpperBoundsWithAllNames(listOf("fixtureUpperBound1", "fixtureUpperBound2")) shouldBeEqualTo false
+            hasUpperBoundsWithAllNames(setOf("fixtureUpperBound1", "fixtureUpperBound2")) shouldBeEqualTo false
             hasUpperBound { it.hasNameStartingWith("other") } shouldBeEqualTo false
-            hasAllUpperBounds { it.hasNameStartingWith("sample") } shouldBeEqualTo true
+            hasAllUpperBounds { it.hasNameStartingWith("fixture") } shouldBeEqualTo true
         }
     }
 
@@ -322,23 +322,23 @@ class KoTypeParameterDeclarationForKoUpperBoundsProviderTest {
         assertSoftly(sut) {
             upperBounds shouldBeEqualTo emptyList()
             numUpperBounds shouldBeEqualTo 0
-            countUpperBounds { it.hasNameStartingWith("sample") } shouldBeEqualTo 0
+            countUpperBounds { it.hasNameStartingWith("fixture") } shouldBeEqualTo 0
             hasUpperBounds() shouldBeEqualTo false
             hasUpperBoundWithName(emptyList()) shouldBeEqualTo false
             hasUpperBoundWithName(emptySet()) shouldBeEqualTo false
             hasUpperBoundsWithAllNames(emptyList()) shouldBeEqualTo false
             hasUpperBoundsWithAllNames(emptySet()) shouldBeEqualTo false
-            hasUpperBoundWithName("sampleUpperBound") shouldBeEqualTo false
-            hasUpperBoundWithName("sampleupperbound", ignoreCase = true) shouldBeEqualTo false
-            hasUpperBoundWithName(listOf("sampleUpperBound")) shouldBeEqualTo false
-            hasUpperBoundWithName(listOf("sampleupperbound"), ignoreCase = true) shouldBeEqualTo false
-            hasUpperBoundWithName(setOf("sampleUpperBound")) shouldBeEqualTo false
-            hasUpperBoundWithName(setOf("sampleupperbound"), ignoreCase = true) shouldBeEqualTo false
-            hasUpperBoundsWithAllNames("sampleUpperBound1", "sampleUpperBound2") shouldBeEqualTo false
-            hasUpperBoundsWithAllNames(listOf("sampleUpperBound1", "sampleUpperBound2")) shouldBeEqualTo false
-            hasUpperBoundsWithAllNames(setOf("sampleUpperBound1", "sampleUpperBound2")) shouldBeEqualTo false
+            hasUpperBoundWithName("fixtureUpperBound") shouldBeEqualTo false
+            hasUpperBoundWithName("fixtureupperbound", ignoreCase = true) shouldBeEqualTo false
+            hasUpperBoundWithName(listOf("fixtureUpperBound")) shouldBeEqualTo false
+            hasUpperBoundWithName(listOf("fixtureupperbound"), ignoreCase = true) shouldBeEqualTo false
+            hasUpperBoundWithName(setOf("fixtureUpperBound")) shouldBeEqualTo false
+            hasUpperBoundWithName(setOf("fixtureupperbound"), ignoreCase = true) shouldBeEqualTo false
+            hasUpperBoundsWithAllNames("fixtureUpperBound1", "fixtureUpperBound2") shouldBeEqualTo false
+            hasUpperBoundsWithAllNames(listOf("fixtureUpperBound1", "fixtureUpperBound2")) shouldBeEqualTo false
+            hasUpperBoundsWithAllNames(setOf("fixtureUpperBound1", "fixtureUpperBound2")) shouldBeEqualTo false
             hasUpperBound { it.hasNameStartingWith("other") } shouldBeEqualTo false
-            hasAllUpperBounds { it.hasNameStartingWith("sample") } shouldBeEqualTo true
+            hasAllUpperBounds { it.hasNameStartingWith("fixture") } shouldBeEqualTo true
         }
     }
 
@@ -473,23 +473,23 @@ class KoTypeParameterDeclarationForKoUpperBoundsProviderTest {
         assertSoftly(sut) {
             upperBounds shouldBeEqualTo emptyList()
             numUpperBounds shouldBeEqualTo 0
-            countUpperBounds { it.hasNameStartingWith("sample") } shouldBeEqualTo 0
+            countUpperBounds { it.hasNameStartingWith("fixture") } shouldBeEqualTo 0
             hasUpperBounds() shouldBeEqualTo false
             hasUpperBoundWithName(emptyList()) shouldBeEqualTo false
             hasUpperBoundWithName(emptySet()) shouldBeEqualTo false
             hasUpperBoundsWithAllNames(emptyList()) shouldBeEqualTo false
             hasUpperBoundsWithAllNames(emptySet()) shouldBeEqualTo false
-            hasUpperBoundWithName("sampleUpperBound") shouldBeEqualTo false
-            hasUpperBoundWithName("sampleupperbound", ignoreCase = true) shouldBeEqualTo false
-            hasUpperBoundWithName(listOf("sampleUpperBound")) shouldBeEqualTo false
-            hasUpperBoundWithName(listOf("sampleupperbound"), ignoreCase = true) shouldBeEqualTo false
-            hasUpperBoundWithName(setOf("sampleUpperBound")) shouldBeEqualTo false
-            hasUpperBoundWithName(setOf("sampleupperbound"), ignoreCase = true) shouldBeEqualTo false
-            hasUpperBoundsWithAllNames("sampleUpperBound1", "sampleUpperBound2") shouldBeEqualTo false
-            hasUpperBoundsWithAllNames(listOf("sampleUpperBound1", "sampleUpperBound2")) shouldBeEqualTo false
-            hasUpperBoundsWithAllNames(setOf("sampleUpperBound1", "sampleUpperBound2")) shouldBeEqualTo false
+            hasUpperBoundWithName("fixtureUpperBound") shouldBeEqualTo false
+            hasUpperBoundWithName("fixtureupperbound", ignoreCase = true) shouldBeEqualTo false
+            hasUpperBoundWithName(listOf("fixtureUpperBound")) shouldBeEqualTo false
+            hasUpperBoundWithName(listOf("fixtureupperbound"), ignoreCase = true) shouldBeEqualTo false
+            hasUpperBoundWithName(setOf("fixtureUpperBound")) shouldBeEqualTo false
+            hasUpperBoundWithName(setOf("fixtureupperbound"), ignoreCase = true) shouldBeEqualTo false
+            hasUpperBoundsWithAllNames("fixtureUpperBound1", "fixtureUpperBound2") shouldBeEqualTo false
+            hasUpperBoundsWithAllNames(listOf("fixtureUpperBound1", "fixtureUpperBound2")) shouldBeEqualTo false
+            hasUpperBoundsWithAllNames(setOf("fixtureUpperBound1", "fixtureUpperBound2")) shouldBeEqualTo false
             hasUpperBound { it.hasNameStartingWith("other") } shouldBeEqualTo false
-            hasAllUpperBounds { it.hasNameStartingWith("sample") } shouldBeEqualTo true
+            hasAllUpperBounds { it.hasNameStartingWith("fixture") } shouldBeEqualTo true
         }
     }
 
@@ -624,23 +624,23 @@ class KoTypeParameterDeclarationForKoUpperBoundsProviderTest {
         assertSoftly(sut) {
             upperBounds shouldBeEqualTo emptyList()
             numUpperBounds shouldBeEqualTo 0
-            countUpperBounds { it.hasNameStartingWith("sample") } shouldBeEqualTo 0
+            countUpperBounds { it.hasNameStartingWith("fixture") } shouldBeEqualTo 0
             hasUpperBounds() shouldBeEqualTo false
             hasUpperBoundWithName(emptyList()) shouldBeEqualTo false
             hasUpperBoundWithName(emptySet()) shouldBeEqualTo false
             hasUpperBoundsWithAllNames(emptyList()) shouldBeEqualTo false
             hasUpperBoundsWithAllNames(emptySet()) shouldBeEqualTo false
-            hasUpperBoundWithName("sampleUpperBound") shouldBeEqualTo false
-            hasUpperBoundWithName("sampleupperbound", ignoreCase = true) shouldBeEqualTo false
-            hasUpperBoundWithName(listOf("sampleUpperBound")) shouldBeEqualTo false
-            hasUpperBoundWithName(listOf("sampleupperbound"), ignoreCase = true) shouldBeEqualTo false
-            hasUpperBoundWithName(setOf("sampleUpperBound")) shouldBeEqualTo false
-            hasUpperBoundWithName(setOf("sampleupperbound"), ignoreCase = true) shouldBeEqualTo false
-            hasUpperBoundsWithAllNames("sampleUpperBound1", "sampleUpperBound2") shouldBeEqualTo false
-            hasUpperBoundsWithAllNames(listOf("sampleUpperBound1", "sampleUpperBound2")) shouldBeEqualTo false
-            hasUpperBoundsWithAllNames(setOf("sampleUpperBound1", "sampleUpperBound2")) shouldBeEqualTo false
+            hasUpperBoundWithName("fixtureUpperBound") shouldBeEqualTo false
+            hasUpperBoundWithName("fixtureupperbound", ignoreCase = true) shouldBeEqualTo false
+            hasUpperBoundWithName(listOf("fixtureUpperBound")) shouldBeEqualTo false
+            hasUpperBoundWithName(listOf("fixtureupperbound"), ignoreCase = true) shouldBeEqualTo false
+            hasUpperBoundWithName(setOf("fixtureUpperBound")) shouldBeEqualTo false
+            hasUpperBoundWithName(setOf("fixtureupperbound"), ignoreCase = true) shouldBeEqualTo false
+            hasUpperBoundsWithAllNames("fixtureUpperBound1", "fixtureUpperBound2") shouldBeEqualTo false
+            hasUpperBoundsWithAllNames(listOf("fixtureUpperBound1", "fixtureUpperBound2")) shouldBeEqualTo false
+            hasUpperBoundsWithAllNames(setOf("fixtureUpperBound1", "fixtureUpperBound2")) shouldBeEqualTo false
             hasUpperBound { it.hasNameStartingWith("other") } shouldBeEqualTo false
-            hasAllUpperBounds { it.hasNameStartingWith("sample") } shouldBeEqualTo true
+            hasAllUpperBounds { it.hasNameStartingWith("fixture") } shouldBeEqualTo true
         }
     }
 

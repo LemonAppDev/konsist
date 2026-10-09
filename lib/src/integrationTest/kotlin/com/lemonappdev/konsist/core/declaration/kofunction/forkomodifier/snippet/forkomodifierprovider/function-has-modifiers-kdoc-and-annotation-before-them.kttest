@@ -1,7 +1,7 @@
-import com.lemonappdev.konsist.testdata.SampleAnnotation
+import com.lemonappdev.konsist.testdata.FixtureAnnotation
 
-class SampleClass {
-    @SampleAnnotation
+class FixtureClass {
+    @FixtureAnnotation
     /**
      * Some comment
      */

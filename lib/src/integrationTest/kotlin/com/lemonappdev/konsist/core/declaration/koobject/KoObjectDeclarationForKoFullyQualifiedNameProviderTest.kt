@@ -14,7 +14,7 @@ class KoObjectDeclarationForKoFullyQualifiedNameProviderTest {
                 .first()
 
         // then
-        sut.fullyQualifiedName shouldBeEqualTo "com.samplepackage.SampleObject"
+        sut.fullyQualifiedName shouldBeEqualTo "com.fixturepackage.FixtureObject"
     }
 
     @Test
@@ -26,7 +26,7 @@ class KoObjectDeclarationForKoFullyQualifiedNameProviderTest {
                 .first()
 
         // then
-        sut.fullyQualifiedName shouldBeEqualTo "SampleObject"
+        sut.fullyQualifiedName shouldBeEqualTo "FixtureObject"
     }
 
     @Test
@@ -38,7 +38,7 @@ class KoObjectDeclarationForKoFullyQualifiedNameProviderTest {
                 .first()
 
         // then
-        sut.fullyQualifiedName shouldBeEqualTo "com.samplepackage.SampleClass.SampleObject"
+        sut.fullyQualifiedName shouldBeEqualTo "com.fixturepackage.FixtureClass.FixtureObject"
     }
 
     @Test
@@ -50,7 +50,7 @@ class KoObjectDeclarationForKoFullyQualifiedNameProviderTest {
                 .first()
 
         // then
-        sut.fullyQualifiedName shouldBeEqualTo "SampleClass.SampleObject"
+        sut.fullyQualifiedName shouldBeEqualTo "FixtureClass.FixtureObject"
     }
 
     private fun getSnippetFile(fileName: String) =

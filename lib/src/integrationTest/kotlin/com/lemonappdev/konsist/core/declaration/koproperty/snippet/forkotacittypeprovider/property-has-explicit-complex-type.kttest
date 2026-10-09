@@ -1,5 +1,5 @@
-import com.lemonappdev.konsist.testdata.SampleClassWithParameter
+import com.lemonappdev.konsist.testdata.FixtureClassWithParameter
 
-val list = listOf(SampleClassWithParameter("some text"))
+val list = listOf(FixtureClassWithParameter("some text"))
 
-val sampleProperty: SampleClassWithParameter = list[0]
+val fixtureProperty: FixtureClassWithParameter = list[0]

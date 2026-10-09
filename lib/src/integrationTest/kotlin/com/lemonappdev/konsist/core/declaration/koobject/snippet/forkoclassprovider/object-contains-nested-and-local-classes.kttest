@@ -1,10 +1,10 @@
-object SampleObject {
-    object SampleObject {
+object FixtureObject {
+    object FixtureObject {
 
-        class SampleNestedClass
+        class FixtureNestedClass
     }
 
-    fun sampleFunction() {
-        class SampleLocalClass
+    fun fixtureFunction() {
+        class FixtureLocalClass
     }
 }

@@ -11,7 +11,7 @@ class KoTextProviderListExtTest {
     @Test
     fun `withText() returns declaration with any text`() {
         // given
-        val text1 = "sampleText"
+        val text1 = "fixtureText"
         val text2 = ""
         val declaration1: KoTextProvider =
             mockk {
@@ -33,7 +33,7 @@ class KoTextProviderListExtTest {
     @Test
     fun `withText(empty list) returns declaration with any text`() {
         // given
-        val text1 = "sampleText"
+        val text1 = "fixtureText"
         val text2 = ""
         val declaration1: KoTextProvider =
             mockk {
@@ -55,7 +55,7 @@ class KoTextProviderListExtTest {
     @Test
     fun `withText(empty set) returns declaration with any text`() {
         // given
-        val text1 = "sampleText"
+        val text1 = "fixtureText"
         val text2 = ""
         val declaration1: KoTextProvider =
             mockk {
@@ -77,7 +77,7 @@ class KoTextProviderListExtTest {
     @Test
     fun `withoutText() returns declaration without text`() {
         // given
-        val text1 = "sampleText"
+        val text1 = "fixtureText"
         val text2 = ""
         val declaration1: KoTextProvider =
             mockk {
@@ -99,7 +99,7 @@ class KoTextProviderListExtTest {
     @Test
     fun `withoutText(empty list) returns declaration without text`() {
         // given
-        val text1 = "sampleText"
+        val text1 = "fixtureText"
         val text2 = ""
         val declaration1: KoTextProvider =
             mockk {
@@ -121,7 +121,7 @@ class KoTextProviderListExtTest {
     @Test
     fun `withoutText(empty set) returns declaration without text`() {
         // given
-        val text1 = "sampleText"
+        val text1 = "fixtureText"
         val text2 = ""
         val declaration1: KoTextProvider =
             mockk {
@@ -143,8 +143,8 @@ class KoTextProviderListExtTest {
     @Test
     fun `withText() returns declaration with given text`() {
         // given
-        val text1 = "sampleText1"
-        val text2 = "sampleText2"
+        val text1 = "fixtureText1"
+        val text2 = "fixtureText2"
         val declaration1: KoTextProvider =
             mockk {
                 every { text } returns text1
@@ -165,9 +165,9 @@ class KoTextProviderListExtTest {
     @Test
     fun `withText() returns declarations with one of given texts`() {
         // given
-        val text1 = "sampleText1"
-        val text2 = "sampleText2"
-        val text3 = "sampleText3"
+        val text1 = "fixtureText1"
+        val text2 = "fixtureText2"
+        val text3 = "fixtureText3"
         val declaration1: KoTextProvider =
             mockk {
                 every { text } returns text1
@@ -192,9 +192,9 @@ class KoTextProviderListExtTest {
     @Test
     fun `withText(List) returns declarations with one of given texts`() {
         // given
-        val text1 = "sampleText1"
-        val text2 = "sampleText2"
-        val text3 = "sampleText3"
+        val text1 = "fixtureText1"
+        val text2 = "fixtureText2"
+        val text3 = "fixtureText3"
         val declaration1: KoTextProvider =
             mockk {
                 every { text } returns text1
@@ -220,9 +220,9 @@ class KoTextProviderListExtTest {
     @Test
     fun `withText(Set) returns declarations with one of given texts`() {
         // given
-        val text1 = "sampleText1"
-        val text2 = "sampleText2"
-        val text3 = "sampleText3"
+        val text1 = "fixtureText1"
+        val text2 = "fixtureText2"
+        val text3 = "fixtureText3"
         val declaration1: KoTextProvider =
             mockk {
                 every { text } returns text1
@@ -248,8 +248,8 @@ class KoTextProviderListExtTest {
     @Test
     fun `withoutText() returns declaration without given text`() {
         // given
-        val text1 = "sampleText1"
-        val text2 = "sampleText2"
+        val text1 = "fixtureText1"
+        val text2 = "fixtureText2"
         val declaration1: KoTextProvider =
             mockk {
                 every { text } returns text1
@@ -270,9 +270,9 @@ class KoTextProviderListExtTest {
     @Test
     fun `withoutText() returns declaration without any of given texts`() {
         // given
-        val text1 = "sampleText1"
-        val text2 = "sampleText2"
-        val text3 = "sampleText3"
+        val text1 = "fixtureText1"
+        val text2 = "fixtureText2"
+        val text3 = "fixtureText3"
         val declaration1: KoTextProvider =
             mockk {
                 every { text } returns text1
@@ -297,9 +297,9 @@ class KoTextProviderListExtTest {
     @Test
     fun `withoutText(List) returns declarations with one of given texts`() {
         // given
-        val text1 = "sampleText1"
-        val text2 = "sampleText2"
-        val text3 = "sampleText3"
+        val text1 = "fixtureText1"
+        val text2 = "fixtureText2"
+        val text3 = "fixtureText3"
         val declaration1: KoTextProvider =
             mockk {
                 every { text } returns text1
@@ -325,9 +325,9 @@ class KoTextProviderListExtTest {
     @Test
     fun `withoutText(Set) returns declarations with one of given texts`() {
         // given
-        val text1 = "sampleText1"
-        val text2 = "sampleText2"
-        val text3 = "sampleText3"
+        val text1 = "fixtureText1"
+        val text2 = "fixtureText2"
+        val text3 = "fixtureText3"
         val declaration1: KoTextProvider =
             mockk {
                 every { text } returns text1
@@ -353,9 +353,9 @@ class KoTextProviderListExtTest {
     @Test
     fun `withText{predicate} returns declaration with text matching to predicate`() {
         // given
-        val text1 = "sampleText1"
-        val text2 = "sampleText2"
-        val prefix = "sample"
+        val text1 = "fixtureText1"
+        val text2 = "fixtureText2"
+        val prefix = "fixture"
         val suffix = "1"
         val predicate: (String) -> Boolean = { it.startsWith(prefix) && it.endsWith(suffix) }
         val declaration1: KoTextProvider =
@@ -378,9 +378,9 @@ class KoTextProviderListExtTest {
     @Test
     fun `withoutText{predicate} returns declaration without text matching to predicate`() {
         // given
-        val text1 = "sampleText1"
-        val text2 = "sampleText2"
-        val prefix = "sample"
+        val text1 = "fixtureText1"
+        val text2 = "fixtureText2"
+        val prefix = "fixture"
         val suffix = "1"
         val predicate: (String) -> Boolean = { it.startsWith(prefix) && it.endsWith(suffix) }
         val declaration1: KoTextProvider =
@@ -403,7 +403,7 @@ class KoTextProviderListExtTest {
     @Test
     fun `withTextStartingWith(empty list) returns declaration with any text`() {
         // given
-        val text1 = "sampleText"
+        val text1 = "fixtureText"
         val text2 = ""
         val declaration1: KoTextProvider =
             mockk {
@@ -425,7 +425,7 @@ class KoTextProviderListExtTest {
     @Test
     fun `withTextStartingWith(empty set) returns declaration with any text`() {
         // given
-        val text1 = "sampleText"
+        val text1 = "fixtureText"
         val text2 = ""
         val declaration1: KoTextProvider =
             mockk {
@@ -447,7 +447,7 @@ class KoTextProviderListExtTest {
     @Test
     fun `withoutTextStartingWith(empty list) returns declaration with none text`() {
         // given
-        val text1 = "sampleText"
+        val text1 = "fixtureText"
         val text2 = ""
         val declaration1: KoTextProvider =
             mockk {
@@ -469,7 +469,7 @@ class KoTextProviderListExtTest {
     @Test
     fun `withoutTextStartingWith(empty set) returns declaration with none text`() {
         // given
-        val text1 = "sampleText"
+        val text1 = "fixtureText"
         val text2 = ""
         val declaration1: KoTextProvider =
             mockk {
@@ -711,7 +711,7 @@ class KoTextProviderListExtTest {
     @Test
     fun `withTextEndingWith(empty list) returns declaration with any text`() {
         // given
-        val text1 = "sampleText"
+        val text1 = "fixtureText"
         val text2 = ""
         val declaration1: KoTextProvider =
             mockk {
@@ -733,7 +733,7 @@ class KoTextProviderListExtTest {
     @Test
     fun `withTextEndingWith(empty set) returns declaration with any text`() {
         // given
-        val text1 = "sampleText"
+        val text1 = "fixtureText"
         val text2 = ""
         val declaration1: KoTextProvider =
             mockk {
@@ -755,7 +755,7 @@ class KoTextProviderListExtTest {
     @Test
     fun `withoutTextEndingWith(empty list) returns declaration with none text`() {
         // given
-        val text1 = "sampleText"
+        val text1 = "fixtureText"
         val text2 = ""
         val declaration1: KoTextProvider =
             mockk {
@@ -777,7 +777,7 @@ class KoTextProviderListExtTest {
     @Test
     fun `withoutTextEndingWith(empty set) returns declaration with none text`() {
         // given
-        val text1 = "sampleText"
+        val text1 = "fixtureText"
         val text2 = ""
         val declaration1: KoTextProvider =
             mockk {
@@ -1019,7 +1019,7 @@ class KoTextProviderListExtTest {
     @Test
     fun `withTextContaining(empty list) returns declaration with any text`() {
         // given
-        val text1 = "sampleText"
+        val text1 = "fixtureText"
         val text2 = ""
         val declaration1: KoTextProvider =
             mockk {
@@ -1041,7 +1041,7 @@ class KoTextProviderListExtTest {
     @Test
     fun `withTextContaining(empty set) returns declaration with any text`() {
         // given
-        val text1 = "sampleText"
+        val text1 = "fixtureText"
         val text2 = ""
         val declaration1: KoTextProvider =
             mockk {
@@ -1063,7 +1063,7 @@ class KoTextProviderListExtTest {
     @Test
     fun `withoutTextContaining(empty list) returns declaration with none text`() {
         // given
-        val text1 = "sampleText"
+        val text1 = "fixtureText"
         val text2 = ""
         val declaration1: KoTextProvider =
             mockk {
@@ -1085,7 +1085,7 @@ class KoTextProviderListExtTest {
     @Test
     fun `withoutTextContaining(empty set) returns declaration with none text`() {
         // given
-        val text1 = "sampleText"
+        val text1 = "fixtureText"
         val text2 = ""
         val declaration1: KoTextProvider =
             mockk {
@@ -1327,7 +1327,7 @@ class KoTextProviderListExtTest {
     @Test
     fun `withTextMatching(empty list) returns declaration with any text`() {
         // given
-        val text1 = "sampleText"
+        val text1 = "fixtureText"
         val text2 = ""
         val declaration1: KoTextProvider =
             mockk {
@@ -1349,7 +1349,7 @@ class KoTextProviderListExtTest {
     @Test
     fun `withTextMatching(empty set) returns declaration with any text`() {
         // given
-        val text1 = "sampleText"
+        val text1 = "fixtureText"
         val text2 = ""
         val declaration1: KoTextProvider =
             mockk {
@@ -1371,7 +1371,7 @@ class KoTextProviderListExtTest {
     @Test
     fun `withoutTextMatching(empty list) returns declaration with none text`() {
         // given
-        val text1 = "sampleText"
+        val text1 = "fixtureText"
         val text2 = ""
         val declaration1: KoTextProvider =
             mockk {
@@ -1393,7 +1393,7 @@ class KoTextProviderListExtTest {
     @Test
     fun `withoutTextMatching(empty set) returns declaration with none text`() {
         // given
-        val text1 = "sampleText"
+        val text1 = "fixtureText"
         val text2 = ""
         val declaration1: KoTextProvider =
             mockk {

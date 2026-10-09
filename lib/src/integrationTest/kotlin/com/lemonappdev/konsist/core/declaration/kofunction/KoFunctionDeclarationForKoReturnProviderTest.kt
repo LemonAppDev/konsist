@@ -1,7 +1,7 @@
 package com.lemonappdev.konsist.core.declaration.kofunction
 
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
-import com.lemonappdev.konsist.testdata.SampleType
+import com.lemonappdev.konsist.testdata.FixtureType
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
@@ -51,11 +51,11 @@ class KoFunctionDeclarationForKoReturnProviderTest {
 
         // then
         assertSoftly(sut) {
-            returnType?.name shouldBeEqualTo "SampleType"
+            returnType?.name shouldBeEqualTo "FixtureType"
             hasReturnType() shouldBeEqualTo true
-            hasReturnType { it.name == "SampleType" } shouldBeEqualTo true
+            hasReturnType { it.name == "FixtureType" } shouldBeEqualTo true
             hasReturnType { it.name == "Int" } shouldBeEqualTo false
-            hasReturnTypeOf(SampleType::class) shouldBeEqualTo true
+            hasReturnTypeOf(FixtureType::class) shouldBeEqualTo true
             hasReturnTypeOf(Int::class) shouldBeEqualTo false
         }
     }
@@ -74,7 +74,7 @@ class KoFunctionDeclarationForKoReturnProviderTest {
             hasReturnType() shouldBeEqualTo true
             hasReturnType { it.name == "ImportAlias" } shouldBeEqualTo true
             hasReturnType { it.name == "Int" } shouldBeEqualTo false
-            hasReturnTypeOf(SampleType::class) shouldBeEqualTo false
+            hasReturnTypeOf(FixtureType::class) shouldBeEqualTo false
             hasReturnTypeOf(Int::class) shouldBeEqualTo false
         }
     }
@@ -89,11 +89,11 @@ class KoFunctionDeclarationForKoReturnProviderTest {
 
         // then
         assertSoftly(sut) {
-            returnType?.name shouldBeEqualTo "SampleType"
+            returnType?.name shouldBeEqualTo "FixtureType"
             hasReturnType() shouldBeEqualTo true
-            hasReturnType { it.name == "SampleType" } shouldBeEqualTo true
+            hasReturnType { it.name == "FixtureType" } shouldBeEqualTo true
             hasReturnType { it.name == "Int" } shouldBeEqualTo false
-            hasReturnTypeOf(SampleType::class) shouldBeEqualTo true
+            hasReturnTypeOf(FixtureType::class) shouldBeEqualTo true
             hasReturnTypeOf(Int::class) shouldBeEqualTo false
         }
     }

@@ -20,7 +20,7 @@ class KoScopeForKoInterfaceDeclarationTest {
         val sut = getSnippetFile("scope-contains-interfaces")
 
         // then
-        val expected = listOf("SampleInterface", "SampleNestedInterface")
+        val expected = listOf("FixtureInterface", "FixtureNestedInterface")
 
         sut
             .interfaces(includeNested = true)
@@ -34,7 +34,7 @@ class KoScopeForKoInterfaceDeclarationTest {
         val sut = getSnippetFile("scope-contains-interfaces")
 
         // then
-        val expected = listOf("SampleInterface")
+        val expected = listOf("FixtureInterface")
 
         sut
             .interfaces(includeNested = false)

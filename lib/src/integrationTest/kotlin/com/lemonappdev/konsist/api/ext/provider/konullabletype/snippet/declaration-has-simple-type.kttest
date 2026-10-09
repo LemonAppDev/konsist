@@ -1,1 +1,1 @@
-val sampleProperty: Int = 0
+val fixtureProperty: Int = 0

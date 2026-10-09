@@ -11,7 +11,7 @@ class KoClassDeclarationForKoIsTopLevelProviderTest {
         val sut =
             getSnippetFile("class-is-not-top-level")
                 .classes(includeNested = true)
-                .first { it.name == "SampleNestedClass" }
+                .first { it.name == "FixtureNestedClass" }
 
         // then
         sut.isTopLevel shouldBeEqualTo false

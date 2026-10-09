@@ -2,9 +2,9 @@ package com.lemonappdev.konsist.api.ext.provider.koexternalparent
 
 import com.lemonappdev.konsist.TestSnippetProvider
 import com.lemonappdev.konsist.api.ext.provider.hasExternalParentOf
-import com.lemonappdev.konsist.externalsample.SampleExternalClass
-import com.lemonappdev.konsist.externalsample.SampleExternalInterface
-import com.lemonappdev.konsist.testdata.SampleParentClass
+import com.lemonappdev.konsist.externalfixture.FixtureExternalClass
+import com.lemonappdev.konsist.externalfixture.FixtureExternalInterface
+import com.lemonappdev.konsist.testdata.FixtureParentClass
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
@@ -20,9 +20,9 @@ class KoExternalParentProviderExtTest {
 
         // then
         assertSoftly(sut) {
-            hasExternalParentOf<SampleExternalInterface>() shouldBeEqualTo true
-            hasExternalParentOf<SampleExternalClass>() shouldBeEqualTo false
-            hasExternalParentOf<SampleParentClass>() shouldBeEqualTo false
+            hasExternalParentOf<FixtureExternalInterface>() shouldBeEqualTo true
+            hasExternalParentOf<FixtureExternalClass>() shouldBeEqualTo false
+            hasExternalParentOf<FixtureParentClass>() shouldBeEqualTo false
         }
     }
 
@@ -36,9 +36,9 @@ class KoExternalParentProviderExtTest {
 
         // then
         assertSoftly(sut) {
-            hasExternalParentOf<SampleExternalInterface>() shouldBeEqualTo true
-            hasExternalParentOf<SampleExternalClass>() shouldBeEqualTo false
-            hasExternalParentOf<SampleParentClass>() shouldBeEqualTo false
+            hasExternalParentOf<FixtureExternalInterface>() shouldBeEqualTo true
+            hasExternalParentOf<FixtureExternalClass>() shouldBeEqualTo false
+            hasExternalParentOf<FixtureParentClass>() shouldBeEqualTo false
         }
     }
 
@@ -52,9 +52,9 @@ class KoExternalParentProviderExtTest {
 
         // then
         assertSoftly(sut) {
-            hasExternalParentOf<SampleExternalInterface>() shouldBeEqualTo true
-            hasExternalParentOf<SampleExternalClass>() shouldBeEqualTo false
-            hasExternalParentOf<SampleParentClass>() shouldBeEqualTo false
+            hasExternalParentOf<FixtureExternalInterface>() shouldBeEqualTo true
+            hasExternalParentOf<FixtureExternalClass>() shouldBeEqualTo false
+            hasExternalParentOf<FixtureParentClass>() shouldBeEqualTo false
         }
     }
 

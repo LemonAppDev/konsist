@@ -1,5 +1,5 @@
-val sampleProperty = 6
+val fixtureProperty = 6
 
-class SampleClass {
-    val sampleNestedProperty = ""
+class FixtureClass {
+    val fixtureNestedProperty = ""
 }

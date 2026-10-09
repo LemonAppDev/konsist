@@ -1,2 +1,2 @@
-val <TestType> TestType.sampleProperty: TestType
+val <TestType> TestType.fixtureProperty: TestType
     get()= this

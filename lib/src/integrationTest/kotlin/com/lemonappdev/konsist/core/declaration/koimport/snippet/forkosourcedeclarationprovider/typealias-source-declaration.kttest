@@ -1,3 +1,3 @@
-import com.lemonappdev.konsist.testdata.SampleBasicTypeAlias
+import com.lemonappdev.konsist.testdata.FixtureBasicTypeAlias
 
-class SampleClass1(val sampleProperty1: SampleBasicTypeAlias?)
+class FixtureClass1(val fixtureProperty1: FixtureBasicTypeAlias?)

@@ -305,7 +305,7 @@ class KoCompanionObjectProviderListExtTest {
     @Test
     fun `withCompanionObject{} returns declaration with companion object which satisfy predicate`() {
         // given
-        val prefix = "sample"
+        val prefix = "fixture"
         val predicate: (KoCompanionObjectDeclaration) -> Boolean = { it.hasNameStartingWith(prefix) }
         val declaration1: KoCompanionObjectProvider =
             mockk {
@@ -327,7 +327,7 @@ class KoCompanionObjectProviderListExtTest {
     @Test
     fun `withoutCompanionObject{} returns declaration without companion object which satisfy predicate`() {
         // given
-        val prefix = "sample"
+        val prefix = "fixture"
         val predicate: (KoCompanionObjectDeclaration) -> Boolean = { it.hasNameStartingWith(prefix) }
         val declaration1: KoCompanionObjectProvider =
             mockk {
@@ -463,7 +463,7 @@ class KoCompanionObjectProviderListExtTest {
     @Test
     fun `withCompanionObjectNamed(name) returns declaration with given companion object`() {
         // given
-        val name = "SampleName"
+        val name = "FixtureName"
         val declaration1: KoCompanionObjectProvider =
             mockk {
                 every { hasCompanionObjectWithName(listOf(name)) } returns true
@@ -484,8 +484,8 @@ class KoCompanionObjectProviderListExtTest {
     @Test
     fun `withCompanionObjectNamed(String) returns declaration with any of given companion objects`() {
         // given
-        val name1 = "SampleName1"
-        val name2 = "SampleName2"
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
         val declaration1: KoCompanionObjectProvider =
             mockk {
                 every { hasCompanionObjectWithName(listOf(name1, name2)) } returns true
@@ -506,8 +506,8 @@ class KoCompanionObjectProviderListExtTest {
     @Test
     fun `withCompanionObjectNamed(list of String) returns declaration with any of given companion objects`() {
         // given
-        val name1 = "SampleName1"
-        val name2 = "SampleName2"
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
         val declaration1: KoCompanionObjectProvider =
             mockk {
                 every { hasCompanionObjectWithName(listOf(name1, name2)) } returns true
@@ -529,8 +529,8 @@ class KoCompanionObjectProviderListExtTest {
     @Test
     fun `withCompanionObjectNamed(set of String) returns declaration with any of given companion objects`() {
         // given
-        val name1 = "SampleName1"
-        val name2 = "SampleName2"
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
         val declaration1: KoCompanionObjectProvider =
             mockk {
                 every { hasCompanionObjectWithName(setOf(name1, name2)) } returns true
@@ -552,7 +552,7 @@ class KoCompanionObjectProviderListExtTest {
     @Test
     fun `withCompanionObjectNamed(name) with ignore case returns declaration with given companion object`() {
         // given
-        val name = "SampleName"
+        val name = "FixtureName"
         val declaration1: KoCompanionObjectProvider =
             mockk {
                 every { hasCompanionObjectWithName(listOf(name), ignoreCase = true) } returns true
@@ -573,8 +573,8 @@ class KoCompanionObjectProviderListExtTest {
     @Test
     fun `withCompanionObjectNamed(list of String) with ignore case returns declaration with any of given companion objects`() {
         // given
-        val name1 = "SampleName1"
-        val name2 = "SampleName2"
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
         val declaration1: KoCompanionObjectProvider =
             mockk {
                 every { hasCompanionObjectWithName(listOf(name1, name2), ignoreCase = true) } returns true
@@ -596,7 +596,7 @@ class KoCompanionObjectProviderListExtTest {
     @Test
     fun `withoutCompanionObjectNamed(name) returns declaration without given companion object`() {
         // given
-        val name = "SampleName"
+        val name = "FixtureName"
         val declaration1: KoCompanionObjectProvider =
             mockk {
                 every { hasCompanionObjectWithName(listOf(name)) } returns true
@@ -617,8 +617,8 @@ class KoCompanionObjectProviderListExtTest {
     @Test
     fun `withoutCompanionObjectNamed(String) returns declaration without any of given companion objects`() {
         // given
-        val name1 = "SampleName1"
-        val name2 = "SampleName2"
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
         val declaration1: KoCompanionObjectProvider =
             mockk {
                 every { hasCompanionObjectWithName(listOf(name1, name2)) } returns true
@@ -639,8 +639,8 @@ class KoCompanionObjectProviderListExtTest {
     @Test
     fun `withoutCompanionObjectNamed(list of String) returns declaration without any of given companion objects`() {
         // given
-        val name1 = "SampleName1"
-        val name2 = "SampleName2"
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
         val declaration1: KoCompanionObjectProvider =
             mockk {
                 every { hasCompanionObjectWithName(listOf(name1, name2)) } returns true
@@ -662,8 +662,8 @@ class KoCompanionObjectProviderListExtTest {
     @Test
     fun `withoutCompanionObjectNamed(set of String) returns declaration without any of given companion objects`() {
         // given
-        val name1 = "SampleName1"
-        val name2 = "SampleName2"
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
         val declaration1: KoCompanionObjectProvider =
             mockk {
                 every { hasCompanionObjectWithName(setOf(name1, name2)) } returns true
@@ -685,7 +685,7 @@ class KoCompanionObjectProviderListExtTest {
     @Test
     fun `withoutCompanionObjectNamed(name) with ignore case returns declaration without given companion object`() {
         // given
-        val name = "SampleName"
+        val name = "FixtureName"
         val declaration1: KoCompanionObjectProvider =
             mockk {
                 every { hasCompanionObjectWithName(listOf(name), ignoreCase = true) } returns true
@@ -706,8 +706,8 @@ class KoCompanionObjectProviderListExtTest {
     @Test
     fun `withoutCompanionObjectNamed(list of String) with ignore case returns declaration without any of given companion objects`() {
         // given
-        val name1 = "SampleName1"
-        val name2 = "SampleName2"
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
         val declaration1: KoCompanionObjectProvider =
             mockk {
                 every { hasCompanionObjectWithName(listOf(name1, name2), ignoreCase = true) } returns true
@@ -729,7 +729,7 @@ class KoCompanionObjectProviderListExtTest {
     @Test
     fun `withAllCompanionObjectsNamed(name) returns declaration with given companion object`() {
         // given
-        val name = "SampleName"
+        val name = "FixtureName"
         val declaration1: KoCompanionObjectProvider =
             mockk {
                 every { hasCompanionObjectsWithAllNames(listOf(name)) } returns true
@@ -750,8 +750,8 @@ class KoCompanionObjectProviderListExtTest {
     @Test
     fun `withAllCompanionObjectsNamed(String) returns declaration with all given companion objects`() {
         // given
-        val name1 = "SampleName1"
-        val name2 = "SampleName2"
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
         val declaration1: KoCompanionObjectProvider =
             mockk {
                 every { hasCompanionObjectsWithAllNames(listOf(name1, name2)) } returns true
@@ -772,8 +772,8 @@ class KoCompanionObjectProviderListExtTest {
     @Test
     fun `withAllCompanionObjectsNamed(list of String) returns declaration with all given companion objects`() {
         // given
-        val name1 = "SampleName1"
-        val name2 = "SampleName2"
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
         val declaration1: KoCompanionObjectProvider =
             mockk {
                 every { hasCompanionObjectsWithAllNames(listOf(name1, name2)) } returns true
@@ -795,8 +795,8 @@ class KoCompanionObjectProviderListExtTest {
     @Test
     fun `withAllCompanionObjectsNamed(set of String) returns declaration with all given companion objects`() {
         // given
-        val name1 = "SampleName1"
-        val name2 = "SampleName2"
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
         val declaration1: KoCompanionObjectProvider =
             mockk {
                 every { hasCompanionObjectsWithAllNames(setOf(name1, name2)) } returns true
@@ -818,7 +818,7 @@ class KoCompanionObjectProviderListExtTest {
     @Test
     fun `withAllCompanionObjectsNamed(name) with ignore case returns declaration with given companion object`() {
         // given
-        val name = "SampleName"
+        val name = "FixtureName"
         val declaration1: KoCompanionObjectProvider =
             mockk {
                 every { hasCompanionObjectsWithAllNames(listOf(name), ignoreCase = true) } returns true
@@ -839,8 +839,8 @@ class KoCompanionObjectProviderListExtTest {
     @Test
     fun `withAllCompanionObjectsNamed(list of String) with ignore case returns declaration with all given companion objects`() {
         // given
-        val name1 = "SampleName1"
-        val name2 = "SampleName2"
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
         val declaration1: KoCompanionObjectProvider =
             mockk {
                 every { hasCompanionObjectsWithAllNames(listOf(name1, name2), ignoreCase = true) } returns true
@@ -862,7 +862,7 @@ class KoCompanionObjectProviderListExtTest {
     @Test
     fun `withoutAllCompanionObjectsNamed(name) returns declaration without given companion object`() {
         // given
-        val name = "SampleName"
+        val name = "FixtureName"
         val declaration1: KoCompanionObjectProvider =
             mockk {
                 every { hasCompanionObjectsWithAllNames(listOf(name)) } returns true
@@ -883,8 +883,8 @@ class KoCompanionObjectProviderListExtTest {
     @Test
     fun `withoutAllCompanionObjectsNamed(String) returns declaration without all of given companion objects`() {
         // given
-        val name1 = "SampleName1"
-        val name2 = "SampleName2"
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
         val declaration1: KoCompanionObjectProvider =
             mockk {
                 every { hasCompanionObjectsWithAllNames(listOf(name1, name2)) } returns true
@@ -905,8 +905,8 @@ class KoCompanionObjectProviderListExtTest {
     @Test
     fun `withoutAllCompanionObjectsNamed(list of String) returns declaration without all of given companion objects`() {
         // given
-        val name1 = "SampleName1"
-        val name2 = "SampleName2"
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
         val declaration1: KoCompanionObjectProvider =
             mockk {
                 every { hasCompanionObjectsWithAllNames(listOf(name1, name2)) } returns true
@@ -928,8 +928,8 @@ class KoCompanionObjectProviderListExtTest {
     @Test
     fun `withoutAllCompanionObjectsNamed(set of String) returns declaration without all of given companion objects`() {
         // given
-        val name1 = "SampleName1"
-        val name2 = "SampleName2"
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
         val declaration1: KoCompanionObjectProvider =
             mockk {
                 every { hasCompanionObjectsWithAllNames(setOf(name1, name2)) } returns true
@@ -951,7 +951,7 @@ class KoCompanionObjectProviderListExtTest {
     @Test
     fun `withoutAllCompanionObjectsNamed(name) with ignore case returns declaration without given companion object`() {
         // given
-        val name = "SampleName"
+        val name = "FixtureName"
         val declaration1: KoCompanionObjectProvider =
             mockk {
                 every { hasCompanionObjectsWithAllNames(listOf(name), ignoreCase = true) } returns true
@@ -972,8 +972,8 @@ class KoCompanionObjectProviderListExtTest {
     @Test
     fun `withoutAllCompanionObjectsNamed(list of String) with ignore case returns declaration without all of given companion objects`() {
         // given
-        val name1 = "SampleName1"
-        val name2 = "SampleName2"
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
         val declaration1: KoCompanionObjectProvider =
             mockk {
                 every { hasCompanionObjectsWithAllNames(listOf(name1, name2), ignoreCase = true) } returns true

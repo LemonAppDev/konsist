@@ -15,41 +15,41 @@ class KoChildDeclarationForKoPackageProviderTest {
     fun `class child packagee`() {
         // given
         val sut = Konsist
-            .scopeFromFile("$appMainSourceSetProjectDirectory/sample/AppClass.kt".toOsSeparator())
+            .scopeFromFile("$appMainSourceSetProjectDirectory/fixture/AppClass.kt".toOsSeparator())
             .classes()
             .withName("ParentSuperClass")
             .children()
             .first()
 
         // then
-            sut.packagee?.name shouldBeEqualTo "com.lemonappdev.sample"
+            sut.packagee?.name shouldBeEqualTo "com.lemonappdev.fixture"
     }
 
     @Test
     fun `object child packagee`() {
         // given
         val sut = Konsist
-            .scopeFromFile("$appMainSourceSetProjectDirectory/sample/AppClass.kt".toOsSeparator())
+            .scopeFromFile("$appMainSourceSetProjectDirectory/fixture/AppClass.kt".toOsSeparator())
             .classes()
             .withName("ParentClassForObject")
             .children()
             .first()
 
         // then
-            sut.packagee?.name shouldBeEqualTo "com.lemonappdev.sample"
+            sut.packagee?.name shouldBeEqualTo "com.lemonappdev.fixture"
     }
 
     @Test
     fun `interface child packagee`() {
         // given
         val sut = Konsist
-            .scopeFromFile("$appMainSourceSetProjectDirectory/sample/AppClass.kt".toOsSeparator())
+            .scopeFromFile("$appMainSourceSetProjectDirectory/fixture/AppClass.kt".toOsSeparator())
             .interfaces()
             .withName("ParentSuperInterface")
             .children()
             .first()
 
         // then
-            sut.packagee?.name shouldBeEqualTo "com.lemonappdev.sample"
+            sut.packagee?.name shouldBeEqualTo "com.lemonappdev.fixture"
     }
 }

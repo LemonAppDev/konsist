@@ -27,12 +27,12 @@ class KoAnnotationDeclarationForKoArgumentProviderTest {
             hasArgumentWithName(emptySet()) shouldBeEqualTo false
             hasArgumentsWithAllNames(emptyList()) shouldBeEqualTo false
             hasArgumentsWithAllNames(emptySet()) shouldBeEqualTo false
-            hasArgumentWithName("sampleArgument") shouldBeEqualTo false
-            hasArgumentWithName(listOf("sampleArgument")) shouldBeEqualTo false
-            hasArgumentWithName(setOf("sampleArgument")) shouldBeEqualTo false
-            hasArgumentsWithAllNames("sampleArgument1", "sampleArgument2") shouldBeEqualTo false
-            hasArgumentsWithAllNames(listOf("sampleArgument1", "sampleArgument2")) shouldBeEqualTo false
-            hasArgumentsWithAllNames(setOf("sampleArgument1", "sampleArgument2")) shouldBeEqualTo false
+            hasArgumentWithName("fixtureArgument") shouldBeEqualTo false
+            hasArgumentWithName(listOf("fixtureArgument")) shouldBeEqualTo false
+            hasArgumentWithName(setOf("fixtureArgument")) shouldBeEqualTo false
+            hasArgumentsWithAllNames("fixtureArgument1", "fixtureArgument2") shouldBeEqualTo false
+            hasArgumentsWithAllNames(listOf("fixtureArgument1", "fixtureArgument2")) shouldBeEqualTo false
+            hasArgumentsWithAllNames(setOf("fixtureArgument1", "fixtureArgument2")) shouldBeEqualTo false
             hasArgument { it.value == "text" } shouldBeEqualTo false
             hasAllArguments { it.value == "text" } shouldBeEqualTo true
         }
@@ -57,12 +57,12 @@ class KoAnnotationDeclarationForKoArgumentProviderTest {
             hasArgumentWithName(emptySet()) shouldBeEqualTo false
             hasArgumentsWithAllNames(emptyList()) shouldBeEqualTo false
             hasArgumentsWithAllNames(emptySet()) shouldBeEqualTo false
-            hasArgumentWithName("sampleArgument") shouldBeEqualTo false
-            hasArgumentWithName(listOf("sampleArgument")) shouldBeEqualTo false
-            hasArgumentWithName(setOf("sampleArgument")) shouldBeEqualTo false
-            hasArgumentsWithAllNames("sampleArgument1", "sampleArgument2") shouldBeEqualTo false
-            hasArgumentsWithAllNames(listOf("sampleArgument1", "sampleArgument2")) shouldBeEqualTo false
-            hasArgumentsWithAllNames(setOf("sampleArgument1", "sampleArgument2")) shouldBeEqualTo false
+            hasArgumentWithName("fixtureArgument") shouldBeEqualTo false
+            hasArgumentWithName(listOf("fixtureArgument")) shouldBeEqualTo false
+            hasArgumentWithName(setOf("fixtureArgument")) shouldBeEqualTo false
+            hasArgumentsWithAllNames("fixtureArgument1", "fixtureArgument2") shouldBeEqualTo false
+            hasArgumentsWithAllNames(listOf("fixtureArgument1", "fixtureArgument2")) shouldBeEqualTo false
+            hasArgumentsWithAllNames(setOf("fixtureArgument1", "fixtureArgument2")) shouldBeEqualTo false
             hasArgument { it.value == "text" } shouldBeEqualTo false
             hasAllArguments { it.value == "text" } shouldBeEqualTo true
         }
@@ -88,21 +88,21 @@ class KoAnnotationDeclarationForKoArgumentProviderTest {
             hasArgumentWithName(emptySet()) shouldBeEqualTo true
             hasArgumentsWithAllNames(emptyList()) shouldBeEqualTo true
             hasArgumentsWithAllNames(emptySet()) shouldBeEqualTo true
-            hasArgumentWithName("sampleParameter") shouldBeEqualTo true
+            hasArgumentWithName("fixtureParameter") shouldBeEqualTo true
             hasArgumentWithName("otherParameter") shouldBeEqualTo false
-            hasArgumentWithName("sampleParameter", "otherParameter") shouldBeEqualTo true
-            hasArgumentWithName(listOf("sampleParameter")) shouldBeEqualTo true
+            hasArgumentWithName("fixtureParameter", "otherParameter") shouldBeEqualTo true
+            hasArgumentWithName(listOf("fixtureParameter")) shouldBeEqualTo true
             hasArgumentWithName(listOf("otherParameter")) shouldBeEqualTo false
-            hasArgumentWithName(listOf("sampleParameter", "otherParameter")) shouldBeEqualTo true
-            hasArgumentWithName(setOf("sampleParameter")) shouldBeEqualTo true
+            hasArgumentWithName(listOf("fixtureParameter", "otherParameter")) shouldBeEqualTo true
+            hasArgumentWithName(setOf("fixtureParameter")) shouldBeEqualTo true
             hasArgumentWithName(setOf("otherParameter")) shouldBeEqualTo false
-            hasArgumentWithName(setOf("sampleParameter", "otherParameter")) shouldBeEqualTo true
-            hasArgumentsWithAllNames("sampleParameter") shouldBeEqualTo true
-            hasArgumentsWithAllNames("sampleParameter", "otherParameter") shouldBeEqualTo false
-            hasArgumentsWithAllNames(listOf("sampleParameter")) shouldBeEqualTo true
-            hasArgumentsWithAllNames(listOf("sampleParameter", "otherParameter")) shouldBeEqualTo false
-            hasArgumentsWithAllNames(setOf("sampleParameter")) shouldBeEqualTo true
-            hasArgumentsWithAllNames(setOf("sampleParameter", "otherParameter")) shouldBeEqualTo false
+            hasArgumentWithName(setOf("fixtureParameter", "otherParameter")) shouldBeEqualTo true
+            hasArgumentsWithAllNames("fixtureParameter") shouldBeEqualTo true
+            hasArgumentsWithAllNames("fixtureParameter", "otherParameter") shouldBeEqualTo false
+            hasArgumentsWithAllNames(listOf("fixtureParameter")) shouldBeEqualTo true
+            hasArgumentsWithAllNames(listOf("fixtureParameter", "otherParameter")) shouldBeEqualTo false
+            hasArgumentsWithAllNames(setOf("fixtureParameter")) shouldBeEqualTo true
+            hasArgumentsWithAllNames(setOf("fixtureParameter", "otherParameter")) shouldBeEqualTo false
             hasArgument { it.value == "text" } shouldBeEqualTo true
             hasArgument { it.value == "other" } shouldBeEqualTo false
             hasAllArguments { it.value == "text" } shouldBeEqualTo true
@@ -130,24 +130,24 @@ class KoAnnotationDeclarationForKoArgumentProviderTest {
             hasArgumentWithName(emptySet()) shouldBeEqualTo true
             hasArgumentsWithAllNames(emptyList()) shouldBeEqualTo true
             hasArgumentsWithAllNames(emptySet()) shouldBeEqualTo true
-            hasArgumentWithName("sampleParameter1") shouldBeEqualTo true
+            hasArgumentWithName("fixtureParameter1") shouldBeEqualTo true
             hasArgumentWithName("otherParameter") shouldBeEqualTo false
-            hasArgumentWithName("sampleParameter1", "otherName") shouldBeEqualTo true
-            hasArgumentWithName(listOf("sampleParameter1")) shouldBeEqualTo true
+            hasArgumentWithName("fixtureParameter1", "otherName") shouldBeEqualTo true
+            hasArgumentWithName(listOf("fixtureParameter1")) shouldBeEqualTo true
             hasArgumentWithName(listOf("otherParameter")) shouldBeEqualTo false
-            hasArgumentWithName(listOf("sampleParameter1", "otherName")) shouldBeEqualTo true
-            hasArgumentWithName(setOf("sampleParameter1")) shouldBeEqualTo true
+            hasArgumentWithName(listOf("fixtureParameter1", "otherName")) shouldBeEqualTo true
+            hasArgumentWithName(setOf("fixtureParameter1")) shouldBeEqualTo true
             hasArgumentWithName(setOf("otherParameter")) shouldBeEqualTo false
-            hasArgumentWithName(setOf("sampleParameter1", "otherName")) shouldBeEqualTo true
-            hasArgumentsWithAllNames("sampleParameter1") shouldBeEqualTo true
-            hasArgumentsWithAllNames("sampleParameter1", "sampleParameter2") shouldBeEqualTo false
-            hasArgumentsWithAllNames("sampleParameter1", "otherParameter") shouldBeEqualTo false
-            hasArgumentsWithAllNames(listOf("sampleParameter1")) shouldBeEqualTo true
-            hasArgumentsWithAllNames(listOf("sampleParameter1", "sampleParameter2")) shouldBeEqualTo false
-            hasArgumentsWithAllNames(listOf("sampleParameter1", "otherParameter")) shouldBeEqualTo false
-            hasArgumentsWithAllNames(setOf("sampleParameter1")) shouldBeEqualTo true
-            hasArgumentsWithAllNames(setOf("sampleParameter1", "sampleParameter2")) shouldBeEqualTo false
-            hasArgumentsWithAllNames(setOf("sampleParameter1", "otherParameter")) shouldBeEqualTo false
+            hasArgumentWithName(setOf("fixtureParameter1", "otherName")) shouldBeEqualTo true
+            hasArgumentsWithAllNames("fixtureParameter1") shouldBeEqualTo true
+            hasArgumentsWithAllNames("fixtureParameter1", "fixtureParameter2") shouldBeEqualTo false
+            hasArgumentsWithAllNames("fixtureParameter1", "otherParameter") shouldBeEqualTo false
+            hasArgumentsWithAllNames(listOf("fixtureParameter1")) shouldBeEqualTo true
+            hasArgumentsWithAllNames(listOf("fixtureParameter1", "fixtureParameter2")) shouldBeEqualTo false
+            hasArgumentsWithAllNames(listOf("fixtureParameter1", "otherParameter")) shouldBeEqualTo false
+            hasArgumentsWithAllNames(setOf("fixtureParameter1")) shouldBeEqualTo true
+            hasArgumentsWithAllNames(setOf("fixtureParameter1", "fixtureParameter2")) shouldBeEqualTo false
+            hasArgumentsWithAllNames(setOf("fixtureParameter1", "otherParameter")) shouldBeEqualTo false
             hasArgument { it.value == "text" } shouldBeEqualTo true
             hasArgument { it.value == "other" } shouldBeEqualTo false
             hasAllArguments { it.value?.startsWith("t") ?: false } shouldBeEqualTo true
@@ -186,18 +186,18 @@ class KoAnnotationDeclarationForKoArgumentProviderTest {
 
         // then
         assertSoftly(sut) {
-            hasArgumentWithName("sampleparameter") shouldBeEqualTo false
-            hasArgumentWithName("sampleparameter", ignoreCase = true) shouldBeEqualTo false
-            hasArgumentWithName(listOf("sampleparameter")) shouldBeEqualTo false
-            hasArgumentWithName(listOf("sampleparameter"), ignoreCase = true) shouldBeEqualTo false
-            hasArgumentWithName(setOf("sampleparameter")) shouldBeEqualTo false
-            hasArgumentWithName(setOf("sampleparameter"), ignoreCase = true) shouldBeEqualTo false
-            hasArgumentsWithAllNames("sampleparameter1", "sampleparameter2") shouldBeEqualTo false
-            hasArgumentsWithAllNames("sampleparameter1", "sampleparameter2", ignoreCase = true) shouldBeEqualTo false
-            hasArgumentsWithAllNames(listOf("sampleparameter1", "sampleparameter2")) shouldBeEqualTo false
-            hasArgumentsWithAllNames(listOf("sampleparameter1", "sampleparameter2"), ignoreCase = true) shouldBeEqualTo false
-            hasArgumentsWithAllNames(setOf("sampleparameter1", "sampleparameter2")) shouldBeEqualTo false
-            hasArgumentsWithAllNames(setOf("sampleparameter1", "sampleparameter2"), ignoreCase = true) shouldBeEqualTo false
+            hasArgumentWithName("fixtureparameter") shouldBeEqualTo false
+            hasArgumentWithName("fixtureparameter", ignoreCase = true) shouldBeEqualTo false
+            hasArgumentWithName(listOf("fixtureparameter")) shouldBeEqualTo false
+            hasArgumentWithName(listOf("fixtureparameter"), ignoreCase = true) shouldBeEqualTo false
+            hasArgumentWithName(setOf("fixtureparameter")) shouldBeEqualTo false
+            hasArgumentWithName(setOf("fixtureparameter"), ignoreCase = true) shouldBeEqualTo false
+            hasArgumentsWithAllNames("fixtureparameter1", "fixtureparameter2") shouldBeEqualTo false
+            hasArgumentsWithAllNames("fixtureparameter1", "fixtureparameter2", ignoreCase = true) shouldBeEqualTo false
+            hasArgumentsWithAllNames(listOf("fixtureparameter1", "fixtureparameter2")) shouldBeEqualTo false
+            hasArgumentsWithAllNames(listOf("fixtureparameter1", "fixtureparameter2"), ignoreCase = true) shouldBeEqualTo false
+            hasArgumentsWithAllNames(setOf("fixtureparameter1", "fixtureparameter2")) shouldBeEqualTo false
+            hasArgumentsWithAllNames(setOf("fixtureparameter1", "fixtureparameter2"), ignoreCase = true) shouldBeEqualTo false
         }
     }
 
@@ -212,18 +212,18 @@ class KoAnnotationDeclarationForKoArgumentProviderTest {
 
         // then
         assertSoftly(sut) {
-            hasArgumentWithName("sampleparameter") shouldBeEqualTo false
-            hasArgumentWithName("sampleparameter", ignoreCase = true) shouldBeEqualTo false
-            hasArgumentWithName(listOf("sampleparameter")) shouldBeEqualTo false
-            hasArgumentWithName(listOf("sampleparameter"), ignoreCase = true) shouldBeEqualTo false
-            hasArgumentWithName(setOf("sampleparameter")) shouldBeEqualTo false
-            hasArgumentWithName(setOf("sampleparameter"), ignoreCase = true) shouldBeEqualTo false
-            hasArgumentsWithAllNames("sampleparameter1", "sampleparameter2") shouldBeEqualTo false
-            hasArgumentsWithAllNames("sampleparameter1", "sampleparameter2", ignoreCase = true) shouldBeEqualTo false
-            hasArgumentsWithAllNames(listOf("sampleparameter1", "sampleparameter2")) shouldBeEqualTo false
-            hasArgumentsWithAllNames(listOf("sampleparameter1", "sampleparameter2"), ignoreCase = true) shouldBeEqualTo false
-            hasArgumentsWithAllNames(setOf("sampleparameter1", "sampleparameter2")) shouldBeEqualTo false
-            hasArgumentsWithAllNames(setOf("sampleparameter1", "sampleparameter2"), ignoreCase = true) shouldBeEqualTo false
+            hasArgumentWithName("fixtureparameter") shouldBeEqualTo false
+            hasArgumentWithName("fixtureparameter", ignoreCase = true) shouldBeEqualTo false
+            hasArgumentWithName(listOf("fixtureparameter")) shouldBeEqualTo false
+            hasArgumentWithName(listOf("fixtureparameter"), ignoreCase = true) shouldBeEqualTo false
+            hasArgumentWithName(setOf("fixtureparameter")) shouldBeEqualTo false
+            hasArgumentWithName(setOf("fixtureparameter"), ignoreCase = true) shouldBeEqualTo false
+            hasArgumentsWithAllNames("fixtureparameter1", "fixtureparameter2") shouldBeEqualTo false
+            hasArgumentsWithAllNames("fixtureparameter1", "fixtureparameter2", ignoreCase = true) shouldBeEqualTo false
+            hasArgumentsWithAllNames(listOf("fixtureparameter1", "fixtureparameter2")) shouldBeEqualTo false
+            hasArgumentsWithAllNames(listOf("fixtureparameter1", "fixtureparameter2"), ignoreCase = true) shouldBeEqualTo false
+            hasArgumentsWithAllNames(setOf("fixtureparameter1", "fixtureparameter2")) shouldBeEqualTo false
+            hasArgumentsWithAllNames(setOf("fixtureparameter1", "fixtureparameter2"), ignoreCase = true) shouldBeEqualTo false
         }
     }
 
@@ -238,42 +238,42 @@ class KoAnnotationDeclarationForKoArgumentProviderTest {
 
         // then
         assertSoftly(sut) {
-            hasArgumentWithName("sampleparameter1") shouldBeEqualTo false
-            hasArgumentWithName("sampleparameter1", ignoreCase = true) shouldBeEqualTo true
+            hasArgumentWithName("fixtureparameter1") shouldBeEqualTo false
+            hasArgumentWithName("fixtureparameter1", ignoreCase = true) shouldBeEqualTo true
             hasArgumentWithName("otherparameter") shouldBeEqualTo false
             hasArgumentWithName("otherparameter", ignoreCase = true) shouldBeEqualTo false
-            hasArgumentWithName("sampleparameter1", "otherName") shouldBeEqualTo false
-            hasArgumentWithName("sampleparameter1", "otherName", ignoreCase = true) shouldBeEqualTo true
-            hasArgumentWithName(listOf("sampleparameter1")) shouldBeEqualTo false
-            hasArgumentWithName(listOf("sampleparameter1"), ignoreCase = true) shouldBeEqualTo true
+            hasArgumentWithName("fixtureparameter1", "otherName") shouldBeEqualTo false
+            hasArgumentWithName("fixtureparameter1", "otherName", ignoreCase = true) shouldBeEqualTo true
+            hasArgumentWithName(listOf("fixtureparameter1")) shouldBeEqualTo false
+            hasArgumentWithName(listOf("fixtureparameter1"), ignoreCase = true) shouldBeEqualTo true
             hasArgumentWithName(listOf("otherparameter")) shouldBeEqualTo false
             hasArgumentWithName(listOf("otherparameter"), ignoreCase = true) shouldBeEqualTo false
-            hasArgumentWithName(listOf("sampleparameter1", "otherName")) shouldBeEqualTo false
-            hasArgumentWithName(listOf("sampleparameter1", "otherName"), ignoreCase = true) shouldBeEqualTo true
-            hasArgumentWithName(setOf("sampleparameter1")) shouldBeEqualTo false
-            hasArgumentWithName(setOf("sampleparameter1"), ignoreCase = true) shouldBeEqualTo true
+            hasArgumentWithName(listOf("fixtureparameter1", "otherName")) shouldBeEqualTo false
+            hasArgumentWithName(listOf("fixtureparameter1", "otherName"), ignoreCase = true) shouldBeEqualTo true
+            hasArgumentWithName(setOf("fixtureparameter1")) shouldBeEqualTo false
+            hasArgumentWithName(setOf("fixtureparameter1"), ignoreCase = true) shouldBeEqualTo true
             hasArgumentWithName(setOf("otherparameter")) shouldBeEqualTo false
             hasArgumentWithName(setOf("otherparameter"), ignoreCase = true) shouldBeEqualTo false
-            hasArgumentWithName(setOf("sampleparameter1", "otherName")) shouldBeEqualTo false
-            hasArgumentWithName(setOf("sampleparameter1", "otherName"), ignoreCase = true) shouldBeEqualTo true
-            hasArgumentsWithAllNames("sampleparameter1") shouldBeEqualTo false
-            hasArgumentsWithAllNames("sampleparameter1", ignoreCase = true) shouldBeEqualTo true
-            hasArgumentsWithAllNames("sampleparameter1", "sampleparameter2") shouldBeEqualTo false
-            hasArgumentsWithAllNames("sampleparameter1", "sampleparameter2", ignoreCase = true) shouldBeEqualTo false
-            hasArgumentsWithAllNames("sampleparameter1", "otherparameter") shouldBeEqualTo false
-            hasArgumentsWithAllNames("sampleparameter1", "otherparameter", ignoreCase = true) shouldBeEqualTo false
-            hasArgumentsWithAllNames(listOf("sampleparameter1")) shouldBeEqualTo false
-            hasArgumentsWithAllNames(listOf("sampleparameter1"), ignoreCase = true) shouldBeEqualTo true
-            hasArgumentsWithAllNames(listOf("sampleparameter1", "sampleparameter2")) shouldBeEqualTo false
-            hasArgumentsWithAllNames(listOf("sampleparameter1", "sampleparameter2"), ignoreCase = true) shouldBeEqualTo false
-            hasArgumentsWithAllNames(listOf("sampleparameter1", "otherparameter")) shouldBeEqualTo false
-            hasArgumentsWithAllNames(listOf("sampleparameter1", "otherparameter"), ignoreCase = true) shouldBeEqualTo false
-            hasArgumentsWithAllNames(setOf("sampleparameter1")) shouldBeEqualTo false
-            hasArgumentsWithAllNames(setOf("sampleparameter1"), ignoreCase = true) shouldBeEqualTo true
-            hasArgumentsWithAllNames(setOf("sampleparameter1", "sampleparameter2")) shouldBeEqualTo false
-            hasArgumentsWithAllNames(setOf("sampleparameter1", "sampleparameter2"), ignoreCase = true) shouldBeEqualTo false
-            hasArgumentsWithAllNames(setOf("sampleparameter1", "otherparameter")) shouldBeEqualTo false
-            hasArgumentsWithAllNames(setOf("sampleparameter1", "otherparameter"), ignoreCase = true) shouldBeEqualTo false
+            hasArgumentWithName(setOf("fixtureparameter1", "otherName")) shouldBeEqualTo false
+            hasArgumentWithName(setOf("fixtureparameter1", "otherName"), ignoreCase = true) shouldBeEqualTo true
+            hasArgumentsWithAllNames("fixtureparameter1") shouldBeEqualTo false
+            hasArgumentsWithAllNames("fixtureparameter1", ignoreCase = true) shouldBeEqualTo true
+            hasArgumentsWithAllNames("fixtureparameter1", "fixtureparameter2") shouldBeEqualTo false
+            hasArgumentsWithAllNames("fixtureparameter1", "fixtureparameter2", ignoreCase = true) shouldBeEqualTo false
+            hasArgumentsWithAllNames("fixtureparameter1", "otherparameter") shouldBeEqualTo false
+            hasArgumentsWithAllNames("fixtureparameter1", "otherparameter", ignoreCase = true) shouldBeEqualTo false
+            hasArgumentsWithAllNames(listOf("fixtureparameter1")) shouldBeEqualTo false
+            hasArgumentsWithAllNames(listOf("fixtureparameter1"), ignoreCase = true) shouldBeEqualTo true
+            hasArgumentsWithAllNames(listOf("fixtureparameter1", "fixtureparameter2")) shouldBeEqualTo false
+            hasArgumentsWithAllNames(listOf("fixtureparameter1", "fixtureparameter2"), ignoreCase = true) shouldBeEqualTo false
+            hasArgumentsWithAllNames(listOf("fixtureparameter1", "otherparameter")) shouldBeEqualTo false
+            hasArgumentsWithAllNames(listOf("fixtureparameter1", "otherparameter"), ignoreCase = true) shouldBeEqualTo false
+            hasArgumentsWithAllNames(setOf("fixtureparameter1")) shouldBeEqualTo false
+            hasArgumentsWithAllNames(setOf("fixtureparameter1"), ignoreCase = true) shouldBeEqualTo true
+            hasArgumentsWithAllNames(setOf("fixtureparameter1", "fixtureparameter2")) shouldBeEqualTo false
+            hasArgumentsWithAllNames(setOf("fixtureparameter1", "fixtureparameter2"), ignoreCase = true) shouldBeEqualTo false
+            hasArgumentsWithAllNames(setOf("fixtureparameter1", "otherparameter")) shouldBeEqualTo false
+            hasArgumentsWithAllNames(setOf("fixtureparameter1", "otherparameter"), ignoreCase = true) shouldBeEqualTo false
         }
     }
 

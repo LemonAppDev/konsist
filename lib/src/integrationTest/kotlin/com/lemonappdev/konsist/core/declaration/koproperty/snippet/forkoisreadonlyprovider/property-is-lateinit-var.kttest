@@ -1,1 +1,1 @@
-lateinit var sampleProperty: String
+lateinit var fixtureProperty: String

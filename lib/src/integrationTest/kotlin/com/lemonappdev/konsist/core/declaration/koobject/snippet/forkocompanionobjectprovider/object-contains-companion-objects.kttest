@@ -1,15 +1,15 @@
-object SampleObject {
-    object SampleNestedObject
+object FixtureObject {
+    object FixtureNestedObject
 
-    class SampleClass {
-        object SampleClassObject
+    class FixtureClass {
+        object FixtureClassObject
 
-        companion object SampleCompanionObject
+        companion object FixtureCompanionObject
     }
 
-    interface SampleInterface {
-        object SampleInterfaceObject
+    interface FixtureInterface {
+        object FixtureInterfaceObject
 
-        companion object SampleNestedCompanionObject
+        companion object FixtureNestedCompanionObject
     }
 }

@@ -1,3 +1,3 @@
-import com.lemonappdev.konsist.testdata.SampleClassWithParameter
+import com.lemonappdev.konsist.testdata.FixtureClassWithParameter
 
-class SampleClass() : SampleClassWithParameter("param")
+class FixtureClass() : FixtureClassWithParameter("param")

@@ -1,5 +1,5 @@
-class SampleClass : SampleParentInterface1, SampleParentInterface2
+class FixtureClass : FixtureParentInterface1, FixtureParentInterface2
 
-interface SampleParentInterface1
+interface FixtureParentInterface1
 
-interface SampleParentInterface2
+interface FixtureParentInterface2

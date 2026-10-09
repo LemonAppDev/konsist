@@ -1,25 +1,25 @@
-annotation class SampleAnnotation
+annotation class FixtureAnnotation
 
-enum class SampleClass(val sampleArgument: Int) {
-    @SampleAnnotation
-    SAMPLE_CONSTANT_1(sampleArgument = 0) {
-        override fun sampleFunction() = Unit
+enum class FixtureClass(val fixtureArgument: Int) {
+    @FixtureAnnotation
+    FIXTURE_CONSTANT_1(fixtureArgument = 0) {
+        override fun fixtureFunction() = Unit
     },
 
     // Comment
-    SAMPLE_CONSTANT_2(sampleArgument = 1) {
-        override fun sampleFunction() = Unit
+    FIXTURE_CONSTANT_2(fixtureArgument = 1) {
+        override fun fixtureFunction() = Unit
     },
 
     /**
      * KDoc
      */
-    SAMPLE_CONSTANT_3(sampleArgument = 2) {
-        override fun sampleFunction() = Unit
+    FIXTURE_CONSTANT_3(fixtureArgument = 2) {
+        override fun fixtureFunction() = Unit
     },
     ;
 
-    val sampleProperty: Int = 0
+    val fixtureProperty: Int = 0
 
-    abstract fun sampleFunction()
+    abstract fun fixtureFunction()
 }

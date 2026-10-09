@@ -1,8 +1,8 @@
-enum class SampleClass {
-    SAMPLE_CONSTANT_1 {
+enum class FixtureClass {
+    FIXTURE_CONSTANT_1 {
         /**
-         * Sample KDoc
+         * Fixture KDoc
          */
-        val sampleVariable = ""
+        val fixtureVariable = ""
     };
 }

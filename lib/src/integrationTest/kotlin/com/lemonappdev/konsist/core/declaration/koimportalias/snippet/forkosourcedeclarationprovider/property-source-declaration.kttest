@@ -1,4 +1,4 @@
-import com.lemonappdev.konsist.testdata.SAMPLE_PROPERTY as SampleImportAlias
+import com.lemonappdev.konsist.testdata.FIXTURE_PROPERTY as FixtureImportAlias
 
 val exampleProperty: Int
-    get() = SampleImportAlias
+    get() = FixtureImportAlias

@@ -1,5 +1,5 @@
-import com.lemonappdev.konsist.testdata.SampleGenericSuperInterface
+import com.lemonappdev.konsist.testdata.FixtureGenericSuperInterface
 
-interface SampleInterface : SampleTypeAlias<Int>
+interface FixtureInterface : FixtureTypeAlias<Int>
 
-typealias SampleTypeAlias<T> = SampleGenericSuperInterface<T>
+typealias FixtureTypeAlias<T> = FixtureGenericSuperInterface<T>

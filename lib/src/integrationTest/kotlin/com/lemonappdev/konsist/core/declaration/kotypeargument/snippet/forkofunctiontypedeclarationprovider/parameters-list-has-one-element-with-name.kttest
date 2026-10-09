@@ -1,1 +1,1 @@
-val sampleProperty: List<(sampleParameter: String) -> Unit> = emptyList()
+val fixtureProperty: List<(fixtureParameter: String) -> Unit> = emptyList()

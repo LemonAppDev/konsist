@@ -33,15 +33,15 @@ class KoObjectDeclarationForKoRepresentsTypeProviderTest {
         @JvmStatic
         fun provideValues() =
             listOf(
-                arguments("SampleObject", false, true),
-                arguments("sampleobject", false, false),
-                arguments("sampleobject", true, true),
+                arguments("FixtureObject", false, true),
+                arguments("fixtureobject", false, false),
+                arguments("fixtureobject", true, true),
                 arguments("OtherObject", false, false),
                 arguments("otherobject", false, false),
                 arguments("otherobject", true, false),
-                arguments("com.lemonappdev.konsist.testdata.SampleObject", false, true),
-                arguments("com.lemonappdev.konsist.testdata.sampleobject", false, false),
-                arguments("com.lemonappdev.konsist.testdata.sampleobject", true, true),
+                arguments("com.lemonappdev.konsist.testdata.FixtureObject", false, true),
+                arguments("com.lemonappdev.konsist.testdata.fixtureobject", false, false),
+                arguments("com.lemonappdev.konsist.testdata.fixtureobject", true, true),
                 arguments("com.lemonappdev.konsist.testdata.OtherObject", false, false),
                 arguments("com.lemonappdev.konsist.testdata.otherobject", false, false),
                 arguments("com.lemonappdev.konsist.testdata.otherobject", true, false),

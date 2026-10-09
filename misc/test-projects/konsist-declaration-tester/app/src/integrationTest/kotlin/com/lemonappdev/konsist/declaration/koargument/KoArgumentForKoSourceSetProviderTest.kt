@@ -18,7 +18,7 @@ class KoArgumentForKoSourceSetProviderTest {
     fun `source set name is 'main' in app module`() {
         // given
         val sut = Konsist
-            .scopeFromFile("$appMainSourceSetProjectDirectory/sample/AppClass.kt".toOsSeparator())
+            .scopeFromFile("$appMainSourceSetProjectDirectory/fixture/AppClass.kt".toOsSeparator())
             .classes()
             .annotations
             .arguments
@@ -36,7 +36,7 @@ class KoArgumentForKoSourceSetProviderTest {
     fun `source set name is 'integrationTest' in app module`() {
         // given
         val sut = Konsist
-            .scopeFromFile("$appIntegrationTestSourceSetProjectDirectory/sample/AppClassTest.kt".toOsSeparator())
+            .scopeFromFile("$appIntegrationTestSourceSetProjectDirectory/fixture/AppClassTest.kt".toOsSeparator())
             .classes()
             .annotations
             .arguments
@@ -54,7 +54,7 @@ class KoArgumentForKoSourceSetProviderTest {
     fun `source set name is 'main' in data module`() {
         // given
         val sut = Konsist
-            .scopeFromFile("$dataMainSourceSetProjectDirectory/sample/LibClass.kt".toOsSeparator())
+            .scopeFromFile("$dataMainSourceSetProjectDirectory/fixture/LibClass.kt".toOsSeparator())
             .classes()
             .annotations
             .arguments
@@ -72,7 +72,7 @@ class KoArgumentForKoSourceSetProviderTest {
     fun `source set name is 'test' in data module`() {
         // given
         val sut = Konsist
-            .scopeFromFile("$dataTestSourceSetProjectDirectory/sample/LibClassTest.kt".toOsSeparator())
+            .scopeFromFile("$dataTestSourceSetProjectDirectory/fixture/LibClassTest.kt".toOsSeparator())
             .classes()
             .annotations
             .arguments
@@ -90,7 +90,7 @@ class KoArgumentForKoSourceSetProviderTest {
     fun `source set name is 'main' in root module`() {
         // given
         val sut = Konsist
-            .scopeFromFile("$rootMainSourceSetProjectDirectory/sample/RootClass.kt".toOsSeparator())
+            .scopeFromFile("$rootMainSourceSetProjectDirectory/fixture/RootClass.kt".toOsSeparator())
             .classes()
             .annotations
             .arguments
@@ -108,7 +108,7 @@ class KoArgumentForKoSourceSetProviderTest {
     fun `source set name is 'main' in root module with double src package`() {
         // given
         val sut = Konsist
-            .scopeFromFile("$rootMainSourceSetProjectDirectory/sample/src/RootSrcClass.kt".toOsSeparator())
+            .scopeFromFile("$rootMainSourceSetProjectDirectory/fixture/src/RootSrcClass.kt".toOsSeparator())
             .classes()
             .annotations
             .arguments

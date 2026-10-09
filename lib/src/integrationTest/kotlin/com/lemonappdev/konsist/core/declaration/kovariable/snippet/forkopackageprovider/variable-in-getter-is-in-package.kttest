@@ -1,8 +1,8 @@
-package com.samplepackage
+package com.fixturepackage
 
-val sampleProperty: String
+val fixtureProperty: String
     get() {
-        val sampleVariable = ""
+        val fixtureVariable = ""
 
         return ""
     }

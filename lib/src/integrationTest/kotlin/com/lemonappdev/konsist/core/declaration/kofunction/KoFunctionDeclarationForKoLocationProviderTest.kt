@@ -45,7 +45,7 @@ class KoFunctionDeclarationForKoLocationProviderTest {
                 .first()
 
         // then
-        val declaration = "Declaration:\nfun sampleFunction() {\n}"
+        val declaration = "Declaration:\nfun fixtureFunction() {\n}"
         assertSoftly(sut.locationWithText) {
             startsWith("Location: /") shouldBeEqualTo true
             contains(projectPath) shouldBeEqualTo true

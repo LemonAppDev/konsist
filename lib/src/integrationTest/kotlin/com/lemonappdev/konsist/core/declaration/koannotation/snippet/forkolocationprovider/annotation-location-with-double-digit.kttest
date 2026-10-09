@@ -1,14 +1,14 @@
-import com.lemonappdev.konsist.testdata.SampleAnnotation
+import com.lemonappdev.konsist.testdata.FixtureAnnotation
 
-interface SampleInterface {
-    class SampleClass1 {
-        class SampleClass2 {
-            class SampleClass3 {
-                class SampleClass4 {
-                    class SampleClass5 {
-                        class SampleClass6 {
-                            @SampleAnnotation
-                            fun sampleFunction() {
+interface FixtureInterface {
+    class FixtureClass1 {
+        class FixtureClass2 {
+            class FixtureClass3 {
+                class FixtureClass4 {
+                    class FixtureClass5 {
+                        class FixtureClass6 {
+                            @FixtureAnnotation
+                            fun fixtureFunction() {
                             }
                         }
                     }

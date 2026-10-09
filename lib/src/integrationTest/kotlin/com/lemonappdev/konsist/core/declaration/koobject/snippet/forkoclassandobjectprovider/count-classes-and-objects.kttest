@@ -1,13 +1,13 @@
-object SampleTopLevelObject {
-    private open class SampleClass {
-        private inner class SampleNestedClass
+object FixtureTopLevelObject {
+    private open class FixtureClass {
+        private inner class FixtureNestedClass
 
-        private interface SampleNestedInterface
+        private interface FixtureNestedInterface
 
-        private object SampleObjectNestedInsideObject
+        private object FixtureObjectNestedInsideObject
     }
 
-    fun sampleFunction() {
-        class SampleLocalClass
+    fun fixtureFunction() {
+        class FixtureLocalClass
     }
 }

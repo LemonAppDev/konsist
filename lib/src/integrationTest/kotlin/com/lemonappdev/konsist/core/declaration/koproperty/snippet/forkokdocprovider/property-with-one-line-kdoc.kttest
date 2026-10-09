@@ -1,2 +1,2 @@
-/** Sample KDoc */
-val sampleProperty = ""
+/** Fixture KDoc */
+val fixtureProperty = ""

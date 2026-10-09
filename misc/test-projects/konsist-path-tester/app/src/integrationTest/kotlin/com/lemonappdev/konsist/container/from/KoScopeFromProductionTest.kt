@@ -22,13 +22,13 @@ class KoScopeFromProductionTest {
         // then
         sut.shouldBeEqualTo(
             listOf(
-                "$appMainSourceSetDirectory/sample/AppClass.kt",
-                "$appMainSourceSetDirectory/sample/data/AppDataClass.kt",
-                "$dataMainSourceSetDirectory/sample/LibClass.kt",
-                "$dataMainSourceSetDirectory/sample/data/LibDataClass.kt",
-                "$rootMainSourceSetDirectory/sample/RootClass.kt",
-                "$rootMainSourceSetDirectory/sample/data/RootDataClass.kt",
-                "$rootMainSourceSetDirectory/sample/src/RootSrcClass.kt",
+                "$appMainSourceSetDirectory/fixture/AppClass.kt",
+                "$appMainSourceSetDirectory/fixture/data/AppDataClass.kt",
+                "$dataMainSourceSetDirectory/fixture/LibClass.kt",
+                "$dataMainSourceSetDirectory/fixture/data/LibDataClass.kt",
+                "$rootMainSourceSetDirectory/fixture/RootClass.kt",
+                "$rootMainSourceSetDirectory/fixture/data/RootDataClass.kt",
+                "$rootMainSourceSetDirectory/fixture/src/RootSrcClass.kt",
             ).toOsSeparator(),
         )
     }
@@ -43,13 +43,13 @@ class KoScopeFromProductionTest {
         // then
         sut.shouldBeEqualTo(
             listOf(
-                "$appMainSourceSetDirectory/sample/AppClass.kt",
-                "$appMainSourceSetDirectory/sample/data/AppDataClass.kt",
-                "$dataMainSourceSetDirectory/sample/LibClass.kt",
-                "$dataMainSourceSetDirectory/sample/data/LibDataClass.kt",
-                "$rootMainSourceSetDirectory/sample/RootClass.kt",
-                "$rootMainSourceSetDirectory/sample/data/RootDataClass.kt",
-                "$rootMainSourceSetDirectory/sample/src/RootSrcClass.kt",
+                "$appMainSourceSetDirectory/fixture/AppClass.kt",
+                "$appMainSourceSetDirectory/fixture/data/AppDataClass.kt",
+                "$dataMainSourceSetDirectory/fixture/LibClass.kt",
+                "$dataMainSourceSetDirectory/fixture/data/LibDataClass.kt",
+                "$rootMainSourceSetDirectory/fixture/RootClass.kt",
+                "$rootMainSourceSetDirectory/fixture/data/RootDataClass.kt",
+                "$rootMainSourceSetDirectory/fixture/src/RootSrcClass.kt",
             ).toOsSeparator(),
         )
     }
@@ -84,8 +84,8 @@ class KoScopeFromProductionTest {
         // then
         sut.shouldBeEqualTo(
             listOf(
-                "$appMainSourceSetDirectory/sample/AppClass.kt",
-                "$appMainSourceSetDirectory/sample/data/AppDataClass.kt",
+                "$appMainSourceSetDirectory/fixture/AppClass.kt",
+                "$appMainSourceSetDirectory/fixture/data/AppDataClass.kt",
             ).toOsSeparator(),
         )
     }
@@ -100,8 +100,8 @@ class KoScopeFromProductionTest {
         // then
         sut.shouldBeEqualTo(
             listOf(
-                "$appMainSourceSetDirectory/sample/AppClass.kt",
-                "$appMainSourceSetDirectory/sample/data/AppDataClass.kt",
+                "$appMainSourceSetDirectory/fixture/AppClass.kt",
+                "$appMainSourceSetDirectory/fixture/data/AppDataClass.kt",
             ).toOsSeparator(),
         )
     }
@@ -116,9 +116,9 @@ class KoScopeFromProductionTest {
         // then
         sut.shouldBeEqualTo(
             listOf(
-                "$rootMainSourceSetDirectory/sample/RootClass.kt",
-                "$rootMainSourceSetDirectory/sample/data/RootDataClass.kt",
-                "$rootMainSourceSetDirectory/sample/src/RootSrcClass.kt",
+                "$rootMainSourceSetDirectory/fixture/RootClass.kt",
+                "$rootMainSourceSetDirectory/fixture/data/RootDataClass.kt",
+                "$rootMainSourceSetDirectory/fixture/src/RootSrcClass.kt",
             ).toOsSeparator(),
         )
     }
@@ -133,9 +133,9 @@ class KoScopeFromProductionTest {
         // then
         sut.shouldBeEqualTo(
             listOf(
-                "$rootMainSourceSetDirectory/sample/RootClass.kt",
-                "$rootMainSourceSetDirectory/sample/data/RootDataClass.kt",
-                "$rootMainSourceSetDirectory/sample/src/RootSrcClass.kt",
+                "$rootMainSourceSetDirectory/fixture/RootClass.kt",
+                "$rootMainSourceSetDirectory/fixture/data/RootDataClass.kt",
+                "$rootMainSourceSetDirectory/fixture/src/RootSrcClass.kt",
             ).toOsSeparator(),
         )
     }
@@ -170,8 +170,8 @@ class KoScopeFromProductionTest {
         // then
         sut.shouldBeEqualTo(
             listOf(
-                "$dataMainSourceSetDirectory/sample/LibClass.kt",
-                "$dataMainSourceSetDirectory/sample/data/LibDataClass.kt",
+                "$dataMainSourceSetDirectory/fixture/LibClass.kt",
+                "$dataMainSourceSetDirectory/fixture/data/LibDataClass.kt",
             ).toOsSeparator(),
         )
     }
@@ -186,8 +186,8 @@ class KoScopeFromProductionTest {
         // then
         sut.shouldBeEqualTo(
             listOf(
-                "$dataMainSourceSetDirectory/sample/LibClass.kt",
-                "$dataMainSourceSetDirectory/sample/data/LibDataClass.kt",
+                "$dataMainSourceSetDirectory/fixture/LibClass.kt",
+                "$dataMainSourceSetDirectory/fixture/data/LibDataClass.kt",
             ).toOsSeparator(),
         )
     }

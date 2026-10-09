@@ -1,6 +1,6 @@
-import com.lemonappdev.konsist.externalsample.SampleExternalClass
-import com.lemonappdev.konsist.externalsample.SampleExternalInterface
+import com.lemonappdev.konsist.externalfixture.FixtureExternalClass
+import com.lemonappdev.konsist.externalfixture.FixtureExternalInterface
 
-class SampleClass : SampleParentClass()
+class FixtureClass : FixtureParentClass()
 
-open class SampleParentClass: SampleExternalClass(), SampleExternalInterface
+open class FixtureParentClass: FixtureExternalClass(), FixtureExternalInterface

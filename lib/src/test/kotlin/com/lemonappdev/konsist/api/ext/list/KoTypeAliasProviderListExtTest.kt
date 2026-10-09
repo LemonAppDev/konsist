@@ -238,7 +238,7 @@ class KoTypeAliasProviderListExtTest {
     @Test
     fun `withTypeAliasNamed(name) returns declaration with given type alias`() {
         // given
-        val name = "SampleName"
+        val name = "FixtureName"
         val declaration1: KoTypeAliasProvider =
             mockk {
                 every { hasTypeAliasWithName(listOf(name)) } returns true
@@ -259,8 +259,8 @@ class KoTypeAliasProviderListExtTest {
     @Test
     fun `withTypeAliasNamed(String) returns declaration with any of given type aliases`() {
         // given
-        val name1 = "SampleName1"
-        val name2 = "SampleName2"
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
         val declaration1: KoTypeAliasProvider =
             mockk {
                 every { hasTypeAliasWithName(listOf(name1, name2)) } returns true
@@ -281,8 +281,8 @@ class KoTypeAliasProviderListExtTest {
     @Test
     fun `withTypeAliasNamed(list of String) returns declaration with any of given type aliases`() {
         // given
-        val name1 = "SampleName1"
-        val name2 = "SampleName2"
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
         val declaration1: KoTypeAliasProvider =
             mockk {
                 every { hasTypeAliasWithName(listOf(name1, name2)) } returns true
@@ -304,8 +304,8 @@ class KoTypeAliasProviderListExtTest {
     @Test
     fun `withTypeAliasNamed(set of String) returns declaration with any of given type aliases`() {
         // given
-        val name1 = "SampleName1"
-        val name2 = "SampleName2"
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
         val declaration1: KoTypeAliasProvider =
             mockk {
                 every { hasTypeAliasWithName(setOf(name1, name2)) } returns true
@@ -327,7 +327,7 @@ class KoTypeAliasProviderListExtTest {
     @Test
     fun `withTypeAliasNamed(name) with ignore case returns declaration with given type alias`() {
         // given
-        val name = "SampleName"
+        val name = "FixtureName"
         val declaration1: KoTypeAliasProvider =
             mockk {
                 every { hasTypeAliasWithName(listOf(name), ignoreCase = true) } returns true
@@ -348,8 +348,8 @@ class KoTypeAliasProviderListExtTest {
     @Test
     fun `withTypeAliasNamed(list of String) with ignore case returns declaration with any of given type aliases`() {
         // given
-        val name1 = "SampleName1"
-        val name2 = "SampleName2"
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
         val declaration1: KoTypeAliasProvider =
             mockk {
                 every { hasTypeAliasWithName(listOf(name1, name2), ignoreCase = true) } returns true
@@ -371,7 +371,7 @@ class KoTypeAliasProviderListExtTest {
     @Test
     fun `withoutTypeAliasNamed(name) returns declaration without given type alias`() {
         // given
-        val name = "SampleName"
+        val name = "FixtureName"
         val declaration1: KoTypeAliasProvider =
             mockk {
                 every { hasTypeAliasWithName(listOf(name)) } returns true
@@ -392,8 +392,8 @@ class KoTypeAliasProviderListExtTest {
     @Test
     fun `withoutTypeAliasNamed(String) returns declaration without any of given type aliases`() {
         // given
-        val name1 = "SampleName1"
-        val name2 = "SampleName2"
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
         val declaration1: KoTypeAliasProvider =
             mockk {
                 every { hasTypeAliasWithName(listOf(name1, name2)) } returns true
@@ -414,8 +414,8 @@ class KoTypeAliasProviderListExtTest {
     @Test
     fun `withoutTypeAliasNamed(list of String) returns declaration without any of given type aliases`() {
         // given
-        val name1 = "SampleName1"
-        val name2 = "SampleName2"
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
         val declaration1: KoTypeAliasProvider =
             mockk {
                 every { hasTypeAliasWithName(listOf(name1, name2)) } returns true
@@ -437,8 +437,8 @@ class KoTypeAliasProviderListExtTest {
     @Test
     fun `withoutTypeAliasNamed(set of String) returns declaration without any of given type aliases`() {
         // given
-        val name1 = "SampleName1"
-        val name2 = "SampleName2"
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
         val declaration1: KoTypeAliasProvider =
             mockk {
                 every { hasTypeAliasWithName(setOf(name1, name2)) } returns true
@@ -460,7 +460,7 @@ class KoTypeAliasProviderListExtTest {
     @Test
     fun `withoutTypeAliasNamed(name) with ignore case returns declaration without given type alias`() {
         // given
-        val name = "SampleName"
+        val name = "FixtureName"
         val declaration1: KoTypeAliasProvider =
             mockk {
                 every { hasTypeAliasWithName(listOf(name), ignoreCase = true) } returns true
@@ -481,8 +481,8 @@ class KoTypeAliasProviderListExtTest {
     @Test
     fun `withoutTypeAliasNamed(list of String) with ignore case returns declaration without any of given type aliases`() {
         // given
-        val name1 = "SampleName1"
-        val name2 = "SampleName2"
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
         val declaration1: KoTypeAliasProvider =
             mockk {
                 every { hasTypeAliasWithName(listOf(name1, name2), ignoreCase = true) } returns true
@@ -504,7 +504,7 @@ class KoTypeAliasProviderListExtTest {
     @Test
     fun `withAllTypeAliasesNamed(name) returns declaration with given type alias`() {
         // given
-        val name = "SampleName"
+        val name = "FixtureName"
         val declaration1: KoTypeAliasProvider =
             mockk {
                 every { hasTypeAliasesWithAllNames(listOf(name)) } returns true
@@ -525,8 +525,8 @@ class KoTypeAliasProviderListExtTest {
     @Test
     fun `withAllTypeAliasesNamed(String) returns declaration with all given type aliases`() {
         // given
-        val name1 = "SampleName1"
-        val name2 = "SampleName2"
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
         val declaration1: KoTypeAliasProvider =
             mockk {
                 every { hasTypeAliasesWithAllNames(listOf(name1, name2)) } returns true
@@ -547,8 +547,8 @@ class KoTypeAliasProviderListExtTest {
     @Test
     fun `withAllTypeAliasesNamed(list of String) returns declaration with all given type aliases`() {
         // given
-        val name1 = "SampleName1"
-        val name2 = "SampleName2"
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
         val declaration1: KoTypeAliasProvider =
             mockk {
                 every { hasTypeAliasesWithAllNames(listOf(name1, name2)) } returns true
@@ -570,8 +570,8 @@ class KoTypeAliasProviderListExtTest {
     @Test
     fun `withAllTypeAliasesNamed(set of String) returns declaration with all given type aliases`() {
         // given
-        val name1 = "SampleName1"
-        val name2 = "SampleName2"
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
         val declaration1: KoTypeAliasProvider =
             mockk {
                 every { hasTypeAliasesWithAllNames(setOf(name1, name2)) } returns true
@@ -593,7 +593,7 @@ class KoTypeAliasProviderListExtTest {
     @Test
     fun `withAllTypeAliasesNamed(name) with ignore case returns declaration with given type alias`() {
         // given
-        val name = "SampleName"
+        val name = "FixtureName"
         val declaration1: KoTypeAliasProvider =
             mockk {
                 every { hasTypeAliasesWithAllNames(listOf(name), ignoreCase = true) } returns true
@@ -614,8 +614,8 @@ class KoTypeAliasProviderListExtTest {
     @Test
     fun `withAllTypeAliasesNamed(list of String) with ignore case returns declaration with all given type aliases`() {
         // given
-        val name1 = "SampleName1"
-        val name2 = "SampleName2"
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
         val declaration1: KoTypeAliasProvider =
             mockk {
                 every { hasTypeAliasesWithAllNames(listOf(name1, name2), ignoreCase = true) } returns true
@@ -637,7 +637,7 @@ class KoTypeAliasProviderListExtTest {
     @Test
     fun `withoutAllTypeAliasesNamed(name) returns declaration without given type alias`() {
         // given
-        val name = "SampleName"
+        val name = "FixtureName"
         val declaration1: KoTypeAliasProvider =
             mockk {
                 every { hasTypeAliasesWithAllNames(listOf(name)) } returns true
@@ -658,8 +658,8 @@ class KoTypeAliasProviderListExtTest {
     @Test
     fun `withoutAllTypeAliasesNamed(String) returns declaration without all of given type aliases`() {
         // given
-        val name1 = "SampleName1"
-        val name2 = "SampleName2"
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
         val declaration1: KoTypeAliasProvider =
             mockk {
                 every { hasTypeAliasesWithAllNames(listOf(name1, name2)) } returns true
@@ -680,8 +680,8 @@ class KoTypeAliasProviderListExtTest {
     @Test
     fun `withoutAllTypeAliasesNamed(list of String) returns declaration without all of given type aliases`() {
         // given
-        val name1 = "SampleName1"
-        val name2 = "SampleName2"
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
         val declaration1: KoTypeAliasProvider =
             mockk {
                 every { hasTypeAliasesWithAllNames(listOf(name1, name2)) } returns true
@@ -703,8 +703,8 @@ class KoTypeAliasProviderListExtTest {
     @Test
     fun `withoutAllTypeAliasesNamed(set of String) returns declaration without all of given type aliases`() {
         // given
-        val name1 = "SampleName1"
-        val name2 = "SampleName2"
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
         val declaration1: KoTypeAliasProvider =
             mockk {
                 every { hasTypeAliasesWithAllNames(setOf(name1, name2)) } returns true
@@ -726,7 +726,7 @@ class KoTypeAliasProviderListExtTest {
     @Test
     fun `withoutAllTypeAliasesNamed(name) with ignore case returns declaration without given type alias`() {
         // given
-        val name = "SampleName"
+        val name = "FixtureName"
         val declaration1: KoTypeAliasProvider =
             mockk {
                 every { hasTypeAliasesWithAllNames(listOf(name), ignoreCase = true) } returns true
@@ -747,8 +747,8 @@ class KoTypeAliasProviderListExtTest {
     @Test
     fun `withoutAllTypeAliasesNamed(list of String) with ignore case returns declaration without all of given type aliases`() {
         // given
-        val name1 = "SampleName1"
-        val name2 = "SampleName2"
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
         val declaration1: KoTypeAliasProvider =
             mockk {
                 every { hasTypeAliasesWithAllNames(listOf(name1, name2), ignoreCase = true) } returns true

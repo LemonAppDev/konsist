@@ -1,5 +1,5 @@
-interface SampleInterface {
-    object SampleObject {
-        object SampleNestedObject
+interface FixtureInterface {
+    object FixtureObject {
+        object FixtureNestedObject
     }
 }

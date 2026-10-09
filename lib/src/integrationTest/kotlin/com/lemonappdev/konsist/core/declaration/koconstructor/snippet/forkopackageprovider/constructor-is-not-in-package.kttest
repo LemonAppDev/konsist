@@ -1,1 +1,1 @@
-class SampleClass(val sampleParameter: Int)
+class FixtureClass(val fixtureParameter: Int)

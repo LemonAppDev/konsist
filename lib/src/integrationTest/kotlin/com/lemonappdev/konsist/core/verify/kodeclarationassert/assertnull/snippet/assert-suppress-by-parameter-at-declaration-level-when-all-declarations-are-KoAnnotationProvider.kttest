@@ -1,4 +1,4 @@
-class SampleClassText {
+class FixtureClassText {
     @Suppress("konsist.suppress-text")
-    class SampleClassWithIncorrectSuffix
+    class FixtureClassWithIncorrectSuffix
 }

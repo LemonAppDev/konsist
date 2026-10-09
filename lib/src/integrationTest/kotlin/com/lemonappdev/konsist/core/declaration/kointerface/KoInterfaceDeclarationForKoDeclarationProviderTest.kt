@@ -20,8 +20,8 @@ class KoInterfaceDeclarationForKoDeclarationProviderTest {
         assertSoftly(sut) {
             declarations() shouldBeEqualTo emptyList()
             hasDeclarations() shouldBeEqualTo false
-            hasDeclaration { (it as KoNameProvider).name == "sampleProperty" } shouldBeEqualTo false
-            hasAllDeclarations { (it as KoNameProvider).hasNameStartingWith("sample") } shouldBeEqualTo true
+            hasDeclaration { (it as KoNameProvider).name == "fixtureProperty" } shouldBeEqualTo false
+            hasAllDeclarations { (it as KoNameProvider).hasNameStartingWith("fixture") } shouldBeEqualTo true
         }
     }
 
@@ -36,9 +36,9 @@ class KoInterfaceDeclarationForKoDeclarationProviderTest {
         // then
         assertSoftly(sut) {
             hasDeclarations() shouldBeEqualTo true
-            hasDeclaration { (it as KoNameProvider).name == "sampleProperty" } shouldBeEqualTo true
+            hasDeclaration { (it as KoNameProvider).name == "fixtureProperty" } shouldBeEqualTo true
             hasDeclaration { (it as KoNameProvider).hasNameEndingWith("Property") } shouldBeEqualTo true
-            hasAllDeclarations { (it as KoNameProvider).hasNameStartingWith("sample") } shouldBeEqualTo true
+            hasAllDeclarations { (it as KoNameProvider).hasNameStartingWith("fixture") } shouldBeEqualTo true
             hasAllDeclarations { (it as KoNameProvider).hasNameEndingWith("Class1") } shouldBeEqualTo false
         }
     }
@@ -54,22 +54,22 @@ class KoInterfaceDeclarationForKoDeclarationProviderTest {
         // then
         val expected =
             listOf(
-                "sampleFunction",
-                "sampleLocalProperty",
-                "SampleLocalClass",
-                "sampleLocalFunction",
-                "SampleClass",
-                "SampleClassNestedInsideClass",
-                "SampleObjectNestedInsideClass",
-                "SampleInterfaceNestedInsideClass",
-                "SampleObject",
-                "SampleClassNestedInsideObject",
-                "SampleObjectNestedInsideObject",
-                "SampleInterfaceNestedInsideObject",
-                "SampleInterface",
-                "SampleClassNestedInsideInterface",
-                "SampleObjectNestedInsideInterface",
-                "SampleInterfaceNestedInsideInterface",
+                "fixtureFunction",
+                "fixtureLocalProperty",
+                "FixtureLocalClass",
+                "fixtureLocalFunction",
+                "FixtureClass",
+                "FixtureClassNestedInsideClass",
+                "FixtureObjectNestedInsideClass",
+                "FixtureInterfaceNestedInsideClass",
+                "FixtureObject",
+                "FixtureClassNestedInsideObject",
+                "FixtureObjectNestedInsideObject",
+                "FixtureInterfaceNestedInsideObject",
+                "FixtureInterface",
+                "FixtureClassNestedInsideInterface",
+                "FixtureObjectNestedInsideInterface",
+                "FixtureInterfaceNestedInsideInterface",
             )
 
         sut
@@ -90,19 +90,19 @@ class KoInterfaceDeclarationForKoDeclarationProviderTest {
         // then
         val expected =
             listOf(
-                "sampleFunction",
-                "SampleClass",
-                "SampleClassNestedInsideClass",
-                "SampleObjectNestedInsideClass",
-                "SampleInterfaceNestedInsideClass",
-                "SampleObject",
-                "SampleClassNestedInsideObject",
-                "SampleObjectNestedInsideObject",
-                "SampleInterfaceNestedInsideObject",
-                "SampleInterface",
-                "SampleClassNestedInsideInterface",
-                "SampleObjectNestedInsideInterface",
-                "SampleInterfaceNestedInsideInterface",
+                "fixtureFunction",
+                "FixtureClass",
+                "FixtureClassNestedInsideClass",
+                "FixtureObjectNestedInsideClass",
+                "FixtureInterfaceNestedInsideClass",
+                "FixtureObject",
+                "FixtureClassNestedInsideObject",
+                "FixtureObjectNestedInsideObject",
+                "FixtureInterfaceNestedInsideObject",
+                "FixtureInterface",
+                "FixtureClassNestedInsideInterface",
+                "FixtureObjectNestedInsideInterface",
+                "FixtureInterfaceNestedInsideInterface",
             )
 
         sut
@@ -123,13 +123,13 @@ class KoInterfaceDeclarationForKoDeclarationProviderTest {
         // then
         val expected =
             listOf(
-                "sampleFunction",
-                "sampleLocalProperty",
-                "SampleLocalClass",
-                "sampleLocalFunction",
-                "SampleClass",
-                "SampleObject",
-                "SampleInterface",
+                "fixtureFunction",
+                "fixtureLocalProperty",
+                "FixtureLocalClass",
+                "fixtureLocalFunction",
+                "FixtureClass",
+                "FixtureObject",
+                "FixtureInterface",
             )
 
         sut
@@ -150,10 +150,10 @@ class KoInterfaceDeclarationForKoDeclarationProviderTest {
         // then
         val expected =
             listOf(
-                "sampleFunction",
-                "SampleClass",
-                "SampleObject",
-                "SampleInterface",
+                "fixtureFunction",
+                "FixtureClass",
+                "FixtureObject",
+                "FixtureInterface",
             )
 
         sut

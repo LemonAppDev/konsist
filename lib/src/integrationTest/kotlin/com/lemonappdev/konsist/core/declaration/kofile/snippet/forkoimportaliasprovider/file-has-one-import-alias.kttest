@@ -1,5 +1,5 @@
-import com.lemonappdev.konsist.testdata.SampleClass as SampleImportAlias
-import com.lemonappdev.konsist.testdata.SampleInterface
+import com.lemonappdev.konsist.testdata.FixtureClass as FixtureImportAlias
+import com.lemonappdev.konsist.testdata.FixtureInterface
 
-class SampleClass(sampleParameter: SampleImportAlias) {
+class FixtureClass(fixtureParameter: FixtureImportAlias) {
 }

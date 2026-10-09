@@ -1,5 +1,5 @@
-interface SampleInterface {
-     fun sampleFunction1()
+interface FixtureInterface {
+     fun fixtureFunction1()
 
-    fun sampleFunction2()
+    fun fixtureFunction2()
 }

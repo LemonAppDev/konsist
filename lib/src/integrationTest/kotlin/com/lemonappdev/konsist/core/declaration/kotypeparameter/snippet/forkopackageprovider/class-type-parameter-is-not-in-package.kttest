@@ -1,1 +1,1 @@
-class SampleClass<TestType>(val sampleParameter: TestType)
+class FixtureClass<TestType>(val fixtureParameter: TestType)

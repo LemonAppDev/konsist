@@ -1,5 +1,5 @@
-fun sampleFunction() {
-    val sampleVariable1 = ""
+fun fixtureFunction() {
+    val fixtureVariable1 = ""
 
-    var sampleVariable2 = 0
+    var fixtureVariable2 = 0
 }

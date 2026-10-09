@@ -1,4 +1,4 @@
-object SampleObject: SomeParentClass(
+object FixtureObject: SomeParentClass(
     "some parent constructor param here"
 )
 

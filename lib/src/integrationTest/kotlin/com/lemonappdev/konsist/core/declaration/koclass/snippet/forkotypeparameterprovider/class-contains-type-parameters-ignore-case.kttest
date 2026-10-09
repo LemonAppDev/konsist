@@ -1,1 +1,1 @@
-class SampleClass<T, V>
+class FixtureClass<T, V>

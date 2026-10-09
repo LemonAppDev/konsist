@@ -11,7 +11,7 @@ class KoPackageDeclarationForKoPackageMatchingPathProviderTest {
     fun `package-with-matching-file-path`() {
         // given
         val sut = Konsist
-            .scopeFromFile("${PathProvider.appMainSourceSetProjectDirectory}/sample/AppClass.kt".toOsSeparator())
+            .scopeFromFile("${PathProvider.appMainSourceSetProjectDirectory}/fixture/AppClass.kt".toOsSeparator())
             .packages
             .first()
 
@@ -24,7 +24,7 @@ class KoPackageDeclarationForKoPackageMatchingPathProviderTest {
         // given
         val sut = Konsist
             .scopeFromFile(
-                "${PathProvider.appMainSourceSetProjectDirectory}/sample/AppClassWithPackageNotMatchingToPath.kt".toOsSeparator()
+                "${PathProvider.appMainSourceSetProjectDirectory}/fixture/AppClassWithPackageNotMatchingToPath.kt".toOsSeparator()
             )
             .packages
             .first()

@@ -239,7 +239,7 @@ class KoInterfaceProviderListExtTest {
     @Test
     fun `withInterfaceNamed(name) returns declaration with given interface`() {
         // given
-        val name = "SampleName"
+        val name = "FixtureName"
         val declaration1: KoInterfaceProvider =
             mockk {
                 every { hasInterfaceWithName(listOf(name)) } returns true
@@ -260,8 +260,8 @@ class KoInterfaceProviderListExtTest {
     @Test
     fun `withInterfaceNamed(String) returns declaration with any of given interfaces`() {
         // given
-        val name1 = "SampleName1"
-        val name2 = "SampleName2"
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
         val declaration1: KoInterfaceProvider =
             mockk {
                 every { hasInterfaceWithName(listOf(name1, name2)) } returns true
@@ -282,8 +282,8 @@ class KoInterfaceProviderListExtTest {
     @Test
     fun `withInterfaceNamed(list of String) returns declaration with any of given interfaces`() {
         // given
-        val name1 = "SampleName1"
-        val name2 = "SampleName2"
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
         val declaration1: KoInterfaceProvider =
             mockk {
                 every { hasInterfaceWithName(listOf(name1, name2)) } returns true
@@ -305,8 +305,8 @@ class KoInterfaceProviderListExtTest {
     @Test
     fun `withInterfaceNamed(set of String) returns declaration with any of given interfaces`() {
         // given
-        val name1 = "SampleName1"
-        val name2 = "SampleName2"
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
         val declaration1: KoInterfaceProvider =
             mockk {
                 every { hasInterfaceWithName(setOf(name1, name2)) } returns true
@@ -328,7 +328,7 @@ class KoInterfaceProviderListExtTest {
     @Test
     fun `withInterfaceNamed(name) with ignore case returns declaration with given interface`() {
         // given
-        val name = "SampleName"
+        val name = "FixtureName"
         val declaration1: KoInterfaceProvider =
             mockk {
                 every { hasInterfaceWithName(listOf(name), ignoreCase = true) } returns true
@@ -349,8 +349,8 @@ class KoInterfaceProviderListExtTest {
     @Test
     fun `withInterfaceNamed(list of String) with ignore case returns declaration with any of given interfaces`() {
         // given
-        val name1 = "SampleName1"
-        val name2 = "SampleName2"
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
         val declaration1: KoInterfaceProvider =
             mockk {
                 every { hasInterfaceWithName(listOf(name1, name2), ignoreCase = true) } returns true
@@ -372,7 +372,7 @@ class KoInterfaceProviderListExtTest {
     @Test
     fun `withoutInterfaceNamed(name) returns declaration without given interface`() {
         // given
-        val name = "SampleName"
+        val name = "FixtureName"
         val declaration1: KoInterfaceProvider =
             mockk {
                 every { hasInterfaceWithName(listOf(name)) } returns true
@@ -393,8 +393,8 @@ class KoInterfaceProviderListExtTest {
     @Test
     fun `withoutInterfaceNamed(String) returns declaration without any of given interfaces`() {
         // given
-        val name1 = "SampleName1"
-        val name2 = "SampleName2"
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
         val declaration1: KoInterfaceProvider =
             mockk {
                 every { hasInterfaceWithName(listOf(name1, name2)) } returns true
@@ -415,8 +415,8 @@ class KoInterfaceProviderListExtTest {
     @Test
     fun `withoutInterfaceNamed(list of String) returns declaration without any of given interfaces`() {
         // given
-        val name1 = "SampleName1"
-        val name2 = "SampleName2"
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
         val declaration1: KoInterfaceProvider =
             mockk {
                 every { hasInterfaceWithName(listOf(name1, name2)) } returns true
@@ -438,8 +438,8 @@ class KoInterfaceProviderListExtTest {
     @Test
     fun `withoutInterfaceNamed(set of String) returns declaration without any of given interfaces`() {
         // given
-        val name1 = "SampleName1"
-        val name2 = "SampleName2"
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
         val declaration1: KoInterfaceProvider =
             mockk {
                 every { hasInterfaceWithName(setOf(name1, name2)) } returns true
@@ -461,7 +461,7 @@ class KoInterfaceProviderListExtTest {
     @Test
     fun `withoutInterfaceNamed(name) with ignore case returns declaration without given interface`() {
         // given
-        val name = "SampleName"
+        val name = "FixtureName"
         val declaration1: KoInterfaceProvider =
             mockk {
                 every { hasInterfaceWithName(listOf(name), ignoreCase = true) } returns true
@@ -482,8 +482,8 @@ class KoInterfaceProviderListExtTest {
     @Test
     fun `withoutInterfaceNamed(list of String) with ignore case returns declaration without any of given interfaces`() {
         // given
-        val name1 = "SampleName1"
-        val name2 = "SampleName2"
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
         val declaration1: KoInterfaceProvider =
             mockk {
                 every { hasInterfaceWithName(listOf(name1, name2), ignoreCase = true) } returns true
@@ -505,7 +505,7 @@ class KoInterfaceProviderListExtTest {
     @Test
     fun `withAllInterfacesNamed(name) returns declaration with given interface`() {
         // given
-        val name = "SampleName"
+        val name = "FixtureName"
         val declaration1: KoInterfaceProvider =
             mockk {
                 every { hasInterfacesWithAllNames(listOf(name)) } returns true
@@ -526,8 +526,8 @@ class KoInterfaceProviderListExtTest {
     @Test
     fun `withAllInterfacesNamed(String) returns declaration with all given interfaces`() {
         // given
-        val name1 = "SampleName1"
-        val name2 = "SampleName2"
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
         val declaration1: KoInterfaceProvider =
             mockk {
                 every { hasInterfacesWithAllNames(listOf(name1, name2)) } returns true
@@ -548,8 +548,8 @@ class KoInterfaceProviderListExtTest {
     @Test
     fun `withAllInterfacesNamed(list of String) returns declaration with all given interfaces`() {
         // given
-        val name1 = "SampleName1"
-        val name2 = "SampleName2"
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
         val declaration1: KoInterfaceProvider =
             mockk {
                 every { hasInterfacesWithAllNames(listOf(name1, name2)) } returns true
@@ -571,8 +571,8 @@ class KoInterfaceProviderListExtTest {
     @Test
     fun `withAllInterfacesNamed(set of String) returns declaration with all given interfaces`() {
         // given
-        val name1 = "SampleName1"
-        val name2 = "SampleName2"
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
         val declaration1: KoInterfaceProvider =
             mockk {
                 every { hasInterfacesWithAllNames(setOf(name1, name2)) } returns true
@@ -594,7 +594,7 @@ class KoInterfaceProviderListExtTest {
     @Test
     fun `withAllInterfacesNamed(name) with ignore case returns declaration with given interface`() {
         // given
-        val name = "SampleName"
+        val name = "FixtureName"
         val declaration1: KoInterfaceProvider =
             mockk {
                 every { hasInterfacesWithAllNames(listOf(name), ignoreCase = true) } returns true
@@ -615,8 +615,8 @@ class KoInterfaceProviderListExtTest {
     @Test
     fun `withAllInterfacesNamed(list of String) with ignore case returns declaration with all given interfaces`() {
         // given
-        val name1 = "SampleName1"
-        val name2 = "SampleName2"
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
         val declaration1: KoInterfaceProvider =
             mockk {
                 every { hasInterfacesWithAllNames(listOf(name1, name2), ignoreCase = true) } returns true
@@ -638,7 +638,7 @@ class KoInterfaceProviderListExtTest {
     @Test
     fun `withoutAllInterfacesNamed(name) returns declaration without given interface`() {
         // given
-        val name = "SampleName"
+        val name = "FixtureName"
         val declaration1: KoInterfaceProvider =
             mockk {
                 every { hasInterfacesWithAllNames(listOf(name)) } returns true
@@ -659,8 +659,8 @@ class KoInterfaceProviderListExtTest {
     @Test
     fun `withoutAllInterfacesNamed(String) returns declaration without all of given interfaces`() {
         // given
-        val name1 = "SampleName1"
-        val name2 = "SampleName2"
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
         val declaration1: KoInterfaceProvider =
             mockk {
                 every { hasInterfacesWithAllNames(listOf(name1, name2)) } returns true
@@ -681,8 +681,8 @@ class KoInterfaceProviderListExtTest {
     @Test
     fun `withoutAllInterfacesNamed(list of String) returns declaration without all of given interfaces`() {
         // given
-        val name1 = "SampleName1"
-        val name2 = "SampleName2"
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
         val declaration1: KoInterfaceProvider =
             mockk {
                 every { hasInterfacesWithAllNames(listOf(name1, name2)) } returns true
@@ -704,8 +704,8 @@ class KoInterfaceProviderListExtTest {
     @Test
     fun `withoutAllInterfacesNamed(set of String) returns declaration without all of given interfaces`() {
         // given
-        val name1 = "SampleName1"
-        val name2 = "SampleName2"
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
         val declaration1: KoInterfaceProvider =
             mockk {
                 every { hasInterfacesWithAllNames(setOf(name1, name2)) } returns true
@@ -727,7 +727,7 @@ class KoInterfaceProviderListExtTest {
     @Test
     fun `withoutAllInterfacesNamed(name) with ignore case returns declaration without given interface`() {
         // given
-        val name = "SampleName"
+        val name = "FixtureName"
         val declaration1: KoInterfaceProvider =
             mockk {
                 every { hasInterfacesWithAllNames(listOf(name), ignoreCase = true) } returns true
@@ -748,8 +748,8 @@ class KoInterfaceProviderListExtTest {
     @Test
     fun `withoutAllInterfacesNamed(list of String) with ignore case returns declaration without all of given interfaces`() {
         // given
-        val name1 = "SampleName1"
-        val name2 = "SampleName2"
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
         val declaration1: KoInterfaceProvider =
             mockk {
                 every { hasInterfacesWithAllNames(listOf(name1, name2), ignoreCase = true) } returns true

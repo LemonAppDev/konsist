@@ -1,5 +1,5 @@
-import com.lemonappdev.konsist.externalsample.SampleExternalGenericClassWithParameter
-import com.lemonappdev.konsist.testdata.SampleAnnotation1
-import com.lemonappdev.konsist.testdata.SampleAnnotation2
+import com.lemonappdev.konsist.externalfixture.FixtureExternalGenericClassWithParameter
+import com.lemonappdev.konsist.testdata.FixtureAnnotation1
+import com.lemonappdev.konsist.testdata.FixtureAnnotation2
 
-object SampleObject: @SampleAnnotation1 @SampleAnnotation2 SampleExternalGenericClassWithParameter<Int>("param")
+object FixtureObject: @FixtureAnnotation1 @FixtureAnnotation2 FixtureExternalGenericClassWithParameter<Int>("param")

@@ -1,1 +1,1 @@
-typealias SampleTypeAlias<TestType> = List<TestType>
+typealias FixtureTypeAlias<TestType> = List<TestType>

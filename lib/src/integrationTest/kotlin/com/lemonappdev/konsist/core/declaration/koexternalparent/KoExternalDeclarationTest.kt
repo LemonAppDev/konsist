@@ -16,7 +16,7 @@ class KoExternalDeclarationTest {
                 .first()
 
         // then
-        sut.toString() shouldBeEqualTo "SampleExternalClass()"
+        sut.toString() shouldBeEqualTo "FixtureExternalClass()"
     }
 
     @Test
@@ -29,7 +29,7 @@ class KoExternalDeclarationTest {
                 .first()
 
         // then
-        sut.toString() shouldBeEqualTo "SampleExternalInterface"
+        sut.toString() shouldBeEqualTo "FixtureExternalInterface"
     }
 
     @Test
@@ -42,7 +42,7 @@ class KoExternalDeclarationTest {
                 .first()
 
         // then
-        sut.toString() shouldBeEqualTo "SampleExternalClass()"
+        sut.toString() shouldBeEqualTo "FixtureExternalClass()"
     }
 
     private fun getSnippetFile(fileName: String) =

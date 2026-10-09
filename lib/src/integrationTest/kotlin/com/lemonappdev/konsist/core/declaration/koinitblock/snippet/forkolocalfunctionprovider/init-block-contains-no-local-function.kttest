@@ -1,5 +1,5 @@
-class SampleClass {
+class FixtureClass {
     init {
-        val sampleLocalProperty: Boolean = true
+        val fixtureLocalProperty: Boolean = true
     }
 }

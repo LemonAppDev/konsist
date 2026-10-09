@@ -1,7 +1,7 @@
-enum class SampleClass {
-    SAMPLE_CONSTANT_1 {
-        val sampleVariable1 = ""
+enum class FixtureClass {
+    FIXTURE_CONSTANT_1 {
+        val fixtureVariable1 = ""
 
-        var sampleVariable2 = 0
+        var fixtureVariable2 = 0
     };
 }

@@ -1,6 +1,6 @@
-package com.samplepackage
+package com.fixturepackage
 
-@SampleAnnotationFromFile
-class SampleClass
+@FixtureAnnotationFromFile
+class FixtureClass
 
-annotation class SampleAnnotationFromFile
+annotation class FixtureAnnotationFromFile

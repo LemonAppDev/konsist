@@ -1,4 +1,4 @@
-import com.lemonappdev.konsist.testdata.SAMPLE_PROPERTY
+import com.lemonappdev.konsist.testdata.FIXTURE_PROPERTY
 
 val exampleProperty: Int
-    get() = SAMPLE_PROPERTY
+    get() = FIXTURE_PROPERTY

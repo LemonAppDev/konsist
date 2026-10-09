@@ -1,7 +1,7 @@
-class SampleClass : SuperClass() {
-    override fun sampleFunction() {}
+class FixtureClass : SuperClass() {
+    override fun fixtureFunction() {}
 }
 
 open class SuperClass {
-    open fun sampleFunction() {}
+    open fun fixtureFunction() {}
 }

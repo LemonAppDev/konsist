@@ -59,8 +59,8 @@ class KoKDocDeclarationForKoKDocVersionTagProviderTest {
         @JvmStatic
         fun provideValues() =
             listOf(
-                arguments("class-with-version-tag", "SampleClass"),
-                arguments("function-with-version-tag", "sampleMethod"),
+                arguments("class-with-version-tag", "FixtureClass"),
+                arguments("function-with-version-tag", "fixtureMethod"),
             )
     }
 }

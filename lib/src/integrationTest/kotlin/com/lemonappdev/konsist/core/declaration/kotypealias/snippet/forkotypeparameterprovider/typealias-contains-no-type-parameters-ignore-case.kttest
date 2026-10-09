@@ -1,1 +1,1 @@
-typealias SampleTypeAlias = (Int) -> Unit
+typealias FixtureTypeAlias = (Int) -> Unit

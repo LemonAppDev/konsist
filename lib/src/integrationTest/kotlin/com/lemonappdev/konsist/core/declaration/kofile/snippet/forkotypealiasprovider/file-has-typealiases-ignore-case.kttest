@@ -1,4 +1,4 @@
-public typealias SampleTypeAlias1 = () -> Int
-typealias SampleTypeAlias2 = () -> String
+public typealias FixtureTypeAlias1 = () -> Int
+typealias FixtureTypeAlias2 = () -> String
 
-class SampleClass(val sampleProperty1: SampleTypeAlias1, val sampleProperty2: SampleTypeAlias2)
+class FixtureClass(val fixtureProperty1: FixtureTypeAlias1, val fixtureProperty2: FixtureTypeAlias2)

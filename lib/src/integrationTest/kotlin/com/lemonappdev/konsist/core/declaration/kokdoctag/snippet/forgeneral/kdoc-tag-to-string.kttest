@@ -1,6 +1,6 @@
 /**
- * This is a sample kdoc.
+ * This is a fixture kdoc.
  *
- * @return sample text
+ * @return fixture text
  */
-fun sampleFunction(): String = ""
+fun fixtureFunction(): String = ""

@@ -1,6 +1,6 @@
-open class SampleClass {
+open class FixtureClass {
     /**
      * Some comment
      */
-    protected open val sampleProperty: Boolean = true
+    protected open val fixtureProperty: Boolean = true
 }

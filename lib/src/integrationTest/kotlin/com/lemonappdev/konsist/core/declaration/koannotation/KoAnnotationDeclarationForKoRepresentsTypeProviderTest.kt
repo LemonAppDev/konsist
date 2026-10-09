@@ -35,15 +35,15 @@ class KoAnnotationDeclarationForKoRepresentsTypeProviderTest {
         @JvmStatic
         fun provideValues() =
             listOf(
-                arguments("SampleAnnotation", false, true),
-                arguments("sampleannotation", false, false),
-                arguments("sampleannotation", true, true),
+                arguments("FixtureAnnotation", false, true),
+                arguments("fixtureannotation", false, false),
+                arguments("fixtureannotation", true, true),
                 arguments("OtherAnnotation", false, false),
                 arguments("otherannotation", false, false),
                 arguments("otherannotation", true, false),
-                arguments("com.lemonappdev.konsist.testdata.SampleAnnotation", false, true),
-                arguments("com.lemonappdev.konsist.testdata.sampleannotation", false, false),
-                arguments("com.lemonappdev.konsist.testdata.sampleannotation", true, true),
+                arguments("com.lemonappdev.konsist.testdata.FixtureAnnotation", false, true),
+                arguments("com.lemonappdev.konsist.testdata.fixtureannotation", false, false),
+                arguments("com.lemonappdev.konsist.testdata.fixtureannotation", true, true),
                 arguments("com.lemonappdev.konsist.testdata.OtherAnnotation", false, false),
                 arguments("com.lemonappdev.konsist.testdata.otherannotation", false, false),
                 arguments("com.lemonappdev.konsist.testdata.otherannotation", true, false),

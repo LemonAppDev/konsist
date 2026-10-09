@@ -20,7 +20,7 @@ class KoScopeForKoCompanionObjectDeclarationTest {
         val sut = getSnippetFile("scope-contains-companion-objects")
 
         // then
-        val expected = listOf("SampleNestedCompanionObject")
+        val expected = listOf("FixtureNestedCompanionObject")
 
         sut
             .companionObjects(includeNested = true)

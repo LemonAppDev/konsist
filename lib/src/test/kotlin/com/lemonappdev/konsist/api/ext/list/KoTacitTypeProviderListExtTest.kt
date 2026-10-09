@@ -1,8 +1,8 @@
 package com.lemonappdev.konsist.api.ext.list
 
 import com.lemonappdev.konsist.api.provider.KoTacitTypeProvider
-import com.lemonappdev.konsist.testdata.SampleClass1
-import com.lemonappdev.konsist.testdata.SampleClass2
+import com.lemonappdev.konsist.testdata.FixtureClass1
+import com.lemonappdev.konsist.testdata.FixtureClass2
 import io.mockk.every
 import io.mockk.mockk
 import org.amshove.kluent.shouldBeEqualTo
@@ -68,7 +68,7 @@ class KoTacitTypeProviderListExtTest {
     @Test
     fun `withTacitType(type) returns declaration with given tacit type`() {
         // given
-        val tacitType = "SampleClass1"
+        val tacitType = "FixtureClass1"
         val declaration1: KoTacitTypeProvider =
             mockk {
                 every { hasTacitType(tacitType) } returns true
@@ -89,8 +89,8 @@ class KoTacitTypeProviderListExtTest {
     @Test
     fun `withTacitType(type) returns declarations with one of given tacit declarations`() {
         // given
-        val tacitType1 = "SampleClass1"
-        val tacitType2 = "SampleClass2"
+        val tacitType1 = "FixtureClass1"
+        val tacitType2 = "FixtureClass2"
         val declaration1: KoTacitTypeProvider =
             mockk {
                 every { hasTacitType(tacitType1) } returns true
@@ -118,8 +118,8 @@ class KoTacitTypeProviderListExtTest {
     @Test
     fun `withTacitType(list of type) returns declarations with one of given tacit declarations`() {
         // given
-        val tacitType1 = "SampleClass1"
-        val tacitType2 = "SampleClass2"
+        val tacitType1 = "FixtureClass1"
+        val tacitType2 = "FixtureClass2"
         val declaration1: KoTacitTypeProvider =
             mockk {
                 every { hasTacitType(tacitType1) } returns true
@@ -148,8 +148,8 @@ class KoTacitTypeProviderListExtTest {
     @Test
     fun `withTacitType(set of type) returns declarations with one of given tacit declarations`() {
         // given
-        val tacitType1 = "SampleClass1"
-        val tacitType2 = "SampleClass2"
+        val tacitType1 = "FixtureClass1"
+        val tacitType2 = "FixtureClass2"
         val declaration1: KoTacitTypeProvider =
             mockk {
                 every { hasTacitType(tacitType1) } returns true
@@ -178,7 +178,7 @@ class KoTacitTypeProviderListExtTest {
     @Test
     fun `withoutTacitType(type) returns declaration without given tacit type`() {
         // given
-        val tacitType = "SampleClass1"
+        val tacitType = "FixtureClass1"
         val declaration1: KoTacitTypeProvider =
             mockk {
                 every { hasTacitType(tacitType) } returns true
@@ -199,8 +199,8 @@ class KoTacitTypeProviderListExtTest {
     @Test
     fun `withoutTacitType(type) returns declaration without any of given tacit type`() {
         // given
-        val tacitType1 = "SampleClass1"
-        val tacitType2 = "SampleClass2"
+        val tacitType1 = "FixtureClass1"
+        val tacitType2 = "FixtureClass2"
         val declaration1: KoTacitTypeProvider =
             mockk {
                 every { hasTacitType(tacitType1) } returns true
@@ -228,8 +228,8 @@ class KoTacitTypeProviderListExtTest {
     @Test
     fun `withoutTacitType(list of type) returns declaration without any of given tacit type`() {
         // given
-        val tacitType1 = "SampleClass1"
-        val tacitType2 = "SampleClass2"
+        val tacitType1 = "FixtureClass1"
+        val tacitType2 = "FixtureClass2"
         val declaration1: KoTacitTypeProvider =
             mockk {
                 every { hasTacitType(tacitType1) } returns true
@@ -258,8 +258,8 @@ class KoTacitTypeProviderListExtTest {
     @Test
     fun `withoutTacitType(set of type) returns declaration without any of given tacit type`() {
         // given
-        val tacitType1 = "SampleClass1"
-        val tacitType2 = "SampleClass2"
+        val tacitType1 = "FixtureClass1"
+        val tacitType2 = "FixtureClass2"
         val declaration1: KoTacitTypeProvider =
             mockk {
                 every { hasTacitType(tacitType1) } returns true
@@ -346,16 +346,16 @@ class KoTacitTypeProviderListExtTest {
         // given
         val declaration1: KoTacitTypeProvider =
             mockk {
-                every { hasTacitTypeOf(SampleClass1::class) } returns true
+                every { hasTacitTypeOf(FixtureClass1::class) } returns true
             }
         val declaration2: KoTacitTypeProvider =
             mockk {
-                every { hasTacitTypeOf(SampleClass1::class) } returns false
+                every { hasTacitTypeOf(FixtureClass1::class) } returns false
             }
         val declarations = listOf(declaration1, declaration2)
 
         // when
-        val sut = declarations.withTacitTypeOf(SampleClass1::class)
+        val sut = declarations.withTacitTypeOf(FixtureClass1::class)
 
         // then
         sut shouldBeEqualTo listOf(declaration1)
@@ -366,23 +366,23 @@ class KoTacitTypeProviderListExtTest {
         // given
         val declaration1: KoTacitTypeProvider =
             mockk {
-                every { hasTacitTypeOf(SampleClass1::class) } returns true
-                every { hasTacitTypeOf(SampleClass2::class) } returns false
+                every { hasTacitTypeOf(FixtureClass1::class) } returns true
+                every { hasTacitTypeOf(FixtureClass2::class) } returns false
             }
         val declaration2: KoTacitTypeProvider =
             mockk {
-                every { hasTacitTypeOf(SampleClass1::class) } returns false
-                every { hasTacitTypeOf(SampleClass2::class) } returns true
+                every { hasTacitTypeOf(FixtureClass1::class) } returns false
+                every { hasTacitTypeOf(FixtureClass2::class) } returns true
             }
         val declaration3: KoTacitTypeProvider =
             mockk {
-                every { hasTacitTypeOf(SampleClass1::class) } returns false
-                every { hasTacitTypeOf(SampleClass2::class) } returns false
+                every { hasTacitTypeOf(FixtureClass1::class) } returns false
+                every { hasTacitTypeOf(FixtureClass2::class) } returns false
             }
         val declarations = listOf(declaration1, declaration2, declaration3)
 
         // when
-        val sut = declarations.withTacitTypeOf(SampleClass1::class, SampleClass2::class)
+        val sut = declarations.withTacitTypeOf(FixtureClass1::class, FixtureClass2::class)
 
         // then
         sut shouldBeEqualTo listOf(declaration1, declaration2)
@@ -393,21 +393,21 @@ class KoTacitTypeProviderListExtTest {
         // given
         val declaration1: KoTacitTypeProvider =
             mockk {
-                every { hasTacitTypeOf(SampleClass1::class) } returns true
-                every { hasTacitTypeOf(SampleClass2::class) } returns false
+                every { hasTacitTypeOf(FixtureClass1::class) } returns true
+                every { hasTacitTypeOf(FixtureClass2::class) } returns false
             }
         val declaration2: KoTacitTypeProvider =
             mockk {
-                every { hasTacitTypeOf(SampleClass1::class) } returns false
-                every { hasTacitTypeOf(SampleClass2::class) } returns true
+                every { hasTacitTypeOf(FixtureClass1::class) } returns false
+                every { hasTacitTypeOf(FixtureClass2::class) } returns true
             }
         val declaration3: KoTacitTypeProvider =
             mockk {
-                every { hasTacitTypeOf(SampleClass1::class) } returns false
-                every { hasTacitTypeOf(SampleClass2::class) } returns false
+                every { hasTacitTypeOf(FixtureClass1::class) } returns false
+                every { hasTacitTypeOf(FixtureClass2::class) } returns false
             }
         val declarations = listOf(declaration1, declaration2, declaration3)
-        val types = listOf(SampleClass1::class, SampleClass2::class)
+        val types = listOf(FixtureClass1::class, FixtureClass2::class)
 
         // when
         val sut = declarations.withTacitTypeOf(types)
@@ -421,21 +421,21 @@ class KoTacitTypeProviderListExtTest {
         // given
         val declaration1: KoTacitTypeProvider =
             mockk {
-                every { hasTacitTypeOf(SampleClass1::class) } returns true
-                every { hasTacitTypeOf(SampleClass2::class) } returns false
+                every { hasTacitTypeOf(FixtureClass1::class) } returns true
+                every { hasTacitTypeOf(FixtureClass2::class) } returns false
             }
         val declaration2: KoTacitTypeProvider =
             mockk {
-                every { hasTacitTypeOf(SampleClass1::class) } returns false
-                every { hasTacitTypeOf(SampleClass2::class) } returns true
+                every { hasTacitTypeOf(FixtureClass1::class) } returns false
+                every { hasTacitTypeOf(FixtureClass2::class) } returns true
             }
         val declaration3: KoTacitTypeProvider =
             mockk {
-                every { hasTacitTypeOf(SampleClass1::class) } returns false
-                every { hasTacitTypeOf(SampleClass2::class) } returns false
+                every { hasTacitTypeOf(FixtureClass1::class) } returns false
+                every { hasTacitTypeOf(FixtureClass2::class) } returns false
             }
         val declarations = listOf(declaration1, declaration2, declaration3)
-        val types = setOf(SampleClass1::class, SampleClass2::class)
+        val types = setOf(FixtureClass1::class, FixtureClass2::class)
 
         // when
         val sut = declarations.withTacitTypeOf(types)
@@ -449,16 +449,16 @@ class KoTacitTypeProviderListExtTest {
         // given
         val declaration1: KoTacitTypeProvider =
             mockk {
-                every { hasTacitTypeOf(SampleClass1::class) } returns true
+                every { hasTacitTypeOf(FixtureClass1::class) } returns true
             }
         val declaration2: KoTacitTypeProvider =
             mockk {
-                every { hasTacitTypeOf(SampleClass1::class) } returns false
+                every { hasTacitTypeOf(FixtureClass1::class) } returns false
             }
         val declarations = listOf(declaration1, declaration2)
 
         // when
-        val sut = declarations.withoutTacitTypeOf(SampleClass1::class)
+        val sut = declarations.withoutTacitTypeOf(FixtureClass1::class)
 
         // then
         sut shouldBeEqualTo listOf(declaration2)
@@ -469,23 +469,23 @@ class KoTacitTypeProviderListExtTest {
         // given
         val declaration1: KoTacitTypeProvider =
             mockk {
-                every { hasTacitTypeOf(SampleClass1::class) } returns true
-                every { hasTacitTypeOf(SampleClass2::class) } returns false
+                every { hasTacitTypeOf(FixtureClass1::class) } returns true
+                every { hasTacitTypeOf(FixtureClass2::class) } returns false
             }
         val declaration2: KoTacitTypeProvider =
             mockk {
-                every { hasTacitTypeOf(SampleClass1::class) } returns false
-                every { hasTacitTypeOf(SampleClass2::class) } returns true
+                every { hasTacitTypeOf(FixtureClass1::class) } returns false
+                every { hasTacitTypeOf(FixtureClass2::class) } returns true
             }
         val declaration3: KoTacitTypeProvider =
             mockk {
-                every { hasTacitTypeOf(SampleClass1::class) } returns false
-                every { hasTacitTypeOf(SampleClass2::class) } returns false
+                every { hasTacitTypeOf(FixtureClass1::class) } returns false
+                every { hasTacitTypeOf(FixtureClass2::class) } returns false
             }
         val declarations = listOf(declaration1, declaration2, declaration3)
 
         // when
-        val sut = declarations.withoutTacitTypeOf(SampleClass1::class, SampleClass2::class)
+        val sut = declarations.withoutTacitTypeOf(FixtureClass1::class, FixtureClass2::class)
 
         // then
         sut shouldBeEqualTo listOf(declaration3)
@@ -496,21 +496,21 @@ class KoTacitTypeProviderListExtTest {
         // given
         val declaration1: KoTacitTypeProvider =
             mockk {
-                every { hasTacitTypeOf(SampleClass1::class) } returns true
-                every { hasTacitTypeOf(SampleClass2::class) } returns false
+                every { hasTacitTypeOf(FixtureClass1::class) } returns true
+                every { hasTacitTypeOf(FixtureClass2::class) } returns false
             }
         val declaration2: KoTacitTypeProvider =
             mockk {
-                every { hasTacitTypeOf(SampleClass1::class) } returns false
-                every { hasTacitTypeOf(SampleClass2::class) } returns true
+                every { hasTacitTypeOf(FixtureClass1::class) } returns false
+                every { hasTacitTypeOf(FixtureClass2::class) } returns true
             }
         val declaration3: KoTacitTypeProvider =
             mockk {
-                every { hasTacitTypeOf(SampleClass1::class) } returns false
-                every { hasTacitTypeOf(SampleClass2::class) } returns false
+                every { hasTacitTypeOf(FixtureClass1::class) } returns false
+                every { hasTacitTypeOf(FixtureClass2::class) } returns false
             }
         val declarations = listOf(declaration1, declaration2, declaration3)
-        val types = listOf(SampleClass1::class, SampleClass2::class)
+        val types = listOf(FixtureClass1::class, FixtureClass2::class)
 
         // when
         val sut = declarations.withoutTacitTypeOf(types)
@@ -524,21 +524,21 @@ class KoTacitTypeProviderListExtTest {
         // given
         val declaration1: KoTacitTypeProvider =
             mockk {
-                every { hasTacitTypeOf(SampleClass1::class) } returns true
-                every { hasTacitTypeOf(SampleClass2::class) } returns false
+                every { hasTacitTypeOf(FixtureClass1::class) } returns true
+                every { hasTacitTypeOf(FixtureClass2::class) } returns false
             }
         val declaration2: KoTacitTypeProvider =
             mockk {
-                every { hasTacitTypeOf(SampleClass1::class) } returns false
-                every { hasTacitTypeOf(SampleClass2::class) } returns true
+                every { hasTacitTypeOf(FixtureClass1::class) } returns false
+                every { hasTacitTypeOf(FixtureClass2::class) } returns true
             }
         val declaration3: KoTacitTypeProvider =
             mockk {
-                every { hasTacitTypeOf(SampleClass1::class) } returns false
-                every { hasTacitTypeOf(SampleClass2::class) } returns false
+                every { hasTacitTypeOf(FixtureClass1::class) } returns false
+                every { hasTacitTypeOf(FixtureClass2::class) } returns false
             }
         val declarations = listOf(declaration1, declaration2, declaration3)
-        val types = setOf(SampleClass1::class, SampleClass2::class)
+        val types = setOf(FixtureClass1::class, FixtureClass2::class)
 
         // when
         val sut = declarations.withoutTacitTypeOf(types)

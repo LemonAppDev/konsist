@@ -18,20 +18,20 @@ class KoFunctionDeclarationForKoVariableProviderTest {
         assertSoftly(sut) {
             variables shouldBeEqualTo emptyList()
             numVariables shouldBeEqualTo 0
-            countVariables { it.name == "sampleVariable" } shouldBeEqualTo 0
+            countVariables { it.name == "fixtureVariable" } shouldBeEqualTo 0
             hasVariables() shouldBeEqualTo false
             hasVariableWithName(emptyList()) shouldBeEqualTo false
             hasVariableWithName(emptySet()) shouldBeEqualTo false
             hasVariablesWithAllNames(emptyList()) shouldBeEqualTo false
             hasVariablesWithAllNames(emptySet()) shouldBeEqualTo false
-            hasVariableWithName("sampleVariable") shouldBeEqualTo false
-            hasVariableWithName(listOf("sampleVariable")) shouldBeEqualTo false
-            hasVariableWithName(setOf("sampleVariable")) shouldBeEqualTo false
-            hasVariablesWithAllNames("sampleVariable1", "sampleVariable2") shouldBeEqualTo false
-            hasVariablesWithAllNames(listOf("sampleVariable1", "sampleVariable2")) shouldBeEqualTo false
-            hasVariablesWithAllNames(setOf("sampleVariable1", "sampleVariable2")) shouldBeEqualTo false
-            hasVariable { it.name == "sampleVariable" } shouldBeEqualTo false
-            hasAllVariables { it.name == "sampleVariable" } shouldBeEqualTo true
+            hasVariableWithName("fixtureVariable") shouldBeEqualTo false
+            hasVariableWithName(listOf("fixtureVariable")) shouldBeEqualTo false
+            hasVariableWithName(setOf("fixtureVariable")) shouldBeEqualTo false
+            hasVariablesWithAllNames("fixtureVariable1", "fixtureVariable2") shouldBeEqualTo false
+            hasVariablesWithAllNames(listOf("fixtureVariable1", "fixtureVariable2")) shouldBeEqualTo false
+            hasVariablesWithAllNames(setOf("fixtureVariable1", "fixtureVariable2")) shouldBeEqualTo false
+            hasVariable { it.name == "fixtureVariable" } shouldBeEqualTo false
+            hasAllVariables { it.name == "fixtureVariable" } shouldBeEqualTo true
         }
     }
 
@@ -46,37 +46,37 @@ class KoFunctionDeclarationForKoVariableProviderTest {
         // then
         assertSoftly(sut) {
             numVariables shouldBeEqualTo 2
-            countVariables { it.name == "sampleVariable1" } shouldBeEqualTo 1
+            countVariables { it.name == "fixtureVariable1" } shouldBeEqualTo 1
             hasVariables() shouldBeEqualTo true
             hasVariableWithName(emptyList()) shouldBeEqualTo true
             hasVariableWithName(emptySet()) shouldBeEqualTo true
             hasVariablesWithAllNames(emptyList()) shouldBeEqualTo true
             hasVariablesWithAllNames(emptySet()) shouldBeEqualTo true
-            hasVariableWithName("sampleVariable1") shouldBeEqualTo true
+            hasVariableWithName("fixtureVariable1") shouldBeEqualTo true
             hasVariableWithName("otherVariable") shouldBeEqualTo false
-            hasVariableWithName("sampleVariable1", "otherVariable") shouldBeEqualTo true
-            hasVariableWithName(listOf("sampleVariable1")) shouldBeEqualTo true
+            hasVariableWithName("fixtureVariable1", "otherVariable") shouldBeEqualTo true
+            hasVariableWithName(listOf("fixtureVariable1")) shouldBeEqualTo true
             hasVariableWithName(listOf("otherVariable")) shouldBeEqualTo false
-            hasVariableWithName(listOf("sampleVariable1", "otherVariable")) shouldBeEqualTo true
-            hasVariableWithName(setOf("sampleVariable1")) shouldBeEqualTo true
+            hasVariableWithName(listOf("fixtureVariable1", "otherVariable")) shouldBeEqualTo true
+            hasVariableWithName(setOf("fixtureVariable1")) shouldBeEqualTo true
             hasVariableWithName(setOf("otherVariable")) shouldBeEqualTo false
-            hasVariableWithName(setOf("sampleVariable1", "otherVariable")) shouldBeEqualTo true
-            hasVariablesWithAllNames("sampleVariable1") shouldBeEqualTo true
-            hasVariablesWithAllNames("sampleVariable1", "sampleVariable2") shouldBeEqualTo true
-            hasVariablesWithAllNames("sampleVariable1", "otherVariable") shouldBeEqualTo false
-            hasVariablesWithAllNames(listOf("sampleVariable1")) shouldBeEqualTo true
-            hasVariablesWithAllNames(listOf("sampleVariable1", "sampleVariable2")) shouldBeEqualTo true
-            hasVariablesWithAllNames(listOf("sampleVariable1", "otherVariable")) shouldBeEqualTo false
-            hasVariablesWithAllNames(setOf("sampleVariable1")) shouldBeEqualTo true
-            hasVariablesWithAllNames(setOf("sampleVariable1", "sampleVariable2")) shouldBeEqualTo true
-            hasVariablesWithAllNames(setOf("sampleVariable1", "otherVariable")) shouldBeEqualTo false
-            hasVariable { it.name == "sampleVariable1" } shouldBeEqualTo true
+            hasVariableWithName(setOf("fixtureVariable1", "otherVariable")) shouldBeEqualTo true
+            hasVariablesWithAllNames("fixtureVariable1") shouldBeEqualTo true
+            hasVariablesWithAllNames("fixtureVariable1", "fixtureVariable2") shouldBeEqualTo true
+            hasVariablesWithAllNames("fixtureVariable1", "otherVariable") shouldBeEqualTo false
+            hasVariablesWithAllNames(listOf("fixtureVariable1")) shouldBeEqualTo true
+            hasVariablesWithAllNames(listOf("fixtureVariable1", "fixtureVariable2")) shouldBeEqualTo true
+            hasVariablesWithAllNames(listOf("fixtureVariable1", "otherVariable")) shouldBeEqualTo false
+            hasVariablesWithAllNames(setOf("fixtureVariable1")) shouldBeEqualTo true
+            hasVariablesWithAllNames(setOf("fixtureVariable1", "fixtureVariable2")) shouldBeEqualTo true
+            hasVariablesWithAllNames(setOf("fixtureVariable1", "otherVariable")) shouldBeEqualTo false
+            hasVariable { it.name == "fixtureVariable1" } shouldBeEqualTo true
             hasVariable { it.name == "otherVariable" } shouldBeEqualTo false
-            hasAllVariables { it.name.endsWith("2") || it.name == "sampleVariable1" } shouldBeEqualTo true
+            hasAllVariables { it.name.endsWith("2") || it.name == "fixtureVariable1" } shouldBeEqualTo true
             hasAllVariables { it.name.endsWith("2") } shouldBeEqualTo false
             variables
                 .map { it.name }
-                .shouldBeEqualTo(listOf("sampleVariable1", "sampleVariable2"))
+                .shouldBeEqualTo(listOf("fixtureVariable1", "fixtureVariable2"))
         }
     }
 
@@ -90,18 +90,18 @@ class KoFunctionDeclarationForKoVariableProviderTest {
 
         // then
         assertSoftly(sut) {
-            hasVariableWithName("samplevariable") shouldBeEqualTo false
-            hasVariableWithName("samplevariable", ignoreCase = true) shouldBeEqualTo false
-            hasVariableWithName(listOf("samplevariable")) shouldBeEqualTo false
-            hasVariableWithName(listOf("samplevariable"), ignoreCase = true) shouldBeEqualTo false
-            hasVariableWithName(setOf("samplevariable")) shouldBeEqualTo false
-            hasVariableWithName(setOf("samplevariable"), ignoreCase = true) shouldBeEqualTo false
-            hasVariablesWithAllNames("samplevariable1", "samplevariable2") shouldBeEqualTo false
-            hasVariablesWithAllNames("samplevariable1", "samplevariable2", ignoreCase = true) shouldBeEqualTo false
-            hasVariablesWithAllNames(listOf("samplevariable1", "samplevariable2")) shouldBeEqualTo false
-            hasVariablesWithAllNames(listOf("samplevariable1", "samplevariable2"), ignoreCase = true) shouldBeEqualTo false
-            hasVariablesWithAllNames(setOf("samplevariable1", "samplevariable2")) shouldBeEqualTo false
-            hasVariablesWithAllNames(setOf("samplevariable1", "samplevariable2"), ignoreCase = true) shouldBeEqualTo false
+            hasVariableWithName("fixturevariable") shouldBeEqualTo false
+            hasVariableWithName("fixturevariable", ignoreCase = true) shouldBeEqualTo false
+            hasVariableWithName(listOf("fixturevariable")) shouldBeEqualTo false
+            hasVariableWithName(listOf("fixturevariable"), ignoreCase = true) shouldBeEqualTo false
+            hasVariableWithName(setOf("fixturevariable")) shouldBeEqualTo false
+            hasVariableWithName(setOf("fixturevariable"), ignoreCase = true) shouldBeEqualTo false
+            hasVariablesWithAllNames("fixturevariable1", "fixturevariable2") shouldBeEqualTo false
+            hasVariablesWithAllNames("fixturevariable1", "fixturevariable2", ignoreCase = true) shouldBeEqualTo false
+            hasVariablesWithAllNames(listOf("fixturevariable1", "fixturevariable2")) shouldBeEqualTo false
+            hasVariablesWithAllNames(listOf("fixturevariable1", "fixturevariable2"), ignoreCase = true) shouldBeEqualTo false
+            hasVariablesWithAllNames(setOf("fixturevariable1", "fixturevariable2")) shouldBeEqualTo false
+            hasVariablesWithAllNames(setOf("fixturevariable1", "fixturevariable2"), ignoreCase = true) shouldBeEqualTo false
         }
     }
 
@@ -115,30 +115,30 @@ class KoFunctionDeclarationForKoVariableProviderTest {
 
         // then
         assertSoftly(sut) {
-            hasVariableWithName("samplevariable1") shouldBeEqualTo false
-            hasVariableWithName("samplevariable1", ignoreCase = true) shouldBeEqualTo true
+            hasVariableWithName("fixturevariable1") shouldBeEqualTo false
+            hasVariableWithName("fixturevariable1", ignoreCase = true) shouldBeEqualTo true
             hasVariableWithName("othervariable") shouldBeEqualTo false
             hasVariableWithName("othervariable", ignoreCase = true) shouldBeEqualTo false
-            hasVariableWithName("samplevariable1", "otherName") shouldBeEqualTo false
-            hasVariableWithName("samplevariable1", "otherName", ignoreCase = true) shouldBeEqualTo true
-            hasVariableWithName(listOf("samplevariable1")) shouldBeEqualTo false
-            hasVariableWithName(listOf("samplevariable1"), ignoreCase = true) shouldBeEqualTo true
+            hasVariableWithName("fixturevariable1", "otherName") shouldBeEqualTo false
+            hasVariableWithName("fixturevariable1", "otherName", ignoreCase = true) shouldBeEqualTo true
+            hasVariableWithName(listOf("fixturevariable1")) shouldBeEqualTo false
+            hasVariableWithName(listOf("fixturevariable1"), ignoreCase = true) shouldBeEqualTo true
             hasVariableWithName(listOf("othervariable")) shouldBeEqualTo false
             hasVariableWithName(listOf("othervariable"), ignoreCase = true) shouldBeEqualTo false
-            hasVariableWithName(listOf("samplevariable1", "otherName")) shouldBeEqualTo false
-            hasVariableWithName(listOf("samplevariable1", "otherName"), ignoreCase = true) shouldBeEqualTo true
-            hasVariablesWithAllNames("samplevariable1") shouldBeEqualTo false
-            hasVariablesWithAllNames("samplevariable1", ignoreCase = true) shouldBeEqualTo true
-            hasVariablesWithAllNames("samplevariable1", "samplevariable2") shouldBeEqualTo false
-            hasVariablesWithAllNames("samplevariable1", "samplevariable2", ignoreCase = true) shouldBeEqualTo true
-            hasVariablesWithAllNames("samplevariable1", "othervariable") shouldBeEqualTo false
-            hasVariablesWithAllNames("samplevariable1", "othervariable", ignoreCase = true) shouldBeEqualTo false
-            hasVariablesWithAllNames(listOf("samplevariable1")) shouldBeEqualTo false
-            hasVariablesWithAllNames(listOf("samplevariable1"), ignoreCase = true) shouldBeEqualTo true
-            hasVariablesWithAllNames(listOf("samplevariable1", "samplevariable2")) shouldBeEqualTo false
-            hasVariablesWithAllNames(listOf("samplevariable1", "samplevariable2"), ignoreCase = true) shouldBeEqualTo true
-            hasVariablesWithAllNames(listOf("samplevariable1", "othervariable")) shouldBeEqualTo false
-            hasVariablesWithAllNames(listOf("samplevariable1", "othervariable"), ignoreCase = true) shouldBeEqualTo false
+            hasVariableWithName(listOf("fixturevariable1", "otherName")) shouldBeEqualTo false
+            hasVariableWithName(listOf("fixturevariable1", "otherName"), ignoreCase = true) shouldBeEqualTo true
+            hasVariablesWithAllNames("fixturevariable1") shouldBeEqualTo false
+            hasVariablesWithAllNames("fixturevariable1", ignoreCase = true) shouldBeEqualTo true
+            hasVariablesWithAllNames("fixturevariable1", "fixturevariable2") shouldBeEqualTo false
+            hasVariablesWithAllNames("fixturevariable1", "fixturevariable2", ignoreCase = true) shouldBeEqualTo true
+            hasVariablesWithAllNames("fixturevariable1", "othervariable") shouldBeEqualTo false
+            hasVariablesWithAllNames("fixturevariable1", "othervariable", ignoreCase = true) shouldBeEqualTo false
+            hasVariablesWithAllNames(listOf("fixturevariable1")) shouldBeEqualTo false
+            hasVariablesWithAllNames(listOf("fixturevariable1"), ignoreCase = true) shouldBeEqualTo true
+            hasVariablesWithAllNames(listOf("fixturevariable1", "fixturevariable2")) shouldBeEqualTo false
+            hasVariablesWithAllNames(listOf("fixturevariable1", "fixturevariable2"), ignoreCase = true) shouldBeEqualTo true
+            hasVariablesWithAllNames(listOf("fixturevariable1", "othervariable")) shouldBeEqualTo false
+            hasVariablesWithAllNames(listOf("fixturevariable1", "othervariable"), ignoreCase = true) shouldBeEqualTo false
         }
     }
 

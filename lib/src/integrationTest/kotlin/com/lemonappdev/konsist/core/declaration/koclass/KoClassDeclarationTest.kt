@@ -14,7 +14,7 @@ class KoClassDeclarationTest {
                 .first()
 
         // then
-        sut.toString() shouldBeEqualTo "SampleClass"
+        sut.toString() shouldBeEqualTo "FixtureClass"
     }
 
     private fun getSnippetFile(fileName: String) =

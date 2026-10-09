@@ -1,6 +1,6 @@
-import com.lemonappdev.konsist.testdata.SampleClass
-import com.lemonappdev.konsist.testdata.SampleType as ImportAlias
+import com.lemonappdev.konsist.testdata.FixtureClass
+import com.lemonappdev.konsist.testdata.FixtureType as ImportAlias
 
-class SampleTopLevelClass1(val sampleProperty2: SampleClass)
+class FixtureTopLevelClass1(val fixtureProperty2: FixtureClass)
 
-class SampleTopLevelClass2(val sampleProperty2: ImportAlias)
+class FixtureTopLevelClass2(val fixtureProperty2: ImportAlias)

@@ -17,8 +17,8 @@ class KoScopeFromDirectoriesTest {
     fun `scopeFromDirectories(set)`() {
         // given
         val paths = setOf(
-            "app/src/main/kotlin/com/lemonappdev/sample/".toOsSeparator(),
-            "app/src/integrationTest/kotlin/com/lemonappdev/sample/".toOsSeparator(),
+            "app/src/main/kotlin/com/lemonappdev/fixture/".toOsSeparator(),
+            "app/src/integrationTest/kotlin/com/lemonappdev/fixture/".toOsSeparator(),
         )
         val sut = Konsist
             .scopeFromDirectories(paths)
@@ -27,10 +27,10 @@ class KoScopeFromDirectoriesTest {
         // then
         sut.shouldBeEqualTo(
             listOf(
-                "$appIntegrationTestSourceSetDirectory/sample/AppClassTest.kt",
-                "$appIntegrationTestSourceSetDirectory/sample/data/AppDataClassTest.kt",
-                "$appMainSourceSetDirectory/sample/AppClass.kt",
-                "$appMainSourceSetDirectory/sample/data/AppDataClass.kt",
+                "$appIntegrationTestSourceSetDirectory/fixture/AppClassTest.kt",
+                "$appIntegrationTestSourceSetDirectory/fixture/data/AppDataClassTest.kt",
+                "$appMainSourceSetDirectory/fixture/AppClass.kt",
+                "$appMainSourceSetDirectory/fixture/data/AppDataClass.kt",
             ).toOsSeparator(),
         )
     }
@@ -39,8 +39,8 @@ class KoScopeFromDirectoriesTest {
     fun `scopeFromDirectories(list)`() {
         // given
         val paths = listOf(
-            "app/src/main/kotlin/com/lemonappdev/sample/".toOsSeparator(),
-            "app/src/integrationTest/kotlin/com/lemonappdev/sample/".toOsSeparator(),
+            "app/src/main/kotlin/com/lemonappdev/fixture/".toOsSeparator(),
+            "app/src/integrationTest/kotlin/com/lemonappdev/fixture/".toOsSeparator(),
         )
         val sut = Konsist
             .scopeFromDirectories(paths)
@@ -49,10 +49,10 @@ class KoScopeFromDirectoriesTest {
         // then
         sut.shouldBeEqualTo(
             listOf(
-                "$appIntegrationTestSourceSetDirectory/sample/AppClassTest.kt",
-                "$appIntegrationTestSourceSetDirectory/sample/data/AppDataClassTest.kt",
-                "$appMainSourceSetDirectory/sample/AppClass.kt",
-                "$appMainSourceSetDirectory/sample/data/AppDataClass.kt",
+                "$appIntegrationTestSourceSetDirectory/fixture/AppClassTest.kt",
+                "$appIntegrationTestSourceSetDirectory/fixture/data/AppDataClassTest.kt",
+                "$appMainSourceSetDirectory/fixture/AppClass.kt",
+                "$appMainSourceSetDirectory/fixture/data/AppDataClass.kt",
             ).toOsSeparator(),
         )
     }
@@ -84,26 +84,26 @@ class KoScopeFromDirectoriesTest {
     @Test
     fun `scopeFromDirectories(set) throws exception if path points to file`() {
         // given
-        val paths = setOf("app/src/main/kotlin/com/lemonappdev/sample/AppClass.kt".toOsSeparator())
+        val paths = setOf("app/src/main/kotlin/com/lemonappdev/fixture/AppClass.kt".toOsSeparator())
 
         val func = { Konsist.scopeFromDirectories(paths) }
 
         // then
         val message =
-            "Path is a file, but should be a directory: $appMainSourceSetDirectory${fileSeparator}sample${fileSeparator}AppClass.kt"
+            "Path is a file, but should be a directory: $appMainSourceSetDirectory${fileSeparator}fixture${fileSeparator}AppClass.kt"
         func shouldThrow IllegalArgumentException::class withMessage message
     }
 
     @Test
     fun `scopeFromDirectories(list) throws exception if path points to file`() {
         // given
-        val paths = listOf("app/src/main/kotlin/com/lemonappdev/sample/AppClass.kt".toOsSeparator())
+        val paths = listOf("app/src/main/kotlin/com/lemonappdev/fixture/AppClass.kt".toOsSeparator())
 
         val func = { Konsist.scopeFromDirectories(paths) }
 
         // then
         val message =
-            "Path is a file, but should be a directory: $appMainSourceSetDirectory${fileSeparator}sample${fileSeparator}AppClass.kt"
+            "Path is a file, but should be a directory: $appMainSourceSetDirectory${fileSeparator}fixture${fileSeparator}AppClass.kt"
         func shouldThrow IllegalArgumentException::class withMessage message
     }
 }

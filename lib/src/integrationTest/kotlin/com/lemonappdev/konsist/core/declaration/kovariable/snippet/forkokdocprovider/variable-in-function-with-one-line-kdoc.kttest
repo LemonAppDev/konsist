@@ -1,4 +1,4 @@
-fun sampleFunction() {
-    /** Sample KDoc */
-     val sampleVariable = ""
+fun fixtureFunction() {
+    /** Fixture KDoc */
+     val fixtureVariable = ""
 }

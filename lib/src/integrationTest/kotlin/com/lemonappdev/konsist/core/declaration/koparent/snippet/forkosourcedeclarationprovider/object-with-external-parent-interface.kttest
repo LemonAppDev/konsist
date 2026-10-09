@@ -1,3 +1,3 @@
-import com.lemonappdev.konsist.externalsample.SampleExternalInterface
+import com.lemonappdev.konsist.externalfixture.FixtureExternalInterface
 
-object SampleObject: SampleExternalInterface
+object FixtureObject: FixtureExternalInterface

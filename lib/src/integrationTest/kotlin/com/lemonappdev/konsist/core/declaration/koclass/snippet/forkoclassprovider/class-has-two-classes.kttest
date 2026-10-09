@@ -1,5 +1,5 @@
-class SampleTopLevelClass {
-    public class SampleClass1
+class FixtureTopLevelClass {
+    public class FixtureClass1
 
-    class SampleClass2
+    class FixtureClass2
 }

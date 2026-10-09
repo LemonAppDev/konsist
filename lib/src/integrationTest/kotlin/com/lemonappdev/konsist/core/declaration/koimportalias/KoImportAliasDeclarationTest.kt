@@ -30,7 +30,7 @@ class KoImportAliasDeclarationTest {
                 ?.asImportAliasDeclaration()
 
         // then
-        sut?.importDirective?.name shouldBeEqualTo "com.lemonappdev.konsist.testdata.SampleType"
+        sut?.importDirective?.name shouldBeEqualTo "com.lemonappdev.konsist.testdata.FixtureType"
     }
 
     private fun getSnippetFile(fileName: String) =

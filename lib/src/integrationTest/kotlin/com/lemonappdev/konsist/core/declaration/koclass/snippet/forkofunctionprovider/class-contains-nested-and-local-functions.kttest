@@ -1,9 +1,9 @@
-class SampleTopLevelClass {
-    fun sampleFunction() {
-        fun sampleLocalFunction() {}
+class FixtureTopLevelClass {
+    fun fixtureFunction() {
+        fun fixtureLocalFunction() {}
     }
 
-    class SampleClass {
-        fun sampleNestedFunction() {}
+    class FixtureClass {
+        fun fixtureNestedFunction() {}
     }
 }

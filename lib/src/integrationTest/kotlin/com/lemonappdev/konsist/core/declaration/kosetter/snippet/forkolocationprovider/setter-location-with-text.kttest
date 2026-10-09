@@ -1,4 +1,4 @@
-var sampleProperty: String = "text"
+var fixtureProperty: String = "text"
     set(value) {
         if (true) field = value
     }

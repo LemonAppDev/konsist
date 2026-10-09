@@ -1,12 +1,12 @@
 val otherProperty = ""
 
-class SampleClassWithOtherProperty {
+class FixtureClassWithOtherProperty {
     val otherProperty = ""
     init {
         val otherProperty = ""
 
         @Suppress("konsist.suppress-text")
-        fun sampleFunctionWithoutOtherProperty(){
+        fun fixtureFunctionWithoutOtherProperty(){
 
         }
     }

@@ -16,7 +16,7 @@ script_dir = os.path.dirname(os.path.abspath(__file__))
 kt_temp_files_dir = tempfile.mkdtemp()
 test_data_jar_file_path = os.path.join(kt_temp_files_dir, "test-data.jar")
 nested_test_data_jar_file_path = os.path.join(kt_temp_files_dir, "nested_test-data.jar")
-sample_external_library_path = os.path.join(project_root, "lib/libs/sample-external-library-1.2.jar")
+fixture_external_library_path = os.path.join(project_root, "lib/libs/fixture-external-library-1.2.jar")
 success = "SUCCESS"
 failed = "FAILED"
 
@@ -109,7 +109,7 @@ def compile_kotlin_file(file_path):
     snippet_command = [
         "kotlinc",
         "-cp",
-        f"{test_data_jar_file_path}:{nested_test_data_jar_file_path}:{sample_external_library_path}",
+        f"{test_data_jar_file_path}:{nested_test_data_jar_file_path}:{fixture_external_library_path}",
         "-nowarn",
         "-d", temp_dir,
         file_path
@@ -148,8 +148,8 @@ def compile_kotlin_files(kotlin_files):
         print_and_flush(f"Error: The file {nested_test_data_jar_file_path} does not exist.")
         sys.exit(1)
 
-    if not os.path.exists(sample_external_library_path):
-        print_and_flush(f"Error: The file {sample_external_library_path} does not exist.")
+    if not os.path.exists(fixture_external_library_path):
+        print_and_flush(f"Error: The file {fixture_external_library_path} does not exist.")
         sys.exit(1)
 
     # Use concurrent processing to compile Kotlin files

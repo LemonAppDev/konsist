@@ -1,5 +1,5 @@
-import com.lemonappdev.konsist.testdata.SampleType as ImportAlias
+import com.lemonappdev.konsist.testdata.FixtureType as ImportAlias
 
-fun sampleFunction(): ImportAlias {
+fun fixtureFunction(): ImportAlias {
     return ImportAlias()
 }

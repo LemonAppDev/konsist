@@ -1,11 +1,11 @@
-import com.lemonappdev.konsist.externalsample.SampleExternalGenericInterface
-import com.lemonappdev.konsist.externalsample.SampleExternalInterface
-import com.lemonappdev.konsist.testdata.SampleParentInterface1
-import com.lemonappdev.konsist.testdata.SampleParentInterface2
+import com.lemonappdev.konsist.externalfixture.FixtureExternalGenericInterface
+import com.lemonappdev.konsist.externalfixture.FixtureExternalInterface
+import com.lemonappdev.konsist.testdata.FixtureParentInterface1
+import com.lemonappdev.konsist.testdata.FixtureParentInterface2
 
-interface SampleInterface :
-    SampleParentInterface1,
-    SampleParentInterface2,
-    SampleExternalInterface,
-    SampleExternalGenericInterface<Int>
+interface FixtureInterface :
+    FixtureParentInterface1,
+    FixtureParentInterface2,
+    FixtureExternalInterface,
+    FixtureExternalGenericInterface<Int>
 

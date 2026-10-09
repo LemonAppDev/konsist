@@ -1,7 +1,7 @@
-package com.samplepackage
+package com.fixturepackage
 
-object SampleName : SampleInterface.SampleName()
+object FixtureName : FixtureInterface.FixtureName()
 
-interface SampleInterface {
-    open class SampleName
+interface FixtureInterface {
+    open class FixtureName
 }

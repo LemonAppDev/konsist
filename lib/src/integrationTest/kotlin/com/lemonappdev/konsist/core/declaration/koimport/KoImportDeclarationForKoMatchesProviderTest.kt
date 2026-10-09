@@ -19,7 +19,7 @@ class KoImportDeclarationForKoMatchesProviderTest {
             matches("com..") shouldBeEqualTo true
             matches("com") shouldBeEqualTo false
             matches("..testdata..") shouldBeEqualTo true
-            matches("com.lemonappdev..testdata.SampleType") shouldBeEqualTo true
+            matches("com.lemonappdev..testdata.FixtureType") shouldBeEqualTo true
             matches("com.lemonappdev.konsist.testdata.OtherImport") shouldBeEqualTo false
         }
     }

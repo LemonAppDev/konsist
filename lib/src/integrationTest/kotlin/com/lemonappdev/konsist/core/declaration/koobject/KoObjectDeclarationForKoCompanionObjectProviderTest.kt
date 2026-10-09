@@ -19,26 +19,26 @@ class KoObjectDeclarationForKoCompanionObjectProviderTest {
         assertSoftly(sut) {
             companionObject shouldBeEqualTo null
             hasCompanionObject() shouldBeEqualTo false
-            hasCompanionObject(includeNested = false) { it.name == "SampleCompanionObject" } shouldBeEqualTo false
-            hasCompanionObjectWithName("SampleCompanionObject", includeNested = false) shouldBeEqualTo false
-            hasCompanionObjectWithName(listOf("SampleCompanionObject"), includeNested = false) shouldBeEqualTo false
-            hasCompanionObjectWithName(setOf("SampleCompanionObject"), includeNested = false) shouldBeEqualTo false
+            hasCompanionObject(includeNested = false) { it.name == "FixtureCompanionObject" } shouldBeEqualTo false
+            hasCompanionObjectWithName("FixtureCompanionObject", includeNested = false) shouldBeEqualTo false
+            hasCompanionObjectWithName(listOf("FixtureCompanionObject"), includeNested = false) shouldBeEqualTo false
+            hasCompanionObjectWithName(setOf("FixtureCompanionObject"), includeNested = false) shouldBeEqualTo false
             hasCompanionObjectsWithAllNames(
-                "SampleCompanionObject1",
-                "SampleCompanionObject2",
+                "FixtureCompanionObject1",
+                "FixtureCompanionObject2",
                 includeNested = false,
             ) shouldBeEqualTo false
             hasCompanionObjectsWithAllNames(
                 listOf(
-                    "SampleCompanionObject1",
-                    "SampleCompanionObject2",
+                    "FixtureCompanionObject1",
+                    "FixtureCompanionObject2",
                 ),
                 includeNested = false,
             ) shouldBeEqualTo false
             hasCompanionObjectsWithAllNames(
                 setOf(
-                    "SampleCompanionObject1",
-                    "SampleCompanionObject2",
+                    "FixtureCompanionObject1",
+                    "FixtureCompanionObject2",
                 ),
                 includeNested = false,
             ) shouldBeEqualTo false
@@ -54,7 +54,7 @@ class KoObjectDeclarationForKoCompanionObjectProviderTest {
                 .first()
 
         // then
-        val expected = listOf("SampleCompanionObject", "SampleNestedCompanionObject")
+        val expected = listOf("FixtureCompanionObject", "FixtureNestedCompanionObject")
 
         sut
             .companionObjects()
@@ -107,56 +107,56 @@ class KoObjectDeclarationForKoCompanionObjectProviderTest {
 
         // then
         assertSoftly(sut) {
-            hasCompanionObjectWithName("samplecompanionobject", includeNested = false) shouldBeEqualTo false
+            hasCompanionObjectWithName("fixturecompanionobject", includeNested = false) shouldBeEqualTo false
             hasCompanionObjectWithName(
-                "samplecompanionobject",
+                "fixturecompanionobject",
                 ignoreCase = true,
                 includeNested = false,
             ) shouldBeEqualTo false
-            hasCompanionObjectWithName(listOf("samplecompanionobject"), includeNested = false) shouldBeEqualTo false
+            hasCompanionObjectWithName(listOf("fixturecompanionobject"), includeNested = false) shouldBeEqualTo false
             hasCompanionObjectWithName(
-                listOf("samplecompanionobject"),
+                listOf("fixturecompanionobject"),
                 ignoreCase = true,
                 includeNested = false,
             ) shouldBeEqualTo false
-            hasCompanionObjectWithName(setOf("samplecompanionobject"), includeNested = false) shouldBeEqualTo false
+            hasCompanionObjectWithName(setOf("fixturecompanionobject"), includeNested = false) shouldBeEqualTo false
             hasCompanionObjectWithName(
-                setOf("samplecompanionobject"),
+                setOf("fixturecompanionobject"),
                 ignoreCase = true,
                 includeNested = false,
             ) shouldBeEqualTo false
             hasCompanionObjectsWithAllNames(
-                "samplecompanionobject1",
-                "samplecompanionobject2",
+                "fixturecompanionobject1",
+                "fixturecompanionobject2",
                 includeNested = false,
             ) shouldBeEqualTo false
             hasCompanionObjectsWithAllNames(
-                "samplecompanionobject1",
-                "samplecompanionobject2",
+                "fixturecompanionobject1",
+                "fixturecompanionobject2",
                 ignoreCase = true,
                 includeNested = false,
             ) shouldBeEqualTo false
             hasCompanionObjectsWithAllNames(
                 listOf(
-                    "samplecompanionobject1",
-                    "samplecompanionobject2",
+                    "fixturecompanionobject1",
+                    "fixturecompanionobject2",
                 ),
                 includeNested = false,
             ) shouldBeEqualTo false
             hasCompanionObjectsWithAllNames(
-                listOf("samplecompanionobject1", "samplecompanionobject2"),
+                listOf("fixturecompanionobject1", "fixturecompanionobject2"),
                 ignoreCase = true,
                 includeNested = false,
             ) shouldBeEqualTo false
             hasCompanionObjectsWithAllNames(
                 setOf(
-                    "samplecompanionobject1",
-                    "samplecompanionobject2",
+                    "fixturecompanionobject1",
+                    "fixturecompanionobject2",
                 ),
                 includeNested = false,
             ) shouldBeEqualTo false
             hasCompanionObjectsWithAllNames(
-                setOf("samplecompanionobject1", "samplecompanionobject2"),
+                setOf("fixturecompanionobject1", "fixturecompanionobject2"),
                 ignoreCase = true,
                 includeNested = false,
             ) shouldBeEqualTo false
@@ -173,9 +173,9 @@ class KoObjectDeclarationForKoCompanionObjectProviderTest {
 
         // then
         assertSoftly(sut) {
-            hasCompanionObjectWithName("samplecompanionobject1") shouldBeEqualTo false
+            hasCompanionObjectWithName("fixturecompanionobject1") shouldBeEqualTo false
             hasCompanionObjectWithName(
-                "samplecompanionobject1",
+                "fixturecompanionobject1",
                 ignoreCase = true,
             ) shouldBeEqualTo true
             hasCompanionObjectWithName("othercompanionobject") shouldBeEqualTo false
@@ -184,17 +184,17 @@ class KoObjectDeclarationForKoCompanionObjectProviderTest {
                 ignoreCase = true,
             ) shouldBeEqualTo false
             hasCompanionObjectWithName(
-                "samplecompanionobject1",
+                "fixturecompanionobject1",
                 "OtherCompanionObject",
             ) shouldBeEqualTo false
             hasCompanionObjectWithName(
-                "samplecompanionobject1",
+                "fixturecompanionobject1",
                 "OtherCompanionObject",
                 ignoreCase = true,
             ) shouldBeEqualTo true
-            hasCompanionObjectWithName(listOf("samplecompanionobject1")) shouldBeEqualTo false
+            hasCompanionObjectWithName(listOf("fixturecompanionobject1")) shouldBeEqualTo false
             hasCompanionObjectWithName(
-                listOf("samplecompanionobject1"),
+                listOf("fixturecompanionobject1"),
                 ignoreCase = true,
             ) shouldBeEqualTo true
             hasCompanionObjectWithName(listOf("othercompanionobject")) shouldBeEqualTo false
@@ -203,54 +203,54 @@ class KoObjectDeclarationForKoCompanionObjectProviderTest {
                 ignoreCase = true,
             ) shouldBeEqualTo false
             hasCompanionObjectWithName(
-                listOf("samplecompanionobject1", "OtherCompanionObject"),
+                listOf("fixturecompanionobject1", "OtherCompanionObject"),
             ) shouldBeEqualTo false
             hasCompanionObjectWithName(
-                listOf("samplecompanionobject1", "OtherCompanionObject"),
+                listOf("fixturecompanionobject1", "OtherCompanionObject"),
                 ignoreCase = true,
             ) shouldBeEqualTo true
-            hasCompanionObjectsWithAllNames("samplecompanionobject1") shouldBeEqualTo false
+            hasCompanionObjectsWithAllNames("fixturecompanionobject1") shouldBeEqualTo false
             hasCompanionObjectsWithAllNames(
-                "samplecompanionobject1",
+                "fixturecompanionobject1",
                 ignoreCase = true,
             ) shouldBeEqualTo true
             hasCompanionObjectsWithAllNames(
-                "samplecompanionobject1",
-                "samplecompanionobject2",
+                "fixturecompanionobject1",
+                "fixturecompanionobject2",
             ) shouldBeEqualTo false
             hasCompanionObjectsWithAllNames(
-                "samplecompanionobject1",
-                "samplecompanionobject2",
+                "fixturecompanionobject1",
+                "fixturecompanionobject2",
                 ignoreCase = true,
             ) shouldBeEqualTo true
             hasCompanionObjectsWithAllNames(
-                "samplecompanionobject1",
+                "fixturecompanionobject1",
                 "othercompanionobject",
             ) shouldBeEqualTo false
             hasCompanionObjectsWithAllNames(
-                "samplecompanionobject1",
+                "fixturecompanionobject1",
                 "othercompanionobject",
                 ignoreCase = true,
             ) shouldBeEqualTo false
             hasCompanionObjectsWithAllNames(
-                listOf("samplecompanionobject1"),
+                listOf("fixturecompanionobject1"),
             ) shouldBeEqualTo false
             hasCompanionObjectsWithAllNames(
-                listOf("samplecompanionobject1"),
+                listOf("fixturecompanionobject1"),
                 ignoreCase = true,
             ) shouldBeEqualTo true
             hasCompanionObjectsWithAllNames(
-                listOf("samplecompanionobject1", "samplecompanionobject2"),
+                listOf("fixturecompanionobject1", "fixturecompanionobject2"),
             ) shouldBeEqualTo false
             hasCompanionObjectsWithAllNames(
-                listOf("samplecompanionobject1", "samplecompanionobject2"),
+                listOf("fixturecompanionobject1", "fixturecompanionobject2"),
                 ignoreCase = true,
             ) shouldBeEqualTo true
             hasCompanionObjectsWithAllNames(
-                listOf("samplecompanionobject1", "othercompanionobject"),
+                listOf("fixturecompanionobject1", "othercompanionobject"),
             ) shouldBeEqualTo false
             hasCompanionObjectsWithAllNames(
-                listOf("samplecompanionobject1", "othercompanionobject"),
+                listOf("fixturecompanionobject1", "othercompanionobject"),
                 ignoreCase = true,
             ) shouldBeEqualTo false
         }

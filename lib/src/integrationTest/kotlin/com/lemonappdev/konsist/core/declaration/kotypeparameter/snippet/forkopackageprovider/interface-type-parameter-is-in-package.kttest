@@ -1,5 +1,5 @@
-package com.samplepackage
+package com.fixturepackage
 
-interface SampleInterface<TestType> {
-    val sampleProperty: TestType
+interface FixtureInterface<TestType> {
+    val fixtureProperty: TestType
 }

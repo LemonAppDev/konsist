@@ -1,1 +1,1 @@
-class SampleClass <TestType>(sampleProperty1: TestType?) {}
+class FixtureClass <TestType>(fixtureProperty1: TestType?) {}

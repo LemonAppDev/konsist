@@ -123,12 +123,12 @@ class KoVariableForKoSourceSetProviderTest {
         private const val TEST = "test"
         private const val INTEGRATION_TEST = "integrationTest"
 
-        private val appMainPath = "$appMainSourceSetProjectDirectory/sample/AppClass.kt".toOsSeparator()
-        private val appIntegrationTestPath = "$appIntegrationTestSourceSetProjectDirectory/sample/AppClassTest.kt".toOsSeparator()
-        private val dataMainPath = "$dataMainSourceSetProjectDirectory/sample/LibClass.kt".toOsSeparator()
-        private val dataTestPath = "$dataTestSourceSetProjectDirectory/sample/LibClassTest.kt".toOsSeparator()
-        private val rootMainPath = "$rootMainSourceSetProjectDirectory/sample/RootClass.kt".toOsSeparator()
-        private val rootMainPathWithDoubleSrcPackage = "$rootMainSourceSetProjectDirectory/sample/src/RootSrcClass.kt".toOsSeparator()
+        private val appMainPath = "$appMainSourceSetProjectDirectory/fixture/AppClass.kt".toOsSeparator()
+        private val appIntegrationTestPath = "$appIntegrationTestSourceSetProjectDirectory/fixture/AppClassTest.kt".toOsSeparator()
+        private val dataMainPath = "$dataMainSourceSetProjectDirectory/fixture/LibClass.kt".toOsSeparator()
+        private val dataTestPath = "$dataTestSourceSetProjectDirectory/fixture/LibClassTest.kt".toOsSeparator()
+        private val rootMainPath = "$rootMainSourceSetProjectDirectory/fixture/RootClass.kt".toOsSeparator()
+        private val rootMainPathWithDoubleSrcPackage = "$rootMainSourceSetProjectDirectory/fixture/src/RootSrcClass.kt".toOsSeparator()
 
         @Suppress("unused")
         @JvmStatic

@@ -5,7 +5,7 @@ import com.lemonappdev.konsist.api.ext.koscope.declarationsOf
 import com.lemonappdev.konsist.api.ext.provider.hasReceiverTypeOf
 import com.lemonappdev.konsist.api.ext.provider.hasValidKDocReceiverTag
 import com.lemonappdev.konsist.api.provider.KoReceiverTypeProvider
-import com.lemonappdev.konsist.testdata.SampleClass
+import com.lemonappdev.konsist.testdata.FixtureClass
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
@@ -22,7 +22,7 @@ class KoReceiverTypeProviderExtTest {
         // then
         assertSoftly(sut) {
             hasReceiverTypeOf<Int>() shouldBeEqualTo false
-            hasReceiverTypeOf<SampleClass>() shouldBeEqualTo false
+            hasReceiverTypeOf<FixtureClass>() shouldBeEqualTo false
         }
     }
 
@@ -37,7 +37,7 @@ class KoReceiverTypeProviderExtTest {
         // then
         assertSoftly(sut) {
             hasReceiverTypeOf<Int>() shouldBeEqualTo true
-            hasReceiverTypeOf<SampleClass>() shouldBeEqualTo false
+            hasReceiverTypeOf<FixtureClass>() shouldBeEqualTo false
         }
     }
 
@@ -51,7 +51,7 @@ class KoReceiverTypeProviderExtTest {
 
         // then
         assertSoftly(sut) {
-            hasReceiverTypeOf<SampleClass>() shouldBeEqualTo true
+            hasReceiverTypeOf<FixtureClass>() shouldBeEqualTo true
             hasReceiverTypeOf<Int>() shouldBeEqualTo false
         }
     }

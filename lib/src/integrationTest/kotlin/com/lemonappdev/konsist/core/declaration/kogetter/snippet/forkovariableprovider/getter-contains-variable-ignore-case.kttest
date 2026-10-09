@@ -1,8 +1,8 @@
-val sampleProperty: String
+val fixtureProperty: String
     get() {
-        val sampleVariable1 = ""
+        val fixtureVariable1 = ""
 
-        var sampleVariable2 = 0
+        var fixtureVariable2 = 0
 
         return ""
     }

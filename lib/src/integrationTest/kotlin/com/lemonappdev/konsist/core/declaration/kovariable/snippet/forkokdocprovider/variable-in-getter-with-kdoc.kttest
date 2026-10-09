@@ -1,9 +1,9 @@
-val sampleProperty: String
+val fixtureProperty: String
     get() {
         /**
-         * Sample KDoc
+         * Fixture KDoc
          */
-        val sampleVariable = ""
+        val fixtureVariable = ""
 
         return ""
     }

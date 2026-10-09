@@ -1,5 +1,5 @@
-open class SampleClass{
-    var sampleProperty: String = "text"
+open class FixtureClass{
+    var fixtureProperty: String = "text"
         protected set(value) {
             if (true) field = value
         }

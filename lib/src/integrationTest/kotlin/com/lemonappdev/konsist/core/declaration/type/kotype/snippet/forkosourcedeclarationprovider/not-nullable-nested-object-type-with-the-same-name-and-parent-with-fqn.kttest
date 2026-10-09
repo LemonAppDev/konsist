@@ -1,9 +1,9 @@
 interface FirstInterface {
-    class NestedClass(val arg: SampleNestedObjectWithTheSameName)
-    object SampleNestedObjectWithTheSameName
+    class NestedClass(val arg: FixtureNestedObjectWithTheSameName)
+    object FixtureNestedObjectWithTheSameName
 }
 
 interface SecondInterface {
-    class NestedClass(val arg: SampleNestedObjectWithTheSameName)
-    object SampleNestedObjectWithTheSameName
+    class NestedClass(val arg: FixtureNestedObjectWithTheSameName)
+    object FixtureNestedObjectWithTheSameName
 }

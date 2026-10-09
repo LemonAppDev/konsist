@@ -1,2 +1,2 @@
-abstract class SampleClass {
+abstract class FixtureClass {
 }

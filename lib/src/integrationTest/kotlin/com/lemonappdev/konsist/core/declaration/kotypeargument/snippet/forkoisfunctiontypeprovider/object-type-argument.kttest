@@ -1,3 +1,3 @@
-import com.lemonappdev.konsist.testdata.SampleObject
+import com.lemonappdev.konsist.testdata.FixtureObject
 
-val sampleProperty1: List<SampleObject> = emptyList()
+val fixtureProperty1: List<FixtureObject> = emptyList()

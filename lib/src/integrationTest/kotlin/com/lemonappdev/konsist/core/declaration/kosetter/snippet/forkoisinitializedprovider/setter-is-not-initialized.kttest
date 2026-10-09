@@ -1,2 +1,2 @@
-var sampleProperty: String = ""
+var fixtureProperty: String = ""
     private set

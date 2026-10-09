@@ -1,5 +1,5 @@
-object SampleObject {
+object FixtureObject {
     init {
-        val sampleProperty = 6
+        val fixtureProperty = 6
     }
 }

@@ -1,12 +1,12 @@
 package com.lemonappdev.konsist.core.declaration.koclass
 
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
-import com.lemonappdev.konsist.externalsample.SampleExternalClass
-import com.lemonappdev.konsist.externalsample.SampleExternalGenericInterface
-import com.lemonappdev.konsist.externalsample.SampleExternalInterface
-import com.lemonappdev.konsist.testdata.SampleParentClass
-import com.lemonappdev.konsist.testdata.SampleParentInterface1
-import com.lemonappdev.konsist.testdata.SampleParentInterface2
+import com.lemonappdev.konsist.externalfixture.FixtureExternalClass
+import com.lemonappdev.konsist.externalfixture.FixtureExternalGenericInterface
+import com.lemonappdev.konsist.externalfixture.FixtureExternalInterface
+import com.lemonappdev.konsist.testdata.FixtureParentClass
+import com.lemonappdev.konsist.testdata.FixtureParentInterface1
+import com.lemonappdev.konsist.testdata.FixtureParentInterface2
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
@@ -25,26 +25,26 @@ class KoClassDeclarationForKoExternalParentProviderTest {
         assertSoftly(sut) {
             externalParents() shouldBeEqualTo emptyList()
             numExternalParents() shouldBeEqualTo 0
-            countExternalParents { it.name == "SampleExternalParent" } shouldBeEqualTo 0
+            countExternalParents { it.name == "FixtureExternalParent" } shouldBeEqualTo 0
             hasExternalParents() shouldBeEqualTo false
             hasExternalParentWithName(emptyList()) shouldBeEqualTo false
             hasExternalParentWithName(emptySet()) shouldBeEqualTo false
             hasExternalParentsWithAllNames(emptyList()) shouldBeEqualTo false
             hasExternalParentsWithAllNames(emptySet()) shouldBeEqualTo false
-            hasExternalParentWithName("SampleExternalClass", "SampleExternalInterface") shouldBeEqualTo false
-            hasExternalParentWithName(listOf("SampleExternalClass", "SampleExternalInterface")) shouldBeEqualTo false
-            hasExternalParentWithName(setOf("SampleExternalClass", "SampleExternalInterface")) shouldBeEqualTo false
-            hasExternalParentsWithAllNames("SampleExternalClass", "SampleExternalInterface") shouldBeEqualTo false
-            hasExternalParentsWithAllNames(listOf("SampleExternalClass", "SampleExternalInterface")) shouldBeEqualTo false
-            hasExternalParentsWithAllNames(setOf("SampleExternalClass", "SampleExternalInterface")) shouldBeEqualTo false
-            hasExternalParent { it.name == "SampleExternalParent" } shouldBeEqualTo false
-            hasAllExternalParents { it.hasNameStartingWith("Sample") } shouldBeEqualTo true
-            hasExternalParentOf(SampleParentInterface1::class) shouldBeEqualTo false
-            hasExternalParentOf(listOf(SampleParentInterface1::class)) shouldBeEqualTo false
-            hasExternalParentOf(setOf(SampleParentInterface1::class)) shouldBeEqualTo false
-            hasAllExternalParentsOf(SampleParentInterface1::class, SampleParentInterface2::class) shouldBeEqualTo false
-            hasAllExternalParentsOf(listOf(SampleParentInterface1::class, SampleParentInterface2::class)) shouldBeEqualTo false
-            hasAllExternalParentsOf(setOf(SampleParentInterface1::class, SampleParentInterface2::class)) shouldBeEqualTo false
+            hasExternalParentWithName("FixtureExternalClass", "FixtureExternalInterface") shouldBeEqualTo false
+            hasExternalParentWithName(listOf("FixtureExternalClass", "FixtureExternalInterface")) shouldBeEqualTo false
+            hasExternalParentWithName(setOf("FixtureExternalClass", "FixtureExternalInterface")) shouldBeEqualTo false
+            hasExternalParentsWithAllNames("FixtureExternalClass", "FixtureExternalInterface") shouldBeEqualTo false
+            hasExternalParentsWithAllNames(listOf("FixtureExternalClass", "FixtureExternalInterface")) shouldBeEqualTo false
+            hasExternalParentsWithAllNames(setOf("FixtureExternalClass", "FixtureExternalInterface")) shouldBeEqualTo false
+            hasExternalParent { it.name == "FixtureExternalParent" } shouldBeEqualTo false
+            hasAllExternalParents { it.hasNameStartingWith("Fixture") } shouldBeEqualTo true
+            hasExternalParentOf(FixtureParentInterface1::class) shouldBeEqualTo false
+            hasExternalParentOf(listOf(FixtureParentInterface1::class)) shouldBeEqualTo false
+            hasExternalParentOf(setOf(FixtureParentInterface1::class)) shouldBeEqualTo false
+            hasAllExternalParentsOf(FixtureParentInterface1::class, FixtureParentInterface2::class) shouldBeEqualTo false
+            hasAllExternalParentsOf(listOf(FixtureParentInterface1::class, FixtureParentInterface2::class)) shouldBeEqualTo false
+            hasAllExternalParentsOf(setOf(FixtureParentInterface1::class, FixtureParentInterface2::class)) shouldBeEqualTo false
         }
     }
 
@@ -58,59 +58,59 @@ class KoClassDeclarationForKoExternalParentProviderTest {
 
         // then
         assertSoftly(sut) {
-            externalParents().map { it.name } shouldBeEqualTo listOf("SampleExternalClass", "SampleExternalInterface")
+            externalParents().map { it.name } shouldBeEqualTo listOf("FixtureExternalClass", "FixtureExternalInterface")
             numExternalParents() shouldBeEqualTo 2
-            countExternalParents { it.name == "SampleExternalClass" } shouldBeEqualTo 1
-            countExternalParents { it.hasNameStartingWith("SampleExternal") } shouldBeEqualTo 2
+            countExternalParents { it.name == "FixtureExternalClass" } shouldBeEqualTo 1
+            countExternalParents { it.hasNameStartingWith("FixtureExternal") } shouldBeEqualTo 2
             hasExternalParents() shouldBeEqualTo true
             hasExternalParentWithName(emptyList()) shouldBeEqualTo true
             hasExternalParentWithName(emptySet()) shouldBeEqualTo true
             hasExternalParentsWithAllNames(emptyList()) shouldBeEqualTo true
             hasExternalParentsWithAllNames(emptySet()) shouldBeEqualTo true
-            hasExternalParentWithName("SampleExternalClass") shouldBeEqualTo true
+            hasExternalParentWithName("FixtureExternalClass") shouldBeEqualTo true
             hasExternalParentWithName("OtherInterface") shouldBeEqualTo false
-            hasExternalParentWithName("SampleExternalClass", "SampleExternalInterface") shouldBeEqualTo true
-            hasExternalParentWithName("SampleExternalClass", "OtherInterface") shouldBeEqualTo true
-            hasExternalParentWithName(listOf("SampleExternalClass")) shouldBeEqualTo true
+            hasExternalParentWithName("FixtureExternalClass", "FixtureExternalInterface") shouldBeEqualTo true
+            hasExternalParentWithName("FixtureExternalClass", "OtherInterface") shouldBeEqualTo true
+            hasExternalParentWithName(listOf("FixtureExternalClass")) shouldBeEqualTo true
             hasExternalParentWithName(listOf("OtherInterface")) shouldBeEqualTo false
-            hasExternalParentWithName(listOf("SampleExternalClass", "SampleExternalInterface")) shouldBeEqualTo true
-            hasExternalParentWithName(listOf("SampleExternalClass", "OtherInterface")) shouldBeEqualTo true
-            hasExternalParentWithName(setOf("SampleExternalClass")) shouldBeEqualTo true
+            hasExternalParentWithName(listOf("FixtureExternalClass", "FixtureExternalInterface")) shouldBeEqualTo true
+            hasExternalParentWithName(listOf("FixtureExternalClass", "OtherInterface")) shouldBeEqualTo true
+            hasExternalParentWithName(setOf("FixtureExternalClass")) shouldBeEqualTo true
             hasExternalParentWithName(setOf("OtherInterface")) shouldBeEqualTo false
-            hasExternalParentWithName(setOf("SampleExternalClass", "SampleExternalInterface")) shouldBeEqualTo true
-            hasExternalParentWithName(setOf("SampleExternalClass", "OtherInterface")) shouldBeEqualTo true
-            hasExternalParentsWithAllNames("SampleExternalClass") shouldBeEqualTo true
+            hasExternalParentWithName(setOf("FixtureExternalClass", "FixtureExternalInterface")) shouldBeEqualTo true
+            hasExternalParentWithName(setOf("FixtureExternalClass", "OtherInterface")) shouldBeEqualTo true
+            hasExternalParentsWithAllNames("FixtureExternalClass") shouldBeEqualTo true
             hasExternalParentsWithAllNames("OtherInterface") shouldBeEqualTo false
-            hasExternalParentsWithAllNames("SampleExternalClass", "SampleExternalInterface") shouldBeEqualTo true
-            hasExternalParentsWithAllNames("SampleExternalClass", "OtherInterface") shouldBeEqualTo false
-            hasExternalParentsWithAllNames(listOf("SampleExternalClass")) shouldBeEqualTo true
+            hasExternalParentsWithAllNames("FixtureExternalClass", "FixtureExternalInterface") shouldBeEqualTo true
+            hasExternalParentsWithAllNames("FixtureExternalClass", "OtherInterface") shouldBeEqualTo false
+            hasExternalParentsWithAllNames(listOf("FixtureExternalClass")) shouldBeEqualTo true
             hasExternalParentsWithAllNames(listOf("OtherInterface")) shouldBeEqualTo false
-            hasExternalParentsWithAllNames(listOf("SampleExternalClass", "SampleExternalInterface")) shouldBeEqualTo true
-            hasExternalParentsWithAllNames(listOf("SampleExternalClass", "OtherInterface")) shouldBeEqualTo false
-            hasExternalParentsWithAllNames(setOf("SampleExternalClass")) shouldBeEqualTo true
+            hasExternalParentsWithAllNames(listOf("FixtureExternalClass", "FixtureExternalInterface")) shouldBeEqualTo true
+            hasExternalParentsWithAllNames(listOf("FixtureExternalClass", "OtherInterface")) shouldBeEqualTo false
+            hasExternalParentsWithAllNames(setOf("FixtureExternalClass")) shouldBeEqualTo true
             hasExternalParentsWithAllNames(setOf("OtherInterface")) shouldBeEqualTo false
-            hasExternalParentsWithAllNames(setOf("SampleExternalClass", "SampleExternalInterface")) shouldBeEqualTo true
-            hasExternalParentsWithAllNames(setOf("SampleExternalClass", "OtherInterface")) shouldBeEqualTo false
-            hasExternalParent { it.name == "SampleExternalClass" } shouldBeEqualTo true
+            hasExternalParentsWithAllNames(setOf("FixtureExternalClass", "FixtureExternalInterface")) shouldBeEqualTo true
+            hasExternalParentsWithAllNames(setOf("FixtureExternalClass", "OtherInterface")) shouldBeEqualTo false
+            hasExternalParent { it.name == "FixtureExternalClass" } shouldBeEqualTo true
             hasExternalParent { it.name == "OtherInterface" } shouldBeEqualTo false
-            hasAllExternalParents { it.name == "SampleExternalClass" } shouldBeEqualTo false
-            hasAllExternalParents { it.hasNameStartingWith("Sample") } shouldBeEqualTo true
+            hasAllExternalParents { it.name == "FixtureExternalClass" } shouldBeEqualTo false
+            hasAllExternalParents { it.hasNameStartingWith("Fixture") } shouldBeEqualTo true
             hasAllExternalParents { it.hasNameStartingWith("Other") } shouldBeEqualTo false
-            hasExternalParentOf(SampleExternalClass::class) shouldBeEqualTo true
-            hasExternalParentOf(SampleExternalClass::class, SampleParentClass::class) shouldBeEqualTo true
-            hasExternalParentOf(listOf(SampleExternalClass::class)) shouldBeEqualTo true
-            hasExternalParentOf(listOf(SampleExternalClass::class, SampleParentClass::class)) shouldBeEqualTo true
-            hasExternalParentOf(setOf(SampleExternalClass::class)) shouldBeEqualTo true
-            hasExternalParentOf(setOf(SampleExternalClass::class, SampleParentClass::class)) shouldBeEqualTo true
-            hasAllExternalParentsOf(SampleExternalClass::class) shouldBeEqualTo true
-            hasAllExternalParentsOf(SampleExternalClass::class, SampleParentClass::class) shouldBeEqualTo false
-            hasAllExternalParentsOf(SampleExternalClass::class, SampleExternalInterface::class) shouldBeEqualTo true
-            hasAllExternalParentsOf(listOf(SampleExternalClass::class)) shouldBeEqualTo true
-            hasAllExternalParentsOf(listOf(SampleExternalClass::class, SampleParentClass::class)) shouldBeEqualTo false
-            hasAllExternalParentsOf(listOf(SampleExternalClass::class, SampleExternalInterface::class)) shouldBeEqualTo true
-            hasAllExternalParentsOf(setOf(SampleExternalClass::class)) shouldBeEqualTo true
-            hasAllExternalParentsOf(setOf(SampleExternalClass::class, SampleParentClass::class)) shouldBeEqualTo false
-            hasAllExternalParentsOf(setOf(SampleExternalClass::class, SampleExternalInterface::class)) shouldBeEqualTo true
+            hasExternalParentOf(FixtureExternalClass::class) shouldBeEqualTo true
+            hasExternalParentOf(FixtureExternalClass::class, FixtureParentClass::class) shouldBeEqualTo true
+            hasExternalParentOf(listOf(FixtureExternalClass::class)) shouldBeEqualTo true
+            hasExternalParentOf(listOf(FixtureExternalClass::class, FixtureParentClass::class)) shouldBeEqualTo true
+            hasExternalParentOf(setOf(FixtureExternalClass::class)) shouldBeEqualTo true
+            hasExternalParentOf(setOf(FixtureExternalClass::class, FixtureParentClass::class)) shouldBeEqualTo true
+            hasAllExternalParentsOf(FixtureExternalClass::class) shouldBeEqualTo true
+            hasAllExternalParentsOf(FixtureExternalClass::class, FixtureParentClass::class) shouldBeEqualTo false
+            hasAllExternalParentsOf(FixtureExternalClass::class, FixtureExternalInterface::class) shouldBeEqualTo true
+            hasAllExternalParentsOf(listOf(FixtureExternalClass::class)) shouldBeEqualTo true
+            hasAllExternalParentsOf(listOf(FixtureExternalClass::class, FixtureParentClass::class)) shouldBeEqualTo false
+            hasAllExternalParentsOf(listOf(FixtureExternalClass::class, FixtureExternalInterface::class)) shouldBeEqualTo true
+            hasAllExternalParentsOf(setOf(FixtureExternalClass::class)) shouldBeEqualTo true
+            hasAllExternalParentsOf(setOf(FixtureExternalClass::class, FixtureParentClass::class)) shouldBeEqualTo false
+            hasAllExternalParentsOf(setOf(FixtureExternalClass::class, FixtureExternalInterface::class)) shouldBeEqualTo true
         }
     }
 
@@ -124,59 +124,59 @@ class KoClassDeclarationForKoExternalParentProviderTest {
 
         // then
         assertSoftly(sut) {
-            externalParents().map { it.name } shouldBeEqualTo listOf("SampleExternalInterface", "SampleExternalGenericInterface<Int>")
+            externalParents().map { it.name } shouldBeEqualTo listOf("FixtureExternalInterface", "FixtureExternalGenericInterface<Int>")
             numExternalParents() shouldBeEqualTo 2
-            countExternalParents { it.name == "SampleExternalInterface" } shouldBeEqualTo 1
-            countExternalParents { it.hasNameStartingWith("SampleExternal") } shouldBeEqualTo 2
+            countExternalParents { it.name == "FixtureExternalInterface" } shouldBeEqualTo 1
+            countExternalParents { it.hasNameStartingWith("FixtureExternal") } shouldBeEqualTo 2
             hasExternalParents() shouldBeEqualTo true
             hasExternalParentWithName(emptyList()) shouldBeEqualTo true
             hasExternalParentWithName(emptySet()) shouldBeEqualTo true
             hasExternalParentsWithAllNames(emptyList()) shouldBeEqualTo true
             hasExternalParentsWithAllNames(emptySet()) shouldBeEqualTo true
-            hasExternalParentWithName("SampleExternalInterface") shouldBeEqualTo true
+            hasExternalParentWithName("FixtureExternalInterface") shouldBeEqualTo true
             hasExternalParentWithName("OtherInterface") shouldBeEqualTo false
-            hasExternalParentWithName("SampleExternalInterface", "SampleExternalGenericInterface") shouldBeEqualTo true
-            hasExternalParentWithName("SampleExternalInterface", "OtherInterface") shouldBeEqualTo true
-            hasExternalParentWithName(listOf("SampleExternalInterface")) shouldBeEqualTo true
+            hasExternalParentWithName("FixtureExternalInterface", "FixtureExternalGenericInterface") shouldBeEqualTo true
+            hasExternalParentWithName("FixtureExternalInterface", "OtherInterface") shouldBeEqualTo true
+            hasExternalParentWithName(listOf("FixtureExternalInterface")) shouldBeEqualTo true
             hasExternalParentWithName(listOf("OtherInterface")) shouldBeEqualTo false
-            hasExternalParentWithName(listOf("SampleExternalInterface", "SampleExternalGenericInterface")) shouldBeEqualTo true
-            hasExternalParentWithName(listOf("SampleExternalInterface", "OtherInterface")) shouldBeEqualTo true
-            hasExternalParentWithName(setOf("SampleExternalInterface")) shouldBeEqualTo true
+            hasExternalParentWithName(listOf("FixtureExternalInterface", "FixtureExternalGenericInterface")) shouldBeEqualTo true
+            hasExternalParentWithName(listOf("FixtureExternalInterface", "OtherInterface")) shouldBeEqualTo true
+            hasExternalParentWithName(setOf("FixtureExternalInterface")) shouldBeEqualTo true
             hasExternalParentWithName(setOf("OtherInterface")) shouldBeEqualTo false
-            hasExternalParentWithName(setOf("SampleExternalInterface", "SampleExternalGenericInterface")) shouldBeEqualTo true
-            hasExternalParentWithName(setOf("SampleExternalInterface", "OtherInterface")) shouldBeEqualTo true
-            hasExternalParentsWithAllNames("SampleExternalInterface") shouldBeEqualTo true
+            hasExternalParentWithName(setOf("FixtureExternalInterface", "FixtureExternalGenericInterface")) shouldBeEqualTo true
+            hasExternalParentWithName(setOf("FixtureExternalInterface", "OtherInterface")) shouldBeEqualTo true
+            hasExternalParentsWithAllNames("FixtureExternalInterface") shouldBeEqualTo true
             hasExternalParentsWithAllNames("OtherInterface") shouldBeEqualTo false
-            hasExternalParentsWithAllNames("SampleExternalInterface", "SampleExternalGenericInterface<Int>") shouldBeEqualTo true
-            hasExternalParentsWithAllNames("SampleExternalInterface", "OtherInterface") shouldBeEqualTo false
-            hasExternalParentsWithAllNames(listOf("SampleExternalInterface")) shouldBeEqualTo true
+            hasExternalParentsWithAllNames("FixtureExternalInterface", "FixtureExternalGenericInterface<Int>") shouldBeEqualTo true
+            hasExternalParentsWithAllNames("FixtureExternalInterface", "OtherInterface") shouldBeEqualTo false
+            hasExternalParentsWithAllNames(listOf("FixtureExternalInterface")) shouldBeEqualTo true
             hasExternalParentsWithAllNames(listOf("OtherInterface")) shouldBeEqualTo false
-            hasExternalParentsWithAllNames(listOf("SampleExternalInterface", "SampleExternalGenericInterface<Int>")) shouldBeEqualTo true
-            hasExternalParentsWithAllNames(listOf("SampleExternalInterface", "OtherInterface")) shouldBeEqualTo false
-            hasExternalParentsWithAllNames(setOf("SampleExternalInterface")) shouldBeEqualTo true
+            hasExternalParentsWithAllNames(listOf("FixtureExternalInterface", "FixtureExternalGenericInterface<Int>")) shouldBeEqualTo true
+            hasExternalParentsWithAllNames(listOf("FixtureExternalInterface", "OtherInterface")) shouldBeEqualTo false
+            hasExternalParentsWithAllNames(setOf("FixtureExternalInterface")) shouldBeEqualTo true
             hasExternalParentsWithAllNames(setOf("OtherInterface")) shouldBeEqualTo false
-            hasExternalParentsWithAllNames(setOf("SampleExternalInterface", "SampleExternalGenericInterface<Int>")) shouldBeEqualTo true
-            hasExternalParentsWithAllNames(setOf("SampleExternalInterface", "OtherInterface")) shouldBeEqualTo false
-            hasExternalParent { it.name == "SampleExternalInterface" } shouldBeEqualTo true
+            hasExternalParentsWithAllNames(setOf("FixtureExternalInterface", "FixtureExternalGenericInterface<Int>")) shouldBeEqualTo true
+            hasExternalParentsWithAllNames(setOf("FixtureExternalInterface", "OtherInterface")) shouldBeEqualTo false
+            hasExternalParent { it.name == "FixtureExternalInterface" } shouldBeEqualTo true
             hasExternalParent { it.name == "OtherInterface" } shouldBeEqualTo false
-            hasAllExternalParents { it.name == "SampleExternalInterface" } shouldBeEqualTo false
-            hasAllExternalParents { it.hasNameStartingWith("Sample") } shouldBeEqualTo true
+            hasAllExternalParents { it.name == "FixtureExternalInterface" } shouldBeEqualTo false
+            hasAllExternalParents { it.hasNameStartingWith("Fixture") } shouldBeEqualTo true
             hasAllExternalParents { it.hasNameStartingWith("Other") } shouldBeEqualTo false
-            hasExternalParentOf(SampleExternalInterface::class) shouldBeEqualTo true
-            hasExternalParentOf(SampleExternalInterface::class, SampleParentClass::class) shouldBeEqualTo true
-            hasExternalParentOf(listOf(SampleExternalInterface::class)) shouldBeEqualTo true
-            hasExternalParentOf(listOf(SampleExternalInterface::class, SampleParentClass::class)) shouldBeEqualTo true
-            hasExternalParentOf(setOf(SampleExternalInterface::class)) shouldBeEqualTo true
-            hasExternalParentOf(setOf(SampleExternalInterface::class, SampleParentClass::class)) shouldBeEqualTo true
-            hasAllExternalParentsOf(SampleExternalInterface::class) shouldBeEqualTo true
-            hasAllExternalParentsOf(SampleExternalInterface::class, SampleParentClass::class) shouldBeEqualTo false
-            hasAllExternalParentsOf(SampleExternalInterface::class, SampleExternalGenericInterface::class) shouldBeEqualTo true
-            hasAllExternalParentsOf(listOf(SampleExternalInterface::class)) shouldBeEqualTo true
-            hasAllExternalParentsOf(listOf(SampleExternalInterface::class, SampleParentClass::class)) shouldBeEqualTo false
-            hasAllExternalParentsOf(listOf(SampleExternalInterface::class, SampleExternalGenericInterface::class)) shouldBeEqualTo true
-            hasAllExternalParentsOf(setOf(SampleExternalInterface::class)) shouldBeEqualTo true
-            hasAllExternalParentsOf(setOf(SampleExternalInterface::class, SampleParentClass::class)) shouldBeEqualTo false
-            hasAllExternalParentsOf(setOf(SampleExternalInterface::class, SampleExternalGenericInterface::class)) shouldBeEqualTo true
+            hasExternalParentOf(FixtureExternalInterface::class) shouldBeEqualTo true
+            hasExternalParentOf(FixtureExternalInterface::class, FixtureParentClass::class) shouldBeEqualTo true
+            hasExternalParentOf(listOf(FixtureExternalInterface::class)) shouldBeEqualTo true
+            hasExternalParentOf(listOf(FixtureExternalInterface::class, FixtureParentClass::class)) shouldBeEqualTo true
+            hasExternalParentOf(setOf(FixtureExternalInterface::class)) shouldBeEqualTo true
+            hasExternalParentOf(setOf(FixtureExternalInterface::class, FixtureParentClass::class)) shouldBeEqualTo true
+            hasAllExternalParentsOf(FixtureExternalInterface::class) shouldBeEqualTo true
+            hasAllExternalParentsOf(FixtureExternalInterface::class, FixtureParentClass::class) shouldBeEqualTo false
+            hasAllExternalParentsOf(FixtureExternalInterface::class, FixtureExternalGenericInterface::class) shouldBeEqualTo true
+            hasAllExternalParentsOf(listOf(FixtureExternalInterface::class)) shouldBeEqualTo true
+            hasAllExternalParentsOf(listOf(FixtureExternalInterface::class, FixtureParentClass::class)) shouldBeEqualTo false
+            hasAllExternalParentsOf(listOf(FixtureExternalInterface::class, FixtureExternalGenericInterface::class)) shouldBeEqualTo true
+            hasAllExternalParentsOf(setOf(FixtureExternalInterface::class)) shouldBeEqualTo true
+            hasAllExternalParentsOf(setOf(FixtureExternalInterface::class, FixtureParentClass::class)) shouldBeEqualTo false
+            hasAllExternalParentsOf(setOf(FixtureExternalInterface::class, FixtureExternalGenericInterface::class)) shouldBeEqualTo true
         }
     }
 
@@ -194,15 +194,15 @@ class KoClassDeclarationForKoExternalParentProviderTest {
             externalParents(indirectParents = false) shouldBeEqualTo emptyList()
             externalParents(indirectParents = true).map { it.name } shouldBeEqualTo
                 listOf(
-                    "SampleExternalClass",
-                    "SampleExternalInterface",
+                    "FixtureExternalClass",
+                    "FixtureExternalInterface",
                 )
             numExternalParents(indirectParents = false) shouldBeEqualTo 0
             numExternalParents(indirectParents = true) shouldBeEqualTo 2
-            countExternalParents(indirectParents = false) { it.name == "SampleExternalInterface" } shouldBeEqualTo 0
-            countExternalParents(indirectParents = true) { it.name == "SampleExternalInterface" } shouldBeEqualTo 1
-            countExternalParents(indirectParents = false) { it.hasNameStartingWith("SampleExternal") } shouldBeEqualTo 0
-            countExternalParents(indirectParents = true) { it.hasNameStartingWith("SampleExternal") } shouldBeEqualTo 2
+            countExternalParents(indirectParents = false) { it.name == "FixtureExternalInterface" } shouldBeEqualTo 0
+            countExternalParents(indirectParents = true) { it.name == "FixtureExternalInterface" } shouldBeEqualTo 1
+            countExternalParents(indirectParents = false) { it.hasNameStartingWith("FixtureExternal") } shouldBeEqualTo 0
+            countExternalParents(indirectParents = true) { it.hasNameStartingWith("FixtureExternal") } shouldBeEqualTo 2
             hasExternalParents(indirectParents = false) shouldBeEqualTo false
             hasExternalParents(indirectParents = true) shouldBeEqualTo true
             hasExternalParentWithName(emptyList(), indirectParents = false) shouldBeEqualTo false
@@ -213,106 +213,106 @@ class KoClassDeclarationForKoExternalParentProviderTest {
             hasExternalParentWithName(emptySet(), indirectParents = true) shouldBeEqualTo true
             hasExternalParentsWithAllNames(emptyList(), indirectParents = true) shouldBeEqualTo true
             hasExternalParentsWithAllNames(emptySet(), indirectParents = true) shouldBeEqualTo true
-            hasExternalParentWithName("SampleExternalInterface", indirectParents = true) shouldBeEqualTo true
+            hasExternalParentWithName("FixtureExternalInterface", indirectParents = true) shouldBeEqualTo true
             hasExternalParentWithName("OtherInterface", indirectParents = true) shouldBeEqualTo false
             hasExternalParentWithName(
-                "SampleExternalInterface",
-                "SampleExternalClass",
+                "FixtureExternalInterface",
+                "FixtureExternalClass",
                 indirectParents = true,
             ) shouldBeEqualTo true
             hasExternalParentWithName(
-                "SampleExternalInterface",
+                "FixtureExternalInterface",
                 "OtherInterface",
                 indirectParents = true,
             ) shouldBeEqualTo true
-            hasExternalParentWithName(listOf("SampleExternalInterface"), indirectParents = true) shouldBeEqualTo true
+            hasExternalParentWithName(listOf("FixtureExternalInterface"), indirectParents = true) shouldBeEqualTo true
             hasExternalParentWithName(listOf("OtherInterface"), indirectParents = true) shouldBeEqualTo false
             hasExternalParentWithName(
                 listOf(
-                    "SampleExternalInterface",
-                    "SampleExternalClass",
+                    "FixtureExternalInterface",
+                    "FixtureExternalClass",
                 ),
                 indirectParents = true,
             ) shouldBeEqualTo true
             hasExternalParentWithName(
                 listOf(
-                    "SampleExternalInterface",
+                    "FixtureExternalInterface",
                     "OtherInterface",
                 ),
                 indirectParents = true,
             ) shouldBeEqualTo true
-            hasExternalParentsWithAllNames("SampleExternalInterface", indirectParents = true) shouldBeEqualTo true
+            hasExternalParentsWithAllNames("FixtureExternalInterface", indirectParents = true) shouldBeEqualTo true
             hasExternalParentsWithAllNames("OtherInterface", indirectParents = true) shouldBeEqualTo false
             hasExternalParentsWithAllNames(
-                "SampleExternalInterface",
-                "SampleExternalClass",
+                "FixtureExternalInterface",
+                "FixtureExternalClass",
                 indirectParents = true,
             ) shouldBeEqualTo true
             hasExternalParentsWithAllNames(
-                "SampleExternalInterface",
+                "FixtureExternalInterface",
                 "OtherInterface",
                 indirectParents = true,
             ) shouldBeEqualTo false
 
-            hasExternalParentsWithAllNames(listOf("SampleExternalInterface"), indirectParents = true) shouldBeEqualTo true
+            hasExternalParentsWithAllNames(listOf("FixtureExternalInterface"), indirectParents = true) shouldBeEqualTo true
             hasExternalParentsWithAllNames(listOf("OtherInterface"), indirectParents = true) shouldBeEqualTo false
             hasExternalParentsWithAllNames(
                 listOf(
-                    "SampleExternalInterface",
-                    "SampleExternalClass",
+                    "FixtureExternalInterface",
+                    "FixtureExternalClass",
                 ),
                 indirectParents = true,
             ) shouldBeEqualTo true
             hasExternalParentsWithAllNames(
                 listOf(
-                    "SampleExternalInterface",
+                    "FixtureExternalInterface",
                     "OtherInterface",
                 ),
                 indirectParents = true,
             ) shouldBeEqualTo false
-            hasExternalParent(indirectParents = true) { it.name == "SampleExternalInterface" } shouldBeEqualTo true
+            hasExternalParent(indirectParents = true) { it.name == "FixtureExternalInterface" } shouldBeEqualTo true
             hasExternalParent(indirectParents = true) { it.name == "OtherInterface" } shouldBeEqualTo false
-            hasAllExternalParents(indirectParents = true) { it.name == "SampleExternalInterface" } shouldBeEqualTo false
-            hasAllExternalParents(indirectParents = true) { it.hasNameStartingWith("Sample") } shouldBeEqualTo true
+            hasAllExternalParents(indirectParents = true) { it.name == "FixtureExternalInterface" } shouldBeEqualTo false
+            hasAllExternalParents(indirectParents = true) { it.hasNameStartingWith("Fixture") } shouldBeEqualTo true
             hasAllExternalParents(indirectParents = true) { it.hasNameStartingWith("Other") } shouldBeEqualTo false
-            hasExternalParentOf(SampleExternalInterface::class, indirectParents = true) shouldBeEqualTo true
+            hasExternalParentOf(FixtureExternalInterface::class, indirectParents = true) shouldBeEqualTo true
             hasExternalParentOf(
-                SampleExternalInterface::class,
-                SampleParentClass::class,
+                FixtureExternalInterface::class,
+                FixtureParentClass::class,
                 indirectParents = true,
             ) shouldBeEqualTo true
-            hasExternalParentOf(listOf(SampleExternalInterface::class), indirectParents = true) shouldBeEqualTo true
+            hasExternalParentOf(listOf(FixtureExternalInterface::class), indirectParents = true) shouldBeEqualTo true
             hasExternalParentOf(
                 listOf(
-                    SampleExternalInterface::class,
-                    SampleParentClass::class,
+                    FixtureExternalInterface::class,
+                    FixtureParentClass::class,
                 ),
                 indirectParents = true,
             ) shouldBeEqualTo true
-            hasAllExternalParentsOf(SampleExternalInterface::class, indirectParents = true) shouldBeEqualTo true
+            hasAllExternalParentsOf(FixtureExternalInterface::class, indirectParents = true) shouldBeEqualTo true
             hasAllExternalParentsOf(
-                SampleExternalInterface::class,
-                SampleParentClass::class,
+                FixtureExternalInterface::class,
+                FixtureParentClass::class,
                 indirectParents = true,
             ) shouldBeEqualTo false
             hasAllExternalParentsOf(
-                SampleExternalInterface::class,
-                SampleExternalClass::class,
+                FixtureExternalInterface::class,
+                FixtureExternalClass::class,
                 indirectParents = true,
             ) shouldBeEqualTo true
 
-            hasAllExternalParentsOf(listOf(SampleExternalInterface::class), indirectParents = true) shouldBeEqualTo true
+            hasAllExternalParentsOf(listOf(FixtureExternalInterface::class), indirectParents = true) shouldBeEqualTo true
             hasAllExternalParentsOf(
                 listOf(
-                    SampleExternalInterface::class,
-                    SampleParentClass::class,
+                    FixtureExternalInterface::class,
+                    FixtureParentClass::class,
                 ),
                 indirectParents = true,
             ) shouldBeEqualTo false
             hasAllExternalParentsOf(
                 listOf(
-                    SampleExternalInterface::class,
-                    SampleExternalClass::class,
+                    FixtureExternalInterface::class,
+                    FixtureExternalClass::class,
                 ),
                 indirectParents = true,
             ) shouldBeEqualTo true
@@ -329,11 +329,11 @@ class KoClassDeclarationForKoExternalParentProviderTest {
 
         // then
         assertSoftly(sut) {
-            externalParents(indirectParents = false).map { it.name } shouldBeEqualTo listOf("SampleExternalInterface")
+            externalParents(indirectParents = false).map { it.name } shouldBeEqualTo listOf("FixtureExternalInterface")
             externalParents(indirectParents = true).map { it.name } shouldBeEqualTo
                 listOf(
-                    "SampleExternalInterface",
-                    "SampleExternalClass",
+                    "FixtureExternalInterface",
+                    "FixtureExternalClass",
                 )
             numExternalParents(indirectParents = false) shouldBeEqualTo 1
             numExternalParents(indirectParents = true) shouldBeEqualTo 2
@@ -350,19 +350,20 @@ class KoClassDeclarationForKoExternalParentProviderTest {
 
         // then
         assertSoftly(sut) {
-            hasExternalParentWithName("sampleexternalclass") shouldBeEqualTo false
-            hasExternalParentWithName("sampleexternalclass", ignoreCase = true) shouldBeEqualTo false
-            hasExternalParentWithName(listOf("sampleexternalclass")) shouldBeEqualTo false
-            hasExternalParentWithName(listOf("sampleexternalclass"), ignoreCase = true) shouldBeEqualTo false
-            hasExternalParentWithName(setOf("sampleexternalclass")) shouldBeEqualTo false
-            hasExternalParentWithName(setOf("sampleexternalclass"), ignoreCase = true) shouldBeEqualTo false
-            hasExternalParentsWithAllNames("sampleexternalclass", "sampleexternalinterface") shouldBeEqualTo false
-            hasExternalParentsWithAllNames("sampleexternalclass", "sampleexternalinterface", ignoreCase = true) shouldBeEqualTo false
-            hasExternalParentsWithAllNames(listOf("sampleexternalclass", "sampleexternalinterface")) shouldBeEqualTo false
-            hasExternalParentsWithAllNames(listOf("sampleexternalclass", "sampleexternalinterface"), ignoreCase = true) shouldBeEqualTo
+            hasExternalParentWithName("fixtureexternalclass") shouldBeEqualTo false
+            hasExternalParentWithName("fixtureexternalclass", ignoreCase = true) shouldBeEqualTo false
+            hasExternalParentWithName(listOf("fixtureexternalclass")) shouldBeEqualTo false
+            hasExternalParentWithName(listOf("fixtureexternalclass"), ignoreCase = true) shouldBeEqualTo false
+            hasExternalParentWithName(setOf("fixtureexternalclass")) shouldBeEqualTo false
+            hasExternalParentWithName(setOf("fixtureexternalclass"), ignoreCase = true) shouldBeEqualTo false
+            hasExternalParentsWithAllNames("fixtureexternalclass", "fixtureexternalinterface") shouldBeEqualTo false
+            hasExternalParentsWithAllNames("fixtureexternalclass", "fixtureexternalinterface", ignoreCase = true) shouldBeEqualTo false
+            hasExternalParentsWithAllNames(listOf("fixtureexternalclass", "fixtureexternalinterface")) shouldBeEqualTo false
+            hasExternalParentsWithAllNames(listOf("fixtureexternalclass", "fixtureexternalinterface"), ignoreCase = true) shouldBeEqualTo
                 false
-            hasExternalParentsWithAllNames(setOf("sampleexternalclass", "sampleexternalinterface")) shouldBeEqualTo false
-            hasExternalParentsWithAllNames(setOf("sampleexternalclass", "sampleexternalinterface"), ignoreCase = true) shouldBeEqualTo false
+            hasExternalParentsWithAllNames(setOf("fixtureexternalclass", "fixtureexternalinterface")) shouldBeEqualTo false
+            hasExternalParentsWithAllNames(setOf("fixtureexternalclass", "fixtureexternalinterface"), ignoreCase = true) shouldBeEqualTo
+                false
         }
     }
 
@@ -376,30 +377,32 @@ class KoClassDeclarationForKoExternalParentProviderTest {
 
         // then
         assertSoftly(sut) {
-            hasExternalParentWithName("sampleexternalclass") shouldBeEqualTo false
-            hasExternalParentWithName("sampleexternalclass", ignoreCase = true) shouldBeEqualTo true
+            hasExternalParentWithName("fixtureexternalclass") shouldBeEqualTo false
+            hasExternalParentWithName("fixtureexternalclass", ignoreCase = true) shouldBeEqualTo true
             hasExternalParentWithName("otherexternalinterface") shouldBeEqualTo false
             hasExternalParentWithName("otherexternalinterface", ignoreCase = true) shouldBeEqualTo false
-            hasExternalParentWithName("sampleexternalclass", "otherName") shouldBeEqualTo false
-            hasExternalParentWithName("sampleexternalclass", "otherName", ignoreCase = true) shouldBeEqualTo true
-            hasExternalParentWithName(listOf("sampleexternalclass")) shouldBeEqualTo false
-            hasExternalParentWithName(listOf("sampleexternalclass"), ignoreCase = true) shouldBeEqualTo true
+            hasExternalParentWithName("fixtureexternalclass", "otherName") shouldBeEqualTo false
+            hasExternalParentWithName("fixtureexternalclass", "otherName", ignoreCase = true) shouldBeEqualTo true
+            hasExternalParentWithName(listOf("fixtureexternalclass")) shouldBeEqualTo false
+            hasExternalParentWithName(listOf("fixtureexternalclass"), ignoreCase = true) shouldBeEqualTo true
             hasExternalParentWithName(listOf("otherexternalinterface")) shouldBeEqualTo false
             hasExternalParentWithName(listOf("otherexternalinterface"), ignoreCase = true) shouldBeEqualTo false
-            hasExternalParentWithName(listOf("sampleexternalclass", "otherName")) shouldBeEqualTo false
-            hasExternalParentWithName(listOf("sampleexternalclass", "otherName"), ignoreCase = true) shouldBeEqualTo true
-            hasExternalParentsWithAllNames("sampleexternalclass") shouldBeEqualTo false
-            hasExternalParentsWithAllNames("sampleexternalclass", ignoreCase = true) shouldBeEqualTo true
-            hasExternalParentsWithAllNames("sampleexternalclass", "sampleexternalinterface") shouldBeEqualTo false
-            hasExternalParentsWithAllNames("sampleexternalclass", "sampleexternalinterface", ignoreCase = true) shouldBeEqualTo true
-            hasExternalParentsWithAllNames("sampleexternalclass", "otherexternalinterface") shouldBeEqualTo false
-            hasExternalParentsWithAllNames("sampleexternalclass", "otherexternalinterface", ignoreCase = true) shouldBeEqualTo false
-            hasExternalParentsWithAllNames(listOf("sampleexternalclass")) shouldBeEqualTo false
-            hasExternalParentsWithAllNames(listOf("sampleexternalclass"), ignoreCase = true) shouldBeEqualTo true
-            hasExternalParentsWithAllNames(listOf("sampleexternalclass", "sampleexternalinterface")) shouldBeEqualTo false
-            hasExternalParentsWithAllNames(listOf("sampleexternalclass", "sampleexternalinterface"), ignoreCase = true) shouldBeEqualTo true
-            hasExternalParentsWithAllNames(listOf("sampleexternalclass", "otherexternalinterface")) shouldBeEqualTo false
-            hasExternalParentsWithAllNames(listOf("sampleexternalclass", "otherexternalinterface"), ignoreCase = true) shouldBeEqualTo false
+            hasExternalParentWithName(listOf("fixtureexternalclass", "otherName")) shouldBeEqualTo false
+            hasExternalParentWithName(listOf("fixtureexternalclass", "otherName"), ignoreCase = true) shouldBeEqualTo true
+            hasExternalParentsWithAllNames("fixtureexternalclass") shouldBeEqualTo false
+            hasExternalParentsWithAllNames("fixtureexternalclass", ignoreCase = true) shouldBeEqualTo true
+            hasExternalParentsWithAllNames("fixtureexternalclass", "fixtureexternalinterface") shouldBeEqualTo false
+            hasExternalParentsWithAllNames("fixtureexternalclass", "fixtureexternalinterface", ignoreCase = true) shouldBeEqualTo true
+            hasExternalParentsWithAllNames("fixtureexternalclass", "otherexternalinterface") shouldBeEqualTo false
+            hasExternalParentsWithAllNames("fixtureexternalclass", "otherexternalinterface", ignoreCase = true) shouldBeEqualTo false
+            hasExternalParentsWithAllNames(listOf("fixtureexternalclass")) shouldBeEqualTo false
+            hasExternalParentsWithAllNames(listOf("fixtureexternalclass"), ignoreCase = true) shouldBeEqualTo true
+            hasExternalParentsWithAllNames(listOf("fixtureexternalclass", "fixtureexternalinterface")) shouldBeEqualTo false
+            hasExternalParentsWithAllNames(listOf("fixtureexternalclass", "fixtureexternalinterface"), ignoreCase = true) shouldBeEqualTo
+                true
+            hasExternalParentsWithAllNames(listOf("fixtureexternalclass", "otherexternalinterface")) shouldBeEqualTo false
+            hasExternalParentsWithAllNames(listOf("fixtureexternalclass", "otherexternalinterface"), ignoreCase = true) shouldBeEqualTo
+                false
         }
     }
 

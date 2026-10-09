@@ -1,1 +1,1 @@
-fun <TestType> TestType.sampleFunction(): TestType = this
+fun <TestType> TestType.fixtureFunction(): TestType = this

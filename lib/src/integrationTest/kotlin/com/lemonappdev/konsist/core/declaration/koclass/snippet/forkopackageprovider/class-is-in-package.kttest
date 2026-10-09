@@ -1,3 +1,3 @@
-package com.samplepackage
-class SampleClass {
+package com.fixturepackage
+class FixtureClass {
 }

@@ -1,4 +1,4 @@
 import kotlin.Deprecated
 
 @Deprecated("")
-class SampleClass
+class FixtureClass

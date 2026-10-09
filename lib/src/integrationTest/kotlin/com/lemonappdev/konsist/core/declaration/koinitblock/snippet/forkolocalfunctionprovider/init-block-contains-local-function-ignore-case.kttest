@@ -1,7 +1,7 @@
-class SampleClass {
+class FixtureClass {
     init {
-        fun sampleLocalFunction1() { }
+        fun fixtureLocalFunction1() { }
 
-        fun sampleLocalFunction2() { }
+        fun fixtureLocalFunction2() { }
     }
 }

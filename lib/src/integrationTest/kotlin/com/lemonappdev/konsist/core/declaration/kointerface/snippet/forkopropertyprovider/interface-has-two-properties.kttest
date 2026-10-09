@@ -1,5 +1,5 @@
-interface SampleInterface {
-    val sampleProperty1: String
+interface FixtureInterface {
+    val fixtureProperty1: String
 
-    var sampleProperty2: Int
+    var fixtureProperty2: Int
 }

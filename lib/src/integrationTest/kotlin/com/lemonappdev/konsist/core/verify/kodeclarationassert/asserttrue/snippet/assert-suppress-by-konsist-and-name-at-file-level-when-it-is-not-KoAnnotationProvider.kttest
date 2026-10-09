@@ -1,7 +1,7 @@
 @file:Suppress("konsist.assert-suppress-by-konsist-and-name-at-file-level-when-it-is-not-KoAnnotationProvider")
 
-class SampleClassWithoutOtherFunction {
+class FixtureClassWithoutOtherFunction {
     init {
-        fun sampleFunction() {}
+        fun fixtureFunction() {}
     }
 }

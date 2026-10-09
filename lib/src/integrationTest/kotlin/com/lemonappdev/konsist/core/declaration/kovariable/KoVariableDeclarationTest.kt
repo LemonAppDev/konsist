@@ -23,7 +23,7 @@ class KoVariableDeclarationTest {
                 .first()
 
         // then
-        sut.toString() shouldBeEqualTo "sampleVariable"
+        sut.toString() shouldBeEqualTo "fixtureVariable"
     }
 
     companion object {

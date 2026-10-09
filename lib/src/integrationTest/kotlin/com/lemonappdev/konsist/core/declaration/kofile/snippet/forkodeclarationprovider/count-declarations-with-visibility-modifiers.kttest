@@ -1,7 +1,7 @@
-val sampleDefaultProperty = ""
+val fixtureDefaultProperty = ""
 
-public fun samplePublicFunction() {}
+public fun fixturePublicFunction() {}
 
-private class SamplePrivateClass
+private class FixturePrivateClass
 
-internal interface SampleInternalInterface
+internal interface FixtureInternalInterface

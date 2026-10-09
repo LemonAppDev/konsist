@@ -88,9 +88,9 @@ class KoModuleProviderListExtTest {
     @Test
     fun `withModule(list) returns declaration with one of given modules`() {
         // given
-        val module1 = "sampleModule1"
-        val module2 = "sampleModule2"
-        val module3 = "sampleModule3"
+        val module1 = "fixtureModule1"
+        val module2 = "fixtureModule2"
+        val module3 = "fixtureModule3"
         val declaration1: KoModuleProvider =
             mockk {
                 every { resideInModule(module1) } returns true
@@ -122,9 +122,9 @@ class KoModuleProviderListExtTest {
     @Test
     fun `withModule(set) returns declaration with one of given modules`() {
         // given
-        val module1 = "sampleModule1"
-        val module2 = "sampleModule2"
-        val module3 = "sampleModule3"
+        val module1 = "fixtureModule1"
+        val module2 = "fixtureModule2"
+        val module3 = "fixtureModule3"
         val declaration1: KoModuleProvider =
             mockk {
                 every { resideInModule(module1) } returns true
@@ -234,9 +234,9 @@ class KoModuleProviderListExtTest {
     @Test
     fun `withoutModule(list) returns declaration without any of given modules`() {
         // given
-        val module1 = "sampleModule1"
-        val module2 = "sampleModule2"
-        val module3 = "sampleModule3"
+        val module1 = "fixtureModule1"
+        val module2 = "fixtureModule2"
+        val module3 = "fixtureModule3"
         val declaration1: KoModuleProvider =
             mockk {
                 every { resideInModule(module1) } returns true
@@ -268,9 +268,9 @@ class KoModuleProviderListExtTest {
     @Test
     fun `withoutModule(set) returns declaration without any of given modules`() {
         // given
-        val module1 = "sampleModule1"
-        val module2 = "sampleModule2"
-        val module3 = "sampleModule3"
+        val module1 = "fixtureModule1"
+        val module2 = "fixtureModule2"
+        val module3 = "fixtureModule3"
         val declaration1: KoModuleProvider =
             mockk {
                 every { resideInModule(module1) } returns true

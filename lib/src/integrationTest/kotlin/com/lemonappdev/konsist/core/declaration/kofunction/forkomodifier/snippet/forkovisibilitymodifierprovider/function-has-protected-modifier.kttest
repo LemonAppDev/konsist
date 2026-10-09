@@ -1,4 +1,4 @@
-class SampleClass {
-    protected fun sampleFunction() {
+class FixtureClass {
+    protected fun fixtureFunction() {
     }
 }

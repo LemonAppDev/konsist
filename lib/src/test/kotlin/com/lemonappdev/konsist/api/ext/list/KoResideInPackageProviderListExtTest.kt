@@ -8,18 +8,18 @@ import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
 class KoResideInPackageProviderListExtTest {
-    private interface SampleTestDeclaration :
+    private interface FixtureTestDeclaration :
         KoPackageProvider,
         KoResideInPackageProvider
 
     @Test
     fun `withPackage() returns declaration reside in any package`() {
         // given
-        val declaration1: SampleTestDeclaration =
+        val declaration1: FixtureTestDeclaration =
             mockk {
                 every { packagee } returns mockk()
             }
-        val declaration2: SampleTestDeclaration =
+        val declaration2: FixtureTestDeclaration =
             mockk {
                 every { packagee } returns null
             }
@@ -35,11 +35,11 @@ class KoResideInPackageProviderListExtTest {
     @Test
     fun `withPackage(empty list) returns declaration reside in any package`() {
         // given
-        val declaration1: SampleTestDeclaration =
+        val declaration1: FixtureTestDeclaration =
             mockk {
                 every { packagee } returns mockk()
             }
-        val declaration2: SampleTestDeclaration =
+        val declaration2: FixtureTestDeclaration =
             mockk {
                 every { packagee } returns null
             }
@@ -55,11 +55,11 @@ class KoResideInPackageProviderListExtTest {
     @Test
     fun `withPackage(empty set) returns declaration reside in any package`() {
         // given
-        val declaration1: SampleTestDeclaration =
+        val declaration1: FixtureTestDeclaration =
             mockk {
                 every { packagee } returns mockk()
             }
-        val declaration2: SampleTestDeclaration =
+        val declaration2: FixtureTestDeclaration =
             mockk {
                 every { packagee } returns null
             }
@@ -75,12 +75,12 @@ class KoResideInPackageProviderListExtTest {
     @Test
     fun `withPackage(String) returns declaration with given package`() {
         // given
-        val packagee = "com.sample.samplepackage"
-        val declaration1: SampleTestDeclaration =
+        val packagee = "com.fixture.fixturepackage"
+        val declaration1: FixtureTestDeclaration =
             mockk {
                 every { resideInPackage(packagee) } returns true
             }
-        val declaration2: SampleTestDeclaration =
+        val declaration2: FixtureTestDeclaration =
             mockk {
                 every { resideInPackage(packagee) } returns false
             }
@@ -96,19 +96,19 @@ class KoResideInPackageProviderListExtTest {
     @Test
     fun `withPackage(String) returns declarations with at least one of given package`() {
         // given
-        val package1 = "com.sample.samplepackage1"
-        val package2 = "com.sample.samplepackage2"
-        val declaration1: SampleTestDeclaration =
+        val package1 = "com.fixture.fixturepackage1"
+        val package2 = "com.fixture.fixturepackage2"
+        val declaration1: FixtureTestDeclaration =
             mockk {
                 every { resideInPackage(package1) } returns true
                 every { resideInPackage(package2) } returns true
             }
-        val declaration2: SampleTestDeclaration =
+        val declaration2: FixtureTestDeclaration =
             mockk {
                 every { resideInPackage(package1) } returns false
                 every { resideInPackage(package2) } returns true
             }
-        val declaration3: SampleTestDeclaration =
+        val declaration3: FixtureTestDeclaration =
             mockk {
                 every { resideInPackage(package1) } returns false
                 every { resideInPackage(package2) } returns false
@@ -125,19 +125,19 @@ class KoResideInPackageProviderListExtTest {
     @Test
     fun `withPackage(list of String) returns declarations with at least one of given package`() {
         // given
-        val package1 = "com.sample.samplepackage1"
-        val package2 = "com.sample.samplepackage2"
-        val declaration1: SampleTestDeclaration =
+        val package1 = "com.fixture.fixturepackage1"
+        val package2 = "com.fixture.fixturepackage2"
+        val declaration1: FixtureTestDeclaration =
             mockk {
                 every { resideInPackage(package1) } returns true
                 every { resideInPackage(package2) } returns true
             }
-        val declaration2: SampleTestDeclaration =
+        val declaration2: FixtureTestDeclaration =
             mockk {
                 every { resideInPackage(package1) } returns false
                 every { resideInPackage(package2) } returns true
             }
-        val declaration3: SampleTestDeclaration =
+        val declaration3: FixtureTestDeclaration =
             mockk {
                 every { resideInPackage(package1) } returns false
                 every { resideInPackage(package2) } returns false
@@ -155,19 +155,19 @@ class KoResideInPackageProviderListExtTest {
     @Test
     fun `withPackage(set of String) returns declarations with at least one of given package`() {
         // given
-        val package1 = "com.sample.samplepackage1"
-        val package2 = "com.sample.samplepackage2"
-        val declaration1: SampleTestDeclaration =
+        val package1 = "com.fixture.fixturepackage1"
+        val package2 = "com.fixture.fixturepackage2"
+        val declaration1: FixtureTestDeclaration =
             mockk {
                 every { resideInPackage(package1) } returns true
                 every { resideInPackage(package2) } returns true
             }
-        val declaration2: SampleTestDeclaration =
+        val declaration2: FixtureTestDeclaration =
             mockk {
                 every { resideInPackage(package1) } returns false
                 every { resideInPackage(package2) } returns true
             }
-        val declaration3: SampleTestDeclaration =
+        val declaration3: FixtureTestDeclaration =
             mockk {
                 every { resideInPackage(package1) } returns false
                 every { resideInPackage(package2) } returns false
@@ -185,11 +185,11 @@ class KoResideInPackageProviderListExtTest {
     @Test
     fun `withoutPackage() returns declaration not reside in any package`() {
         // given
-        val declaration1: SampleTestDeclaration =
+        val declaration1: FixtureTestDeclaration =
             mockk {
                 every { packagee } returns mockk()
             }
-        val declaration2: SampleTestDeclaration =
+        val declaration2: FixtureTestDeclaration =
             mockk {
                 every { packagee } returns null
             }
@@ -205,11 +205,11 @@ class KoResideInPackageProviderListExtTest {
     @Test
     fun `withoutPackage(empty list) returns declaration not reside in any package`() {
         // given
-        val declaration1: SampleTestDeclaration =
+        val declaration1: FixtureTestDeclaration =
             mockk {
                 every { packagee } returns mockk()
             }
-        val declaration2: SampleTestDeclaration =
+        val declaration2: FixtureTestDeclaration =
             mockk {
                 every { packagee } returns null
             }
@@ -225,11 +225,11 @@ class KoResideInPackageProviderListExtTest {
     @Test
     fun `withoutPackage(empty set) returns declaration not reside in any package`() {
         // given
-        val declaration1: SampleTestDeclaration =
+        val declaration1: FixtureTestDeclaration =
             mockk {
                 every { packagee } returns mockk()
             }
-        val declaration2: SampleTestDeclaration =
+        val declaration2: FixtureTestDeclaration =
             mockk {
                 every { packagee } returns null
             }
@@ -245,12 +245,12 @@ class KoResideInPackageProviderListExtTest {
     @Test
     fun `withoutPackage(String) returns declaration without given package`() {
         // given
-        val packagee = "com.sample.samplepackage"
-        val declaration1: SampleTestDeclaration =
+        val packagee = "com.fixture.fixturepackage"
+        val declaration1: FixtureTestDeclaration =
             mockk {
                 every { resideOutsidePackage(packagee) } returns false
             }
-        val declaration2: SampleTestDeclaration =
+        val declaration2: FixtureTestDeclaration =
             mockk {
                 every { resideOutsidePackage(packagee) } returns true
             }
@@ -266,19 +266,19 @@ class KoResideInPackageProviderListExtTest {
     @Test
     fun `withoutPackage(String) returns declaration without any of given packages`() {
         // given
-        val package1 = "com.sample.samplepackage1"
-        val package2 = "com.sample.samplepackage2"
-        val declaration1: SampleTestDeclaration =
+        val package1 = "com.fixture.fixturepackage1"
+        val package2 = "com.fixture.fixturepackage2"
+        val declaration1: FixtureTestDeclaration =
             mockk {
                 every { resideOutsidePackage(package1) } returns false
                 every { resideOutsidePackage(package2) } returns false
             }
-        val declaration2: SampleTestDeclaration =
+        val declaration2: FixtureTestDeclaration =
             mockk {
                 every { resideOutsidePackage(package1) } returns true
                 every { resideOutsidePackage(package2) } returns false
             }
-        val declaration3: SampleTestDeclaration =
+        val declaration3: FixtureTestDeclaration =
             mockk {
                 every { resideOutsidePackage(package1) } returns true
                 every { resideOutsidePackage(package2) } returns true
@@ -295,19 +295,19 @@ class KoResideInPackageProviderListExtTest {
     @Test
     fun `withoutPackage(list of String) returns declaration without any of given packages`() {
         // given
-        val package1 = "com.sample.samplepackage1"
-        val package2 = "com.sample.samplepackage2"
-        val declaration1: SampleTestDeclaration =
+        val package1 = "com.fixture.fixturepackage1"
+        val package2 = "com.fixture.fixturepackage2"
+        val declaration1: FixtureTestDeclaration =
             mockk {
                 every { resideOutsidePackage(package1) } returns false
                 every { resideOutsidePackage(package2) } returns false
             }
-        val declaration2: SampleTestDeclaration =
+        val declaration2: FixtureTestDeclaration =
             mockk {
                 every { resideOutsidePackage(package1) } returns true
                 every { resideOutsidePackage(package2) } returns false
             }
-        val declaration3: SampleTestDeclaration =
+        val declaration3: FixtureTestDeclaration =
             mockk {
                 every { resideOutsidePackage(package1) } returns true
                 every { resideOutsidePackage(package2) } returns true
@@ -325,19 +325,19 @@ class KoResideInPackageProviderListExtTest {
     @Test
     fun `withoutPackage(set of String) returns declaration without any of given packages`() {
         // given
-        val package1 = "com.sample.samplepackage1"
-        val package2 = "com.sample.samplepackage2"
-        val declaration1: SampleTestDeclaration =
+        val package1 = "com.fixture.fixturepackage1"
+        val package2 = "com.fixture.fixturepackage2"
+        val declaration1: FixtureTestDeclaration =
             mockk {
                 every { resideOutsidePackage(package1) } returns false
                 every { resideOutsidePackage(package2) } returns false
             }
-        val declaration2: SampleTestDeclaration =
+        val declaration2: FixtureTestDeclaration =
             mockk {
                 every { resideOutsidePackage(package1) } returns true
                 every { resideOutsidePackage(package2) } returns false
             }
-        val declaration3: SampleTestDeclaration =
+        val declaration3: FixtureTestDeclaration =
             mockk {
                 every { resideOutsidePackage(package1) } returns true
                 every { resideOutsidePackage(package2) } returns true

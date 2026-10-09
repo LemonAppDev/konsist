@@ -1,6 +1,6 @@
 @Suppress("konsist.suppress-text")
-class SampleClassWithoutOtherFunction {
+class FixtureClassWithoutOtherFunction {
     init {
-        fun sampleFunction() {}
+        fun fixtureFunction() {}
     }
 }

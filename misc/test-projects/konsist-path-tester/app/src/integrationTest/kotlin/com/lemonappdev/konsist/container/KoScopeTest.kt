@@ -13,7 +13,7 @@ class KoScopeTest {
     @Test
     fun `slice-with-predicate-name`() {
         // given
-        val sut = Konsist.scopeFromPackage("com.lemonappdev.sample", sourceSetName = "test")
+        val sut = Konsist.scopeFromPackage("com.lemonappdev.fixture", sourceSetName = "test")
 
         // then
         val actual = sut.slice { it.name.startsWith("RootClass") }
@@ -27,13 +27,13 @@ class KoScopeTest {
     fun `toString method`() {
         // given
         val sut = Konsist
-            .scopeFromDirectory("${PathProvider.appMainSourceSetProjectDirectory}/sample/".toOsSeparator())
+            .scopeFromDirectory("${PathProvider.appMainSourceSetProjectDirectory}/fixture/".toOsSeparator())
             .toString()
 
         // then
         sut shouldBeEqualTo """
-            ${PathProvider.appMainSourceSetDirectory}/sample/AppClass.kt
-            ${PathProvider.appMainSourceSetDirectory}/sample/data/AppDataClass.kt
+            ${PathProvider.appMainSourceSetDirectory}/fixture/AppClass.kt
+            ${PathProvider.appMainSourceSetDirectory}/fixture/data/AppDataClass.kt
         """
             .trimIndent()
             .toOsSeparator()
@@ -42,7 +42,7 @@ class KoScopeTest {
     @Test
     fun `plus operator`() {
         // given
-        val scope1 = Konsist.scopeFromPackage("com.lemonappdev.sample", sourceSetName = "test")
+        val scope1 = Konsist.scopeFromPackage("com.lemonappdev.fixture", sourceSetName = "test")
         val scope2 = Konsist.scopeFromProject(moduleName = "data")
 
         // when
@@ -52,11 +52,11 @@ class KoScopeTest {
         // then
         sut.shouldBeEqualTo(
             listOf(
-                "$dataMainSourceSetDirectory/sample/LibClass.kt",
-                "$dataMainSourceSetDirectory/sample/data/LibDataClass.kt",
-                "$dataTestSourceSetDirectory/sample/LibClassSpec.kt",
-                "$dataTestSourceSetDirectory/sample/LibClassSpec.kt",
-                "$dataTestSourceSetDirectory/sample/data/LibDataClassTest.kt",
+                "$dataMainSourceSetDirectory/fixture/LibClass.kt",
+                "$dataMainSourceSetDirectory/fixture/data/LibDataClass.kt",
+                "$dataTestSourceSetDirectory/fixture/LibClassSpec.kt",
+                "$dataTestSourceSetDirectory/fixture/LibClassSpec.kt",
+                "$dataTestSourceSetDirectory/fixture/data/LibDataClassTest.kt",
             ).toOsSeparator(),
         )
     }
@@ -64,7 +64,7 @@ class KoScopeTest {
     @Test
     fun `minus operator`() {
         // given
-        val scope1 = Konsist.scopeFromPackage("com.lemonappdev.sample", sourceSetName = "test")
+        val scope1 = Konsist.scopeFromPackage("com.lemonappdev.fixture", sourceSetName = "test")
         val scope2 = Konsist.scopeFromProject(moduleName = "data")
 
         // when
@@ -80,7 +80,7 @@ class KoScopeTest {
     @Test
     fun `minus operator works when we subtract element which scope1 not contain`() {
         // given
-        val scope1 = Konsist.scopeFromPackage("com.lemonappdev.sample", sourceSetName = "test")
+        val scope1 = Konsist.scopeFromPackage("com.lemonappdev.fixture", sourceSetName = "test")
         val scope2 = Konsist.scopeFromProject(sourceSetName = "integrationTest")
 
         // when
@@ -95,7 +95,7 @@ class KoScopeTest {
     @Test
     fun `plusAssign operator`() {
         // given
-        val scope1 = Konsist.scopeFromPackage("com.lemonappdev.sample", sourceSetName = "test")
+        val scope1 = Konsist.scopeFromPackage("com.lemonappdev.fixture", sourceSetName = "test")
         val scope2 = Konsist.scopeFromProject(moduleName = "data")
 
         // when
@@ -106,11 +106,11 @@ class KoScopeTest {
             .mapToFilePaths()
             .shouldBeEqualTo(
                 listOf(
-                    "$dataMainSourceSetDirectory/sample/LibClass.kt",
-                    "$dataMainSourceSetDirectory/sample/data/LibDataClass.kt",
-                    "$dataTestSourceSetDirectory/sample/LibClassSpec.kt",
-                    "$dataTestSourceSetDirectory/sample/LibClassSpec.kt",
-                    "$dataTestSourceSetDirectory/sample/data/LibDataClassTest.kt",
+                    "$dataMainSourceSetDirectory/fixture/LibClass.kt",
+                    "$dataMainSourceSetDirectory/fixture/data/LibDataClass.kt",
+                    "$dataTestSourceSetDirectory/fixture/LibClassSpec.kt",
+                    "$dataTestSourceSetDirectory/fixture/LibClassSpec.kt",
+                    "$dataTestSourceSetDirectory/fixture/data/LibDataClassTest.kt",
                 ).toOsSeparator(),
             )
     }
@@ -118,7 +118,7 @@ class KoScopeTest {
     @Test
     fun `minusAssign operator`() {
         // given
-        val scope1 = Konsist.scopeFromPackage("com.lemonappdev.sample", sourceSetName = "test")
+        val scope1 = Konsist.scopeFromPackage("com.lemonappdev.fixture", sourceSetName = "test")
         val scope2 = Konsist.scopeFromProject(moduleName = "data")
 
         // when

@@ -18,7 +18,7 @@ class KoInterfaceForKoModuleProviderTest {
     fun `module name is 'app'`() {
         // given
         val sut = Konsist
-            .scopeFromFile("$appMainSourceSetProjectDirectory/sample/AppClass.kt".toOsSeparator())
+            .scopeFromFile("$appMainSourceSetProjectDirectory/fixture/AppClass.kt".toOsSeparator())
             .interfaces()
             .first()
 
@@ -34,7 +34,7 @@ class KoInterfaceForKoModuleProviderTest {
     fun `module name is 'data'`() {
         // given
         val sut = Konsist
-            .scopeFromFile("$dataMainSourceSetProjectDirectory/sample/LibClass.kt".toOsSeparator())
+            .scopeFromFile("$dataMainSourceSetProjectDirectory/fixture/LibClass.kt".toOsSeparator())
             .interfaces()
             .first()
 
@@ -50,7 +50,7 @@ class KoInterfaceForKoModuleProviderTest {
     fun `module name is 'root'`() {
         // given
         val sut = Konsist
-            .scopeFromFile("$rootMainSourceSetProjectDirectory/sample/RootClass.kt".toOsSeparator())
+            .scopeFromFile("$rootMainSourceSetProjectDirectory/fixture/RootClass.kt".toOsSeparator())
             .interfaces()
             .first()
 

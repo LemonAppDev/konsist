@@ -16,11 +16,11 @@ class KoImportDeclarationForKoNameProviderTest {
 
         // then
         assertSoftly(sut) {
-            name shouldBeEqualTo "com.lemonappdev.konsist.testdata.SampleClass"
-            hasName("com.lemonappdev.konsist.testdata.SampleClass") shouldBeEqualTo true
+            name shouldBeEqualTo "com.lemonappdev.konsist.testdata.FixtureClass"
+            hasName("com.lemonappdev.konsist.testdata.FixtureClass") shouldBeEqualTo true
             hasName("com.lemonappdev.konsist.testdata.OtherClass") shouldBeEqualTo false
-            hasName("com.lemonappdev.konsist.testdata.sampleclass", ignoreCase = false) shouldBeEqualTo false
-            hasName("com.lemonappdev.konsist.testdata.sampleclass", ignoreCase = true) shouldBeEqualTo true
+            hasName("com.lemonappdev.konsist.testdata.fixtureclass", ignoreCase = false) shouldBeEqualTo false
+            hasName("com.lemonappdev.konsist.testdata.fixtureclass", ignoreCase = true) shouldBeEqualTo true
         }
     }
 
@@ -34,11 +34,11 @@ class KoImportDeclarationForKoNameProviderTest {
 
         // then
         assertSoftly(sut) {
-            name shouldBeEqualTo "com.lemonappdev.konsist.testdata.SampleType"
-            hasName("com.lemonappdev.konsist.testdata.SampleType") shouldBeEqualTo true
+            name shouldBeEqualTo "com.lemonappdev.konsist.testdata.FixtureType"
+            hasName("com.lemonappdev.konsist.testdata.FixtureType") shouldBeEqualTo true
             hasName("com.lemonappdev.konsist.testdata.OtherType") shouldBeEqualTo false
-            hasName("com.lemonappdev.konsist.testdata.sampletype", ignoreCase = false) shouldBeEqualTo false
-            hasName("com.lemonappdev.konsist.testdata.sampletype", ignoreCase = true) shouldBeEqualTo true
+            hasName("com.lemonappdev.konsist.testdata.fixturetype", ignoreCase = false) shouldBeEqualTo false
+            hasName("com.lemonappdev.konsist.testdata.fixturetype", ignoreCase = true) shouldBeEqualTo true
         }
     }
 
@@ -69,10 +69,10 @@ class KoImportDeclarationForKoNameProviderTest {
 
         // then
         assertSoftly(sut) {
-            hasNameEndingWith("testdata.SampleClass") shouldBeEqualTo true
+            hasNameEndingWith("testdata.FixtureClass") shouldBeEqualTo true
             hasNameEndingWith("wrong-suffix") shouldBeEqualTo false
-            hasNameEndingWith("TESTDATA.SampleClass", ignoreCase = false) shouldBeEqualTo false
-            hasNameEndingWith("TESTDATA.SampleClass", ignoreCase = true) shouldBeEqualTo true
+            hasNameEndingWith("TESTDATA.FixtureClass", ignoreCase = false) shouldBeEqualTo false
+            hasNameEndingWith("TESTDATA.FixtureClass", ignoreCase = true) shouldBeEqualTo true
         }
     }
 

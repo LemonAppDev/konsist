@@ -1,5 +1,5 @@
-object SampleObject {
-    val sampleProperty1 = ""
+object FixtureObject {
+    val fixtureProperty1 = ""
 
-    var sampleProperty2 = 0
+    var fixtureProperty2 = 0
 }

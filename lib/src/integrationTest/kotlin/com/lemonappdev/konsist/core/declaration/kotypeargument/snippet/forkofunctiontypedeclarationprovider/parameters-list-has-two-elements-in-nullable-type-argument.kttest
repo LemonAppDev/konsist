@@ -1,1 +1,1 @@
-val sampleProperty: List<((String, List<Int>) -> Unit)?> = emptyList()
+val fixtureProperty: List<((String, List<Int>) -> Unit)?> = emptyList()

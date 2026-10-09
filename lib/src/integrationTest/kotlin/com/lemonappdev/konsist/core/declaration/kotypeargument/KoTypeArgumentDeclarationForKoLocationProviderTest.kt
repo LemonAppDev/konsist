@@ -18,7 +18,7 @@ class KoTypeArgumentDeclarationForKoLocationProviderTest {
                 ?.firstOrNull()
 
         // then
-        sut?.location shouldBeEqualTo "${sut?.path}:1:26"
+        sut?.location shouldBeEqualTo "${sut?.path}:1:27"
     }
 
     @Test
@@ -62,7 +62,7 @@ class KoTypeArgumentDeclarationForKoLocationProviderTest {
                 ?.firstOrNull()
 
         // then
-        sut?.location shouldBeEqualTo "${sut?.path}:1:26"
+        sut?.location shouldBeEqualTo "${sut?.path}:1:27"
     }
 
     @Test
@@ -106,7 +106,7 @@ class KoTypeArgumentDeclarationForKoLocationProviderTest {
                 ?.firstOrNull()
 
         // then
-        sut?.location shouldBeEqualTo "${sut?.path}:1:26"
+        sut?.location shouldBeEqualTo "${sut?.path}:1:27"
     }
 
     @Test
@@ -150,7 +150,7 @@ class KoTypeArgumentDeclarationForKoLocationProviderTest {
                 ?.firstOrNull()
 
         // then
-        sut?.location shouldBeEqualTo "${sut?.path}:1:26"
+        sut?.location shouldBeEqualTo "${sut?.path}:1:27"
     }
 
     @Test
@@ -194,7 +194,7 @@ class KoTypeArgumentDeclarationForKoLocationProviderTest {
                 ?.firstOrNull()
 
         // then
-        sut?.location shouldBeEqualTo "${sut?.path}:1:33"
+        sut?.location shouldBeEqualTo "${sut?.path}:1:34"
     }
 
     @Test
@@ -238,7 +238,7 @@ class KoTypeArgumentDeclarationForKoLocationProviderTest {
                 ?.firstOrNull()
 
         // then
-        sut?.location shouldBeEqualTo "${sut?.path}:1:33"
+        sut?.location shouldBeEqualTo "${sut?.path}:1:34"
     }
 
     @Test

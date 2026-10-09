@@ -1,1 +1,1 @@
-typealias SampleTypeAlias<T> = (T) -> Unit
+typealias FixtureTypeAlias<T> = (T) -> Unit

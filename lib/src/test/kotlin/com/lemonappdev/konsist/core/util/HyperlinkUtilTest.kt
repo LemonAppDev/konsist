@@ -8,7 +8,7 @@ class HyperlinkUtilTest {
     @Test
     fun `should add prefix when path does not have it`() {
         // given
-        val path = "src/main/kotlin/com/lemonappdev/sample/AppClass.kt"
+        val path = "src/main/kotlin/com/lemonappdev/fixture/AppClass.kt"
         val absolutePath = File(path).absolutePath
         val expected = "file://$absolutePath"
 
@@ -22,7 +22,7 @@ class HyperlinkUtilTest {
     @Test
     fun `should not add prefix when path already has it`() {
         // given
-        val absolutePath = File("src/main/kotlin/com/lemonappdev/sample/sampleFile.kt").absolutePath
+        val absolutePath = File("src/main/kotlin/com/lemonappdev/fixture/fixtureFile.kt").absolutePath
         val prefixedPath = "file://$absolutePath"
 
         // when
@@ -48,7 +48,7 @@ class HyperlinkUtilTest {
     @Test
     fun `should handle absolute path without prefix`() {
         // given
-        val absolutePath = File("src/main/kotlin/com/lemonappdev/sample/sampleFile.kt").absolutePath
+        val absolutePath = File("src/main/kotlin/com/lemonappdev/fixture/fixtureFile.kt").absolutePath
         val expected = "file://$absolutePath"
 
         // when
@@ -61,7 +61,7 @@ class HyperlinkUtilTest {
     @Test
     fun `should handle file prefix for an absolute path`() {
         // given
-        val absolutePath = File("src/main/kotlin/com/lemonappdev/sample/sampleFile.kt").absolutePath
+        val absolutePath = File("src/main/kotlin/com/lemonappdev/fixture/fixtureFile.kt").absolutePath
         val pathWithPrefix = "file://$absolutePath"
 
         // when

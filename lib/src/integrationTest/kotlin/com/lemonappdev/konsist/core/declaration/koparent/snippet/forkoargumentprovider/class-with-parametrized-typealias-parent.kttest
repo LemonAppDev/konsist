@@ -1,5 +1,5 @@
-import com.lemonappdev.konsist.testdata.SampleClassWithParameter
+import com.lemonappdev.konsist.testdata.FixtureClassWithParameter
 
-class SampleClass() : SampleTypeAlias("param")
+class FixtureClass() : FixtureTypeAlias("param")
 
-typealias SampleTypeAlias = SampleClassWithParameter
+typealias FixtureTypeAlias = FixtureClassWithParameter

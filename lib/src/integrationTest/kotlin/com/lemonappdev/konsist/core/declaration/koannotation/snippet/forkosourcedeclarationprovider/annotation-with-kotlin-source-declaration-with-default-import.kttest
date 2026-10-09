@@ -1,2 +1,2 @@
 @Deprecated("")
-class SampleClass
+class FixtureClass

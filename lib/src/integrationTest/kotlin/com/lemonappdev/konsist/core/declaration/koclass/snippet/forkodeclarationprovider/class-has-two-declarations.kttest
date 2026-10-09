@@ -1,6 +1,6 @@
-class SampleClass {
-    val sampleProperty = ""
+class FixtureClass {
+    val fixtureProperty = ""
 
-    fun sampleFunction() {
+    fun fixtureFunction() {
     }
 }

@@ -1,3 +1,3 @@
-import com.lemonappdev.konsist.externalsample.SampleExternalGenericClassWithParameter
+import com.lemonappdev.konsist.externalfixture.FixtureExternalGenericClassWithParameter
 
-class SampleClass() : SampleExternalGenericClassWithParameter<Int>("param")
+class FixtureClass() : FixtureExternalGenericClassWithParameter<Int>("param")

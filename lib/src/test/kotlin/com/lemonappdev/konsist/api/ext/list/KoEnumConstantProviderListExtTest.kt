@@ -238,7 +238,7 @@ class KoEnumConstantProviderListExtTest {
     @Test
     fun `withEnumConstantNamed(name) returns declaration with given enum constant`() {
         // given
-        val name = "SampleName"
+        val name = "FixtureName"
         val declaration1: KoEnumConstantProvider =
             mockk {
                 every { hasEnumConstantWithName(listOf(name)) } returns true
@@ -259,8 +259,8 @@ class KoEnumConstantProviderListExtTest {
     @Test
     fun `withEnumConstantNamed(String) returns declaration with any of given enum constants`() {
         // given
-        val name1 = "SampleName1"
-        val name2 = "SampleName2"
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
         val declaration1: KoEnumConstantProvider =
             mockk {
                 every { hasEnumConstantWithName(listOf(name1, name2)) } returns true
@@ -281,8 +281,8 @@ class KoEnumConstantProviderListExtTest {
     @Test
     fun `withEnumConstantNamed(list of String) returns declaration with any of given enum constants`() {
         // given
-        val name1 = "SampleName1"
-        val name2 = "SampleName2"
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
         val declaration1: KoEnumConstantProvider =
             mockk {
                 every { hasEnumConstantWithName(listOf(name1, name2)) } returns true
@@ -304,8 +304,8 @@ class KoEnumConstantProviderListExtTest {
     @Test
     fun `withEnumConstantNamed(set of String) returns declaration with any of given enum constants`() {
         // given
-        val name1 = "SampleName1"
-        val name2 = "SampleName2"
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
         val declaration1: KoEnumConstantProvider =
             mockk {
                 every { hasEnumConstantWithName(setOf(name1, name2)) } returns true
@@ -327,7 +327,7 @@ class KoEnumConstantProviderListExtTest {
     @Test
     fun `withEnumConstantNamed(name) with ignore case returns declaration with given enum constant`() {
         // given
-        val name = "SampleName"
+        val name = "FixtureName"
         val declaration1: KoEnumConstantProvider =
             mockk {
                 every { hasEnumConstantWithName(listOf(name), ignoreCase = true) } returns true
@@ -348,8 +348,8 @@ class KoEnumConstantProviderListExtTest {
     @Test
     fun `withEnumConstantNamed(list of String) with ignore case returns declaration with any of given enum constants`() {
         // given
-        val name1 = "SampleName1"
-        val name2 = "SampleName2"
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
         val declaration1: KoEnumConstantProvider =
             mockk {
                 every { hasEnumConstantWithName(listOf(name1, name2), ignoreCase = true) } returns true
@@ -371,7 +371,7 @@ class KoEnumConstantProviderListExtTest {
     @Test
     fun `withoutEnumConstantNamed(name) returns declaration without given enum constant`() {
         // given
-        val name = "SampleName"
+        val name = "FixtureName"
         val declaration1: KoEnumConstantProvider =
             mockk {
                 every { hasEnumConstantWithName(listOf(name)) } returns true
@@ -392,8 +392,8 @@ class KoEnumConstantProviderListExtTest {
     @Test
     fun `withoutEnumConstantNamed(String) returns declaration without any of given enum constants`() {
         // given
-        val name1 = "SampleName1"
-        val name2 = "SampleName2"
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
         val declaration1: KoEnumConstantProvider =
             mockk {
                 every { hasEnumConstantWithName(listOf(name1, name2)) } returns true
@@ -414,8 +414,8 @@ class KoEnumConstantProviderListExtTest {
     @Test
     fun `withoutEnumConstantNamed(list of String) returns declaration without any of given enum constants`() {
         // given
-        val name1 = "SampleName1"
-        val name2 = "SampleName2"
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
         val declaration1: KoEnumConstantProvider =
             mockk {
                 every { hasEnumConstantWithName(listOf(name1, name2)) } returns true
@@ -437,8 +437,8 @@ class KoEnumConstantProviderListExtTest {
     @Test
     fun `withoutEnumConstantNamed(set of String) returns declaration without any of given enum constants`() {
         // given
-        val name1 = "SampleName1"
-        val name2 = "SampleName2"
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
         val declaration1: KoEnumConstantProvider =
             mockk {
                 every { hasEnumConstantWithName(setOf(name1, name2)) } returns true
@@ -460,7 +460,7 @@ class KoEnumConstantProviderListExtTest {
     @Test
     fun `withoutEnumConstantNamed(name) with ignore case returns declaration without given enum constant`() {
         // given
-        val name = "SampleName"
+        val name = "FixtureName"
         val declaration1: KoEnumConstantProvider =
             mockk {
                 every { hasEnumConstantWithName(listOf(name), ignoreCase = true) } returns true
@@ -481,8 +481,8 @@ class KoEnumConstantProviderListExtTest {
     @Test
     fun `withoutEnumConstantNamed(list of String) with ignore case returns declaration without any of given enum constants`() {
         // given
-        val name1 = "SampleName1"
-        val name2 = "SampleName2"
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
         val declaration1: KoEnumConstantProvider =
             mockk {
                 every { hasEnumConstantWithName(listOf(name1, name2), ignoreCase = true) } returns true
@@ -504,7 +504,7 @@ class KoEnumConstantProviderListExtTest {
     @Test
     fun `withAllEnumConstantsNamed(name) returns declaration with given enum constant`() {
         // given
-        val name = "SampleName"
+        val name = "FixtureName"
         val declaration1: KoEnumConstantProvider =
             mockk {
                 every { hasEnumConstantsWithAllNames(listOf(name)) } returns true
@@ -525,8 +525,8 @@ class KoEnumConstantProviderListExtTest {
     @Test
     fun `withAllEnumConstantsNamed(String) returns declaration with all given enum constants`() {
         // given
-        val name1 = "SampleName1"
-        val name2 = "SampleName2"
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
         val declaration1: KoEnumConstantProvider =
             mockk {
                 every { hasEnumConstantsWithAllNames(listOf(name1, name2)) } returns true
@@ -547,8 +547,8 @@ class KoEnumConstantProviderListExtTest {
     @Test
     fun `withAllEnumConstantsNamed(list of String) returns declaration with all given enum constants`() {
         // given
-        val name1 = "SampleName1"
-        val name2 = "SampleName2"
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
         val declaration1: KoEnumConstantProvider =
             mockk {
                 every { hasEnumConstantsWithAllNames(listOf(name1, name2)) } returns true
@@ -570,8 +570,8 @@ class KoEnumConstantProviderListExtTest {
     @Test
     fun `withAllEnumConstantsNamed(set of String) returns declaration with all given enum constants`() {
         // given
-        val name1 = "SampleName1"
-        val name2 = "SampleName2"
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
         val declaration1: KoEnumConstantProvider =
             mockk {
                 every { hasEnumConstantsWithAllNames(setOf(name1, name2)) } returns true
@@ -593,7 +593,7 @@ class KoEnumConstantProviderListExtTest {
     @Test
     fun `withAllEnumConstantsNamed(name) with ignore case returns declaration with given enum constant`() {
         // given
-        val name = "SampleName"
+        val name = "FixtureName"
         val declaration1: KoEnumConstantProvider =
             mockk {
                 every { hasEnumConstantsWithAllNames(listOf(name), ignoreCase = true) } returns true
@@ -614,8 +614,8 @@ class KoEnumConstantProviderListExtTest {
     @Test
     fun `withAllEnumConstantsNamed(list of String) with ignore case returns declaration with all given enum constants`() {
         // given
-        val name1 = "SampleName1"
-        val name2 = "SampleName2"
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
         val declaration1: KoEnumConstantProvider =
             mockk {
                 every { hasEnumConstantsWithAllNames(listOf(name1, name2), ignoreCase = true) } returns true
@@ -637,7 +637,7 @@ class KoEnumConstantProviderListExtTest {
     @Test
     fun `withoutAllEnumConstantsNamed(name) returns declaration without given enum constant`() {
         // given
-        val name = "SampleName"
+        val name = "FixtureName"
         val declaration1: KoEnumConstantProvider =
             mockk {
                 every { hasEnumConstantsWithAllNames(listOf(name)) } returns true
@@ -658,8 +658,8 @@ class KoEnumConstantProviderListExtTest {
     @Test
     fun `withoutAllEnumConstantsNamed(String) returns declaration without all of given enum constants`() {
         // given
-        val name1 = "SampleName1"
-        val name2 = "SampleName2"
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
         val declaration1: KoEnumConstantProvider =
             mockk {
                 every { hasEnumConstantsWithAllNames(listOf(name1, name2)) } returns true
@@ -680,8 +680,8 @@ class KoEnumConstantProviderListExtTest {
     @Test
     fun `withoutAllEnumConstantsNamed(list of String) returns declaration without all of given enum constants`() {
         // given
-        val name1 = "SampleName1"
-        val name2 = "SampleName2"
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
         val declaration1: KoEnumConstantProvider =
             mockk {
                 every { hasEnumConstantsWithAllNames(listOf(name1, name2)) } returns true
@@ -703,8 +703,8 @@ class KoEnumConstantProviderListExtTest {
     @Test
     fun `withoutAllEnumConstantsNamed(set of String) returns declaration without all of given enum constants`() {
         // given
-        val name1 = "SampleName1"
-        val name2 = "SampleName2"
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
         val declaration1: KoEnumConstantProvider =
             mockk {
                 every { hasEnumConstantsWithAllNames(setOf(name1, name2)) } returns true
@@ -726,7 +726,7 @@ class KoEnumConstantProviderListExtTest {
     @Test
     fun `withoutAllEnumConstantsNamed(name) with ignore case returns declaration without given enum constant`() {
         // given
-        val name = "SampleName"
+        val name = "FixtureName"
         val declaration1: KoEnumConstantProvider =
             mockk {
                 every { hasEnumConstantsWithAllNames(listOf(name), ignoreCase = true) } returns true
@@ -747,8 +747,8 @@ class KoEnumConstantProviderListExtTest {
     @Test
     fun `withoutAllEnumConstantsNamed(list of String) with ignore case returns declaration without all of given enum constants`() {
         // given
-        val name1 = "SampleName1"
-        val name2 = "SampleName2"
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
         val declaration1: KoEnumConstantProvider =
             mockk {
                 every { hasEnumConstantsWithAllNames(listOf(name1, name2), ignoreCase = true) } returns true

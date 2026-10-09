@@ -1,3 +1,3 @@
-private abstract interface SampleInterface {
-    private interface SampleNestedInterface
+private abstract interface FixtureInterface {
+    private interface FixtureNestedInterface
 }

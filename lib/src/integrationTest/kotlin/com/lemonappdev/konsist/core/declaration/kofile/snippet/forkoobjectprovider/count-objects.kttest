@@ -1,3 +1,3 @@
-private data object SampleObject {
-    private object SampleNestedObject
+private data object FixtureObject {
+    private object FixtureNestedObject
 }

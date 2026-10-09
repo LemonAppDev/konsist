@@ -14,7 +14,7 @@ class KoClassForKoChildProviderTest {
     fun `class without children`() {
         // given
         val sut = Konsist
-            .scopeFromFile("$appMainSourceSetProjectDirectory/sample/AppClass.kt".toOsSeparator())
+            .scopeFromFile("$appMainSourceSetProjectDirectory/fixture/AppClass.kt".toOsSeparator())
             .classes()
             .withName("AppClass")
             .first()
@@ -44,7 +44,7 @@ class KoClassForKoChildProviderTest {
     fun `class with direct child`() {
         // given
         val sut = Konsist
-            .scopeFromFile("$appMainSourceSetProjectDirectory/sample/AppClass.kt".toOsSeparator())
+            .scopeFromFile("$appMainSourceSetProjectDirectory/fixture/AppClass.kt".toOsSeparator())
             .classes()
             .withName("ParentSuperClass")
             .first()
@@ -83,7 +83,7 @@ class KoClassForKoChildProviderTest {
     fun `class with indirect children`() {
         // given
         val sut = Konsist
-            .scopeFromFile("$appMainSourceSetProjectDirectory/sample/AppClass.kt".toOsSeparator())
+            .scopeFromFile("$appMainSourceSetProjectDirectory/fixture/AppClass.kt".toOsSeparator())
             .classes()
             .withName("ParentSuperClass")
             .first()
@@ -126,7 +126,7 @@ class KoClassForKoChildProviderTest {
     fun `class without children ignore case`() {
         // given
         val sut = Konsist
-            .scopeFromFile("$appMainSourceSetProjectDirectory/sample/AppClass.kt".toOsSeparator())
+            .scopeFromFile("$appMainSourceSetProjectDirectory/fixture/AppClass.kt".toOsSeparator())
             .classes()
             .withName("AppClass")
             .first()
@@ -152,7 +152,7 @@ class KoClassForKoChildProviderTest {
     fun `class with child ignore case`() {
         // given
         val sut = Konsist
-            .scopeFromFile("$appMainSourceSetProjectDirectory/sample/AppClass.kt".toOsSeparator())
+            .scopeFromFile("$appMainSourceSetProjectDirectory/fixture/AppClass.kt".toOsSeparator())
             .classes()
             .withName("ParentSuperClass")
             .first()

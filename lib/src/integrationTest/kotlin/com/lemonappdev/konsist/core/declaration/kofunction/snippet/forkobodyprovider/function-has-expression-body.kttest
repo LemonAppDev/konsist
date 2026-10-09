@@ -1,1 +1,1 @@
-fun sampleFunction() = 0
+fun fixtureFunction() = 0

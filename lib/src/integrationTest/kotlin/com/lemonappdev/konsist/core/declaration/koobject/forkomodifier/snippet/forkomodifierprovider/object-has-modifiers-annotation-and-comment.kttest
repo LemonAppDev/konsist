@@ -1,5 +1,5 @@
-import com.lemonappdev.konsist.testdata.SampleAnnotation
+import com.lemonappdev.konsist.testdata.FixtureAnnotation
 
-@SampleAnnotation // sample comment
-private data object SampleObject {
+@FixtureAnnotation // fixture comment
+private data object FixtureObject {
 }

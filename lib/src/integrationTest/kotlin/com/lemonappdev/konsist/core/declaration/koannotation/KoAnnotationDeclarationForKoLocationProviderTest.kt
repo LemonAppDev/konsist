@@ -53,7 +53,7 @@ class KoAnnotationDeclarationForKoLocationProviderTest {
                 .first()
 
         // then
-        val declaration = "Declaration:\n@SampleAnnotation"
+        val declaration = "Declaration:\n@FixtureAnnotation"
         assertSoftly(sut.locationWithText) {
             startsWith("Location: /") shouldBeEqualTo true
             contains(projectPath) shouldBeEqualTo true

@@ -1,5 +1,5 @@
-package com.samplepackage
+package com.fixturepackage
 
-import com.lemonappdev.konsist.testdata.SampleParentClass as SampleImportAlias
+import com.lemonappdev.konsist.testdata.FixtureParentClass as FixtureImportAlias
 
-class SampleClass() : SampleImportAlias()
+class FixtureClass() : FixtureImportAlias()

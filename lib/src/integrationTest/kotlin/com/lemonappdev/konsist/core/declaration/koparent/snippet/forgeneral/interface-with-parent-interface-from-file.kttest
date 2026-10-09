@@ -1,3 +1,3 @@
-interface SampleInterface : SampleSuperInterface
+interface FixtureInterface : FixtureSuperInterface
 
-interface SampleSuperInterface
+interface FixtureSuperInterface

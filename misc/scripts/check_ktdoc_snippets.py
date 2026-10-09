@@ -95,10 +95,10 @@ def compile_kotlin_file(file_path):
     error_occurred_local = False
     temp_dir = tempfile.mkdtemp()
 
-    sample_konsist_library_path = user_home + f"/.m2/repository/com/lemonappdev/konsist/{konsist_version}/konsist-{konsist_version}.jar"
+    konsist_library_path = user_home + f"/.m2/repository/com/lemonappdev/konsist/{konsist_version}/konsist-{konsist_version}.jar"
 
     cp_sep = ";" if os.name == "nt" else ":"
-    classpath = f"{sample_konsist_library_path}{cp_sep}{dummy_classes_jar_path}"
+    classpath = f"{konsist_library_path}{cp_sep}{dummy_classes_jar_path}"
 
     snippet_command = [
         "kotlinc",
@@ -130,10 +130,10 @@ def compile_kotlin_files(kotlin_files):
     total_files = len(kotlin_files)
     processed_files = 0
 
-    sample_konsist_library_path = user_home + f"/.m2/repository/com/lemonappdev/konsist/{konsist_version}/"
+    konsist_library_path = user_home + f"/.m2/repository/com/lemonappdev/konsist/{konsist_version}/"
 
-    if not os.path.exists(sample_konsist_library_path):
-        print_and_flush(f"Error: The file {sample_konsist_library_path} does not exist.")
+    if not os.path.exists(konsist_library_path):
+        print_and_flush(f"Error: The file {konsist_library_path} does not exist.")
         sys.exit(1)  # Exit the script with an error code
 
     with ProcessPoolExecutor() as executor:

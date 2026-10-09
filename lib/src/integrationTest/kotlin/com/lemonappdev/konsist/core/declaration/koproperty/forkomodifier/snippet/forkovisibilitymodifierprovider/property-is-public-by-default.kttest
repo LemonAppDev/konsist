@@ -1,1 +1,1 @@
-val sampleProperty: Boolean = true
+val fixtureProperty: Boolean = true

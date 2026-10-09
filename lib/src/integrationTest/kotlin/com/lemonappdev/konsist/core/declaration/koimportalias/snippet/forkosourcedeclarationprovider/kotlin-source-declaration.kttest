@@ -1,3 +1,3 @@
-import kotlin.String as SampleImportAlias
+import kotlin.String as FixtureImportAlias
 
-class SampleClass1(val sampleProperty1: SampleImportAlias?)
+class FixtureClass1(val fixtureProperty1: FixtureImportAlias?)

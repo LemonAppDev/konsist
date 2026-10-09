@@ -1,11 +1,11 @@
-interface SampleInterface {
-    private companion object SampleCompanionObject
+interface FixtureInterface {
+    private companion object FixtureCompanionObject
 
-    object SampleObject
+    object FixtureObject
 
-    class SampleClass {
-        object SampleClassObject
+    class FixtureClass {
+        object FixtureClassObject
 
-        private companion object SampleNestedCompanionObject
+        private companion object FixtureNestedCompanionObject
     }
 }

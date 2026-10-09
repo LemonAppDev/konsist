@@ -25,12 +25,12 @@ class KoVariableDeclarationForKoTextProviderTest {
 
         // then
         assertSoftly(sut) {
-            text shouldBeEqualTo "val sampleVariable = \"\""
-            hasTextStartingWith("val sample") shouldBeEqualTo true
+            text shouldBeEqualTo "val fixtureVariable = \"\""
+            hasTextStartingWith("val fixture") shouldBeEqualTo true
             hasTextStartingWith("Other") shouldBeEqualTo false
             hasTextEndingWith("Variable = \"\"") shouldBeEqualTo true
             hasTextEndingWith("other") shouldBeEqualTo false
-            hasTextContaining("sampleVariable =") shouldBeEqualTo true
+            hasTextContaining("fixtureVariable =") shouldBeEqualTo true
             hasTextContaining("anno") shouldBeEqualTo false
             hasTextMatching(Regex("^[^@]*\$")) shouldBeEqualTo true
             hasTextMatching(Regex("[0-9]+")) shouldBeEqualTo false

@@ -3,8 +3,8 @@ package com.lemonappdev.konsist.api.ext.provider.kononnullabletype
 import com.lemonappdev.konsist.TestSnippetProvider
 import com.lemonappdev.konsist.api.ext.koscope.declarationsOf
 import com.lemonappdev.konsist.api.provider.KoNonNullableTypeProvider
-import com.lemonappdev.konsist.testdata.SampleClass
-import com.lemonappdev.konsist.testdata.SampleType
+import com.lemonappdev.konsist.testdata.FixtureClass
+import com.lemonappdev.konsist.testdata.FixtureType
 import hasTypeOf
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
@@ -22,7 +22,7 @@ class KoNonNullableTypeProviderExtTest {
         // then
         assertSoftly(sut) {
             hasTypeOf<String>() shouldBeEqualTo true
-            hasTypeOf<SampleClass>() shouldBeEqualTo false
+            hasTypeOf<FixtureClass>() shouldBeEqualTo false
         }
     }
 
@@ -36,7 +36,7 @@ class KoNonNullableTypeProviderExtTest {
 
         // then
         assertSoftly(sut) {
-            hasTypeOf<SampleType>() shouldBeEqualTo true
+            hasTypeOf<FixtureType>() shouldBeEqualTo true
             hasTypeOf<Int>() shouldBeEqualTo false
         }
     }

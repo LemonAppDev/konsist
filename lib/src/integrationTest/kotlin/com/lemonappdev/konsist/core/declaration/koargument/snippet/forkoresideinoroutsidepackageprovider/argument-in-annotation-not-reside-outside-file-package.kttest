@@ -1,7 +1,7 @@
-package com.samplepackage
+package com.fixturepackage
 
-import com.lemonappdev.konsist.testdata.SampleAnnotationWithParameter
+import com.lemonappdev.konsist.testdata.FixtureAnnotationWithParameter
 
-@SampleAnnotationWithParameter(sampleParameter = "text")
-fun sampleFunction() {
+@FixtureAnnotationWithParameter(fixtureParameter = "text")
+fun fixtureFunction() {
 }

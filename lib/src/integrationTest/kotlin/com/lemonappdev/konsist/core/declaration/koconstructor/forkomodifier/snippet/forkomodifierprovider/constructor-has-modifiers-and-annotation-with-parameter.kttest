@@ -1,5 +1,5 @@
-import com.lemonappdev.konsist.testdata.SampleAnnotationWithParameter
+import com.lemonappdev.konsist.testdata.FixtureAnnotationWithParameter
 
-class SampleClass @SampleAnnotationWithParameter(sampleParameter = " parameter description ") private constructor () {
+class FixtureClass @FixtureAnnotationWithParameter(fixtureParameter = " parameter description ") private constructor () {
 
 }

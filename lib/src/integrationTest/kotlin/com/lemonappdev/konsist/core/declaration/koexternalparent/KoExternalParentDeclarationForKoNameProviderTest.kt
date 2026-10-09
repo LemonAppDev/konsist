@@ -19,11 +19,11 @@ class KoExternalParentDeclarationForKoNameProviderTest {
 
         // then
         assertSoftly(sut) {
-            name shouldBeEqualTo "SampleExternalClass"
-            hasName("SampleExternalClass") shouldBeEqualTo true
+            name shouldBeEqualTo "FixtureExternalClass"
+            hasName("FixtureExternalClass") shouldBeEqualTo true
             hasName("OtherClass") shouldBeEqualTo false
-            hasName("sampleexternalclass", ignoreCase = false) shouldBeEqualTo false
-            hasName("sampleexternalclass", ignoreCase = true) shouldBeEqualTo true
+            hasName("fixtureexternalclass", ignoreCase = false) shouldBeEqualTo false
+            hasName("fixtureexternalclass", ignoreCase = true) shouldBeEqualTo true
         }
     }
 
@@ -38,11 +38,11 @@ class KoExternalParentDeclarationForKoNameProviderTest {
 
         // then
         assertSoftly(sut) {
-            name shouldBeEqualTo "SampleExternalGenericClass<Int>"
-            hasName("SampleExternalGenericClass<Int>") shouldBeEqualTo true
+            name shouldBeEqualTo "FixtureExternalGenericClass<Int>"
+            hasName("FixtureExternalGenericClass<Int>") shouldBeEqualTo true
             hasName("OtherClass") shouldBeEqualTo false
-            hasName("sampleexternalgenericclass<int>", ignoreCase = false) shouldBeEqualTo false
-            hasName("sampleexternalgenericclass<int>", ignoreCase = true) shouldBeEqualTo true
+            hasName("fixtureexternalgenericclass<int>", ignoreCase = false) shouldBeEqualTo false
+            hasName("fixtureexternalgenericclass<int>", ignoreCase = true) shouldBeEqualTo true
         }
     }
 
@@ -57,11 +57,11 @@ class KoExternalParentDeclarationForKoNameProviderTest {
 
         // then
         assertSoftly(sut) {
-            name shouldBeEqualTo "SampleExternalClassWithParameter"
-            hasName("SampleExternalClassWithParameter") shouldBeEqualTo true
+            name shouldBeEqualTo "FixtureExternalClassWithParameter"
+            hasName("FixtureExternalClassWithParameter") shouldBeEqualTo true
             hasName("OtherClass") shouldBeEqualTo false
-            hasName("sampleexternalclasswithparameter", ignoreCase = false) shouldBeEqualTo false
-            hasName("sampleexternalclasswithparameter", ignoreCase = true) shouldBeEqualTo true
+            hasName("fixtureexternalclasswithparameter", ignoreCase = false) shouldBeEqualTo false
+            hasName("fixtureexternalclasswithparameter", ignoreCase = true) shouldBeEqualTo true
         }
     }
 
@@ -76,11 +76,11 @@ class KoExternalParentDeclarationForKoNameProviderTest {
 
         // then
         assertSoftly(sut) {
-            name shouldBeEqualTo "SampleExternalGenericClassWithParameter<Int>"
-            hasName("SampleExternalGenericClassWithParameter<Int>") shouldBeEqualTo true
+            name shouldBeEqualTo "FixtureExternalGenericClassWithParameter<Int>"
+            hasName("FixtureExternalGenericClassWithParameter<Int>") shouldBeEqualTo true
             hasName("OtherClass") shouldBeEqualTo false
-            hasName("sampleexternalgenericclasswithparameter<int>", ignoreCase = false) shouldBeEqualTo false
-            hasName("sampleexternalgenericclasswithparameter<int>", ignoreCase = true) shouldBeEqualTo true
+            hasName("fixtureexternalgenericclasswithparameter<int>", ignoreCase = false) shouldBeEqualTo false
+            hasName("fixtureexternalgenericclasswithparameter<int>", ignoreCase = true) shouldBeEqualTo true
         }
     }
 
@@ -95,11 +95,11 @@ class KoExternalParentDeclarationForKoNameProviderTest {
 
         // then
         assertSoftly(sut) {
-            name shouldBeEqualTo "SampleExternalInterface"
-            hasName("SampleExternalInterface") shouldBeEqualTo true
+            name shouldBeEqualTo "FixtureExternalInterface"
+            hasName("FixtureExternalInterface") shouldBeEqualTo true
             hasName("OtherInterface") shouldBeEqualTo false
-            hasName("sampleexternalinterface", ignoreCase = false) shouldBeEqualTo false
-            hasName("sampleexternalinterface", ignoreCase = true) shouldBeEqualTo true
+            hasName("fixtureexternalinterface", ignoreCase = false) shouldBeEqualTo false
+            hasName("fixtureexternalinterface", ignoreCase = true) shouldBeEqualTo true
         }
     }
 
@@ -114,11 +114,11 @@ class KoExternalParentDeclarationForKoNameProviderTest {
 
         // then
         assertSoftly(sut) {
-            name shouldBeEqualTo "SampleExternalGenericInterface<Int>"
-            hasName("SampleExternalGenericInterface<Int>") shouldBeEqualTo true
+            name shouldBeEqualTo "FixtureExternalGenericInterface<Int>"
+            hasName("FixtureExternalGenericInterface<Int>") shouldBeEqualTo true
             hasName("OtherInterface") shouldBeEqualTo false
-            hasName("sampleexternalgenericinterface<int>", ignoreCase = false) shouldBeEqualTo false
-            hasName("sampleexternalgenericinterface<int>", ignoreCase = true) shouldBeEqualTo true
+            hasName("fixtureexternalgenericinterface<int>", ignoreCase = false) shouldBeEqualTo false
+            hasName("fixtureexternalgenericinterface<int>", ignoreCase = true) shouldBeEqualTo true
         }
     }
 
@@ -133,11 +133,11 @@ class KoExternalParentDeclarationForKoNameProviderTest {
 
         // then
         assertSoftly(sut) {
-            name shouldBeEqualTo "SampleExternalInterface"
-            hasName("SampleExternalInterface") shouldBeEqualTo true
+            name shouldBeEqualTo "FixtureExternalInterface"
+            hasName("FixtureExternalInterface") shouldBeEqualTo true
             hasName("OtherInterface") shouldBeEqualTo false
-            hasName("sampleexternalinterface", ignoreCase = false) shouldBeEqualTo false
-            hasName("sampleexternalinterface", ignoreCase = true) shouldBeEqualTo true
+            hasName("fixtureexternalinterface", ignoreCase = false) shouldBeEqualTo false
+            hasName("fixtureexternalinterface", ignoreCase = true) shouldBeEqualTo true
         }
     }
 
@@ -152,11 +152,11 @@ class KoExternalParentDeclarationForKoNameProviderTest {
 
         // then
         assertSoftly(sut) {
-            name shouldBeEqualTo "SampleExternalClassWithParameter"
-            hasName("SampleExternalClassWithParameter") shouldBeEqualTo true
+            name shouldBeEqualTo "FixtureExternalClassWithParameter"
+            hasName("FixtureExternalClassWithParameter") shouldBeEqualTo true
             hasName("OtherClass") shouldBeEqualTo false
-            hasName("sampleexternalclasswithparameter", ignoreCase = false) shouldBeEqualTo false
-            hasName("sampleexternalclasswithparameter", ignoreCase = true) shouldBeEqualTo true
+            hasName("fixtureexternalclasswithparameter", ignoreCase = false) shouldBeEqualTo false
+            hasName("fixtureexternalclasswithparameter", ignoreCase = true) shouldBeEqualTo true
         }
     }
 
@@ -171,11 +171,11 @@ class KoExternalParentDeclarationForKoNameProviderTest {
 
         // then
         assertSoftly(sut) {
-            name shouldBeEqualTo "SampleExternalInterface"
-            hasName("SampleExternalInterface") shouldBeEqualTo true
+            name shouldBeEqualTo "FixtureExternalInterface"
+            hasName("FixtureExternalInterface") shouldBeEqualTo true
             hasName("OtherInterface") shouldBeEqualTo false
-            hasName("sampleexternalinterface", ignoreCase = false) shouldBeEqualTo false
-            hasName("sampleexternalinterface", ignoreCase = true) shouldBeEqualTo true
+            hasName("fixtureexternalinterface", ignoreCase = false) shouldBeEqualTo false
+            hasName("fixtureexternalinterface", ignoreCase = true) shouldBeEqualTo true
         }
     }
 
@@ -190,11 +190,11 @@ class KoExternalParentDeclarationForKoNameProviderTest {
 
         // then
         assertSoftly(sut) {
-            name shouldBeEqualTo "SampleExternalGenericInterface<Int>"
-            hasName("SampleExternalGenericInterface<Int>") shouldBeEqualTo true
+            name shouldBeEqualTo "FixtureExternalGenericInterface<Int>"
+            hasName("FixtureExternalGenericInterface<Int>") shouldBeEqualTo true
             hasName("OtherInterface") shouldBeEqualTo false
-            hasName("sampleexternalgenericinterface<int>", ignoreCase = false) shouldBeEqualTo false
-            hasName("sampleexternalgenericinterface<int>", ignoreCase = true) shouldBeEqualTo true
+            hasName("fixtureexternalgenericinterface<int>", ignoreCase = false) shouldBeEqualTo false
+            hasName("fixtureexternalgenericinterface<int>", ignoreCase = true) shouldBeEqualTo true
         }
     }
 
@@ -209,11 +209,11 @@ class KoExternalParentDeclarationForKoNameProviderTest {
 
         // then
         assertSoftly(sut) {
-            name shouldBeEqualTo "SampleExternalClass"
-            hasName("SampleExternalClass") shouldBeEqualTo true
+            name shouldBeEqualTo "FixtureExternalClass"
+            hasName("FixtureExternalClass") shouldBeEqualTo true
             hasName("OtherClass") shouldBeEqualTo false
-            hasName("sampleexternalclass", ignoreCase = false) shouldBeEqualTo false
-            hasName("sampleexternalclass", ignoreCase = true) shouldBeEqualTo true
+            hasName("fixtureexternalclass", ignoreCase = false) shouldBeEqualTo false
+            hasName("fixtureexternalclass", ignoreCase = true) shouldBeEqualTo true
         }
     }
 
@@ -228,11 +228,11 @@ class KoExternalParentDeclarationForKoNameProviderTest {
 
         // then
         assertSoftly(sut) {
-            name shouldBeEqualTo "SampleExternalGenericClass<Int>"
-            hasName("SampleExternalGenericClass<Int>") shouldBeEqualTo true
+            name shouldBeEqualTo "FixtureExternalGenericClass<Int>"
+            hasName("FixtureExternalGenericClass<Int>") shouldBeEqualTo true
             hasName("OtherClass") shouldBeEqualTo false
-            hasName("sampleexternalgenericclass<int>", ignoreCase = false) shouldBeEqualTo false
-            hasName("sampleexternalgenericclass<int>", ignoreCase = true) shouldBeEqualTo true
+            hasName("fixtureexternalgenericclass<int>", ignoreCase = false) shouldBeEqualTo false
+            hasName("fixtureexternalgenericclass<int>", ignoreCase = true) shouldBeEqualTo true
         }
     }
 
@@ -247,11 +247,11 @@ class KoExternalParentDeclarationForKoNameProviderTest {
 
         // then
         assertSoftly(sut) {
-            name shouldBeEqualTo "SampleExternalClassWithParameter"
-            hasName("SampleExternalClassWithParameter") shouldBeEqualTo true
+            name shouldBeEqualTo "FixtureExternalClassWithParameter"
+            hasName("FixtureExternalClassWithParameter") shouldBeEqualTo true
             hasName("OtherClass") shouldBeEqualTo false
-            hasName("sampleexternalclasswithparameter", ignoreCase = false) shouldBeEqualTo false
-            hasName("sampleexternalclasswithparameter", ignoreCase = true) shouldBeEqualTo true
+            hasName("fixtureexternalclasswithparameter", ignoreCase = false) shouldBeEqualTo false
+            hasName("fixtureexternalclasswithparameter", ignoreCase = true) shouldBeEqualTo true
         }
     }
 
@@ -266,11 +266,11 @@ class KoExternalParentDeclarationForKoNameProviderTest {
 
         // then
         assertSoftly(sut) {
-            name shouldBeEqualTo "SampleExternalGenericClassWithParameter<Int>"
-            hasName("SampleExternalGenericClassWithParameter<Int>") shouldBeEqualTo true
+            name shouldBeEqualTo "FixtureExternalGenericClassWithParameter<Int>"
+            hasName("FixtureExternalGenericClassWithParameter<Int>") shouldBeEqualTo true
             hasName("OtherClass") shouldBeEqualTo false
-            hasName("sampleexternalgenericclasswithparameter<int>", ignoreCase = false) shouldBeEqualTo false
-            hasName("sampleexternalgenericclasswithparameter<int>", ignoreCase = true) shouldBeEqualTo true
+            hasName("fixtureexternalgenericclasswithparameter<int>", ignoreCase = false) shouldBeEqualTo false
+            hasName("fixtureexternalgenericclasswithparameter<int>", ignoreCase = true) shouldBeEqualTo true
         }
     }
 
@@ -285,11 +285,11 @@ class KoExternalParentDeclarationForKoNameProviderTest {
 
         // then
         assertSoftly(sut) {
-            name shouldBeEqualTo "SampleExternalInterface"
-            hasName("SampleExternalInterface") shouldBeEqualTo true
+            name shouldBeEqualTo "FixtureExternalInterface"
+            hasName("FixtureExternalInterface") shouldBeEqualTo true
             hasName("OtherInterface") shouldBeEqualTo false
-            hasName("sampleexternalinterface", ignoreCase = false) shouldBeEqualTo false
-            hasName("sampleexternalinterface", ignoreCase = true) shouldBeEqualTo true
+            hasName("fixtureexternalinterface", ignoreCase = false) shouldBeEqualTo false
+            hasName("fixtureexternalinterface", ignoreCase = true) shouldBeEqualTo true
         }
     }
 
@@ -304,11 +304,11 @@ class KoExternalParentDeclarationForKoNameProviderTest {
 
         // then
         assertSoftly(sut) {
-            name shouldBeEqualTo "SampleExternalGenericInterface<Int>"
-            hasName("SampleExternalGenericInterface<Int>") shouldBeEqualTo true
+            name shouldBeEqualTo "FixtureExternalGenericInterface<Int>"
+            hasName("FixtureExternalGenericInterface<Int>") shouldBeEqualTo true
             hasName("OtherInterface") shouldBeEqualTo false
-            hasName("sampleexternalgenericinterface<int>", ignoreCase = false) shouldBeEqualTo false
-            hasName("sampleexternalgenericinterface<int>", ignoreCase = true) shouldBeEqualTo true
+            hasName("fixtureexternalgenericinterface<int>", ignoreCase = false) shouldBeEqualTo false
+            hasName("fixtureexternalgenericinterface<int>", ignoreCase = true) shouldBeEqualTo true
         }
     }
 
@@ -324,11 +324,11 @@ class KoExternalParentDeclarationForKoNameProviderTest {
 
         // then
         assertSoftly(sut) {
-            name shouldBeEqualTo "SampleExternalClassWithParameter"
-            hasName("SampleExternalClassWithParameter") shouldBeEqualTo true
+            name shouldBeEqualTo "FixtureExternalClassWithParameter"
+            hasName("FixtureExternalClassWithParameter") shouldBeEqualTo true
             hasName("OtherClass") shouldBeEqualTo false
-            hasName("sampleexternalclasswithparameter", ignoreCase = false) shouldBeEqualTo false
-            hasName("sampleexternalclasswithparameter", ignoreCase = true) shouldBeEqualTo true
+            hasName("fixtureexternalclasswithparameter", ignoreCase = false) shouldBeEqualTo false
+            hasName("fixtureexternalclasswithparameter", ignoreCase = true) shouldBeEqualTo true
         }
     }
 

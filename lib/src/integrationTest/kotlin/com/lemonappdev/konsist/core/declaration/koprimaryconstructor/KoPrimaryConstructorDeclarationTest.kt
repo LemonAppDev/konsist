@@ -16,7 +16,7 @@ class KoPrimaryConstructorDeclarationTest {
                 .primaryConstructor
 
         // then
-        val declaration = "Declaration:\n(val sampleParameter: Int)"
+        val declaration = "Declaration:\n(val fixtureParameter: Int)"
         assertSoftly(sut?.toString()) {
             it?.startsWith("Location: /") shouldBeEqualTo true
             it?.endsWith(declaration) shouldBeEqualTo true

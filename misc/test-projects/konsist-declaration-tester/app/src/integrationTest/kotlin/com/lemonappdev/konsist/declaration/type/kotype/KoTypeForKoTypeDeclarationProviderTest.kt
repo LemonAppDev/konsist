@@ -24,7 +24,7 @@ class KoTypeForKoTypeDeclarationProviderTest {
         val sut =
             Konsist
                 .scopeFromFile(
-                    "$appMainSourceSetProjectDirectory/sample/fortypetest/packagecase/DeclarationsWithParameter.kt".toOsSeparator()
+                    "$appMainSourceSetProjectDirectory/fixture/fortypetest/packagecase/DeclarationsWithParameter.kt".toOsSeparator()
                 )
                 .classes()
                 .withName("ClassWithClassTypeParameter")
@@ -38,7 +38,7 @@ class KoTypeForKoTypeDeclarationProviderTest {
             sourceDeclaration shouldBeInstanceOf KoClassDeclaration::class
             (sourceDeclaration as? KoFullyQualifiedNameProvider)
                 ?.fullyQualifiedName
-                .shouldBeEqualTo("com.lemonappdev.sample.fortypetest.packagecase.ClassType")
+                .shouldBeEqualTo("com.lemonappdev.fixture.fortypetest.packagecase.ClassType")
         }
     }
 
@@ -48,7 +48,7 @@ class KoTypeForKoTypeDeclarationProviderTest {
         val sut =
             Konsist
                 .scopeFromFile(
-                    "$appMainSourceSetProjectDirectory/sample/fortypetest/packagecase/DeclarationsWithParameter.kt".toOsSeparator()
+                    "$appMainSourceSetProjectDirectory/fixture/fortypetest/packagecase/DeclarationsWithParameter.kt".toOsSeparator()
                 )
                 .functions()
                 .withName("functionWithClassTypeParameter")
@@ -61,7 +61,7 @@ class KoTypeForKoTypeDeclarationProviderTest {
             sourceDeclaration shouldBeInstanceOf KoClassDeclaration::class
             (sourceDeclaration as? KoFullyQualifiedNameProvider)
                 ?.fullyQualifiedName
-                .shouldBeEqualTo("com.lemonappdev.sample.fortypetest.packagecase.ClassType")
+                .shouldBeEqualTo("com.lemonappdev.fixture.fortypetest.packagecase.ClassType")
         }
     }
 
@@ -71,7 +71,7 @@ class KoTypeForKoTypeDeclarationProviderTest {
         val sut =
             Konsist
                 .scopeFromFile(
-                    "$appMainSourceSetProjectDirectory/sample/fortypetest/packagecase/DeclarationsWithParameter.kt".toOsSeparator()
+                    "$appMainSourceSetProjectDirectory/fixture/fortypetest/packagecase/DeclarationsWithParameter.kt".toOsSeparator()
                 )
                 .classes()
                 .withName("ClassWithInterfaceTypeParameter")
@@ -85,7 +85,7 @@ class KoTypeForKoTypeDeclarationProviderTest {
             sourceDeclaration shouldBeInstanceOf KoInterfaceDeclaration::class
             (sourceDeclaration as? KoFullyQualifiedNameProvider)
                 ?.fullyQualifiedName
-                .shouldBeEqualTo("com.lemonappdev.sample.fortypetest.packagecase.InterfaceType")
+                .shouldBeEqualTo("com.lemonappdev.fixture.fortypetest.packagecase.InterfaceType")
         }
     }
 
@@ -95,7 +95,7 @@ class KoTypeForKoTypeDeclarationProviderTest {
         val sut =
             Konsist
                 .scopeFromFile(
-                    "$appMainSourceSetProjectDirectory/sample/fortypetest/packagecase/DeclarationsWithParameter.kt".toOsSeparator()
+                    "$appMainSourceSetProjectDirectory/fixture/fortypetest/packagecase/DeclarationsWithParameter.kt".toOsSeparator()
                 )
                 .functions()
                 .withName("functionWithInterfaceTypeParameter")
@@ -108,7 +108,7 @@ class KoTypeForKoTypeDeclarationProviderTest {
             sourceDeclaration shouldBeInstanceOf KoInterfaceDeclaration::class
             (sourceDeclaration as? KoFullyQualifiedNameProvider)
                 ?.fullyQualifiedName
-                .shouldBeEqualTo("com.lemonappdev.sample.fortypetest.packagecase.InterfaceType")
+                .shouldBeEqualTo("com.lemonappdev.fixture.fortypetest.packagecase.InterfaceType")
         }
     }
 
@@ -118,7 +118,7 @@ class KoTypeForKoTypeDeclarationProviderTest {
         val sut =
             Konsist
                 .scopeFromFile(
-                    "$appMainSourceSetProjectDirectory/sample/fortypetest/packagecase/DeclarationsWithParameter.kt".toOsSeparator()
+                    "$appMainSourceSetProjectDirectory/fixture/fortypetest/packagecase/DeclarationsWithParameter.kt".toOsSeparator()
                 )
                 .classes()
                 .withName("ClassWithObjectTypeParameter")
@@ -132,7 +132,7 @@ class KoTypeForKoTypeDeclarationProviderTest {
             sourceDeclaration shouldBeInstanceOf KoObjectDeclaration::class
             (sourceDeclaration as? KoFullyQualifiedNameProvider)
                 ?.fullyQualifiedName
-                .shouldBeEqualTo("com.lemonappdev.sample.fortypetest.packagecase.ObjectType")
+                .shouldBeEqualTo("com.lemonappdev.fixture.fortypetest.packagecase.ObjectType")
         }
     }
 
@@ -142,7 +142,7 @@ class KoTypeForKoTypeDeclarationProviderTest {
         val sut =
             Konsist
                 .scopeFromFile(
-                    "$appMainSourceSetProjectDirectory/sample/fortypetest/packagecase/DeclarationsWithParameter.kt".toOsSeparator()
+                    "$appMainSourceSetProjectDirectory/fixture/fortypetest/packagecase/DeclarationsWithParameter.kt".toOsSeparator()
                 )
                 .functions()
                 .withName("functionWithObjectTypeParameter")
@@ -155,7 +155,7 @@ class KoTypeForKoTypeDeclarationProviderTest {
             sourceDeclaration shouldBeInstanceOf KoObjectDeclaration::class
             (sourceDeclaration as? KoFullyQualifiedNameProvider)
                 ?.fullyQualifiedName
-                .shouldBeEqualTo("com.lemonappdev.sample.fortypetest.packagecase.ObjectType")
+                .shouldBeEqualTo("com.lemonappdev.fixture.fortypetest.packagecase.ObjectType")
         }
     }
 
@@ -165,7 +165,7 @@ class KoTypeForKoTypeDeclarationProviderTest {
         val sut =
             Konsist
                 .scopeFromFile(
-                    "$appMainSourceSetProjectDirectory/sample/fortypetest/packagecase/DeclarationsWithParameter.kt".toOsSeparator()
+                    "$appMainSourceSetProjectDirectory/fixture/fortypetest/packagecase/DeclarationsWithParameter.kt".toOsSeparator()
                 )
                 .classes()
                 .withName("ClassWithTypeAliasTypeParameter")
@@ -179,7 +179,7 @@ class KoTypeForKoTypeDeclarationProviderTest {
             sourceDeclaration shouldBeInstanceOf KoTypeAliasDeclaration::class
             (sourceDeclaration as? KoFullyQualifiedNameProvider)
                 ?.fullyQualifiedName
-                .shouldBeEqualTo("com.lemonappdev.sample.fortypetest.packagecase.TypeAliasType")
+                .shouldBeEqualTo("com.lemonappdev.fixture.fortypetest.packagecase.TypeAliasType")
         }
     }
 
@@ -189,7 +189,7 @@ class KoTypeForKoTypeDeclarationProviderTest {
         val sut =
             Konsist
                 .scopeFromFile(
-                    "$appMainSourceSetProjectDirectory/sample/fortypetest/packagecase/DeclarationsWithParameter.kt".toOsSeparator()
+                    "$appMainSourceSetProjectDirectory/fixture/fortypetest/packagecase/DeclarationsWithParameter.kt".toOsSeparator()
                 )
                 .functions()
                 .withName("functionWithTypeAliasTypeParameter")
@@ -202,7 +202,7 @@ class KoTypeForKoTypeDeclarationProviderTest {
             sourceDeclaration shouldBeInstanceOf KoTypeAliasDeclaration::class
             (sourceDeclaration as? KoFullyQualifiedNameProvider)
                 ?.fullyQualifiedName
-                .shouldBeEqualTo("com.lemonappdev.sample.fortypetest.packagecase.TypeAliasType")
+                .shouldBeEqualTo("com.lemonappdev.fixture.fortypetest.packagecase.TypeAliasType")
         }
     }
 
@@ -212,7 +212,7 @@ class KoTypeForKoTypeDeclarationProviderTest {
         val sut =
             Konsist
                 .scopeFromFile(
-                    "$appMainSourceSetProjectDirectory/sample/fortypetest/importaliascase/DeclarationsWithImportAliasType.kt"
+                    "$appMainSourceSetProjectDirectory/fixture/fortypetest/importaliascase/DeclarationsWithImportAliasType.kt"
                         .toOsSeparator()
                 )
                 .classes()
@@ -227,7 +227,7 @@ class KoTypeForKoTypeDeclarationProviderTest {
             sourceDeclaration shouldBeInstanceOf KoImportAliasDeclaration::class
             asImportAliasDeclaration()?.importDirective
                 ?.name
-                .shouldBeEqualTo("com.lemonappdev.sample.fortypetest.importaliascase.declarations.ClassType")
+                .shouldBeEqualTo("com.lemonappdev.fixture.fortypetest.importaliascase.declarations.ClassType")
         }
     }
 
@@ -237,7 +237,7 @@ class KoTypeForKoTypeDeclarationProviderTest {
         val sut =
             Konsist
                 .scopeFromFile(
-                    "$appMainSourceSetProjectDirectory/sample/fortypetest/importaliascase/DeclarationsWithImportAliasType.kt"
+                    "$appMainSourceSetProjectDirectory/fixture/fortypetest/importaliascase/DeclarationsWithImportAliasType.kt"
                         .toOsSeparator()
                 )
                 .functions()
@@ -251,7 +251,7 @@ class KoTypeForKoTypeDeclarationProviderTest {
             sourceDeclaration shouldBeInstanceOf KoImportAliasDeclaration::class
             asImportAliasDeclaration()?.importDirective
                 ?.name
-                .shouldBeEqualTo("com.lemonappdev.sample.fortypetest.importaliascase.declarations.ClassType")
+                .shouldBeEqualTo("com.lemonappdev.fixture.fortypetest.importaliascase.declarations.ClassType")
         }
     }
 
@@ -261,7 +261,7 @@ class KoTypeForKoTypeDeclarationProviderTest {
         val sut =
             Konsist
                 .scopeFromFile(
-                    "$appMainSourceSetProjectDirectory/sample/fortypetest/importaliascase/DeclarationsWithImportAliasType.kt"
+                    "$appMainSourceSetProjectDirectory/fixture/fortypetest/importaliascase/DeclarationsWithImportAliasType.kt"
                         .toOsSeparator()
                 )
                 .classes()
@@ -276,7 +276,7 @@ class KoTypeForKoTypeDeclarationProviderTest {
             sourceDeclaration shouldBeInstanceOf KoImportAliasDeclaration::class
             asImportAliasDeclaration()?.importDirective
                 ?.name
-                .shouldBeEqualTo("com.lemonappdev.sample.fortypetest.importaliascase.declarations.InterfaceType")
+                .shouldBeEqualTo("com.lemonappdev.fixture.fortypetest.importaliascase.declarations.InterfaceType")
         }
     }
 
@@ -286,7 +286,7 @@ class KoTypeForKoTypeDeclarationProviderTest {
         val sut =
             Konsist
                 .scopeFromFile(
-                    "$appMainSourceSetProjectDirectory/sample/fortypetest/importaliascase/DeclarationsWithImportAliasType.kt"
+                    "$appMainSourceSetProjectDirectory/fixture/fortypetest/importaliascase/DeclarationsWithImportAliasType.kt"
                         .toOsSeparator()
                 )
                 .functions()
@@ -300,7 +300,7 @@ class KoTypeForKoTypeDeclarationProviderTest {
             sourceDeclaration shouldBeInstanceOf KoImportAliasDeclaration::class
             asImportAliasDeclaration()?.importDirective
                 ?.name
-                .shouldBeEqualTo("com.lemonappdev.sample.fortypetest.importaliascase.declarations.InterfaceType")
+                .shouldBeEqualTo("com.lemonappdev.fixture.fortypetest.importaliascase.declarations.InterfaceType")
         }
     }
 
@@ -310,7 +310,7 @@ class KoTypeForKoTypeDeclarationProviderTest {
         val sut =
             Konsist
                 .scopeFromFile(
-                    "$appMainSourceSetProjectDirectory/sample/fortypetest/importaliascase/DeclarationsWithImportAliasType.kt"
+                    "$appMainSourceSetProjectDirectory/fixture/fortypetest/importaliascase/DeclarationsWithImportAliasType.kt"
                         .toOsSeparator()
                 )
                 .classes()
@@ -325,7 +325,7 @@ class KoTypeForKoTypeDeclarationProviderTest {
             sourceDeclaration shouldBeInstanceOf KoImportAliasDeclaration::class
             asImportAliasDeclaration()?.importDirective
                 ?.name
-                .shouldBeEqualTo("com.lemonappdev.sample.fortypetest.importaliascase.declarations.ObjectType")
+                .shouldBeEqualTo("com.lemonappdev.fixture.fortypetest.importaliascase.declarations.ObjectType")
         }
     }
 
@@ -335,7 +335,7 @@ class KoTypeForKoTypeDeclarationProviderTest {
         val sut =
             Konsist
                 .scopeFromFile(
-                    "$appMainSourceSetProjectDirectory/sample/fortypetest/importaliascase/DeclarationsWithImportAliasType.kt"
+                    "$appMainSourceSetProjectDirectory/fixture/fortypetest/importaliascase/DeclarationsWithImportAliasType.kt"
                         .toOsSeparator()
                 )
                 .functions()
@@ -349,7 +349,7 @@ class KoTypeForKoTypeDeclarationProviderTest {
             sourceDeclaration shouldBeInstanceOf KoImportAliasDeclaration::class
             asImportAliasDeclaration()?.importDirective
                 ?.name
-                .shouldBeEqualTo("com.lemonappdev.sample.fortypetest.importaliascase.declarations.ObjectType")
+                .shouldBeEqualTo("com.lemonappdev.fixture.fortypetest.importaliascase.declarations.ObjectType")
         }
     }
 
@@ -359,7 +359,7 @@ class KoTypeForKoTypeDeclarationProviderTest {
         val sut =
             Konsist
                 .scopeFromFile(
-                    "$appMainSourceSetProjectDirectory/sample/fortypetest/importaliascase/DeclarationsWithImportAliasType.kt"
+                    "$appMainSourceSetProjectDirectory/fixture/fortypetest/importaliascase/DeclarationsWithImportAliasType.kt"
                         .toOsSeparator()
                 )
                 .classes()
@@ -374,7 +374,7 @@ class KoTypeForKoTypeDeclarationProviderTest {
             sourceDeclaration shouldBeInstanceOf KoImportAliasDeclaration::class
             asImportAliasDeclaration()?.importDirective
                 ?.name
-                .shouldBeEqualTo("com.lemonappdev.sample.fortypetest.importaliascase.declarations.TypeAliasType")
+                .shouldBeEqualTo("com.lemonappdev.fixture.fortypetest.importaliascase.declarations.TypeAliasType")
         }
     }
 
@@ -384,7 +384,7 @@ class KoTypeForKoTypeDeclarationProviderTest {
         val sut =
             Konsist
                 .scopeFromFile(
-                    "$appMainSourceSetProjectDirectory/sample/fortypetest/importaliascase/DeclarationsWithImportAliasType.kt"
+                    "$appMainSourceSetProjectDirectory/fixture/fortypetest/importaliascase/DeclarationsWithImportAliasType.kt"
                         .toOsSeparator()
                 )
                 .functions()
@@ -398,7 +398,7 @@ class KoTypeForKoTypeDeclarationProviderTest {
             sourceDeclaration shouldBeInstanceOf KoImportAliasDeclaration::class
             asImportAliasDeclaration()?.importDirective
                 ?.name
-                .shouldBeEqualTo("com.lemonappdev.sample.fortypetest.importaliascase.declarations.TypeAliasType")
+                .shouldBeEqualTo("com.lemonappdev.fixture.fortypetest.importaliascase.declarations.TypeAliasType")
         }
     }
 
@@ -408,7 +408,7 @@ class KoTypeForKoTypeDeclarationProviderTest {
         val sut =
             Konsist
                 .scopeFromFile(
-                    "$appMainSourceSetProjectDirectory/sample/fortypetest/importaliascase/DeclarationsWithoutImportAliasType.kt"
+                    "$appMainSourceSetProjectDirectory/fixture/fortypetest/importaliascase/DeclarationsWithoutImportAliasType.kt"
                         .toOsSeparator()
                 )
                 .classes()
@@ -423,7 +423,7 @@ class KoTypeForKoTypeDeclarationProviderTest {
             sourceDeclaration shouldBeInstanceOf KoClassDeclaration::class
             (sourceDeclaration as? KoFullyQualifiedNameProvider)
                 ?.fullyQualifiedName
-                .shouldBeEqualTo("com.lemonappdev.sample.fortypetest.importaliascase.declarations.ClassType")
+                .shouldBeEqualTo("com.lemonappdev.fixture.fortypetest.importaliascase.declarations.ClassType")
         }
     }
 
@@ -433,7 +433,7 @@ class KoTypeForKoTypeDeclarationProviderTest {
         val sut =
             Konsist
                 .scopeFromFile(
-                    "$appMainSourceSetProjectDirectory/sample/fortypetest/importaliascase/DeclarationsWithoutImportAliasType.kt"
+                    "$appMainSourceSetProjectDirectory/fixture/fortypetest/importaliascase/DeclarationsWithoutImportAliasType.kt"
                         .toOsSeparator()
                 )
                 .functions()
@@ -447,7 +447,7 @@ class KoTypeForKoTypeDeclarationProviderTest {
             sourceDeclaration shouldBeInstanceOf KoClassDeclaration::class
             (sourceDeclaration as? KoFullyQualifiedNameProvider)
                 ?.fullyQualifiedName
-                .shouldBeEqualTo("com.lemonappdev.sample.fortypetest.importaliascase.declarations.ClassType")
+                .shouldBeEqualTo("com.lemonappdev.fixture.fortypetest.importaliascase.declarations.ClassType")
         }
     }
 
@@ -457,7 +457,7 @@ class KoTypeForKoTypeDeclarationProviderTest {
         val sut =
             Konsist
                 .scopeFromFile(
-                    "$appMainSourceSetProjectDirectory/sample/fortypetest/importaliascase/DeclarationsWithoutImportAliasType.kt"
+                    "$appMainSourceSetProjectDirectory/fixture/fortypetest/importaliascase/DeclarationsWithoutImportAliasType.kt"
                         .toOsSeparator()
                 )
                 .classes()
@@ -472,7 +472,7 @@ class KoTypeForKoTypeDeclarationProviderTest {
             sourceDeclaration shouldBeInstanceOf KoInterfaceDeclaration::class
             (sourceDeclaration as? KoFullyQualifiedNameProvider)
                 ?.fullyQualifiedName
-                .shouldBeEqualTo("com.lemonappdev.sample.fortypetest.importaliascase.declarations.InterfaceType")
+                .shouldBeEqualTo("com.lemonappdev.fixture.fortypetest.importaliascase.declarations.InterfaceType")
         }
     }
 
@@ -482,7 +482,7 @@ class KoTypeForKoTypeDeclarationProviderTest {
         val sut =
             Konsist
                 .scopeFromFile(
-                    "$appMainSourceSetProjectDirectory/sample/fortypetest/importaliascase/DeclarationsWithoutImportAliasType.kt"
+                    "$appMainSourceSetProjectDirectory/fixture/fortypetest/importaliascase/DeclarationsWithoutImportAliasType.kt"
                         .toOsSeparator()
                 )
                 .functions()
@@ -496,7 +496,7 @@ class KoTypeForKoTypeDeclarationProviderTest {
             sourceDeclaration shouldBeInstanceOf KoInterfaceDeclaration::class
             (sourceDeclaration as? KoFullyQualifiedNameProvider)
                 ?.fullyQualifiedName
-                .shouldBeEqualTo("com.lemonappdev.sample.fortypetest.importaliascase.declarations.InterfaceType")
+                .shouldBeEqualTo("com.lemonappdev.fixture.fortypetest.importaliascase.declarations.InterfaceType")
         }
     }
 
@@ -506,7 +506,7 @@ class KoTypeForKoTypeDeclarationProviderTest {
         val sut =
             Konsist
                 .scopeFromFile(
-                    "$appMainSourceSetProjectDirectory/sample/fortypetest/importaliascase/DeclarationsWithoutImportAliasType.kt"
+                    "$appMainSourceSetProjectDirectory/fixture/fortypetest/importaliascase/DeclarationsWithoutImportAliasType.kt"
                         .toOsSeparator()
                 )
                 .classes()
@@ -521,7 +521,7 @@ class KoTypeForKoTypeDeclarationProviderTest {
             sourceDeclaration shouldBeInstanceOf KoObjectDeclaration::class
             (sourceDeclaration as? KoFullyQualifiedNameProvider)
                 ?.fullyQualifiedName
-                .shouldBeEqualTo("com.lemonappdev.sample.fortypetest.importaliascase.declarations.ObjectType")
+                .shouldBeEqualTo("com.lemonappdev.fixture.fortypetest.importaliascase.declarations.ObjectType")
         }
     }
 
@@ -531,7 +531,7 @@ class KoTypeForKoTypeDeclarationProviderTest {
         val sut =
             Konsist
                 .scopeFromFile(
-                    "$appMainSourceSetProjectDirectory/sample/fortypetest/importaliascase/DeclarationsWithoutImportAliasType.kt"
+                    "$appMainSourceSetProjectDirectory/fixture/fortypetest/importaliascase/DeclarationsWithoutImportAliasType.kt"
                         .toOsSeparator()
                 )
                 .functions()
@@ -545,7 +545,7 @@ class KoTypeForKoTypeDeclarationProviderTest {
             sourceDeclaration shouldBeInstanceOf KoObjectDeclaration::class
             (sourceDeclaration as? KoFullyQualifiedNameProvider)
                 ?.fullyQualifiedName
-                .shouldBeEqualTo("com.lemonappdev.sample.fortypetest.importaliascase.declarations.ObjectType")
+                .shouldBeEqualTo("com.lemonappdev.fixture.fortypetest.importaliascase.declarations.ObjectType")
         }
     }
 
@@ -555,7 +555,7 @@ class KoTypeForKoTypeDeclarationProviderTest {
         val sut =
             Konsist
                 .scopeFromFile(
-                    "$appMainSourceSetProjectDirectory/sample/fortypetest/importaliascase/DeclarationsWithoutImportAliasType.kt"
+                    "$appMainSourceSetProjectDirectory/fixture/fortypetest/importaliascase/DeclarationsWithoutImportAliasType.kt"
                         .toOsSeparator()
                 )
                 .classes()
@@ -570,7 +570,7 @@ class KoTypeForKoTypeDeclarationProviderTest {
             sourceDeclaration shouldBeInstanceOf KoTypeAliasDeclaration::class
             (sourceDeclaration as? KoFullyQualifiedNameProvider)
                 ?.fullyQualifiedName
-                .shouldBeEqualTo("com.lemonappdev.sample.fortypetest.importaliascase.declarations.TypeAliasType")
+                .shouldBeEqualTo("com.lemonappdev.fixture.fortypetest.importaliascase.declarations.TypeAliasType")
         }
     }
 
@@ -580,7 +580,7 @@ class KoTypeForKoTypeDeclarationProviderTest {
         val sut =
             Konsist
                 .scopeFromFile(
-                    "$appMainSourceSetProjectDirectory/sample/fortypetest/importaliascase/DeclarationsWithoutImportAliasType.kt"
+                    "$appMainSourceSetProjectDirectory/fixture/fortypetest/importaliascase/DeclarationsWithoutImportAliasType.kt"
                         .toOsSeparator()
                 )
                 .functions()
@@ -594,7 +594,7 @@ class KoTypeForKoTypeDeclarationProviderTest {
             sourceDeclaration shouldBeInstanceOf KoTypeAliasDeclaration::class
             (sourceDeclaration as? KoFullyQualifiedNameProvider)
                 ?.fullyQualifiedName
-                .shouldBeEqualTo("com.lemonappdev.sample.fortypetest.importaliascase.declarations.TypeAliasType")
+                .shouldBeEqualTo("com.lemonappdev.fixture.fortypetest.importaliascase.declarations.TypeAliasType")
         }
     }
 }

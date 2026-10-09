@@ -1,4 +1,4 @@
-class SampleClass {
+class FixtureClass {
     protected open suspend inline operator fun invoke() {
     }
 }

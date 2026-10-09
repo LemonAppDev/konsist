@@ -1,1 +1,1 @@
-interface SampleInterface<T>
+interface FixtureInterface<T>

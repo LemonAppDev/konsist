@@ -1,11 +1,11 @@
-class SampleClass(){
-    fun sampleMethod() {
+class FixtureClass(){
+    fun fixtureMethod() {
         // Implementation
     }
 
     /**
      */
-    var sampleProperty: Int
+    var fixtureProperty: Int
         get() {
             return 6
         }

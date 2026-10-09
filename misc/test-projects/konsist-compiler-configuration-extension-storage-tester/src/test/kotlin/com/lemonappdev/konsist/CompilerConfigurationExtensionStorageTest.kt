@@ -21,6 +21,6 @@ class CompilerConfigurationExtensionStorageTest {
             .classes()
 
         // then
-        sut.map { it.name } shouldBeEqualTo listOf("SampleClass")
+        sut.map { it.name } shouldBeEqualTo listOf("FixtureClass")
     }
 }

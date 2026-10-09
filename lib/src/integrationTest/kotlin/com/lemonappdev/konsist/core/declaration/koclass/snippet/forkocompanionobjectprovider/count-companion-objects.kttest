@@ -1,11 +1,11 @@
-class SampleTopLevelClass {
-    private companion object SampleCompanionObject
+class FixtureTopLevelClass {
+    private companion object FixtureCompanionObject
 
-    object SampleObject
+    object FixtureObject
 
-    interface SampleInterface {
-        object SampleInterfaceObject
+    interface FixtureInterface {
+        object FixtureInterfaceObject
 
-        private companion object SampleNestedCompanionObject
+        private companion object FixtureNestedCompanionObject
     }
 }
