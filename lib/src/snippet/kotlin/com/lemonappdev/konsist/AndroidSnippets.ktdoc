@@ -3,6 +3,7 @@ package com.lemonappdev.konsist
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.ViewModel
 import com.lemonappdev.konsist.api.Konsist
+import com.lemonappdev.konsist.api.ext.list.modifierprovider.withPublicOrDefaultModifier
 import com.lemonappdev.konsist.api.ext.list.properties
 import com.lemonappdev.konsist.api.ext.list.sourceDeclarations
 import com.lemonappdev.konsist.api.ext.list.types
@@ -30,8 +31,9 @@ class AndroidSnippets {
             .classes()
             .withParentClassOf(ViewModel::class)
             .properties()
+            .withPublicOrDefaultModifier()
             .assertTrue {
-                it.hasPublicOrDefaultModifier && it.hasType { type -> type.name == "kotlinx.coroutines.flow.Flow" }
+                it.hasType { type -> type.bareSourceType == "Flow" }
             }
     }
 
@@ -50,7 +52,7 @@ class AndroidSnippets {
             .assertFalse { it.hasImport { import -> import.name == "android.util.Log" } }
     }
 
-    fun `All JetPack Compose previews contain 'Preview' in method name`() {
+    fun `All Jetpack Compose previews contain 'Preview' in method name`() {
         Konsist
             .scopeFromProject()
             .functions()

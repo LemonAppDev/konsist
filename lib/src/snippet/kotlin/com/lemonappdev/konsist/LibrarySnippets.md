@@ -1,3 +1,3 @@
 # Library Snippets
 
-Snippets to library authors.
+Snippets for library authors.

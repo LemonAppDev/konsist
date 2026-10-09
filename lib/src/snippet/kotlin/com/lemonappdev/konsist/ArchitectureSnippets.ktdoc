@@ -6,7 +6,7 @@ import com.lemonappdev.konsist.api.architecture.Layer
 import com.lemonappdev.konsist.api.verify.assertTrue
 
 class ArchitectureSnippets {
-    fun `2 layer architecture has correct dependencies`() {
+    fun `4 layer architecture has correct dependencies`() {
         Konsist
             .scopeFromProject()
             .assertArchitecture {
@@ -16,15 +16,13 @@ class ArchitectureSnippets {
                 val database = Layer("Database", "com.myapp.database..")
 
                 presentation.dependsOn(business)
-                business.dependsOn(presentation)
                 business.dependsOn(persistence)
-                persistence.dependsOn(business)
-                business.dependsOn(database)
-                database.dependsOn(business)
+                persistence.dependsOn(database)
+                database.dependsOnNothing()
             }
     }
 
-    fun `every file in module reside in module specific package`() {
+    fun `every file in module resides in module-specific package`() {
         Konsist
             .scopeFromProject()
             .files

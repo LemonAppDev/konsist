@@ -13,5 +13,5 @@ class TestCase {
 }
 
 class TestName {
-    val testName: String = ""
+    val name: String = ""
 }

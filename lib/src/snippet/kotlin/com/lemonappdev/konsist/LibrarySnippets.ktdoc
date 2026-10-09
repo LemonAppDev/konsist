@@ -2,6 +2,7 @@ package com.lemonappdev.konsist
 
 import com.lemonappdev.konsist.api.Konsist
 import com.lemonappdev.konsist.api.ext.koscope.declarationsOf
+import com.lemonappdev.konsist.api.ext.list.modifierprovider.withPublicOrDefaultModifier
 import com.lemonappdev.konsist.api.ext.provider.hasValidKDocParamTags
 import com.lemonappdev.konsist.api.ext.provider.hasValidKDocReceiverTag
 import com.lemonappdev.konsist.api.ext.provider.hasValidKDocReturnTag
@@ -17,7 +18,7 @@ class LibrarySnippets {
             .assertTrue { it.hasKDoc }
     }
 
-    fun `every function with parameters has a param tags`() {
+    fun `every function with parameters has param tags`() {
         Konsist.scopeFromPackage("..api..")
             .functions()
             .assertTrue { it.hasValidKDocParamTags() }
@@ -39,13 +40,15 @@ class LibrarySnippets {
         Konsist
             .scopeFromPackage("..api..")
             .functions()
+            .withPublicOrDefaultModifier()
             .assertTrue { it.hasReturnType() }
     }
 
-    fun `every public property in api package must have specify type explicitly`() {
+    fun `every public property in api package must specify type explicitly`() {
         Konsist
             .scopeFromPackage("..api..")
             .properties()
+            .withPublicOrDefaultModifier()
             .assertTrue { it.hasType() }
     }
 }

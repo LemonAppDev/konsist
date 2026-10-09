@@ -54,8 +54,9 @@ class CleanArchitectureSnippets {
             .classes()
             .withNameEndingWith("UseCase")
             .assertTrue {
-                // Class and it's parent
-                val declarations = listOf(it) + it.parents(true)
+                // Class and its parents
+                val declarations = listOf(it) + it.parents(indirectParents = true)
+                    .mapNotNull { parent -> parent.sourceDeclaration?.asClassOrInterfaceDeclaration() }
 
                 // Functions from all parents without overrides
                 val uniqueFunctions = declarations
