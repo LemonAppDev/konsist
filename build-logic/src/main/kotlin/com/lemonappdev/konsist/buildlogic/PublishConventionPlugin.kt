@@ -6,7 +6,6 @@ import com.lemonappdev.konsist.buildlogic.ext.getLocalPropertyOrGradleProperty
 import com.lemonappdev.konsist.buildlogic.ext.getReleaseTarget
 import org.gradle.api.Plugin
 import org.gradle.api.Project
-import org.gradle.api.artifacts.repositories.MavenArtifactRepository
 import org.gradle.api.publish.PublishingExtension
 import org.gradle.api.publish.maven.MavenPublication
 import org.gradle.kotlin.dsl.apply
@@ -21,6 +20,7 @@ class PublishConventionPlugin : Plugin<Project> {
         with(target) {
             apply(plugin = "maven-publish")
             apply(plugin = "signing")
+            apply(plugin = "com.gradleup.nmcp")
 
             val konsistPublicationName = "konsist"
 
@@ -83,27 +83,13 @@ class PublishConventionPlugin : Plugin<Project> {
                     }
                 }
 
-                repositories {
-                    maven {
-                        when (releaseTarget) {
-                            ReleaseTarget.LOCAL -> {
-                                name = "local"
-                                url = mavenLocal().url
-                            }
-
-                            // Repository URL for snapshot deployment and download access.
-                            ReleaseTarget.SNAPSHOT -> {
-                                name = "snapshot"
-                                url = uri("https://s01.oss.sonatype.org/content/repositories/snapshots/")
-                                project.setCredentialsFromGradleProperties().invoke(this)
-                            }
-
-                            ReleaseTarget.RELEASE -> {
-                                // Repository URL for release deployment, no download access.
-                                name = "release"
-                                url = uri("https://s01.oss.sonatype.org/content/repositories/releases/")
-                                project.setCredentialsFromGradleProperties().invoke(this)
-                            }
+                // Snapshot and release targets are uploaded to the Central Portal by the root project
+                // (see PublishAggregationConventionPlugin)
+                if (releaseTarget == ReleaseTarget.LOCAL) {
+                    repositories {
+                        maven {
+                            name = "local"
+                            url = mavenLocal().url
                         }
                     }
                 }
@@ -128,16 +114,6 @@ class PublishConventionPlugin : Plugin<Project> {
                     }
                 }
             }
-        }
-    }
-
-    private fun Project.setCredentialsFromGradleProperties(): MavenArtifactRepository.() -> Unit = {
-        val ossrhUsername = getLocalPropertyOrGradleProperty("konsist.ossrhUsername")
-        val ossrhPassword = getLocalPropertyOrGradleProperty("konsist.ossrhPassword")
-
-        credentials {
-            username = ossrhUsername
-            password = ossrhPassword
         }
     }
 
