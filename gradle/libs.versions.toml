@@ -25,3 +25,4 @@ kotlinJvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlinVersion" }
 spotless = "com.diffplug.spotless:8.10.4"
 testLogger = "com.adarshr.test-logger:4.0.0"
 detekt = "io.gitlab.arturbosch.detekt:1.23.8"
+nmcp = "com.gradleup.nmcp:1.6.2"

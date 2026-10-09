@@ -12,11 +12,20 @@
 - Publish Local Snapshot: `./gradlew publishToMavenLocal -Pkonsist.releaseTarget=local` publish to local
 - `~/.m2/repository`
 - Publish Public Snapshot `./gradlew publish -Pkonsist.releaseTarget=snapshot` publish to
-  [snapshot repository](https://s01.oss.sonatype.org/content/repositories/snapshots/com/lemonappdev/konsist/)
-- Publish Release `./gradlew publish -Pkonsist.releaseTarget=release` publish to
-  [release repository](https://s01.oss.sonatype.org/content/repositories/releases/com/lemonappdev/konsist/). This
-  artefact will be transferred to [maven central](https://central.sonatype.com/artifact/com.lemonappdev/konsist)
-  repository after some time.
+  [snapshot repository](https://central.sonatype.com/repository/maven-snapshots/com/lemonappdev/konsist/)
+  (snapshots are removed after 90 days)
+- Publish Release `./gradlew publish -Pkonsist.releaseTarget=release` upload to
+  [Central Portal](https://central.sonatype.com/publishing/deployments). After validation, the artifact is:
+  - automatically published to [maven central](https://central.sonatype.com/artifact/com.lemonappdev/konsist/versions).
+  - eventually will be visible as [mvn repository](https://mvnrepository.com/artifact/com.lemonappdev/konsist) (third-party site that 
+    copies Maven 
+    Central's index)
+  
+Snapshot and release publishing require these properties in `local.properties`:
+
+- `konsist.mavenCentralUsername` and `konsist.mavenCentralPassword` - Central Portal user token
+  (generate at [Central Portal account](https://central.sonatype.com/account))
+- `konsist.signingKey` and `konsist.signingPassword` - Base64 encoded GPG signing key and password
 
 ## Production Release
 
@@ -46,8 +55,8 @@
 
 ## Sonatype
 
-- [Nexus Repository Manager](https://s01.oss.sonatype.org/#nexus-search;quick~konsist)
-- [Sonatype Jira](https://issues.sonatype.org/secure/Dashboard.jspa)
+- [Central Portal Deployments](https://central.sonatype.com/publishing/deployments)
+- [Central Portal Namespaces](https://central.sonatype.com/publishing/namespaces)
 
 ## Repositories Links
 
