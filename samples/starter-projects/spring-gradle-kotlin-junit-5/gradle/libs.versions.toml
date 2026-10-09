@@ -3,7 +3,7 @@ spring-boot = "4.1.1"
 spring-dep-management = "1.1.7"
 kotlin = "2.4.21"
 junit-jupiter = "6.1.3"
-konsist = "0.17.3"
+konsist = "0.18.0"
 
 [libraries]
 spring-boot-starter = { module = "org.springframework.boot:spring-boot-starter", version.ref = "spring-boot" }
