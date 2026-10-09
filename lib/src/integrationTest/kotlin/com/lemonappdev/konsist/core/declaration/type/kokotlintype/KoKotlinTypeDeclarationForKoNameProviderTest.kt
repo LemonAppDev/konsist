@@ -68,6 +68,68 @@ class KoKotlinTypeDeclarationForKoNameProviderTest {
         }
     }
 
+    @Test
+    fun `kotlin-type-name-with-constructor-arguments`() {
+        // given
+        val sut =
+            getSnippetFile("kotlin-type-name-with-constructor-arguments")
+                .classes()
+                .first()
+                .parents()
+                .firstOrNull()
+                ?.sourceDeclaration
+                ?.asKotlinTypeDeclaration()
+
+        // then
+        sut?.name shouldBeEqualTo "RuntimeException"
+    }
+
+    @Test
+    fun `kotlin-type-name-with-type-arguments`() {
+        // given
+        val sut =
+            getSnippetFile("kotlin-type-name-with-type-arguments")
+                .classes()
+                .first()
+                .parents()
+                .firstOrNull()
+                ?.sourceDeclaration
+                ?.asKotlinTypeDeclaration()
+
+        // then
+        sut?.name shouldBeEqualTo "Comparable"
+    }
+
+    @Test
+    fun `kotlin-type-name-with-delegation`() {
+        // given
+        val sut =
+            getSnippetFile("kotlin-type-name-with-delegation")
+                .classes()
+                .first()
+                .parents()
+                .firstOrNull()
+                ?.sourceDeclaration
+                ?.asKotlinTypeDeclaration()
+
+        // then
+        sut?.name shouldBeEqualTo "CharSequence"
+    }
+
+    @Test
+    fun `kotlin-type-name-with-package`() {
+        // given
+        val sut =
+            getSnippetFile("kotlin-type-name-with-package")
+                .properties()
+                .first()
+                .type
+                ?.asKotlinTypeDeclaration()
+
+        // then
+        sut?.name shouldBeEqualTo "String"
+    }
+
     private fun getSnippetFile(fileName: String) =
         TestSnippetProvider.getSnippetKoScope("core/declaration/type/kokotlintype/snippet/forkonameprovider/", fileName)
 }

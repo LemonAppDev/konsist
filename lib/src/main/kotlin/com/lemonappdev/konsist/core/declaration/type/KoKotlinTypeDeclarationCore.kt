@@ -29,9 +29,12 @@ internal class KoKotlinTypeDeclarationCore private constructor(
     }
 
     override val name: String by lazy {
-        ktElement
-            .text
-            .removeSuffix("()")
+        TypeUtil.getBareType(
+            ktElement
+                .text
+                .substringBefore(" ")
+                .substringBefore("("),
+        )
     }
 
     override val fullyQualifiedName: String by lazy {
