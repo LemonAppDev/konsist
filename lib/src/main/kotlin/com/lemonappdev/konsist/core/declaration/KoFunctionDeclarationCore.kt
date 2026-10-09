@@ -2,7 +2,6 @@ package com.lemonappdev.konsist.core.declaration
 
 import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoFunctionDeclaration
-import com.lemonappdev.konsist.core.annotation.RemoveInVersion
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
 import com.lemonappdev.konsist.core.provider.KoAnnotationProviderCore
 import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
@@ -11,7 +10,6 @@ import com.lemonappdev.konsist.core.provider.KoContainingDeclarationProviderCore
 import com.lemonappdev.konsist.core.provider.KoContainingFileProviderCore
 import com.lemonappdev.konsist.core.provider.KoDeclarationCastProviderCore
 import com.lemonappdev.konsist.core.provider.KoDeclarationFullyQualifiedNameProviderCore
-import com.lemonappdev.konsist.core.provider.KoInitializerProviderCore
 import com.lemonappdev.konsist.core.provider.KoIsExtensionProviderCore
 import com.lemonappdev.konsist.core.provider.KoIsGenericProviderCore
 import com.lemonappdev.konsist.core.provider.KoIsInitializedProviderCore
@@ -30,7 +28,6 @@ import com.lemonappdev.konsist.core.provider.KoResideInPackageProviderCore
 import com.lemonappdev.konsist.core.provider.KoReturnProviderCore
 import com.lemonappdev.konsist.core.provider.KoSourceSetProviderCore
 import com.lemonappdev.konsist.core.provider.KoTextProviderCore
-import com.lemonappdev.konsist.core.provider.KoTopLevelProviderCore
 import com.lemonappdev.konsist.core.provider.KoTypeParameterProviderCore
 import com.lemonappdev.konsist.core.provider.KoVariableProviderCore
 import com.lemonappdev.konsist.core.provider.modifier.KoAbstractModifierProviderCore
@@ -70,7 +67,6 @@ internal class KoFunctionDeclarationCore private constructor(
     KoContainingFileProviderCore,
     KoDeclarationFullyQualifiedNameProviderCore,
     KoReturnProviderCore,
-    KoInitializerProviderCore,
     KoIsInitializedProviderCore,
     KoKDocProviderCore,
     KoLocalClassProviderCore,
@@ -89,7 +85,6 @@ internal class KoFunctionDeclarationCore private constructor(
     KoReceiverTypeProviderCore,
     KoResideInPackageProviderCore,
     KoTextProviderCore,
-    KoTopLevelProviderCore,
     KoIsTopLevelProviderCore,
     KoVisibilityModifierProviderCore,
     KoOperatorModifierProviderCore,
@@ -132,12 +127,6 @@ internal class KoFunctionDeclarationCore private constructor(
 
         KoLocalDeclarationProviderCoreUtil.getKoLocalDeclarations(psiElements, this)
     }
-
-    @RemoveInVersion("0.18.0")
-    override val isInitialized: Boolean by lazy { super<KoIsInitializedProviderCore>.isInitialized }
-
-    @RemoveInVersion("0.18.0")
-    override val isTopLevel: Boolean by lazy { super<KoIsTopLevelProviderCore>.isTopLevel }
 
     override val fullyQualifiedName: String? by lazy {
         if (this.isTopLevel) {

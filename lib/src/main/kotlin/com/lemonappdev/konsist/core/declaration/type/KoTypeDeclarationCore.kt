@@ -26,7 +26,6 @@ import com.lemonappdev.konsist.core.provider.KoContainingDeclarationProviderCore
 import com.lemonappdev.konsist.core.provider.KoContainingFileProviderCore
 import com.lemonappdev.konsist.core.provider.KoDeclarationCastProviderCore
 import com.lemonappdev.konsist.core.provider.KoFunctionTypeDeclarationProviderCore
-import com.lemonappdev.konsist.core.provider.KoGenericTypeProviderCore
 import com.lemonappdev.konsist.core.provider.KoIsFunctionTypeProviderCore
 import com.lemonappdev.konsist.core.provider.KoIsGenericProviderCore
 import com.lemonappdev.konsist.core.provider.KoIsGenericTypeProviderCore
@@ -35,7 +34,6 @@ import com.lemonappdev.konsist.core.provider.KoIsNullableProviderCore
 import com.lemonappdev.konsist.core.provider.KoLocationProviderCore
 import com.lemonappdev.konsist.core.provider.KoModuleProviderCore
 import com.lemonappdev.konsist.core.provider.KoNameProviderCore
-import com.lemonappdev.konsist.core.provider.KoNullableProviderCore
 import com.lemonappdev.konsist.core.provider.KoPathProviderCore
 import com.lemonappdev.konsist.core.provider.KoResideInPackageProviderCore
 import com.lemonappdev.konsist.core.provider.KoSourceAndAliasTypeProviderCore
@@ -68,7 +66,6 @@ internal class KoTypeDeclarationCore private constructor(
     KoTextProviderCore,
     KoPathProviderCore,
     KoLocationProviderCore,
-    KoNullableProviderCore,
     KoIsNullableProviderCore,
     KoContainingFileProviderCore,
     KoContainingDeclarationProviderCore,
@@ -76,7 +73,6 @@ internal class KoTypeDeclarationCore private constructor(
     KoSourceSetProviderCore,
     KoSourceAndAliasTypeProviderCore,
     KoSourceTypeProviderCore,
-    KoGenericTypeProviderCore,
     KoIsGenericTypeProviderCore,
     KoIsGenericProviderCore,
     KoIsFunctionTypeProviderCore,
@@ -152,12 +148,6 @@ internal class KoTypeDeclarationCore private constructor(
     }
 
     override val packagee: KoPackageDeclaration? by lazy { containingFile.packagee }
-
-    @RemoveInVersion("0.18.0")
-    override val isGenericType: Boolean by lazy { super<KoIsGenericTypeProviderCore>.isGenericType }
-
-    @RemoveInVersion("0.18.0")
-    override val isNullable: Boolean by lazy { super<KoIsNullableProviderCore>.isNullable }
 
     @RemoveInVersion("0.19.0")
     override val sourceType: String by lazy { super<KoSourceTypeProviderCore>.sourceType }

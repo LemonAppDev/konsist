@@ -33,7 +33,6 @@ import com.lemonappdev.konsist.api.provider.KoRepresentsTypeProvider
 import com.lemonappdev.konsist.api.provider.KoResideInPackageProvider
 import com.lemonappdev.konsist.api.provider.KoSourceSetProvider
 import com.lemonappdev.konsist.api.provider.KoTextProvider
-import com.lemonappdev.konsist.api.provider.KoTopLevelProvider
 import com.lemonappdev.konsist.api.provider.modifier.KoModifierProvider
 import com.lemonappdev.konsist.api.provider.modifier.KoVisibilityModifierProvider
 
@@ -73,7 +72,6 @@ interface KoClassAndInterfaceAndObjectDeclaration :
     KoResideInPackageProvider,
     KoSourceSetProvider,
     KoTextProvider,
-    KoTopLevelProvider,
     KoIsTopLevelProvider,
     KoVisibilityModifierProvider,
     KoCompanionObjectProvider

@@ -13,7 +13,6 @@ import com.lemonappdev.konsist.api.provider.KoRepresentsTypeProvider
 import com.lemonappdev.konsist.api.provider.KoSourceDeclarationProvider
 import com.lemonappdev.konsist.api.provider.KoSourceSetProvider
 import com.lemonappdev.konsist.api.provider.KoTextProvider
-import com.lemonappdev.konsist.api.provider.KoWildcardProvider
 
 /**
  * Represents a Kotlin import declaration.
@@ -30,7 +29,6 @@ interface KoImportDeclaration :
     KoModuleProvider,
     KoSourceSetProvider,
     KoTextProvider,
-    KoWildcardProvider,
     KoIsWildcardProvider,
     KoRepresentsTypeProvider,
     KoSourceDeclarationProvider
