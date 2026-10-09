@@ -9,6 +9,7 @@ dependencies {
     implementation(plugin(libs.plugins.spotless))
     implementation(plugin(libs.plugins.testLogger))
     implementation(plugin(libs.plugins.detekt))
+    implementation(plugin(libs.plugins.nmcp))
 
     implementation(files(libs.javaClass.superclass.protectionDomain.codeSource.location))
 }
@@ -58,6 +59,11 @@ gradlePlugin {
         register("publishConvention") {
             id = "com.lemonappdev.konsist.convention.publish"
             implementationClass = "com.lemonappdev.konsist.buildlogic.PublishConventionPlugin"
+        }
+
+        register("publishAggregationConvention") {
+            id = "com.lemonappdev.konsist.convention.publishaggregation"
+            implementationClass = "com.lemonappdev.konsist.buildlogic.PublishAggregationConventionPlugin"
         }
     }
 }
