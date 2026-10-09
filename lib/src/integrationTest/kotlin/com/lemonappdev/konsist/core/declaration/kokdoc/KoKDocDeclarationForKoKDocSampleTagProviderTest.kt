@@ -13,10 +13,10 @@ import org.junit.jupiter.params.provider.MethodSource
 
 class KoKDocDeclarationForKoKDocSampleTagProviderTest {
     @Test
-    fun `kdoc-without-sample-tag`() {
+    fun `kdoc-without-tag`() {
         // given
         val sut =
-            getSnippetFile("kdoc-without-sample-tag")
+            getSnippetFile("kdoc-without-tag")
                 .classes()
                 .first()
                 .kDoc
@@ -65,8 +65,8 @@ class KoKDocDeclarationForKoKDocSampleTagProviderTest {
         @JvmStatic
         fun provideValues() =
             listOf(
-                arguments("class-with-sample-tag", "FixtureClass"),
-                arguments("function-with-sample-tag", "fixtureMethod"),
+                arguments("class-with-tag", "FixtureClass"),
+                arguments("function-with-tag", "fixtureMethod"),
             )
     }
 }
