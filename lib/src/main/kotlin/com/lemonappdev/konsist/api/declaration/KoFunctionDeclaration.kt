@@ -6,7 +6,6 @@ import com.lemonappdev.konsist.api.provider.KoBodyProvider
 import com.lemonappdev.konsist.api.provider.KoContainingDeclarationProvider
 import com.lemonappdev.konsist.api.provider.KoContainingFileProvider
 import com.lemonappdev.konsist.api.provider.KoFullyQualifiedNameProvider
-import com.lemonappdev.konsist.api.provider.KoInitializerProvider
 import com.lemonappdev.konsist.api.provider.KoIsExtensionProvider
 import com.lemonappdev.konsist.api.provider.KoIsGenericProvider
 import com.lemonappdev.konsist.api.provider.KoIsInitializedProvider
@@ -26,7 +25,6 @@ import com.lemonappdev.konsist.api.provider.KoResideInPackageProvider
 import com.lemonappdev.konsist.api.provider.KoReturnProvider
 import com.lemonappdev.konsist.api.provider.KoSourceSetProvider
 import com.lemonappdev.konsist.api.provider.KoTextProvider
-import com.lemonappdev.konsist.api.provider.KoTopLevelProvider
 import com.lemonappdev.konsist.api.provider.KoTypeParameterProvider
 import com.lemonappdev.konsist.api.provider.KoVariableProvider
 import com.lemonappdev.konsist.api.provider.modifier.KoAbstractModifierProvider
@@ -56,7 +54,6 @@ interface KoFunctionDeclaration :
     KoContainingFileProvider,
     KoReturnProvider,
     KoFullyQualifiedNameProvider,
-    KoInitializerProvider,
     KoIsInitializedProvider,
     KoKDocProvider,
     KoLocalClassProvider,
@@ -75,7 +72,6 @@ interface KoFunctionDeclaration :
     KoReceiverTypeProvider,
     KoResideInPackageProvider,
     KoTextProvider,
-    KoTopLevelProvider,
     KoIsTopLevelProvider,
     KoVisibilityModifierProvider,
     KoOperatorModifierProvider,

@@ -4,17 +4,14 @@ import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoKDocDeclaration
 import com.lemonappdev.konsist.api.declaration.KoPropertyDeclaration
 import com.lemonappdev.konsist.api.provider.KoKDocProvider
-import com.lemonappdev.konsist.core.annotation.RemoveInVersion
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
 import com.lemonappdev.konsist.core.provider.KoAnnotationProviderCore
 import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
-import com.lemonappdev.konsist.core.provider.KoConstructorDefinedProviderCore
 import com.lemonappdev.konsist.core.provider.KoContainingDeclarationProviderCore
 import com.lemonappdev.konsist.core.provider.KoContainingFileProviderCore
 import com.lemonappdev.konsist.core.provider.KoDeclarationCastProviderCore
 import com.lemonappdev.konsist.core.provider.KoDeclarationFullyQualifiedNameProviderCore
 import com.lemonappdev.konsist.core.provider.KoGetterProviderCore
-import com.lemonappdev.konsist.core.provider.KoInitializerProviderCore
 import com.lemonappdev.konsist.core.provider.KoIsConstructorDefinedProviderCore
 import com.lemonappdev.konsist.core.provider.KoIsExtensionProviderCore
 import com.lemonappdev.konsist.core.provider.KoIsGenericProviderCore
@@ -30,14 +27,12 @@ import com.lemonappdev.konsist.core.provider.KoNameProviderCore
 import com.lemonappdev.konsist.core.provider.KoNullableTypeProviderCore
 import com.lemonappdev.konsist.core.provider.KoPathProviderCore
 import com.lemonappdev.konsist.core.provider.KoPropertyDelegateProviderCore
-import com.lemonappdev.konsist.core.provider.KoReadOnlyProviderCore
 import com.lemonappdev.konsist.core.provider.KoReceiverTypeProviderCore
 import com.lemonappdev.konsist.core.provider.KoResideInPackageProviderCore
 import com.lemonappdev.konsist.core.provider.KoSetterProviderCore
 import com.lemonappdev.konsist.core.provider.KoSourceSetProviderCore
 import com.lemonappdev.konsist.core.provider.KoTacitTypeProviderCore
 import com.lemonappdev.konsist.core.provider.KoTextProviderCore
-import com.lemonappdev.konsist.core.provider.KoTopLevelProviderCore
 import com.lemonappdev.konsist.core.provider.KoTypeParameterProviderCore
 import com.lemonappdev.konsist.core.provider.KoValueProviderCore
 import com.lemonappdev.konsist.core.provider.modifier.KoAbstractModifierProviderCore
@@ -83,13 +78,11 @@ internal class KoPropertyDeclarationCore private constructor(
     KoSourceDeclarationCore,
     KoBaseProviderCore,
     KoAnnotationProviderCore,
-    KoConstructorDefinedProviderCore,
     KoIsConstructorDefinedProviderCore,
     KoContainingFileProviderCore,
     KoDeclarationFullyQualifiedNameProviderCore,
     KoPropertyDelegateProviderCore,
     KoNullableTypeProviderCore,
-    KoInitializerProviderCore,
     KoIsInitializedProviderCore,
     KoKDocProviderCore,
     KoLocationProviderCore,
@@ -103,7 +96,6 @@ internal class KoPropertyDeclarationCore private constructor(
     KoReceiverTypeProviderCore,
     KoResideInPackageProviderCore,
     KoTextProviderCore,
-    KoTopLevelProviderCore,
     KoIsTopLevelProviderCore,
     KoValueProviderCore,
     KoVisibilityModifierProviderCore,
@@ -120,7 +112,6 @@ internal class KoPropertyDeclarationCore private constructor(
     KoGetterProviderCore,
     KoTacitTypeProviderCore,
     KoSetterProviderCore,
-    KoReadOnlyProviderCore,
     KoIsReadOnlyProviderCore,
     KoTypeParameterProviderCore,
     KoIsExtensionProviderCore,
@@ -141,18 +132,6 @@ internal class KoPropertyDeclarationCore private constructor(
     override val ktDeclaration: KtDeclaration by lazy { ktCallableDeclaration }
 
     override val ktProperty: KtProperty? by lazy { ktCallableDeclaration as? KtProperty }
-
-    @RemoveInVersion("0.18.0")
-    override val isInitialized: Boolean by lazy { super<KoIsInitializedProviderCore>.isInitialized }
-
-    @RemoveInVersion("0.18.0")
-    override val isConstructorDefined: Boolean by lazy { super<KoIsConstructorDefinedProviderCore>.isConstructorDefined }
-
-    @RemoveInVersion("0.18.0")
-    override val isReadOnly: Boolean by lazy { super<KoIsReadOnlyProviderCore>.isReadOnly }
-
-    @RemoveInVersion("0.18.0")
-    override val isTopLevel: Boolean by lazy { super<KoIsTopLevelProviderCore>.isTopLevel }
 
     override val ktExpression: KtExpression? by lazy {
         ktCallableDeclaration

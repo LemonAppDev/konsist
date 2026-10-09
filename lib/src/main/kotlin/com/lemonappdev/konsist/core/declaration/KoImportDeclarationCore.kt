@@ -6,7 +6,6 @@ import com.lemonappdev.konsist.api.declaration.KoImportDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoKotlinTypeDeclaration
 import com.lemonappdev.konsist.api.provider.KoDeclarationCastProvider
 import com.lemonappdev.konsist.api.provider.KoFullyQualifiedNameProvider
-import com.lemonappdev.konsist.core.annotation.RemoveInVersion
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
 import com.lemonappdev.konsist.core.declaration.type.KoKotlinTypeDeclarationCore
 import com.lemonappdev.konsist.core.ext.castToKoBaseDeclaration
@@ -23,7 +22,6 @@ import com.lemonappdev.konsist.core.provider.KoPathProviderCore
 import com.lemonappdev.konsist.core.provider.KoSourceDeclarationProviderCore
 import com.lemonappdev.konsist.core.provider.KoSourceSetProviderCore
 import com.lemonappdev.konsist.core.provider.KoTextProviderCore
-import com.lemonappdev.konsist.core.provider.KoWildcardProviderCore
 import com.lemonappdev.konsist.core.util.TypeUtil
 import org.jetbrains.kotlin.com.intellij.psi.PsiElement
 import org.jetbrains.kotlin.psi.KtDotQualifiedExpression
@@ -44,7 +42,6 @@ internal class KoImportDeclarationCore private constructor(
     KoModuleProviderCore,
     KoSourceSetProviderCore,
     KoTextProviderCore,
-    KoWildcardProviderCore,
     KoIsWildcardProviderCore,
     KoSourceDeclarationProviderCore {
     override val psiElement: PsiElement by lazy { ktImportDirective }
@@ -58,9 +55,6 @@ internal class KoImportDeclarationCore private constructor(
             .alias
             ?.let { KoImportAliasDeclarationCore.getInstance(it, this) }
     }
-
-    @RemoveInVersion("0.18.0")
-    override val isWildcard: Boolean by lazy { super<KoIsWildcardProviderCore>.isWildcard }
 
     override val sourceDeclaration: KoDeclarationCastProvider? by lazy {
         val shortName = name.substringAfterLast(".")
