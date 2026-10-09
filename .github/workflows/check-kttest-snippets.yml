@@ -16,7 +16,7 @@ concurrency:
 
 jobs:
   get-github-context:
-    name: Get Branches And Changed Files
+    name: Get Changed Files
     runs-on: ubuntu-latest
 
     # Allow the workflow to read the contents of the repository and pull request to be
@@ -26,16 +26,6 @@ jobs:
       pull-requests: read
 
     steps:
-      - name: Get branch name
-        id: branch-name
-        uses: tj-actions/branch-names@v9
-
-      - name: List Branches
-        run: |
-          echo current branch: ${{ steps.branch-name.outputs.current_branch }}
-          echo base ref branch branch: ${{ steps.branch-name.outputs.base_ref_branch }}
-          echo default branch: ${{ steps.branch-name.outputs.default_branch }}
-
       - name: Get Changed Files
         id: changed-files
         uses: tj-actions/changed-files@v47.0.6
@@ -45,25 +35,18 @@ jobs:
           echo Changed files:
           echo ${{ steps.changed-files.outputs.all_changed_files }} | tr ' ' '\n'
 
-      - name: Echo Run Condition (any true to run)
+      - name: Echo Run Condition
         run: |
-          echo Current branch starts with "release/": ${{ startsWith(steps.branch-name.outputs.current_branch, 'release/') }}
-          echo Base ref branch is "main": ${{ steps.branch-name.outputs.base_ref_branch == 'main' }}
           echo Changed .kttest files: ${{ contains(steps.changed-files.outputs.all_changed_files, '.kttest') }}
 
     outputs:
-      current_branch: ${{ steps.branch-name.outputs.current_branch }}
-      base_ref_branch: ${{ steps.branch-name.outputs.base_ref_branch }}
       all_changed_files: ${{ steps.changed-files.outputs.all_changed_files }}
 
   check-kttest-snippets:
     name: Check kttest Snippets
     needs: get-github-context
     runs-on: ubuntu-latest
-    if: |
-      needs.get-github-context.outputs.base_ref_branch == 'main' ||
-      startsWith(needs.get-github-context.outputs.current_branch, 'release/') ||
-      contains(needs.get-github-context.outputs.all_changed_files, '.kttest')
+    if: contains(needs.get-github-context.outputs.all_changed_files, '.kttest')
     steps:
       - name: Checkout
         uses: actions/checkout@v7
@@ -74,12 +57,7 @@ jobs:
           java-version: 25
           distribution: 'corretto'
 
-      - name: Run Python Script for All Files
-        if: needs.get-github-context.outputs.base_ref_branch == 'main' || startsWith(needs.get-github-context.outputs.current_branch, 'release/')
-        run: python3 misc/scripts/check_kttest_snippets.py -all
-
       - name: Filter Changed .kttest Files
-        if: contains(needs.get-github-context.outputs.all_changed_files, '.kttest')
         run: |
           kttest_files=$(echo '${{ needs.get-github-context.outputs.all_changed_files }}' | tr ' ' '\n' | grep '\.kttest$')
           if [ -n "$kttest_files" ]; then
@@ -89,7 +67,6 @@ jobs:
           fi
 
       - name: Run Python Script With Changed .kttest Files
-        if: contains(needs.get-github-context.outputs.all_changed_files, '.kttest')
         run: python3 misc/scripts/check_kttest_snippets.py "$TEMP_FILE"
         env:
           TEMP_FILE: ${{ env.TEMP_FILE }}
