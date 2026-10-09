@@ -1,4 +1,4 @@
-val sampleProperty = ""
+val fixtureProperty = ""
 
-fun sampleFunction() {
+fun fixtureFunction() {
 }

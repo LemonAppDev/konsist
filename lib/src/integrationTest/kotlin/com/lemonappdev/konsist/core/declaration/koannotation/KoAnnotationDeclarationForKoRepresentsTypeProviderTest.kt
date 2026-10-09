@@ -11,6 +11,7 @@ class KoAnnotationDeclarationForKoRepresentsTypeProviderTest {
     @MethodSource("provideValues")
     fun `annotation-represents-type`(
         type: String?,
+        ignoreCase: Boolean,
         value: Boolean,
     ) {
         // given
@@ -22,7 +23,7 @@ class KoAnnotationDeclarationForKoRepresentsTypeProviderTest {
                 .first()
 
         // then
-        sut.representsType(type) shouldBeEqualTo value
+        sut.representsType(type, ignoreCase) shouldBeEqualTo value
     }
 
     @Suppress("SameParameterValue")
@@ -34,11 +35,20 @@ class KoAnnotationDeclarationForKoRepresentsTypeProviderTest {
         @JvmStatic
         fun provideValues() =
             listOf(
-                arguments("SampleAnnotation", true),
-                arguments("OtherAnnotation", false),
-                arguments("com.lemonappdev.konsist.testdata.SampleAnnotation", true),
-                arguments("com.lemonappdev.konsist.testdata.OtherAnnotation", false),
-                arguments(null, false),
+                arguments("FixtureAnnotation", false, true),
+                arguments("fixtureannotation", false, false),
+                arguments("fixtureannotation", true, true),
+                arguments("OtherAnnotation", false, false),
+                arguments("otherannotation", false, false),
+                arguments("otherannotation", true, false),
+                arguments("com.lemonappdev.konsist.testdata.FixtureAnnotation", false, true),
+                arguments("com.lemonappdev.konsist.testdata.fixtureannotation", false, false),
+                arguments("com.lemonappdev.konsist.testdata.fixtureannotation", true, true),
+                arguments("com.lemonappdev.konsist.testdata.OtherAnnotation", false, false),
+                arguments("com.lemonappdev.konsist.testdata.otherannotation", false, false),
+                arguments("com.lemonappdev.konsist.testdata.otherannotation", true, false),
+                arguments(null, false, false),
+                arguments(null, true, false),
             )
     }
 }

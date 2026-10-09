@@ -1,0 +1,5 @@
+package com.fixturepackage
+
+import com.lemonappdev.konsist.testdata.FixtureParentInterfaceWithNestedDeclarations
+
+data class FixtureName(val data: String) : FixtureParentInterfaceWithNestedDeclarations.FixtureNestedClass()

@@ -1,5 +1,5 @@
-class SampleClass(){
-    fun sampleMethod() {
+class FixtureClass(){
+    fun fixtureMethod() {
         // Implementation
     }
 
@@ -7,7 +7,7 @@ class SampleClass(){
      * @propertySetter Sets the value of the [name] property.
      * @propertyGetter Retrieves the value of the [name] property.
      */
-    var sampleProperty: Int
+    var fixtureProperty: Int
         get() {
             return 6
         }

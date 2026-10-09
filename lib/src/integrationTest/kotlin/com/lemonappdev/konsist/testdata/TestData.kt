@@ -1,36 +1,36 @@
 package com.lemonappdev.konsist.testdata
 
-const val SAMPLE_PROPERTY: Int = 0
+const val FIXTURE_PROPERTY: Int = 0
 
-fun sampleFunction() = {}
+fun fixtureFunction() = {}
 
-open class SampleParentClass
+open class FixtureParentClass
 
-open class SampleParentClass1
+open class FixtureParentClass1
 
-open class SampleParentClass2
+open class FixtureParentClass2
 
-open class SampleParentClassWithDuplicatedName
+open class FixtureParentClassWithDuplicatedName
 
-open class SampleParentClassWithNestedDeclarations {
-    open class SampleNestedClass
+open class FixtureParentClassWithNestedDeclarations {
+    open class FixtureNestedClass
 }
 
-class SampleClass
+class FixtureClass
 
-class SampleClass1
+class FixtureClass1
 
-class SampleClass2
+class FixtureClass2
 
-open class SampleClassWithParameter(
+open class FixtureClassWithParameter(
     val param: String,
 )
 
-open class SampleGenericClassWithParameter<T>(
+open class FixtureGenericClassWithParameter<T>(
     val param: String,
 )
 
-open class SampleCollection1<out E> : Collection<E> {
+open class FixtureCollection1<out E> : Collection<E> {
     override val size: Int = 1
 
     override fun isEmpty(): Boolean = false
@@ -42,7 +42,7 @@ open class SampleCollection1<out E> : Collection<E> {
     override fun contains(element: @UnsafeVariance E): Boolean = false
 }
 
-class SampleCollection2<out E, out V> : Collection<E> {
+class FixtureCollection2<out E, out V> : Collection<E> {
     override val size: Int = 1
 
     override fun isEmpty(): Boolean = false
@@ -54,35 +54,37 @@ class SampleCollection2<out E, out V> : Collection<E> {
     override fun contains(element: @UnsafeVariance E): Boolean = false
 }
 
-class SampleType
+class FixtureType
 
-class SampleType1
+class FixtureType1
 
-class SampleType2
+class FixtureType2
 
-interface SampleInterface
+interface FixtureInterface
 
-interface SampleInterface1
+interface FixtureInterface1
 
-interface SampleInterface2
+interface FixtureInterface2
 
-interface SampleParentInterface
+interface FixtureParentInterface
 
-interface SampleParentInterface1
+interface FixtureParentInterface1
 
-interface SampleParentInterface2
+interface FixtureParentInterface2
 
-interface SampleParentInterfaceWithNestedDeclarations {
-    interface SampleNestedInterface
+interface FixtureParentInterfaceWithNestedDeclarations {
+    interface FixtureNestedInterface
+
+    open class FixtureNestedClass
 }
 
-interface SampleGenericSuperInterface<T>
+interface FixtureGenericSuperInterface<T>
 
-object SampleObject
+object FixtureObject
 
-typealias SampleTypeAlias = (SampleClass) -> Unit
+typealias FixtureTypeAlias = (FixtureClass) -> Unit
 
-typealias SampleBasicTypeAlias = SampleClass
+typealias FixtureBasicTypeAlias = FixtureClass
 
 annotation class NonExistingAnnotation
 
@@ -97,7 +99,7 @@ annotation class NonExistingAnnotation
     AnnotationTarget.TYPE,
     AnnotationTarget.VALUE_PARAMETER,
 )
-annotation class SampleAnnotation
+annotation class FixtureAnnotation
 
 @Target(
     AnnotationTarget.CLASS,
@@ -110,7 +112,7 @@ annotation class SampleAnnotation
     AnnotationTarget.TYPE,
     AnnotationTarget.VALUE_PARAMETER,
 )
-annotation class SampleAnnotation1
+annotation class FixtureAnnotation1
 
 @Target(
     AnnotationTarget.CLASS,
@@ -123,7 +125,7 @@ annotation class SampleAnnotation1
     AnnotationTarget.TYPE,
     AnnotationTarget.VALUE_PARAMETER,
 )
-annotation class SampleAnnotation2
+annotation class FixtureAnnotation2
 
 @Target(
     AnnotationTarget.CLASS,
@@ -132,14 +134,14 @@ annotation class SampleAnnotation2
     AnnotationTarget.FUNCTION,
     AnnotationTarget.TYPEALIAS,
 )
-annotation class SampleAnnotationWithParameter(
-    val sampleParameter: String,
+annotation class FixtureAnnotationWithParameter(
+    val fixtureParameter: String,
 )
 
-annotation class SampleAnnotationWithParameters(
-    val sampleParameter1: String,
-    val sampleParameter2: Boolean,
+annotation class FixtureAnnotationWithParameters(
+    val fixtureParameter1: String,
+    val fixtureParameter2: Boolean,
 )
 
 @Target(AnnotationTarget.CLASS, AnnotationTarget.PROPERTY, AnnotationTarget.FUNCTION, AnnotationTarget.TYPEALIAS)
-annotation class SampleAnnotationWithAngleBrackets<T, U>
+annotation class FixtureAnnotationWithAngleBrackets<T, U>

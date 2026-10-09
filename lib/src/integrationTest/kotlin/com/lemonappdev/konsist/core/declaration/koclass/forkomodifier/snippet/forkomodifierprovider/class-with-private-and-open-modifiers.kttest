@@ -1,2 +1,2 @@
-private open class SampleClass {
+private open class FixtureClass {
 }

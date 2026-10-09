@@ -1,5 +1,5 @@
-object SampleTopLevelObject {
-    object SampleObject {
-        object SampleNestedObject
+object FixtureTopLevelObject {
+    object FixtureObject {
+        object FixtureNestedObject
     }
 }

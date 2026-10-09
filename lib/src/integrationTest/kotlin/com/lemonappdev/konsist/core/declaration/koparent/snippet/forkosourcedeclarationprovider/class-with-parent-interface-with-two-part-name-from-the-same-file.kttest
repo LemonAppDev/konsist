@@ -1,0 +1,7 @@
+package com.fixturepackage
+
+data class FixtureName(val data: String) : FixtureInterface.FixtureNestedInterface
+
+interface FixtureInterface {
+    interface FixtureNestedInterface
+}

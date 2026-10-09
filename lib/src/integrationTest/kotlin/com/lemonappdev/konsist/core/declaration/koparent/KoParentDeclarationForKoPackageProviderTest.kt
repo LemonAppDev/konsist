@@ -19,7 +19,7 @@ class KoParentDeclarationForKoPackageProviderTest {
                 .first()
 
         // then
-        sut.packagee?.name shouldBeEqualTo "com.samplepackage"
+        sut.packagee?.name shouldBeEqualTo "com.fixturepackage"
     }
 
     @ParameterizedTest
@@ -47,7 +47,7 @@ class KoParentDeclarationForKoPackageProviderTest {
                 .first()
 
         // then
-        sut.packagee?.name shouldBeEqualTo "com.samplepackage"
+        sut.packagee?.name shouldBeEqualTo "com.fixturepackage"
     }
 
     @ParameterizedTest
@@ -75,7 +75,7 @@ class KoParentDeclarationForKoPackageProviderTest {
                 .first()
 
         // then
-        sut.packagee?.name shouldBeEqualTo "com.samplepackage"
+        sut.packagee?.name shouldBeEqualTo "com.fixturepackage"
     }
 
     @ParameterizedTest

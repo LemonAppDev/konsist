@@ -20,14 +20,14 @@ class KoAnnotationDeclarationForKoTextProviderTest {
         assertSoftly(sut) {
             text.shouldBeEqualTo(
                 """
-                @SampleAnnotationWithParameter(sampleParameter = "text")
+                @FixtureAnnotationWithParameter(fixtureParameter = "text")
                 """.trimIndent(),
             )
-            hasTextStartingWith("@Sample") shouldBeEqualTo true
+            hasTextStartingWith("@Fixture") shouldBeEqualTo true
             hasTextStartingWith("Other") shouldBeEqualTo false
             hasTextEndingWith("eter = \"text\")") shouldBeEqualTo true
             hasTextEndingWith("other") shouldBeEqualTo false
-            hasTextContaining("Parameter(sample") shouldBeEqualTo true
+            hasTextContaining("Parameter(fixture") shouldBeEqualTo true
             hasTextContaining("anno") shouldBeEqualTo false
             hasTextMatching(Regex("^[^\\d]*\$")) shouldBeEqualTo true
             hasTextMatching(Regex("[0-9]+")) shouldBeEqualTo false

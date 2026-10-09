@@ -18,12 +18,12 @@ class KoEnumConstantDeclarationForKoTextProviderTest {
 
         // then
         assertSoftly(sut) {
-            text shouldBeEqualTo "SAMPLE_CONSTANT_1(sampleArgument = 0)"
-            hasTextStartingWith("SAMPLE_CONSTANT") shouldBeEqualTo true
+            text shouldBeEqualTo "FIXTURE_CONSTANT_1(fixtureArgument = 0)"
+            hasTextStartingWith("FIXTURE_CONSTANT") shouldBeEqualTo true
             hasTextStartingWith("Other") shouldBeEqualTo false
             hasTextEndingWith("= 0)") shouldBeEqualTo true
             hasTextEndingWith("other") shouldBeEqualTo false
-            hasTextContaining("CONSTANT_1(sample") shouldBeEqualTo true
+            hasTextContaining("CONSTANT_1(fixture") shouldBeEqualTo true
             hasTextContaining("anno") shouldBeEqualTo false
             hasTextMatching(Regex("^[^@]*\$")) shouldBeEqualTo true
             hasTextMatching(Regex("[0-9]+")) shouldBeEqualTo false

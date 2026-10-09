@@ -1,7 +1,7 @@
 package com.lemonappdev.konsist.core.declaration.kofunction
 
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
-import com.lemonappdev.konsist.testdata.SampleClass
+import com.lemonappdev.konsist.testdata.FixtureClass
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
@@ -34,11 +34,11 @@ class KoFunctionDeclarationForKoReceiverTypeProviderTest {
 
         // then
         assertSoftly(sut) {
-            receiverType?.name shouldBeEqualTo "SampleClass"
+            receiverType?.name shouldBeEqualTo "FixtureClass"
             hasReceiverType() shouldBeEqualTo true
-            hasReceiverType { it.name == "SampleClass" } shouldBeEqualTo true
+            hasReceiverType { it.name == "FixtureClass" } shouldBeEqualTo true
             hasReceiverType { it.name == "String" } shouldBeEqualTo false
-            hasReceiverTypeOf(SampleClass::class) shouldBeEqualTo true
+            hasReceiverTypeOf(FixtureClass::class) shouldBeEqualTo true
             hasReceiverTypeOf(String::class) shouldBeEqualTo false
         }
     }

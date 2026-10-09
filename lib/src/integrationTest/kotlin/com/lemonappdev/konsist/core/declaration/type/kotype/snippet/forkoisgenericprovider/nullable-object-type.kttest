@@ -1,0 +1,3 @@
+import com.lemonappdev.konsist.testdata.FixtureObject
+
+val fixtureProperty1: FixtureObject? = FixtureObject

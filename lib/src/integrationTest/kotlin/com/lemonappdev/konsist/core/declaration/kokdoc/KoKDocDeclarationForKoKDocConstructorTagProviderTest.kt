@@ -35,7 +35,7 @@ class KoKDocDeclarationForKoKDocConstructorTagProviderTest {
         // then
         assertSoftly(sut) {
             it?.constructorTag?.name shouldBeEqualTo CONSTRUCTOR
-            it?.constructorTag?.description shouldBeEqualTo "Creates a new instance of the [SampleClass]."
+            it?.constructorTag?.description shouldBeEqualTo "Creates a new instance of the [FixtureClass]."
             it?.hasConstructorTag shouldBeEqualTo true
         }
     }

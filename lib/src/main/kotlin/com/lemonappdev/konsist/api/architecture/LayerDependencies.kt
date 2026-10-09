@@ -164,9 +164,6 @@ interface LayerDependencies {
      *
      * @receiver Collection of source [Layer]s for which dependencies will be forbidden.
      * @param layer The target layer that should not be depended on.
-     * @param strict Controls the dependency enforcement:
-     *              - true: MUST NOT have dependencies - Any dependencies between layers will be reported as violations.
-     *              - false: SHOULD NOT have dependencies (default) - Dependencies are discouraged but allowed.
      */
     fun Collection<Layer>.doesNotDependOn(layer: Layer): Unit
 

@@ -243,7 +243,7 @@ class KoFunctionProviderListExtTest {
     @Test
     fun `withFunctionNamed(name) returns declaration with given function`() {
         // given
-        val name = "SampleName"
+        val name = "FixtureName"
         val declaration1: KoFunctionProvider =
             mockk {
                 every { hasFunctionWithName(listOf(name)) } returns true
@@ -264,8 +264,8 @@ class KoFunctionProviderListExtTest {
     @Test
     fun `withFunctionNamed(String) returns declaration with any of given functions`() {
         // given
-        val name1 = "SampleName1"
-        val name2 = "SampleName2"
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
         val declaration1: KoFunctionProvider =
             mockk {
                 every { hasFunctionWithName(listOf(name1, name2)) } returns true
@@ -286,8 +286,8 @@ class KoFunctionProviderListExtTest {
     @Test
     fun `withFunctionNamed(list of String) returns declaration with any of given functions`() {
         // given
-        val name1 = "SampleName1"
-        val name2 = "SampleName2"
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
         val declaration1: KoFunctionProvider =
             mockk {
                 every { hasFunctionWithName(listOf(name1, name2)) } returns true
@@ -309,8 +309,8 @@ class KoFunctionProviderListExtTest {
     @Test
     fun `withFunctionNamed(set of String) returns declaration with any of given functions`() {
         // given
-        val name1 = "SampleName1"
-        val name2 = "SampleName2"
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
         val declaration1: KoFunctionProvider =
             mockk {
                 every { hasFunctionWithName(setOf(name1, name2)) } returns true
@@ -330,9 +330,53 @@ class KoFunctionProviderListExtTest {
     }
 
     @Test
+    fun `withFunctionNamed(name) with ignore case returns declaration with given function`() {
+        // given
+        val name = "FixtureName"
+        val declaration1: KoFunctionProvider =
+            mockk {
+                every { hasFunctionWithName(listOf(name), ignoreCase = true) } returns true
+            }
+        val declaration2: KoFunctionProvider =
+            mockk {
+                every { hasFunctionWithName(listOf(name), ignoreCase = true) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withFunctionNamed(name, ignoreCase = true)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
+    fun `withFunctionNamed(list of String) with ignore case returns declaration with any of given functions`() {
+        // given
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
+        val declaration1: KoFunctionProvider =
+            mockk {
+                every { hasFunctionWithName(listOf(name1, name2), ignoreCase = true) } returns true
+            }
+        val declaration2: KoFunctionProvider =
+            mockk {
+                every { hasFunctionWithName(listOf(name1, name2), ignoreCase = true) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+        val names = listOf(name1, name2)
+
+        // when
+        val sut = declarations.withFunctionNamed(names, ignoreCase = true)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
     fun `withoutFunctionNamed(name) returns declaration without given function`() {
         // given
-        val name = "SampleName"
+        val name = "FixtureName"
         val declaration1: KoFunctionProvider =
             mockk {
                 every { hasFunctionWithName(listOf(name)) } returns true
@@ -353,8 +397,8 @@ class KoFunctionProviderListExtTest {
     @Test
     fun `withoutFunctionNamed(String) returns declaration without any of given functions`() {
         // given
-        val name1 = "SampleName1"
-        val name2 = "SampleName2"
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
         val declaration1: KoFunctionProvider =
             mockk {
                 every { hasFunctionWithName(listOf(name1, name2)) } returns true
@@ -375,8 +419,8 @@ class KoFunctionProviderListExtTest {
     @Test
     fun `withoutFunctionNamed(list of String) returns declaration without any of given functions`() {
         // given
-        val name1 = "SampleName1"
-        val name2 = "SampleName2"
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
         val declaration1: KoFunctionProvider =
             mockk {
                 every { hasFunctionWithName(listOf(name1, name2)) } returns true
@@ -398,8 +442,8 @@ class KoFunctionProviderListExtTest {
     @Test
     fun `withoutFunctionNamed(set of String) returns declaration without any of given functions`() {
         // given
-        val name1 = "SampleName1"
-        val name2 = "SampleName2"
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
         val declaration1: KoFunctionProvider =
             mockk {
                 every { hasFunctionWithName(setOf(name1, name2)) } returns true
@@ -419,9 +463,53 @@ class KoFunctionProviderListExtTest {
     }
 
     @Test
+    fun `withoutFunctionNamed(name) with ignore case returns declaration without given function`() {
+        // given
+        val name = "FixtureName"
+        val declaration1: KoFunctionProvider =
+            mockk {
+                every { hasFunctionWithName(listOf(name), ignoreCase = true) } returns true
+            }
+        val declaration2: KoFunctionProvider =
+            mockk {
+                every { hasFunctionWithName(listOf(name), ignoreCase = true) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withoutFunctionNamed(name, ignoreCase = true)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
+    }
+
+    @Test
+    fun `withoutFunctionNamed(list of String) with ignore case returns declaration without any of given functions`() {
+        // given
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
+        val declaration1: KoFunctionProvider =
+            mockk {
+                every { hasFunctionWithName(listOf(name1, name2), ignoreCase = true) } returns true
+            }
+        val declaration2: KoFunctionProvider =
+            mockk {
+                every { hasFunctionWithName(listOf(name1, name2), ignoreCase = true) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+        val names = listOf(name1, name2)
+
+        // when
+        val sut = declarations.withoutFunctionNamed(names, ignoreCase = true)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
+    }
+
+    @Test
     fun `withAllFunctionsNamed(name) returns declaration with given function`() {
         // given
-        val name = "SampleName"
+        val name = "FixtureName"
         val declaration1: KoFunctionProvider =
             mockk {
                 every { hasFunctionsWithAllNames(listOf(name)) } returns true
@@ -442,8 +530,8 @@ class KoFunctionProviderListExtTest {
     @Test
     fun `withAllFunctionsNamed(String) returns declaration with all given functions`() {
         // given
-        val name1 = "SampleName1"
-        val name2 = "SampleName2"
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
         val declaration1: KoFunctionProvider =
             mockk {
                 every { hasFunctionsWithAllNames(listOf(name1, name2)) } returns true
@@ -464,8 +552,8 @@ class KoFunctionProviderListExtTest {
     @Test
     fun `withAllFunctionsNamed(list of String) returns declaration with all given functions`() {
         // given
-        val name1 = "SampleName1"
-        val name2 = "SampleName2"
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
         val declaration1: KoFunctionProvider =
             mockk {
                 every { hasFunctionsWithAllNames(listOf(name1, name2)) } returns true
@@ -487,8 +575,8 @@ class KoFunctionProviderListExtTest {
     @Test
     fun `withAllFunctionsNamed(set of String) returns declaration with all given functions`() {
         // given
-        val name1 = "SampleName1"
-        val name2 = "SampleName2"
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
         val declaration1: KoFunctionProvider =
             mockk {
                 every { hasFunctionsWithAllNames(setOf(name1, name2)) } returns true
@@ -508,9 +596,53 @@ class KoFunctionProviderListExtTest {
     }
 
     @Test
+    fun `withAllFunctionsNamed(name) with ignore case returns declaration with given function`() {
+        // given
+        val name = "FixtureName"
+        val declaration1: KoFunctionProvider =
+            mockk {
+                every { hasFunctionsWithAllNames(listOf(name), ignoreCase = true) } returns true
+            }
+        val declaration2: KoFunctionProvider =
+            mockk {
+                every { hasFunctionsWithAllNames(listOf(name), ignoreCase = true) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withAllFunctionsNamed(name, ignoreCase = true)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
+    fun `withAllFunctionsNamed(list of String) with ignore case returns declaration with all given functions`() {
+        // given
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
+        val declaration1: KoFunctionProvider =
+            mockk {
+                every { hasFunctionsWithAllNames(listOf(name1, name2), ignoreCase = true) } returns true
+            }
+        val declaration2: KoFunctionProvider =
+            mockk {
+                every { hasFunctionsWithAllNames(listOf(name1, name2), ignoreCase = true) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+        val names = listOf(name1, name2)
+
+        // when
+        val sut = declarations.withAllFunctionsNamed(names, ignoreCase = true)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
     fun `withoutAllFunctionsNamed(name) returns declaration without given function`() {
         // given
-        val name = "SampleName"
+        val name = "FixtureName"
         val declaration1: KoFunctionProvider =
             mockk {
                 every { hasFunctionsWithAllNames(listOf(name)) } returns true
@@ -531,8 +663,8 @@ class KoFunctionProviderListExtTest {
     @Test
     fun `withoutAllFunctionsNamed(String) returns declaration without all of given functions`() {
         // given
-        val name1 = "SampleName1"
-        val name2 = "SampleName2"
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
         val declaration1: KoFunctionProvider =
             mockk {
                 every { hasFunctionsWithAllNames(listOf(name1, name2)) } returns true
@@ -553,8 +685,8 @@ class KoFunctionProviderListExtTest {
     @Test
     fun `withoutAllFunctionsNamed(list of String) returns declaration without all of given functions`() {
         // given
-        val name1 = "SampleName1"
-        val name2 = "SampleName2"
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
         val declaration1: KoFunctionProvider =
             mockk {
                 every { hasFunctionsWithAllNames(listOf(name1, name2)) } returns true
@@ -576,8 +708,8 @@ class KoFunctionProviderListExtTest {
     @Test
     fun `withoutAllFunctionsNamed(set of String) returns declaration without all of given functions`() {
         // given
-        val name1 = "SampleName1"
-        val name2 = "SampleName2"
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
         val declaration1: KoFunctionProvider =
             mockk {
                 every { hasFunctionsWithAllNames(setOf(name1, name2)) } returns true
@@ -591,6 +723,50 @@ class KoFunctionProviderListExtTest {
 
         // when
         val sut = declarations.withoutAllFunctionsNamed(names)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
+    }
+
+    @Test
+    fun `withoutAllFunctionsNamed(name) with ignore case returns declaration without given function`() {
+        // given
+        val name = "FixtureName"
+        val declaration1: KoFunctionProvider =
+            mockk {
+                every { hasFunctionsWithAllNames(listOf(name), ignoreCase = true) } returns true
+            }
+        val declaration2: KoFunctionProvider =
+            mockk {
+                every { hasFunctionsWithAllNames(listOf(name), ignoreCase = true) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withoutAllFunctionsNamed(name, ignoreCase = true)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
+    }
+
+    @Test
+    fun `withoutAllFunctionsNamed(list of String) with ignore case returns declaration without all of given functions`() {
+        // given
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
+        val declaration1: KoFunctionProvider =
+            mockk {
+                every { hasFunctionsWithAllNames(listOf(name1, name2), ignoreCase = true) } returns true
+            }
+        val declaration2: KoFunctionProvider =
+            mockk {
+                every { hasFunctionsWithAllNames(listOf(name1, name2), ignoreCase = true) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+        val names = listOf(name1, name2)
+
+        // when
+        val sut = declarations.withoutAllFunctionsNamed(names, ignoreCase = true)
 
         // then
         sut shouldBeEqualTo listOf(declaration2)

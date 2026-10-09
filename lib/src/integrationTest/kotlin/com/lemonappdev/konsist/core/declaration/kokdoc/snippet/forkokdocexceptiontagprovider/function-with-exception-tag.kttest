@@ -1,15 +1,15 @@
-class SampleClass() {
+class FixtureClass() {
 
     /**
-     * This is a sample method that demonstrates the usage of KDoc tags.
+     * This is a fixture method that demonstrates the usage of KDoc tags.
      *
-     * @exception NullPointerException Second sample description
+     * @exception NullPointerException Second fixture description
      */
-    fun sampleMethod(sampleArgument1: Int, sampleArgument2: String): Int {
+    fun fixtureMethod(fixtureArgument1: Int, fixtureArgument2: String): Int {
         return 6
     }
 
-    var sampleProperty: Int
+    var fixtureProperty: Int
         get() {
             return 5
         }

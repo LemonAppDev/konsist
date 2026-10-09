@@ -19,7 +19,7 @@ import org.jetbrains.kotlin.psi.KtModifierListOwner
 import org.jetbrains.kotlin.psi.KtObjectDeclaration
 import org.jetbrains.kotlin.psi.KtTypeParameterListOwner
 
-internal class KoObjectDeclarationCore(
+internal open class KoObjectDeclarationCore(
     private val ktObjectDeclaration: KtObjectDeclaration,
     override val containingDeclaration: KoBaseDeclaration,
 ) : KoObjectDeclaration,
@@ -45,14 +45,6 @@ internal class KoObjectDeclarationCore(
     override val ktElement: KtElement by lazy { ktObjectDeclaration }
 
     override val ktClassOrObject: KtClassOrObject by lazy { ktObjectDeclaration }
-
-    override val name: String by lazy {
-        if (hasCompanionModifier && super<KoNameProviderCore>.name == "") {
-            "Companion"
-        } else {
-            super<KoNameProviderCore>.name
-        }
-    }
 
     override fun declarations(
         includeNested: Boolean,

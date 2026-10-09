@@ -1,2 +1,2 @@
-inline fun sampleFunction(sampleProperty: () -> Unit) {
+inline fun fixtureFunction(fixtureProperty: () -> Unit) {
 }

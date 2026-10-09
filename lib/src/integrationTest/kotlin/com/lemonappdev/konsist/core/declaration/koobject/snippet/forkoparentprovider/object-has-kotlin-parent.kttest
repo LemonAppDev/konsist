@@ -1,0 +1,3 @@
+object FixtureObject : Throwable() {
+    private fun readResolve(): Any = FixtureObject
+}

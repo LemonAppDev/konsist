@@ -1,6 +1,6 @@
-import com.lemonappdev.konsist.testdata.SampleAnnotationWithAngleBrackets
+import com.lemonappdev.konsist.testdata.FixtureAnnotationWithAngleBrackets
 
-@SampleAnnotationWithAngleBrackets<Int, String>
-private typealias SampleTypeAlias = (Boolean) -> Int
+@FixtureAnnotationWithAngleBrackets<Int, String>
+private typealias FixtureTypeAlias = (Boolean) -> Int
 
-class SampleClass(val sampleProperty: SampleTypeAlias)
+class FixtureClass(val fixtureProperty: FixtureTypeAlias)

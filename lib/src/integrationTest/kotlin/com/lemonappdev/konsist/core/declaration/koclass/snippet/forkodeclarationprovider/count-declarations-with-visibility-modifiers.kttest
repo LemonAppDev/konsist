@@ -1,13 +1,13 @@
-open class SampleTopLevelClass() {
-    constructor(sampleParameter: Int): this()
+open class FixtureTopLevelClass() {
+    constructor(fixtureParameter: Int): this()
 
-    val sampleDefaultProperty = ""
+    val fixtureDefaultProperty = ""
 
-    public fun samplePublicFunction() {}
+    public fun fixturePublicFunction() {}
 
-    private class SamplePrivateClass
+    private class FixturePrivateClass
 
-    internal interface SampleInternalInterface
+    internal interface FixtureInternalInterface
 
-    protected object SampleProtectedObject
+    protected object FixtureProtectedObject
 }

@@ -1,0 +1,11 @@
+enum class FixtureClass {
+    FIXTURE_CONSTANT_1 {
+        override fun fixtureFunction1() = 1
+
+        override fun fixtureFunction2() = ""
+    };
+
+    abstract fun fixtureFunction1(): Int
+
+    abstract fun fixtureFunction2(): String
+}

@@ -1,3 +1,3 @@
-import com.lemonappdev.konsist.testdata.SampleInterface
+import com.lemonappdev.konsist.testdata.FixtureInterface
 
-val sampleProperty1: SampleInterface? = null
+val fixtureProperty1: FixtureInterface? = null

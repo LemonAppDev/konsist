@@ -50,7 +50,7 @@ class KoParameterDeclarationForKoPackageProviderTest {
         // then
         assertSoftly(sut) {
             it?.packagee shouldNotBeEqualTo null
-            it?.packagee?.name shouldBeEqualTo "com.samplepackage"
+            it?.packagee?.name shouldBeEqualTo "com.fixturepackage"
         }
     }
 
@@ -67,7 +67,7 @@ class KoParameterDeclarationForKoPackageProviderTest {
         // then
         assertSoftly(sut) {
             packagee shouldNotBeEqualTo null
-            packagee?.name shouldBeEqualTo "com.samplepackage"
+            packagee?.name shouldBeEqualTo "com.fixturepackage"
         }
     }
 

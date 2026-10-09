@@ -1,3 +1,3 @@
-import com.lemonappdev.konsist.externalsample.SampleExternalClass
+import com.lemonappdev.konsist.externalfixture.FixtureExternalClass
 
-object SampleObject: SampleExternalClass()
+object FixtureObject: FixtureExternalClass()

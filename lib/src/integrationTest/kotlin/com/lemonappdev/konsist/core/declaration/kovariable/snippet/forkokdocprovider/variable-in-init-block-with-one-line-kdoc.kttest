@@ -1,6 +1,6 @@
-class SampleClass {
+class FixtureClass {
     init {
-        /** Sample KDoc */
-        val sampleVariable = ""
+        /** Fixture KDoc */
+        val fixtureVariable = ""
     }
 }

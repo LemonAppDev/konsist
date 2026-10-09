@@ -1,1 +1,1 @@
-val sampleProperty = "sample text"
+val fixtureProperty = "fixture text"

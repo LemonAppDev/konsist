@@ -1,1 +1,1 @@
-fun sampleFunction(sampleParameter: () -> Unit = { }) {}
+fun fixtureFunction(fixtureParameter: () -> Unit = { }) {}

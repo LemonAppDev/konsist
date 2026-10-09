@@ -1,0 +1,7 @@
+enum class FixtureClass {
+    FIXTURE_CONSTANT_1 {
+        override fun fixtureLocalFunction1() = 1
+    };
+
+    abstract fun fixtureLocalFunction1(): Int
+}

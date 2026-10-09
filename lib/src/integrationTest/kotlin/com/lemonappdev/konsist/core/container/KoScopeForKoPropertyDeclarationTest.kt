@@ -20,7 +20,7 @@ class KoScopeForKoPropertyDeclarationTest {
         val sut = getSnippetFile("scope-contains-nested-properties")
 
         // then
-        val expected = listOf("sampleProperty", "sampleNestedProperty")
+        val expected = listOf("fixtureProperty", "fixtureNestedProperty")
 
         sut
             .properties(includeNested = true)
@@ -34,7 +34,7 @@ class KoScopeForKoPropertyDeclarationTest {
         val sut = getSnippetFile("scope-contains-nested-properties")
 
         // then
-        val expected = listOf("sampleProperty")
+        val expected = listOf("fixtureProperty")
 
         sut
             .properties(includeNested = false)

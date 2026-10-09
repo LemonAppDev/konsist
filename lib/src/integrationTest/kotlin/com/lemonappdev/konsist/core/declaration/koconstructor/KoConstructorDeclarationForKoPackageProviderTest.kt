@@ -30,7 +30,7 @@ class KoConstructorDeclarationForKoPackageProviderTest {
                 .first()
 
         // then
-        sut.packagee?.name shouldBeEqualTo "com.samplepackage"
+        sut.packagee?.name shouldBeEqualTo "com.fixturepackage"
     }
 
     private fun getSnippetFile(fileName: String) =

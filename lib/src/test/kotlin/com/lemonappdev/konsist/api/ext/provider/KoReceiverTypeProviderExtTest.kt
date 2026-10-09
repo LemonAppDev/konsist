@@ -10,7 +10,7 @@ import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
 class KoReceiverTypeProviderExtTest {
-    private interface SampleTestReceiverTypeDeclaration :
+    private interface FixtureTestReceiverTypeDeclaration :
         KoReceiverTypeProvider,
         KoKDocProvider
 
@@ -32,7 +32,7 @@ class KoReceiverTypeProviderExtTest {
     @Test
     fun `hasValidKDocReceiverTag() calls hasTags method`() {
         // given
-        val declaration: SampleTestReceiverTypeDeclaration =
+        val declaration: FixtureTestReceiverTypeDeclaration =
             mockk {
                 every { receiverType } returns mockk()
                 every { kDoc?.hasTag(KoKDocTag.RECEIVER) } returns true

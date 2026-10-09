@@ -1,0 +1,3 @@
+import kotlin.*
+
+class FixtureClass1(val fixtureProperty1: String)

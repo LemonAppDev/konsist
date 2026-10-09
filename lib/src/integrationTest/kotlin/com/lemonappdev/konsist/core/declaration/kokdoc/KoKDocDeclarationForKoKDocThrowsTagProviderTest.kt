@@ -49,7 +49,7 @@ class KoKDocDeclarationForKoKDocThrowsTagProviderTest {
             it?.numThrowsTags shouldBeEqualTo 1
             it?.throwsTags?.get(0)?.name shouldBeEqualTo THROWS
             it?.throwsTags?.get(0)?.value shouldBeEqualTo "IllegalArgumentException"
-            it?.throwsTags?.get(0)?.description shouldBeEqualTo "First sample description"
+            it?.throwsTags?.get(0)?.description shouldBeEqualTo "First fixture description"
             it?.hasThrowsTags shouldBeEqualTo true
         }
     }
@@ -62,8 +62,8 @@ class KoKDocDeclarationForKoKDocThrowsTagProviderTest {
         @JvmStatic
         fun provideValues() =
             listOf(
-                arguments("class-with-throws-tag", "SampleClass"),
-                arguments("function-with-throws-tag", "sampleMethod"),
+                arguments("class-with-throws-tag", "FixtureClass"),
+                arguments("function-with-throws-tag", "fixtureMethod"),
             )
     }
 }

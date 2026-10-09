@@ -48,6 +48,14 @@ interface KoParentClassProvider : KoBaseProvider {
     fun hasParentClass(): Boolean
 
     /**
+     * Determines whatever declaration has any parent class.
+     *
+     * @param indirectParents specifies whether to include parent classes defined in other files such as parent of the parent.
+     * @return `true` if the declaration has any parent class, `false` otherwise.
+     */
+    fun hasParentClasses(indirectParents: Boolean = false): Boolean
+
+    /**
      * Determines whether the declaration has a specified parent class.
      * If `indirectParents` is set to `true`, it verifies if there's at least one parent class that satisfies the provided predicate.
      *
@@ -59,14 +67,6 @@ interface KoParentClassProvider : KoBaseProvider {
         indirectParents: Boolean = false,
         predicate: (KoParentDeclaration) -> Boolean,
     ): Boolean
-
-    /**
-     * Determines whatever declaration has any parent class.
-     *
-     * @param indirectParents specifies whether to include parent classes defined in other files such as parent of the parent.
-     * @return `true` if the declaration has any parent class, `false` otherwise.
-     */
-    fun hasParentClasses(indirectParents: Boolean = false): Boolean
 
     /**
      * Determines whether the declaration has all parent classes that satisfy the provided predicate.
@@ -90,12 +90,16 @@ interface KoParentClassProvider : KoBaseProvider {
      * @param name the name of the parent class to check.
      * @param names the names of the parent classes to check.
      * @param indirectParents specifies whether to include parent classes defined in other files such as parent of the parent.
+     * @param ignoreCase Specifies whether the comparison should ignore case.
+     *        If `true`, the prefix comparison will be case-insensitive.
+     *        If `false`, the comparison will consider case sensitivity.
      * @return `true` if there is a matching declaration, `false` otherwise.
      */
     fun hasParentClassWithName(
         name: String,
         vararg names: String,
         indirectParents: Boolean = false,
+        ignoreCase: Boolean = false,
     ): Boolean
 
     /**
@@ -104,11 +108,15 @@ interface KoParentClassProvider : KoBaseProvider {
      *
      * @param names the names of the parent classes to check.
      * @param indirectParents specifies whether to include parent classes defined in other files such as parent of the parent.
+     * @param ignoreCase Specifies whether the comparison should ignore case.
+     *        If `true`, the prefix comparison will be case-insensitive.
+     *        If `false`, the comparison will consider case sensitivity.
      * @return `true` if there is a matching declaration, `false` otherwise.
      */
     fun hasParentClassWithName(
         names: Collection<String>,
         indirectParents: Boolean = false,
+        ignoreCase: Boolean = false,
     ): Boolean
 
     /**
@@ -117,12 +125,16 @@ interface KoParentClassProvider : KoBaseProvider {
      * @param name The name of the parent class to check.
      * @param names The names of the parent classes to check.
      * @param indirectParents specifies whether to include parent classes defined in other files such as parent of the parent.
+     * @param ignoreCase Specifies whether the comparison should ignore case.
+     *        If `true`, the prefix comparison will be case-insensitive.
+     *        If `false`, the comparison will consider case sensitivity.
      * @return `true` if there are declarations with all the specified names, `false` otherwise.
      */
     fun hasParentClassesWithAllNames(
         name: String,
         vararg names: String,
         indirectParents: Boolean = false,
+        ignoreCase: Boolean = false,
     ): Boolean
 
     /**
@@ -130,11 +142,15 @@ interface KoParentClassProvider : KoBaseProvider {
      *
      * @param names The names of the parent classes to check.
      * @param indirectParents specifies whether to include parent classes defined in other files such as parent of the parent.
+     * @param ignoreCase Specifies whether the comparison should ignore case.
+     *        If `true`, the prefix comparison will be case-insensitive.
+     *        If `false`, the comparison will consider case sensitivity.
      * @return `true` if there are declarations with all the specified names, `false` otherwise.
      */
     fun hasParentClassesWithAllNames(
         names: Collection<String>,
         indirectParents: Boolean = false,
+        ignoreCase: Boolean = false,
     ): Boolean
 
     /**

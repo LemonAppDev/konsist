@@ -14,7 +14,7 @@ class KoInterfaceDeclarationForKoFullyQualifiedNameProviderTest {
                 .first()
 
         // then
-        sut.fullyQualifiedName shouldBeEqualTo "com.samplepackage.SampleInterface"
+        sut.fullyQualifiedName shouldBeEqualTo "com.fixturepackage.FixtureInterface"
     }
 
     @Test
@@ -26,7 +26,7 @@ class KoInterfaceDeclarationForKoFullyQualifiedNameProviderTest {
                 .first()
 
         // then
-        sut.fullyQualifiedName shouldBeEqualTo "SampleInterface"
+        sut.fullyQualifiedName shouldBeEqualTo "FixtureInterface"
     }
 
     @Test
@@ -38,7 +38,7 @@ class KoInterfaceDeclarationForKoFullyQualifiedNameProviderTest {
                 .first()
 
         // then
-        sut.fullyQualifiedName shouldBeEqualTo "com.samplepackage.SampleClass.SampleInterface"
+        sut.fullyQualifiedName shouldBeEqualTo "com.fixturepackage.FixtureClass.FixtureInterface"
     }
 
     @Test
@@ -50,7 +50,7 @@ class KoInterfaceDeclarationForKoFullyQualifiedNameProviderTest {
                 .first()
 
         // then
-        sut.fullyQualifiedName shouldBeEqualTo "SampleClass.SampleInterface"
+        sut.fullyQualifiedName shouldBeEqualTo "FixtureClass.FixtureInterface"
     }
 
     private fun getSnippetFile(fileName: String) =

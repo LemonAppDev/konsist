@@ -49,7 +49,7 @@ class KoKDocDeclarationForKoKDocExceptionTagProviderTest {
             it?.numExceptionTags shouldBeEqualTo 1
             it?.exceptionTags?.get(0)?.name shouldBeEqualTo EXCEPTION
             it?.exceptionTags?.get(0)?.value shouldBeEqualTo "NullPointerException"
-            it?.exceptionTags?.get(0)?.description shouldBeEqualTo "Second sample description"
+            it?.exceptionTags?.get(0)?.description shouldBeEqualTo "Second fixture description"
             it?.hasExceptionTags shouldBeEqualTo true
         }
     }
@@ -62,8 +62,8 @@ class KoKDocDeclarationForKoKDocExceptionTagProviderTest {
         @JvmStatic
         fun provideValues() =
             listOf(
-                arguments("class-with-exception-tag", "SampleClass"),
-                arguments("function-with-exception-tag", "sampleMethod"),
+                arguments("class-with-exception-tag", "FixtureClass"),
+                arguments("function-with-exception-tag", "fixtureMethod"),
             )
     }
 }

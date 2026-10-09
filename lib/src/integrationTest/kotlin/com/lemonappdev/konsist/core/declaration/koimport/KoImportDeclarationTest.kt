@@ -14,7 +14,7 @@ class KoImportDeclarationTest {
                 .first()
 
         // then
-        sut.toString() shouldBeEqualTo "com.lemonappdev.konsist.testdata.SampleAnnotation"
+        sut.toString() shouldBeEqualTo "com.lemonappdev.konsist.testdata.FixtureAnnotation"
     }
 
     private fun getSnippetFile(fileName: String) =

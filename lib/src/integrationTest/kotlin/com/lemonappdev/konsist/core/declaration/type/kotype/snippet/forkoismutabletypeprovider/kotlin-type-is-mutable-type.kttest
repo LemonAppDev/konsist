@@ -1,1 +1,1 @@
-class SampleClass1(val sampleProperty1: MutableList<String>?)
+class FixtureClass1(val fixtureProperty1: MutableList<String>?)

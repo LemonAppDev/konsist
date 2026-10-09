@@ -4,7 +4,6 @@ import com.lemonappdev.konsist.api.KoModifier.OVERRIDE
 import com.lemonappdev.konsist.api.KoModifier.PRIVATE
 import com.lemonappdev.konsist.api.ext.list.modifierprovider.withoutModifier
 import com.lemonappdev.konsist.api.ext.list.modifierprovider.withoutPrivateModifier
-import com.lemonappdev.konsist.api.ext.list.withName
 import com.lemonappdev.konsist.api.ext.provider.hasValidKDocParamTags
 import com.lemonappdev.konsist.api.ext.provider.hasValidKDocReturnTag
 import com.lemonappdev.konsist.api.verify.assertTrue
@@ -17,8 +16,7 @@ class KdocKonsistTest {
     fun `every api function has valid KDoc`() {
         apiPackageScope
             .functions()
-            .withoutPrivateModifier()
-            .withName("isSortedBy")
+            .withoutModifier(PRIVATE, OVERRIDE)
             .assertTrue {
                 it.hasValidKDocParamTags() && it.hasValidKDocReturnTag()
             }

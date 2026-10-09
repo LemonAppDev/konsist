@@ -46,7 +46,7 @@ class KoVariableDeclarationForKoLocationProviderTest {
                 .first()
 
         // then
-        val declaration = "Declaration:\nval sampleVariable = \"\""
+        val declaration = "Declaration:\nval fixtureVariable = \"\""
         assertSoftly(sut.locationWithText) {
             startsWith("Location: /") shouldBeEqualTo true
             contains(projectPath) shouldBeEqualTo true

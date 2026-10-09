@@ -1,0 +1,3 @@
+interface FixtureInterface {
+    object FixtureObject
+}

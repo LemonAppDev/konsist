@@ -19,12 +19,12 @@ class KoParameterDeclarationForKoTextProviderTest {
 
         // then
         assertSoftly(sut) {
-            it?.text shouldBeEqualTo "val sampleParameter: Int"
+            it?.text shouldBeEqualTo "val fixtureParameter: Int"
             it?.hasTextStartingWith("val ") shouldBeEqualTo true
             it?.hasTextStartingWith("Other") shouldBeEqualTo false
             it?.hasTextEndingWith(": Int") shouldBeEqualTo true
             it?.hasTextEndingWith("other") shouldBeEqualTo false
-            it?.hasTextContaining("sampleParameter: ") shouldBeEqualTo true
+            it?.hasTextContaining("fixtureParameter: ") shouldBeEqualTo true
             it?.hasTextContaining("anno") shouldBeEqualTo false
             it?.hasTextMatching(Regex("^[^@]*\$")) shouldBeEqualTo true
             it?.hasTextMatching(Regex("[0-9]+")) shouldBeEqualTo false
@@ -43,12 +43,12 @@ class KoParameterDeclarationForKoTextProviderTest {
 
         // then
         assertSoftly(sut) {
-            text shouldBeEqualTo "sampleParameter: Int"
-            hasTextStartingWith("sampl") shouldBeEqualTo true
+            text shouldBeEqualTo "fixtureParameter: Int"
+            hasTextStartingWith("fixtu") shouldBeEqualTo true
             hasTextStartingWith("Other") shouldBeEqualTo false
             hasTextEndingWith(": Int") shouldBeEqualTo true
             hasTextEndingWith("other") shouldBeEqualTo false
-            hasTextContaining("sampleParameter: ") shouldBeEqualTo true
+            hasTextContaining("fixtureParameter: ") shouldBeEqualTo true
             hasTextContaining("anno") shouldBeEqualTo false
             hasTextMatching(Regex("^[^@]*\$")) shouldBeEqualTo true
             hasTextMatching(Regex("[0-9]+")) shouldBeEqualTo false

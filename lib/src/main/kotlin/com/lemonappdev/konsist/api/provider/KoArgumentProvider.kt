@@ -37,40 +37,60 @@ interface KoArgumentProvider : KoBaseProvider {
      *
      * @param name the name of the argument to check.
      * @param names the names of the arguments to check.
+     * @param ignoreCase Specifies whether the comparison should ignore a case.
+     *        If `true`, the prefix comparison will be case-insensitive.
+     *        If `false`, the comparison will consider case sensitivity.
      * @return `true` if there is a matching declaration, `false` otherwise.
      */
     fun hasArgumentWithName(
         name: String,
         vararg names: String,
+        ignoreCase: Boolean = false,
     ): Boolean
 
     /**
      * Determines whether the declaration has at least one argument whose name matches any of the specified names.
      *
      * @param names the names of the arguments to check.
+     * @param ignoreCase Specifies whether the comparison should ignore a case.
+     *        If `true`, the prefix comparison will be case-insensitive.
+     *        If `false`, the comparison will consider case sensitivity.
      * @return `true` if there is a matching declaration, `false` otherwise.
      */
-    fun hasArgumentWithName(names: Collection<String>): Boolean
+    fun hasArgumentWithName(
+        names: Collection<String>,
+        ignoreCase: Boolean = false,
+    ): Boolean
 
     /**
      * Determines whether the declaration has arguments with all the specified names.
      *
      * @param name The name of the argument to check.
      * @param names The names of the arguments to check.
+     * @param ignoreCase Specifies whether the comparison should ignore a case.
+     *        If `true`, the prefix comparison will be case-insensitive.
+     *        If `false`, the comparison will consider case sensitivity.
      * @return `true` if there are declarations with all the specified names, `false` otherwise.
      */
     fun hasArgumentsWithAllNames(
         name: String,
         vararg names: String,
+        ignoreCase: Boolean = false,
     ): Boolean
 
     /**
      * Determines whether the declaration has arguments with all the specified names.
      *
      * @param names The names of the arguments to check.
+     * @param ignoreCase Specifies whether the comparison should ignore a case.
+     *        If `true`, the prefix comparison will be case-insensitive.
+     *        If `false`, the comparison will consider case sensitivity.
      * @return `true` if there are declarations with all the specified names, `false` otherwise.
      */
-    fun hasArgumentsWithAllNames(names: Collection<String>): Boolean
+    fun hasArgumentsWithAllNames(
+        names: Collection<String>,
+        ignoreCase: Boolean = false,
+    ): Boolean
 
     /**
      * Determines whether the declaration has at least one argument that satisfies the provided predicate.

@@ -30,24 +30,34 @@ fun <T : KoTypeArgumentProvider> List<T>.withoutTypeArguments(): List<T> = filte
  *
  * @param name The name of the type argument to include.
  * @param names The names of additional type arguments to include.
+ * @param ignoreCase Specifies whether the comparison should ignore case.
+ *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations with at least one of the specified type argument(s).
  */
 fun <T : KoTypeArgumentProvider> List<T>.withTypeArgumentNamed(
     name: String,
     vararg names: String,
-): List<T> = withTypeArgumentNamed(listOf(name, *names))
+    ignoreCase: Boolean = false,
+): List<T> = withTypeArgumentNamed(listOf(name, *names), ignoreCase)
 
 /**
  * List containing declarations that have at least one type argument with the specified name(s).
  *
  * @param names The names of additional type arguments to include.
+ * @param ignoreCase Specifies whether the comparison should ignore case.
+ *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations with at least one of the specified type argument(s).
  */
-fun <T : KoTypeArgumentProvider> List<T>.withTypeArgumentNamed(names: Collection<String>): List<T> =
+fun <T : KoTypeArgumentProvider> List<T>.withTypeArgumentNamed(
+    names: Collection<String>,
+    ignoreCase: Boolean = false,
+): List<T> =
     filter {
         when {
             names.isEmpty() -> true
-            else -> it.hasTypeArgumentWithName(names)
+            else -> it.hasTypeArgumentWithName(names, ignoreCase = ignoreCase)
         }
     }
 
@@ -56,24 +66,34 @@ fun <T : KoTypeArgumentProvider> List<T>.withTypeArgumentNamed(names: Collection
  *
  * @param name The name of the type argument to exclude.
  * @param names The names of additional type arguments to exclude.
+ * @param ignoreCase Specifies whether the comparison should ignore case.
+ *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations without any of specified type arguments.
  */
 fun <T : KoTypeArgumentProvider> List<T>.withoutTypeArgumentNamed(
     name: String,
     vararg names: String,
-): List<T> = withoutTypeArgumentNamed(listOf(name, *names))
+    ignoreCase: Boolean = false,
+): List<T> = withoutTypeArgumentNamed(listOf(name, *names), ignoreCase)
 
 /**
  * List containing declarations without any of specified type arguments.
  *
  * @param names The names of additional type arguments to exclude.
+ * @param ignoreCase Specifies whether the comparison should ignore case.
+ *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations without any of specified type arguments.
  */
-fun <T : KoTypeArgumentProvider> List<T>.withoutTypeArgumentNamed(names: Collection<String>): List<T> =
+fun <T : KoTypeArgumentProvider> List<T>.withoutTypeArgumentNamed(
+    names: Collection<String>,
+    ignoreCase: Boolean = false,
+): List<T> =
     filterNot {
         when {
             names.isEmpty() -> true
-            else -> it.hasTypeArgumentWithName(names)
+            else -> it.hasTypeArgumentWithName(names, ignoreCase = ignoreCase)
         }
     }
 
@@ -82,24 +102,34 @@ fun <T : KoTypeArgumentProvider> List<T>.withoutTypeArgumentNamed(names: Collect
  *
  * @param name The name of the type argument to include.
  * @param names The name(s) of the type argument(s) to include.
+ * @param ignoreCase Specifies whether the comparison should ignore case.
+ *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations with all specified type argument(s).
  */
 fun <T : KoTypeArgumentProvider> List<T>.withAllTypeArgumentsNamed(
     name: String,
     vararg names: String,
-): List<T> = withAllTypeArgumentsNamed(listOf(name, *names))
+    ignoreCase: Boolean = false,
+): List<T> = withAllTypeArgumentsNamed(listOf(name, *names), ignoreCase)
 
 /**
  * List containing declarations that have all specified type arguments.
  *
  * @param names The name(s) of the type argument(s) to include.
+ * @param ignoreCase Specifies whether the comparison should ignore case.
+ *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations with all specified type argument(s).
  */
-fun <T : KoTypeArgumentProvider> List<T>.withAllTypeArgumentsNamed(names: Collection<String>): List<T> =
+fun <T : KoTypeArgumentProvider> List<T>.withAllTypeArgumentsNamed(
+    names: Collection<String>,
+    ignoreCase: Boolean = false,
+): List<T> =
     filter {
         when {
             names.isEmpty() -> true
-            else -> it.hasTypeArgumentsWithAllNames(names)
+            else -> it.hasTypeArgumentsWithAllNames(names, ignoreCase = ignoreCase)
         }
     }
 
@@ -108,24 +138,34 @@ fun <T : KoTypeArgumentProvider> List<T>.withAllTypeArgumentsNamed(names: Collec
  *
  * @param name The name of the type argument to exclude.
  * @param names The name(s) of the type argument(s) to exclude.
+ * @param ignoreCase Specifies whether the comparison should ignore case.
+ *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations without all specified type argument(s).
  */
 fun <T : KoTypeArgumentProvider> List<T>.withoutAllTypeArgumentsNamed(
     name: String,
     vararg names: String,
-): List<T> = withoutAllTypeArgumentsNamed(listOf(name, *names))
+    ignoreCase: Boolean = false,
+): List<T> = withoutAllTypeArgumentsNamed(listOf(name, *names), ignoreCase)
 
 /**
  * List containing declarations without all specified type arguments.
  *
  * @param names The name(s) of the type argument(s) to exclude.
+ * @param ignoreCase Specifies whether the comparison should ignore case.
+ *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations without all specified type argument(s).
  */
-fun <T : KoTypeArgumentProvider> List<T>.withoutAllTypeArgumentsNamed(names: Collection<String>): List<T> =
+fun <T : KoTypeArgumentProvider> List<T>.withoutAllTypeArgumentsNamed(
+    names: Collection<String>,
+    ignoreCase: Boolean = false,
+): List<T> =
     filterNot {
         when {
             names.isEmpty() -> true
-            else -> it.hasTypeArgumentsWithAllNames(names)
+            else -> it.hasTypeArgumentsWithAllNames(names, ignoreCase = ignoreCase)
         }
     }
 

@@ -25,36 +25,48 @@ internal interface KoParentInterfaceProviderCore :
         name: String,
         vararg names: String,
         indirectParents: Boolean,
-    ): Boolean = hasParentInterfaceWithName(listOf(name, *names), indirectParents)
+        ignoreCase: Boolean,
+    ): Boolean = hasParentInterfaceWithName(listOf(name, *names), indirectParents, ignoreCase)
 
     override fun hasParentInterfaceWithName(
         names: Collection<String>,
         indirectParents: Boolean,
+        ignoreCase: Boolean,
     ): Boolean =
         when {
-            names.isEmpty() -> hasParentInterfaces(indirectParents)
-            else ->
+            names.isEmpty() -> {
+                hasParentInterfaces(indirectParents)
+            }
+
+            else -> {
                 names.any {
-                    parentInterfaces(indirectParents).any { parentInterface -> it == parentInterface.name }
+                    parentInterfaces(indirectParents).any { parentInterface -> parentInterface.hasName(it, ignoreCase) }
                 }
+            }
         }
 
     override fun hasParentInterfacesWithAllNames(
         name: String,
         vararg names: String,
         indirectParents: Boolean,
-    ): Boolean = hasParentInterfacesWithAllNames(listOf(name, *names), indirectParents)
+        ignoreCase: Boolean,
+    ): Boolean = hasParentInterfacesWithAllNames(listOf(name, *names), indirectParents, ignoreCase)
 
     override fun hasParentInterfacesWithAllNames(
         names: Collection<String>,
         indirectParents: Boolean,
+        ignoreCase: Boolean,
     ): Boolean =
         when {
-            names.isEmpty() -> hasParentInterfaces(indirectParents)
-            else ->
+            names.isEmpty() -> {
+                hasParentInterfaces(indirectParents)
+            }
+
+            else -> {
                 names.all {
-                    parentInterfaces(indirectParents).any { parentInterface -> it == parentInterface.name }
+                    parentInterfaces(indirectParents).any { parentInterface -> parentInterface.hasName(it, ignoreCase) }
                 }
+            }
         }
 
     override fun hasParentInterface(

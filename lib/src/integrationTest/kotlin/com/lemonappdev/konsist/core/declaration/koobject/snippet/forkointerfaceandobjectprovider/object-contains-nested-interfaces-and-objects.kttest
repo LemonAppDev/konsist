@@ -1,13 +1,13 @@
-object SampleTopLevelObject {
-    fun sampleFunction() {
-        class SampleLocalClass
+object FixtureTopLevelObject {
+    fun fixtureFunction() {
+        class FixtureLocalClass
     }
 
-    object SampleObject {
-        class SampleClassNestedInsideObject
+    object FixtureObject {
+        class FixtureClassNestedInsideObject
 
-        interface SampleInterfaceNestedInsideObject
+        interface FixtureInterfaceNestedInsideObject
 
-        object SampleObjectNestedInsideObject
+        object FixtureObjectNestedInsideObject
     }
 }

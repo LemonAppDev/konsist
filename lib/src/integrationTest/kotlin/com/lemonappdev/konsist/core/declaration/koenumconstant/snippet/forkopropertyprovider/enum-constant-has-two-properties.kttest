@@ -1,0 +1,11 @@
+enum class FixtureEnumClass {
+    FIXTURE_ENUM_CONSTANT {
+        override val fixtureProperty1: String get() = "fixture value"
+
+        override val fixtureProperty2 = 0
+    };
+
+    abstract val fixtureProperty1: String
+
+    internal abstract val fixtureProperty2: Int
+}

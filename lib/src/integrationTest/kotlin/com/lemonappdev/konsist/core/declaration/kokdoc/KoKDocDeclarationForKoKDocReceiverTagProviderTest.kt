@@ -35,7 +35,7 @@ class KoKDocDeclarationForKoKDocReceiverTagProviderTest {
         // then
         assertSoftly(sut) {
             it?.receiverTag?.name shouldBeEqualTo RECEIVER
-            it?.receiverTag?.description shouldBeEqualTo "sample receiver description"
+            it?.receiverTag?.description shouldBeEqualTo "fixture receiver description"
             it?.hasReceiverTag shouldBeEqualTo true
         }
     }

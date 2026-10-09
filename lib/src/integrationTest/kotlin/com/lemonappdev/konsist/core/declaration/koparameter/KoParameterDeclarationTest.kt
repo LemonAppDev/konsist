@@ -17,7 +17,7 @@ class KoParameterDeclarationTest {
                 ?.first()
 
         // then
-        sut.toString() shouldBeEqualTo "sampleParameter"
+        sut.toString() shouldBeEqualTo "fixtureParameter"
     }
 
     @Test
@@ -31,7 +31,7 @@ class KoParameterDeclarationTest {
                 .first()
 
         // then
-        sut.toString() shouldBeEqualTo "sampleParameter"
+        sut.toString() shouldBeEqualTo "fixtureParameter"
     }
 
     private fun getSnippetFile(fileName: String) =

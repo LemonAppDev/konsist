@@ -1,7 +1,7 @@
 /**
- * This is a sample kdoc.
+ * This is a fixture kdoc.
  *
- * @param sampleParameter sample text
+ * @param fixtureParameter fixture text
  */
-fun sampleFunction(sampleParameter: Int){
+fun fixtureFunction(fixtureParameter: Int){
 }

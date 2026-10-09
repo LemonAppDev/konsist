@@ -70,7 +70,7 @@ class KoClassDeclarationForKoVisibilityModifierProviderTest {
         val sut =
             getSnippetFile("protected-class")
                 .classes(includeNested = true)
-                .first { it.name == "SampleClass" }
+                .first { it.name == "FixtureClass" }
 
         // then
         sut.hasProtectedModifier shouldBeEqualTo true

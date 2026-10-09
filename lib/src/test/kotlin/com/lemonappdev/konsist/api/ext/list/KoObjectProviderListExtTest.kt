@@ -239,7 +239,7 @@ class KoObjectProviderListExtTest {
     @Test
     fun `withObjectNamed(name) returns declaration with given object`() {
         // given
-        val name = "SampleName"
+        val name = "FixtureName"
         val declaration1: KoObjectProvider =
             mockk {
                 every { hasObjectWithName(listOf(name)) } returns true
@@ -260,8 +260,8 @@ class KoObjectProviderListExtTest {
     @Test
     fun `withObjectNamed(String) returns declaration with any of given objects`() {
         // given
-        val name1 = "SampleName1"
-        val name2 = "SampleName2"
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
         val declaration1: KoObjectProvider =
             mockk {
                 every { hasObjectWithName(listOf(name1, name2)) } returns true
@@ -282,8 +282,8 @@ class KoObjectProviderListExtTest {
     @Test
     fun `withObjectNamed(list of String) returns declaration with any of given objects`() {
         // given
-        val name1 = "SampleName1"
-        val name2 = "SampleName2"
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
         val declaration1: KoObjectProvider =
             mockk {
                 every { hasObjectWithName(listOf(name1, name2)) } returns true
@@ -305,8 +305,8 @@ class KoObjectProviderListExtTest {
     @Test
     fun `withObjectNamed(set of String) returns declaration with any of given objects`() {
         // given
-        val name1 = "SampleName1"
-        val name2 = "SampleName2"
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
         val declaration1: KoObjectProvider =
             mockk {
                 every { hasObjectWithName(setOf(name1, name2)) } returns true
@@ -326,9 +326,53 @@ class KoObjectProviderListExtTest {
     }
 
     @Test
+    fun `withObjectNamed(name) with ignore case returns declaration with given object`() {
+        // given
+        val name = "FixtureName"
+        val declaration1: KoObjectProvider =
+            mockk {
+                every { hasObjectWithName(listOf(name), ignoreCase = true) } returns true
+            }
+        val declaration2: KoObjectProvider =
+            mockk {
+                every { hasObjectWithName(listOf(name), ignoreCase = true) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withObjectNamed(name, ignoreCase = true)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
+    fun `withObjectNamed(list of String) with ignore case returns declaration with any of given objects`() {
+        // given
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
+        val declaration1: KoObjectProvider =
+            mockk {
+                every { hasObjectWithName(listOf(name1, name2), ignoreCase = true) } returns true
+            }
+        val declaration2: KoObjectProvider =
+            mockk {
+                every { hasObjectWithName(listOf(name1, name2), ignoreCase = true) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+        val names = listOf(name1, name2)
+
+        // when
+        val sut = declarations.withObjectNamed(names, ignoreCase = true)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
     fun `withoutObjectNamed(name) returns declaration without given object`() {
         // given
-        val name = "SampleName"
+        val name = "FixtureName"
         val declaration1: KoObjectProvider =
             mockk {
                 every { hasObjectWithName(listOf(name)) } returns true
@@ -349,8 +393,8 @@ class KoObjectProviderListExtTest {
     @Test
     fun `withoutObjectNamed(String) returns declaration without any of given objects`() {
         // given
-        val name1 = "SampleName1"
-        val name2 = "SampleName2"
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
         val declaration1: KoObjectProvider =
             mockk {
                 every { hasObjectWithName(listOf(name1, name2)) } returns true
@@ -371,8 +415,8 @@ class KoObjectProviderListExtTest {
     @Test
     fun `withoutObjectNamed(list of String) returns declaration without any of given objects`() {
         // given
-        val name1 = "SampleName1"
-        val name2 = "SampleName2"
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
         val declaration1: KoObjectProvider =
             mockk {
                 every { hasObjectWithName(listOf(name1, name2)) } returns true
@@ -394,8 +438,8 @@ class KoObjectProviderListExtTest {
     @Test
     fun `withoutObjectNamed(set of String) returns declaration without any of given objects`() {
         // given
-        val name1 = "SampleName1"
-        val name2 = "SampleName2"
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
         val declaration1: KoObjectProvider =
             mockk {
                 every { hasObjectWithName(setOf(name1, name2)) } returns true
@@ -415,9 +459,53 @@ class KoObjectProviderListExtTest {
     }
 
     @Test
+    fun `withoutObjectNamed(name) with ignore case returns declaration without given object`() {
+        // given
+        val name = "FixtureName"
+        val declaration1: KoObjectProvider =
+            mockk {
+                every { hasObjectWithName(listOf(name), ignoreCase = true) } returns true
+            }
+        val declaration2: KoObjectProvider =
+            mockk {
+                every { hasObjectWithName(listOf(name), ignoreCase = true) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withoutObjectNamed(name, ignoreCase = true)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
+    }
+
+    @Test
+    fun `withoutObjectNamed(list of String) with ignore case returns declaration without any of given objects`() {
+        // given
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
+        val declaration1: KoObjectProvider =
+            mockk {
+                every { hasObjectWithName(listOf(name1, name2), ignoreCase = true) } returns true
+            }
+        val declaration2: KoObjectProvider =
+            mockk {
+                every { hasObjectWithName(listOf(name1, name2), ignoreCase = true) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+        val names = listOf(name1, name2)
+
+        // when
+        val sut = declarations.withoutObjectNamed(names, ignoreCase = true)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
+    }
+
+    @Test
     fun `withAllObjectsNamed(name) returns declaration with given object`() {
         // given
-        val name = "SampleName"
+        val name = "FixtureName"
         val declaration1: KoObjectProvider =
             mockk {
                 every { hasObjectsWithAllNames(listOf(name)) } returns true
@@ -438,8 +526,8 @@ class KoObjectProviderListExtTest {
     @Test
     fun `withAllObjectsNamed(String) returns declaration with all given objects`() {
         // given
-        val name1 = "SampleName1"
-        val name2 = "SampleName2"
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
         val declaration1: KoObjectProvider =
             mockk {
                 every { hasObjectsWithAllNames(listOf(name1, name2)) } returns true
@@ -460,8 +548,8 @@ class KoObjectProviderListExtTest {
     @Test
     fun `withAllObjectsNamed(list of String) returns declaration with all given objects`() {
         // given
-        val name1 = "SampleName1"
-        val name2 = "SampleName2"
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
         val declaration1: KoObjectProvider =
             mockk {
                 every { hasObjectsWithAllNames(listOf(name1, name2)) } returns true
@@ -483,8 +571,8 @@ class KoObjectProviderListExtTest {
     @Test
     fun `withAllObjectsNamed(set of String) returns declaration with all given objects`() {
         // given
-        val name1 = "SampleName1"
-        val name2 = "SampleName2"
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
         val declaration1: KoObjectProvider =
             mockk {
                 every { hasObjectsWithAllNames(setOf(name1, name2)) } returns true
@@ -504,9 +592,53 @@ class KoObjectProviderListExtTest {
     }
 
     @Test
+    fun `withAllObjectsNamed(name) with ignore case returns declaration with given object`() {
+        // given
+        val name = "FixtureName"
+        val declaration1: KoObjectProvider =
+            mockk {
+                every { hasObjectsWithAllNames(listOf(name), ignoreCase = true) } returns true
+            }
+        val declaration2: KoObjectProvider =
+            mockk {
+                every { hasObjectsWithAllNames(listOf(name), ignoreCase = true) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withAllObjectsNamed(name, ignoreCase = true)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
+    fun `withAllObjectsNamed(list of String) with ignore case returns declaration with all given objects`() {
+        // given
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
+        val declaration1: KoObjectProvider =
+            mockk {
+                every { hasObjectsWithAllNames(listOf(name1, name2), ignoreCase = true) } returns true
+            }
+        val declaration2: KoObjectProvider =
+            mockk {
+                every { hasObjectsWithAllNames(listOf(name1, name2), ignoreCase = true) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+        val names = listOf(name1, name2)
+
+        // when
+        val sut = declarations.withAllObjectsNamed(names, ignoreCase = true)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
     fun `withoutAllObjectsNamed(name) returns declaration without given object`() {
         // given
-        val name = "SampleName"
+        val name = "FixtureName"
         val declaration1: KoObjectProvider =
             mockk {
                 every { hasObjectsWithAllNames(listOf(name)) } returns true
@@ -527,8 +659,8 @@ class KoObjectProviderListExtTest {
     @Test
     fun `withoutAllObjectsNamed(String) returns declaration without all of given objects`() {
         // given
-        val name1 = "SampleName1"
-        val name2 = "SampleName2"
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
         val declaration1: KoObjectProvider =
             mockk {
                 every { hasObjectsWithAllNames(listOf(name1, name2)) } returns true
@@ -549,8 +681,8 @@ class KoObjectProviderListExtTest {
     @Test
     fun `withoutAllObjectsNamed(list of String) returns declaration without all of given objects`() {
         // given
-        val name1 = "SampleName1"
-        val name2 = "SampleName2"
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
         val declaration1: KoObjectProvider =
             mockk {
                 every { hasObjectsWithAllNames(listOf(name1, name2)) } returns true
@@ -572,8 +704,8 @@ class KoObjectProviderListExtTest {
     @Test
     fun `withoutAllObjectsNamed(set of String) returns declaration without all of given objects`() {
         // given
-        val name1 = "SampleName1"
-        val name2 = "SampleName2"
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
         val declaration1: KoObjectProvider =
             mockk {
                 every { hasObjectsWithAllNames(setOf(name1, name2)) } returns true
@@ -587,6 +719,50 @@ class KoObjectProviderListExtTest {
 
         // when
         val sut = declarations.withoutAllObjectsNamed(names)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
+    }
+
+    @Test
+    fun `withoutAllObjectsNamed(name) with ignore case returns declaration without given object`() {
+        // given
+        val name = "FixtureName"
+        val declaration1: KoObjectProvider =
+            mockk {
+                every { hasObjectsWithAllNames(listOf(name), ignoreCase = true) } returns true
+            }
+        val declaration2: KoObjectProvider =
+            mockk {
+                every { hasObjectsWithAllNames(listOf(name), ignoreCase = true) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withoutAllObjectsNamed(name, ignoreCase = true)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
+    }
+
+    @Test
+    fun `withoutAllObjectsNamed(list of String) with ignore case returns declaration without all of given objects`() {
+        // given
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
+        val declaration1: KoObjectProvider =
+            mockk {
+                every { hasObjectsWithAllNames(listOf(name1, name2), ignoreCase = true) } returns true
+            }
+        val declaration2: KoObjectProvider =
+            mockk {
+                every { hasObjectsWithAllNames(listOf(name1, name2), ignoreCase = true) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+        val names = listOf(name1, name2)
+
+        // when
+        val sut = declarations.withoutAllObjectsNamed(names, ignoreCase = true)
 
         // then
         sut shouldBeEqualTo listOf(declaration2)

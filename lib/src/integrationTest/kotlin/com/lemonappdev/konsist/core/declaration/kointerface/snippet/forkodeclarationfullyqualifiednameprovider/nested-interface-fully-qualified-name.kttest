@@ -1,5 +1,5 @@
-package com.samplepackage
+package com.fixturepackage
 
-class SampleClass {
-    interface SampleInterface
+class FixtureClass {
+    interface FixtureInterface
 }

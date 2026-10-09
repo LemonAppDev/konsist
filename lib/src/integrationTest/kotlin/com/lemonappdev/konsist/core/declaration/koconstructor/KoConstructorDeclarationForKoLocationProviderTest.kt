@@ -17,7 +17,7 @@ class KoConstructorDeclarationForKoLocationProviderTest {
                 .first()
 
         // then
-        sut.location shouldBeEqualTo "${sut.path}:3:18"
+        sut.location shouldBeEqualTo "${sut.path}:3:19"
     }
 
     @Test
@@ -39,7 +39,7 @@ class KoConstructorDeclarationForKoLocationProviderTest {
                 .first()
 
         // then
-        val declaration = "Declaration:\n(val sampleParameter: SampleType)"
+        val declaration = "Declaration:\n(val fixtureParameter: FixtureType)"
         assertSoftly(sut.locationWithText) {
             startsWith("Location: /") shouldBeEqualTo true
             contains(projectPath) shouldBeEqualTo true

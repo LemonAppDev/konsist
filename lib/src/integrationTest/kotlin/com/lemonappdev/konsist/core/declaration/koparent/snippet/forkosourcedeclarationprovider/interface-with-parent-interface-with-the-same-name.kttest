@@ -1,7 +1,7 @@
-package com.samplepackage
+package com.fixturepackage
 
-interface SampleName : SampleInterface.SampleName
+interface FixtureName : FixtureInterface.FixtureName
 
-interface SampleInterface {
-    interface SampleName
+interface FixtureInterface {
+    interface FixtureName
 }

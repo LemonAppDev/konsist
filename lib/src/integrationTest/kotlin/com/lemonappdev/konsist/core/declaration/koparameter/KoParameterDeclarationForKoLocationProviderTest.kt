@@ -18,7 +18,7 @@ class KoParameterDeclarationForKoLocationProviderTest {
                 ?.first()
 
         // then
-        sut?.location shouldBeEqualTo "${sut?.path}:3:19"
+        sut?.location shouldBeEqualTo "${sut?.path}:3:20"
     }
 
     @Test
@@ -32,7 +32,7 @@ class KoParameterDeclarationForKoLocationProviderTest {
                 .first()
 
         // then
-        sut.location shouldBeEqualTo "${sut.path}:3:20"
+        sut.location shouldBeEqualTo "${sut.path}:3:21"
     }
 
     @Test
@@ -56,7 +56,7 @@ class KoParameterDeclarationForKoLocationProviderTest {
                 ?.first()
 
         // then
-        val declaration = "Declaration:\nval sampleParameter: SampleType"
+        val declaration = "Declaration:\nval fixtureParameter: FixtureType"
         assertSoftly(sut?.locationWithText) {
             it?.startsWith("Location: /") shouldBeEqualTo true
             projectPath?.let { string -> it?.contains(string) } shouldBeEqualTo true
@@ -83,7 +83,7 @@ class KoParameterDeclarationForKoLocationProviderTest {
                 .first()
 
         // then
-        val declaration = "Declaration:\nsampleParameter: SampleType"
+        val declaration = "Declaration:\nfixtureParameter: FixtureType"
         assertSoftly(sut.locationWithText) {
             it.startsWith("Location: /") shouldBeEqualTo true
             projectPath.let { string -> it.contains(string) } shouldBeEqualTo true

@@ -1,0 +1,59 @@
+# .clinerules
+
+## 1. Project Details
+- Kotlin/Java Gradle project with multi-module structure
+- Uses Spotless for code formatting and Detekt for static analysis
+- Follows kebab-case naming for modules with corresponding package naming
+
+## 2. Coding Preferences
+- Follow existing project structure and patterns
+- Maintain consistency with current codebase architecture
+- Use clear, descriptive naming conventions
+- Keep code readable and well-organized
+
+## 3. Architecture Preferences
+- Respect multi-module project boundaries (lib, api, integration, etc.)
+- Maintain separation of concerns between modules
+- Follow established package structure within each module
+
+## 4. File Organization
+- Follow existing project structure without deviation
+- If module name is kebab-case, derive package name containing module name without hyphen character
+- Maintain logical grouping of related files within modules
+
+## 5. Testing Approach
+- Run comprehensive test suite after changes:
+  - ./gradlew lib:test (unit tests)
+  - ./gradlew lib:apiTest (API tests)
+  - ./gradlew lib:integrationTest (integration tests)
+  - ./gradlew lib:konsistTest (architecture consistency tests)
+
+## 6. Documentation Standards
+- Keep comments and documentation up to date with code changes
+- Update relevant documentation when modifying functionality
+- Ensure code changes are properly documented
+
+## Git Workflow
+- Move files using `git mv` rather than deleting and recreating them
+- Commit changes automatically after successful verification
+- Preserve file history through proper git operations
+- Add newly created files to git repository
+
+## Verification Process
+Before completing any changes, ensure:
+
+1. **Linting passes:**
+   - ./gradlew spotlessCheck
+   - ./gradlew detektCheck
+
+2. **Auto-fix linting issues if needed:**
+   - ./gradlew spotlessApply
+   - ./gradlew detektApply
+
+3. **All tests pass:**
+   - ./gradlew lib:test
+   - ./gradlew lib:apiTest
+   - ./gradlew lib:integrationTest
+   - ./gradlew lib:konsistTest
+
+Only proceed with git operations after all verification steps pass successfully.

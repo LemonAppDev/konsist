@@ -1,0 +1,1 @@
+val fixtureProperty1: ((String) -> Unit)? = {}

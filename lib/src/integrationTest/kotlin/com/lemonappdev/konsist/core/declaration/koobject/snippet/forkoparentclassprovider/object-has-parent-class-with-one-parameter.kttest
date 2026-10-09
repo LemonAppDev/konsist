@@ -1,5 +1,5 @@
-import com.lemonappdev.konsist.testdata.SampleParentClassWithDuplicatedName
+import com.lemonappdev.konsist.testdata.FixtureParentClassWithDuplicatedName
 
-object SampleObject : SampleParentClassWithDuplicatedName()
+object FixtureObject : FixtureParentClassWithDuplicatedName()
 
-open class SampleParentClassWithDuplicatedName
+open class FixtureParentClassWithDuplicatedName

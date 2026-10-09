@@ -39,7 +39,7 @@ class KoFileExtensionProviderListExtTest {
     @Test
     fun `withExtension() returns declaration with given extension`() {
         // given
-        val extension = "sampleExtension"
+        val extension = "fixtureExtension"
         val declaration1: KoFileExtensionProvider =
             mockk {
                 every { hasExtension(extension) } returns true
@@ -60,9 +60,9 @@ class KoFileExtensionProviderListExtTest {
     @Test
     fun `withExtension() returns declaration with one of given extensions`() {
         // given
-        val extension1 = "sampleExtension1"
-        val extension2 = "sampleExtension2"
-        val extension3 = "sampleExtension3"
+        val extension1 = "fixtureExtension1"
+        val extension2 = "fixtureExtension2"
+        val extension3 = "fixtureExtension3"
         val declaration1: KoFileExtensionProvider =
             mockk {
                 every { hasExtension(extension1) } returns true
@@ -93,9 +93,9 @@ class KoFileExtensionProviderListExtTest {
     @Test
     fun `withExtension(list) returns declaration with one of given extensions`() {
         // given
-        val extension1 = "sampleExtension1"
-        val extension2 = "sampleExtension2"
-        val extension3 = "sampleExtension3"
+        val extension1 = "fixtureExtension1"
+        val extension2 = "fixtureExtension2"
+        val extension3 = "fixtureExtension3"
         val declaration1: KoFileExtensionProvider =
             mockk {
                 every { hasExtension(extension1) } returns true
@@ -127,9 +127,9 @@ class KoFileExtensionProviderListExtTest {
     @Test
     fun `withExtension(set) returns declaration with one of given extensions`() {
         // given
-        val extension1 = "sampleExtension1"
-        val extension2 = "sampleExtension2"
-        val extension3 = "sampleExtension3"
+        val extension1 = "fixtureExtension1"
+        val extension2 = "fixtureExtension2"
+        val extension3 = "fixtureExtension3"
         val declaration1: KoFileExtensionProvider =
             mockk {
                 every { hasExtension(extension1) } returns true
@@ -189,7 +189,7 @@ class KoFileExtensionProviderListExtTest {
     @Test
     fun `withoutExtension() returns declaration without given extension`() {
         // given
-        val extension = "sampleExtension"
+        val extension = "fixtureExtension"
         val declaration1: KoFileExtensionProvider =
             mockk {
                 every { hasExtension(extension) } returns true
@@ -210,9 +210,9 @@ class KoFileExtensionProviderListExtTest {
     @Test
     fun `withoutExtension() returns declaration without any of given extensions`() {
         // given
-        val extension1 = "sampleExtension1"
-        val extension2 = "sampleExtension2"
-        val extension3 = "sampleExtension3"
+        val extension1 = "fixtureExtension1"
+        val extension2 = "fixtureExtension2"
+        val extension3 = "fixtureExtension3"
         val declaration1: KoFileExtensionProvider =
             mockk {
                 every { hasExtension(extension1) } returns true
@@ -243,9 +243,9 @@ class KoFileExtensionProviderListExtTest {
     @Test
     fun `withoutExtension(list) returns declaration without any of given extensions`() {
         // given
-        val extension1 = "sampleExtension1"
-        val extension2 = "sampleExtension2"
-        val extension3 = "sampleExtension3"
+        val extension1 = "fixtureExtension1"
+        val extension2 = "fixtureExtension2"
+        val extension3 = "fixtureExtension3"
         val declaration1: KoFileExtensionProvider =
             mockk {
                 every { hasExtension(extension1) } returns true
@@ -277,9 +277,9 @@ class KoFileExtensionProviderListExtTest {
     @Test
     fun `withoutExtension(set) returns declaration without any of given extensions`() {
         // given
-        val extension1 = "sampleExtension1"
-        val extension2 = "sampleExtension2"
-        val extension3 = "sampleExtension3"
+        val extension1 = "fixtureExtension1"
+        val extension2 = "fixtureExtension2"
+        val extension3 = "fixtureExtension3"
         val declaration1: KoFileExtensionProvider =
             mockk {
                 every { hasExtension(extension1) } returns true

@@ -1,1 +1,1 @@
-val sampleProperty1: List<Set<String>> = listOf()
+val fixtureProperty1: List<Set<String>> = listOf()

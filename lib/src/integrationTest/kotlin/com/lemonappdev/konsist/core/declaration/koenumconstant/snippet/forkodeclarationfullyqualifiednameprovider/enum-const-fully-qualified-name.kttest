@@ -1,5 +1,5 @@
-package com.samplepackage
+package com.fixturepackage
 
-enum class SampleClass {
-    SAMPLE_CONSTANT_1
+enum class FixtureClass {
+    FIXTURE_CONSTANT_1
 }

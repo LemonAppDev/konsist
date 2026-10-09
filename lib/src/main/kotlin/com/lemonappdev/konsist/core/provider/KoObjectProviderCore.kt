@@ -27,36 +27,48 @@ internal interface KoObjectProviderCore :
         name: String,
         vararg names: String,
         includeNested: Boolean,
-    ): Boolean = hasObjectWithName(listOf(name, *names), includeNested)
+        ignoreCase: Boolean,
+    ): Boolean = hasObjectWithName(listOf(name, *names), includeNested, ignoreCase)
 
     override fun hasObjectWithName(
         names: Collection<String>,
         includeNested: Boolean,
+        ignoreCase: Boolean,
     ): Boolean =
         when {
-            names.isEmpty() -> hasObjects(includeNested)
-            else ->
+            names.isEmpty() -> {
+                hasObjects(includeNested)
+            }
+
+            else -> {
                 names.any {
-                    objects(includeNested).any { koObject -> it == koObject.name }
+                    objects(includeNested).any { koObject -> koObject.hasName(it, ignoreCase) }
                 }
+            }
         }
 
     override fun hasObjectsWithAllNames(
         name: String,
         vararg names: String,
         includeNested: Boolean,
-    ): Boolean = hasObjectsWithAllNames(listOf(name, *names), includeNested)
+        ignoreCase: Boolean,
+    ): Boolean = hasObjectsWithAllNames(listOf(name, *names), includeNested, ignoreCase)
 
     override fun hasObjectsWithAllNames(
         names: Collection<String>,
         includeNested: Boolean,
+        ignoreCase: Boolean,
     ): Boolean =
         when {
-            names.isEmpty() -> hasObjects(includeNested)
-            else ->
+            names.isEmpty() -> {
+                hasObjects(includeNested)
+            }
+
+            else -> {
                 names.all {
-                    objects(includeNested).any { koObject -> it == koObject.name }
+                    objects(includeNested).any { koObject -> koObject.hasName(it, ignoreCase) }
                 }
+            }
         }
 
     override fun hasObject(

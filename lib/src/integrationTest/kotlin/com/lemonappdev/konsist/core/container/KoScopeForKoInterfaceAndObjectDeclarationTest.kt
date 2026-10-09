@@ -25,9 +25,9 @@ class KoScopeForKoInterfaceAndObjectDeclarationTest {
         // then
         val expected =
             listOf(
-                "SampleInterfaceNestedInsideObject",
-                "SampleObject",
-                "SampleObjectNestedInsideObject",
+                "FixtureInterfaceNestedInsideObject",
+                "FixtureObject",
+                "FixtureObjectNestedInsideObject",
             )
 
         sut
@@ -42,7 +42,7 @@ class KoScopeForKoInterfaceAndObjectDeclarationTest {
         val sut = getSnippetFile("scope-contains-nested-interfaces-and-objects")
 
         // then
-        val expected = listOf("SampleObject")
+        val expected = listOf("FixtureObject")
 
         sut
             .interfacesAndObjects(includeNested = false)
@@ -61,30 +61,30 @@ class KoScopeForKoInterfaceAndObjectDeclarationTest {
                 arguments(
                     false,
                     false,
-                    listOf("SampleClass"),
+                    listOf("FixtureClass"),
                 ),
                 arguments(
                     true,
                     false,
                     listOf(
-                        "SampleClass",
-                        "SampleNestedClass1",
-                        "SampleNestedClass2",
+                        "FixtureClass",
+                        "FixtureNestedClass1",
+                        "FixtureNestedClass2",
                     ),
                 ),
                 arguments(
                     false,
                     true,
-                    listOf("SampleClass"),
+                    listOf("FixtureClass"),
                 ),
                 arguments(
                     true,
                     true,
                     listOf(
-                        "SampleClass",
-                        "SampleLocalClass",
-                        "SampleNestedClass1",
-                        "SampleNestedClass2",
+                        "FixtureClass",
+                        "FixtureLocalClass",
+                        "FixtureNestedClass1",
+                        "FixtureNestedClass2",
                     ),
                 ),
             )

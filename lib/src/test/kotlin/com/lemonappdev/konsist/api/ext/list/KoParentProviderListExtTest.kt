@@ -2,8 +2,8 @@ package com.lemonappdev.konsist.api.ext.list
 
 import com.lemonappdev.konsist.api.declaration.KoParentDeclaration
 import com.lemonappdev.konsist.api.provider.KoParentProvider
-import com.lemonappdev.konsist.testdata.SampleClass
-import com.lemonappdev.konsist.testdata.SampleInterface
+import com.lemonappdev.konsist.testdata.FixtureClass
+import com.lemonappdev.konsist.testdata.FixtureInterface
 import io.mockk.every
 import io.mockk.mockk
 import org.amshove.kluent.shouldBeEqualTo
@@ -241,7 +241,7 @@ class KoParentProviderListExtTest {
     @Test
     fun `withParentNamed(name) returns declaration with given parent`() {
         // given
-        val name = "SampleName"
+        val name = "FixtureName"
         val declaration1: KoParentProvider =
             mockk {
                 every { hasParentWithName(listOf(name)) } returns true
@@ -262,8 +262,8 @@ class KoParentProviderListExtTest {
     @Test
     fun `withParentNamed(String) returns declaration with any of given parents`() {
         // given
-        val name1 = "SampleName1"
-        val name2 = "SampleName2"
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
         val declaration1: KoParentProvider =
             mockk {
                 every { hasParentWithName(listOf(name1, name2)) } returns true
@@ -284,8 +284,8 @@ class KoParentProviderListExtTest {
     @Test
     fun `withParentNamed(list of String) returns declaration with any of given parents`() {
         // given
-        val name1 = "SampleName1"
-        val name2 = "SampleName2"
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
         val declaration1: KoParentProvider =
             mockk {
                 every { hasParentWithName(listOf(name1, name2)) } returns true
@@ -307,8 +307,8 @@ class KoParentProviderListExtTest {
     @Test
     fun `withParentNamed(set of String) returns declaration with any of given parents`() {
         // given
-        val name1 = "SampleName1"
-        val name2 = "SampleName2"
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
         val declaration1: KoParentProvider =
             mockk {
                 every { hasParentWithName(setOf(name1, name2)) } returns true
@@ -328,9 +328,53 @@ class KoParentProviderListExtTest {
     }
 
     @Test
+    fun `withParentNamed(name) with ignore case returns declaration with given parent`() {
+        // given
+        val name = "FixtureName"
+        val declaration1: KoParentProvider =
+            mockk {
+                every { hasParentWithName(listOf(name), ignoreCase = true) } returns true
+            }
+        val declaration2: KoParentProvider =
+            mockk {
+                every { hasParentWithName(listOf(name), ignoreCase = true) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withParentNamed(name, ignoreCase = true)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
+    fun `withParentNamed(list of String) with ignore case returns declaration with any of given parents`() {
+        // given
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
+        val declaration1: KoParentProvider =
+            mockk {
+                every { hasParentWithName(listOf(name1, name2), ignoreCase = true) } returns true
+            }
+        val declaration2: KoParentProvider =
+            mockk {
+                every { hasParentWithName(listOf(name1, name2), ignoreCase = true) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+        val names = listOf(name1, name2)
+
+        // when
+        val sut = declarations.withParentNamed(names, ignoreCase = true)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
     fun `withoutParentNamed(name) returns declaration without given parent`() {
         // given
-        val name = "SampleName"
+        val name = "FixtureName"
         val declaration1: KoParentProvider =
             mockk {
                 every { hasParentWithName(listOf(name)) } returns true
@@ -351,8 +395,8 @@ class KoParentProviderListExtTest {
     @Test
     fun `withoutParentNamed(String) returns declaration without any of given parents`() {
         // given
-        val name1 = "SampleName1"
-        val name2 = "SampleName2"
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
         val declaration1: KoParentProvider =
             mockk {
                 every { hasParentWithName(listOf(name1, name2)) } returns true
@@ -373,8 +417,8 @@ class KoParentProviderListExtTest {
     @Test
     fun `withoutParentNamed(list of String) returns declaration without any of given parents`() {
         // given
-        val name1 = "SampleName1"
-        val name2 = "SampleName2"
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
         val declaration1: KoParentProvider =
             mockk {
                 every { hasParentWithName(listOf(name1, name2)) } returns true
@@ -396,8 +440,8 @@ class KoParentProviderListExtTest {
     @Test
     fun `withoutParentNamed(set of String) returns declaration without any of given parents`() {
         // given
-        val name1 = "SampleName1"
-        val name2 = "SampleName2"
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
         val declaration1: KoParentProvider =
             mockk {
                 every { hasParentWithName(setOf(name1, name2)) } returns true
@@ -417,9 +461,53 @@ class KoParentProviderListExtTest {
     }
 
     @Test
+    fun `withoutParentNamed(name) with ignore case returns declaration without given parent`() {
+        // given
+        val name = "FixtureName"
+        val declaration1: KoParentProvider =
+            mockk {
+                every { hasParentWithName(listOf(name), ignoreCase = true) } returns true
+            }
+        val declaration2: KoParentProvider =
+            mockk {
+                every { hasParentWithName(listOf(name), ignoreCase = true) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withoutParentNamed(name, ignoreCase = true)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
+    }
+
+    @Test
+    fun `withoutParentNamed(list of String) with ignore case returns declaration without any of given parents`() {
+        // given
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
+        val declaration1: KoParentProvider =
+            mockk {
+                every { hasParentWithName(listOf(name1, name2), ignoreCase = true) } returns true
+            }
+        val declaration2: KoParentProvider =
+            mockk {
+                every { hasParentWithName(listOf(name1, name2), ignoreCase = true) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+        val names = listOf(name1, name2)
+
+        // when
+        val sut = declarations.withoutParentNamed(names, ignoreCase = true)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
+    }
+
+    @Test
     fun `withAllParentsNamed(name) returns declaration with given parent`() {
         // given
-        val name = "SampleName"
+        val name = "FixtureName"
         val declaration1: KoParentProvider =
             mockk {
                 every { hasParentsWithAllNames(listOf(name)) } returns true
@@ -440,8 +528,8 @@ class KoParentProviderListExtTest {
     @Test
     fun `withAllParentsNamed(String) returns declaration with all given parents`() {
         // given
-        val name1 = "SampleName1"
-        val name2 = "SampleName2"
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
         val declaration1: KoParentProvider =
             mockk {
                 every { hasParentsWithAllNames(listOf(name1, name2)) } returns true
@@ -462,8 +550,8 @@ class KoParentProviderListExtTest {
     @Test
     fun `withAllParentsNamed(list of String) returns declaration with all given parents`() {
         // given
-        val name1 = "SampleName1"
-        val name2 = "SampleName2"
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
         val declaration1: KoParentProvider =
             mockk {
                 every { hasParentsWithAllNames(listOf(name1, name2)) } returns true
@@ -485,8 +573,8 @@ class KoParentProviderListExtTest {
     @Test
     fun `withAllParentsNamed(set of String) returns declaration with all given parents`() {
         // given
-        val name1 = "SampleName1"
-        val name2 = "SampleName2"
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
         val declaration1: KoParentProvider =
             mockk {
                 every { hasParentsWithAllNames(setOf(name1, name2)) } returns true
@@ -506,9 +594,53 @@ class KoParentProviderListExtTest {
     }
 
     @Test
+    fun `withAllParentsNamed(name) with ignore case returns declaration with given parent`() {
+        // given
+        val name = "FixtureName"
+        val declaration1: KoParentProvider =
+            mockk {
+                every { hasParentsWithAllNames(listOf(name), ignoreCase = true) } returns true
+            }
+        val declaration2: KoParentProvider =
+            mockk {
+                every { hasParentsWithAllNames(listOf(name), ignoreCase = true) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withAllParentsNamed(name, ignoreCase = true)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
+    fun `withAllParentsNamed(list of String) with ignore case returns declaration with all given parents`() {
+        // given
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
+        val declaration1: KoParentProvider =
+            mockk {
+                every { hasParentsWithAllNames(listOf(name1, name2), ignoreCase = true) } returns true
+            }
+        val declaration2: KoParentProvider =
+            mockk {
+                every { hasParentsWithAllNames(listOf(name1, name2), ignoreCase = true) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+        val names = listOf(name1, name2)
+
+        // when
+        val sut = declarations.withAllParentsNamed(names, ignoreCase = true)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
     fun `withoutAllParentsNamed(name) returns declaration without given parent`() {
         // given
-        val name = "SampleName"
+        val name = "FixtureName"
         val declaration1: KoParentProvider =
             mockk {
                 every { hasParentsWithAllNames(listOf(name)) } returns true
@@ -529,8 +661,8 @@ class KoParentProviderListExtTest {
     @Test
     fun `withoutAllParentsNamed(String) returns declaration without all of given parents`() {
         // given
-        val name1 = "SampleName1"
-        val name2 = "SampleName2"
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
         val declaration1: KoParentProvider =
             mockk {
                 every { hasParentsWithAllNames(listOf(name1, name2)) } returns true
@@ -551,8 +683,8 @@ class KoParentProviderListExtTest {
     @Test
     fun `withoutAllParentsNamed(list of String) returns declaration without all of given parents`() {
         // given
-        val name1 = "SampleName1"
-        val name2 = "SampleName2"
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
         val declaration1: KoParentProvider =
             mockk {
                 every { hasParentsWithAllNames(listOf(name1, name2)) } returns true
@@ -574,8 +706,8 @@ class KoParentProviderListExtTest {
     @Test
     fun `withoutAllParentsNamed(set of String) returns declaration without all of given parents`() {
         // given
-        val name1 = "SampleName1"
-        val name2 = "SampleName2"
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
         val declaration1: KoParentProvider =
             mockk {
                 every { hasParentsWithAllNames(setOf(name1, name2)) } returns true
@@ -589,6 +721,50 @@ class KoParentProviderListExtTest {
 
         // when
         val sut = declarations.withoutAllParentsNamed(names)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
+    }
+
+    @Test
+    fun `withoutAllParentsNamed(name) with ignore case returns declaration without given parent`() {
+        // given
+        val name = "FixtureName"
+        val declaration1: KoParentProvider =
+            mockk {
+                every { hasParentsWithAllNames(listOf(name), ignoreCase = true) } returns true
+            }
+        val declaration2: KoParentProvider =
+            mockk {
+                every { hasParentsWithAllNames(listOf(name), ignoreCase = true) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withoutAllParentsNamed(name, ignoreCase = true)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
+    }
+
+    @Test
+    fun `withoutAllParentsNamed(list of String) with ignore case returns declaration without all of given parents`() {
+        // given
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
+        val declaration1: KoParentProvider =
+            mockk {
+                every { hasParentsWithAllNames(listOf(name1, name2), ignoreCase = true) } returns true
+            }
+        val declaration2: KoParentProvider =
+            mockk {
+                every { hasParentsWithAllNames(listOf(name1, name2), ignoreCase = true) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+        val names = listOf(name1, name2)
+
+        // when
+        val sut = declarations.withoutAllParentsNamed(names, ignoreCase = true)
 
         // then
         sut shouldBeEqualTo listOf(declaration2)
@@ -917,16 +1093,16 @@ class KoParentProviderListExtTest {
         // given
         val declaration1: KoParentProvider =
             mockk {
-                every { hasParentOf(listOf(SampleClass::class, SampleInterface::class)) } returns true
+                every { hasParentOf(listOf(FixtureClass::class, FixtureInterface::class)) } returns true
             }
         val declaration2: KoParentProvider =
             mockk {
-                every { hasParentOf(listOf(SampleClass::class, SampleInterface::class)) } returns false
+                every { hasParentOf(listOf(FixtureClass::class, FixtureInterface::class)) } returns false
             }
         val declarations = listOf(declaration1, declaration2)
 
         // when
-        val sut = declarations.withParentOf(SampleClass::class, SampleInterface::class)
+        val sut = declarations.withParentOf(FixtureClass::class, FixtureInterface::class)
 
         // then
         sut shouldBeEqualTo listOf(declaration1)
@@ -937,14 +1113,14 @@ class KoParentProviderListExtTest {
         // given
         val declaration1: KoParentProvider =
             mockk {
-                every { hasParentOf(listOf(SampleClass::class, SampleInterface::class)) } returns true
+                every { hasParentOf(listOf(FixtureClass::class, FixtureInterface::class)) } returns true
             }
         val declaration2: KoParentProvider =
             mockk {
-                every { hasParentOf(listOf(SampleClass::class, SampleInterface::class)) } returns false
+                every { hasParentOf(listOf(FixtureClass::class, FixtureInterface::class)) } returns false
             }
         val declarations = listOf(declaration1, declaration2)
-        val kClasses = listOf(SampleClass::class, SampleInterface::class)
+        val kClasses = listOf(FixtureClass::class, FixtureInterface::class)
 
         // when
         val sut = declarations.withParentOf(kClasses)
@@ -958,14 +1134,14 @@ class KoParentProviderListExtTest {
         // given
         val declaration1: KoParentProvider =
             mockk {
-                every { hasParentOf(setOf(SampleClass::class, SampleInterface::class)) } returns true
+                every { hasParentOf(setOf(FixtureClass::class, FixtureInterface::class)) } returns true
             }
         val declaration2: KoParentProvider =
             mockk {
-                every { hasParentOf(setOf(SampleClass::class, SampleInterface::class)) } returns false
+                every { hasParentOf(setOf(FixtureClass::class, FixtureInterface::class)) } returns false
             }
         val declarations = listOf(declaration1, declaration2)
-        val kClasses = setOf(SampleClass::class, SampleInterface::class)
+        val kClasses = setOf(FixtureClass::class, FixtureInterface::class)
 
         // when
         val sut = declarations.withParentOf(kClasses)
@@ -979,16 +1155,16 @@ class KoParentProviderListExtTest {
         // given
         val declaration1: KoParentProvider =
             mockk {
-                every { hasParentOf(listOf(SampleClass::class, SampleInterface::class)) } returns true
+                every { hasParentOf(listOf(FixtureClass::class, FixtureInterface::class)) } returns true
             }
         val declaration2: KoParentProvider =
             mockk {
-                every { hasParentOf(listOf(SampleClass::class, SampleInterface::class)) } returns false
+                every { hasParentOf(listOf(FixtureClass::class, FixtureInterface::class)) } returns false
             }
         val declarations = listOf(declaration1, declaration2)
 
         // when
-        val sut = declarations.withoutParentOf(SampleClass::class, SampleInterface::class)
+        val sut = declarations.withoutParentOf(FixtureClass::class, FixtureInterface::class)
 
         // then
         sut shouldBeEqualTo listOf(declaration2)
@@ -999,14 +1175,14 @@ class KoParentProviderListExtTest {
         // given
         val declaration1: KoParentProvider =
             mockk {
-                every { hasParentOf(listOf(SampleClass::class, SampleInterface::class)) } returns true
+                every { hasParentOf(listOf(FixtureClass::class, FixtureInterface::class)) } returns true
             }
         val declaration2: KoParentProvider =
             mockk {
-                every { hasParentOf(listOf(SampleClass::class, SampleInterface::class)) } returns false
+                every { hasParentOf(listOf(FixtureClass::class, FixtureInterface::class)) } returns false
             }
         val declarations = listOf(declaration1, declaration2)
-        val kClasses = listOf(SampleClass::class, SampleInterface::class)
+        val kClasses = listOf(FixtureClass::class, FixtureInterface::class)
 
         // when
         val sut = declarations.withoutParentOf(kClasses)
@@ -1020,14 +1196,14 @@ class KoParentProviderListExtTest {
         // given
         val declaration1: KoParentProvider =
             mockk {
-                every { hasParentOf(setOf(SampleClass::class, SampleInterface::class)) } returns true
+                every { hasParentOf(setOf(FixtureClass::class, FixtureInterface::class)) } returns true
             }
         val declaration2: KoParentProvider =
             mockk {
-                every { hasParentOf(setOf(SampleClass::class, SampleInterface::class)) } returns false
+                every { hasParentOf(setOf(FixtureClass::class, FixtureInterface::class)) } returns false
             }
         val declarations = listOf(declaration1, declaration2)
-        val kClasses = setOf(SampleClass::class, SampleInterface::class)
+        val kClasses = setOf(FixtureClass::class, FixtureInterface::class)
 
         // when
         val sut = declarations.withoutParentOf(kClasses)
@@ -1041,16 +1217,16 @@ class KoParentProviderListExtTest {
         // given
         val declaration1: KoParentProvider =
             mockk {
-                every { hasAllParentsOf(listOf(SampleClass::class, SampleInterface::class)) } returns true
+                every { hasAllParentsOf(listOf(FixtureClass::class, FixtureInterface::class)) } returns true
             }
         val declaration2: KoParentProvider =
             mockk {
-                every { hasAllParentsOf(listOf(SampleClass::class, SampleInterface::class)) } returns false
+                every { hasAllParentsOf(listOf(FixtureClass::class, FixtureInterface::class)) } returns false
             }
         val declarations = listOf(declaration1, declaration2)
 
         // when
-        val sut = declarations.withAllParentsOf(SampleClass::class, SampleInterface::class)
+        val sut = declarations.withAllParentsOf(FixtureClass::class, FixtureInterface::class)
 
         // then
         sut shouldBeEqualTo listOf(declaration1)
@@ -1061,14 +1237,14 @@ class KoParentProviderListExtTest {
         // given
         val declaration1: KoParentProvider =
             mockk {
-                every { hasAllParentsOf(listOf(SampleClass::class, SampleInterface::class)) } returns true
+                every { hasAllParentsOf(listOf(FixtureClass::class, FixtureInterface::class)) } returns true
             }
         val declaration2: KoParentProvider =
             mockk {
-                every { hasAllParentsOf(listOf(SampleClass::class, SampleInterface::class)) } returns false
+                every { hasAllParentsOf(listOf(FixtureClass::class, FixtureInterface::class)) } returns false
             }
         val declarations = listOf(declaration1, declaration2)
-        val kClasses = listOf(SampleClass::class, SampleInterface::class)
+        val kClasses = listOf(FixtureClass::class, FixtureInterface::class)
 
         // when
         val sut = declarations.withAllParentsOf(kClasses)
@@ -1082,14 +1258,14 @@ class KoParentProviderListExtTest {
         // given
         val declaration1: KoParentProvider =
             mockk {
-                every { hasAllParentsOf(setOf(SampleClass::class, SampleInterface::class)) } returns true
+                every { hasAllParentsOf(setOf(FixtureClass::class, FixtureInterface::class)) } returns true
             }
         val declaration2: KoParentProvider =
             mockk {
-                every { hasAllParentsOf(setOf(SampleClass::class, SampleInterface::class)) } returns false
+                every { hasAllParentsOf(setOf(FixtureClass::class, FixtureInterface::class)) } returns false
             }
         val declarations = listOf(declaration1, declaration2)
-        val kClasses = setOf(SampleClass::class, SampleInterface::class)
+        val kClasses = setOf(FixtureClass::class, FixtureInterface::class)
 
         // when
         val sut = declarations.withAllParentsOf(kClasses)
@@ -1103,16 +1279,16 @@ class KoParentProviderListExtTest {
         // given
         val declaration1: KoParentProvider =
             mockk {
-                every { hasAllParentsOf(listOf(SampleClass::class, SampleInterface::class)) } returns true
+                every { hasAllParentsOf(listOf(FixtureClass::class, FixtureInterface::class)) } returns true
             }
         val declaration2: KoParentProvider =
             mockk {
-                every { hasAllParentsOf(listOf(SampleClass::class, SampleInterface::class)) } returns false
+                every { hasAllParentsOf(listOf(FixtureClass::class, FixtureInterface::class)) } returns false
             }
         val declarations = listOf(declaration1, declaration2)
 
         // when
-        val sut = declarations.withoutAllParentsOf(SampleClass::class, SampleInterface::class)
+        val sut = declarations.withoutAllParentsOf(FixtureClass::class, FixtureInterface::class)
 
         // then
         sut shouldBeEqualTo listOf(declaration2)
@@ -1123,14 +1299,14 @@ class KoParentProviderListExtTest {
         // given
         val declaration1: KoParentProvider =
             mockk {
-                every { hasAllParentsOf(listOf(SampleClass::class, SampleInterface::class)) } returns true
+                every { hasAllParentsOf(listOf(FixtureClass::class, FixtureInterface::class)) } returns true
             }
         val declaration2: KoParentProvider =
             mockk {
-                every { hasAllParentsOf(listOf(SampleClass::class, SampleInterface::class)) } returns false
+                every { hasAllParentsOf(listOf(FixtureClass::class, FixtureInterface::class)) } returns false
             }
         val declarations = listOf(declaration1, declaration2)
-        val kClasses = listOf(SampleClass::class, SampleInterface::class)
+        val kClasses = listOf(FixtureClass::class, FixtureInterface::class)
 
         // when
         val sut = declarations.withoutAllParentsOf(kClasses)
@@ -1144,14 +1320,14 @@ class KoParentProviderListExtTest {
         // given
         val declaration1: KoParentProvider =
             mockk {
-                every { hasAllParentsOf(setOf(SampleClass::class, SampleInterface::class)) } returns true
+                every { hasAllParentsOf(setOf(FixtureClass::class, FixtureInterface::class)) } returns true
             }
         val declaration2: KoParentProvider =
             mockk {
-                every { hasAllParentsOf(setOf(SampleClass::class, SampleInterface::class)) } returns false
+                every { hasAllParentsOf(setOf(FixtureClass::class, FixtureInterface::class)) } returns false
             }
         val declarations = listOf(declaration1, declaration2)
-        val kClasses = setOf(SampleClass::class, SampleInterface::class)
+        val kClasses = setOf(FixtureClass::class, FixtureInterface::class)
 
         // when
         val sut = declarations.withoutAllParentsOf(kClasses)

@@ -1,1 +1,1 @@
-class SampleClass (sampleProperty: List<*>) {}
+class FixtureClass (fixtureProperty: List<*>) {}

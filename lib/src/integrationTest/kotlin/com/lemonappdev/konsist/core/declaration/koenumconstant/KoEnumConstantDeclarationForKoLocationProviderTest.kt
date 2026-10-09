@@ -39,7 +39,7 @@ class KoEnumConstantDeclarationForKoLocationProviderTest {
                 .first()
 
         // then
-        val declaration = "Declaration:\nSAMPLE_CONSTANT_1"
+        val declaration = "Declaration:\nFIXTURE_CONSTANT_1"
         assertSoftly(sut.locationWithText) {
             startsWith("Location: /") shouldBeEqualTo true
             contains(projectPath) shouldBeEqualTo true

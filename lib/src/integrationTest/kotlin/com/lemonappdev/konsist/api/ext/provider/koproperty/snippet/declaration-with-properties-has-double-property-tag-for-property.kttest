@@ -1,7 +1,7 @@
 /**
- * Sample description
+ * Fixture description
  *
- * @property sampleProperty
- * @property sampleProperty
+ * @property fixtureProperty
+ * @property fixtureProperty
  */
-class SampleClass(val sampleProperty: Int)
+class FixtureClass(val fixtureProperty: Int)

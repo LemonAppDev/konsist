@@ -40,9 +40,9 @@ class AssertTrueOnDeclarationSequenceTest {
 
         // then
         try {
-            sut.assertTrue(testName = "sample test") { false }
+            sut.assertTrue(testName = "fixture test") { false }
         } catch (e: Exception) {
-            e.message?.shouldContain("Assert 'sample test' was violated (1 time)")
+            e.message?.shouldContain("Assert 'fixture test' was violated (1 time)")
                 ?: throw e
         }
     }
@@ -76,9 +76,9 @@ class AssertTrueOnDeclarationSequenceTest {
 
         // then
         try {
-            sut.assertTrue(testName = "sample test") { false }
+            sut.assertTrue(testName = "fixture test") { false }
         } catch (e: Exception) {
-            e.message?.shouldContain("Assert 'sample test' was violated (1 time)")
+            e.message?.shouldContain("Assert 'fixture test' was violated (1 time)")
                 ?: throw e
         }
     }
@@ -179,7 +179,7 @@ class AssertTrueOnDeclarationSequenceTest {
         try {
             sut.assertTrue { false }
         } catch (e: Exception) {
-            e.message?.shouldContain("Class SampleClass")
+            e.message?.shouldContain("Class FixtureClass")
                 ?: throw e
         }
     }
@@ -338,7 +338,7 @@ class AssertTrueOnDeclarationSequenceTest {
                 .asSequence()
 
         // then
-        sut.assertTrue { it.name == "SampleClass" }
+        sut.assertTrue { it.name == "FixtureClass" }
     }
 
     @Test
@@ -383,7 +383,7 @@ class AssertTrueOnDeclarationSequenceTest {
         // when
         val func = {
             sut.assertFalse {
-                it.name == "SampleClass"
+                it.name == "FixtureClass"
             }
         }
 
@@ -462,7 +462,7 @@ class AssertTrueOnDeclarationSequenceTest {
                 .asSequence()
 
         // then
-        sut.assertTrue { it.primaryConstructor?.hasParameterWithName("sampleParameter") }
+        sut.assertTrue { it.primaryConstructor?.hasParameterWithName("fixtureParameter") }
     }
 
     @Test
@@ -475,7 +475,7 @@ class AssertTrueOnDeclarationSequenceTest {
 
         // when
         val func = {
-            sut.assertTrue { it.primaryConstructor?.hasParameterWithName("sampleParameter") }
+            sut.assertTrue { it.primaryConstructor?.hasParameterWithName("fixtureParameter") }
         }
 
         // then
@@ -504,7 +504,7 @@ class AssertTrueOnDeclarationSequenceTest {
 
         // when
         val func = {
-            sut.assertFalse { it.primaryConstructor?.hasParameterWithName("sampleParameter") }
+            sut.assertFalse { it.primaryConstructor?.hasParameterWithName("fixtureParameter") }
         }
 
         // then

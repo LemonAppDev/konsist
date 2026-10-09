@@ -40,9 +40,9 @@ class AssertTrueOnSingleDeclarationTest {
 
         // then
         try {
-            sut.assertTrue(testName = "sample test") { false }
+            sut.assertTrue(testName = "fixture test") { false }
         } catch (e: Exception) {
-            e.message?.shouldContain("Assert 'sample test' was violated (1 time)")
+            e.message?.shouldContain("Assert 'fixture test' was violated (1 time)")
                 ?: throw e
         }
     }
@@ -76,9 +76,9 @@ class AssertTrueOnSingleDeclarationTest {
 
         // then
         try {
-            sut.assertTrue(testName = "sample test") { false }
+            sut.assertTrue(testName = "fixture test") { false }
         } catch (e: Exception) {
-            e.message?.shouldContain("Assert 'sample test' was violated (1 time)")
+            e.message?.shouldContain("Assert 'fixture test' was violated (1 time)")
                 ?: throw e
         }
     }
@@ -179,7 +179,7 @@ class AssertTrueOnSingleDeclarationTest {
         try {
             sut.assertTrue { false }
         } catch (e: Exception) {
-            e.message?.shouldContain("Class SampleClass")
+            e.message?.shouldContain("Class FixtureClass")
                 ?: throw e
         }
     }
@@ -276,7 +276,7 @@ class AssertTrueOnSingleDeclarationTest {
                 .first()
 
         // then
-        sut.assertTrue { it.name == "SampleClass" }
+        sut.assertTrue { it.name == "FixtureClass" }
     }
 
     @Test
@@ -321,7 +321,7 @@ class AssertTrueOnSingleDeclarationTest {
         // when
         val func = {
             sut.assertFalse {
-                it.name == "SampleClass"
+                it.name == "FixtureClass"
             }
         }
 

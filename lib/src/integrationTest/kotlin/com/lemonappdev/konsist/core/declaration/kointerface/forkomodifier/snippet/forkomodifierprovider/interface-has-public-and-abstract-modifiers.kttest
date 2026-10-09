@@ -1,2 +1,2 @@
-public abstract interface SampleInterface {
+public abstract interface FixtureInterface {
 }

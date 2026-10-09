@@ -1,11 +1,11 @@
-class SampleClass {
+class FixtureClass {
     init {
-        val sampleProperty = 6
+        val fixtureProperty = 6
     }
 
     init {
         fun localFunction() {}
 
-        println("Sample text")
+        println("Fixture text")
     }
 }

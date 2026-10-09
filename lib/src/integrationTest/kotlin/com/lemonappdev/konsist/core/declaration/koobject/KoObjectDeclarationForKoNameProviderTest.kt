@@ -16,13 +16,23 @@ class KoObjectDeclarationForKoNameProviderTest {
 
         // then
         assertSoftly(sut) {
-            name shouldBeEqualTo "SampleObject"
-            hasNameStartingWith("Sample") shouldBeEqualTo true
+            name shouldBeEqualTo "FixtureObject"
+            hasName("FixtureObject") shouldBeEqualTo true
+            hasName("OtherObject") shouldBeEqualTo false
+            hasName("fixtureobject", ignoreCase = false) shouldBeEqualTo false
+            hasName("fixtureobject", ignoreCase = true) shouldBeEqualTo true
+            hasNameStartingWith("Fixture") shouldBeEqualTo true
             hasNameStartingWith("Other") shouldBeEqualTo false
+            hasNameStartingWith("fixture", ignoreCase = false) shouldBeEqualTo false
+            hasNameStartingWith("fixture", ignoreCase = true) shouldBeEqualTo true
             hasNameEndingWith("ject") shouldBeEqualTo true
             hasNameEndingWith("other") shouldBeEqualTo false
-            hasNameContaining("leObj") shouldBeEqualTo true
-            hasNameContaining("leobj") shouldBeEqualTo false
+            hasNameEndingWith("JECT", ignoreCase = false) shouldBeEqualTo false
+            hasNameEndingWith("JECT", ignoreCase = true) shouldBeEqualTo true
+            hasNameContaining("reObj") shouldBeEqualTo true
+            hasNameContaining("other") shouldBeEqualTo false
+            hasNameContaining("reobj", ignoreCase = false) shouldBeEqualTo false
+            hasNameContaining("reobj", ignoreCase = true) shouldBeEqualTo true
             hasNameMatching(Regex("[a-zA-Z]+")) shouldBeEqualTo true
             hasNameMatching(Regex("[0-9]+")) shouldBeEqualTo false
         }
@@ -38,13 +48,23 @@ class KoObjectDeclarationForKoNameProviderTest {
 
         // then
         assertSoftly(sut) {
-            name shouldBeEqualTo "SampleObject"
-            hasNameStartingWith("Sample") shouldBeEqualTo true
+            name shouldBeEqualTo "FixtureObject"
+            hasName("FixtureObject") shouldBeEqualTo true
+            hasName("OtherObject") shouldBeEqualTo false
+            hasName("fixtureobject", ignoreCase = false) shouldBeEqualTo false
+            hasName("fixtureobject", ignoreCase = true) shouldBeEqualTo true
+            hasNameStartingWith("Fixture") shouldBeEqualTo true
             hasNameStartingWith("Other") shouldBeEqualTo false
+            hasNameStartingWith("fixture", ignoreCase = false) shouldBeEqualTo false
+            hasNameStartingWith("fixture", ignoreCase = true) shouldBeEqualTo true
             hasNameEndingWith("ject") shouldBeEqualTo true
             hasNameEndingWith("other") shouldBeEqualTo false
-            hasNameContaining("leObj") shouldBeEqualTo true
-            hasNameContaining("leobj") shouldBeEqualTo false
+            hasNameEndingWith("JECT", ignoreCase = false) shouldBeEqualTo false
+            hasNameEndingWith("JECT", ignoreCase = true) shouldBeEqualTo true
+            hasNameContaining("reObj") shouldBeEqualTo true
+            hasNameContaining("other") shouldBeEqualTo false
+            hasNameContaining("reobj", ignoreCase = false) shouldBeEqualTo false
+            hasNameContaining("reobj", ignoreCase = true) shouldBeEqualTo true
             hasNameMatching(Regex("[a-zA-Z]+")) shouldBeEqualTo true
             hasNameMatching(Regex("[0-9]+")) shouldBeEqualTo false
         }

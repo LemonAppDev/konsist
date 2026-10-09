@@ -1,7 +1,7 @@
-class SampleTopLevelClass {
-    public class SampleClass
+class FixtureTopLevelClass {
+    public class FixtureClass
 
-    interface SampleInterface
+    interface FixtureInterface
 
-    object SampleObject
+    object FixtureObject
 }

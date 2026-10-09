@@ -1,2 +1,2 @@
-tailrec fun sampleFunction() {
+tailrec fun fixtureFunction() {
 }

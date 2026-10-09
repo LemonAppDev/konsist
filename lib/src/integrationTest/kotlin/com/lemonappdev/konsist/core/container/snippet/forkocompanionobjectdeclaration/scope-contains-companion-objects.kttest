@@ -1,0 +1,7 @@
+class FixtureClass {
+    object FixtureNestedObject
+
+    companion object FixtureNestedCompanionObject
+}
+
+object FixtureObject

@@ -1,8 +1,8 @@
-import com.lemonappdev.konsist.testdata.SampleAnnotation
-import com.lemonappdev.konsist.testdata.SampleAnnotationWithParameter
+import com.lemonappdev.konsist.testdata.FixtureAnnotation
+import com.lemonappdev.konsist.testdata.FixtureAnnotationWithParameter
 
-@SampleAnnotation
-@SampleAnnotationWithParameter(sampleParameter = " parameter description ")
-private typealias SampleTypeAlias = (Boolean) -> Int
+@FixtureAnnotation
+@FixtureAnnotationWithParameter(fixtureParameter = " parameter description ")
+private typealias FixtureTypeAlias = (Boolean) -> Int
 
-class SampleClass(val sampleProperty: SampleTypeAlias)
+class FixtureClass(val fixtureProperty: FixtureTypeAlias)

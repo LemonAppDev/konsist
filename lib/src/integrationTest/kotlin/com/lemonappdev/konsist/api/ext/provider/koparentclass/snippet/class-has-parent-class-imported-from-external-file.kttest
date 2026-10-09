@@ -1,4 +1,4 @@
-import com.lemonappdev.konsist.testdata.SampleParentClass
-import com.lemonappdev.konsist.testdata.SampleParentInterface
+import com.lemonappdev.konsist.testdata.FixtureParentClass
+import com.lemonappdev.konsist.testdata.FixtureParentInterface
 
-class SampleClass : SampleParentClass(), SampleParentInterface
+class FixtureClass : FixtureParentClass(), FixtureParentInterface

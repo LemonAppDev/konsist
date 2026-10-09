@@ -153,7 +153,7 @@ class Architecture4Test {
         // then
         val filepath =
             "file://$rootPath/lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/assertarchitecture/" +
-                "architecture4/project/data/sample/DataThirdClass.kt"
+                "architecture4/project/data/fixture/DataThirdClass.kt"
 
         result
             .message
@@ -183,7 +183,7 @@ class Architecture4Test {
         // then
         val filepath =
             "file://$rootPath/lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/" +
-                "assertarchitecture/architecture4/project/data/sample/DataThirdClass.kt"
+                "assertarchitecture/architecture4/project/data/fixture/DataThirdClass.kt"
 
         result
             .message
@@ -215,7 +215,7 @@ class Architecture4Test {
         // then
         val filepath =
             "file://$rootPath/lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/" +
-                "assertarchitecture/architecture4/project/data/sample/DataThirdClass.kt"
+                "assertarchitecture/architecture4/project/data/fixture/DataThirdClass.kt"
 
         result
             .message
@@ -249,7 +249,7 @@ class Architecture4Test {
         // then
         val filepath =
             "file://$rootPath/lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/" +
-                "assertarchitecture/architecture4/project/data/sample/DataThirdClass.kt"
+                "assertarchitecture/architecture4/project/data/fixture/DataThirdClass.kt"
 
         result
             .message
@@ -278,7 +278,7 @@ class Architecture4Test {
         // then
         val filepath =
             "file://$rootPath/lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/" +
-                "assertarchitecture/architecture4/project/presentation/sample/PresentationThirdClass.kt"
+                "assertarchitecture/architecture4/project/presentation/fixture/PresentationThirdClass.kt"
 
         result
             .message
@@ -306,7 +306,7 @@ class Architecture4Test {
         // then
         val filepath =
             "file://$rootPath/lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/" +
-                "assertarchitecture/architecture4/project/presentation/sample/PresentationThirdClass.kt"
+                "assertarchitecture/architecture4/project/presentation/fixture/PresentationThirdClass.kt"
 
         result
             .message
@@ -337,7 +337,7 @@ class Architecture4Test {
         // then
         val filepath =
             "file://$rootPath/lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/" +
-                "assertarchitecture/architecture4/project/presentation/sample/PresentationThirdClass.kt"
+                "assertarchitecture/architecture4/project/presentation/fixture/PresentationThirdClass.kt"
 
         result
             .message
@@ -369,7 +369,7 @@ class Architecture4Test {
         // then
         val filepath =
             "file://$rootPath/lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/" +
-                "assertarchitecture/architecture4/project/presentation/sample/PresentationThirdClass.kt"
+                "assertarchitecture/architecture4/project/presentation/fixture/PresentationThirdClass.kt"
 
         result
             .message

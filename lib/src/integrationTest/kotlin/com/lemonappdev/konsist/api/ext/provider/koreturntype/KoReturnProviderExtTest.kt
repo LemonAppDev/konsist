@@ -5,7 +5,7 @@ import com.lemonappdev.konsist.api.ext.koscope.declarationsOf
 import com.lemonappdev.konsist.api.ext.provider.hasReturnTypeOf
 import com.lemonappdev.konsist.api.ext.provider.hasValidKDocReturnTag
 import com.lemonappdev.konsist.api.provider.KoReturnProvider
-import com.lemonappdev.konsist.testdata.SampleClass
+import com.lemonappdev.konsist.testdata.FixtureClass
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
@@ -22,7 +22,7 @@ class KoReturnProviderExtTest {
         // then
         assertSoftly(sut) {
             hasReturnTypeOf<String>() shouldBeEqualTo false
-            hasReturnTypeOf<SampleClass>() shouldBeEqualTo false
+            hasReturnTypeOf<FixtureClass>() shouldBeEqualTo false
         }
     }
 
@@ -51,7 +51,7 @@ class KoReturnProviderExtTest {
 
         // then
         assertSoftly(sut) {
-            hasReturnTypeOf<SampleClass>() shouldBeEqualTo true
+            hasReturnTypeOf<FixtureClass>() shouldBeEqualTo true
             hasReturnTypeOf<Int>() shouldBeEqualTo false
         }
     }

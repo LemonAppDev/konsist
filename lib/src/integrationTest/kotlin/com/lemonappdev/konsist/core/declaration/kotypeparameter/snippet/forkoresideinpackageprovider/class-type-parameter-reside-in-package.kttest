@@ -1,3 +1,3 @@
-package com.samplepackage
+package com.fixturepackage
 
-class SampleClass<TestType>(val sampleParameter: TestType)
+class FixtureClass<TestType>(val fixtureParameter: TestType)

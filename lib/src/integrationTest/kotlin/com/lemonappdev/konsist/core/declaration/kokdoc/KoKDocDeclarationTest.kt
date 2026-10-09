@@ -17,7 +17,7 @@ class KoKDocDeclarationTest {
                 .first()
 
         // then
-        val declaration = "Declaration:\nThis is a sample kdoc."
+        val declaration = "Declaration:\nThis is a fixture kdoc."
         assertSoftly(sut.toString()) {
             startsWith("Location: /") shouldBeEqualTo true
             endsWith(declaration) shouldBeEqualTo true

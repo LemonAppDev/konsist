@@ -1,3 +1,3 @@
-import com.lemonappdev.konsist.testdata.SampleGenericClassWithParameter
+import com.lemonappdev.konsist.testdata.FixtureGenericClassWithParameter
 
-fun sampleFunction(sampleParameter: SampleGenericClassWithParameter<String> = SampleGenericClassWithParameter("")) {}
+fun fixtureFunction(fixtureParameter: FixtureGenericClassWithParameter<String> = FixtureGenericClassWithParameter("")) {}

@@ -48,12 +48,16 @@ interface KoPropertyProvider : KoBaseProvider {
      * @param name the name of the property to check.
      * @param names the names of the properties to check.
      * @param includeNested Specifies whether to include nested properties in the check (optional, default is `true`).
+     * @param ignoreCase Specifies whether the comparison should ignore case.
+     *        If `true`, the prefix comparison will be case-insensitive.
+     *        If `false`, the comparison will consider case sensitivity.
      * @return `true` if there is a matching declaration, `false` otherwise.
      */
     fun hasPropertyWithName(
         name: String,
         vararg names: String,
         includeNested: Boolean = true,
+        ignoreCase: Boolean = false,
     ): Boolean
 
     /**
@@ -61,11 +65,15 @@ interface KoPropertyProvider : KoBaseProvider {
      *
      * @param names the names of the properties to check.
      * @param includeNested Specifies whether to include nested properties in the check (optional, default is `true`).
+     * @param ignoreCase Specifies whether the comparison should ignore case.
+     *        If `true`, the prefix comparison will be case-insensitive.
+     *        If `false`, the comparison will consider case sensitivity.
      * @return `true` if there is a matching declaration, `false` otherwise.
      */
     fun hasPropertyWithName(
         names: Collection<String>,
         includeNested: Boolean = true,
+        ignoreCase: Boolean = false,
     ): Boolean
 
     /**
@@ -74,12 +82,16 @@ interface KoPropertyProvider : KoBaseProvider {
      * @param name The name of the property to check.
      * @param names The names of the properties to check.
      * @param includeNested Specifies whether to include nested properties in the check (optional, default is `true`).
+     * @param ignoreCase Specifies whether the comparison should ignore case.
+     *        If `true`, the prefix comparison will be case-insensitive.
+     *        If `false`, the comparison will consider case sensitivity.
      * @return `true` if there are declarations with all the specified names, `false` otherwise.
      */
     fun hasPropertiesWithAllNames(
         name: String,
         vararg names: String,
         includeNested: Boolean = true,
+        ignoreCase: Boolean = false,
     ): Boolean
 
     /**
@@ -87,11 +99,15 @@ interface KoPropertyProvider : KoBaseProvider {
      *
      * @param names The names of the properties to check.
      * @param includeNested Specifies whether to include nested properties in the check (optional, default is `true`).
+     * @param ignoreCase Specifies whether the comparison should ignore case.
+     *        If `true`, the prefix comparison will be case-insensitive.
+     *        If `false`, the comparison will consider case sensitivity.
      * @return `true` if there are declarations with all the specified names, `false` otherwise.
      */
     fun hasPropertiesWithAllNames(
         names: Collection<String>,
         includeNested: Boolean = true,
+        ignoreCase: Boolean = false,
     ): Boolean
 
     /**

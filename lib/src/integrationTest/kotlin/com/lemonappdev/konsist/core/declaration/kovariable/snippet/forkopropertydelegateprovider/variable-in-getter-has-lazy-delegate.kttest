@@ -1,6 +1,6 @@
-val sampleProperty: String
+val fixtureProperty: String
     get() {
-        val sampleProperty: String by lazy { "" }
+        val fixtureProperty: String by lazy { "" }
 
         return ""
     }

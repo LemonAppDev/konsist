@@ -1,0 +1,1 @@
+val fixtureProperty: List<Map<List<String>?, Int>> = emptyList()

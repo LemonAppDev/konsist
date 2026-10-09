@@ -1,5 +1,5 @@
-object SampleTopLevelObject {
-    private data object SampleObject {
-        private object SampleNestedObject
+object FixtureTopLevelObject {
+    private data object FixtureObject {
+        private object FixtureNestedObject
     }
 }

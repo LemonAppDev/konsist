@@ -1,3 +1,3 @@
-enum class SampleClass {
-    SAMPLE_CONSTANT
+enum class FixtureClass {
+    FIXTURE_CONSTANT
 }

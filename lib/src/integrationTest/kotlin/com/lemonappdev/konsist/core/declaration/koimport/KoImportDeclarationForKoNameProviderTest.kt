@@ -15,7 +15,13 @@ class KoImportDeclarationForKoNameProviderTest {
                 .first()
 
         // then
-        sut.name shouldBeEqualTo "com.lemonappdev.konsist.testdata.SampleClass"
+        assertSoftly(sut) {
+            name shouldBeEqualTo "com.lemonappdev.konsist.testdata.FixtureClass"
+            hasName("com.lemonappdev.konsist.testdata.FixtureClass") shouldBeEqualTo true
+            hasName("com.lemonappdev.konsist.testdata.OtherClass") shouldBeEqualTo false
+            hasName("com.lemonappdev.konsist.testdata.fixtureclass", ignoreCase = false) shouldBeEqualTo false
+            hasName("com.lemonappdev.konsist.testdata.fixtureclass", ignoreCase = true) shouldBeEqualTo true
+        }
     }
 
     @Test
@@ -27,7 +33,13 @@ class KoImportDeclarationForKoNameProviderTest {
                 .first()
 
         // then
-        sut.name shouldBeEqualTo "com.lemonappdev.konsist.testdata.SampleType"
+        assertSoftly(sut) {
+            name shouldBeEqualTo "com.lemonappdev.konsist.testdata.FixtureType"
+            hasName("com.lemonappdev.konsist.testdata.FixtureType") shouldBeEqualTo true
+            hasName("com.lemonappdev.konsist.testdata.OtherType") shouldBeEqualTo false
+            hasName("com.lemonappdev.konsist.testdata.fixturetype", ignoreCase = false) shouldBeEqualTo false
+            hasName("com.lemonappdev.konsist.testdata.fixturetype", ignoreCase = true) shouldBeEqualTo true
+        }
     }
 
     @Test
@@ -42,6 +54,8 @@ class KoImportDeclarationForKoNameProviderTest {
         assertSoftly(sut) {
             hasNameStartingWith("com.lemonappdev") shouldBeEqualTo true
             hasNameStartingWith("wrong-prefix") shouldBeEqualTo false
+            hasNameStartingWith("COM.lemonappdev", ignoreCase = false) shouldBeEqualTo false
+            hasNameStartingWith("COM.lemonappdev", ignoreCase = true) shouldBeEqualTo true
         }
     }
 
@@ -55,8 +69,10 @@ class KoImportDeclarationForKoNameProviderTest {
 
         // then
         assertSoftly(sut) {
-            hasNameEndingWith("testdata.SampleClass") shouldBeEqualTo true
+            hasNameEndingWith("testdata.FixtureClass") shouldBeEqualTo true
             hasNameEndingWith("wrong-suffix") shouldBeEqualTo false
+            hasNameEndingWith("TESTDATA.FixtureClass", ignoreCase = false) shouldBeEqualTo false
+            hasNameEndingWith("TESTDATA.FixtureClass", ignoreCase = true) shouldBeEqualTo true
         }
     }
 
@@ -72,6 +88,8 @@ class KoImportDeclarationForKoNameProviderTest {
         assertSoftly(sut) {
             hasNameContaining("konsist.testdata.") shouldBeEqualTo true
             hasNameContaining("not-containing") shouldBeEqualTo false
+            hasNameContaining("konsist.TESTDATA.", ignoreCase = false) shouldBeEqualTo false
+            hasNameContaining("konsist.TESTDATA.", ignoreCase = true) shouldBeEqualTo true
         }
     }
 

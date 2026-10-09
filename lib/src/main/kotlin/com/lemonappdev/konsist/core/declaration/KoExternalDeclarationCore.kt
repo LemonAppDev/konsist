@@ -21,7 +21,7 @@ internal class KoExternalDeclarationCore(
 
     override val name: String by lazy {
         name
-            /**
+            /*
              * Replace everything after '<' and '(' characters with empty string e.g.
              *
              * Foo(param) -> Foo

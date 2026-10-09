@@ -15,7 +15,13 @@ class KoFileDeclarationForKoNameProviderTest {
                 .first()
 
         // then
-        sut.name shouldBeEqualTo "file-name"
+        assertSoftly(sut) {
+            name shouldBeEqualTo "file-name"
+            hasName("file-name") shouldBeEqualTo true
+            hasName("wrong-name") shouldBeEqualTo false
+            hasName("FILE-name", ignoreCase = false) shouldBeEqualTo false
+            hasName("FILE-name", ignoreCase = true) shouldBeEqualTo true
+        }
     }
 
     @Test
@@ -30,6 +36,8 @@ class KoFileDeclarationForKoNameProviderTest {
         assertSoftly(sut) {
             hasNameStartingWith("file-has-name") shouldBeEqualTo true
             hasNameStartingWith("wrong-prefix") shouldBeEqualTo false
+            hasNameStartingWith("FILE-has-name", ignoreCase = false) shouldBeEqualTo false
+            hasNameStartingWith("FILE-has-name", ignoreCase = true) shouldBeEqualTo true
         }
     }
 
@@ -45,6 +53,8 @@ class KoFileDeclarationForKoNameProviderTest {
         assertSoftly(sut) {
             hasNameEndingWith("with-suffix") shouldBeEqualTo true
             hasNameEndingWith("wrong-suffix") shouldBeEqualTo false
+            hasNameEndingWith("WITH-suffix", ignoreCase = false) shouldBeEqualTo false
+            hasNameEndingWith("WITH-suffix", ignoreCase = true) shouldBeEqualTo true
         }
     }
 
@@ -60,6 +70,8 @@ class KoFileDeclarationForKoNameProviderTest {
         assertSoftly(sut) {
             hasNameContaining("name-containing") shouldBeEqualTo true
             hasNameContaining("not-containing") shouldBeEqualTo false
+            hasNameContaining("NAME-containing", ignoreCase = false) shouldBeEqualTo false
+            hasNameContaining("NAME-containing", ignoreCase = true) shouldBeEqualTo true
         }
     }
 

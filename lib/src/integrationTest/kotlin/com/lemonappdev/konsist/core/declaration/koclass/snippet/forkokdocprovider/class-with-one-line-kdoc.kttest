@@ -1,2 +1,2 @@
-/** Sample KDoc */
-class SampleClass
+/** Fixture KDoc */
+class FixtureClass

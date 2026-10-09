@@ -1,0 +1,3 @@
+@Deprecated("Fixture annotation")
+fun fixtureFunction() {
+}

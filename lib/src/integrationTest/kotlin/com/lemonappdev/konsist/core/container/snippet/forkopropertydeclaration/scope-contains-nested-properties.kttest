@@ -1,9 +1,9 @@
-val sampleProperty = ""
+val fixtureProperty = ""
 
-fun sampleFunction() {
-    val sampleLocalProperty = 6
+fun fixtureFunction() {
+    val fixtureLocalProperty = 6
 }
 
-class SampleClass {
-    val sampleNestedProperty = ""
+class FixtureClass {
+    val fixtureNestedProperty = ""
 }

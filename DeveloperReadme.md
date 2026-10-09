@@ -20,7 +20,7 @@
 
 ## Production Release
 
-1. Run `/scripts/create_release.py` script
+1. Run `/misc/scripts/create_release.py` script
 2. Select option `1` on the console
 3. (If needed) Remove deprecated API
 4. Run `./gradlew publish -Pkonsist.releaseTarget=release` on the `main` branch to release a new version 
@@ -36,7 +36,7 @@
 1. Create `hotfix/KON-XXX-...` branch from `main`
 2. Fix the bug and open PR targeting `main`
 3. Merge the PR
-4. Run `/scripts/create_release.py` script
+4. Run `/misc/scripts/create_release.py` script
 5. Select option `2` on the console
 6. (If needed) Remove deprecated API
 7. Run `./gradlew publish -Pkonsist.releaseTarget=release` on the `main` branch to release a new version

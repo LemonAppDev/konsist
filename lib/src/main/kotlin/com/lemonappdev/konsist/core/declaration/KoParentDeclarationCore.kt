@@ -5,6 +5,7 @@ import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoParentDeclaration
 import com.lemonappdev.konsist.api.provider.KoDeclarationCastProvider
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
+import com.lemonappdev.konsist.core.declaration.type.KoKotlinTypeDeclarationCore
 import com.lemonappdev.konsist.core.model.getClass
 import com.lemonappdev.konsist.core.model.getInterface
 import com.lemonappdev.konsist.core.model.getTypeAlias
@@ -24,6 +25,7 @@ import com.lemonappdev.konsist.core.provider.KoSourceSetProviderCore
 import com.lemonappdev.konsist.core.provider.KoTextProviderCore
 import com.lemonappdev.konsist.core.provider.KoTypeArgumentProviderCore
 import com.lemonappdev.konsist.core.provider.packagee.KoPackageDeclarationProviderCore
+import com.lemonappdev.konsist.core.util.TypeUtil.isKotlinType
 import org.jetbrains.kotlin.com.intellij.psi.PsiElement
 import org.jetbrains.kotlin.psi.KtAnnotationEntry
 import org.jetbrains.kotlin.psi.KtConstructorCalleeExpression
@@ -95,17 +97,17 @@ internal class KoParentDeclarationCore(
                 .substringBefore("(")
                 .substringBefore("<")
 
-        val innerName = if (name.contains(".")) name.substringBeforeLast(".") else name
-        val outerName = if (name.contains(".")) name.substringAfterLast(".") else name
+        val outerName = if (name.contains(".")) name.substringBeforeLast(".") else name
+        val innerName = if (name.contains(".")) name.substringAfterLast(".") else name
 
         val import =
             containingFile
                 .imports
                 .firstOrNull { import ->
                     if (import.alias != null) {
-                        import.alias?.name == innerName
+                        import.alias?.name == outerName
                     } else {
-                        import.name.substringAfterLast(".") == outerName
+                        import.name.substringAfterLast(".") == outerName || import.name.endsWith(name)
                     }
                 }
 
@@ -117,10 +119,15 @@ internal class KoParentDeclarationCore(
 
         (
             import?.alias
-                ?: getClass(outerName, fullyQualifiedName, isAlias, containingFile)
-                ?: getInterface(outerName, fullyQualifiedName, isAlias, containingFile)
-                ?: getTypeAlias(outerName, fullyQualifiedName, containingFile)
-                ?: KoExternalDeclarationCore.getInstance(outerName, ktSuperTypeListEntry)
+                ?: getClass(innerName, fullyQualifiedName, isAlias, containingFile)
+                ?: getInterface(innerName, fullyQualifiedName, isAlias, containingFile)
+                ?: getTypeAlias(innerName, fullyQualifiedName, containingFile)
+                ?: if (isKotlinType(name)) {
+                    KoKotlinTypeDeclarationCore.getInstance(ktElement, containingDeclaration)
+                } else {
+                    null
+                }
+                ?: KoExternalDeclarationCore.getInstance(innerName, ktSuperTypeListEntry)
         )
             as? KoDeclarationCastProvider
     }

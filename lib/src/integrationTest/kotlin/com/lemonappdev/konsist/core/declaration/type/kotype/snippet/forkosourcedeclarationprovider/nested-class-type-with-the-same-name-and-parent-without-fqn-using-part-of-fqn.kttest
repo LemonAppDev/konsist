@@ -1,11 +1,11 @@
-package com.samplepackage
+package com.fixturepackage
 
 interface FirstInterface {
-    fun method(arg: SampleNestedClassWithTheSameName)
-    data class SampleNestedClassWithTheSameName(val sampleFirstParameter: String)
+    fun method(arg: FixtureNestedClassWithTheSameName)
+    data class FixtureNestedClassWithTheSameName(val fixtureFirstParameter: String)
 }
 
 interface SecondInterface {
-    fun method(arg: SecondInterface.SampleNestedClassWithTheSameName)
-    data class SampleNestedClassWithTheSameName(val sampleSecondParameter: String)
+    fun method(arg: SecondInterface.FixtureNestedClassWithTheSameName)
+    data class FixtureNestedClassWithTheSameName(val fixtureSecondParameter: String)
 }

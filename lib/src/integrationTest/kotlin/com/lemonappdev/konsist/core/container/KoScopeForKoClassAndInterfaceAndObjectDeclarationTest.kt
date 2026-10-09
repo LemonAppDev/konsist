@@ -25,11 +25,11 @@ class KoScopeForKoClassAndInterfaceAndObjectDeclarationTest {
         // then
         val expected =
             listOf(
-                "SampleLocalClass",
-                "SampleClassNestedInsideObject",
-                "SampleInterfaceNestedInsideObject",
-                "SampleObject",
-                "SampleObjectNestedInsideObject",
+                "FixtureLocalClass",
+                "FixtureClassNestedInsideObject",
+                "FixtureInterfaceNestedInsideObject",
+                "FixtureObject",
+                "FixtureObjectNestedInsideObject",
             )
 
         sut
@@ -46,10 +46,10 @@ class KoScopeForKoClassAndInterfaceAndObjectDeclarationTest {
         // then
         val expected =
             listOf(
-                "SampleClassNestedInsideObject",
-                "SampleInterfaceNestedInsideObject",
-                "SampleObject",
-                "SampleObjectNestedInsideObject",
+                "FixtureClassNestedInsideObject",
+                "FixtureInterfaceNestedInsideObject",
+                "FixtureObject",
+                "FixtureObjectNestedInsideObject",
             )
 
         sut
@@ -64,7 +64,7 @@ class KoScopeForKoClassAndInterfaceAndObjectDeclarationTest {
         val sut = getSnippetFile("scope-contains-nested-and-local-classes-and-interfaces-and-objects")
 
         // then
-        val expected = listOf("SampleLocalClass", "SampleObject")
+        val expected = listOf("FixtureLocalClass", "FixtureObject")
 
         sut
             .classesAndInterfacesAndObjects(includeNested = false, includeLocal = true)
@@ -78,7 +78,7 @@ class KoScopeForKoClassAndInterfaceAndObjectDeclarationTest {
         val sut = getSnippetFile("scope-contains-nested-and-local-classes-and-interfaces-and-objects")
 
         // then
-        val expected = listOf("SampleObject")
+        val expected = listOf("FixtureObject")
 
         sut
             .classesAndInterfacesAndObjects(includeNested = false, includeLocal = false)
@@ -97,30 +97,30 @@ class KoScopeForKoClassAndInterfaceAndObjectDeclarationTest {
                 arguments(
                     false,
                     false,
-                    listOf("SampleClass"),
+                    listOf("FixtureClass"),
                 ),
                 arguments(
                     true,
                     false,
                     listOf(
-                        "SampleClass",
-                        "SampleNestedClass1",
-                        "SampleNestedClass2",
+                        "FixtureClass",
+                        "FixtureNestedClass1",
+                        "FixtureNestedClass2",
                     ),
                 ),
                 arguments(
                     false,
                     true,
-                    listOf("SampleClass"),
+                    listOf("FixtureClass"),
                 ),
                 arguments(
                     true,
                     true,
                     listOf(
-                        "SampleClass",
-                        "SampleLocalClass",
-                        "SampleNestedClass1",
-                        "SampleNestedClass2",
+                        "FixtureClass",
+                        "FixtureLocalClass",
+                        "FixtureNestedClass1",
+                        "FixtureNestedClass2",
                     ),
                 ),
             )

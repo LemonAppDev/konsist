@@ -1,7 +1,7 @@
-object SampleObject : SampleParentClass(), SampleParentInterface2
+object FixtureObject : FixtureParentClass(), FixtureParentInterface2
 
-open class SampleParentClass: SampleParentInterface1
+open class FixtureParentClass: FixtureParentInterface1
 
-interface SampleParentInterface1: SampleParentInterface2
+interface FixtureParentInterface1: FixtureParentInterface2
 
-interface SampleParentInterface2
+interface FixtureParentInterface2

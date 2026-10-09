@@ -14,7 +14,7 @@ class KoTypeAliasDeclarationForKoFullyQualifiedNameProviderTest {
                 .first()
 
         // then
-        sut.fullyQualifiedName shouldBeEqualTo "com.samplepackage.SampleTypeAlias"
+        sut.fullyQualifiedName shouldBeEqualTo "com.fixturepackage.FixtureTypeAlias"
     }
 
     @Test
@@ -26,7 +26,7 @@ class KoTypeAliasDeclarationForKoFullyQualifiedNameProviderTest {
                 .first()
 
         // then
-        sut.fullyQualifiedName shouldBeEqualTo "SampleTypeAlias"
+        sut.fullyQualifiedName shouldBeEqualTo "FixtureTypeAlias"
     }
 
     private fun getSnippetFile(fileName: String) =

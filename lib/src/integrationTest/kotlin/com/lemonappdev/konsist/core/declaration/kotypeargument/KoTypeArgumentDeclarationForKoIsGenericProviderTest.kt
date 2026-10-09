@@ -40,10 +40,40 @@ class KoTypeArgumentDeclarationForKoIsGenericProviderTest {
     }
 
     @Test
+    fun `nullable-generic-type-argument`() {
+        // given
+        val sut =
+            getSnippetFile("nullable-generic-type-argument")
+                .properties()
+                .first()
+                .type
+                ?.typeArguments
+                ?.firstOrNull()
+
+        // then
+        sut?.isGeneric shouldBeEqualTo true
+    }
+
+    @Test
     fun `typealias-with-generic-type-argument`() {
         // given
         val sut =
             getSnippetFile("typealias-with-generic-type-argument")
+                .properties()
+                .first()
+                .type
+                ?.typeArguments
+                ?.firstOrNull()
+
+        // then
+        sut?.isGeneric shouldBeEqualTo true
+    }
+
+    @Test
+    fun `typealias-with-nullable-generic-type-argument`() {
+        // given
+        val sut =
+            getSnippetFile("typealias-with-nullable-generic-type-argument")
                 .properties()
                 .first()
                 .type

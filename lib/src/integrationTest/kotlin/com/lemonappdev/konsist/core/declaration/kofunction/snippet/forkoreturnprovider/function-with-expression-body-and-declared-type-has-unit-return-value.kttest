@@ -1,1 +1,1 @@
-fun sampleFunction(): Unit = println("some text")
+fun fixtureFunction(): Unit = println("some text")

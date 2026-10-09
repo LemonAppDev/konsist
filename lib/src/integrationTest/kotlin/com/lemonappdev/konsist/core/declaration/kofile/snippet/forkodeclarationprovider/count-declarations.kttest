@@ -1,8 +1,8 @@
-private class SampleNestedClass {
+private class FixtureNestedClass {
 
-    private val sampleNestedProperty = ""
+    private val fixtureNestedProperty = ""
 }
 
-private fun sampleFunction() {
-    val sampleLocalProperty = ""
+private fun fixtureFunction() {
+    val fixtureLocalProperty = ""
 }

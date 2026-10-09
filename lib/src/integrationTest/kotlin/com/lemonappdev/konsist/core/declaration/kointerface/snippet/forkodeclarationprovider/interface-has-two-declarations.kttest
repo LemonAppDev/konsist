@@ -1,6 +1,6 @@
-interface SampleInterface {
-    val sampleProperty: String
+interface FixtureInterface {
+    val fixtureProperty: String
 
-    fun sampleFunction() {
+    fun fixtureFunction() {
     }
 }

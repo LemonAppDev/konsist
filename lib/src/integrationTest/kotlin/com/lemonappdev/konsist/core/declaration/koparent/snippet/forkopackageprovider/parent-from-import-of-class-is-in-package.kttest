@@ -1,5 +1,5 @@
-package com.samplepackage
+package com.fixturepackage
 
-import com.lemonappdev.konsist.testdata.SampleParentClass
+import com.lemonappdev.konsist.testdata.FixtureParentClass
 
-class SampleClass: SampleParentClass()
+class FixtureClass: FixtureParentClass()

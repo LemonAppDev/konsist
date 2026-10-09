@@ -45,7 +45,7 @@ class KoObjectDeclarationForKoLocationProviderTest {
                 .first()
 
         // then
-        val declaration = "Declaration:\nobject SampleObject {\n}"
+        val declaration = "Declaration:\nobject FixtureObject {\n}"
         assertSoftly(sut.locationWithText) {
             startsWith("Location: /") shouldBeEqualTo true
             contains(projectPath) shouldBeEqualTo true

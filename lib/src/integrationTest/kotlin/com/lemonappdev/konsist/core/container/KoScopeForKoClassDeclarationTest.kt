@@ -24,7 +24,7 @@ class KoScopeForKoClassDeclarationTest {
         val sut = getSnippetFile("scope-contains-nested-and-local-classes")
 
         // then
-        val expected = listOf("SampleLocalClass", "SampleClassNestedInsideObject")
+        val expected = listOf("FixtureLocalClass", "FixtureClassNestedInsideObject")
 
         sut
             .classes(includeNested = true, includeLocal = true)
@@ -38,7 +38,7 @@ class KoScopeForKoClassDeclarationTest {
         val sut = getSnippetFile("scope-contains-nested-and-local-classes")
 
         // then
-        val expected = listOf("SampleClassNestedInsideObject")
+        val expected = listOf("FixtureClassNestedInsideObject")
 
         sut
             .classes(includeNested = true, includeLocal = false)
@@ -52,7 +52,7 @@ class KoScopeForKoClassDeclarationTest {
         val sut = getSnippetFile("scope-contains-nested-and-local-classes")
 
         // then
-        val expected = listOf("SampleLocalClass")
+        val expected = listOf("FixtureLocalClass")
 
         sut
             .classes(includeNested = false, includeLocal = true)
@@ -85,30 +85,30 @@ class KoScopeForKoClassDeclarationTest {
                 arguments(
                     false,
                     false,
-                    listOf("SampleClass"),
+                    listOf("FixtureClass"),
                 ),
                 arguments(
                     true,
                     false,
                     listOf(
-                        "SampleClass",
-                        "SampleNestedClass1",
-                        "SampleNestedClass2",
+                        "FixtureClass",
+                        "FixtureNestedClass1",
+                        "FixtureNestedClass2",
                     ),
                 ),
                 arguments(
                     false,
                     true,
-                    listOf("SampleClass"),
+                    listOf("FixtureClass"),
                 ),
                 arguments(
                     true,
                     true,
                     listOf(
-                        "SampleClass",
-                        "SampleLocalClass",
-                        "SampleNestedClass1",
-                        "SampleNestedClass2",
+                        "FixtureClass",
+                        "FixtureLocalClass",
+                        "FixtureNestedClass1",
+                        "FixtureNestedClass2",
                     ),
                 ),
             )

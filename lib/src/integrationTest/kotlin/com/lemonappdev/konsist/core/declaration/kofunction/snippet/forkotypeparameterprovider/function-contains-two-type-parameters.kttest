@@ -1,1 +1,1 @@
-fun <T, V> sampleFunction() {}
+fun <T, V> fixtureFunction() {}

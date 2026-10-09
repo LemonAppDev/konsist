@@ -11,6 +11,7 @@ class KoInterfaceDeclarationForKoRepresentsTypeProviderTest {
     @MethodSource("provideValues")
     fun `interface-represents-type`(
         type: String?,
+        ignoreCase: Boolean,
         value: Boolean,
     ) {
         // given
@@ -20,7 +21,7 @@ class KoInterfaceDeclarationForKoRepresentsTypeProviderTest {
                 .first()
 
         // then
-        sut.representsType(type) shouldBeEqualTo value
+        sut.representsType(type, ignoreCase) shouldBeEqualTo value
     }
 
     @Suppress("SameParameterValue")
@@ -32,11 +33,20 @@ class KoInterfaceDeclarationForKoRepresentsTypeProviderTest {
         @JvmStatic
         fun provideValues() =
             listOf(
-                arguments("SampleInterface", true),
-                arguments("OtherInterface", false),
-                arguments("com.lemonappdev.konsist.testdata.SampleInterface", true),
-                arguments("com.lemonappdev.konsist.testdata.OtherInterface", false),
-                arguments(null, false),
+                arguments("FixtureInterface", false, true),
+                arguments("fixtureinterface", false, false),
+                arguments("fixtureinterface", true, true),
+                arguments("OtherInterface", false, false),
+                arguments("otherinterface", false, false),
+                arguments("otherinterface", true, false),
+                arguments("com.lemonappdev.konsist.testdata.FixtureInterface", false, true),
+                arguments("com.lemonappdev.konsist.testdata.fixtureinterface", false, false),
+                arguments("com.lemonappdev.konsist.testdata.fixtureinterface", true, true),
+                arguments("com.lemonappdev.konsist.testdata.OtherInterface", false, false),
+                arguments("com.lemonappdev.konsist.testdata.otherinterface", false, false),
+                arguments("com.lemonappdev.konsist.testdata.otherinterface", true, false),
+                arguments(null, false, false),
+                arguments(null, true, false),
             )
     }
 }

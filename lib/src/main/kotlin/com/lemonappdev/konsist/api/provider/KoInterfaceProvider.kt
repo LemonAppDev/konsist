@@ -48,12 +48,16 @@ interface KoInterfaceProvider : KoBaseProvider {
      * @param name the name of the interface to check.
      * @param names the names of the interfaces to check.
      * @param includeNested Specifies whether to include nested interfaces in the check (optional, default is `true`).
+     * @param ignoreCase Specifies whether the comparison should ignore case.
+     *        If `true`, the prefix comparison will be case-insensitive.
+     *        If `false`, the comparison will consider case sensitivity.
      * @return `true` if there is a matching declaration, `false` otherwise.
      */
     fun hasInterfaceWithName(
         name: String,
         vararg names: String,
         includeNested: Boolean = true,
+        ignoreCase: Boolean = false,
     ): Boolean
 
     /**
@@ -61,11 +65,15 @@ interface KoInterfaceProvider : KoBaseProvider {
      *
      * @param names the names of the interfaces to check.
      * @param includeNested Specifies whether to include nested interfaces in the check (optional, default is `true`).
+     * @param ignoreCase Specifies whether the comparison should ignore case.
+     *        If `true`, the prefix comparison will be case-insensitive.
+     *        If `false`, the comparison will consider case sensitivity.
      * @return `true` if there is a matching declaration, `false` otherwise.
      */
     fun hasInterfaceWithName(
         names: Collection<String>,
         includeNested: Boolean = true,
+        ignoreCase: Boolean = false,
     ): Boolean
 
     /**
@@ -74,12 +82,16 @@ interface KoInterfaceProvider : KoBaseProvider {
      * @param name The name of the interface to check.
      * @param names The names of the interfaces to check.
      * @param includeNested Specifies whether to include nested interfaces in the check (optional, default is `true`).
+     * @param ignoreCase Specifies whether the comparison should ignore case.
+     *        If `true`, the prefix comparison will be case-insensitive.
+     *        If `false`, the comparison will consider case sensitivity.
      * @return `true` if there are declarations with all the specified names, `false` otherwise.
      */
     fun hasInterfacesWithAllNames(
         name: String,
         vararg names: String,
         includeNested: Boolean = true,
+        ignoreCase: Boolean = false,
     ): Boolean
 
     /**
@@ -87,11 +99,15 @@ interface KoInterfaceProvider : KoBaseProvider {
      *
      * @param names The names of the interfaces to check.
      * @param includeNested Specifies whether to include nested interfaces in the check (optional, default is `true`).
+     * @param ignoreCase Specifies whether the comparison should ignore case.
+     *        If `true`, the prefix comparison will be case-insensitive.
+     *        If `false`, the comparison will consider case sensitivity.
      * @return `true` if there are declarations with all the specified names, `false` otherwise.
      */
     fun hasInterfacesWithAllNames(
         names: Collection<String>,
         includeNested: Boolean = true,
+        ignoreCase: Boolean = false,
     ): Boolean
 
     /**

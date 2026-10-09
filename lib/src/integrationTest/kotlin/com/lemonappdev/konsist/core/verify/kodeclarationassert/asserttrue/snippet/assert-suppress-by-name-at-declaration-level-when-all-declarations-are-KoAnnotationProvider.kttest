@@ -1,4 +1,4 @@
-class SampleClassText {
+class FixtureClassText {
     @Suppress("assert-suppress-by-name-at-declaration-level-when-all-declarations-are-KoAnnotationProvider")
-    class SampleClassWithIncorrectSuffix
+    class FixtureClassWithIncorrectSuffix
 }

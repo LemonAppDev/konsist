@@ -1,8 +1,8 @@
-private open class SampleClass {
+private open class FixtureClass {
 
-    private inner class SampleNestedClass
+    private inner class FixtureNestedClass
 }
 
-fun sampleFunction() {
-    class SampleLocalClass
+fun fixtureFunction() {
+    class FixtureLocalClass
 }

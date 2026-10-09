@@ -43,13 +43,17 @@ fun <T : KoExternalParentProvider> List<T>.withoutExternalParents(indirectParent
  * @param name The name of the external parent to include.
  * @param names The names of additional external parents to include.
  * @param indirectParents Whether to include indirect external parents.
+ * @param ignoreCase Specifies whether the comparison should ignore case.
+ *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations with at least one of the specified external parent(s).
  */
 fun <T : KoExternalParentProvider> List<T>.withExternalParentNamed(
     name: String,
     vararg names: String,
     indirectParents: Boolean = false,
-): List<T> = withExternalParentNamed(listOf(name, *names), indirectParents)
+    ignoreCase: Boolean = false,
+): List<T> = withExternalParentNamed(listOf(name, *names), indirectParents, ignoreCase)
 
 /**
  * List containing declarations that have at least one external parent with the specified name(s).
@@ -57,16 +61,20 @@ fun <T : KoExternalParentProvider> List<T>.withExternalParentNamed(
  *
  * @param names The names of additional external parents to include.
  * @param indirectParents Whether to include indirect external parents.
+ * @param ignoreCase Specifies whether the comparison should ignore case.
+ *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations with at least one of the specified external parent(s).
  */
 fun <T : KoExternalParentProvider> List<T>.withExternalParentNamed(
     names: Collection<String>,
     indirectParents: Boolean = false,
+    ignoreCase: Boolean = false,
 ): List<T> =
     filter {
         when {
             names.isEmpty() -> it.hasExternalParents(indirectParents)
-            else -> it.hasExternalParentWithName(names, indirectParents = indirectParents)
+            else -> it.hasExternalParentWithName(names, indirectParents = indirectParents, ignoreCase = ignoreCase)
         }
     }
 
@@ -77,13 +85,17 @@ fun <T : KoExternalParentProvider> List<T>.withExternalParentNamed(
  * @param name The name of the external parent to exclude.
  * @param names The names of additional external parents to exclude.
  * @param indirectParents Whether to include indirect external parents.
+ * @param ignoreCase Specifies whether the comparison should ignore case.
+ *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations without any of specified external parents.
  */
 fun <T : KoExternalParentProvider> List<T>.withoutExternalParentNamed(
     name: String,
     vararg names: String,
     indirectParents: Boolean = false,
-): List<T> = withoutExternalParentNamed(listOf(name, *names), indirectParents)
+    ignoreCase: Boolean = false,
+): List<T> = withoutExternalParentNamed(listOf(name, *names), indirectParents, ignoreCase)
 
 /**
  * List containing declarations without any of specified external parents.
@@ -91,16 +103,20 @@ fun <T : KoExternalParentProvider> List<T>.withoutExternalParentNamed(
  *
  * @param names The names of additional external parents to exclude.
  * @param indirectParents Whether to include indirect external parents.
+ * @param ignoreCase Specifies whether the comparison should ignore case.
+ *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations without any of specified external parents.
  */
 fun <T : KoExternalParentProvider> List<T>.withoutExternalParentNamed(
     names: Collection<String>,
     indirectParents: Boolean = false,
+    ignoreCase: Boolean = false,
 ): List<T> =
     filterNot {
         when {
             names.isEmpty() -> it.hasExternalParents(indirectParents)
-            else -> it.hasExternalParentWithName(names, indirectParents = indirectParents)
+            else -> it.hasExternalParentWithName(names, indirectParents = indirectParents, ignoreCase = ignoreCase)
         }
     }
 
@@ -111,13 +127,17 @@ fun <T : KoExternalParentProvider> List<T>.withoutExternalParentNamed(
  * @param name The name of the external parent to include.
  * @param names The name(s) of the external parent(s) to include.
  * @param indirectParents Whether to include indirect external parents.
+ * @param ignoreCase Specifies whether the comparison should ignore case.
+ *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations with all specified external parent(s).
  */
 fun <T : KoExternalParentProvider> List<T>.withAllExternalParentsNamed(
     name: String,
     vararg names: String,
     indirectParents: Boolean = false,
-): List<T> = withAllExternalParentsNamed(listOf(name, *names), indirectParents)
+    ignoreCase: Boolean = false,
+): List<T> = withAllExternalParentsNamed(listOf(name, *names), indirectParents, ignoreCase)
 
 /**
  * List containing declarations that have all specified external parents.
@@ -125,16 +145,20 @@ fun <T : KoExternalParentProvider> List<T>.withAllExternalParentsNamed(
  *
  * @param names The name(s) of the external parent(s) to include.
  * @param indirectParents Whether to include indirect external parents.
+ * @param ignoreCase Specifies whether the comparison should ignore case.
+ *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations with all specified external parent(s).
  */
 fun <T : KoExternalParentProvider> List<T>.withAllExternalParentsNamed(
     names: Collection<String>,
     indirectParents: Boolean = false,
+    ignoreCase: Boolean = false,
 ): List<T> =
     filter {
         when {
             names.isEmpty() -> it.hasExternalParents(indirectParents)
-            else -> it.hasExternalParentsWithAllNames(names, indirectParents = indirectParents)
+            else -> it.hasExternalParentsWithAllNames(names, indirectParents = indirectParents, ignoreCase = ignoreCase)
         }
     }
 
@@ -145,13 +169,17 @@ fun <T : KoExternalParentProvider> List<T>.withAllExternalParentsNamed(
  * @param name The name of the external parent to exclude.
  * @param names The name(s) of the external parent(s) to exclude.
  * @param indirectParents Whether to include indirect external parents.
+ * @param ignoreCase Specifies whether the comparison should ignore case.
+ *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations without all specified external parent(s).
  */
 fun <T : KoExternalParentProvider> List<T>.withoutAllExternalParentsNamed(
     name: String,
     vararg names: String,
     indirectParents: Boolean = false,
-): List<T> = withoutAllExternalParentsNamed(listOf(name, *names), indirectParents)
+    ignoreCase: Boolean = false,
+): List<T> = withoutAllExternalParentsNamed(listOf(name, *names), indirectParents, ignoreCase)
 
 /**
  * List containing declarations without all specified external parents.
@@ -159,16 +187,20 @@ fun <T : KoExternalParentProvider> List<T>.withoutAllExternalParentsNamed(
  *
  * @param names The name(s) of the external parent(s) to exclude.
  * @param indirectParents Whether to include indirect external parents.
+ * @param ignoreCase Specifies whether the comparison should ignore case.
+ *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations without all specified external parent(s).
  */
 fun <T : KoExternalParentProvider> List<T>.withoutAllExternalParentsNamed(
     names: Collection<String>,
     indirectParents: Boolean = false,
+    ignoreCase: Boolean = false,
 ): List<T> =
     filterNot {
         when {
             names.isEmpty() -> it.hasExternalParents(indirectParents)
-            else -> it.hasExternalParentsWithAllNames(names, indirectParents = indirectParents)
+            else -> it.hasExternalParentsWithAllNames(names, indirectParents = indirectParents, ignoreCase = ignoreCase)
         }
     }
 

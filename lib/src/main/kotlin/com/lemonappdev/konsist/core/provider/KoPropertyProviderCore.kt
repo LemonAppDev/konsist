@@ -28,36 +28,48 @@ internal interface KoPropertyProviderCore :
         name: String,
         vararg names: String,
         includeNested: Boolean,
-    ): Boolean = hasPropertyWithName(listOf(name, *names), includeNested)
+        ignoreCase: Boolean,
+    ): Boolean = hasPropertyWithName(listOf(name, *names), includeNested, ignoreCase)
 
     override fun hasPropertyWithName(
         names: Collection<String>,
         includeNested: Boolean,
+        ignoreCase: Boolean,
     ): Boolean =
         when {
-            names.isEmpty() -> hasProperties(includeNested)
-            else ->
+            names.isEmpty() -> {
+                hasProperties(includeNested)
+            }
+
+            else -> {
                 names.any {
-                    properties(includeNested).any { koProperty -> it == koProperty.name }
+                    properties(includeNested).any { koProperty -> koProperty.hasName(it, ignoreCase) }
                 }
+            }
         }
 
     override fun hasPropertiesWithAllNames(
         name: String,
         vararg names: String,
         includeNested: Boolean,
-    ): Boolean = hasPropertiesWithAllNames(listOf(name, *names), includeNested)
+        ignoreCase: Boolean,
+    ): Boolean = hasPropertiesWithAllNames(listOf(name, *names), includeNested, ignoreCase)
 
     override fun hasPropertiesWithAllNames(
         names: Collection<String>,
         includeNested: Boolean,
+        ignoreCase: Boolean,
     ): Boolean =
         when {
-            names.isEmpty() -> hasProperties(includeNested)
-            else ->
+            names.isEmpty() -> {
+                hasProperties(includeNested)
+            }
+
+            else -> {
                 names.all {
-                    properties(includeNested).any { koProperty -> it == koProperty.name }
+                    properties(includeNested).any { koProperty -> koProperty.hasName(it, ignoreCase) }
                 }
+            }
         }
 
     override fun hasProperty(

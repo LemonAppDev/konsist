@@ -1,0 +1,3 @@
+import com.lemonappdev.konsist.testdata.FixtureClass as ImportAlias
+
+val fixtureProperty: List<ImportAlias>? = emptyList()

@@ -1,3 +1,3 @@
-import com.lemonappdev.konsist.testdata.SampleType
+import com.lemonappdev.konsist.testdata.FixtureType
 
-class SampleClass @Suppress constructor(val sampleParameter: SampleType)
+class FixtureClass @Suppress constructor(val fixtureParameter: FixtureType)

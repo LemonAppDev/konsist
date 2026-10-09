@@ -3,8 +3,8 @@ package com.lemonappdev.konsist.api.ext.provider.kotacittype
 import com.lemonappdev.konsist.TestSnippetProvider
 import com.lemonappdev.konsist.api.ext.koscope.declarationsOf
 import com.lemonappdev.konsist.api.provider.KoTacitTypeProvider
-import com.lemonappdev.konsist.testdata.SampleClass
-import com.lemonappdev.konsist.testdata.SampleClassWithParameter
+import com.lemonappdev.konsist.testdata.FixtureClass
+import com.lemonappdev.konsist.testdata.FixtureClassWithParameter
 import hasTacitTypeOf
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
@@ -22,7 +22,7 @@ class KoTacitTypeProviderExtTest {
         // then
         assertSoftly(sut) {
             hasTacitTypeOf<Int>() shouldBeEqualTo false
-            hasTacitTypeOf<SampleClass>() shouldBeEqualTo false
+            hasTacitTypeOf<FixtureClass>() shouldBeEqualTo false
         }
     }
 
@@ -51,8 +51,8 @@ class KoTacitTypeProviderExtTest {
 
         // then
         assertSoftly(sut) {
-            hasTacitTypeOf<SampleClassWithParameter>() shouldBeEqualTo true
-            hasTacitTypeOf<SampleClass>() shouldBeEqualTo false
+            hasTacitTypeOf<FixtureClassWithParameter>() shouldBeEqualTo true
+            hasTacitTypeOf<FixtureClass>() shouldBeEqualTo false
         }
     }
 
@@ -66,8 +66,8 @@ class KoTacitTypeProviderExtTest {
 
         // then
         assertSoftly(sut) {
-            hasTacitTypeOf<SampleClassWithParameter>() shouldBeEqualTo true
-            hasTacitTypeOf<SampleClass>() shouldBeEqualTo false
+            hasTacitTypeOf<FixtureClassWithParameter>() shouldBeEqualTo true
+            hasTacitTypeOf<FixtureClass>() shouldBeEqualTo false
         }
     }
 

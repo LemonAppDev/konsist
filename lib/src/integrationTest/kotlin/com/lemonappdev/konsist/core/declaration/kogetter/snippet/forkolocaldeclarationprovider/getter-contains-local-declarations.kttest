@@ -1,10 +1,10 @@
-val sampleProperty: String
+val fixtureProperty: String
     get() {
-        val sampleLocalProperty: Boolean = true
+        val fixtureLocalProperty: Boolean = true
 
-        fun sampleLocalFunction() { }
+        fun fixtureLocalFunction() { }
 
-        class SampleLocalClass
+        class FixtureLocalClass
 
         return ""
     }

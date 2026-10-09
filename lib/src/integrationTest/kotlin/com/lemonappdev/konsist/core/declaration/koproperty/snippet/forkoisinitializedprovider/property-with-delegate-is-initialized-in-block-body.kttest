@@ -1,1 +1,1 @@
-val sampleProperty: Int by lazy { 0 }
+val fixtureProperty: Int by lazy { 0 }

@@ -1,4 +1,4 @@
-@file:SampleAnnotation
+@file:FixtureAnnotation
 
 @Target(AnnotationTarget.FILE)
-annotation class SampleAnnotation
+annotation class FixtureAnnotation

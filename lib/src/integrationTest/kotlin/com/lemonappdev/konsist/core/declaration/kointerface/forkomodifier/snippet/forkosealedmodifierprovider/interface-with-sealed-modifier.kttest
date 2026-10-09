@@ -1,1 +1,1 @@
-sealed interface SampleInterface
+sealed interface FixtureInterface

@@ -28,24 +28,34 @@ fun <T : KoUpperBoundsProvider> List<T>.withoutUpperBounds(): List<T> = filterNo
  *
  * @param name The name of the upper bound to include.
  * @param names The names of additional upper bounds to include.
+ * @param ignoreCase Specifies whether the comparison should ignore case.
+ *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations with at least one of the specified upper bound(s).
  */
 fun <T : KoUpperBoundsProvider> List<T>.withUpperBoundNamed(
     name: String,
     vararg names: String,
-): List<T> = withUpperBoundNamed(listOf(name, *names))
+    ignoreCase: Boolean = false,
+): List<T> = withUpperBoundNamed(listOf(name, *names), ignoreCase = ignoreCase)
 
 /**
  * List containing declarations that have at least one upper bound with the specified name(s).
  *
  * @param names The names of additional upper bounds to include.
+ * @param ignoreCase Specifies whether the comparison should ignore case.
+ *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations with at least one of the specified upper bound(s).
  */
-fun <T : KoUpperBoundsProvider> List<T>.withUpperBoundNamed(names: Collection<String>): List<T> =
+fun <T : KoUpperBoundsProvider> List<T>.withUpperBoundNamed(
+    names: Collection<String>,
+    ignoreCase: Boolean = false,
+): List<T> =
     filter {
         when {
             names.isEmpty() -> it.hasUpperBounds()
-            else -> it.hasUpperBoundWithName(names)
+            else -> it.hasUpperBoundWithName(names, ignoreCase = ignoreCase)
         }
     }
 
@@ -54,24 +64,34 @@ fun <T : KoUpperBoundsProvider> List<T>.withUpperBoundNamed(names: Collection<St
  *
  * @param name The name of the upper bound to exclude.
  * @param names The names of additional upper bounds to exclude.
+ * @param ignoreCase Specifies whether the comparison should ignore case.
+ *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations without any of specified upper bounds.
  */
 fun <T : KoUpperBoundsProvider> List<T>.withoutUpperBoundNamed(
     name: String,
     vararg names: String,
-): List<T> = withoutUpperBoundNamed(listOf(name, *names))
+    ignoreCase: Boolean = false,
+): List<T> = withoutUpperBoundNamed(listOf(name, *names), ignoreCase = ignoreCase)
 
 /**
  * List containing declarations without any of specified upper bounds.
  *
  * @param names The names of additional upper bounds to exclude.
+ * @param ignoreCase Specifies whether the comparison should ignore case.
+ *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations without any of specified upper bounds.
  */
-fun <T : KoUpperBoundsProvider> List<T>.withoutUpperBoundNamed(names: Collection<String>): List<T> =
+fun <T : KoUpperBoundsProvider> List<T>.withoutUpperBoundNamed(
+    names: Collection<String>,
+    ignoreCase: Boolean = false,
+): List<T> =
     filterNot {
         when {
             names.isEmpty() -> it.hasUpperBounds()
-            else -> it.hasUpperBoundWithName(names)
+            else -> it.hasUpperBoundWithName(names, ignoreCase = ignoreCase)
         }
     }
 
@@ -80,24 +100,34 @@ fun <T : KoUpperBoundsProvider> List<T>.withoutUpperBoundNamed(names: Collection
  *
  * @param name The name of the upper bound to include.
  * @param names The name(s) of the upper bound(s) to include.
+ * @param ignoreCase Specifies whether the comparison should ignore case.
+ *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations with all specified upper bound(s).
  */
 fun <T : KoUpperBoundsProvider> List<T>.withAllUpperBoundsNamed(
     name: String,
     vararg names: String,
-): List<T> = withAllUpperBoundsNamed(listOf(name, *names))
+    ignoreCase: Boolean = false,
+): List<T> = withAllUpperBoundsNamed(listOf(name, *names), ignoreCase = ignoreCase)
 
 /**
  * List containing declarations that have all specified upper bounds.
  *
  * @param names The name(s) of the upper bound(s) to include.
+ * @param ignoreCase Specifies whether the comparison should ignore case.
+ *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations with all specified upper bound(s).
  */
-fun <T : KoUpperBoundsProvider> List<T>.withAllUpperBoundsNamed(names: Collection<String>): List<T> =
+fun <T : KoUpperBoundsProvider> List<T>.withAllUpperBoundsNamed(
+    names: Collection<String>,
+    ignoreCase: Boolean = false,
+): List<T> =
     filter {
         when {
             names.isEmpty() -> it.hasUpperBounds()
-            else -> it.hasUpperBoundsWithAllNames(names)
+            else -> it.hasUpperBoundsWithAllNames(names, ignoreCase = ignoreCase)
         }
     }
 
@@ -106,24 +136,34 @@ fun <T : KoUpperBoundsProvider> List<T>.withAllUpperBoundsNamed(names: Collectio
  *
  * @param name The name of the upper bound to exclude.
  * @param names The name(s) of the upper bound(s) to exclude.
+ * @param ignoreCase Specifies whether the comparison should ignore case.
+ *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations without all specified upper bound(s).
  */
 fun <T : KoUpperBoundsProvider> List<T>.withoutAllUpperBoundsNamed(
     name: String,
     vararg names: String,
-): List<T> = withoutAllUpperBoundsNamed(listOf(name, *names))
+    ignoreCase: Boolean = false,
+): List<T> = withoutAllUpperBoundsNamed(listOf(name, *names), ignoreCase = ignoreCase)
 
 /**
  * List containing declarations without all specified upper bounds.
  *
  * @param names The name(s) of the upper bound(s) to exclude.
+ * @param ignoreCase Specifies whether the comparison should ignore case.
+ *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations without all specified upper bound(s).
  */
-fun <T : KoUpperBoundsProvider> List<T>.withoutAllUpperBoundsNamed(names: Collection<String>): List<T> =
+fun <T : KoUpperBoundsProvider> List<T>.withoutAllUpperBoundsNamed(
+    names: Collection<String>,
+    ignoreCase: Boolean = false,
+): List<T> =
     filterNot {
         when {
             names.isEmpty() -> it.hasUpperBounds()
-            else -> it.hasUpperBoundsWithAllNames(names)
+            else -> it.hasUpperBoundsWithAllNames(names, ignoreCase = ignoreCase)
         }
     }
 

@@ -42,9 +42,9 @@ class AssertNullOnSingleProviderTest {
 
         // then
         try {
-            sut.assertNull(testName = "sample test")
+            sut.assertNull(testName = "fixture test")
         } catch (e: Exception) {
-            e.message?.shouldContain("Assert `sample test` failed.")
+            e.message?.shouldContain("Assert `fixture test` failed.")
                 ?: throw e
         }
     }
@@ -66,7 +66,7 @@ class AssertNullOnSingleProviderTest {
         } catch (e: Exception) {
             e.message?.shouldContain(
                 "Assert `provider-assert-null-error-with-custom-message` failed.\n" +
-                    "$message\nDeclaration has not null value: SampleClass.",
+                    "$message\nDeclaration has not null value: FixtureClass.",
             )
                 ?: throw e
         }

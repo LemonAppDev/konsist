@@ -22,14 +22,14 @@ class KoFileDeclarationForKoObjectProviderTest {
             hasObjectWithName(emptySet()) shouldBeEqualTo false
             hasObjectsWithAllNames(emptyList()) shouldBeEqualTo false
             hasObjectsWithAllNames(emptySet()) shouldBeEqualTo false
-            hasObjectWithName("SampleObject") shouldBeEqualTo false
-            hasObjectWithName(listOf("SampleObject")) shouldBeEqualTo false
-            hasObjectWithName(setOf("SampleObject")) shouldBeEqualTo false
-            hasObjectsWithAllNames("SampleObject1", "SampleObject2") shouldBeEqualTo false
-            hasObjectsWithAllNames(listOf("SampleObject1", "SampleObject2")) shouldBeEqualTo false
-            hasObjectsWithAllNames(setOf("SampleObject1", "SampleObject2")) shouldBeEqualTo false
-            hasObject { it.name == "SampleObject" } shouldBeEqualTo false
-            hasAllObjects { it.hasNameStartingWith("Sample") } shouldBeEqualTo true
+            hasObjectWithName("FixtureObject") shouldBeEqualTo false
+            hasObjectWithName(listOf("FixtureObject")) shouldBeEqualTo false
+            hasObjectWithName(setOf("FixtureObject")) shouldBeEqualTo false
+            hasObjectsWithAllNames("FixtureObject1", "FixtureObject2") shouldBeEqualTo false
+            hasObjectsWithAllNames(listOf("FixtureObject1", "FixtureObject2")) shouldBeEqualTo false
+            hasObjectsWithAllNames(setOf("FixtureObject1", "FixtureObject2")) shouldBeEqualTo false
+            hasObject { it.name == "FixtureObject" } shouldBeEqualTo false
+            hasAllObjects { it.hasNameStartingWith("Fixture") } shouldBeEqualTo true
         }
     }
 
@@ -48,24 +48,24 @@ class KoFileDeclarationForKoObjectProviderTest {
             hasObjectWithName(emptySet()) shouldBeEqualTo true
             hasObjectsWithAllNames(emptyList()) shouldBeEqualTo true
             hasObjectsWithAllNames(emptySet()) shouldBeEqualTo true
-            hasObjectWithName("SampleObject1") shouldBeEqualTo true
-            hasObjectWithName("SampleObject1", "OtherObject") shouldBeEqualTo true
-            hasObjectWithName(listOf("SampleObject1")) shouldBeEqualTo true
-            hasObjectWithName(listOf("SampleObject1", "OtherObject")) shouldBeEqualTo true
-            hasObjectWithName(setOf("SampleObject1")) shouldBeEqualTo true
-            hasObjectWithName(setOf("SampleObject1", "OtherObject")) shouldBeEqualTo true
-            hasObjectsWithAllNames("SampleObject1") shouldBeEqualTo true
-            hasObjectsWithAllNames("SampleObject1", "SampleObject2") shouldBeEqualTo true
-            hasObjectsWithAllNames("SampleObject1", "OtherObject") shouldBeEqualTo false
-            hasObjectsWithAllNames(listOf("SampleObject1")) shouldBeEqualTo true
-            hasObjectsWithAllNames(listOf("SampleObject1", "SampleObject2")) shouldBeEqualTo true
-            hasObjectsWithAllNames(listOf("SampleObject1", "OtherObject")) shouldBeEqualTo false
-            hasObjectsWithAllNames(setOf("SampleObject1")) shouldBeEqualTo true
-            hasObjectsWithAllNames(setOf("SampleObject1", "SampleObject2")) shouldBeEqualTo true
-            hasObjectsWithAllNames(setOf("SampleObject1", "OtherObject")) shouldBeEqualTo false
-            hasObject { it.name == "SampleObject1" } shouldBeEqualTo true
+            hasObjectWithName("FixtureObject1") shouldBeEqualTo true
+            hasObjectWithName("FixtureObject1", "OtherObject") shouldBeEqualTo true
+            hasObjectWithName(listOf("FixtureObject1")) shouldBeEqualTo true
+            hasObjectWithName(listOf("FixtureObject1", "OtherObject")) shouldBeEqualTo true
+            hasObjectWithName(setOf("FixtureObject1")) shouldBeEqualTo true
+            hasObjectWithName(setOf("FixtureObject1", "OtherObject")) shouldBeEqualTo true
+            hasObjectsWithAllNames("FixtureObject1") shouldBeEqualTo true
+            hasObjectsWithAllNames("FixtureObject1", "FixtureObject2") shouldBeEqualTo true
+            hasObjectsWithAllNames("FixtureObject1", "OtherObject") shouldBeEqualTo false
+            hasObjectsWithAllNames(listOf("FixtureObject1")) shouldBeEqualTo true
+            hasObjectsWithAllNames(listOf("FixtureObject1", "FixtureObject2")) shouldBeEqualTo true
+            hasObjectsWithAllNames(listOf("FixtureObject1", "OtherObject")) shouldBeEqualTo false
+            hasObjectsWithAllNames(setOf("FixtureObject1")) shouldBeEqualTo true
+            hasObjectsWithAllNames(setOf("FixtureObject1", "FixtureObject2")) shouldBeEqualTo true
+            hasObjectsWithAllNames(setOf("FixtureObject1", "OtherObject")) shouldBeEqualTo false
+            hasObject { it.name == "FixtureObject1" } shouldBeEqualTo true
             hasObject { it.hasNameEndingWith("Object1") } shouldBeEqualTo true
-            hasAllObjects { it.hasNameStartingWith("Sample") } shouldBeEqualTo true
+            hasAllObjects { it.hasNameStartingWith("Fixture") } shouldBeEqualTo true
             hasAllObjects { it.hasNameEndingWith("Class1") } shouldBeEqualTo false
         }
     }
@@ -79,7 +79,7 @@ class KoFileDeclarationForKoObjectProviderTest {
                 .first()
 
         // then
-        val expected = listOf("SampleObject", "SampleNestedObject")
+        val expected = listOf("FixtureObject", "FixtureNestedObject")
 
         sut
             .objects(includeNested = true)
@@ -96,7 +96,7 @@ class KoFileDeclarationForKoObjectProviderTest {
                 .first()
 
         // then
-        val expected = listOf("SampleObject")
+        val expected = listOf("FixtureObject")
 
         sut
             .objects(includeNested = false)
@@ -119,6 +119,68 @@ class KoFileDeclarationForKoObjectProviderTest {
             countObjects { it.hasPrivateModifier } shouldBeEqualTo 2
             countObjects(includeNested = false) { it.hasPrivateModifier } shouldBeEqualTo 1
             countObjects { it.hasInternalModifier } shouldBeEqualTo 0
+        }
+    }
+
+    @Test
+    fun `file-has-no-objects-ignore-case`() {
+        // given
+        val sut =
+            getSnippetFile("file-has-no-objects-ignore-case")
+                .files
+                .first()
+
+        // then
+        assertSoftly(sut) {
+            hasObjectWithName("fixtureobject") shouldBeEqualTo false
+            hasObjectWithName("fixtureobject", ignoreCase = true) shouldBeEqualTo false
+            hasObjectWithName(listOf("fixtureobject")) shouldBeEqualTo false
+            hasObjectWithName(listOf("fixtureobject"), ignoreCase = true) shouldBeEqualTo false
+            hasObjectWithName(setOf("fixtureobject")) shouldBeEqualTo false
+            hasObjectWithName(setOf("fixtureobject"), ignoreCase = true) shouldBeEqualTo false
+            hasObjectsWithAllNames("fixtureobject1", "fixtureobject2") shouldBeEqualTo false
+            hasObjectsWithAllNames("fixtureobject1", "fixtureobject2", ignoreCase = true) shouldBeEqualTo false
+            hasObjectsWithAllNames(listOf("fixtureobject1", "fixtureobject2")) shouldBeEqualTo false
+            hasObjectsWithAllNames(listOf("fixtureobject1", "fixtureobject2"), ignoreCase = true) shouldBeEqualTo false
+            hasObjectsWithAllNames(setOf("fixtureobject1", "fixtureobject2")) shouldBeEqualTo false
+            hasObjectsWithAllNames(setOf("fixtureobject1", "fixtureobject2"), ignoreCase = true) shouldBeEqualTo false
+        }
+    }
+
+    @Test
+    fun `file-has-objects-ignore-case`() {
+        // given
+        val sut =
+            getSnippetFile("file-has-objects-ignore-case")
+                .files
+                .first()
+
+        // then
+        assertSoftly(sut) {
+            hasObjectWithName("fixtureobject1") shouldBeEqualTo false
+            hasObjectWithName("fixtureobject1", ignoreCase = true) shouldBeEqualTo true
+            hasObjectWithName("otherobject") shouldBeEqualTo false
+            hasObjectWithName("otherobject", ignoreCase = true) shouldBeEqualTo false
+            hasObjectWithName("fixtureobject1", "otherName") shouldBeEqualTo false
+            hasObjectWithName("fixtureobject1", "otherName", ignoreCase = true) shouldBeEqualTo true
+            hasObjectWithName(listOf("fixtureobject1")) shouldBeEqualTo false
+            hasObjectWithName(listOf("fixtureobject1"), ignoreCase = true) shouldBeEqualTo true
+            hasObjectWithName(listOf("otherobject")) shouldBeEqualTo false
+            hasObjectWithName(listOf("otherobject"), ignoreCase = true) shouldBeEqualTo false
+            hasObjectWithName(listOf("fixtureobject1", "otherName")) shouldBeEqualTo false
+            hasObjectWithName(listOf("fixtureobject1", "otherName"), ignoreCase = true) shouldBeEqualTo true
+            hasObjectsWithAllNames("fixtureobject1") shouldBeEqualTo false
+            hasObjectsWithAllNames("fixtureobject1", ignoreCase = true) shouldBeEqualTo true
+            hasObjectsWithAllNames("fixtureobject1", "fixtureobject2") shouldBeEqualTo false
+            hasObjectsWithAllNames("fixtureobject1", "fixtureobject2", ignoreCase = true) shouldBeEqualTo true
+            hasObjectsWithAllNames("fixtureobject1", "otherobject") shouldBeEqualTo false
+            hasObjectsWithAllNames("fixtureobject1", "otherobject", ignoreCase = true) shouldBeEqualTo false
+            hasObjectsWithAllNames(listOf("fixtureobject1")) shouldBeEqualTo false
+            hasObjectsWithAllNames(listOf("fixtureobject1"), ignoreCase = true) shouldBeEqualTo true
+            hasObjectsWithAllNames(listOf("fixtureobject1", "fixtureobject2")) shouldBeEqualTo false
+            hasObjectsWithAllNames(listOf("fixtureobject1", "fixtureobject2"), ignoreCase = true) shouldBeEqualTo true
+            hasObjectsWithAllNames(listOf("fixtureobject1", "otherobject")) shouldBeEqualTo false
+            hasObjectsWithAllNames(listOf("fixtureobject1", "otherobject"), ignoreCase = true) shouldBeEqualTo false
         }
     }
 

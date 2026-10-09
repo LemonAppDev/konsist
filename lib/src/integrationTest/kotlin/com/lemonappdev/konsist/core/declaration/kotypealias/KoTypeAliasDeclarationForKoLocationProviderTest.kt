@@ -33,7 +33,7 @@ class KoTypeAliasDeclarationForKoLocationProviderTest {
                 .first()
 
         // then
-        val declaration = "Declaration:\ntypealias SampleTypeAlias = () -> Int"
+        val declaration = "Declaration:\ntypealias FixtureTypeAlias = () -> Int"
         assertSoftly(sut.locationWithText) {
             startsWith("Location: /") shouldBeEqualTo true
             contains(projectPath) shouldBeEqualTo true

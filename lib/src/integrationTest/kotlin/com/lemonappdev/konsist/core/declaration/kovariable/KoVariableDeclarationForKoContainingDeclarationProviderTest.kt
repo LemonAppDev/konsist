@@ -40,7 +40,7 @@ class KoVariableDeclarationForKoContainingDeclarationProviderTest {
             listOf(
                 arguments(
                     getSnippetFile("variable-in-function-parent-declaration").functions(),
-                    "fun sampleFunction()",
+                    "fun fixtureFunction()",
                 ),
                 arguments(
                     getSnippetFile("variable-in-init-block-parent-declaration").classes().initBlocks,
@@ -48,7 +48,7 @@ class KoVariableDeclarationForKoContainingDeclarationProviderTest {
                 ),
                 arguments(
                     getSnippetFile("variable-in-enum-constant-parent-declaration").classes().enumConstants,
-                    "SAMPLE_CONSTANT_1",
+                    "FIXTURE_CONSTANT_1",
                 ),
                 arguments(
                     getSnippetFile("variable-in-getter-parent-declaration").properties().getters,

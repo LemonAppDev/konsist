@@ -1,3 +1,3 @@
-import com.lemonappdev.konsist.externalsample.MutableSampleExternalClass
+import com.lemonappdev.konsist.externalfixture.MutableFixtureExternalClass
 
-class SampleClass1(val sampleProperty1: MutableSampleExternalClass?)
+class FixtureClass1(val fixtureProperty1: MutableFixtureExternalClass?)

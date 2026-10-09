@@ -106,12 +106,16 @@ interface KoExternalParentProvider : KoBaseProvider {
      *                        // Project
      *                        class BaseActivity: AppCompactActivity() // externalParents(indirectParents = true) returns [AppCompactActivity]
      *                        class MyActivity: BaseActivity() // externalParents(indirectParents = true) returns [AppCompactActivity]
+     * @param ignoreCase Specifies whether the comparison should ignore case.
+     *        If `true`, the prefix comparison will be case-insensitive.
+     *        If `false`, the comparison will consider case sensitivity.
      * @return `true` if there is a matching declaration, `false` otherwise.
      */
     fun hasExternalParentWithName(
         name: String,
         vararg names: String,
         indirectParents: Boolean = false,
+        ignoreCase: Boolean = false,
     ): Boolean
 
     /**
@@ -130,11 +134,15 @@ interface KoExternalParentProvider : KoBaseProvider {
      *                        // Project
      *                        class BaseActivity: AppCompactActivity() // externalParents(indirectParents = true) returns [AppCompactActivity]
      *                        class MyActivity: BaseActivity() // externalParents(indirectParents = true) returns [AppCompactActivity]
+     * @param ignoreCase Specifies whether the comparison should ignore case.
+     *        If `true`, the prefix comparison will be case-insensitive.
+     *        If `false`, the comparison will consider case sensitivity.
      * @return `true` if there is a matching declaration, `false` otherwise.
      */
     fun hasExternalParentWithName(
         names: Collection<String>,
         indirectParents: Boolean = false,
+        ignoreCase: Boolean = false,
     ): Boolean
 
     /**
@@ -154,12 +162,16 @@ interface KoExternalParentProvider : KoBaseProvider {
      *                        // Project
      *                        class BaseActivity: AppCompactActivity() // externalParents(indirectParents = true) returns [AppCompactActivity]
      *                        class MyActivity: BaseActivity() // externalParents(indirectParents = true) returns [AppCompactActivity]
+     * @param ignoreCase Specifies whether the comparison should ignore case.
+     *        If `true`, the prefix comparison will be case-insensitive.
+     *        If `false`, the comparison will consider case sensitivity.
      * @return `true` if there are declarations with all the specified names, `false` otherwise.
      */
     fun hasExternalParentsWithAllNames(
         name: String,
         vararg names: String,
         indirectParents: Boolean = false,
+        ignoreCase: Boolean = false,
     ): Boolean
 
     /**
@@ -178,11 +190,15 @@ interface KoExternalParentProvider : KoBaseProvider {
      *                        // Project
      *                        class BaseActivity: AppCompactActivity() // externalParents(indirectParents = true) returns [AppCompactActivity]
      *                        class MyActivity: BaseActivity() // externalParents(indirectParents = true) returns [AppCompactActivity]
+     * @param ignoreCase Specifies whether the comparison should ignore case.
+     *        If `true`, the prefix comparison will be case-insensitive.
+     *        If `false`, the comparison will consider case sensitivity.
      * @return `true` if there are declarations with all the specified names, `false` otherwise.
      */
     fun hasExternalParentsWithAllNames(
         names: Collection<String>,
         indirectParents: Boolean = false,
+        ignoreCase: Boolean = false,
     ): Boolean
 
     /**

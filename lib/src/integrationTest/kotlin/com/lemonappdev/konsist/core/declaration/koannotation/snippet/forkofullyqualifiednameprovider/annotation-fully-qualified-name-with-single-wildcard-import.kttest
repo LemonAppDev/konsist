@@ -1,0 +1,5 @@
+import com.lemonappdev.konsist.testdata.*
+
+@FixtureAnnotation
+fun fixtureFunction() {
+}

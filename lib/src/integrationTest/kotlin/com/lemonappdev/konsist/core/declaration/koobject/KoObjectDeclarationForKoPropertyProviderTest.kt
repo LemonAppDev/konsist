@@ -22,14 +22,14 @@ class KoObjectDeclarationForKoPropertyProviderTest {
             hasPropertyWithName(emptySet()) shouldBeEqualTo false
             hasPropertiesWithAllNames(emptyList()) shouldBeEqualTo false
             hasPropertiesWithAllNames(emptySet()) shouldBeEqualTo false
-            hasPropertyWithName("sampleProperty") shouldBeEqualTo false
-            hasPropertyWithName(listOf("sampleProperty")) shouldBeEqualTo false
-            hasPropertyWithName(setOf("sampleProperty")) shouldBeEqualTo false
-            hasPropertiesWithAllNames("sampleProperty1", "sampleProperty2") shouldBeEqualTo false
-            hasPropertiesWithAllNames(listOf("sampleProperty1", "sampleProperty2")) shouldBeEqualTo false
-            hasPropertiesWithAllNames(setOf("sampleProperty1", "sampleProperty2")) shouldBeEqualTo false
-            hasProperty { it.name == "sampleProperty" } shouldBeEqualTo false
-            hasAllProperties { it.hasNameStartingWith("sample") } shouldBeEqualTo true
+            hasPropertyWithName("fixtureProperty") shouldBeEqualTo false
+            hasPropertyWithName(listOf("fixtureProperty")) shouldBeEqualTo false
+            hasPropertyWithName(setOf("fixtureProperty")) shouldBeEqualTo false
+            hasPropertiesWithAllNames("fixtureProperty1", "fixtureProperty2") shouldBeEqualTo false
+            hasPropertiesWithAllNames(listOf("fixtureProperty1", "fixtureProperty2")) shouldBeEqualTo false
+            hasPropertiesWithAllNames(setOf("fixtureProperty1", "fixtureProperty2")) shouldBeEqualTo false
+            hasProperty { it.name == "fixtureProperty" } shouldBeEqualTo false
+            hasAllProperties { it.hasNameStartingWith("fixture") } shouldBeEqualTo true
         }
     }
 
@@ -48,24 +48,24 @@ class KoObjectDeclarationForKoPropertyProviderTest {
             hasPropertyWithName(emptySet()) shouldBeEqualTo true
             hasPropertiesWithAllNames(emptyList()) shouldBeEqualTo true
             hasPropertiesWithAllNames(emptySet()) shouldBeEqualTo true
-            hasPropertyWithName("sampleProperty1") shouldBeEqualTo true
-            hasPropertyWithName("sampleProperty1", "otherProperty") shouldBeEqualTo true
-            hasPropertyWithName(listOf("sampleProperty1")) shouldBeEqualTo true
-            hasPropertyWithName(listOf("sampleProperty1", "otherProperty")) shouldBeEqualTo true
-            hasPropertyWithName(setOf("sampleProperty1")) shouldBeEqualTo true
-            hasPropertyWithName(setOf("sampleProperty1", "otherProperty")) shouldBeEqualTo true
-            hasPropertiesWithAllNames("sampleProperty1") shouldBeEqualTo true
-            hasPropertiesWithAllNames("sampleProperty1", "sampleProperty2") shouldBeEqualTo true
-            hasPropertiesWithAllNames("sampleProperty1", "otherProperty") shouldBeEqualTo false
-            hasPropertiesWithAllNames(listOf("sampleProperty1")) shouldBeEqualTo true
-            hasPropertiesWithAllNames(listOf("sampleProperty1", "sampleProperty2")) shouldBeEqualTo true
-            hasPropertiesWithAllNames(listOf("sampleProperty1", "otherProperty")) shouldBeEqualTo false
-            hasPropertiesWithAllNames(setOf("sampleProperty1")) shouldBeEqualTo true
-            hasPropertiesWithAllNames(setOf("sampleProperty1", "sampleProperty2")) shouldBeEqualTo true
-            hasPropertiesWithAllNames(setOf("sampleProperty1", "otherProperty")) shouldBeEqualTo false
-            hasProperty { it.name == "sampleProperty1" } shouldBeEqualTo true
+            hasPropertyWithName("fixtureProperty1") shouldBeEqualTo true
+            hasPropertyWithName("fixtureProperty1", "otherProperty") shouldBeEqualTo true
+            hasPropertyWithName(listOf("fixtureProperty1")) shouldBeEqualTo true
+            hasPropertyWithName(listOf("fixtureProperty1", "otherProperty")) shouldBeEqualTo true
+            hasPropertyWithName(setOf("fixtureProperty1")) shouldBeEqualTo true
+            hasPropertyWithName(setOf("fixtureProperty1", "otherProperty")) shouldBeEqualTo true
+            hasPropertiesWithAllNames("fixtureProperty1") shouldBeEqualTo true
+            hasPropertiesWithAllNames("fixtureProperty1", "fixtureProperty2") shouldBeEqualTo true
+            hasPropertiesWithAllNames("fixtureProperty1", "otherProperty") shouldBeEqualTo false
+            hasPropertiesWithAllNames(listOf("fixtureProperty1")) shouldBeEqualTo true
+            hasPropertiesWithAllNames(listOf("fixtureProperty1", "fixtureProperty2")) shouldBeEqualTo true
+            hasPropertiesWithAllNames(listOf("fixtureProperty1", "otherProperty")) shouldBeEqualTo false
+            hasPropertiesWithAllNames(setOf("fixtureProperty1")) shouldBeEqualTo true
+            hasPropertiesWithAllNames(setOf("fixtureProperty1", "fixtureProperty2")) shouldBeEqualTo true
+            hasPropertiesWithAllNames(setOf("fixtureProperty1", "otherProperty")) shouldBeEqualTo false
+            hasProperty { it.name == "fixtureProperty1" } shouldBeEqualTo true
             hasProperty { it.hasNameEndingWith("Property1") } shouldBeEqualTo true
-            hasAllProperties { it.hasNameStartingWith("sample") } shouldBeEqualTo true
+            hasAllProperties { it.hasNameStartingWith("fixture") } shouldBeEqualTo true
             hasAllProperties { it.hasNameEndingWith("Class1") } shouldBeEqualTo false
         }
     }
@@ -79,7 +79,7 @@ class KoObjectDeclarationForKoPropertyProviderTest {
                 .first()
 
         // then
-        val expected = listOf("sampleProperty", "sampleNestedProperty")
+        val expected = listOf("fixtureProperty", "fixtureNestedProperty")
 
         sut
             .properties(includeNested = true)
@@ -96,7 +96,7 @@ class KoObjectDeclarationForKoPropertyProviderTest {
                 .first()
 
         // then
-        val expected = listOf("sampleProperty")
+        val expected = listOf("fixtureProperty")
 
         sut
             .properties(includeNested = false)
@@ -118,7 +118,68 @@ class KoObjectDeclarationForKoPropertyProviderTest {
             numProperties(includeNested = false) shouldBeEqualTo 1
             countProperties(includeNested = false) { it.hasValModifier } shouldBeEqualTo 1
             countProperties { it.hasValModifier } shouldBeEqualTo 2
-            countProperties { it.name == "sampleProperty" && it.hasVarModifier } shouldBeEqualTo 0
+            countProperties { it.name == "fixtureProperty" && it.hasVarModifier } shouldBeEqualTo 0
+        }
+    }
+
+    @Test
+    fun `object-has-no-properties-ignore-case`() {
+        // given
+        val sut =
+            getSnippetFile("object-has-no-properties-ignore-case")
+                .objects()
+                .first()
+
+        // then
+        assertSoftly(sut) {
+            hasPropertyWithName("fixtureproperty") shouldBeEqualTo false
+            hasPropertyWithName("fixtureproperty", ignoreCase = true) shouldBeEqualTo false
+            hasPropertyWithName(listOf("fixtureproperty")) shouldBeEqualTo false
+            hasPropertyWithName(listOf("fixtureproperty"), ignoreCase = true) shouldBeEqualTo false
+            hasPropertyWithName(setOf("fixtureproperty")) shouldBeEqualTo false
+            hasPropertyWithName(setOf("fixtureproperty"), ignoreCase = true) shouldBeEqualTo false
+            hasPropertiesWithAllNames("fixtureproperty1", "fixtureproperty2") shouldBeEqualTo false
+            hasPropertiesWithAllNames("fixtureproperty1", "fixtureproperty2", ignoreCase = true) shouldBeEqualTo false
+            hasPropertiesWithAllNames(listOf("fixtureproperty1", "fixtureproperty2")) shouldBeEqualTo false
+            hasPropertiesWithAllNames(listOf("fixtureproperty1", "fixtureproperty2"), ignoreCase = true) shouldBeEqualTo false
+            hasPropertiesWithAllNames(setOf("fixtureproperty1", "fixtureproperty2")) shouldBeEqualTo false
+            hasPropertiesWithAllNames(setOf("fixtureproperty1", "fixtureproperty2"), ignoreCase = true) shouldBeEqualTo false
+        }
+    }
+
+    @Test
+    fun `object-has-properties-ignore-case`() {
+        // given
+        val sut =
+            getSnippetFile("object-has-properties-ignore-case")
+                .objects()
+                .first()
+
+        // then
+        assertSoftly(sut) {
+            hasPropertyWithName("fixtureproperty1", ignoreCase = true) shouldBeEqualTo true
+            hasPropertyWithName("otherproperty") shouldBeEqualTo false
+            hasPropertyWithName("otherproperty", ignoreCase = true) shouldBeEqualTo false
+            hasPropertyWithName("fixtureproperty1", "otherName") shouldBeEqualTo false
+            hasPropertyWithName("fixtureproperty1", "otherName", ignoreCase = true) shouldBeEqualTo true
+            hasPropertyWithName(listOf("fixtureproperty1")) shouldBeEqualTo false
+            hasPropertyWithName(listOf("fixtureproperty1"), ignoreCase = true) shouldBeEqualTo true
+            hasPropertyWithName(listOf("otherproperty")) shouldBeEqualTo false
+            hasPropertyWithName(listOf("otherproperty"), ignoreCase = true) shouldBeEqualTo false
+            hasPropertyWithName(listOf("fixtureproperty1", "otherName")) shouldBeEqualTo false
+            hasPropertyWithName(listOf("fixtureproperty1", "otherName"), ignoreCase = true) shouldBeEqualTo true
+            hasPropertiesWithAllNames("fixtureproperty1") shouldBeEqualTo false
+            hasPropertiesWithAllNames("fixtureproperty1", ignoreCase = true) shouldBeEqualTo true
+            hasPropertiesWithAllNames("fixtureproperty1", "fixtureproperty2") shouldBeEqualTo false
+            hasPropertiesWithAllNames("fixtureproperty1", "fixtureproperty2", ignoreCase = true) shouldBeEqualTo true
+            hasPropertiesWithAllNames("fixtureproperty1", "otherproperty") shouldBeEqualTo false
+            hasPropertiesWithAllNames("fixtureproperty1", "otherproperty", ignoreCase = true) shouldBeEqualTo false
+            hasPropertiesWithAllNames(listOf("fixtureproperty1")) shouldBeEqualTo false
+            hasPropertiesWithAllNames(listOf("fixtureproperty1"), ignoreCase = true) shouldBeEqualTo true
+            hasPropertiesWithAllNames(listOf("fixtureproperty1", "fixtureproperty2")) shouldBeEqualTo false
+            hasPropertiesWithAllNames(listOf("fixtureproperty1", "fixtureproperty2"), ignoreCase = true) shouldBeEqualTo true
+            hasPropertiesWithAllNames(listOf("fixtureproperty1", "otherproperty")) shouldBeEqualTo false
+            hasPropertiesWithAllNames(listOf("fixtureproperty1", "otherproperty"), ignoreCase = true) shouldBeEqualTo false
         }
     }
 

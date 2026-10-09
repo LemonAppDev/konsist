@@ -1,2 +1,2 @@
-/** Sample KDoc */
-fun sampleFunction() {}
+/** Fixture KDoc */
+fun fixtureFunction() {}

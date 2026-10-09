@@ -1,6 +1,6 @@
 /**
- * Sample description
+ * Fixture description
  *
- * @param sampleParameter1
+ * @param fixtureParameter1
  */
-fun sampleFunction(sampleParameter1: Int, sampleParameter2: String) {}
+fun fixtureFunction(fixtureParameter1: Int, fixtureParameter2: String) {}

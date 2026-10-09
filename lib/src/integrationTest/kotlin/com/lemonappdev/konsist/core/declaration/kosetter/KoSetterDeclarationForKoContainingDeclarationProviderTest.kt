@@ -16,7 +16,7 @@ class KoSetterDeclarationForKoContainingDeclarationProviderTest {
                 .setter
 
         // then
-        (sut?.containingDeclaration as KoNameProvider).name shouldBeEqualTo "sampleProperty"
+        (sut?.containingDeclaration as KoNameProvider).name shouldBeEqualTo "fixtureProperty"
     }
 
     private fun getSnippetFile(fileName: String) =

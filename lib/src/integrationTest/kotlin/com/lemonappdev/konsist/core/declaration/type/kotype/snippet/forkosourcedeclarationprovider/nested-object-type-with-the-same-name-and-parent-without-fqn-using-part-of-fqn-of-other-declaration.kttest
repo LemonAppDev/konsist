@@ -1,11 +1,11 @@
-package com.samplepackage
+package com.fixturepackage
 
 interface FirstInterface {
-    fun method(arg: SampleNestedObjectWithTheSameName)
-    object SampleNestedObjectWithTheSameName
+    fun method(arg: FixtureNestedObjectWithTheSameName)
+    object FixtureNestedObjectWithTheSameName
 }
 
 interface SecondInterface {
-    fun method(arg: FirstInterface.SampleNestedObjectWithTheSameName)
-    object SampleNestedObjectWithTheSameName
+    fun method(arg: FirstInterface.FixtureNestedObjectWithTheSameName)
+    object FixtureNestedObjectWithTheSameName
 }

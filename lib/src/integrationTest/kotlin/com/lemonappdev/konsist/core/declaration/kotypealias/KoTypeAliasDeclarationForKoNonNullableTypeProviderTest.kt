@@ -1,7 +1,7 @@
 package com.lemonappdev.konsist.core.declaration.kotypealias
 
 import com.lemonappdev.konsist.TestSnippetProvider
-import com.lemonappdev.konsist.testdata.SampleType
+import com.lemonappdev.konsist.testdata.FixtureType
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
@@ -59,10 +59,10 @@ class KoTypeAliasDeclarationForKoNonNullableTypeProviderTest {
 
         // then
         assertSoftly(sut) {
-            it.type.name shouldBeEqualTo "SampleType"
-            it.hasType { type -> type.name == "SampleType" } shouldBeEqualTo true
+            it.type.name shouldBeEqualTo "FixtureType"
+            it.hasType { type -> type.name == "FixtureType" } shouldBeEqualTo true
             it.hasType { type -> type.name == "Int" } shouldBeEqualTo false
-            it.hasTypeOf(SampleType::class) shouldBeEqualTo true
+            it.hasTypeOf(FixtureType::class) shouldBeEqualTo true
             it.hasTypeOf(Int::class) shouldBeEqualTo false
         }
     }
@@ -79,10 +79,10 @@ class KoTypeAliasDeclarationForKoNonNullableTypeProviderTest {
 
         // then
         assertSoftly(sut) {
-            it.type.name shouldBeEqualTo "SampleType"
-            it.hasType { type -> type.name == "SampleType" } shouldBeEqualTo true
+            it.type.name shouldBeEqualTo "FixtureType"
+            it.hasType { type -> type.name == "FixtureType" } shouldBeEqualTo true
             it.hasType { type -> type.name == "Int" } shouldBeEqualTo false
-            it.hasTypeOf(SampleType::class) shouldBeEqualTo true
+            it.hasTypeOf(FixtureType::class) shouldBeEqualTo true
             it.hasTypeOf(Int::class) shouldBeEqualTo false
         }
     }

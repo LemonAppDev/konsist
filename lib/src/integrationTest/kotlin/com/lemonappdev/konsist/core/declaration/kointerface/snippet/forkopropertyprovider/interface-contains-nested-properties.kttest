@@ -1,11 +1,11 @@
-interface SampleInterface {
-    val sampleProperty: Int
+interface FixtureInterface {
+    val fixtureProperty: Int
 
-    fun sampleFunction() {
-        val sampleLocalProperty = 6
+    fun fixtureFunction() {
+        val fixtureLocalProperty = 6
     }
 
-    class SampleClass {
-        val sampleNestedProperty = ""
+    class FixtureClass {
+        val fixtureNestedProperty = ""
     }
 }

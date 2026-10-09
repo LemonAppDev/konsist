@@ -1,4 +1,4 @@
-import com.lemonappdev.konsist.testdata.SampleAnnotationWithAngleBrackets
+import com.lemonappdev.konsist.testdata.FixtureAnnotationWithAngleBrackets
 
-@SampleAnnotationWithAngleBrackets<String, Int>
-private open class SampleClass
+@FixtureAnnotationWithAngleBrackets<String, Int>
+private open class FixtureClass

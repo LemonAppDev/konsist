@@ -1,1 +1,1 @@
-val sampleProperty1: () -> Unit = {}
+val fixtureProperty1: () -> Unit = {}

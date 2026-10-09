@@ -2,9 +2,9 @@ package com.lemonappdev.konsist.core.declaration.koobject
 
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
 import com.lemonappdev.konsist.api.provider.modifier.KoVisibilityModifierProvider
-import com.lemonappdev.konsist.testdata.SampleClass
-import com.lemonappdev.konsist.testdata.SampleParentClass
-import com.lemonappdev.konsist.testdata.SampleParentClass2
+import com.lemonappdev.konsist.testdata.FixtureClass
+import com.lemonappdev.konsist.testdata.FixtureParentClass
+import com.lemonappdev.konsist.testdata.FixtureParentClass2
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
@@ -27,37 +27,37 @@ class KoObjectDeclarationForKoParentClassProviderTest {
             numParentClasses() shouldBeEqualTo 0
             countParentClasses { (it.sourceDeclaration as? KoVisibilityModifierProvider)?.hasPrivateModifier == true } shouldBeEqualTo 0
             hasParentClass() shouldBeEqualTo false
-            hasParentClass { it.name == "SampleParentClass" } shouldBeEqualTo false
+            hasParentClass { it.name == "FixtureParentClass" } shouldBeEqualTo false
             hasParentClasses() shouldBeEqualTo false
             hasParentClassWithName(emptyList()) shouldBeEqualTo false
             hasParentClassWithName(emptySet()) shouldBeEqualTo false
             hasParentClassesWithAllNames(emptyList()) shouldBeEqualTo false
             hasParentClassesWithAllNames(emptySet()) shouldBeEqualTo false
             hasAllParentClasses { (it.sourceDeclaration as? KoVisibilityModifierProvider)?.hasPrivateModifier == true } shouldBeEqualTo true
-            hasParentClassWithName("SampleParentClass") shouldBeEqualTo false
-            hasParentClassWithName("SampleParentClass", "OtherClass") shouldBeEqualTo false
-            hasParentClassWithName(listOf("SampleParentClass")) shouldBeEqualTo false
-            hasParentClassWithName(listOf("SampleParentClass", "OtherClass")) shouldBeEqualTo false
-            hasParentClassWithName(setOf("SampleParentClass")) shouldBeEqualTo false
-            hasParentClassWithName(setOf("SampleParentClass", "OtherClass")) shouldBeEqualTo false
-            hasParentClassesWithAllNames("SampleParentClass") shouldBeEqualTo false
-            hasParentClassesWithAllNames("SampleParentClass", "OtherClass") shouldBeEqualTo false
-            hasParentClassesWithAllNames(listOf("SampleParentClass")) shouldBeEqualTo false
-            hasParentClassesWithAllNames(listOf("SampleParentClass", "OtherClass")) shouldBeEqualTo false
-            hasParentClassesWithAllNames(setOf("SampleParentClass")) shouldBeEqualTo false
-            hasParentClassesWithAllNames(setOf("SampleParentClass", "OtherClass")) shouldBeEqualTo false
-            hasParentClassOf(SampleParentClass::class) shouldBeEqualTo false
-            hasParentClassOf(SampleParentClass::class, SampleClass::class) shouldBeEqualTo false
-            hasParentClassOf(listOf(SampleParentClass::class)) shouldBeEqualTo false
-            hasParentClassOf(listOf(SampleParentClass::class, SampleClass::class)) shouldBeEqualTo false
-            hasParentClassOf(setOf(SampleParentClass::class)) shouldBeEqualTo false
-            hasParentClassOf(setOf(SampleParentClass::class, SampleClass::class)) shouldBeEqualTo false
-            hasAllParentClassesOf(SampleParentClass::class) shouldBeEqualTo false
-            hasAllParentClassesOf(SampleParentClass::class, SampleClass::class) shouldBeEqualTo false
-            hasAllParentClassesOf(listOf(SampleParentClass::class)) shouldBeEqualTo false
-            hasAllParentClassesOf(listOf(SampleParentClass::class, SampleClass::class)) shouldBeEqualTo false
-            hasAllParentClassesOf(setOf(SampleParentClass::class)) shouldBeEqualTo false
-            hasAllParentClassesOf(setOf(SampleParentClass::class, SampleClass::class)) shouldBeEqualTo false
+            hasParentClassWithName("FixtureParentClass") shouldBeEqualTo false
+            hasParentClassWithName("FixtureParentClass", "OtherClass") shouldBeEqualTo false
+            hasParentClassWithName(listOf("FixtureParentClass")) shouldBeEqualTo false
+            hasParentClassWithName(listOf("FixtureParentClass", "OtherClass")) shouldBeEqualTo false
+            hasParentClassWithName(setOf("FixtureParentClass")) shouldBeEqualTo false
+            hasParentClassWithName(setOf("FixtureParentClass", "OtherClass")) shouldBeEqualTo false
+            hasParentClassesWithAllNames("FixtureParentClass") shouldBeEqualTo false
+            hasParentClassesWithAllNames("FixtureParentClass", "OtherClass") shouldBeEqualTo false
+            hasParentClassesWithAllNames(listOf("FixtureParentClass")) shouldBeEqualTo false
+            hasParentClassesWithAllNames(listOf("FixtureParentClass", "OtherClass")) shouldBeEqualTo false
+            hasParentClassesWithAllNames(setOf("FixtureParentClass")) shouldBeEqualTo false
+            hasParentClassesWithAllNames(setOf("FixtureParentClass", "OtherClass")) shouldBeEqualTo false
+            hasParentClassOf(FixtureParentClass::class) shouldBeEqualTo false
+            hasParentClassOf(FixtureParentClass::class, FixtureClass::class) shouldBeEqualTo false
+            hasParentClassOf(listOf(FixtureParentClass::class)) shouldBeEqualTo false
+            hasParentClassOf(listOf(FixtureParentClass::class, FixtureClass::class)) shouldBeEqualTo false
+            hasParentClassOf(setOf(FixtureParentClass::class)) shouldBeEqualTo false
+            hasParentClassOf(setOf(FixtureParentClass::class, FixtureClass::class)) shouldBeEqualTo false
+            hasAllParentClassesOf(FixtureParentClass::class) shouldBeEqualTo false
+            hasAllParentClassesOf(FixtureParentClass::class, FixtureClass::class) shouldBeEqualTo false
+            hasAllParentClassesOf(listOf(FixtureParentClass::class)) shouldBeEqualTo false
+            hasAllParentClassesOf(listOf(FixtureParentClass::class, FixtureClass::class)) shouldBeEqualTo false
+            hasAllParentClassesOf(setOf(FixtureParentClass::class)) shouldBeEqualTo false
+            hasAllParentClassesOf(setOf(FixtureParentClass::class, FixtureClass::class)) shouldBeEqualTo false
         }
     }
 
@@ -71,58 +71,58 @@ class KoObjectDeclarationForKoParentClassProviderTest {
 
         // then
         assertSoftly(sut) {
-            parentClass?.name shouldBeEqualTo "SampleParentClass"
-            parentClasses().map { it.name } shouldBeEqualTo listOf("SampleParentClass")
+            parentClass?.name shouldBeEqualTo "FixtureParentClass"
+            parentClasses().map { it.name } shouldBeEqualTo listOf("FixtureParentClass")
             numParentClasses() shouldBeEqualTo 1
-            countParentClasses { it.hasNameStartingWith("Sample") } shouldBeEqualTo 1
+            countParentClasses { it.hasNameStartingWith("Fixture") } shouldBeEqualTo 1
             countParentClasses { (it.sourceDeclaration as? KoVisibilityModifierProvider)?.hasPrivateModifier == true } shouldBeEqualTo 0
             hasParentClass() shouldBeEqualTo true
-            hasParentClass { it.name == "SampleParentClass" } shouldBeEqualTo true
+            hasParentClass { it.name == "FixtureParentClass" } shouldBeEqualTo true
             hasParentClass { it.name == "OtherClass" } shouldBeEqualTo false
             hasParentClasses() shouldBeEqualTo true
             hasParentClassWithName(emptyList()) shouldBeEqualTo true
             hasParentClassWithName(emptySet()) shouldBeEqualTo true
             hasParentClassesWithAllNames(emptyList()) shouldBeEqualTo true
             hasParentClassesWithAllNames(emptySet()) shouldBeEqualTo true
-            hasAllParentClasses { it.hasNameStartingWith("Sample") } shouldBeEqualTo true
+            hasAllParentClasses { it.hasNameStartingWith("Fixture") } shouldBeEqualTo true
             hasAllParentClasses { (it.sourceDeclaration as? KoVisibilityModifierProvider)?.hasPrivateModifier == true } shouldBeEqualTo
                 false
-            hasParentClassWithName("SampleParentClass") shouldBeEqualTo true
+            hasParentClassWithName("FixtureParentClass") shouldBeEqualTo true
             hasParentClassWithName("OtherClass") shouldBeEqualTo false
-            hasParentClassWithName("SampleParentClass", "OtherClass") shouldBeEqualTo true
-            hasParentClassWithName(listOf("SampleParentClass")) shouldBeEqualTo true
+            hasParentClassWithName("FixtureParentClass", "OtherClass") shouldBeEqualTo true
+            hasParentClassWithName(listOf("FixtureParentClass")) shouldBeEqualTo true
             hasParentClassWithName(listOf("OtherClass")) shouldBeEqualTo false
-            hasParentClassWithName(listOf("SampleParentClass", "OtherClass")) shouldBeEqualTo true
-            hasParentClassWithName(setOf("SampleParentClass")) shouldBeEqualTo true
+            hasParentClassWithName(listOf("FixtureParentClass", "OtherClass")) shouldBeEqualTo true
+            hasParentClassWithName(setOf("FixtureParentClass")) shouldBeEqualTo true
             hasParentClassWithName(setOf("OtherClass")) shouldBeEqualTo false
-            hasParentClassWithName(setOf("SampleParentClass", "OtherClass")) shouldBeEqualTo true
-            hasParentClassesWithAllNames("SampleParentClass") shouldBeEqualTo true
+            hasParentClassWithName(setOf("FixtureParentClass", "OtherClass")) shouldBeEqualTo true
+            hasParentClassesWithAllNames("FixtureParentClass") shouldBeEqualTo true
             hasParentClassesWithAllNames("OtherClass") shouldBeEqualTo false
-            hasParentClassesWithAllNames("SampleParentClass", "OtherClass") shouldBeEqualTo false
-            hasParentClassesWithAllNames(listOf("SampleParentClass")) shouldBeEqualTo true
+            hasParentClassesWithAllNames("FixtureParentClass", "OtherClass") shouldBeEqualTo false
+            hasParentClassesWithAllNames(listOf("FixtureParentClass")) shouldBeEqualTo true
             hasParentClassesWithAllNames(listOf("OtherClass")) shouldBeEqualTo false
-            hasParentClassesWithAllNames(listOf("SampleParentClass", "OtherClass")) shouldBeEqualTo false
-            hasParentClassesWithAllNames(setOf("SampleParentClass")) shouldBeEqualTo true
+            hasParentClassesWithAllNames(listOf("FixtureParentClass", "OtherClass")) shouldBeEqualTo false
+            hasParentClassesWithAllNames(setOf("FixtureParentClass")) shouldBeEqualTo true
             hasParentClassesWithAllNames(setOf("OtherClass")) shouldBeEqualTo false
-            hasParentClassesWithAllNames(setOf("SampleParentClass", "OtherClass")) shouldBeEqualTo false
-            hasParentClassOf(SampleParentClass::class) shouldBeEqualTo true
-            hasParentClassOf(SampleClass::class) shouldBeEqualTo false
-            hasParentClassOf(SampleParentClass::class, SampleClass::class) shouldBeEqualTo true
-            hasParentClassOf(listOf(SampleParentClass::class)) shouldBeEqualTo true
-            hasParentClassOf(listOf(SampleClass::class)) shouldBeEqualTo false
-            hasParentClassOf(listOf(SampleParentClass::class, SampleClass::class)) shouldBeEqualTo true
-            hasParentClassOf(setOf(SampleParentClass::class)) shouldBeEqualTo true
-            hasParentClassOf(setOf(SampleClass::class)) shouldBeEqualTo false
-            hasParentClassOf(setOf(SampleParentClass::class, SampleClass::class)) shouldBeEqualTo true
-            hasAllParentClassesOf(SampleParentClass::class) shouldBeEqualTo true
-            hasAllParentClassesOf(SampleClass::class) shouldBeEqualTo false
-            hasAllParentClassesOf(SampleParentClass::class, SampleClass::class) shouldBeEqualTo false
-            hasAllParentClassesOf(listOf(SampleParentClass::class)) shouldBeEqualTo true
-            hasAllParentClassesOf(listOf(SampleClass::class)) shouldBeEqualTo false
-            hasAllParentClassesOf(listOf(SampleParentClass::class, SampleClass::class)) shouldBeEqualTo false
-            hasAllParentClassesOf(setOf(SampleParentClass::class)) shouldBeEqualTo true
-            hasAllParentClassesOf(setOf(SampleClass::class)) shouldBeEqualTo false
-            hasAllParentClassesOf(setOf(SampleParentClass::class, SampleClass::class)) shouldBeEqualTo false
+            hasParentClassesWithAllNames(setOf("FixtureParentClass", "OtherClass")) shouldBeEqualTo false
+            hasParentClassOf(FixtureParentClass::class) shouldBeEqualTo true
+            hasParentClassOf(FixtureClass::class) shouldBeEqualTo false
+            hasParentClassOf(FixtureParentClass::class, FixtureClass::class) shouldBeEqualTo true
+            hasParentClassOf(listOf(FixtureParentClass::class)) shouldBeEqualTo true
+            hasParentClassOf(listOf(FixtureClass::class)) shouldBeEqualTo false
+            hasParentClassOf(listOf(FixtureParentClass::class, FixtureClass::class)) shouldBeEqualTo true
+            hasParentClassOf(setOf(FixtureParentClass::class)) shouldBeEqualTo true
+            hasParentClassOf(setOf(FixtureClass::class)) shouldBeEqualTo false
+            hasParentClassOf(setOf(FixtureParentClass::class, FixtureClass::class)) shouldBeEqualTo true
+            hasAllParentClassesOf(FixtureParentClass::class) shouldBeEqualTo true
+            hasAllParentClassesOf(FixtureClass::class) shouldBeEqualTo false
+            hasAllParentClassesOf(FixtureParentClass::class, FixtureClass::class) shouldBeEqualTo false
+            hasAllParentClassesOf(listOf(FixtureParentClass::class)) shouldBeEqualTo true
+            hasAllParentClassesOf(listOf(FixtureClass::class)) shouldBeEqualTo false
+            hasAllParentClassesOf(listOf(FixtureParentClass::class, FixtureClass::class)) shouldBeEqualTo false
+            hasAllParentClassesOf(setOf(FixtureParentClass::class)) shouldBeEqualTo true
+            hasAllParentClassesOf(setOf(FixtureClass::class)) shouldBeEqualTo false
+            hasAllParentClassesOf(setOf(FixtureParentClass::class, FixtureClass::class)) shouldBeEqualTo false
         }
     }
 
@@ -136,58 +136,58 @@ class KoObjectDeclarationForKoParentClassProviderTest {
 
         // then
         assertSoftly(sut) {
-            parentClass?.name shouldBeEqualTo "SampleParentClass"
-            parentClasses().map { it.name } shouldBeEqualTo listOf("SampleParentClass")
+            parentClass?.name shouldBeEqualTo "FixtureParentClass"
+            parentClasses().map { it.name } shouldBeEqualTo listOf("FixtureParentClass")
             numParentClasses() shouldBeEqualTo 1
-            countParentClasses { it.hasNameStartingWith("Sample") } shouldBeEqualTo 1
+            countParentClasses { it.hasNameStartingWith("Fixture") } shouldBeEqualTo 1
             countParentClasses { (it.sourceDeclaration as? KoVisibilityModifierProvider)?.hasPrivateModifier == true } shouldBeEqualTo 0
             hasParentClass() shouldBeEqualTo true
-            hasParentClass { it.name == "SampleParentClass" } shouldBeEqualTo true
+            hasParentClass { it.name == "FixtureParentClass" } shouldBeEqualTo true
             hasParentClass { it.name == "OtherClass" } shouldBeEqualTo false
             hasParentClasses() shouldBeEqualTo true
             hasParentClassWithName(emptyList()) shouldBeEqualTo true
             hasParentClassWithName(emptySet()) shouldBeEqualTo true
             hasParentClassesWithAllNames(emptyList()) shouldBeEqualTo true
             hasParentClassesWithAllNames(emptySet()) shouldBeEqualTo true
-            hasAllParentClasses { it.hasNameStartingWith("Sample") } shouldBeEqualTo true
+            hasAllParentClasses { it.hasNameStartingWith("Fixture") } shouldBeEqualTo true
             hasAllParentClasses { (it.sourceDeclaration as? KoVisibilityModifierProvider)?.hasPrivateModifier == true } shouldBeEqualTo
                 false
-            hasParentClassWithName("SampleParentClass") shouldBeEqualTo true
+            hasParentClassWithName("FixtureParentClass") shouldBeEqualTo true
             hasParentClassWithName("OtherClass") shouldBeEqualTo false
-            hasParentClassWithName("SampleParentClass", "OtherClass") shouldBeEqualTo true
-            hasParentClassWithName(listOf("SampleParentClass")) shouldBeEqualTo true
+            hasParentClassWithName("FixtureParentClass", "OtherClass") shouldBeEqualTo true
+            hasParentClassWithName(listOf("FixtureParentClass")) shouldBeEqualTo true
             hasParentClassWithName(listOf("OtherClass")) shouldBeEqualTo false
-            hasParentClassWithName(listOf("SampleParentClass", "OtherClass")) shouldBeEqualTo true
-            hasParentClassWithName(setOf("SampleParentClass")) shouldBeEqualTo true
+            hasParentClassWithName(listOf("FixtureParentClass", "OtherClass")) shouldBeEqualTo true
+            hasParentClassWithName(setOf("FixtureParentClass")) shouldBeEqualTo true
             hasParentClassWithName(setOf("OtherClass")) shouldBeEqualTo false
-            hasParentClassWithName(setOf("SampleParentClass", "OtherClass")) shouldBeEqualTo true
-            hasParentClassesWithAllNames("SampleParentClass") shouldBeEqualTo true
+            hasParentClassWithName(setOf("FixtureParentClass", "OtherClass")) shouldBeEqualTo true
+            hasParentClassesWithAllNames("FixtureParentClass") shouldBeEqualTo true
             hasParentClassesWithAllNames("OtherClass") shouldBeEqualTo false
-            hasParentClassesWithAllNames("SampleParentClass", "OtherClass") shouldBeEqualTo false
-            hasParentClassesWithAllNames(listOf("SampleParentClass")) shouldBeEqualTo true
+            hasParentClassesWithAllNames("FixtureParentClass", "OtherClass") shouldBeEqualTo false
+            hasParentClassesWithAllNames(listOf("FixtureParentClass")) shouldBeEqualTo true
             hasParentClassesWithAllNames(listOf("OtherClass")) shouldBeEqualTo false
-            hasParentClassesWithAllNames(listOf("SampleParentClass", "OtherClass")) shouldBeEqualTo false
-            hasParentClassesWithAllNames(setOf("SampleParentClass")) shouldBeEqualTo true
+            hasParentClassesWithAllNames(listOf("FixtureParentClass", "OtherClass")) shouldBeEqualTo false
+            hasParentClassesWithAllNames(setOf("FixtureParentClass")) shouldBeEqualTo true
             hasParentClassesWithAllNames(setOf("OtherClass")) shouldBeEqualTo false
-            hasParentClassesWithAllNames(setOf("SampleParentClass", "OtherClass")) shouldBeEqualTo false
-            hasParentClassOf(SampleParentClass::class) shouldBeEqualTo true
-            hasParentClassOf(SampleClass::class) shouldBeEqualTo false
-            hasParentClassOf(SampleParentClass::class, SampleClass::class) shouldBeEqualTo true
-            hasParentClassOf(listOf(SampleParentClass::class)) shouldBeEqualTo true
-            hasParentClassOf(listOf(SampleClass::class)) shouldBeEqualTo false
-            hasParentClassOf(listOf(SampleParentClass::class, SampleClass::class)) shouldBeEqualTo true
-            hasParentClassOf(setOf(SampleParentClass::class)) shouldBeEqualTo true
-            hasParentClassOf(setOf(SampleClass::class)) shouldBeEqualTo false
-            hasParentClassOf(setOf(SampleParentClass::class, SampleClass::class)) shouldBeEqualTo true
-            hasAllParentClassesOf(SampleParentClass::class) shouldBeEqualTo true
-            hasAllParentClassesOf(SampleClass::class) shouldBeEqualTo false
-            hasAllParentClassesOf(SampleParentClass::class, SampleClass::class) shouldBeEqualTo false
-            hasAllParentClassesOf(listOf(SampleParentClass::class)) shouldBeEqualTo true
-            hasAllParentClassesOf(listOf(SampleClass::class)) shouldBeEqualTo false
-            hasAllParentClassesOf(listOf(SampleParentClass::class, SampleClass::class)) shouldBeEqualTo false
-            hasAllParentClassesOf(setOf(SampleParentClass::class)) shouldBeEqualTo true
-            hasAllParentClassesOf(setOf(SampleClass::class)) shouldBeEqualTo false
-            hasAllParentClassesOf(setOf(SampleParentClass::class, SampleClass::class)) shouldBeEqualTo false
+            hasParentClassesWithAllNames(setOf("FixtureParentClass", "OtherClass")) shouldBeEqualTo false
+            hasParentClassOf(FixtureParentClass::class) shouldBeEqualTo true
+            hasParentClassOf(FixtureClass::class) shouldBeEqualTo false
+            hasParentClassOf(FixtureParentClass::class, FixtureClass::class) shouldBeEqualTo true
+            hasParentClassOf(listOf(FixtureParentClass::class)) shouldBeEqualTo true
+            hasParentClassOf(listOf(FixtureClass::class)) shouldBeEqualTo false
+            hasParentClassOf(listOf(FixtureParentClass::class, FixtureClass::class)) shouldBeEqualTo true
+            hasParentClassOf(setOf(FixtureParentClass::class)) shouldBeEqualTo true
+            hasParentClassOf(setOf(FixtureClass::class)) shouldBeEqualTo false
+            hasParentClassOf(setOf(FixtureParentClass::class, FixtureClass::class)) shouldBeEqualTo true
+            hasAllParentClassesOf(FixtureParentClass::class) shouldBeEqualTo true
+            hasAllParentClassesOf(FixtureClass::class) shouldBeEqualTo false
+            hasAllParentClassesOf(FixtureParentClass::class, FixtureClass::class) shouldBeEqualTo false
+            hasAllParentClassesOf(listOf(FixtureParentClass::class)) shouldBeEqualTo true
+            hasAllParentClassesOf(listOf(FixtureClass::class)) shouldBeEqualTo false
+            hasAllParentClassesOf(listOf(FixtureParentClass::class, FixtureClass::class)) shouldBeEqualTo false
+            hasAllParentClassesOf(setOf(FixtureParentClass::class)) shouldBeEqualTo true
+            hasAllParentClassesOf(setOf(FixtureClass::class)) shouldBeEqualTo false
+            hasAllParentClassesOf(setOf(FixtureParentClass::class, FixtureClass::class)) shouldBeEqualTo false
         }
     }
 
@@ -208,9 +208,9 @@ class KoObjectDeclarationForKoParentClassProviderTest {
 
         // then
         assertSoftly(sut) {
-            parentClass?.name shouldBeEqualTo "SampleParentClassWithDuplicatedName"
+            parentClass?.name shouldBeEqualTo "FixtureParentClassWithDuplicatedName"
             parentClass?.sourceDeclaration?.asClassDeclaration()?.fullyQualifiedName shouldBeEqualTo
-                "com.lemonappdev.konsist.testdata.SampleParentClassWithDuplicatedName"
+                "com.lemonappdev.konsist.testdata.FixtureParentClassWithDuplicatedName"
         }
     }
 
@@ -224,19 +224,19 @@ class KoObjectDeclarationForKoParentClassProviderTest {
 
         // then
         assertSoftly(sut) {
-            parentClasses(indirectParents = false).map { it.name } shouldBeEqualTo listOf("SampleParentClass")
+            parentClasses(indirectParents = false).map { it.name } shouldBeEqualTo listOf("FixtureParentClass")
             parentClasses(indirectParents = true).map { it.name } shouldBeEqualTo
                 listOf(
-                    "SampleParentClass",
-                    "SampleParentClass1",
-                    "SampleParentClass2",
+                    "FixtureParentClass",
+                    "FixtureParentClass1",
+                    "FixtureParentClass2",
                 )
             numParentClasses(indirectParents = false) shouldBeEqualTo 1
             numParentClasses(indirectParents = true) shouldBeEqualTo 3
-            countParentClasses(indirectParents = false) { it.name == "SampleParentClass1" } shouldBeEqualTo 0
-            countParentClasses(indirectParents = true) { it.name == "SampleParentClass1" } shouldBeEqualTo 1
-            countParentClasses(indirectParents = false) { it.hasNameStartingWith("SampleParent") } shouldBeEqualTo 1
-            countParentClasses(indirectParents = true) { it.hasNameStartingWith("SampleParent") } shouldBeEqualTo 3
+            countParentClasses(indirectParents = false) { it.name == "FixtureParentClass1" } shouldBeEqualTo 0
+            countParentClasses(indirectParents = true) { it.name == "FixtureParentClass1" } shouldBeEqualTo 1
+            countParentClasses(indirectParents = false) { it.hasNameStartingWith("FixtureParent") } shouldBeEqualTo 1
+            countParentClasses(indirectParents = true) { it.hasNameStartingWith("FixtureParent") } shouldBeEqualTo 3
             hasParentClass() shouldBeEqualTo true
             hasParentClasses(indirectParents = false) shouldBeEqualTo true
             hasParentClasses(indirectParents = true) shouldBeEqualTo true
@@ -244,124 +244,182 @@ class KoObjectDeclarationForKoParentClassProviderTest {
             hasParentClassWithName(emptySet(), indirectParents = false) shouldBeEqualTo true
             hasParentClassesWithAllNames(emptyList(), indirectParents = false) shouldBeEqualTo true
             hasParentClassesWithAllNames(emptySet(), indirectParents = false) shouldBeEqualTo true
-            hasParentClassWithName("SampleParentClass1", indirectParents = true) shouldBeEqualTo true
+            hasParentClassWithName("FixtureParentClass1", indirectParents = true) shouldBeEqualTo true
             hasParentClassWithName("OtherClass", indirectParents = true) shouldBeEqualTo false
             hasParentClassWithName(
-                "SampleParentClass1",
-                "SampleParentClass2",
+                "FixtureParentClass1",
+                "FixtureParentClass2",
                 indirectParents = true,
             ) shouldBeEqualTo true
             hasParentClassWithName(
-                "SampleParentClass1",
+                "FixtureParentClass1",
                 "OtherClass",
                 indirectParents = true,
             ) shouldBeEqualTo true
-            hasParentClassWithName(listOf("SampleParentClass1"), indirectParents = true) shouldBeEqualTo true
+            hasParentClassWithName(listOf("FixtureParentClass1"), indirectParents = true) shouldBeEqualTo true
             hasParentClassWithName(listOf("OtherClass"), indirectParents = true) shouldBeEqualTo false
             hasParentClassWithName(
                 listOf(
-                    "SampleParentClass1",
-                    "SampleParentClass2",
+                    "FixtureParentClass1",
+                    "FixtureParentClass2",
                 ),
                 indirectParents = true,
             ) shouldBeEqualTo true
             hasParentClassWithName(
                 listOf(
-                    "SampleParentClass1",
+                    "FixtureParentClass1",
                     "OtherClass",
                 ),
                 indirectParents = true,
             ) shouldBeEqualTo true
-            hasParentClassWithName(setOf("SampleParentClass1"), indirectParents = true) shouldBeEqualTo true
+            hasParentClassWithName(setOf("FixtureParentClass1"), indirectParents = true) shouldBeEqualTo true
             hasParentClassWithName(setOf("OtherClass"), indirectParents = true) shouldBeEqualTo false
             hasParentClassWithName(
                 setOf(
-                    "SampleParentClass1",
-                    "SampleParentClass2",
+                    "FixtureParentClass1",
+                    "FixtureParentClass2",
                 ),
                 indirectParents = true,
             ) shouldBeEqualTo true
             hasParentClassWithName(
                 setOf(
-                    "SampleParentClass1",
+                    "FixtureParentClass1",
                     "OtherClass",
                 ),
                 indirectParents = true,
             ) shouldBeEqualTo true
-            hasParentClassesWithAllNames("SampleParentClass1", indirectParents = true) shouldBeEqualTo true
+            hasParentClassesWithAllNames("FixtureParentClass1", indirectParents = true) shouldBeEqualTo true
             hasParentClassesWithAllNames("OtherClass", indirectParents = true) shouldBeEqualTo false
             hasParentClassesWithAllNames(
-                "SampleParentClass1",
-                "SampleParentClass2",
+                "FixtureParentClass1",
+                "FixtureParentClass2",
                 indirectParents = true,
             ) shouldBeEqualTo true
             hasParentClassesWithAllNames(
-                "SampleParentClass1",
+                "FixtureParentClass1",
                 "OtherClass",
                 indirectParents = true,
             ) shouldBeEqualTo false
-            hasParentClassesWithAllNames(listOf("SampleParentClass1"), indirectParents = true) shouldBeEqualTo true
+            hasParentClassesWithAllNames(listOf("FixtureParentClass1"), indirectParents = true) shouldBeEqualTo true
             hasParentClassesWithAllNames(listOf("OtherClass"), indirectParents = true) shouldBeEqualTo false
             hasParentClassesWithAllNames(
                 listOf(
-                    "SampleParentClass1",
-                    "SampleParentClass2",
+                    "FixtureParentClass1",
+                    "FixtureParentClass2",
                 ),
                 indirectParents = true,
             ) shouldBeEqualTo true
             hasParentClassesWithAllNames(
                 listOf(
-                    "SampleParentClass1",
+                    "FixtureParentClass1",
                     "OtherClass",
                 ),
                 indirectParents = true,
             ) shouldBeEqualTo false
-            hasParentClassesWithAllNames(setOf("SampleParentClass1"), indirectParents = true) shouldBeEqualTo true
+            hasParentClassesWithAllNames(setOf("FixtureParentClass1"), indirectParents = true) shouldBeEqualTo true
             hasParentClassesWithAllNames(setOf("OtherClass"), indirectParents = true) shouldBeEqualTo false
             hasParentClassesWithAllNames(
                 setOf(
-                    "SampleParentClass1",
-                    "SampleParentClass2",
+                    "FixtureParentClass1",
+                    "FixtureParentClass2",
                 ),
                 indirectParents = true,
             ) shouldBeEqualTo true
             hasParentClassesWithAllNames(
                 setOf(
-                    "SampleParentClass1",
+                    "FixtureParentClass1",
                     "OtherClass",
                 ),
                 indirectParents = true,
             ) shouldBeEqualTo false
-            hasParentClass(indirectParents = true) { it.name == "SampleParentClass1" } shouldBeEqualTo true
+            hasParentClass(indirectParents = true) { it.name == "FixtureParentClass1" } shouldBeEqualTo true
             hasParentClass(indirectParents = true) { it.name == "OtherClass" } shouldBeEqualTo false
-            hasAllParentClasses(indirectParents = true) { it.name == "SampleParentClass1" } shouldBeEqualTo false
-            hasAllParentClasses(indirectParents = true) { it.hasNameStartingWith("Sample") } shouldBeEqualTo true
+            hasAllParentClasses(indirectParents = true) { it.name == "FixtureParentClass1" } shouldBeEqualTo false
+            hasAllParentClasses(indirectParents = true) { it.hasNameStartingWith("Fixture") } shouldBeEqualTo true
             hasAllParentClasses(indirectParents = true) { it.hasNameStartingWith("Other") } shouldBeEqualTo false
-            hasParentClassOf(SampleParentClass2::class, indirectParents = true) shouldBeEqualTo true
-            hasParentClassOf(listOf(SampleParentClass2::class), indirectParents = true) shouldBeEqualTo true
-            hasParentClassOf(setOf(SampleParentClass2::class), indirectParents = true) shouldBeEqualTo true
-            hasAllParentClassesOf(SampleParentClass2::class, indirectParents = true) shouldBeEqualTo true
+            hasParentClassOf(FixtureParentClass2::class, indirectParents = true) shouldBeEqualTo true
+            hasParentClassOf(listOf(FixtureParentClass2::class), indirectParents = true) shouldBeEqualTo true
+            hasParentClassOf(setOf(FixtureParentClass2::class), indirectParents = true) shouldBeEqualTo true
+            hasAllParentClassesOf(FixtureParentClass2::class, indirectParents = true) shouldBeEqualTo true
             hasAllParentClassesOf(
-                SampleParentClass2::class,
-                SampleClass::class,
+                FixtureParentClass2::class,
+                FixtureClass::class,
                 indirectParents = true,
             ) shouldBeEqualTo false
-            hasAllParentClassesOf(listOf(SampleParentClass2::class), indirectParents = true) shouldBeEqualTo true
+            hasAllParentClassesOf(listOf(FixtureParentClass2::class), indirectParents = true) shouldBeEqualTo true
             hasAllParentClassesOf(
                 listOf(
-                    SampleParentClass2::class,
-                    SampleClass::class,
+                    FixtureParentClass2::class,
+                    FixtureClass::class,
                 ),
                 indirectParents = true,
             ) shouldBeEqualTo false
-            hasAllParentClassesOf(setOf(SampleParentClass2::class), indirectParents = true) shouldBeEqualTo true
+            hasAllParentClassesOf(setOf(FixtureParentClass2::class), indirectParents = true) shouldBeEqualTo true
             hasAllParentClassesOf(
                 setOf(
-                    SampleParentClass2::class,
-                    SampleClass::class,
+                    FixtureParentClass2::class,
+                    FixtureClass::class,
                 ),
                 indirectParents = true,
             ) shouldBeEqualTo false
+        }
+    }
+
+    @Test
+    fun `object-has-no-parent-class-ignore-case`() {
+        // given
+        val sut =
+            getSnippetFile("object-has-no-parent-class-ignore-case")
+                .objects()
+                .first()
+
+        // then
+        assertSoftly(sut) {
+            hasParentClassWithName("fixtureparentclass") shouldBeEqualTo false
+            hasParentClassWithName("fixtureparentclass", ignoreCase = true) shouldBeEqualTo false
+            hasParentClassWithName(listOf("fixtureparentclass")) shouldBeEqualTo false
+            hasParentClassWithName(listOf("fixtureparentclass"), ignoreCase = true) shouldBeEqualTo false
+            hasParentClassWithName(setOf("fixtureparentclass")) shouldBeEqualTo false
+            hasParentClassWithName(setOf("fixtureparentclass"), ignoreCase = true) shouldBeEqualTo false
+            hasParentClassesWithAllNames("fixtureparentclass", "fixtureparentinterface1") shouldBeEqualTo false
+            hasParentClassesWithAllNames("fixtureparentclass", "fixtureparentinterface1", ignoreCase = true) shouldBeEqualTo false
+            hasParentClassesWithAllNames(listOf("fixtureparentclass", "fixtureparentinterface1")) shouldBeEqualTo false
+            hasParentClassesWithAllNames(listOf("fixtureparentclass", "fixtureparentinterface1"), ignoreCase = true) shouldBeEqualTo false
+            hasParentClassesWithAllNames(setOf("fixtureparentclass", "fixtureparentinterface1")) shouldBeEqualTo false
+            hasParentClassesWithAllNames(setOf("fixtureparentclass", "fixtureparentinterface1"), ignoreCase = true) shouldBeEqualTo false
+        }
+    }
+
+    @Test
+    fun `object-has-parent-class-ignore-case`() {
+        // given
+        val sut =
+            getSnippetFile("object-has-parent-class-ignore-case")
+                .objects()
+                .first()
+
+        // then
+        assertSoftly(sut) {
+            hasParentWithName("fixtureparentclass") shouldBeEqualTo false
+            hasParentWithName("fixtureparentclass", ignoreCase = true) shouldBeEqualTo true
+            hasParentWithName("otherparentclass") shouldBeEqualTo false
+            hasParentWithName("otherparentclass", ignoreCase = true) shouldBeEqualTo false
+            hasParentWithName("fixtureparentclass", "otherName") shouldBeEqualTo false
+            hasParentWithName("fixtureparentclass", "otherName", ignoreCase = true) shouldBeEqualTo true
+            hasParentWithName(listOf("fixtureparentclass")) shouldBeEqualTo false
+            hasParentWithName(listOf("fixtureparentclass"), ignoreCase = true) shouldBeEqualTo true
+            hasParentWithName(listOf("otherparentclass")) shouldBeEqualTo false
+            hasParentWithName(listOf("otherparentclass"), ignoreCase = true) shouldBeEqualTo false
+            hasParentWithName(listOf("fixtureparentclass", "otherName")) shouldBeEqualTo false
+            hasParentWithName(listOf("fixtureparentclass", "otherName"), ignoreCase = true) shouldBeEqualTo true
+            hasParentsWithAllNames("fixtureparentclass") shouldBeEqualTo false
+            hasParentsWithAllNames("fixtureparentclass", ignoreCase = true) shouldBeEqualTo true
+            hasParentsWithAllNames("fixtureparentclass", "fixtureparentinterface1") shouldBeEqualTo false
+            hasParentsWithAllNames("fixtureparentclass", "fixtureparentinterface1", ignoreCase = true) shouldBeEqualTo false
+            hasParentsWithAllNames(listOf("fixtureparentclass")) shouldBeEqualTo false
+            hasParentsWithAllNames(listOf("fixtureparentclass"), ignoreCase = true) shouldBeEqualTo true
+            hasParentsWithAllNames(listOf("fixtureparentclass", "fixtureparentinterface1")) shouldBeEqualTo false
+            hasParentsWithAllNames(listOf("fixtureparentclass", "fixtureparentinterface1"), ignoreCase = true) shouldBeEqualTo false
         }
     }
 

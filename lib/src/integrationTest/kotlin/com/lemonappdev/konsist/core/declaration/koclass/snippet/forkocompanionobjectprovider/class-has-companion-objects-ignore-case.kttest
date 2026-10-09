@@ -1,0 +1,11 @@
+class FixtureTopLevelClass {
+    companion object FixtureCompanionObject1
+
+    object FixtureObject
+
+    interface FixtureInterface {
+        object FixtureInterfaceObject
+
+        companion object FixtureCompanionObject2
+    }
+}

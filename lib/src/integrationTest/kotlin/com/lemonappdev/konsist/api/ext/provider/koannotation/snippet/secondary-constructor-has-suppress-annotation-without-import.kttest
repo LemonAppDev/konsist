@@ -1,4 +1,4 @@
-class SampleClass(val sampleProperty1: Int) {
+class FixtureClass(val fixtureProperty1: Int) {
     @Suppress
-    constructor(sampleProperty2: Int, sampleProperty1: Int): this(sampleProperty1)
+    constructor(fixtureProperty2: Int, fixtureProperty1: Int): this(fixtureProperty1)
 }

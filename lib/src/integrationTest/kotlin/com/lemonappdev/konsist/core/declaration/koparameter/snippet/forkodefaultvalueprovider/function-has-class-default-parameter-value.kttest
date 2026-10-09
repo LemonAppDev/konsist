@@ -1,3 +1,3 @@
-import com.lemonappdev.konsist.testdata.SampleType
+import com.lemonappdev.konsist.testdata.FixtureType
 
-fun sampleFunction(sampleParameter: SampleType = SampleType()) {}
+fun fixtureFunction(fixtureParameter: FixtureType = FixtureType()) {}

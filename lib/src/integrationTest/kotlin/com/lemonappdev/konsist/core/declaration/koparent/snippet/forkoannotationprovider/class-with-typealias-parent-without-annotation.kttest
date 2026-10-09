@@ -1,5 +1,5 @@
-import com.lemonappdev.konsist.testdata.SampleParentClass
+import com.lemonappdev.konsist.testdata.FixtureParentClass
 
-class SampleClass() : SampleTypeAlias()
+class FixtureClass() : FixtureTypeAlias()
 
-typealias SampleTypeAlias = SampleParentClass
+typealias FixtureTypeAlias = FixtureParentClass

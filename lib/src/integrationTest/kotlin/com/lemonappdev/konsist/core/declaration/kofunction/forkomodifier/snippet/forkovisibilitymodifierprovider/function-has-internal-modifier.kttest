@@ -1,4 +1,4 @@
-class SampleClass {
-    internal fun sampleFunction() {
+class FixtureClass {
+    internal fun fixtureFunction() {
     }
 }

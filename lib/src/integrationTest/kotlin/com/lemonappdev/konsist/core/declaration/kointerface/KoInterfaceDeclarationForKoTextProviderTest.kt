@@ -19,8 +19,8 @@ class KoInterfaceDeclarationForKoTextProviderTest {
             .text
             .shouldBeEqualTo(
                 """
-                interface SampleInterface {
-                    val sampleProperty: Int
+                interface FixtureInterface {
+                    val fixtureProperty: Int
                 }
                 """.trimIndent(),
             )
@@ -28,16 +28,16 @@ class KoInterfaceDeclarationForKoTextProviderTest {
         assertSoftly(sut) {
             text.shouldBeEqualTo(
                 """
-                interface SampleInterface {
-                    val sampleProperty: Int
+                interface FixtureInterface {
+                    val fixtureProperty: Int
                 }
                 """.trimIndent(),
             )
-            hasTextStartingWith("interface Sample") shouldBeEqualTo true
+            hasTextStartingWith("interface Fixture") shouldBeEqualTo true
             hasTextStartingWith("Other") shouldBeEqualTo false
             hasTextEndingWith("\n}") shouldBeEqualTo true
             hasTextEndingWith("other") shouldBeEqualTo false
-            hasTextContaining("sampleProperty: Int") shouldBeEqualTo true
+            hasTextContaining("fixtureProperty: Int") shouldBeEqualTo true
             hasTextContaining("anno") shouldBeEqualTo false
             hasTextMatching(Regex("^[^@]*\$")) shouldBeEqualTo true
             hasTextMatching(Regex("[0-9]+")) shouldBeEqualTo false

@@ -31,9 +31,13 @@ fun <T, R : Comparable<R>> List<T>.isSortedBy(
 
         val comparisonResult =
             when {
-                previous is String && current is String ->
+                previous is String && current is String -> {
                     previous.compareTo(current, ignoreCase = ignoreCase)
-                else -> previous.compareTo(current)
+                }
+
+                else -> {
+                    previous.compareTo(current)
+                }
             }
 
         if ((ascending && comparisonResult > 0) || (!ascending && comparisonResult < 0)) {

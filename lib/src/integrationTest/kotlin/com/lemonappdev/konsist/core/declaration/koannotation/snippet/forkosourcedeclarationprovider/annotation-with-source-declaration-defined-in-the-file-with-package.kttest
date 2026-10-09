@@ -1,0 +1,6 @@
+package com.fixturepackage
+
+@FixtureAnnotationFromFile
+class FixtureClass
+
+annotation class FixtureAnnotationFromFile

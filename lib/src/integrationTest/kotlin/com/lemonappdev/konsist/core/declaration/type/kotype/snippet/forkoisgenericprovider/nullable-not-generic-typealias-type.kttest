@@ -1,0 +1,5 @@
+import com.lemonappdev.konsist.testdata.FixtureClass
+
+val fixtureProperty1: FixtureTypeAlias? = {}
+
+typealias FixtureTypeAlias = (FixtureClass) -> Unit

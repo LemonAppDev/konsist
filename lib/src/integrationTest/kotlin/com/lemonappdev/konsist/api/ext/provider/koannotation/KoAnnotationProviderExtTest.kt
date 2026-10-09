@@ -5,9 +5,9 @@ import com.lemonappdev.konsist.api.declaration.KoFileDeclaration
 import com.lemonappdev.konsist.api.ext.list.secondaryConstructors
 import com.lemonappdev.konsist.api.ext.provider.hasAnnotationOf
 import com.lemonappdev.konsist.api.provider.KoAnnotationProvider
+import com.lemonappdev.konsist.testdata.FixtureAnnotation1
+import com.lemonappdev.konsist.testdata.FixtureAnnotation2
 import com.lemonappdev.konsist.testdata.NonExistingAnnotation
-import com.lemonappdev.konsist.testdata.SampleAnnotation1
-import com.lemonappdev.konsist.testdata.SampleAnnotation2
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
@@ -26,8 +26,8 @@ class KoAnnotationProviderExtTest {
 
         // then
         assertSoftly(sut) {
-            hasAnnotationOf<SampleAnnotation1>() shouldBeEqualTo true
-            hasAnnotationOf<SampleAnnotation2>() shouldBeEqualTo true
+            hasAnnotationOf<FixtureAnnotation1>() shouldBeEqualTo true
+            hasAnnotationOf<FixtureAnnotation2>() shouldBeEqualTo true
             hasAnnotationOf<NonExistingAnnotation>() shouldBeEqualTo false
         }
     }
@@ -60,8 +60,8 @@ class KoAnnotationProviderExtTest {
 
         // then
         assertSoftly(sut) {
-            hasAnnotationOf<SampleAnnotation1>() shouldBeEqualTo true
-            hasAnnotationOf<SampleAnnotation2>() shouldBeEqualTo true
+            hasAnnotationOf<FixtureAnnotation1>() shouldBeEqualTo true
+            hasAnnotationOf<FixtureAnnotation2>() shouldBeEqualTo true
             hasAnnotationOf<NonExistingAnnotation>() shouldBeEqualTo false
         }
     }
@@ -95,8 +95,8 @@ class KoAnnotationProviderExtTest {
 
         // then
         assertSoftly(sut) {
-            it?.hasAnnotationOf<SampleAnnotation1>() shouldBeEqualTo true
-            it?.hasAnnotationOf<SampleAnnotation2>() shouldBeEqualTo true
+            it?.hasAnnotationOf<FixtureAnnotation1>() shouldBeEqualTo true
+            it?.hasAnnotationOf<FixtureAnnotation2>() shouldBeEqualTo true
             it?.hasAnnotationOf<NonExistingAnnotation>() shouldBeEqualTo false
         }
     }
@@ -128,8 +128,8 @@ class KoAnnotationProviderExtTest {
 
         // then
         assertSoftly(sut) {
-            hasAnnotationOf<SampleAnnotation1>() shouldBeEqualTo true
-            hasAnnotationOf<SampleAnnotation2>() shouldBeEqualTo true
+            hasAnnotationOf<FixtureAnnotation1>() shouldBeEqualTo true
+            hasAnnotationOf<FixtureAnnotation2>() shouldBeEqualTo true
             hasAnnotationOf<NonExistingAnnotation>() shouldBeEqualTo false
         }
     }

@@ -1,0 +1,13 @@
+object FixtureObject
+
+class FixtureClass {
+    object FixtureClassObject
+
+    private companion object FixtureCompanionObject1
+}
+
+interface FixtureInterface {
+    object FixtureInterfaceObject
+
+    private companion object FixtureCompanionObject2
+}

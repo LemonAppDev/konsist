@@ -21,8 +21,8 @@ class KoArgumentDeclarationForKoTextProviderTest {
 
         // then
         assertSoftly(sut) {
-            text shouldBeEqualTo "sampleArgument = 0"
-            hasTextStartingWith("sample") shouldBeEqualTo true
+            text shouldBeEqualTo "fixtureArgument = 0"
+            hasTextStartingWith("fixture") shouldBeEqualTo true
             hasTextStartingWith("Other") shouldBeEqualTo false
             hasTextEndingWith("= 0") shouldBeEqualTo true
             hasTextEndingWith("other") shouldBeEqualTo false
@@ -45,8 +45,8 @@ class KoArgumentDeclarationForKoTextProviderTest {
 
         // then
         assertSoftly(sut) {
-            text shouldBeEqualTo "sampleParameter = \"text\""
-            hasTextStartingWith("sample") shouldBeEqualTo true
+            text shouldBeEqualTo "fixtureParameter = \"text\""
+            hasTextStartingWith("fixture") shouldBeEqualTo true
             hasTextStartingWith("Other") shouldBeEqualTo false
             hasTextEndingWith("= \"text\"") shouldBeEqualTo true
             hasTextEndingWith("other") shouldBeEqualTo false

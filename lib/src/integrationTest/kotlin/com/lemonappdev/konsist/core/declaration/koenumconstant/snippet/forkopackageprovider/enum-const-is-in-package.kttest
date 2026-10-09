@@ -1,4 +1,4 @@
-package com.samplepackage
-enum class SampleClass {
-    SAMPLE_CONSTANT_1
+package com.fixturepackage
+enum class FixtureClass {
+    FIXTURE_CONSTANT_1
 }

@@ -1,10 +1,10 @@
-interface SampleInterface {
-    object SampleObject {
+interface FixtureInterface {
+    object FixtureObject {
 
-        class SampleNestedClass
+        class FixtureNestedClass
     }
 
-    fun sampleFunction() {
-        class SampleLocalClass
+    fun fixtureFunction() {
+        class FixtureLocalClass
     }
 }

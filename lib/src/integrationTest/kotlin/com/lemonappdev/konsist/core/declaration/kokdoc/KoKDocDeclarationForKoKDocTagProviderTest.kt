@@ -201,10 +201,10 @@ class KoKDocDeclarationForKoKDocTagProviderTest {
         @JvmStatic
         fun provideValues() =
             listOf(
-                arguments("SampleClass", 10),
-                arguments("sampleMethod", 2),
-                arguments("sampleProperty", 2),
-                arguments("SampleClassWithoutTags", 0),
+                arguments("FixtureClass", 10),
+                arguments("fixtureMethod", 2),
+                arguments("fixtureProperty", 2),
+                arguments("FixtureClassWithoutTags", 0),
             )
     }
 }

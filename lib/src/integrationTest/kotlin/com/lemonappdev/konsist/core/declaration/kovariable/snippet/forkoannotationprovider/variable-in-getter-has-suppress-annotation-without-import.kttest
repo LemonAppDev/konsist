@@ -1,7 +1,7 @@
-val sampleProperty: String
+val fixtureProperty: String
     get() {
         @Suppress
-        val sampleVariable = ""
+        val fixtureVariable = ""
 
         return ""
     }

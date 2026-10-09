@@ -2,12 +2,10 @@ package com.lemonappdev.konsist.api.declaration
 
 import com.lemonappdev.konsist.api.provider.KoAnnotationProvider
 import com.lemonappdev.konsist.api.provider.KoBaseProvider
-import com.lemonappdev.konsist.api.provider.KoConstructorDefinedProvider
 import com.lemonappdev.konsist.api.provider.KoContainingDeclarationProvider
 import com.lemonappdev.konsist.api.provider.KoContainingFileProvider
 import com.lemonappdev.konsist.api.provider.KoFullyQualifiedNameProvider
 import com.lemonappdev.konsist.api.provider.KoGetterProvider
-import com.lemonappdev.konsist.api.provider.KoInitializerProvider
 import com.lemonappdev.konsist.api.provider.KoIsConstructorDefinedProvider
 import com.lemonappdev.konsist.api.provider.KoIsExtensionProvider
 import com.lemonappdev.konsist.api.provider.KoIsGenericProvider
@@ -24,14 +22,12 @@ import com.lemonappdev.konsist.api.provider.KoNullableTypeProvider
 import com.lemonappdev.konsist.api.provider.KoPackageProvider
 import com.lemonappdev.konsist.api.provider.KoPathProvider
 import com.lemonappdev.konsist.api.provider.KoPropertyDelegateProvider
-import com.lemonappdev.konsist.api.provider.KoReadOnlyProvider
 import com.lemonappdev.konsist.api.provider.KoReceiverTypeProvider
 import com.lemonappdev.konsist.api.provider.KoResideInPackageProvider
 import com.lemonappdev.konsist.api.provider.KoSetterProvider
 import com.lemonappdev.konsist.api.provider.KoSourceSetProvider
 import com.lemonappdev.konsist.api.provider.KoTacitTypeProvider
 import com.lemonappdev.konsist.api.provider.KoTextProvider
-import com.lemonappdev.konsist.api.provider.KoTopLevelProvider
 import com.lemonappdev.konsist.api.provider.KoTypeParameterProvider
 import com.lemonappdev.konsist.api.provider.KoValueProvider
 import com.lemonappdev.konsist.api.provider.modifier.KoAbstractModifierProvider
@@ -55,13 +51,11 @@ interface KoPropertyDeclaration :
     KoSourceDeclaration,
     KoBaseProvider,
     KoAnnotationProvider,
-    KoConstructorDefinedProvider,
     KoIsConstructorDefinedProvider,
     KoContainingFileProvider,
     KoPropertyDelegateProvider,
     KoNullableTypeProvider,
     KoFullyQualifiedNameProvider,
-    KoInitializerProvider,
     KoIsInitializedProvider,
     KoKDocProvider,
     KoLocationProvider,
@@ -75,7 +69,6 @@ interface KoPropertyDeclaration :
     KoReceiverTypeProvider,
     KoResideInPackageProvider,
     KoTextProvider,
-    KoTopLevelProvider,
     KoIsTopLevelProvider,
     KoValueProvider,
     KoVisibilityModifierProvider,
@@ -91,7 +84,6 @@ interface KoPropertyDeclaration :
     KoConstModifierProvider,
     KoGetterProvider,
     KoSetterProvider,
-    KoReadOnlyProvider,
     KoIsReadOnlyProvider,
     KoTacitTypeProvider,
     KoTypeParameterProvider,

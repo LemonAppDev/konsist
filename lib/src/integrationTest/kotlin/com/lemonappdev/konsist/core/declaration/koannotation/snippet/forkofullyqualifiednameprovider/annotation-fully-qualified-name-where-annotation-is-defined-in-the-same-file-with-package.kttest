@@ -1,7 +1,7 @@
-package com.samplepackage
+package com.fixturepackage
 
-@SampleAnnotation
-fun sampleFunction() {
+@FixtureAnnotation
+fun fixtureFunction() {
 }
 
-annotation class SampleAnnotation
+annotation class FixtureAnnotation

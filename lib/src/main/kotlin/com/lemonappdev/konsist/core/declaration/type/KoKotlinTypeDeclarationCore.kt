@@ -28,14 +28,17 @@ internal class KoKotlinTypeDeclarationCore private constructor(
         )
     }
 
-    override val name: String by lazy { ktElement.text }
+    override val name: String by lazy {
+        ktElement
+            .text
+            .removeSuffix("()")
+    }
 
     override val fullyQualifiedName: String by lazy {
-        when {
-            TypeUtil.isKotlinBasicType(name) -> "kotlin.$bareSourceType"
-            TypeUtil.isKotlinCollectionTypes(name) -> "kotlin.collections.$bareSourceType"
-            else -> throw IllegalArgumentException("Kotlin type has incorrect fullyQualified name")
-        }
+        TypeUtil
+            .kotlinTypes
+            .firstOrNull { it.endsWith(".$stringUsedAsFullyQualifiedName") }
+            ?: throw IllegalArgumentException("Kotlin type has incorrect fullyQualified name")
     }
 
     override fun toString(): String = ktElement.text

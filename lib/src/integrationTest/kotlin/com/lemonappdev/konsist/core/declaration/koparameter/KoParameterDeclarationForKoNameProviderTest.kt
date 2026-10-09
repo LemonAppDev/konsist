@@ -19,13 +19,23 @@ class KoParameterDeclarationForKoNameProviderTest {
 
         // then
         assertSoftly(sut) {
-            it?.name shouldBeEqualTo "sampleParameter"
-            it?.hasNameStartingWith("sample") shouldBeEqualTo true
+            it?.name shouldBeEqualTo "fixtureParameter"
+            it?.hasName("fixtureParameter") shouldBeEqualTo true
+            it?.hasName("otherParameter") shouldBeEqualTo false
+            it?.hasName("FIXTUREPARAMETER", ignoreCase = false) shouldBeEqualTo false
+            it?.hasName("FIXTUREPARAMETER", ignoreCase = true) shouldBeEqualTo true
+            it?.hasNameStartingWith("fixture") shouldBeEqualTo true
             it?.hasNameStartingWith("Other") shouldBeEqualTo false
+            it?.hasNameStartingWith("FIXTURE", ignoreCase = false) shouldBeEqualTo false
+            it?.hasNameStartingWith("FIXTURE", ignoreCase = true) shouldBeEqualTo true
             it?.hasNameEndingWith("meter") shouldBeEqualTo true
             it?.hasNameEndingWith("other") shouldBeEqualTo false
-            it?.hasNameContaining("lePar") shouldBeEqualTo true
-            it?.hasNameContaining("lepar") shouldBeEqualTo false
+            it?.hasNameEndingWith("METER", ignoreCase = false) shouldBeEqualTo false
+            it?.hasNameEndingWith("METER", ignoreCase = true) shouldBeEqualTo true
+            it?.hasNameContaining("rePar") shouldBeEqualTo true
+            it?.hasNameContaining("other") shouldBeEqualTo false
+            it?.hasNameContaining("repar", ignoreCase = false) shouldBeEqualTo false
+            it?.hasNameContaining("repar", ignoreCase = true) shouldBeEqualTo true
             it?.hasNameMatching(Regex("[a-zA-Z]+")) shouldBeEqualTo true
             it?.hasNameMatching(Regex("[0-9]+")) shouldBeEqualTo false
         }
@@ -43,13 +53,23 @@ class KoParameterDeclarationForKoNameProviderTest {
 
         // then
         assertSoftly(sut) {
-            name shouldBeEqualTo "sampleParameter"
-            hasNameStartingWith("sample") shouldBeEqualTo true
+            name shouldBeEqualTo "fixtureParameter"
+            hasName("fixtureParameter") shouldBeEqualTo true
+            hasName("otherParameter") shouldBeEqualTo false
+            hasName("FIXTUREPARAMETER", ignoreCase = false) shouldBeEqualTo false
+            hasName("FIXTUREPARAMETER", ignoreCase = true) shouldBeEqualTo true
+            hasNameStartingWith("fixture") shouldBeEqualTo true
             hasNameStartingWith("Other") shouldBeEqualTo false
+            hasNameStartingWith("FIXTURE", ignoreCase = false) shouldBeEqualTo false
+            hasNameStartingWith("FIXTURE", ignoreCase = true) shouldBeEqualTo true
             hasNameEndingWith("meter") shouldBeEqualTo true
             hasNameEndingWith("other") shouldBeEqualTo false
-            hasNameContaining("lePar") shouldBeEqualTo true
-            hasNameContaining("lepar") shouldBeEqualTo false
+            hasNameEndingWith("METER", ignoreCase = false) shouldBeEqualTo false
+            hasNameEndingWith("METER", ignoreCase = true) shouldBeEqualTo true
+            hasNameContaining("rePar") shouldBeEqualTo true
+            hasNameContaining("other") shouldBeEqualTo false
+            hasNameContaining("repar", ignoreCase = false) shouldBeEqualTo false
+            hasNameContaining("repar", ignoreCase = true) shouldBeEqualTo true
             hasNameMatching(Regex("[a-zA-Z]+")) shouldBeEqualTo true
             hasNameMatching(Regex("[0-9]+")) shouldBeEqualTo false
         }

@@ -1,5 +1,5 @@
-open class SampleClassWithModifier {
+open class FixtureClassWithModifier {
     @Suppress("suppress-text")
-    fun sampleFunctionWithoutModifier() {
+    fun fixtureFunctionWithoutModifier() {
     }
 }

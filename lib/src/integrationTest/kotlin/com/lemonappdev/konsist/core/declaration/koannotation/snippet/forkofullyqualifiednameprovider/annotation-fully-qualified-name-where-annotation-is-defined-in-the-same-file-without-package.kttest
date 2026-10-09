@@ -1,5 +1,5 @@
-@SampleAnnotation
-fun sampleFunction() {
+@FixtureAnnotation
+fun fixtureFunction() {
 }
 
-annotation class SampleAnnotation
+annotation class FixtureAnnotation

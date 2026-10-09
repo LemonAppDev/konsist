@@ -1,0 +1,3 @@
+class FixtureClass {
+    companion object FixtureCompanionObject
+}

@@ -1,2 +1,2 @@
-val List<String>.sampleProperty: String
+val List<String>.fixtureProperty: String
     get() = ""

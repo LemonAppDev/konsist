@@ -15,4 +15,3 @@ class SampleKonsistTest : FreeSpec({
             .assertTrue { it.name.endsWith("SpringBootApplication") }
     }
 })
-

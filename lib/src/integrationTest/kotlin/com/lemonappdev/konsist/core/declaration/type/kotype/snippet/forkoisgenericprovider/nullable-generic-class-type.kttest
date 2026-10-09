@@ -1,0 +1,3 @@
+import com.lemonappdev.konsist.testdata.FixtureGenericClassWithParameter
+
+val fixtureProperty1: FixtureGenericClassWithParameter<String?> = FixtureGenericClassWithParameter("")

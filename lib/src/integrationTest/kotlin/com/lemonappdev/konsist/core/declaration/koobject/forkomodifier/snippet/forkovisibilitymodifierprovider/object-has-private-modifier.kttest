@@ -1,4 +1,4 @@
-class SampleClass {
-    private object SampleObject {
+class FixtureClass {
+    private object FixtureObject {
     }
 }

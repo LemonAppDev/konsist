@@ -1,0 +1,3 @@
+import com.lemonappdev.konsist.testdata.FixtureClass
+
+val fixtureProperty1: FixtureClass? = FixtureClass()

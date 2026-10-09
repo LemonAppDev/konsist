@@ -1,2 +1,2 @@
-inline fun sampleInlineFunction(crossinline sampleParameter: () -> Unit) {
+inline fun fixtureInlineFunction(crossinline fixtureParameter: () -> Unit) {
 }

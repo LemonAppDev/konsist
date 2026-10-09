@@ -1,0 +1,22 @@
+# Local configuration file
+local.properties
+
+# Build Files #
+
+bin
+target
+build/
+.gradle
+
+# IntelliJ IDEA Files
+.idea
+*.iws
+*.iml
+*.ipr
+
+# VS Code #
+.vscode/
+
+# Operating System Files
+**/.DS_Store
+Thumbs.db

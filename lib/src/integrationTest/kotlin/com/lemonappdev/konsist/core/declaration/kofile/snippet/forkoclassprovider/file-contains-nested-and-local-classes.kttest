@@ -1,7 +1,7 @@
-fun sampleFunction() {
-    class SampleLocalClass
+fun fixtureFunction() {
+    class FixtureLocalClass
 }
 
-object SampleObject {
-    class SampleClassNestedInsideObject
+object FixtureObject {
+    class FixtureClassNestedInsideObject
 }

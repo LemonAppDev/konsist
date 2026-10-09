@@ -1,5 +1,5 @@
-import com.lemonappdev.konsist.testdata.SampleAnnotationWithAngleBrackets
+import com.lemonappdev.konsist.testdata.FixtureAnnotationWithAngleBrackets
 
-@SampleAnnotationWithAngleBrackets<String, Int>
-public abstract interface SampleInterface {
+@FixtureAnnotationWithAngleBrackets<String, Int>
+public abstract interface FixtureInterface {
 }

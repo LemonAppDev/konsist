@@ -1,0 +1,1 @@
+val fixtureProperty: List<((fixtureParameter: String) -> Unit)?> = emptyList()

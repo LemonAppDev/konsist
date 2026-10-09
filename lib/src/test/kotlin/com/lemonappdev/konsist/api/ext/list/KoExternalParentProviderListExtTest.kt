@@ -2,8 +2,8 @@ package com.lemonappdev.konsist.api.ext.list
 
 import com.lemonappdev.konsist.api.declaration.KoParentDeclaration
 import com.lemonappdev.konsist.api.provider.KoExternalParentProvider
-import com.lemonappdev.konsist.testdata.SampleClass
-import com.lemonappdev.konsist.testdata.SampleInterface
+import com.lemonappdev.konsist.testdata.FixtureClass
+import com.lemonappdev.konsist.testdata.FixtureInterface
 import io.mockk.every
 import io.mockk.mockk
 import org.amshove.kluent.shouldBeEqualTo
@@ -241,7 +241,7 @@ class KoExternalParentProviderListExtTest {
     @Test
     fun `withExternalParentNamed(name) returns declaration with given external parent`() {
         // given
-        val name = "SampleName"
+        val name = "FixtureName"
         val declaration1: KoExternalParentProvider =
             mockk {
                 every { hasExternalParentWithName(listOf(name)) } returns true
@@ -262,8 +262,8 @@ class KoExternalParentProviderListExtTest {
     @Test
     fun `withExternalParentNamed(String) returns declaration with any of given external parents`() {
         // given
-        val name1 = "SampleName1"
-        val name2 = "SampleName2"
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
         val declaration1: KoExternalParentProvider =
             mockk {
                 every { hasExternalParentWithName(listOf(name1, name2)) } returns true
@@ -284,8 +284,8 @@ class KoExternalParentProviderListExtTest {
     @Test
     fun `withExternalParentNamed(list of String) returns declaration with any of given external parents`() {
         // given
-        val name1 = "SampleName1"
-        val name2 = "SampleName2"
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
         val declaration1: KoExternalParentProvider =
             mockk {
                 every { hasExternalParentWithName(listOf(name1, name2)) } returns true
@@ -307,8 +307,8 @@ class KoExternalParentProviderListExtTest {
     @Test
     fun `withExternalParentNamed(set of String) returns declaration with any of given external parents`() {
         // given
-        val name1 = "SampleName1"
-        val name2 = "SampleName2"
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
         val declaration1: KoExternalParentProvider =
             mockk {
                 every { hasExternalParentWithName(setOf(name1, name2)) } returns true
@@ -328,9 +328,53 @@ class KoExternalParentProviderListExtTest {
     }
 
     @Test
+    fun `withExternalParentNamed(name) with ignore case returns declaration with given external parent`() {
+        // given
+        val name = "FixtureName"
+        val declaration1: KoExternalParentProvider =
+            mockk {
+                every { hasExternalParentWithName(listOf(name), ignoreCase = true) } returns true
+            }
+        val declaration2: KoExternalParentProvider =
+            mockk {
+                every { hasExternalParentWithName(listOf(name), ignoreCase = true) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withExternalParentNamed(name, ignoreCase = true)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
+    fun `withExternalParentNamed(list of String) with ignore case returns declaration with any of given external parents`() {
+        // given
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
+        val declaration1: KoExternalParentProvider =
+            mockk {
+                every { hasExternalParentWithName(listOf(name1, name2), ignoreCase = true) } returns true
+            }
+        val declaration2: KoExternalParentProvider =
+            mockk {
+                every { hasExternalParentWithName(listOf(name1, name2), ignoreCase = true) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+        val names = listOf(name1, name2)
+
+        // when
+        val sut = declarations.withExternalParentNamed(names, ignoreCase = true)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
     fun `withoutExternalParentNamed(name) returns declaration without given external parent`() {
         // given
-        val name = "SampleName"
+        val name = "FixtureName"
         val declaration1: KoExternalParentProvider =
             mockk {
                 every { hasExternalParentWithName(listOf(name)) } returns true
@@ -351,8 +395,8 @@ class KoExternalParentProviderListExtTest {
     @Test
     fun `withoutExternalParentNamed(String) returns declaration without any of given external parents`() {
         // given
-        val name1 = "SampleName1"
-        val name2 = "SampleName2"
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
         val declaration1: KoExternalParentProvider =
             mockk {
                 every { hasExternalParentWithName(listOf(name1, name2)) } returns true
@@ -373,8 +417,8 @@ class KoExternalParentProviderListExtTest {
     @Test
     fun `withoutExternalParentNamed(list of String) returns declaration without any of given external parents`() {
         // given
-        val name1 = "SampleName1"
-        val name2 = "SampleName2"
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
         val declaration1: KoExternalParentProvider =
             mockk {
                 every { hasExternalParentWithName(listOf(name1, name2)) } returns true
@@ -396,8 +440,8 @@ class KoExternalParentProviderListExtTest {
     @Test
     fun `withoutExternalParentNamed(set of String) returns declaration without any of given external parents`() {
         // given
-        val name1 = "SampleName1"
-        val name2 = "SampleName2"
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
         val declaration1: KoExternalParentProvider =
             mockk {
                 every { hasExternalParentWithName(setOf(name1, name2)) } returns true
@@ -417,9 +461,53 @@ class KoExternalParentProviderListExtTest {
     }
 
     @Test
+    fun `withoutExternalParentNamed(name) with ignore case returns declaration without given external parent`() {
+        // given
+        val name = "FixtureName"
+        val declaration1: KoExternalParentProvider =
+            mockk {
+                every { hasExternalParentWithName(listOf(name), ignoreCase = true) } returns true
+            }
+        val declaration2: KoExternalParentProvider =
+            mockk {
+                every { hasExternalParentWithName(listOf(name), ignoreCase = true) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withoutExternalParentNamed(name, ignoreCase = true)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
+    }
+
+    @Test
+    fun `withoutExternalParentNamed(list of String) with ignore case returns declaration without any of given external parents`() {
+        // given
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
+        val declaration1: KoExternalParentProvider =
+            mockk {
+                every { hasExternalParentWithName(listOf(name1, name2), ignoreCase = true) } returns true
+            }
+        val declaration2: KoExternalParentProvider =
+            mockk {
+                every { hasExternalParentWithName(listOf(name1, name2), ignoreCase = true) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+        val names = listOf(name1, name2)
+
+        // when
+        val sut = declarations.withoutExternalParentNamed(names, ignoreCase = true)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
+    }
+
+    @Test
     fun `withAllExternalParentsNamed(name) returns declaration with given external parent`() {
         // given
-        val name = "SampleName"
+        val name = "FixtureName"
         val declaration1: KoExternalParentProvider =
             mockk {
                 every { hasExternalParentsWithAllNames(listOf(name)) } returns true
@@ -440,8 +528,8 @@ class KoExternalParentProviderListExtTest {
     @Test
     fun `withAllExternalParentsNamed(String) returns declaration with all given external parents`() {
         // given
-        val name1 = "SampleName1"
-        val name2 = "SampleName2"
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
         val declaration1: KoExternalParentProvider =
             mockk {
                 every { hasExternalParentsWithAllNames(listOf(name1, name2)) } returns true
@@ -462,8 +550,8 @@ class KoExternalParentProviderListExtTest {
     @Test
     fun `withAllExternalParentsNamed(list of String) returns declaration with all given external parents`() {
         // given
-        val name1 = "SampleName1"
-        val name2 = "SampleName2"
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
         val declaration1: KoExternalParentProvider =
             mockk {
                 every { hasExternalParentsWithAllNames(listOf(name1, name2)) } returns true
@@ -485,8 +573,8 @@ class KoExternalParentProviderListExtTest {
     @Test
     fun `withAllExternalParentsNamed(set of String) returns declaration with all given external parents`() {
         // given
-        val name1 = "SampleName1"
-        val name2 = "SampleName2"
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
         val declaration1: KoExternalParentProvider =
             mockk {
                 every { hasExternalParentsWithAllNames(setOf(name1, name2)) } returns true
@@ -506,9 +594,53 @@ class KoExternalParentProviderListExtTest {
     }
 
     @Test
+    fun `withAllExternalParentsNamed(name) with ignore case returns declaration with given external parent`() {
+        // given
+        val name = "FixtureName"
+        val declaration1: KoExternalParentProvider =
+            mockk {
+                every { hasExternalParentsWithAllNames(listOf(name), ignoreCase = true) } returns true
+            }
+        val declaration2: KoExternalParentProvider =
+            mockk {
+                every { hasExternalParentsWithAllNames(listOf(name), ignoreCase = true) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withAllExternalParentsNamed(name, ignoreCase = true)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
+    fun `withAllExternalParentsNamed(list of String) with ignore case returns declaration with all given external parents`() {
+        // given
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
+        val declaration1: KoExternalParentProvider =
+            mockk {
+                every { hasExternalParentsWithAllNames(listOf(name1, name2), ignoreCase = true) } returns true
+            }
+        val declaration2: KoExternalParentProvider =
+            mockk {
+                every { hasExternalParentsWithAllNames(listOf(name1, name2), ignoreCase = true) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+        val names = listOf(name1, name2)
+
+        // when
+        val sut = declarations.withAllExternalParentsNamed(names, ignoreCase = true)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
     fun `withoutAllExternalParentsNamed(name) returns declaration without given external parent`() {
         // given
-        val name = "SampleName"
+        val name = "FixtureName"
         val declaration1: KoExternalParentProvider =
             mockk {
                 every { hasExternalParentsWithAllNames(listOf(name)) } returns true
@@ -529,8 +661,8 @@ class KoExternalParentProviderListExtTest {
     @Test
     fun `withoutAllExternalParentsNamed(String) returns declaration without all of given external parents`() {
         // given
-        val name1 = "SampleName1"
-        val name2 = "SampleName2"
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
         val declaration1: KoExternalParentProvider =
             mockk {
                 every { hasExternalParentsWithAllNames(listOf(name1, name2)) } returns true
@@ -551,8 +683,8 @@ class KoExternalParentProviderListExtTest {
     @Test
     fun `withoutAllExternalParentsNamed(list of String) returns declaration without all of given external parents`() {
         // given
-        val name1 = "SampleName1"
-        val name2 = "SampleName2"
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
         val declaration1: KoExternalParentProvider =
             mockk {
                 every { hasExternalParentsWithAllNames(listOf(name1, name2)) } returns true
@@ -574,8 +706,8 @@ class KoExternalParentProviderListExtTest {
     @Test
     fun `withoutAllExternalParentsNamed(set of String) returns declaration without all of given external parents`() {
         // given
-        val name1 = "SampleName1"
-        val name2 = "SampleName2"
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
         val declaration1: KoExternalParentProvider =
             mockk {
                 every { hasExternalParentsWithAllNames(setOf(name1, name2)) } returns true
@@ -589,6 +721,50 @@ class KoExternalParentProviderListExtTest {
 
         // when
         val sut = declarations.withoutAllExternalParentsNamed(names)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
+    }
+
+    @Test
+    fun `withoutAllExternalParentsNamed(name) with ignore case returns declaration without given external parent`() {
+        // given
+        val name = "FixtureName"
+        val declaration1: KoExternalParentProvider =
+            mockk {
+                every { hasExternalParentsWithAllNames(listOf(name), ignoreCase = true) } returns true
+            }
+        val declaration2: KoExternalParentProvider =
+            mockk {
+                every { hasExternalParentsWithAllNames(listOf(name), ignoreCase = true) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withoutAllExternalParentsNamed(name, ignoreCase = true)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
+    }
+
+    @Test
+    fun `withoutAllExternalParentsNamed(list of String) with ignore case returns declaration without all of given external parents`() {
+        // given
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
+        val declaration1: KoExternalParentProvider =
+            mockk {
+                every { hasExternalParentsWithAllNames(listOf(name1, name2), ignoreCase = true) } returns true
+            }
+        val declaration2: KoExternalParentProvider =
+            mockk {
+                every { hasExternalParentsWithAllNames(listOf(name1, name2), ignoreCase = true) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+        val names = listOf(name1, name2)
+
+        // when
+        val sut = declarations.withoutAllExternalParentsNamed(names, ignoreCase = true)
 
         // then
         sut shouldBeEqualTo listOf(declaration2)
@@ -917,16 +1093,16 @@ class KoExternalParentProviderListExtTest {
         // given
         val declaration1: KoExternalParentProvider =
             mockk {
-                every { hasExternalParentOf(listOf(SampleClass::class, SampleInterface::class)) } returns true
+                every { hasExternalParentOf(listOf(FixtureClass::class, FixtureInterface::class)) } returns true
             }
         val declaration2: KoExternalParentProvider =
             mockk {
-                every { hasExternalParentOf(listOf(SampleClass::class, SampleInterface::class)) } returns false
+                every { hasExternalParentOf(listOf(FixtureClass::class, FixtureInterface::class)) } returns false
             }
         val declarations = listOf(declaration1, declaration2)
 
         // when
-        val sut = declarations.withExternalParentOf(SampleClass::class, SampleInterface::class)
+        val sut = declarations.withExternalParentOf(FixtureClass::class, FixtureInterface::class)
 
         // then
         sut shouldBeEqualTo listOf(declaration1)
@@ -937,14 +1113,14 @@ class KoExternalParentProviderListExtTest {
         // given
         val declaration1: KoExternalParentProvider =
             mockk {
-                every { hasExternalParentOf(listOf(SampleClass::class, SampleInterface::class)) } returns true
+                every { hasExternalParentOf(listOf(FixtureClass::class, FixtureInterface::class)) } returns true
             }
         val declaration2: KoExternalParentProvider =
             mockk {
-                every { hasExternalParentOf(listOf(SampleClass::class, SampleInterface::class)) } returns false
+                every { hasExternalParentOf(listOf(FixtureClass::class, FixtureInterface::class)) } returns false
             }
         val declarations = listOf(declaration1, declaration2)
-        val kClasses = listOf(SampleClass::class, SampleInterface::class)
+        val kClasses = listOf(FixtureClass::class, FixtureInterface::class)
 
         // when
         val sut = declarations.withExternalParentOf(kClasses)
@@ -958,14 +1134,14 @@ class KoExternalParentProviderListExtTest {
         // given
         val declaration1: KoExternalParentProvider =
             mockk {
-                every { hasExternalParentOf(setOf(SampleClass::class, SampleInterface::class)) } returns true
+                every { hasExternalParentOf(setOf(FixtureClass::class, FixtureInterface::class)) } returns true
             }
         val declaration2: KoExternalParentProvider =
             mockk {
-                every { hasExternalParentOf(setOf(SampleClass::class, SampleInterface::class)) } returns false
+                every { hasExternalParentOf(setOf(FixtureClass::class, FixtureInterface::class)) } returns false
             }
         val declarations = listOf(declaration1, declaration2)
-        val kClasses = setOf(SampleClass::class, SampleInterface::class)
+        val kClasses = setOf(FixtureClass::class, FixtureInterface::class)
 
         // when
         val sut = declarations.withExternalParentOf(kClasses)
@@ -979,16 +1155,16 @@ class KoExternalParentProviderListExtTest {
         // given
         val declaration1: KoExternalParentProvider =
             mockk {
-                every { hasExternalParentOf(listOf(SampleClass::class, SampleInterface::class)) } returns true
+                every { hasExternalParentOf(listOf(FixtureClass::class, FixtureInterface::class)) } returns true
             }
         val declaration2: KoExternalParentProvider =
             mockk {
-                every { hasExternalParentOf(listOf(SampleClass::class, SampleInterface::class)) } returns false
+                every { hasExternalParentOf(listOf(FixtureClass::class, FixtureInterface::class)) } returns false
             }
         val declarations = listOf(declaration1, declaration2)
 
         // when
-        val sut = declarations.withoutExternalParentOf(SampleClass::class, SampleInterface::class)
+        val sut = declarations.withoutExternalParentOf(FixtureClass::class, FixtureInterface::class)
 
         // then
         sut shouldBeEqualTo listOf(declaration2)
@@ -999,14 +1175,14 @@ class KoExternalParentProviderListExtTest {
         // given
         val declaration1: KoExternalParentProvider =
             mockk {
-                every { hasExternalParentOf(listOf(SampleClass::class, SampleInterface::class)) } returns true
+                every { hasExternalParentOf(listOf(FixtureClass::class, FixtureInterface::class)) } returns true
             }
         val declaration2: KoExternalParentProvider =
             mockk {
-                every { hasExternalParentOf(listOf(SampleClass::class, SampleInterface::class)) } returns false
+                every { hasExternalParentOf(listOf(FixtureClass::class, FixtureInterface::class)) } returns false
             }
         val declarations = listOf(declaration1, declaration2)
-        val kClasses = listOf(SampleClass::class, SampleInterface::class)
+        val kClasses = listOf(FixtureClass::class, FixtureInterface::class)
 
         // when
         val sut = declarations.withoutExternalParentOf(kClasses)
@@ -1020,14 +1196,14 @@ class KoExternalParentProviderListExtTest {
         // given
         val declaration1: KoExternalParentProvider =
             mockk {
-                every { hasExternalParentOf(setOf(SampleClass::class, SampleInterface::class)) } returns true
+                every { hasExternalParentOf(setOf(FixtureClass::class, FixtureInterface::class)) } returns true
             }
         val declaration2: KoExternalParentProvider =
             mockk {
-                every { hasExternalParentOf(setOf(SampleClass::class, SampleInterface::class)) } returns false
+                every { hasExternalParentOf(setOf(FixtureClass::class, FixtureInterface::class)) } returns false
             }
         val declarations = listOf(declaration1, declaration2)
-        val kClasses = setOf(SampleClass::class, SampleInterface::class)
+        val kClasses = setOf(FixtureClass::class, FixtureInterface::class)
 
         // when
         val sut = declarations.withoutExternalParentOf(kClasses)
@@ -1041,16 +1217,16 @@ class KoExternalParentProviderListExtTest {
         // given
         val declaration1: KoExternalParentProvider =
             mockk {
-                every { hasAllExternalParentsOf(listOf(SampleClass::class, SampleInterface::class)) } returns true
+                every { hasAllExternalParentsOf(listOf(FixtureClass::class, FixtureInterface::class)) } returns true
             }
         val declaration2: KoExternalParentProvider =
             mockk {
-                every { hasAllExternalParentsOf(listOf(SampleClass::class, SampleInterface::class)) } returns false
+                every { hasAllExternalParentsOf(listOf(FixtureClass::class, FixtureInterface::class)) } returns false
             }
         val declarations = listOf(declaration1, declaration2)
 
         // when
-        val sut = declarations.withAllExternalParentsOf(SampleClass::class, SampleInterface::class)
+        val sut = declarations.withAllExternalParentsOf(FixtureClass::class, FixtureInterface::class)
 
         // then
         sut shouldBeEqualTo listOf(declaration1)
@@ -1061,14 +1237,14 @@ class KoExternalParentProviderListExtTest {
         // given
         val declaration1: KoExternalParentProvider =
             mockk {
-                every { hasAllExternalParentsOf(listOf(SampleClass::class, SampleInterface::class)) } returns true
+                every { hasAllExternalParentsOf(listOf(FixtureClass::class, FixtureInterface::class)) } returns true
             }
         val declaration2: KoExternalParentProvider =
             mockk {
-                every { hasAllExternalParentsOf(listOf(SampleClass::class, SampleInterface::class)) } returns false
+                every { hasAllExternalParentsOf(listOf(FixtureClass::class, FixtureInterface::class)) } returns false
             }
         val declarations = listOf(declaration1, declaration2)
-        val kClasses = listOf(SampleClass::class, SampleInterface::class)
+        val kClasses = listOf(FixtureClass::class, FixtureInterface::class)
 
         // when
         val sut = declarations.withAllExternalParentsOf(kClasses)
@@ -1082,14 +1258,14 @@ class KoExternalParentProviderListExtTest {
         // given
         val declaration1: KoExternalParentProvider =
             mockk {
-                every { hasAllExternalParentsOf(setOf(SampleClass::class, SampleInterface::class)) } returns true
+                every { hasAllExternalParentsOf(setOf(FixtureClass::class, FixtureInterface::class)) } returns true
             }
         val declaration2: KoExternalParentProvider =
             mockk {
-                every { hasAllExternalParentsOf(setOf(SampleClass::class, SampleInterface::class)) } returns false
+                every { hasAllExternalParentsOf(setOf(FixtureClass::class, FixtureInterface::class)) } returns false
             }
         val declarations = listOf(declaration1, declaration2)
-        val kClasses = setOf(SampleClass::class, SampleInterface::class)
+        val kClasses = setOf(FixtureClass::class, FixtureInterface::class)
 
         // when
         val sut = declarations.withAllExternalParentsOf(kClasses)
@@ -1103,16 +1279,16 @@ class KoExternalParentProviderListExtTest {
         // given
         val declaration1: KoExternalParentProvider =
             mockk {
-                every { hasAllExternalParentsOf(listOf(SampleClass::class, SampleInterface::class)) } returns true
+                every { hasAllExternalParentsOf(listOf(FixtureClass::class, FixtureInterface::class)) } returns true
             }
         val declaration2: KoExternalParentProvider =
             mockk {
-                every { hasAllExternalParentsOf(listOf(SampleClass::class, SampleInterface::class)) } returns false
+                every { hasAllExternalParentsOf(listOf(FixtureClass::class, FixtureInterface::class)) } returns false
             }
         val declarations = listOf(declaration1, declaration2)
 
         // when
-        val sut = declarations.withoutAllExternalParentsOf(SampleClass::class, SampleInterface::class)
+        val sut = declarations.withoutAllExternalParentsOf(FixtureClass::class, FixtureInterface::class)
 
         // then
         sut shouldBeEqualTo listOf(declaration2)
@@ -1123,14 +1299,14 @@ class KoExternalParentProviderListExtTest {
         // given
         val declaration1: KoExternalParentProvider =
             mockk {
-                every { hasAllExternalParentsOf(listOf(SampleClass::class, SampleInterface::class)) } returns true
+                every { hasAllExternalParentsOf(listOf(FixtureClass::class, FixtureInterface::class)) } returns true
             }
         val declaration2: KoExternalParentProvider =
             mockk {
-                every { hasAllExternalParentsOf(listOf(SampleClass::class, SampleInterface::class)) } returns false
+                every { hasAllExternalParentsOf(listOf(FixtureClass::class, FixtureInterface::class)) } returns false
             }
         val declarations = listOf(declaration1, declaration2)
-        val kClasses = listOf(SampleClass::class, SampleInterface::class)
+        val kClasses = listOf(FixtureClass::class, FixtureInterface::class)
 
         // when
         val sut = declarations.withoutAllExternalParentsOf(kClasses)
@@ -1144,14 +1320,14 @@ class KoExternalParentProviderListExtTest {
         // given
         val declaration1: KoExternalParentProvider =
             mockk {
-                every { hasAllExternalParentsOf(setOf(SampleClass::class, SampleInterface::class)) } returns true
+                every { hasAllExternalParentsOf(setOf(FixtureClass::class, FixtureInterface::class)) } returns true
             }
         val declaration2: KoExternalParentProvider =
             mockk {
-                every { hasAllExternalParentsOf(setOf(SampleClass::class, SampleInterface::class)) } returns false
+                every { hasAllExternalParentsOf(setOf(FixtureClass::class, FixtureInterface::class)) } returns false
             }
         val declarations = listOf(declaration1, declaration2)
-        val kClasses = setOf(SampleClass::class, SampleInterface::class)
+        val kClasses = setOf(FixtureClass::class, FixtureInterface::class)
 
         // when
         val sut = declarations.withoutAllExternalParentsOf(kClasses)

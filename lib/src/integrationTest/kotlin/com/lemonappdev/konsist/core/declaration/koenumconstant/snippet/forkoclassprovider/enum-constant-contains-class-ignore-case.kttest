@@ -1,0 +1,6 @@
+enum class FixtureClass {
+    FIXTURE_CONSTANT_1 {
+        inner class FixtureInnerClass1
+        inner class FixtureInnerClass2
+    };
+}

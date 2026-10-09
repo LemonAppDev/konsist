@@ -1,4 +1,4 @@
-import com.lemonappdev.konsist.testdata.SampleType
+import com.lemonappdev.konsist.testdata.FixtureType
 
-infix fun String.sampleFunction(sampleProperty: SampleType) {
+infix fun String.fixtureFunction(fixtureProperty: FixtureType) {
 }

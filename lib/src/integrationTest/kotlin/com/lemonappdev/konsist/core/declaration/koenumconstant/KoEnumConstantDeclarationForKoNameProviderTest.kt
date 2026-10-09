@@ -18,15 +18,23 @@ class KoEnumConstantDeclarationForKoNameProviderTest {
 
         // then
         assertSoftly(sut) {
-            name shouldBeEqualTo "SAMPLE_CONSTANT_1"
-            hasNameStartingWith("SAMPLE") shouldBeEqualTo true
+            name shouldBeEqualTo "FIXTURE_CONSTANT_1"
+            hasName("FIXTURE_CONSTANT_1") shouldBeEqualTo true
+            hasName("OTHER") shouldBeEqualTo false
+            hasName("fixture_constant_1", ignoreCase = false) shouldBeEqualTo false
+            hasName("fixture_constant_1", ignoreCase = true) shouldBeEqualTo true
+            hasNameStartingWith("FIXTURE") shouldBeEqualTo true
             hasNameStartingWith("OTHER") shouldBeEqualTo false
+            hasNameStartingWith("fixture", ignoreCase = false) shouldBeEqualTo false
+            hasNameStartingWith("fixture", ignoreCase = true) shouldBeEqualTo true
             hasNameEndingWith("T_1") shouldBeEqualTo true
             hasNameEndingWith("OTHER") shouldBeEqualTo false
-            hasNameContaining("LE_CO") shouldBeEqualTo true
+            hasNameEndingWith("t_1", ignoreCase = false) shouldBeEqualTo false
+            hasNameEndingWith("t_1", ignoreCase = true) shouldBeEqualTo true
+            hasNameContaining("RE_CO") shouldBeEqualTo true
             hasNameContaining("LECO") shouldBeEqualTo false
-            hasNameMatching(Regex(".*")) shouldBeEqualTo true
-            hasNameMatching(Regex("[0-9]+")) shouldBeEqualTo false
+            hasNameContaining("re_co", ignoreCase = false) shouldBeEqualTo false
+            hasNameContaining("re_co", ignoreCase = true) shouldBeEqualTo true
         }
     }
 

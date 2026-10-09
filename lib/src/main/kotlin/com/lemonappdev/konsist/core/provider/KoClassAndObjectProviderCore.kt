@@ -34,19 +34,25 @@ internal interface KoClassAndObjectProviderCore :
         vararg names: String,
         includeNested: Boolean,
         includeLocal: Boolean,
-    ): Boolean = hasClassOrObjectWithName(listOf(name, *names), includeNested, includeLocal)
+        ignoreCase: Boolean,
+    ): Boolean = hasClassOrObjectWithName(listOf(name, *names), includeNested, includeLocal, ignoreCase)
 
     override fun hasClassOrObjectWithName(
         names: Collection<String>,
         includeNested: Boolean,
         includeLocal: Boolean,
+        ignoreCase: Boolean,
     ): Boolean =
         when {
-            names.isEmpty() -> hasClassesOrObjects(includeNested, includeLocal)
-            else ->
+            names.isEmpty() -> {
+                hasClassesOrObjects(includeNested, includeLocal)
+            }
+
+            else -> {
                 names.any {
-                    classesAndObjects(includeNested, includeLocal).any { koClass -> it == koClass.name }
+                    classesAndObjects(includeNested, includeLocal).any { koClass -> koClass.hasName(it, ignoreCase) }
                 }
+            }
         }
 
     override fun hasClassesAndObjectsWithAllNames(
@@ -54,19 +60,25 @@ internal interface KoClassAndObjectProviderCore :
         vararg names: String,
         includeNested: Boolean,
         includeLocal: Boolean,
-    ): Boolean = hasClassesAndObjectsWithAllNames(listOf(name, *names), includeNested, includeLocal)
+        ignoreCase: Boolean,
+    ): Boolean = hasClassesAndObjectsWithAllNames(listOf(name, *names), includeNested, includeLocal, ignoreCase)
 
     override fun hasClassesAndObjectsWithAllNames(
         names: Collection<String>,
         includeNested: Boolean,
         includeLocal: Boolean,
+        ignoreCase: Boolean,
     ): Boolean =
         when {
-            names.isEmpty() -> hasClassesOrObjects(includeNested, includeLocal)
-            else ->
+            names.isEmpty() -> {
+                hasClassesOrObjects(includeNested, includeLocal)
+            }
+
+            else -> {
                 names.all {
-                    classesAndObjects(includeNested, includeLocal).any { koClass -> it == koClass.name }
+                    classesAndObjects(includeNested, includeLocal).any { koClass -> koClass.hasName(it, ignoreCase) }
                 }
+            }
         }
 
     override fun hasClassOrObject(

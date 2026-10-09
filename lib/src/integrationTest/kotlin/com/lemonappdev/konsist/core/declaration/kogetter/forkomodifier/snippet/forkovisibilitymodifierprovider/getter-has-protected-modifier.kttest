@@ -1,4 +1,4 @@
-open class SampleClass{
-    protected val sampleProperty: Boolean
+open class FixtureClass{
+    protected val fixtureProperty: Boolean
         protected get() = true
 }

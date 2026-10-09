@@ -14,7 +14,7 @@ class KoPropertyDeclarationForKoFullyQualifiedNameProviderTest {
                 .first()
 
         // then
-        sut.fullyQualifiedName shouldBeEqualTo "com.samplepackage.sampleProperty"
+        sut.fullyQualifiedName shouldBeEqualTo "com.fixturepackage.fixtureProperty"
     }
 
     @Test
@@ -26,7 +26,7 @@ class KoPropertyDeclarationForKoFullyQualifiedNameProviderTest {
                 .first()
 
         // then
-        sut.fullyQualifiedName shouldBeEqualTo "sampleProperty"
+        sut.fullyQualifiedName shouldBeEqualTo "fixtureProperty"
     }
 
     @Test

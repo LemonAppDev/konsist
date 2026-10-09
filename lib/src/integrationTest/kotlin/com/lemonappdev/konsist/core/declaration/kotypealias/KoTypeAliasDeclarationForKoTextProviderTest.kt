@@ -16,8 +16,8 @@ class KoTypeAliasDeclarationForKoTextProviderTest {
 
         // then
         assertSoftly(sut) {
-            text shouldBeEqualTo "typealias SampleTypeAlias = () -> Int"
-            hasTextStartingWith("typealias Sample") shouldBeEqualTo true
+            text shouldBeEqualTo "typealias FixtureTypeAlias = () -> Int"
+            hasTextStartingWith("typealias Fixture") shouldBeEqualTo true
             hasTextStartingWith("Other") shouldBeEqualTo false
             hasTextEndingWith("= () -> Int") shouldBeEqualTo true
             hasTextEndingWith("other") shouldBeEqualTo false

@@ -1,0 +1,17 @@
+[versions]
+# Legacy Kotlin version (prior to 2.4) - do not upgrade, see README.md
+kotlinVersion = "2.3.21"
+
+[libraries]
+kotlinBom = { module = "org.jetbrains.kotlin:kotlin-bom", version.ref = "kotlinVersion" }
+kotlinStdlibJdk8 = { module = "org.jetbrains.kotlin:kotlin-stdlib-jdk8" }
+kotlinCompilerEmbeddable = { module = "org.jetbrains.kotlin:kotlin-compiler-embeddable" }
+junitJupiterEngine = "org.junit.jupiter:junit-jupiter-engine:5.14.4"
+junitPlatformLauncher = "org.junit.platform:junit-platform-launcher:6.1.3"
+kluent = "org.amshove.kluent:kluent:1.73"
+# Newest version will be retrieved from mavenLocal
+konsist = "com.lemonappdev:konsist:+"
+
+[plugins]
+kotlinJvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlinVersion" }
+testLogger = "com.adarshr.test-logger:4.0.0"

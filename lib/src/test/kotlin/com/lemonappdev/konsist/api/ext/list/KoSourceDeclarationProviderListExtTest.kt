@@ -2,8 +2,8 @@ package com.lemonappdev.konsist.api.ext.list
 
 import com.lemonappdev.konsist.api.provider.KoDeclarationCastProvider
 import com.lemonappdev.konsist.api.provider.KoSourceDeclarationProvider
-import com.lemonappdev.konsist.testdata.SampleType1
-import com.lemonappdev.konsist.testdata.SampleType2
+import com.lemonappdev.konsist.testdata.FixtureType1
+import com.lemonappdev.konsist.testdata.FixtureType2
 import io.mockk.every
 import io.mockk.mockk
 import org.amshove.kluent.shouldBeEqualTo
@@ -129,16 +129,16 @@ class KoSourceDeclarationProviderListExtTest {
         // given
         val declaration1: KoSourceDeclarationProvider =
             mockk {
-                every { hasSourceDeclarationOf(SampleType1::class) } returns true
+                every { hasSourceDeclarationOf(FixtureType1::class) } returns true
             }
         val declaration2: KoSourceDeclarationProvider =
             mockk {
-                every { hasSourceDeclarationOf(SampleType1::class) } returns false
+                every { hasSourceDeclarationOf(FixtureType1::class) } returns false
             }
         val declarations = listOf(declaration1, declaration2)
 
         // when
-        val sut = declarations.withSourceDeclarationOf(SampleType1::class)
+        val sut = declarations.withSourceDeclarationOf(FixtureType1::class)
 
         // then
         sut shouldBeEqualTo listOf(declaration1)
@@ -149,23 +149,23 @@ class KoSourceDeclarationProviderListExtTest {
         // given
         val declaration1: KoSourceDeclarationProvider =
             mockk {
-                every { hasSourceDeclarationOf(SampleType1::class) } returns true
-                every { hasSourceDeclarationOf(SampleType2::class) } returns false
+                every { hasSourceDeclarationOf(FixtureType1::class) } returns true
+                every { hasSourceDeclarationOf(FixtureType2::class) } returns false
             }
         val declaration2: KoSourceDeclarationProvider =
             mockk {
-                every { hasSourceDeclarationOf(SampleType1::class) } returns false
-                every { hasSourceDeclarationOf(SampleType2::class) } returns true
+                every { hasSourceDeclarationOf(FixtureType1::class) } returns false
+                every { hasSourceDeclarationOf(FixtureType2::class) } returns true
             }
         val declaration3: KoSourceDeclarationProvider =
             mockk {
-                every { hasSourceDeclarationOf(SampleType1::class) } returns false
-                every { hasSourceDeclarationOf(SampleType2::class) } returns false
+                every { hasSourceDeclarationOf(FixtureType1::class) } returns false
+                every { hasSourceDeclarationOf(FixtureType2::class) } returns false
             }
         val declarations = listOf(declaration1, declaration2, declaration3)
 
         // when
-        val sut = declarations.withSourceDeclarationOf(SampleType1::class, SampleType2::class)
+        val sut = declarations.withSourceDeclarationOf(FixtureType1::class, FixtureType2::class)
 
         // then
         sut shouldBeEqualTo listOf(declaration1, declaration2)
@@ -176,21 +176,21 @@ class KoSourceDeclarationProviderListExtTest {
         // given
         val declaration1: KoSourceDeclarationProvider =
             mockk {
-                every { hasSourceDeclarationOf(SampleType1::class) } returns true
-                every { hasSourceDeclarationOf(SampleType2::class) } returns false
+                every { hasSourceDeclarationOf(FixtureType1::class) } returns true
+                every { hasSourceDeclarationOf(FixtureType2::class) } returns false
             }
         val declaration2: KoSourceDeclarationProvider =
             mockk {
-                every { hasSourceDeclarationOf(SampleType1::class) } returns false
-                every { hasSourceDeclarationOf(SampleType2::class) } returns true
+                every { hasSourceDeclarationOf(FixtureType1::class) } returns false
+                every { hasSourceDeclarationOf(FixtureType2::class) } returns true
             }
         val declaration3: KoSourceDeclarationProvider =
             mockk {
-                every { hasSourceDeclarationOf(SampleType1::class) } returns false
-                every { hasSourceDeclarationOf(SampleType2::class) } returns false
+                every { hasSourceDeclarationOf(FixtureType1::class) } returns false
+                every { hasSourceDeclarationOf(FixtureType2::class) } returns false
             }
         val declarations = listOf(declaration1, declaration2, declaration3)
-        val kClasses = listOf(SampleType1::class, SampleType2::class)
+        val kClasses = listOf(FixtureType1::class, FixtureType2::class)
 
         // when
         val sut = declarations.withSourceDeclarationOf(kClasses)
@@ -204,21 +204,21 @@ class KoSourceDeclarationProviderListExtTest {
         // given
         val declaration1: KoSourceDeclarationProvider =
             mockk {
-                every { hasSourceDeclarationOf(SampleType1::class) } returns true
-                every { hasSourceDeclarationOf(SampleType2::class) } returns false
+                every { hasSourceDeclarationOf(FixtureType1::class) } returns true
+                every { hasSourceDeclarationOf(FixtureType2::class) } returns false
             }
         val declaration2: KoSourceDeclarationProvider =
             mockk {
-                every { hasSourceDeclarationOf(SampleType1::class) } returns false
-                every { hasSourceDeclarationOf(SampleType2::class) } returns true
+                every { hasSourceDeclarationOf(FixtureType1::class) } returns false
+                every { hasSourceDeclarationOf(FixtureType2::class) } returns true
             }
         val declaration3: KoSourceDeclarationProvider =
             mockk {
-                every { hasSourceDeclarationOf(SampleType1::class) } returns false
-                every { hasSourceDeclarationOf(SampleType2::class) } returns false
+                every { hasSourceDeclarationOf(FixtureType1::class) } returns false
+                every { hasSourceDeclarationOf(FixtureType2::class) } returns false
             }
         val declarations = listOf(declaration1, declaration2, declaration3)
-        val kClasses = setOf(SampleType1::class, SampleType2::class)
+        val kClasses = setOf(FixtureType1::class, FixtureType2::class)
 
         // when
         val sut = declarations.withSourceDeclarationOf(kClasses)
@@ -232,11 +232,11 @@ class KoSourceDeclarationProviderListExtTest {
         // given
         val declaration1: KoSourceDeclarationProvider =
             mockk {
-                every { hasSourceDeclarationOf(SampleType1::class) } returns true
+                every { hasSourceDeclarationOf(FixtureType1::class) } returns true
             }
         val declaration2: KoSourceDeclarationProvider =
             mockk {
-                every { hasSourceDeclarationOf(SampleType1::class) } returns false
+                every { hasSourceDeclarationOf(FixtureType1::class) } returns false
             }
         val declarations = listOf(declaration1, declaration2)
 
@@ -252,11 +252,11 @@ class KoSourceDeclarationProviderListExtTest {
         // given
         val declaration1: KoSourceDeclarationProvider =
             mockk {
-                every { hasSourceDeclarationOf(SampleType1::class) } returns true
+                every { hasSourceDeclarationOf(FixtureType1::class) } returns true
             }
         val declaration2: KoSourceDeclarationProvider =
             mockk {
-                every { hasSourceDeclarationOf(SampleType1::class) } returns false
+                every { hasSourceDeclarationOf(FixtureType1::class) } returns false
             }
         val declarations = listOf(declaration1, declaration2)
 
@@ -272,16 +272,16 @@ class KoSourceDeclarationProviderListExtTest {
         // given
         val declaration1: KoSourceDeclarationProvider =
             mockk {
-                every { hasSourceDeclarationOf(SampleType1::class) } returns true
+                every { hasSourceDeclarationOf(FixtureType1::class) } returns true
             }
         val declaration2: KoSourceDeclarationProvider =
             mockk {
-                every { hasSourceDeclarationOf(SampleType1::class) } returns false
+                every { hasSourceDeclarationOf(FixtureType1::class) } returns false
             }
         val declarations = listOf(declaration1, declaration2)
 
         // when
-        val sut = declarations.withoutSourceDeclarationOf(SampleType1::class)
+        val sut = declarations.withoutSourceDeclarationOf(FixtureType1::class)
 
         // then
         sut shouldBeEqualTo listOf(declaration2)
@@ -292,23 +292,23 @@ class KoSourceDeclarationProviderListExtTest {
         // given
         val declaration1: KoSourceDeclarationProvider =
             mockk {
-                every { hasSourceDeclarationOf(SampleType1::class) } returns true
-                every { hasSourceDeclarationOf(SampleType2::class) } returns false
+                every { hasSourceDeclarationOf(FixtureType1::class) } returns true
+                every { hasSourceDeclarationOf(FixtureType2::class) } returns false
             }
         val declaration2: KoSourceDeclarationProvider =
             mockk {
-                every { hasSourceDeclarationOf(SampleType1::class) } returns false
-                every { hasSourceDeclarationOf(SampleType2::class) } returns true
+                every { hasSourceDeclarationOf(FixtureType1::class) } returns false
+                every { hasSourceDeclarationOf(FixtureType2::class) } returns true
             }
         val declaration3: KoSourceDeclarationProvider =
             mockk {
-                every { hasSourceDeclarationOf(SampleType1::class) } returns false
-                every { hasSourceDeclarationOf(SampleType2::class) } returns false
+                every { hasSourceDeclarationOf(FixtureType1::class) } returns false
+                every { hasSourceDeclarationOf(FixtureType2::class) } returns false
             }
         val declarations = listOf(declaration1, declaration2, declaration3)
 
         // when
-        val sut = declarations.withoutSourceDeclarationOf(SampleType1::class, SampleType2::class)
+        val sut = declarations.withoutSourceDeclarationOf(FixtureType1::class, FixtureType2::class)
 
         // then
         sut shouldBeEqualTo listOf(declaration3)
@@ -319,21 +319,21 @@ class KoSourceDeclarationProviderListExtTest {
         // given
         val declaration1: KoSourceDeclarationProvider =
             mockk {
-                every { hasSourceDeclarationOf(SampleType1::class) } returns true
-                every { hasSourceDeclarationOf(SampleType2::class) } returns false
+                every { hasSourceDeclarationOf(FixtureType1::class) } returns true
+                every { hasSourceDeclarationOf(FixtureType2::class) } returns false
             }
         val declaration2: KoSourceDeclarationProvider =
             mockk {
-                every { hasSourceDeclarationOf(SampleType1::class) } returns false
-                every { hasSourceDeclarationOf(SampleType2::class) } returns true
+                every { hasSourceDeclarationOf(FixtureType1::class) } returns false
+                every { hasSourceDeclarationOf(FixtureType2::class) } returns true
             }
         val declaration3: KoSourceDeclarationProvider =
             mockk {
-                every { hasSourceDeclarationOf(SampleType1::class) } returns false
-                every { hasSourceDeclarationOf(SampleType2::class) } returns false
+                every { hasSourceDeclarationOf(FixtureType1::class) } returns false
+                every { hasSourceDeclarationOf(FixtureType2::class) } returns false
             }
         val declarations = listOf(declaration1, declaration2, declaration3)
-        val kClasses = listOf(SampleType1::class, SampleType2::class)
+        val kClasses = listOf(FixtureType1::class, FixtureType2::class)
 
         // when
         val sut = declarations.withoutSourceDeclarationOf(kClasses)
@@ -347,21 +347,21 @@ class KoSourceDeclarationProviderListExtTest {
         // given
         val declaration1: KoSourceDeclarationProvider =
             mockk {
-                every { hasSourceDeclarationOf(SampleType1::class) } returns true
-                every { hasSourceDeclarationOf(SampleType2::class) } returns false
+                every { hasSourceDeclarationOf(FixtureType1::class) } returns true
+                every { hasSourceDeclarationOf(FixtureType2::class) } returns false
             }
         val declaration2: KoSourceDeclarationProvider =
             mockk {
-                every { hasSourceDeclarationOf(SampleType1::class) } returns false
-                every { hasSourceDeclarationOf(SampleType2::class) } returns true
+                every { hasSourceDeclarationOf(FixtureType1::class) } returns false
+                every { hasSourceDeclarationOf(FixtureType2::class) } returns true
             }
         val declaration3: KoSourceDeclarationProvider =
             mockk {
-                every { hasSourceDeclarationOf(SampleType1::class) } returns false
-                every { hasSourceDeclarationOf(SampleType2::class) } returns false
+                every { hasSourceDeclarationOf(FixtureType1::class) } returns false
+                every { hasSourceDeclarationOf(FixtureType2::class) } returns false
             }
         val declarations = listOf(declaration1, declaration2, declaration3)
-        val kClasses = setOf(SampleType1::class, SampleType2::class)
+        val kClasses = setOf(FixtureType1::class, FixtureType2::class)
 
         // when
         val sut = declarations.withoutSourceDeclarationOf(kClasses)

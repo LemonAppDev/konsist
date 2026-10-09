@@ -6,6 +6,7 @@ import com.lemonappdev.konsist.api.provider.KoClassAndInterfaceAndObjectProvider
 import com.lemonappdev.konsist.api.provider.KoClassAndInterfaceProvider
 import com.lemonappdev.konsist.api.provider.KoClassAndObjectProvider
 import com.lemonappdev.konsist.api.provider.KoClassProvider
+import com.lemonappdev.konsist.api.provider.KoCompanionObjectProvider
 import com.lemonappdev.konsist.api.provider.KoDeclarationProvider
 import com.lemonappdev.konsist.api.provider.KoFileExtensionProvider
 import com.lemonappdev.konsist.api.provider.KoFunctionProvider
@@ -51,7 +52,8 @@ interface KoFileDeclaration :
     KoPropertyProvider,
     KoSourceSetProvider,
     KoTextProvider,
-    KoTypeAliasProvider {
+    KoTypeAliasProvider,
+    KoCompanionObjectProvider {
     /**
      * Indicates whether some other element is "equal to" this one.
      *

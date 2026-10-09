@@ -1,0 +1,4 @@
+import com.lemonappdev.konsist.testdata.FixtureAnnotation as AnnotationAliased
+
+@AnnotationAliased
+class FixtureClass

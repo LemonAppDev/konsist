@@ -1,1 +1,1 @@
-class SampleClass private constructor ()
+class FixtureClass private constructor ()

@@ -1,0 +1,7 @@
+class FixtureOuterClass {
+    enum class FixtureClass {
+        FIXTURE_CONSTANT_1,
+        FIXTURE_CONSTANT_2,
+        FIXTURE_CONSTANT_3,
+    }
+}

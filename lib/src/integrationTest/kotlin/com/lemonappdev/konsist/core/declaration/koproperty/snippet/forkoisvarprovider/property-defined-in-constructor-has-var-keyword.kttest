@@ -1,1 +1,1 @@
-class SampleClass(var sampleProperty: Int)
+class FixtureClass(var fixtureProperty: Int)

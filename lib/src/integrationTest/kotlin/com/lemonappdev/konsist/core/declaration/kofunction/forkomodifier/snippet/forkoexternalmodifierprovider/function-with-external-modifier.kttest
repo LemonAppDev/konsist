@@ -1,1 +1,1 @@
-external fun sampleFunction()
+external fun fixtureFunction()

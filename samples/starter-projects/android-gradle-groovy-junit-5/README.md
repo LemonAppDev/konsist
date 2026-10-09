@@ -3,7 +3,7 @@
 This a [Konsist](https://github.com/LemonAppDev/konsist) sample is configured using
 [Gradle](https://docs.gradle.org/current/userguide/userguide.html),
 [Groovy](https://groovy-lang.org/) (build script language),
-and [Junit 5](https://junit.org/junit4/). 
+and [Junit 5](https://junit.org/junit4/).
 
 Other samples are located [here](..).
 
@@ -14,8 +14,8 @@ Konsist tests are located in inside `konsistTest` module:
 To run tests use IDE UI or run gradle commands:
 - `./gradlew konsistTest:test --rerun-tasks` - run tests in `konsistTest` module
 
-> The `--rerun-tasks` Gradle flag is required when Konsist tests are placed in a distinct module. When test module is 
-> unchanged Gradle assumes the tests are up-to-date, so these tests are skipped. This can lead to misleading test 
+> The `--rerun-tasks` Gradle flag is required when Konsist tests are placed in a distinct module. When test module is
+> unchanged Gradle assumes the tests are up-to-date, so these tests are skipped. This can lead to misleading test
 > outcomes, as Gradle isn't aware that these tests are actually evaluating code in other modules.
 
 See:

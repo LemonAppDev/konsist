@@ -1,4 +1,4 @@
-import com.lemonappdev.konsist.testdata.SampleClass
+import com.lemonappdev.konsist.testdata.FixtureClass
 
-fun SampleClass.sampleFunction() {
+fun FixtureClass.fixtureFunction() {
 }

@@ -1,14 +1,14 @@
-class SampleClass(){
-    fun sampleMethod() {
+class FixtureClass(){
+    fun fixtureMethod() {
         // Implementation
     }
 
     /**
-     * This is a sample property that demonstrates the usage of KDoc tags.
+     * This is a fixture property that demonstrates the usage of KDoc tags.
      *
      * @propertyGetter Retrieves the value of the [name] property.
      */
-    var sampleProperty: Int
+    var fixtureProperty: Int
         get() {
             return 6
         }

@@ -1,4 +1,4 @@
-enum class SampleClass(sampleParameter: String) {
-    SAMPLE_CONSTANT(sampleParameter = """first line
+enum class FixtureClass(fixtureParameter: String) {
+    FIXTURE_CONSTANT(fixtureParameter = """first line
     second line""")
 }

@@ -1,1 +1,1 @@
-fun sampleFunction(): String = "some text"
+fun fixtureFunction(): String = "some text"

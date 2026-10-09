@@ -1,7 +1,7 @@
-import com.lemonappdev.konsist.testdata.SampleAnnotation
+import com.lemonappdev.konsist.testdata.FixtureAnnotation
 
-enum class SampleClass {
-    SAMPLE_CONSTANT_1 {
-        val sampleVariable: @SampleAnnotation String = ""
+enum class FixtureClass {
+    FIXTURE_CONSTANT_1 {
+        val fixtureVariable: @FixtureAnnotation String = ""
     };
 }

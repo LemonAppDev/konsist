@@ -1,6 +1,6 @@
 /**
- * Sample description
+ * Fixture description
  *
- * @return sample description
+ * @return fixture description
  */
-fun sampleFunction(): String = ""
+fun fixtureFunction(): String = ""

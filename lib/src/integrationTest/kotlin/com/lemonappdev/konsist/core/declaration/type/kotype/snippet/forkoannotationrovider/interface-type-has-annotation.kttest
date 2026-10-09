@@ -1,4 +1,4 @@
-import com.lemonappdev.konsist.testdata.SampleAnnotation
-import com.lemonappdev.konsist.testdata.SampleInterface
+import com.lemonappdev.konsist.testdata.FixtureAnnotation
+import com.lemonappdev.konsist.testdata.FixtureInterface
 
-class SampleClass1(val sampleProperty1: @SampleAnnotation SampleInterface)
+class FixtureClass1(val fixtureProperty1: @FixtureAnnotation FixtureInterface)

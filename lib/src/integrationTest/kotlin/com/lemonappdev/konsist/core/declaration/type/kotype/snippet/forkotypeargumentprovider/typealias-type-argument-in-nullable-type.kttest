@@ -1,0 +1,3 @@
+val fixtureProperty: List<FixtureTypeAlias>? = emptyList()
+
+typealias FixtureTypeAlias = List<String>

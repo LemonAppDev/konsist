@@ -1,2 +1,2 @@
-package com.samplepackage
-object SampleObject
+package com.fixturepackage
+object FixtureObject

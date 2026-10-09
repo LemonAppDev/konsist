@@ -37,40 +37,60 @@ interface KoAnnotationProvider : KoBaseProvider {
      *
      * @param name the name of the annotations to check. It can be either a simple name or a fully qualified name.
      * @param names the names of the annotations to check. It can be either a simple name or a fully qualified name.
+     * @param ignoreCase Specifies whether the comparison should ignore a case.
+     *        If `true`, the prefix comparison will be case-insensitive.
+     *        If `false`, the comparison will consider case sensitivity.
      * @return `true` if there is a matching declaration, `false` otherwise.
      */
     fun hasAnnotationWithName(
         name: String,
         vararg names: String,
+        ignoreCase: Boolean = false,
     ): Boolean
 
     /**
      * Determines whether the declaration has at least one annotation whose name matches any of the specified names.
      *
      * @param names the names of the annotations to check. It can be either a simple name or a fully qualified name.
+     * @param ignoreCase Specifies whether the comparison should ignore a case.
+     *        If `true`, the prefix comparison will be case-insensitive.
+     *        If `false`, the comparison will consider case sensitivity.
      * @return `true` if there is a matching declaration, `false` otherwise.
      */
-    fun hasAnnotationWithName(names: Collection<String>): Boolean
+    fun hasAnnotationWithName(
+        names: Collection<String>,
+        ignoreCase: Boolean = false,
+    ): Boolean
 
     /**
      * Determines whether the declaration has annotations with all the specified names.
      *
      * @param name the name of the annotations to check. It can be either a simple name or a fully qualified name.
      * @param names The names of the annotations to check. It can be either a simple name or a fully qualified name.
+     * @param ignoreCase Specifies whether the comparison should ignore a case.
+     *        If `true`, the prefix comparison will be case-insensitive.
+     *        If `false`, the comparison will consider case sensitivity.
      * @return `true` if there are declarations with all the specified names, `false` otherwise.
      */
     fun hasAnnotationsWithAllNames(
         name: String,
         vararg names: String,
+        ignoreCase: Boolean = false,
     ): Boolean
 
     /**
      * Determines whether the declaration has annotations with all the specified names.
      *
      * @param names The names of the annotations to check. It can be either a simple name or a fully qualified name.
+     * @param ignoreCase Specifies whether the comparison should ignore a case.
+     *        If `true`, the prefix comparison will be case-insensitive.
+     *        If `false`, the comparison will consider case sensitivity.
      * @return `true` if there are declarations with all the specified names, `false` otherwise.
      */
-    fun hasAnnotationsWithAllNames(names: Collection<String>): Boolean
+    fun hasAnnotationsWithAllNames(
+        names: Collection<String>,
+        ignoreCase: Boolean = false,
+    ): Boolean
 
     /**
      * Determines whether the declaration has at least one annotation that satisfies the provided predicate.

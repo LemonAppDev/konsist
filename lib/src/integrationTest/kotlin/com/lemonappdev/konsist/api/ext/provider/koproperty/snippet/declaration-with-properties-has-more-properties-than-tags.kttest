@@ -1,8 +1,8 @@
 /**
- * Sample description
+ * Fixture description
  *
- * @property sampleConstructorProperty
+ * @property fixtureConstructorProperty
  */
-class SampleClass(val sampleConstructorProperty: Int) {
-    val sampleBodyProperty = ""
+class FixtureClass(val fixtureConstructorProperty: Int) {
+    val fixtureBodyProperty = ""
 }

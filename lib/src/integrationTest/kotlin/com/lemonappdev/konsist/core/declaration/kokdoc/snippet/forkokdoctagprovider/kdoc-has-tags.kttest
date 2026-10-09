@@ -1,8 +1,8 @@
 /**
- * Sample Description
+ * Fixture Description
  *
  * @since 1.0.0
- * @see example sample description
+ * @see example fixture description
  */
-class SampleClass {
+class FixtureClass {
 }

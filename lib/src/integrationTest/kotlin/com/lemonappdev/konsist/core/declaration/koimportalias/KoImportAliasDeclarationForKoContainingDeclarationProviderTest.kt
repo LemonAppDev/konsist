@@ -23,7 +23,7 @@ class KoImportAliasDeclarationForKoContainingDeclarationProviderTest {
                 ?.asImportAliasDeclaration()
 
         // then
-        (sut?.containingDeclaration as? KoNameProvider)?.name shouldBeEqualTo "com.lemonappdev.konsist.testdata.SampleType"
+        (sut?.containingDeclaration as? KoNameProvider)?.name shouldBeEqualTo "com.lemonappdev.konsist.testdata.FixtureType"
     }
 
     private fun getSnippetFile(fileName: String) =

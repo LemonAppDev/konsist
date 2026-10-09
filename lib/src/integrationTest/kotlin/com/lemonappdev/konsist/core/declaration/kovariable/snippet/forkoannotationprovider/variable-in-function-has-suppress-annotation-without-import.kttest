@@ -1,4 +1,4 @@
-fun sampleFunction() {
+fun fixtureFunction() {
     @Suppress
-     val sampleVariable = ""
+     val fixtureVariable = ""
 }

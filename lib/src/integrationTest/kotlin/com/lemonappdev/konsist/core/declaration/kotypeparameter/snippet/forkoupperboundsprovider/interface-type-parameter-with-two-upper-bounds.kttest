@@ -1,1 +1,1 @@
-interface SampleInterface<T> where T : List<*>, T : CharSequence
+interface FixtureInterface<T> where T : List<*>, T : CharSequence

@@ -63,8 +63,8 @@ class KoKDocDeclarationForKoKDocAuthorTagProviderTest {
         @JvmStatic
         fun provideValues() =
             listOf(
-                arguments("class-with-author-tag", "SampleClass"),
-                arguments("function-with-author-tag", "sampleMethod"),
+                arguments("class-with-author-tag", "FixtureClass"),
+                arguments("function-with-author-tag", "fixtureMethod"),
             )
     }
 }

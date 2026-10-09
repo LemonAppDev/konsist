@@ -1,0 +1,5 @@
+class FixtureTopLevelClass {
+     object FixtureObject1
+
+    object FixtureObject2
+}

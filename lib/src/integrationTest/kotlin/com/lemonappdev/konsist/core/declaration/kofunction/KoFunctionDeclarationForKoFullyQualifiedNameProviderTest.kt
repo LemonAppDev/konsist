@@ -14,7 +14,7 @@ class KoFunctionDeclarationForKoFullyQualifiedNameProviderTest {
                 .first()
 
         // then
-        sut.fullyQualifiedName shouldBeEqualTo "com.samplepackage.sampleFunction"
+        sut.fullyQualifiedName shouldBeEqualTo "com.fixturepackage.fixtureFunction"
     }
 
     @Test
@@ -26,7 +26,7 @@ class KoFunctionDeclarationForKoFullyQualifiedNameProviderTest {
                 .first()
 
         // then
-        sut.fullyQualifiedName shouldBeEqualTo "sampleFunction"
+        sut.fullyQualifiedName shouldBeEqualTo "fixtureFunction"
     }
 
     @Test

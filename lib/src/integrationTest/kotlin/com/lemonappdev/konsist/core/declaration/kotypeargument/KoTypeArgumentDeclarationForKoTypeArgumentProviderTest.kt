@@ -3,7 +3,7 @@ package com.lemonappdev.konsist.core.declaration.kotypeargument
 import com.lemonappdev.konsist.TestSnippetProvider
 import com.lemonappdev.konsist.api.declaration.type.KoKotlinTypeDeclaration
 import com.lemonappdev.konsist.api.ext.list.declaration.flatten
-import com.lemonappdev.konsist.testdata.SampleClass
+import com.lemonappdev.konsist.testdata.FixtureClass
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.amshove.kluent.shouldBeInstanceOf
@@ -32,7 +32,7 @@ class KoTypeArgumentDeclarationForKoTypeArgumentProviderTest {
             it?.hasTypeArgumentsWithAllNames("String") shouldBeEqualTo false
             it?.hasTypeArgumentsWithAllNames(listOf("String")) shouldBeEqualTo false
             it?.hasTypeArgumentOf(String::class, Int::class) shouldBeEqualTo false
-            it?.hasTypeArgumentOf(listOf(SampleClass::class, Int::class)) shouldBeEqualTo false
+            it?.hasTypeArgumentOf(listOf(FixtureClass::class, Int::class)) shouldBeEqualTo false
             it?.hasAllTypeArgumentsOf(String::class) shouldBeEqualTo false
             it?.hasAllTypeArgumentsOf(listOf(String::class)) shouldBeEqualTo false
             it?.hasTypeArgument { type -> type.sourceDeclaration?.isKotlinType == true } shouldBeEqualTo false
@@ -75,15 +75,66 @@ class KoTypeArgumentDeclarationForKoTypeArgumentProviderTest {
             it?.hasTypeArgumentsWithAllNames(listOf("String", "Int")) shouldBeEqualTo false
             it?.hasTypeArgumentsWithAllNames(listOf("OtherClass", "Int")) shouldBeEqualTo false
             it?.hasTypeArgumentOf(String::class, Int::class) shouldBeEqualTo true
-            it?.hasTypeArgumentOf(SampleClass::class, Int::class) shouldBeEqualTo false
+            it?.hasTypeArgumentOf(FixtureClass::class, Int::class) shouldBeEqualTo false
             it?.hasTypeArgumentOf(listOf(String::class, Int::class)) shouldBeEqualTo true
-            it?.hasTypeArgumentOf(listOf(SampleClass::class, Int::class)) shouldBeEqualTo false
+            it?.hasTypeArgumentOf(listOf(FixtureClass::class, Int::class)) shouldBeEqualTo false
             it?.hasAllTypeArgumentsOf(String::class) shouldBeEqualTo true
             it?.hasAllTypeArgumentsOf(String::class, Int::class) shouldBeEqualTo false
-            it?.hasAllTypeArgumentsOf(SampleClass::class, Int::class) shouldBeEqualTo false
+            it?.hasAllTypeArgumentsOf(FixtureClass::class, Int::class) shouldBeEqualTo false
             it?.hasAllTypeArgumentsOf(listOf(String::class)) shouldBeEqualTo true
             it?.hasAllTypeArgumentsOf(listOf(String::class, Int::class)) shouldBeEqualTo false
-            it?.hasAllTypeArgumentsOf(listOf(SampleClass::class, Int::class)) shouldBeEqualTo false
+            it?.hasAllTypeArgumentsOf(listOf(FixtureClass::class, Int::class)) shouldBeEqualTo false
+            it?.hasTypeArgument { type -> type.sourceDeclaration?.isKotlinType == true } shouldBeEqualTo true
+            it?.hasTypeArgument { type -> type.sourceDeclaration?.isExternal == true } shouldBeEqualTo false
+            it?.hasAllTypeArguments { type -> type.sourceDeclaration?.isKotlinType == true } shouldBeEqualTo true
+            it?.hasAllTypeArguments { type -> type.sourceDeclaration?.isExternal == true } shouldBeEqualTo false
+        }
+    }
+
+    @Test
+    fun `generic-nullable-type-argument-type-arguments`() {
+        // given
+        val sut =
+            getSnippetFile("generic-nullable-type-argument-type-arguments")
+                .properties()
+                .first()
+                .type
+                ?.typeArguments
+                ?.firstOrNull()
+
+        // then
+        assertSoftly(sut) {
+            it?.typeArguments?.map { typeArgument -> typeArgument.name } shouldBeEqualTo listOf("String")
+            it?.typeArguments?.map { typeArgument -> typeArgument.sourceDeclaration?.name } shouldBeEqualTo listOf("String")
+            it
+                ?.typeArguments
+                ?.flatten()
+                ?.map { typeArgument -> typeArgument.name } shouldBeEqualTo listOf("String")
+            it?.typeArguments?.firstOrNull()?.typeArguments shouldBeEqualTo null
+            it?.numTypeArguments shouldBeEqualTo 1
+            it?.countTypeArguments { type -> type.sourceDeclaration?.isKotlinType == true } shouldBeEqualTo 1
+            it?.countTypeArguments { type -> type.sourceDeclaration?.isClass == true } shouldBeEqualTo 0
+            it?.hasTypeArguments() shouldBeEqualTo true
+            it?.hasTypeArgumentWithName("String", "Int") shouldBeEqualTo true
+            it?.hasTypeArgumentWithName("OtherClass", "Int") shouldBeEqualTo false
+            it?.hasTypeArgumentWithName(listOf("String", "Int")) shouldBeEqualTo true
+            it?.hasTypeArgumentWithName(listOf("OtherClass", "Int")) shouldBeEqualTo false
+            it?.hasTypeArgumentsWithAllNames("String") shouldBeEqualTo true
+            it?.hasTypeArgumentsWithAllNames("String", "Int") shouldBeEqualTo false
+            it?.hasTypeArgumentsWithAllNames("OtherClass", "Int") shouldBeEqualTo false
+            it?.hasTypeArgumentsWithAllNames(listOf("String")) shouldBeEqualTo true
+            it?.hasTypeArgumentsWithAllNames(listOf("String", "Int")) shouldBeEqualTo false
+            it?.hasTypeArgumentsWithAllNames(listOf("OtherClass", "Int")) shouldBeEqualTo false
+            it?.hasTypeArgumentOf(String::class, Int::class) shouldBeEqualTo true
+            it?.hasTypeArgumentOf(FixtureClass::class, Int::class) shouldBeEqualTo false
+            it?.hasTypeArgumentOf(listOf(String::class, Int::class)) shouldBeEqualTo true
+            it?.hasTypeArgumentOf(listOf(FixtureClass::class, Int::class)) shouldBeEqualTo false
+            it?.hasAllTypeArgumentsOf(String::class) shouldBeEqualTo true
+            it?.hasAllTypeArgumentsOf(String::class, Int::class) shouldBeEqualTo false
+            it?.hasAllTypeArgumentsOf(FixtureClass::class, Int::class) shouldBeEqualTo false
+            it?.hasAllTypeArgumentsOf(listOf(String::class)) shouldBeEqualTo true
+            it?.hasAllTypeArgumentsOf(listOf(String::class, Int::class)) shouldBeEqualTo false
+            it?.hasAllTypeArgumentsOf(listOf(FixtureClass::class, Int::class)) shouldBeEqualTo false
             it?.hasTypeArgument { type -> type.sourceDeclaration?.isKotlinType == true } shouldBeEqualTo true
             it?.hasTypeArgument { type -> type.sourceDeclaration?.isExternal == true } shouldBeEqualTo false
             it?.hasAllTypeArguments { type -> type.sourceDeclaration?.isKotlinType == true } shouldBeEqualTo true
@@ -140,15 +191,80 @@ class KoTypeArgumentDeclarationForKoTypeArgumentProviderTest {
             it?.hasTypeArgumentsWithAllNames(listOf("Int", "String")) shouldBeEqualTo false
             it?.hasTypeArgumentsWithAllNames(listOf("OtherClass", "String")) shouldBeEqualTo false
             it?.hasTypeArgumentOf(Int::class, String::class) shouldBeEqualTo true
-            it?.hasTypeArgumentOf(SampleClass::class, String::class) shouldBeEqualTo false
+            it?.hasTypeArgumentOf(FixtureClass::class, String::class) shouldBeEqualTo false
             it?.hasTypeArgumentOf(listOf(Int::class, String::class)) shouldBeEqualTo true
-            it?.hasTypeArgumentOf(listOf(SampleClass::class, String::class)) shouldBeEqualTo false
+            it?.hasTypeArgumentOf(listOf(FixtureClass::class, String::class)) shouldBeEqualTo false
             it?.hasAllTypeArgumentsOf(Int::class) shouldBeEqualTo true
             it?.hasAllTypeArgumentsOf(Int::class, String::class) shouldBeEqualTo false
-            it?.hasAllTypeArgumentsOf(SampleClass::class, String::class) shouldBeEqualTo false
+            it?.hasAllTypeArgumentsOf(FixtureClass::class, String::class) shouldBeEqualTo false
             it?.hasAllTypeArgumentsOf(listOf(Int::class)) shouldBeEqualTo true
             it?.hasAllTypeArgumentsOf(listOf(Int::class, String::class)) shouldBeEqualTo false
-            it?.hasAllTypeArgumentsOf(listOf(SampleClass::class, String::class)) shouldBeEqualTo false
+            it?.hasAllTypeArgumentsOf(listOf(FixtureClass::class, String::class)) shouldBeEqualTo false
+            it?.hasTypeArgument { type -> type.sourceDeclaration?.isKotlinType == true } shouldBeEqualTo true
+            it?.hasTypeArgument { type -> type.sourceDeclaration?.isExternal == true } shouldBeEqualTo false
+            it?.hasAllTypeArguments { type -> type.sourceDeclaration?.isKotlinType == true } shouldBeEqualTo true
+            it?.hasAllTypeArguments { type -> type.sourceDeclaration?.isExternal == true } shouldBeEqualTo false
+        }
+    }
+
+    @Test
+    fun `generic-nullable-complex-type-argument-type-arguments`() {
+        // given
+        val sut =
+            getSnippetFile("generic-nullable-complex-type-argument-type-arguments")
+                .properties()
+                .first()
+                .type
+                ?.typeArguments
+                ?.firstOrNull()
+
+        // then
+        assertSoftly(sut) {
+            it?.typeArguments?.map { typeArgument -> typeArgument.name } shouldBeEqualTo listOf("List<String>", "Int")
+            it?.typeArguments?.map { typeArgument -> typeArgument.sourceDeclaration?.name } shouldBeEqualTo listOf("List", "Int")
+
+            it
+                ?.typeArguments
+                ?.firstOrNull()
+                ?.typeArguments
+                ?.map { typeArgument -> typeArgument.name } shouldBeEqualTo listOf("String")
+
+            it
+                ?.typeArguments
+                ?.flatten()
+                ?.map { typeArgument -> typeArgument.name } shouldBeEqualTo listOf("List", "String", "Int")
+
+            it
+                ?.typeArguments
+                ?.firstOrNull()
+                ?.typeArguments
+                ?.flatten()
+                ?.map { typeArgument -> typeArgument.name } shouldBeEqualTo listOf("String")
+
+            it?.numTypeArguments shouldBeEqualTo 2
+            it?.countTypeArguments { type -> type.sourceDeclaration?.isKotlinType == true } shouldBeEqualTo 2
+            it?.countTypeArguments { type -> type.sourceDeclaration?.isClass == true } shouldBeEqualTo 0
+            it?.hasTypeArguments() shouldBeEqualTo true
+            it?.hasTypeArgumentWithName("Int", "String") shouldBeEqualTo true
+            it?.hasTypeArgumentWithName("OtherClass", "String") shouldBeEqualTo false
+            it?.hasTypeArgumentWithName(listOf("Int", "String")) shouldBeEqualTo true
+            it?.hasTypeArgumentWithName(listOf("OtherClass", "String")) shouldBeEqualTo false
+            it?.hasTypeArgumentsWithAllNames("Int") shouldBeEqualTo true
+            it?.hasTypeArgumentsWithAllNames("Int", "String") shouldBeEqualTo false
+            it?.hasTypeArgumentsWithAllNames("OtherClass", "String") shouldBeEqualTo false
+            it?.hasTypeArgumentsWithAllNames(listOf("Int")) shouldBeEqualTo true
+            it?.hasTypeArgumentsWithAllNames(listOf("Int", "String")) shouldBeEqualTo false
+            it?.hasTypeArgumentsWithAllNames(listOf("OtherClass", "String")) shouldBeEqualTo false
+            it?.hasTypeArgumentOf(Int::class, String::class) shouldBeEqualTo true
+            it?.hasTypeArgumentOf(FixtureClass::class, String::class) shouldBeEqualTo false
+            it?.hasTypeArgumentOf(listOf(Int::class, String::class)) shouldBeEqualTo true
+            it?.hasTypeArgumentOf(listOf(FixtureClass::class, String::class)) shouldBeEqualTo false
+            it?.hasAllTypeArgumentsOf(Int::class) shouldBeEqualTo true
+            it?.hasAllTypeArgumentsOf(Int::class, String::class) shouldBeEqualTo false
+            it?.hasAllTypeArgumentsOf(FixtureClass::class, String::class) shouldBeEqualTo false
+            it?.hasAllTypeArgumentsOf(listOf(Int::class)) shouldBeEqualTo true
+            it?.hasAllTypeArgumentsOf(listOf(Int::class, String::class)) shouldBeEqualTo false
+            it?.hasAllTypeArgumentsOf(listOf(FixtureClass::class, String::class)) shouldBeEqualTo false
             it?.hasTypeArgument { type -> type.sourceDeclaration?.isKotlinType == true } shouldBeEqualTo true
             it?.hasTypeArgument { type -> type.sourceDeclaration?.isExternal == true } shouldBeEqualTo false
             it?.hasAllTypeArguments { type -> type.sourceDeclaration?.isKotlinType == true } shouldBeEqualTo true
@@ -178,7 +294,7 @@ class KoTypeArgumentDeclarationForKoTypeArgumentProviderTest {
             it?.hasTypeArgumentsWithAllNames("*") shouldBeEqualTo false
             it?.hasTypeArgumentsWithAllNames(listOf("*")) shouldBeEqualTo false
             it?.hasTypeArgumentOf(String::class, Int::class) shouldBeEqualTo false
-            it?.hasTypeArgumentOf(listOf(SampleClass::class, Int::class)) shouldBeEqualTo false
+            it?.hasTypeArgumentOf(listOf(FixtureClass::class, Int::class)) shouldBeEqualTo false
             it?.hasAllTypeArgumentsOf(String::class) shouldBeEqualTo false
             it?.hasAllTypeArgumentsOf(listOf(String::class)) shouldBeEqualTo false
             it?.hasTypeArgument { type -> type.sourceDeclaration?.isExternal == true } shouldBeEqualTo false
@@ -208,7 +324,7 @@ class KoTypeArgumentDeclarationForKoTypeArgumentProviderTest {
             it?.hasTypeArgumentsWithAllNames("String") shouldBeEqualTo false
             it?.hasTypeArgumentsWithAllNames(listOf("String")) shouldBeEqualTo false
             it?.hasTypeArgumentOf(String::class, Int::class) shouldBeEqualTo false
-            it?.hasTypeArgumentOf(listOf(SampleClass::class, Int::class)) shouldBeEqualTo false
+            it?.hasTypeArgumentOf(listOf(FixtureClass::class, Int::class)) shouldBeEqualTo false
             it?.hasAllTypeArgumentsOf(String::class) shouldBeEqualTo false
             it?.hasAllTypeArgumentsOf(listOf(String::class)) shouldBeEqualTo false
             it?.hasTypeArgument { type -> type.sourceDeclaration?.isKotlinType == true } shouldBeEqualTo false
@@ -252,15 +368,15 @@ class KoTypeArgumentDeclarationForKoTypeArgumentProviderTest {
             it?.hasTypeArgumentsWithAllNames(listOf("String", "Int")) shouldBeEqualTo false
             it?.hasTypeArgumentsWithAllNames(listOf("OtherClass", "Int")) shouldBeEqualTo false
             it?.hasTypeArgumentOf(String::class, Int::class) shouldBeEqualTo true
-            it?.hasTypeArgumentOf(SampleClass::class, Int::class) shouldBeEqualTo false
+            it?.hasTypeArgumentOf(FixtureClass::class, Int::class) shouldBeEqualTo false
             it?.hasTypeArgumentOf(listOf(String::class, Int::class)) shouldBeEqualTo true
-            it?.hasTypeArgumentOf(listOf(SampleClass::class, Int::class)) shouldBeEqualTo false
+            it?.hasTypeArgumentOf(listOf(FixtureClass::class, Int::class)) shouldBeEqualTo false
             it?.hasAllTypeArgumentsOf(String::class) shouldBeEqualTo true
             it?.hasAllTypeArgumentsOf(String::class, Int::class) shouldBeEqualTo false
-            it?.hasAllTypeArgumentsOf(SampleClass::class, Int::class) shouldBeEqualTo false
+            it?.hasAllTypeArgumentsOf(FixtureClass::class, Int::class) shouldBeEqualTo false
             it?.hasAllTypeArgumentsOf(listOf(String::class)) shouldBeEqualTo true
             it?.hasAllTypeArgumentsOf(listOf(String::class, Int::class)) shouldBeEqualTo false
-            it?.hasAllTypeArgumentsOf(listOf(SampleClass::class, Int::class)) shouldBeEqualTo false
+            it?.hasAllTypeArgumentsOf(listOf(FixtureClass::class, Int::class)) shouldBeEqualTo false
             it?.hasTypeArgument { type -> type.sourceDeclaration?.isKotlinType == true } shouldBeEqualTo true
             it?.hasTypeArgument { type -> type.sourceDeclaration?.isExternal == true } shouldBeEqualTo false
             it?.hasAllTypeArguments { type -> type.sourceDeclaration?.isKotlinType == true } shouldBeEqualTo true
@@ -290,7 +406,7 @@ class KoTypeArgumentDeclarationForKoTypeArgumentProviderTest {
             it?.hasTypeArgumentsWithAllNames("String") shouldBeEqualTo false
             it?.hasTypeArgumentsWithAllNames(listOf("String")) shouldBeEqualTo false
             it?.hasTypeArgumentOf(String::class, Int::class) shouldBeEqualTo false
-            it?.hasTypeArgumentOf(listOf(SampleClass::class, Int::class)) shouldBeEqualTo false
+            it?.hasTypeArgumentOf(listOf(FixtureClass::class, Int::class)) shouldBeEqualTo false
             it?.hasAllTypeArgumentsOf(String::class) shouldBeEqualTo false
             it?.hasAllTypeArgumentsOf(listOf(String::class)) shouldBeEqualTo false
             it?.hasTypeArgument { type -> type.sourceDeclaration?.isKotlinType == true } shouldBeEqualTo false
@@ -334,19 +450,87 @@ class KoTypeArgumentDeclarationForKoTypeArgumentProviderTest {
             it?.hasTypeArgumentsWithAllNames(listOf("String", "Int")) shouldBeEqualTo false
             it?.hasTypeArgumentsWithAllNames(listOf("OtherClass", "Int")) shouldBeEqualTo false
             it?.hasTypeArgumentOf(String::class, Int::class) shouldBeEqualTo true
-            it?.hasTypeArgumentOf(SampleClass::class, Int::class) shouldBeEqualTo false
+            it?.hasTypeArgumentOf(FixtureClass::class, Int::class) shouldBeEqualTo false
             it?.hasTypeArgumentOf(listOf(String::class, Int::class)) shouldBeEqualTo true
-            it?.hasTypeArgumentOf(listOf(SampleClass::class, Int::class)) shouldBeEqualTo false
+            it?.hasTypeArgumentOf(listOf(FixtureClass::class, Int::class)) shouldBeEqualTo false
             it?.hasAllTypeArgumentsOf(String::class) shouldBeEqualTo true
             it?.hasAllTypeArgumentsOf(String::class, Int::class) shouldBeEqualTo false
-            it?.hasAllTypeArgumentsOf(SampleClass::class, Int::class) shouldBeEqualTo false
+            it?.hasAllTypeArgumentsOf(FixtureClass::class, Int::class) shouldBeEqualTo false
             it?.hasAllTypeArgumentsOf(listOf(String::class)) shouldBeEqualTo true
             it?.hasAllTypeArgumentsOf(listOf(String::class, Int::class)) shouldBeEqualTo false
-            it?.hasAllTypeArgumentsOf(listOf(SampleClass::class, Int::class)) shouldBeEqualTo false
+            it?.hasAllTypeArgumentsOf(listOf(FixtureClass::class, Int::class)) shouldBeEqualTo false
             it?.hasTypeArgument { type -> type.sourceDeclaration?.isKotlinType == true } shouldBeEqualTo true
             it?.hasTypeArgument { type -> type.sourceDeclaration?.isExternal == true } shouldBeEqualTo false
             it?.hasAllTypeArguments { type -> type.sourceDeclaration?.isKotlinType == true } shouldBeEqualTo true
             it?.hasAllTypeArguments { type -> type.sourceDeclaration?.isExternal == true } shouldBeEqualTo false
+        }
+    }
+
+    @Test
+    fun `not-generic-type-argument-type-arguments-ignore-case`() {
+        // given
+        val sut =
+            getSnippetFile("not-generic-type-argument-type-arguments-ignore-case")
+                .properties()
+                .first()
+                .type
+                ?.typeArguments
+                ?.firstOrNull()
+
+        // then
+        assertSoftly(sut) {
+            it?.hasTypeArgumentWithName("string") shouldBeEqualTo false
+            it?.hasTypeArgumentWithName("string", ignoreCase = true) shouldBeEqualTo false
+            it?.hasTypeArgumentWithName(listOf("string")) shouldBeEqualTo false
+            it?.hasTypeArgumentWithName(listOf("string"), ignoreCase = true) shouldBeEqualTo false
+            it?.hasTypeArgumentWithName(setOf("string")) shouldBeEqualTo false
+            it?.hasTypeArgumentWithName(setOf("string"), ignoreCase = true) shouldBeEqualTo false
+            it?.hasTypeArgumentsWithAllNames("string", "int") shouldBeEqualTo false
+            it?.hasTypeArgumentsWithAllNames("string", "int", ignoreCase = true) shouldBeEqualTo false
+            it?.hasTypeArgumentsWithAllNames(listOf("string", "int")) shouldBeEqualTo false
+            it?.hasTypeArgumentsWithAllNames(listOf("string", "int"), ignoreCase = true) shouldBeEqualTo false
+            it?.hasTypeArgumentsWithAllNames(setOf("string", "int")) shouldBeEqualTo false
+            it?.hasTypeArgumentsWithAllNames(setOf("string", "int"), ignoreCase = true) shouldBeEqualTo false
+        }
+    }
+
+    @Test
+    fun `generic-complex-type-argument-type-arguments-ignore-case`() {
+        // given
+        val sut =
+            getSnippetFile("generic-complex-type-argument-type-arguments-ignore-case")
+                .properties()
+                .first()
+                .type
+                ?.typeArguments
+                ?.firstOrNull()
+
+        // then
+        assertSoftly(sut) {
+            it?.hasTypeArgumentWithName("int") shouldBeEqualTo false
+            it?.hasTypeArgumentWithName("int", ignoreCase = true) shouldBeEqualTo true
+            it?.hasTypeArgumentWithName("int") shouldBeEqualTo false
+            it?.hasTypeArgumentWithName("int", ignoreCase = true) shouldBeEqualTo true
+            it?.hasTypeArgumentWithName("int", "char") shouldBeEqualTo false
+            it?.hasTypeArgumentWithName("int", "char", ignoreCase = true) shouldBeEqualTo true
+            it?.hasTypeArgumentWithName(listOf("int")) shouldBeEqualTo false
+            it?.hasTypeArgumentWithName(listOf("int"), ignoreCase = true) shouldBeEqualTo true
+            it?.hasTypeArgumentWithName(listOf("char")) shouldBeEqualTo false
+            it?.hasTypeArgumentWithName(listOf("char"), ignoreCase = true) shouldBeEqualTo false
+            it?.hasTypeArgumentWithName(listOf("int", "char")) shouldBeEqualTo false
+            it?.hasTypeArgumentWithName(listOf("int", "char"), ignoreCase = true) shouldBeEqualTo true
+            it?.hasTypeArgumentsWithAllNames("int") shouldBeEqualTo false
+            it?.hasTypeArgumentsWithAllNames("int", ignoreCase = true) shouldBeEqualTo true
+            it?.hasTypeArgumentsWithAllNames("int", "list<string>") shouldBeEqualTo false
+            it?.hasTypeArgumentsWithAllNames("int", "list<string>", ignoreCase = true) shouldBeEqualTo true
+            it?.hasTypeArgumentsWithAllNames("int", "char") shouldBeEqualTo false
+            it?.hasTypeArgumentsWithAllNames("int", "char", ignoreCase = true) shouldBeEqualTo false
+            it?.hasTypeArgumentsWithAllNames(listOf("int")) shouldBeEqualTo false
+            it?.hasTypeArgumentsWithAllNames(listOf("int"), ignoreCase = true) shouldBeEqualTo true
+            it?.hasTypeArgumentsWithAllNames(listOf("int", "list<string>")) shouldBeEqualTo false
+            it?.hasTypeArgumentsWithAllNames(listOf("int", "list<string>"), ignoreCase = true) shouldBeEqualTo true
+            it?.hasTypeArgumentsWithAllNames(listOf("int", "char")) shouldBeEqualTo false
+            it?.hasTypeArgumentsWithAllNames(listOf("int", "char"), ignoreCase = true) shouldBeEqualTo false
         }
     }
 

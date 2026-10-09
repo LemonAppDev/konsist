@@ -215,7 +215,7 @@ class Architecture2Test {
         // then
         val filepath =
             "file://$rootPath/lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/" +
-                "assertarchitecture/architecture2/project/presentation/sample/PresentationThirdClass.kt"
+                "assertarchitecture/architecture2/project/presentation/fixture/PresentationThirdClass.kt"
 
         result
             .message
@@ -244,7 +244,7 @@ class Architecture2Test {
         // then
         val filepath =
             "file://$rootPath/lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/" +
-                "assertarchitecture/architecture2/project/presentation/sample/PresentationThirdClass.kt"
+                "assertarchitecture/architecture2/project/presentation/fixture/PresentationThirdClass.kt"
 
         result
             .message
@@ -277,7 +277,7 @@ class Architecture2Test {
         // then
         val filepath =
             "file://$rootPath/lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/" +
-                "assertarchitecture/architecture2/project/presentation/sample/PresentationThirdClass.kt"
+                "assertarchitecture/architecture2/project/presentation/fixture/PresentationThirdClass.kt"
 
         result
             .message
@@ -312,7 +312,7 @@ class Architecture2Test {
         // then
         val filepath =
             "file://$rootPath/lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/" +
-                "assertarchitecture/architecture2/project/presentation/sample/PresentationThirdClass.kt"
+                "assertarchitecture/architecture2/project/presentation/fixture/PresentationThirdClass.kt"
 
         result
             .message
@@ -343,7 +343,7 @@ class Architecture2Test {
         // then
         val filepath =
             "file://$rootPath/lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/" +
-                "assertarchitecture/architecture2/project/presentation/sample/PresentationThirdClass.kt"
+                "assertarchitecture/architecture2/project/presentation/fixture/PresentationThirdClass.kt"
 
         result
             .message
@@ -373,7 +373,7 @@ class Architecture2Test {
         // then
         val filepath =
             "file://$rootPath/lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/" +
-                "assertarchitecture/architecture2/project/presentation/sample/PresentationThirdClass.kt"
+                "assertarchitecture/architecture2/project/presentation/fixture/PresentationThirdClass.kt"
 
         result
             .message
@@ -406,7 +406,7 @@ class Architecture2Test {
         // then
         val filepath =
             "file://$rootPath/lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/" +
-                "assertarchitecture/architecture2/project/presentation/sample/PresentationThirdClass.kt"
+                "assertarchitecture/architecture2/project/presentation/fixture/PresentationThirdClass.kt"
 
         result
             .message
@@ -441,7 +441,7 @@ class Architecture2Test {
         // then
         val filepath =
             "file://$rootPath/lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/" +
-                "assertarchitecture/architecture2/project/presentation/sample/PresentationThirdClass.kt"
+                "assertarchitecture/architecture2/project/presentation/fixture/PresentationThirdClass.kt"
 
         result
             .message
@@ -518,7 +518,7 @@ class Architecture2Test {
         // then
         val filepath =
             "file://$rootPath/lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/" +
-                "assertarchitecture/architecture2/project/presentation/sample/PresentationThirdClass.kt"
+                "assertarchitecture/architecture2/project/presentation/fixture/PresentationThirdClass.kt"
 
         result.message.shouldBeEqualTo(
             "'fails when dependency is set that presentation layer depends on nothing and domain layer is included (lambda scope)' " +
@@ -544,7 +544,7 @@ class Architecture2Test {
         // then
         val filepath =
             "file://$rootPath/lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/" +
-                "assertarchitecture/architecture2/project/presentation/sample/PresentationThirdClass.kt"
+                "assertarchitecture/architecture2/project/presentation/fixture/PresentationThirdClass.kt"
 
         result.message.shouldBeEqualTo(
             "'fails when dependency is set that presentation layer depends on nothing and domain layer is included (lambda files)' " +
@@ -574,7 +574,7 @@ class Architecture2Test {
         // then
         val filepath =
             "file://$rootPath/lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/" +
-                "assertarchitecture/architecture2/project/presentation/sample/PresentationThirdClass.kt"
+                "assertarchitecture/architecture2/project/presentation/fixture/PresentationThirdClass.kt"
 
         result.message.shouldBeEqualTo(
             "'fails when dependency is set that presentation layer depends on nothing and domain layer is included (parameter scope)' " +
@@ -604,7 +604,7 @@ class Architecture2Test {
         // then
         val filepath =
             "file://$rootPath/lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/" +
-                "assertarchitecture/architecture2/project/presentation/sample/PresentationThirdClass.kt"
+                "assertarchitecture/architecture2/project/presentation/fixture/PresentationThirdClass.kt"
 
         result.message.shouldBeEqualTo(
             "'fails when dependency is set that presentation layer depends on nothing and domain layer is included (parameter files)' " +

@@ -240,7 +240,7 @@ class KoInterfaceAndObjectProviderListExtTest {
     @Test
     fun `withInterfaceOrObjectNamed(name) returns declaration with given interface or object`() {
         // given
-        val name = "SampleName"
+        val name = "FixtureName"
         val declaration1: KoInterfaceAndObjectProvider =
             mockk {
                 every { hasInterfaceOrObjectWithName(listOf(name)) } returns true
@@ -261,8 +261,8 @@ class KoInterfaceAndObjectProviderListExtTest {
     @Test
     fun `withInterfaceOrObjectNamed(String) returns declaration with any of given interface or object`() {
         // given
-        val name1 = "SampleName1"
-        val name2 = "SampleName2"
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
         val declaration1: KoInterfaceAndObjectProvider =
             mockk {
                 every { hasInterfaceOrObjectWithName(listOf(name1, name2)) } returns true
@@ -283,8 +283,8 @@ class KoInterfaceAndObjectProviderListExtTest {
     @Test
     fun `withInterfaceOrObjectNamed(list of String) returns declaration with any of given interface or object`() {
         // given
-        val name1 = "SampleName1"
-        val name2 = "SampleName2"
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
         val declaration1: KoInterfaceAndObjectProvider =
             mockk {
                 every { hasInterfaceOrObjectWithName(listOf(name1, name2)) } returns true
@@ -306,8 +306,8 @@ class KoInterfaceAndObjectProviderListExtTest {
     @Test
     fun `withInterfaceOrObjectNamed(set of String) returns declaration with any of given interface or object`() {
         // given
-        val name1 = "SampleName1"
-        val name2 = "SampleName2"
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
         val declaration1: KoInterfaceAndObjectProvider =
             mockk {
                 every { hasInterfaceOrObjectWithName(setOf(name1, name2)) } returns true
@@ -327,9 +327,53 @@ class KoInterfaceAndObjectProviderListExtTest {
     }
 
     @Test
+    fun `withInterfaceOrObjectNamed(name) with ignore case returns declaration with given interface or object`() {
+        // given
+        val name = "FixtureName"
+        val declaration1: KoInterfaceAndObjectProvider =
+            mockk {
+                every { hasInterfaceOrObjectWithName(listOf(name), ignoreCase = true) } returns true
+            }
+        val declaration2: KoInterfaceAndObjectProvider =
+            mockk {
+                every { hasInterfaceOrObjectWithName(listOf(name), ignoreCase = true) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withInterfaceOrObjectNamed(name, ignoreCase = true)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
+    fun `withInterfaceOrObjectNamed(list of String) with ignore case returns declaration with any of given interface or object`() {
+        // given
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
+        val declaration1: KoInterfaceAndObjectProvider =
+            mockk {
+                every { hasInterfaceOrObjectWithName(listOf(name1, name2), ignoreCase = true) } returns true
+            }
+        val declaration2: KoInterfaceAndObjectProvider =
+            mockk {
+                every { hasInterfaceOrObjectWithName(listOf(name1, name2), ignoreCase = true) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+        val names = listOf(name1, name2)
+
+        // when
+        val sut = declarations.withInterfaceOrObjectNamed(names, ignoreCase = true)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
     fun `withoutInterfaceOrObjectNamed(name) returns declaration without given interface or object`() {
         // given
-        val name = "SampleName"
+        val name = "FixtureName"
         val declaration1: KoInterfaceAndObjectProvider =
             mockk {
                 every { hasInterfaceOrObjectWithName(listOf(name)) } returns true
@@ -350,8 +394,8 @@ class KoInterfaceAndObjectProviderListExtTest {
     @Test
     fun `withoutInterfaceOrObjectNamed(String) returns declaration without any of given interface or object`() {
         // given
-        val name1 = "SampleName1"
-        val name2 = "SampleName2"
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
         val declaration1: KoInterfaceAndObjectProvider =
             mockk {
                 every { hasInterfaceOrObjectWithName(listOf(name1, name2)) } returns true
@@ -372,8 +416,8 @@ class KoInterfaceAndObjectProviderListExtTest {
     @Test
     fun `withoutInterfaceOrObjectNamed(list of String) returns declaration without any of given interface or object`() {
         // given
-        val name1 = "SampleName1"
-        val name2 = "SampleName2"
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
         val declaration1: KoInterfaceAndObjectProvider =
             mockk {
                 every { hasInterfaceOrObjectWithName(listOf(name1, name2)) } returns true
@@ -395,8 +439,8 @@ class KoInterfaceAndObjectProviderListExtTest {
     @Test
     fun `withoutInterfaceOrObjectNamed(set of String) returns declaration without any of given interface or object`() {
         // given
-        val name1 = "SampleName1"
-        val name2 = "SampleName2"
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
         val declaration1: KoInterfaceAndObjectProvider =
             mockk {
                 every { hasInterfaceOrObjectWithName(setOf(name1, name2)) } returns true
@@ -416,9 +460,53 @@ class KoInterfaceAndObjectProviderListExtTest {
     }
 
     @Test
+    fun `withoutInterfaceOrObjectNamed(name) with ignore case returns declaration without given interface or object`() {
+        // given
+        val name = "FixtureName"
+        val declaration1: KoInterfaceAndObjectProvider =
+            mockk {
+                every { hasInterfaceOrObjectWithName(listOf(name), ignoreCase = true) } returns true
+            }
+        val declaration2: KoInterfaceAndObjectProvider =
+            mockk {
+                every { hasInterfaceOrObjectWithName(listOf(name), ignoreCase = true) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withoutInterfaceOrObjectNamed(name, ignoreCase = true)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
+    }
+
+    @Test
+    fun `withoutInterfaceOrObjectNamed(list of String) with ignore case returns declaration without any of given interface or object`() {
+        // given
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
+        val declaration1: KoInterfaceAndObjectProvider =
+            mockk {
+                every { hasInterfaceOrObjectWithName(listOf(name1, name2), ignoreCase = true) } returns true
+            }
+        val declaration2: KoInterfaceAndObjectProvider =
+            mockk {
+                every { hasInterfaceOrObjectWithName(listOf(name1, name2), ignoreCase = true) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+        val names = listOf(name1, name2)
+
+        // when
+        val sut = declarations.withoutInterfaceOrObjectNamed(names, ignoreCase = true)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
+    }
+
+    @Test
     fun `withAllInterfacesAndObjectsNamed(name) returns declaration with given interfaces and objects`() {
         // given
-        val name = "SampleName"
+        val name = "FixtureName"
         val declaration1: KoInterfaceAndObjectProvider =
             mockk {
                 every { hasInterfacesAndObjectsWithAllNames(listOf(name)) } returns true
@@ -439,8 +527,8 @@ class KoInterfaceAndObjectProviderListExtTest {
     @Test
     fun `withAllInterfacesAndObjectsNamed(String) returns declaration with all given interfaces and objects`() {
         // given
-        val name1 = "SampleName1"
-        val name2 = "SampleName2"
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
         val declaration1: KoInterfaceAndObjectProvider =
             mockk {
                 every { hasInterfacesAndObjectsWithAllNames(listOf(name1, name2)) } returns true
@@ -461,8 +549,8 @@ class KoInterfaceAndObjectProviderListExtTest {
     @Test
     fun `withAllInterfacesAndObjectsNamed(list of String) returns declaration with all given interfaces and objects`() {
         // given
-        val name1 = "SampleName1"
-        val name2 = "SampleName2"
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
         val declaration1: KoInterfaceAndObjectProvider =
             mockk {
                 every { hasInterfacesAndObjectsWithAllNames(listOf(name1, name2)) } returns true
@@ -484,8 +572,8 @@ class KoInterfaceAndObjectProviderListExtTest {
     @Test
     fun `withAllInterfacesAndObjectsNamed(set of String) returns declaration with all given interfaces and objects`() {
         // given
-        val name1 = "SampleName1"
-        val name2 = "SampleName2"
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
         val declaration1: KoInterfaceAndObjectProvider =
             mockk {
                 every { hasInterfacesAndObjectsWithAllNames(setOf(name1, name2)) } returns true
@@ -505,9 +593,53 @@ class KoInterfaceAndObjectProviderListExtTest {
     }
 
     @Test
+    fun `withAllInterfacesAndObjectsNamed(name) with ignore case returns declaration with given interfaces and objects`() {
+        // given
+        val name = "FixtureName"
+        val declaration1: KoInterfaceAndObjectProvider =
+            mockk {
+                every { hasInterfacesAndObjectsWithAllNames(listOf(name), ignoreCase = true) } returns true
+            }
+        val declaration2: KoInterfaceAndObjectProvider =
+            mockk {
+                every { hasInterfacesAndObjectsWithAllNames(listOf(name), ignoreCase = true) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withAllInterfacesAndObjectsNamed(name, ignoreCase = true)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
+    fun `withAllInterfacesAndObjectsNamed(list of String) with ignore case returns declaration with all given interfaces and objects`() {
+        // given
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
+        val declaration1: KoInterfaceAndObjectProvider =
+            mockk {
+                every { hasInterfacesAndObjectsWithAllNames(listOf(name1, name2), ignoreCase = true) } returns true
+            }
+        val declaration2: KoInterfaceAndObjectProvider =
+            mockk {
+                every { hasInterfacesAndObjectsWithAllNames(listOf(name1, name2), ignoreCase = true) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+        val names = listOf(name1, name2)
+
+        // when
+        val sut = declarations.withAllInterfacesAndObjectsNamed(names, ignoreCase = true)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
     fun `withoutAllInterfacesAndObjectsNamed(name) returns declaration without given interfaces and objects`() {
         // given
-        val name = "SampleName"
+        val name = "FixtureName"
         val declaration1: KoInterfaceAndObjectProvider =
             mockk {
                 every { hasInterfacesAndObjectsWithAllNames(listOf(name)) } returns true
@@ -528,8 +660,8 @@ class KoInterfaceAndObjectProviderListExtTest {
     @Test
     fun `withoutAllInterfacesAndObjectsNamed(String) returns declaration without all of given interfaces and objects`() {
         // given
-        val name1 = "SampleName1"
-        val name2 = "SampleName2"
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
         val declaration1: KoInterfaceAndObjectProvider =
             mockk {
                 every { hasInterfacesAndObjectsWithAllNames(listOf(name1, name2)) } returns true
@@ -550,8 +682,8 @@ class KoInterfaceAndObjectProviderListExtTest {
     @Test
     fun `withoutAllInterfacesAndObjectsNamed(list of String) returns declaration without all of given interfaces and objects`() {
         // given
-        val name1 = "SampleName1"
-        val name2 = "SampleName2"
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
         val declaration1: KoInterfaceAndObjectProvider =
             mockk {
                 every { hasInterfacesAndObjectsWithAllNames(listOf(name1, name2)) } returns true
@@ -573,8 +705,8 @@ class KoInterfaceAndObjectProviderListExtTest {
     @Test
     fun `withoutAllInterfacesAndObjectsNamed(set of String) returns declaration without all of given interfaces and objects`() {
         // given
-        val name1 = "SampleName1"
-        val name2 = "SampleName2"
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
         val declaration1: KoInterfaceAndObjectProvider =
             mockk {
                 every { hasInterfacesAndObjectsWithAllNames(setOf(name1, name2)) } returns true
@@ -588,6 +720,50 @@ class KoInterfaceAndObjectProviderListExtTest {
 
         // when
         val sut = declarations.withoutAllInterfacesAndObjectsNamed(names)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
+    }
+
+    @Test
+    fun `withoutAllInterfacesAndObjectsNamed(name) with ignore case returns declaration without given interfaces and objects`() {
+        // given
+        val name = "FixtureName"
+        val declaration1: KoInterfaceAndObjectProvider =
+            mockk {
+                every { hasInterfacesAndObjectsWithAllNames(listOf(name), ignoreCase = true) } returns true
+            }
+        val declaration2: KoInterfaceAndObjectProvider =
+            mockk {
+                every { hasInterfacesAndObjectsWithAllNames(listOf(name), ignoreCase = true) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withoutAllInterfacesAndObjectsNamed(name, ignoreCase = true)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
+    }
+
+    @Test
+    fun `withoutAllInterfacesAndObjectsNamed(list of String) with ignore case returns declaration without all of given declarations`() {
+        // given
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
+        val declaration1: KoInterfaceAndObjectProvider =
+            mockk {
+                every { hasInterfacesAndObjectsWithAllNames(listOf(name1, name2), ignoreCase = true) } returns true
+            }
+        val declaration2: KoInterfaceAndObjectProvider =
+            mockk {
+                every { hasInterfacesAndObjectsWithAllNames(listOf(name1, name2), ignoreCase = true) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+        val names = listOf(name1, name2)
+
+        // when
+        val sut = declarations.withoutAllInterfacesAndObjectsNamed(names, ignoreCase = true)
 
         // then
         sut shouldBeEqualTo listOf(declaration2)

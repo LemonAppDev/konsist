@@ -1,0 +1,4 @@
+@FixtureAnnotationFromFile
+class FixtureClass
+
+annotation class FixtureAnnotationFromFile

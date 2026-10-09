@@ -1,0 +1,25 @@
+enum class FixtureClass {
+    FIXTURE_CONSTANT_1 {
+        val fixtureProperty = 0
+
+        override fun fixtureFunction(): Int {
+            val fixtureLocalProperty = 0
+
+            fun fixtureLocalFunction() = 1
+
+            class FixtureLocalClass
+
+            return 1
+        }
+
+        inner class FixtureInnerClass {
+            val fixtureNestedProperty = 0
+
+            fun fixtureNestedFunction() = 1
+
+            inner class FixtureNestedClass
+        }
+    };
+
+    abstract fun fixtureFunction(): Int
+}

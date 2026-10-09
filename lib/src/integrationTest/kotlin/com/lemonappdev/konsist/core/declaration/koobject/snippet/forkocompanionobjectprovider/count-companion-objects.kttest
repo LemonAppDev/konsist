@@ -1,0 +1,15 @@
+object FixtureObject {
+    object FixtureNestedObject
+
+    class FixtureClass {
+        object FixtureClassObject
+
+        private companion object FixtureCompanionObject
+    }
+
+    interface FixtureInterface {
+        object FixtureInterfaceObject
+
+        private companion object FixtureNestedCompanionObject
+    }
+}

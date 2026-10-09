@@ -1,0 +1,7 @@
+package com.fixturepackage
+
+interface FixtureName : FixtureInterface.FixtureNestedInterface
+
+interface FixtureInterface {
+    interface FixtureNestedInterface
+}

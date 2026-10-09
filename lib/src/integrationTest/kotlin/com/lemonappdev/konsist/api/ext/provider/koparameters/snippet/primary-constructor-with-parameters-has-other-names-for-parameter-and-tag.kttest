@@ -1,6 +1,6 @@
 /**
- * Sample description
+ * Fixture description
  *
  * @param otherParameter
  */
-class SampleClass(sampleParameter: Int)
+class FixtureClass(fixtureParameter: Int)

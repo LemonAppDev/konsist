@@ -1,1 +1,1 @@
-val sampleProperty: (String, List<Int>) -> Unit = { _, _ ->}
+val fixtureProperty: (String, List<Int>) -> Unit = { _, _ ->}

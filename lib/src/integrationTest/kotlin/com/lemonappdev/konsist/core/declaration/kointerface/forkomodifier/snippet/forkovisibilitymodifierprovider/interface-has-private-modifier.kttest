@@ -1,2 +1,2 @@
-private interface SampleInterface {
+private interface FixtureInterface {
 }

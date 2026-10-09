@@ -1,0 +1,5 @@
+import com.lemonappdev.konsist.testdata.FixtureAnnotation as AnnotationImportAlias
+
+@AnnotationImportAlias
+fun fixtureFunction() {
+}

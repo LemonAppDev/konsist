@@ -37,7 +37,7 @@ class KoKDocDeclarationForKoLocationProviderTest {
                 .first()
 
         // then
-        val declaration = "Declaration:\nThis is a sample class that demonstrates the usage of KDoc."
+        val declaration = "Declaration:\nThis is a fixture class that demonstrates the usage of KDoc."
         assertSoftly(sut.locationWithText) {
             startsWith("Location: /") shouldBeEqualTo true
             contains(projectPath) shouldBeEqualTo true

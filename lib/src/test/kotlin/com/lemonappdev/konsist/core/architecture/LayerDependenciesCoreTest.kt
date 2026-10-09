@@ -1085,6 +1085,23 @@ class LayerDependenciesCoreTest {
     }
 
     @Test
+    fun `dependsOn does not throw when other layer depends on same layer with different strict value`() {
+        val sut = LayerDependenciesCore()
+        val layer1 = Layer("Domain", "com.example.domain..")
+        val layer2 = Layer("Data", "com.example.data..")
+
+        with(sut) {
+            layer1.include()
+            layer2.dependsOnNothing()
+        }
+
+        sut.layers shouldContain layer1
+        sut.layers shouldContain layer2
+        sut.layerDependencies shouldContain LayerDependency(layer1, LayerDependencyType.NONE, null)
+        sut.layerDependencies shouldContain LayerDependency(layer2, LayerDependencyType.DEPEND_ON_NOTHING, null, false)
+    }
+
+    @Test
     fun `collection doesNotDependOn single layer creates dependencies for all layers in collection`() {
         // given
         val sut = LayerDependenciesCore()

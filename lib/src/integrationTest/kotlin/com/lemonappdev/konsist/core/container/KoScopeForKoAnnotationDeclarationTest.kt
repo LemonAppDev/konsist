@@ -20,7 +20,7 @@ class KoScopeForKoAnnotationDeclarationTest {
         val sut = getSnippetFile("scope-contains-annotation")
 
         // then
-        sut.annotations.map { it.name } shouldBeEqualTo listOf("SampleAnnotation1")
+        sut.annotations.map { it.name } shouldBeEqualTo listOf("FixtureAnnotation1")
     }
 
     private fun getSnippetFile(fileName: String) =

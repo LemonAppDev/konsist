@@ -2,7 +2,6 @@ package com.lemonappdev.konsist.core.declaration.combined
 
 import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.combined.KoClassAndInterfaceAndObjectDeclaration
-import com.lemonappdev.konsist.core.annotation.RemoveInVersion
 import com.lemonappdev.konsist.core.declaration.KoChildDeclarationCore
 import com.lemonappdev.konsist.core.declaration.type.KoBaseTypeDeclarationCore
 import com.lemonappdev.konsist.core.provider.KoAnnotationProviderCore
@@ -11,6 +10,7 @@ import com.lemonappdev.konsist.core.provider.KoClassAndInterfaceAndObjectProvide
 import com.lemonappdev.konsist.core.provider.KoClassAndInterfaceProviderCore
 import com.lemonappdev.konsist.core.provider.KoClassAndObjectProviderCore
 import com.lemonappdev.konsist.core.provider.KoClassProviderCore
+import com.lemonappdev.konsist.core.provider.KoCompanionObjectProviderCore
 import com.lemonappdev.konsist.core.provider.KoContainingDeclarationProviderCore
 import com.lemonappdev.konsist.core.provider.KoContainingFileProviderCore
 import com.lemonappdev.konsist.core.provider.KoDeclarationFullyQualifiedNameProviderCore
@@ -33,7 +33,6 @@ import com.lemonappdev.konsist.core.provider.KoRepresentsTypeProviderCore
 import com.lemonappdev.konsist.core.provider.KoResideInPackageProviderCore
 import com.lemonappdev.konsist.core.provider.KoSourceSetProviderCore
 import com.lemonappdev.konsist.core.provider.KoTextProviderCore
-import com.lemonappdev.konsist.core.provider.KoTopLevelProviderCore
 import com.lemonappdev.konsist.core.provider.modifier.KoModifierProviderCore
 import com.lemonappdev.konsist.core.provider.modifier.KoVisibilityModifierProviderCore
 import com.lemonappdev.konsist.core.provider.packagee.KoPackageProviderCore
@@ -78,9 +77,9 @@ internal interface KoClassAndInterfaceAndObjectDeclarationCore :
     KoResideInPackageProviderCore,
     KoSourceSetProviderCore,
     KoTextProviderCore,
-    KoTopLevelProviderCore,
     KoIsTopLevelProviderCore,
-    KoVisibilityModifierProviderCore {
+    KoVisibilityModifierProviderCore,
+    KoCompanionObjectProviderCore {
     override val ktClassOrObject: KtClassOrObject
 
     override val psiElement: PsiElement
@@ -97,10 +96,6 @@ internal interface KoClassAndInterfaceAndObjectDeclarationCore :
 
     override val ktElement: KtElement
         get() = ktClassOrObject
-
-    @RemoveInVersion("0.18.0")
-    override val isTopLevel: Boolean
-        get() = super<KoIsTopLevelProviderCore>.isTopLevel
 
     override fun declarations(
         includeNested: Boolean,

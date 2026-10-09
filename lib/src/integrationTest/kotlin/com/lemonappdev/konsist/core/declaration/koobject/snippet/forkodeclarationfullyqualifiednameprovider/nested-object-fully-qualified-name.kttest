@@ -1,5 +1,5 @@
-package com.samplepackage
+package com.fixturepackage
 
-class SampleClass {
-    object SampleObject
+class FixtureClass {
+    object FixtureObject
 }

@@ -16,13 +16,23 @@ class KoFunctionDeclarationForKoNameProviderTest {
 
         // then
         assertSoftly(sut) {
-            name shouldBeEqualTo "sampleFunction"
-            hasNameStartingWith("sample") shouldBeEqualTo true
-            hasNameStartingWith("other") shouldBeEqualTo false
+            name shouldBeEqualTo "fixtureFunction"
+            hasName("fixtureFunction") shouldBeEqualTo true
+            hasName("otherFunction") shouldBeEqualTo false
+            hasName("fixturefunction", ignoreCase = false) shouldBeEqualTo false
+            hasName("fixturefunction", ignoreCase = true) shouldBeEqualTo true
+            hasNameStartingWith("fixture") shouldBeEqualTo true
+            hasNameStartingWith("Other") shouldBeEqualTo false
+            hasNameStartingWith("FIXTURE", ignoreCase = false) shouldBeEqualTo false
+            hasNameStartingWith("FIXTURE", ignoreCase = true) shouldBeEqualTo true
             hasNameEndingWith("tion") shouldBeEqualTo true
             hasNameEndingWith("other") shouldBeEqualTo false
-            hasNameContaining("leFun") shouldBeEqualTo true
-            hasNameContaining("lefun") shouldBeEqualTo false
+            hasNameEndingWith("TION", ignoreCase = false) shouldBeEqualTo false
+            hasNameEndingWith("TION", ignoreCase = true) shouldBeEqualTo true
+            hasNameContaining("reFun") shouldBeEqualTo true
+            hasNameContaining("other") shouldBeEqualTo false
+            hasNameContaining("refun", ignoreCase = false) shouldBeEqualTo false
+            hasNameContaining("refun", ignoreCase = true) shouldBeEqualTo true
             hasNameMatching(Regex("[a-zA-Z]+")) shouldBeEqualTo true
             hasNameMatching(Regex("[0-9]+")) shouldBeEqualTo false
         }

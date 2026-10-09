@@ -1,3 +1,3 @@
-import com.lemonappdev.konsist.externalsample.SampleExternalGenericInterface
+import com.lemonappdev.konsist.externalfixture.FixtureExternalGenericInterface
 
-interface SampleInterface : SampleExternalGenericInterface<Int>
+interface FixtureInterface : FixtureExternalGenericInterface<Int>

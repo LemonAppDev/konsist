@@ -1,5 +1,5 @@
-fun sampleFunction() {
-    val sampleProperty by lazy {
+fun fixtureFunction() {
+    val fixtureProperty by lazy {
         val x = 0
     }
 }

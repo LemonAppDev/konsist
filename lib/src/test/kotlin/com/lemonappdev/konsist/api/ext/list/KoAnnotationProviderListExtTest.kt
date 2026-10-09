@@ -2,8 +2,8 @@ package com.lemonappdev.konsist.api.ext.list
 
 import com.lemonappdev.konsist.api.declaration.KoAnnotationDeclaration
 import com.lemonappdev.konsist.api.provider.KoAnnotationProvider
-import com.lemonappdev.konsist.testdata.SampleAnnotation1
-import com.lemonappdev.konsist.testdata.SampleAnnotation2
+import com.lemonappdev.konsist.testdata.FixtureAnnotation1
+import com.lemonappdev.konsist.testdata.FixtureAnnotation2
 import io.mockk.every
 import io.mockk.mockk
 import org.amshove.kluent.shouldBeEqualTo
@@ -241,7 +241,7 @@ class KoAnnotationProviderListExtTest {
     @Test
     fun `withAnnotationNamed(name) returns declaration with given annotation`() {
         // given
-        val name = "SampleName"
+        val name = "FixtureName"
         val declaration1: KoAnnotationProvider =
             mockk {
                 every { hasAnnotationWithName(listOf(name)) } returns true
@@ -262,8 +262,8 @@ class KoAnnotationProviderListExtTest {
     @Test
     fun `withAnnotationNamed(String) returns declaration with any of given annotations`() {
         // given
-        val name1 = "SampleName1"
-        val name2 = "SampleName2"
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
         val declaration1: KoAnnotationProvider =
             mockk {
                 every { hasAnnotationWithName(listOf(name1, name2)) } returns true
@@ -284,8 +284,8 @@ class KoAnnotationProviderListExtTest {
     @Test
     fun `withAnnotationNamed(list of String) returns declaration with any of given annotations`() {
         // given
-        val name1 = "SampleName1"
-        val name2 = "SampleName2"
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
         val declaration1: KoAnnotationProvider =
             mockk {
                 every { hasAnnotationWithName(listOf(name1, name2)) } returns true
@@ -307,8 +307,8 @@ class KoAnnotationProviderListExtTest {
     @Test
     fun `withAnnotationNamed(set of String) returns declaration with any of given annotations`() {
         // given
-        val name1 = "SampleName1"
-        val name2 = "SampleName2"
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
         val declaration1: KoAnnotationProvider =
             mockk {
                 every { hasAnnotationWithName(setOf(name1, name2)) } returns true
@@ -328,9 +328,53 @@ class KoAnnotationProviderListExtTest {
     }
 
     @Test
+    fun `withAnnotationNamed(name) with ignore case returns declaration with given annotation`() {
+        // given
+        val name = "FixtureName"
+        val declaration1: KoAnnotationProvider =
+            mockk {
+                every { hasAnnotationWithName(listOf(name), ignoreCase = true) } returns true
+            }
+        val declaration2: KoAnnotationProvider =
+            mockk {
+                every { hasAnnotationWithName(listOf(name), ignoreCase = true) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withAnnotationNamed(name, ignoreCase = true)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
+    fun `withAnnotationNamed(list of String) with ignore case returns declaration with any of given annotations`() {
+        // given
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
+        val declaration1: KoAnnotationProvider =
+            mockk {
+                every { hasAnnotationWithName(listOf(name1, name2), ignoreCase = true) } returns true
+            }
+        val declaration2: KoAnnotationProvider =
+            mockk {
+                every { hasAnnotationWithName(listOf(name1, name2), ignoreCase = true) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+        val names = listOf(name1, name2)
+
+        // when
+        val sut = declarations.withAnnotationNamed(names, ignoreCase = true)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
     fun `withoutAnnotationNamed(name) returns declaration without given annotation`() {
         // given
-        val name = "SampleName"
+        val name = "FixtureName"
         val declaration1: KoAnnotationProvider =
             mockk {
                 every { hasAnnotationWithName(listOf(name)) } returns true
@@ -351,8 +395,8 @@ class KoAnnotationProviderListExtTest {
     @Test
     fun `withoutAnnotationNamed(String) returns declaration without any of given annotations`() {
         // given
-        val name1 = "SampleName1"
-        val name2 = "SampleName2"
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
         val declaration1: KoAnnotationProvider =
             mockk {
                 every { hasAnnotationWithName(listOf(name1, name2)) } returns true
@@ -373,8 +417,8 @@ class KoAnnotationProviderListExtTest {
     @Test
     fun `withoutAnnotationNamed(list of String) returns declaration without any of given annotations`() {
         // given
-        val name1 = "SampleName1"
-        val name2 = "SampleName2"
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
         val declaration1: KoAnnotationProvider =
             mockk {
                 every { hasAnnotationWithName(listOf(name1, name2)) } returns true
@@ -396,8 +440,8 @@ class KoAnnotationProviderListExtTest {
     @Test
     fun `withoutAnnotationNamed(set of String) returns declaration without any of given annotations`() {
         // given
-        val name1 = "SampleName1"
-        val name2 = "SampleName2"
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
         val declaration1: KoAnnotationProvider =
             mockk {
                 every { hasAnnotationWithName(setOf(name1, name2)) } returns true
@@ -417,9 +461,53 @@ class KoAnnotationProviderListExtTest {
     }
 
     @Test
+    fun `withoutAnnotationNamed(name) with ignore case returns declaration without given annotation`() {
+        // given
+        val name = "FixtureName"
+        val declaration1: KoAnnotationProvider =
+            mockk {
+                every { hasAnnotationWithName(listOf(name), ignoreCase = true) } returns true
+            }
+        val declaration2: KoAnnotationProvider =
+            mockk {
+                every { hasAnnotationWithName(listOf(name), ignoreCase = true) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withoutAnnotationNamed(name, ignoreCase = true)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
+    }
+
+    @Test
+    fun `withoutAnnotationNamed(list of String) with ignore case returns declaration without any of given annotations`() {
+        // given
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
+        val declaration1: KoAnnotationProvider =
+            mockk {
+                every { hasAnnotationWithName(listOf(name1, name2), ignoreCase = true) } returns true
+            }
+        val declaration2: KoAnnotationProvider =
+            mockk {
+                every { hasAnnotationWithName(listOf(name1, name2), ignoreCase = true) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+        val names = listOf(name1, name2)
+
+        // when
+        val sut = declarations.withoutAnnotationNamed(names, ignoreCase = true)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
+    }
+
+    @Test
     fun `withAllAnnotationsNamed(name) returns declaration with given annotation`() {
         // given
-        val name = "SampleName"
+        val name = "FixtureName"
         val declaration1: KoAnnotationProvider =
             mockk {
                 every { hasAnnotationsWithAllNames(listOf(name)) } returns true
@@ -440,8 +528,8 @@ class KoAnnotationProviderListExtTest {
     @Test
     fun `withAllAnnotationsNamed(String) returns declaration with all given annotations`() {
         // given
-        val name1 = "SampleName1"
-        val name2 = "SampleName2"
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
         val declaration1: KoAnnotationProvider =
             mockk {
                 every { hasAnnotationsWithAllNames(listOf(name1, name2)) } returns true
@@ -462,8 +550,8 @@ class KoAnnotationProviderListExtTest {
     @Test
     fun `withAllAnnotationsNamed(list of String) returns declaration with all given annotations`() {
         // given
-        val name1 = "SampleName1"
-        val name2 = "SampleName2"
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
         val declaration1: KoAnnotationProvider =
             mockk {
                 every { hasAnnotationsWithAllNames(listOf(name1, name2)) } returns true
@@ -485,8 +573,8 @@ class KoAnnotationProviderListExtTest {
     @Test
     fun `withAllAnnotationsNamed(set of String) returns declaration with all given annotations`() {
         // given
-        val name1 = "SampleName1"
-        val name2 = "SampleName2"
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
         val declaration1: KoAnnotationProvider =
             mockk {
                 every { hasAnnotationsWithAllNames(setOf(name1, name2)) } returns true
@@ -506,9 +594,53 @@ class KoAnnotationProviderListExtTest {
     }
 
     @Test
+    fun `withAllAnnotationsNamed(name) with ignore case returns declaration with given annotation`() {
+        // given
+        val name = "FixtureName"
+        val declaration1: KoAnnotationProvider =
+            mockk {
+                every { hasAnnotationsWithAllNames(listOf(name), ignoreCase = true) } returns true
+            }
+        val declaration2: KoAnnotationProvider =
+            mockk {
+                every { hasAnnotationsWithAllNames(listOf(name), ignoreCase = true) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withAllAnnotationsNamed(name, ignoreCase = true)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
+    fun `withAllAnnotationsNamed(list of String) with ignore case returns declaration with all given annotations`() {
+        // given
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
+        val declaration1: KoAnnotationProvider =
+            mockk {
+                every { hasAnnotationsWithAllNames(listOf(name1, name2), ignoreCase = true) } returns true
+            }
+        val declaration2: KoAnnotationProvider =
+            mockk {
+                every { hasAnnotationsWithAllNames(listOf(name1, name2), ignoreCase = true) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+        val names = listOf(name1, name2)
+
+        // when
+        val sut = declarations.withAllAnnotationsNamed(names, ignoreCase = true)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
     fun `withoutAllAnnotationsNamed(name) returns declaration without given annotation`() {
         // given
-        val name = "SampleName"
+        val name = "FixtureName"
         val declaration1: KoAnnotationProvider =
             mockk {
                 every { hasAnnotationsWithAllNames(listOf(name)) } returns true
@@ -529,8 +661,8 @@ class KoAnnotationProviderListExtTest {
     @Test
     fun `withoutAllAnnotationsNamed(String) returns declaration without all of given annotations`() {
         // given
-        val name1 = "SampleName1"
-        val name2 = "SampleName2"
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
         val declaration1: KoAnnotationProvider =
             mockk {
                 every { hasAnnotationsWithAllNames(listOf(name1, name2)) } returns true
@@ -551,8 +683,8 @@ class KoAnnotationProviderListExtTest {
     @Test
     fun `withoutAllAnnotationsNamed(list of String) returns declaration without all of given annotations`() {
         // given
-        val name1 = "SampleName1"
-        val name2 = "SampleName2"
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
         val declaration1: KoAnnotationProvider =
             mockk {
                 every { hasAnnotationsWithAllNames(listOf(name1, name2)) } returns true
@@ -574,8 +706,8 @@ class KoAnnotationProviderListExtTest {
     @Test
     fun `withoutAllAnnotationsNamed(set of String) returns declaration without all of given annotations`() {
         // given
-        val name1 = "SampleName1"
-        val name2 = "SampleName2"
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
         val declaration1: KoAnnotationProvider =
             mockk {
                 every { hasAnnotationsWithAllNames(setOf(name1, name2)) } returns true
@@ -589,6 +721,50 @@ class KoAnnotationProviderListExtTest {
 
         // when
         val sut = declarations.withoutAllAnnotationsNamed(names)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
+    }
+
+    @Test
+    fun `withoutAllAnnotationsNamed(name) with ignore case returns declaration without given annotation`() {
+        // given
+        val name = "FixtureName"
+        val declaration1: KoAnnotationProvider =
+            mockk {
+                every { hasAnnotationsWithAllNames(listOf(name), ignoreCase = true) } returns true
+            }
+        val declaration2: KoAnnotationProvider =
+            mockk {
+                every { hasAnnotationsWithAllNames(listOf(name), ignoreCase = true) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withoutAllAnnotationsNamed(name, ignoreCase = true)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
+    }
+
+    @Test
+    fun `withoutAllAnnotationsNamed(list of String) with ignore case returns declaration without all of given annotations`() {
+        // given
+        val name1 = "FixtureName1"
+        val name2 = "FixtureName2"
+        val declaration1: KoAnnotationProvider =
+            mockk {
+                every { hasAnnotationsWithAllNames(listOf(name1, name2), ignoreCase = true) } returns true
+            }
+        val declaration2: KoAnnotationProvider =
+            mockk {
+                every { hasAnnotationsWithAllNames(listOf(name1, name2), ignoreCase = true) } returns false
+            }
+        val declarations = listOf(declaration1, declaration2)
+        val names = listOf(name1, name2)
+
+        // when
+        val sut = declarations.withoutAllAnnotationsNamed(names, ignoreCase = true)
 
         // then
         sut shouldBeEqualTo listOf(declaration2)
@@ -917,16 +1093,16 @@ class KoAnnotationProviderListExtTest {
         // given
         val declaration1: KoAnnotationProvider =
             mockk {
-                every { hasAnnotationOf(listOf(SampleAnnotation1::class, SampleAnnotation2::class)) } returns true
+                every { hasAnnotationOf(listOf(FixtureAnnotation1::class, FixtureAnnotation2::class)) } returns true
             }
         val declaration2: KoAnnotationProvider =
             mockk {
-                every { hasAnnotationOf(listOf(SampleAnnotation1::class, SampleAnnotation2::class)) } returns false
+                every { hasAnnotationOf(listOf(FixtureAnnotation1::class, FixtureAnnotation2::class)) } returns false
             }
         val declarations = listOf(declaration1, declaration2)
 
         // when
-        val sut = declarations.withAnnotationOf(SampleAnnotation1::class, SampleAnnotation2::class)
+        val sut = declarations.withAnnotationOf(FixtureAnnotation1::class, FixtureAnnotation2::class)
 
         // then
         sut shouldBeEqualTo listOf(declaration1)
@@ -937,14 +1113,14 @@ class KoAnnotationProviderListExtTest {
         // given
         val declaration1: KoAnnotationProvider =
             mockk {
-                every { hasAnnotationOf(listOf(SampleAnnotation1::class, SampleAnnotation2::class)) } returns true
+                every { hasAnnotationOf(listOf(FixtureAnnotation1::class, FixtureAnnotation2::class)) } returns true
             }
         val declaration2: KoAnnotationProvider =
             mockk {
-                every { hasAnnotationOf(listOf(SampleAnnotation1::class, SampleAnnotation2::class)) } returns false
+                every { hasAnnotationOf(listOf(FixtureAnnotation1::class, FixtureAnnotation2::class)) } returns false
             }
         val declarations = listOf(declaration1, declaration2)
-        val kClasses = listOf(SampleAnnotation1::class, SampleAnnotation2::class)
+        val kClasses = listOf(FixtureAnnotation1::class, FixtureAnnotation2::class)
 
         // when
         val sut = declarations.withAnnotationOf(kClasses)
@@ -958,14 +1134,14 @@ class KoAnnotationProviderListExtTest {
         // given
         val declaration1: KoAnnotationProvider =
             mockk {
-                every { hasAnnotationOf(setOf(SampleAnnotation1::class, SampleAnnotation2::class)) } returns true
+                every { hasAnnotationOf(setOf(FixtureAnnotation1::class, FixtureAnnotation2::class)) } returns true
             }
         val declaration2: KoAnnotationProvider =
             mockk {
-                every { hasAnnotationOf(setOf(SampleAnnotation1::class, SampleAnnotation2::class)) } returns false
+                every { hasAnnotationOf(setOf(FixtureAnnotation1::class, FixtureAnnotation2::class)) } returns false
             }
         val declarations = listOf(declaration1, declaration2)
-        val kClasses = setOf(SampleAnnotation1::class, SampleAnnotation2::class)
+        val kClasses = setOf(FixtureAnnotation1::class, FixtureAnnotation2::class)
 
         // when
         val sut = declarations.withAnnotationOf(kClasses)
@@ -979,16 +1155,16 @@ class KoAnnotationProviderListExtTest {
         // given
         val declaration1: KoAnnotationProvider =
             mockk {
-                every { hasAnnotationOf(listOf(SampleAnnotation1::class, SampleAnnotation2::class)) } returns true
+                every { hasAnnotationOf(listOf(FixtureAnnotation1::class, FixtureAnnotation2::class)) } returns true
             }
         val declaration2: KoAnnotationProvider =
             mockk {
-                every { hasAnnotationOf(listOf(SampleAnnotation1::class, SampleAnnotation2::class)) } returns false
+                every { hasAnnotationOf(listOf(FixtureAnnotation1::class, FixtureAnnotation2::class)) } returns false
             }
         val declarations = listOf(declaration1, declaration2)
 
         // when
-        val sut = declarations.withoutAnnotationOf(SampleAnnotation1::class, SampleAnnotation2::class)
+        val sut = declarations.withoutAnnotationOf(FixtureAnnotation1::class, FixtureAnnotation2::class)
 
         // then
         sut shouldBeEqualTo listOf(declaration2)
@@ -999,14 +1175,14 @@ class KoAnnotationProviderListExtTest {
         // given
         val declaration1: KoAnnotationProvider =
             mockk {
-                every { hasAnnotationOf(listOf(SampleAnnotation1::class, SampleAnnotation2::class)) } returns true
+                every { hasAnnotationOf(listOf(FixtureAnnotation1::class, FixtureAnnotation2::class)) } returns true
             }
         val declaration2: KoAnnotationProvider =
             mockk {
-                every { hasAnnotationOf(listOf(SampleAnnotation1::class, SampleAnnotation2::class)) } returns false
+                every { hasAnnotationOf(listOf(FixtureAnnotation1::class, FixtureAnnotation2::class)) } returns false
             }
         val declarations = listOf(declaration1, declaration2)
-        val kClasses = listOf(SampleAnnotation1::class, SampleAnnotation2::class)
+        val kClasses = listOf(FixtureAnnotation1::class, FixtureAnnotation2::class)
 
         // when
         val sut = declarations.withoutAnnotationOf(kClasses)
@@ -1020,14 +1196,14 @@ class KoAnnotationProviderListExtTest {
         // given
         val declaration1: KoAnnotationProvider =
             mockk {
-                every { hasAnnotationOf(setOf(SampleAnnotation1::class, SampleAnnotation2::class)) } returns true
+                every { hasAnnotationOf(setOf(FixtureAnnotation1::class, FixtureAnnotation2::class)) } returns true
             }
         val declaration2: KoAnnotationProvider =
             mockk {
-                every { hasAnnotationOf(setOf(SampleAnnotation1::class, SampleAnnotation2::class)) } returns false
+                every { hasAnnotationOf(setOf(FixtureAnnotation1::class, FixtureAnnotation2::class)) } returns false
             }
         val declarations = listOf(declaration1, declaration2)
-        val kClasses = setOf(SampleAnnotation1::class, SampleAnnotation2::class)
+        val kClasses = setOf(FixtureAnnotation1::class, FixtureAnnotation2::class)
 
         // when
         val sut = declarations.withoutAnnotationOf(kClasses)
@@ -1041,16 +1217,16 @@ class KoAnnotationProviderListExtTest {
         // given
         val declaration1: KoAnnotationProvider =
             mockk {
-                every { hasAllAnnotationsOf(listOf(SampleAnnotation1::class, SampleAnnotation2::class)) } returns true
+                every { hasAllAnnotationsOf(listOf(FixtureAnnotation1::class, FixtureAnnotation2::class)) } returns true
             }
         val declaration2: KoAnnotationProvider =
             mockk {
-                every { hasAllAnnotationsOf(listOf(SampleAnnotation1::class, SampleAnnotation2::class)) } returns false
+                every { hasAllAnnotationsOf(listOf(FixtureAnnotation1::class, FixtureAnnotation2::class)) } returns false
             }
         val declarations = listOf(declaration1, declaration2)
 
         // when
-        val sut = declarations.withAllAnnotationsOf(SampleAnnotation1::class, SampleAnnotation2::class)
+        val sut = declarations.withAllAnnotationsOf(FixtureAnnotation1::class, FixtureAnnotation2::class)
 
         // then
         sut shouldBeEqualTo listOf(declaration1)
@@ -1061,14 +1237,14 @@ class KoAnnotationProviderListExtTest {
         // given
         val declaration1: KoAnnotationProvider =
             mockk {
-                every { hasAllAnnotationsOf(listOf(SampleAnnotation1::class, SampleAnnotation2::class)) } returns true
+                every { hasAllAnnotationsOf(listOf(FixtureAnnotation1::class, FixtureAnnotation2::class)) } returns true
             }
         val declaration2: KoAnnotationProvider =
             mockk {
-                every { hasAllAnnotationsOf(listOf(SampleAnnotation1::class, SampleAnnotation2::class)) } returns false
+                every { hasAllAnnotationsOf(listOf(FixtureAnnotation1::class, FixtureAnnotation2::class)) } returns false
             }
         val declarations = listOf(declaration1, declaration2)
-        val kClasses = listOf(SampleAnnotation1::class, SampleAnnotation2::class)
+        val kClasses = listOf(FixtureAnnotation1::class, FixtureAnnotation2::class)
 
         // when
         val sut = declarations.withAllAnnotationsOf(kClasses)
@@ -1082,14 +1258,14 @@ class KoAnnotationProviderListExtTest {
         // given
         val declaration1: KoAnnotationProvider =
             mockk {
-                every { hasAllAnnotationsOf(setOf(SampleAnnotation1::class, SampleAnnotation2::class)) } returns true
+                every { hasAllAnnotationsOf(setOf(FixtureAnnotation1::class, FixtureAnnotation2::class)) } returns true
             }
         val declaration2: KoAnnotationProvider =
             mockk {
-                every { hasAllAnnotationsOf(setOf(SampleAnnotation1::class, SampleAnnotation2::class)) } returns false
+                every { hasAllAnnotationsOf(setOf(FixtureAnnotation1::class, FixtureAnnotation2::class)) } returns false
             }
         val declarations = listOf(declaration1, declaration2)
-        val kClasses = setOf(SampleAnnotation1::class, SampleAnnotation2::class)
+        val kClasses = setOf(FixtureAnnotation1::class, FixtureAnnotation2::class)
 
         // when
         val sut = declarations.withAllAnnotationsOf(kClasses)
@@ -1103,16 +1279,16 @@ class KoAnnotationProviderListExtTest {
         // given
         val declaration1: KoAnnotationProvider =
             mockk {
-                every { hasAllAnnotationsOf(listOf(SampleAnnotation1::class, SampleAnnotation2::class)) } returns true
+                every { hasAllAnnotationsOf(listOf(FixtureAnnotation1::class, FixtureAnnotation2::class)) } returns true
             }
         val declaration2: KoAnnotationProvider =
             mockk {
-                every { hasAllAnnotationsOf(listOf(SampleAnnotation1::class, SampleAnnotation2::class)) } returns false
+                every { hasAllAnnotationsOf(listOf(FixtureAnnotation1::class, FixtureAnnotation2::class)) } returns false
             }
         val declarations = listOf(declaration1, declaration2)
 
         // when
-        val sut = declarations.withoutAllAnnotationsOf(SampleAnnotation1::class, SampleAnnotation2::class)
+        val sut = declarations.withoutAllAnnotationsOf(FixtureAnnotation1::class, FixtureAnnotation2::class)
 
         // then
         sut shouldBeEqualTo listOf(declaration2)
@@ -1123,14 +1299,14 @@ class KoAnnotationProviderListExtTest {
         // given
         val declaration1: KoAnnotationProvider =
             mockk {
-                every { hasAllAnnotationsOf(listOf(SampleAnnotation1::class, SampleAnnotation2::class)) } returns true
+                every { hasAllAnnotationsOf(listOf(FixtureAnnotation1::class, FixtureAnnotation2::class)) } returns true
             }
         val declaration2: KoAnnotationProvider =
             mockk {
-                every { hasAllAnnotationsOf(listOf(SampleAnnotation1::class, SampleAnnotation2::class)) } returns false
+                every { hasAllAnnotationsOf(listOf(FixtureAnnotation1::class, FixtureAnnotation2::class)) } returns false
             }
         val declarations = listOf(declaration1, declaration2)
-        val kClasses = listOf(SampleAnnotation1::class, SampleAnnotation2::class)
+        val kClasses = listOf(FixtureAnnotation1::class, FixtureAnnotation2::class)
 
         // when
         val sut = declarations.withoutAllAnnotationsOf(kClasses)
@@ -1144,14 +1320,14 @@ class KoAnnotationProviderListExtTest {
         // given
         val declaration1: KoAnnotationProvider =
             mockk {
-                every { hasAllAnnotationsOf(setOf(SampleAnnotation1::class, SampleAnnotation2::class)) } returns true
+                every { hasAllAnnotationsOf(setOf(FixtureAnnotation1::class, FixtureAnnotation2::class)) } returns true
             }
         val declaration2: KoAnnotationProvider =
             mockk {
-                every { hasAllAnnotationsOf(setOf(SampleAnnotation1::class, SampleAnnotation2::class)) } returns false
+                every { hasAllAnnotationsOf(setOf(FixtureAnnotation1::class, FixtureAnnotation2::class)) } returns false
             }
         val declarations = listOf(declaration1, declaration2)
-        val kClasses = setOf(SampleAnnotation1::class, SampleAnnotation2::class)
+        val kClasses = setOf(FixtureAnnotation1::class, FixtureAnnotation2::class)
 
         // when
         val sut = declarations.withoutAllAnnotationsOf(kClasses)

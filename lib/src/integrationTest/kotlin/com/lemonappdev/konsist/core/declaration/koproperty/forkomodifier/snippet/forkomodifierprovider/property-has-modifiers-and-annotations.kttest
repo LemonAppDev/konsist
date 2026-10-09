@@ -1,7 +1,7 @@
-import com.lemonappdev.konsist.testdata.SampleAnnotation
-import com.lemonappdev.konsist.testdata.SampleAnnotationWithParameter
+import com.lemonappdev.konsist.testdata.FixtureAnnotation
+import com.lemonappdev.konsist.testdata.FixtureAnnotationWithParameter
 
-open class SampleClass {
-    @SampleAnnotation @SampleAnnotationWithParameter(sampleParameter = " parameter description ")
-    protected open val sampleProperty: Boolean = true
+open class FixtureClass {
+    @FixtureAnnotation @FixtureAnnotationWithParameter(fixtureParameter = " parameter description ")
+    protected open val fixtureProperty: Boolean = true
 }

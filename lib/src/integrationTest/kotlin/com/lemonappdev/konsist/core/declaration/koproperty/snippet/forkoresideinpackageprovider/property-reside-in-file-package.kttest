@@ -1,3 +1,3 @@
-package com.samplepackage
+package com.fixturepackage
 
-val sampleProperty = ""
+val fixtureProperty = ""

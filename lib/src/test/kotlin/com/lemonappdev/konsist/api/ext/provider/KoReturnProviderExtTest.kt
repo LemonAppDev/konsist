@@ -10,7 +10,7 @@ import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
 class KoReturnProviderExtTest {
-    private interface SampleTestReturnDeclaration :
+    private interface FixtureTestReturnDeclaration :
         KoReturnProvider,
         KoKDocProvider
 
@@ -33,7 +33,7 @@ class KoReturnProviderExtTest {
     @Test
     fun `hasValidKDocReturnTag() calls hasTags method`() {
         // given
-        val declaration: SampleTestReturnDeclaration =
+        val declaration: FixtureTestReturnDeclaration =
             mockk {
                 every { returnType } returns mockk()
                 every { returnType?.name } returns "Boolean"

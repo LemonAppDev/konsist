@@ -1,5 +1,5 @@
-package com.samplepackage
+package com.fixturepackage
 
-interface SampleInterface : SampleSuperInterface
+interface FixtureInterface : FixtureSuperInterface
 
-interface SampleSuperInterface
+interface FixtureSuperInterface

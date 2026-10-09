@@ -1,4 +1,4 @@
-class SampleClass(val sampleProperty1: Int) {
-    /** Sample KDoc */
-    constructor(sampleProperty1: Int, sampleProperty2: Int) : this(sampleProperty1)
+class FixtureClass(val fixtureProperty1: Int) {
+    /** Fixture KDoc */
+    constructor(fixtureProperty1: Int, fixtureProperty2: Int) : this(fixtureProperty1)
 }

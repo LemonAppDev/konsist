@@ -18,7 +18,7 @@ class KoValuedKDocTagDeclarationTest {
                 .first()
 
         // then
-        sut.toString() shouldBeEqualTo "@param sampleParameter sample text"
+        sut.toString() shouldBeEqualTo "@param fixtureParameter fixture text"
     }
 
     private fun getSnippetFile(fileName: String) =

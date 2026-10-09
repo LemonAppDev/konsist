@@ -2,4 +2,4 @@ package com.lemonappdev.konsist.api.ext.provider.korepresentstype.snippet
 
 import kotlin.String
 
-val sampleProperty: String = ""
+val fixtureProperty: String = ""

@@ -1,1 +1,1 @@
-fun sampleFunction() = "some text"
+fun fixtureFunction() = "some text"

@@ -1,1 +1,1 @@
-val sampleProperty: MutableList<in List<String>> = mutableListOf()
+val fixtureProperty: MutableList<in List<String>> = mutableListOf()

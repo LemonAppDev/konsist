@@ -1,27 +1,27 @@
 package com.lemonappdev.konsist.testdata
 
-class SampleClass
+class FixtureClass
 
-class SampleClass1
+class FixtureClass1
 
-class SampleClass2
+class FixtureClass2
 
-class SampleType
+class FixtureType
 
-class SampleType1
+class FixtureType1
 
-class SampleType2
+class FixtureType2
 
-interface SampleInterface
+interface FixtureInterface
 
-interface SampleInterface1
+interface FixtureInterface1
 
-interface SampleInterface2
+interface FixtureInterface2
 
-annotation class SampleAnnotation
-
-@Target(AnnotationTarget.CLASS, AnnotationTarget.PROPERTY, AnnotationTarget.FUNCTION, AnnotationTarget.FILE)
-annotation class SampleAnnotation1
+annotation class FixtureAnnotation
 
 @Target(AnnotationTarget.CLASS, AnnotationTarget.PROPERTY, AnnotationTarget.FUNCTION, AnnotationTarget.FILE)
-annotation class SampleAnnotation2
+annotation class FixtureAnnotation1
+
+@Target(AnnotationTarget.CLASS, AnnotationTarget.PROPERTY, AnnotationTarget.FUNCTION, AnnotationTarget.FILE)
+annotation class FixtureAnnotation2

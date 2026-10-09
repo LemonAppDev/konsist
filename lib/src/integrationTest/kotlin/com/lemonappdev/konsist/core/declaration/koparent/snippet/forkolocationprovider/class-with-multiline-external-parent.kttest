@@ -1,5 +1,5 @@
-import com.lemonappdev.konsist.externalsample.SampleExternalClassWithParameter
+import com.lemonappdev.konsist.externalfixture.FixtureExternalClassWithParameter
 
-class SomeClass(): SampleExternalClassWithParameter(
+class SomeClass(): FixtureExternalClassWithParameter(
     "some parent constructor param here"
 )

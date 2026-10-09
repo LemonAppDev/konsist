@@ -1,0 +1,25 @@
+annotation class FixtureAnnotation
+
+enum class FixtureClass(val fixtureArgument: Int) {
+    @FixtureAnnotation
+    FIXTURE_CONSTANT_1(fixtureArgument = 0) {
+        override fun fixtureFunction() = Unit
+    },
+
+    // Comment
+    FIXTURE_CONSTANT_2(fixtureArgument = 1) {
+        override fun fixtureFunction() = Unit
+    },
+
+    /**
+     * KDoc
+     */
+    FIXTURE_CONSTANT_3(fixtureArgument = 2) {
+        override fun fixtureFunction() = Unit
+    },
+    ;
+
+    val fixtureProperty: Int = 0
+
+    abstract fun fixtureFunction()
+}

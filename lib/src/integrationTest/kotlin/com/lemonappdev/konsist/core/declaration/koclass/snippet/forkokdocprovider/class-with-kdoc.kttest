@@ -1,4 +1,4 @@
 /**
- * Sample KDoc
+ * Fixture KDoc
  */
-class SampleClass
+class FixtureClass

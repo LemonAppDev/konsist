@@ -1,3 +1,3 @@
-import com.lemonappdev.konsist.testdata.SampleInterface
+import com.lemonappdev.konsist.testdata.FixtureInterface
 
-class SampleClass(sampleProperty: SampleInterface) : SampleInterface by sampleProperty
+class FixtureClass(fixtureProperty: FixtureInterface) : FixtureInterface by fixtureProperty
