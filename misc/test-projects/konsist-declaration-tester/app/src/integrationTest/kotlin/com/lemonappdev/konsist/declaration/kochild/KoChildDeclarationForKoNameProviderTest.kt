@@ -4,7 +4,6 @@ import com.lemonappdev.konsist.api.Konsist
 import com.lemonappdev.konsist.api.ext.list.children
 import com.lemonappdev.konsist.api.ext.list.print
 import com.lemonappdev.konsist.api.ext.list.withName
-import com.lemonappdev.konsist.helper.ext.toOsSeparator
 import com.lemonappdev.konsist.helper.util.PathProvider.appMainSourceSetProjectDirectory
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
@@ -15,7 +14,7 @@ class KoChildDeclarationForKoNameProviderTest {
     fun `class child name`() {
         // given
         val sut = Konsist
-            .scopeFromFile("$appMainSourceSetProjectDirectory/fixture/AppClass.kt".toOsSeparator())
+            .scopeFromFile("$appMainSourceSetProjectDirectory/fixture/AppClass.kt")
             .classes()
             .withName("ParentSuperClass")
             .children()
@@ -35,7 +34,7 @@ class KoChildDeclarationForKoNameProviderTest {
     fun `object child name`() {
         // given
         val sut = Konsist
-            .scopeFromFile("$appMainSourceSetProjectDirectory/fixture/AppClass.kt".toOsSeparator())
+            .scopeFromFile("$appMainSourceSetProjectDirectory/fixture/AppClass.kt")
             .classes()
             .withName("ParentClassForObject")
             .children()
@@ -55,7 +54,7 @@ class KoChildDeclarationForKoNameProviderTest {
     fun `interface child name`() {
         // given
         val sut = Konsist
-            .scopeFromFile("$appMainSourceSetProjectDirectory/fixture/AppClass.kt".toOsSeparator())
+            .scopeFromFile("$appMainSourceSetProjectDirectory/fixture/AppClass.kt")
             .interfaces()
             .withName("ParentSuperInterface")
             .children()

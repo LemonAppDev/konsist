@@ -1,7 +1,6 @@
 package com.lemonappdev.konsist.declaration.kofile
 
 import com.lemonappdev.konsist.api.Konsist
-import com.lemonappdev.konsist.helper.ext.toOsSeparator
 import com.lemonappdev.konsist.helper.util.PathProvider.appMainSourceSetProjectDirectory
 import com.lemonappdev.konsist.helper.util.PathProvider.dataMainSourceSetProjectDirectory
 import com.lemonappdev.konsist.helper.util.PathProvider.featurePaymentMainSourceSetProjectDirectory
@@ -20,7 +19,7 @@ class KoFileForKoModuleProviderTest {
     fun `module name is 'app'`() {
         // given
         val sut = Konsist
-            .scopeFromFile("$appMainSourceSetProjectDirectory/fixture/AppClass.kt".toOsSeparator())
+            .scopeFromFile("$appMainSourceSetProjectDirectory/fixture/AppClass.kt")
             .files
             .first()
 
@@ -36,7 +35,7 @@ class KoFileForKoModuleProviderTest {
     fun `module name is 'data'`() {
         // given
         val sut = Konsist
-            .scopeFromFile("$dataMainSourceSetProjectDirectory/fixture/LibClass.kt".toOsSeparator())
+            .scopeFromFile("$dataMainSourceSetProjectDirectory/fixture/LibClass.kt")
             .files
             .first()
 
@@ -52,7 +51,7 @@ class KoFileForKoModuleProviderTest {
     fun `module name is 'root'`() {
         // given
         val sut = Konsist
-            .scopeFromFile("$rootMainSourceSetProjectDirectory/fixture/RootClass.kt".toOsSeparator())
+            .scopeFromFile("$rootMainSourceSetProjectDirectory/fixture/RootClass.kt")
             .files
             .first()
 
@@ -68,7 +67,7 @@ class KoFileForKoModuleProviderTest {
     fun `module name of nested module uses unix separator on all OSes`() {
         // given
         val sut = Konsist
-            .scopeFromFile("$featurePaymentMainSourceSetProjectDirectory/fixture/FeaturePaymentClass.kt".toOsSeparator())
+            .scopeFromFile("$featurePaymentMainSourceSetProjectDirectory/fixture/FeaturePaymentClass.kt")
             .files
             .first()
 

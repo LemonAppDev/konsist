@@ -3,7 +3,6 @@ package com.lemonappdev.konsist.declaration.kointerface
 import com.lemonappdev.konsist.api.Konsist
 import com.lemonappdev.konsist.api.ext.list.print
 import com.lemonappdev.konsist.api.ext.list.withName
-import com.lemonappdev.konsist.helper.ext.toOsSeparator
 import com.lemonappdev.konsist.helper.util.PathProvider.appMainSourceSetProjectDirectory
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
@@ -14,7 +13,7 @@ class KoInterfaceForKoChildProviderTest {
     fun `interface without children`() {
         // given
         val sut = Konsist
-            .scopeFromFile("$appMainSourceSetProjectDirectory/fixture/AppClass.kt".toOsSeparator())
+            .scopeFromFile("$appMainSourceSetProjectDirectory/fixture/AppClass.kt")
             .interfaces()
             .withName("InterfaceWithoutChildren")
             .first()
@@ -44,7 +43,7 @@ class KoInterfaceForKoChildProviderTest {
     fun `interface with direct child`() {
         // given
         val sut = Konsist
-            .scopeFromFile("$appMainSourceSetProjectDirectory/fixture/AppClass.kt".toOsSeparator())
+            .scopeFromFile("$appMainSourceSetProjectDirectory/fixture/AppClass.kt")
             .interfaces()
             .withName("ParentSuperInterface")
             .first()
@@ -83,7 +82,7 @@ class KoInterfaceForKoChildProviderTest {
     fun `interface with indirect children`() {
         // given
         val sut = Konsist
-            .scopeFromFile("$appMainSourceSetProjectDirectory/fixture/AppClass.kt".toOsSeparator())
+            .scopeFromFile("$appMainSourceSetProjectDirectory/fixture/AppClass.kt")
             .interfaces()
             .withName("ParentSuperInterface")
             .first()
@@ -126,7 +125,7 @@ class KoInterfaceForKoChildProviderTest {
     fun `interface without children ignore case`() {
         // given
         val sut = Konsist
-            .scopeFromFile("$appMainSourceSetProjectDirectory/fixture/AppClass.kt".toOsSeparator())
+            .scopeFromFile("$appMainSourceSetProjectDirectory/fixture/AppClass.kt")
             .interfaces()
             .withName("InterfaceWithoutChildren")
             .first()
@@ -152,7 +151,7 @@ class KoInterfaceForKoChildProviderTest {
     fun `interface with direct child ignore case`() {
         // given
         val sut = Konsist
-            .scopeFromFile("$appMainSourceSetProjectDirectory/fixture/AppClass.kt".toOsSeparator())
+            .scopeFromFile("$appMainSourceSetProjectDirectory/fixture/AppClass.kt")
             .interfaces()
             .withName("ParentSuperInterface")
             .first()

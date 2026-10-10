@@ -1,7 +1,6 @@
 package com.lemonappdev.konsist.declaration.kofunction
 
 import com.lemonappdev.konsist.api.Konsist
-import com.lemonappdev.konsist.helper.ext.toOsSeparator
 import com.lemonappdev.konsist.helper.util.PathProvider.appMainSourceSetProjectDirectory
 import com.lemonappdev.konsist.helper.util.PathProvider.dataMainSourceSetProjectDirectory
 import com.lemonappdev.konsist.helper.util.PathProvider.rootMainSourceSetProjectDirectory
@@ -18,7 +17,7 @@ class KoFunctionForKoModuleProviderTest {
     fun `module name is 'app'`() {
         // given
         val sut = Konsist
-            .scopeFromFile("$appMainSourceSetProjectDirectory/fixture/AppClass.kt".toOsSeparator())
+            .scopeFromFile("$appMainSourceSetProjectDirectory/fixture/AppClass.kt")
             .functions()
             .first()
 
@@ -34,7 +33,7 @@ class KoFunctionForKoModuleProviderTest {
     fun `module name is 'data'`() {
         // given
         val sut = Konsist
-            .scopeFromFile("$dataMainSourceSetProjectDirectory/fixture/LibClass.kt".toOsSeparator())
+            .scopeFromFile("$dataMainSourceSetProjectDirectory/fixture/LibClass.kt")
             .functions()
             .first()
 
@@ -50,7 +49,7 @@ class KoFunctionForKoModuleProviderTest {
     fun `module name is 'root'`() {
         // given
         val sut = Konsist
-            .scopeFromFile("$rootMainSourceSetProjectDirectory/fixture/RootClass.kt".toOsSeparator())
+            .scopeFromFile("$rootMainSourceSetProjectDirectory/fixture/RootClass.kt")
             .functions()
             .first()
 

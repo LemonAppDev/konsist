@@ -7,7 +7,6 @@ import com.lemonappdev.konsist.api.ext.list.initBlocks
 import com.lemonappdev.konsist.api.ext.list.setters
 import com.lemonappdev.konsist.api.ext.list.variables
 import com.lemonappdev.konsist.api.provider.KoVariableProvider
-import com.lemonappdev.konsist.helper.ext.toOsSeparator
 import com.lemonappdev.konsist.helper.util.PathProvider.appIntegrationTestSourceSetProjectDirectory
 import com.lemonappdev.konsist.helper.util.PathProvider.appMainSourceSetProjectDirectory
 import com.lemonappdev.konsist.helper.util.PathProvider.dataMainSourceSetProjectDirectory
@@ -123,12 +122,12 @@ class KoVariableForKoSourceSetProviderTest {
         private const val TEST = "test"
         private const val INTEGRATION_TEST = "integrationTest"
 
-        private val appMainPath = "$appMainSourceSetProjectDirectory/fixture/AppClass.kt".toOsSeparator()
-        private val appIntegrationTestPath = "$appIntegrationTestSourceSetProjectDirectory/fixture/AppClassTest.kt".toOsSeparator()
-        private val dataMainPath = "$dataMainSourceSetProjectDirectory/fixture/LibClass.kt".toOsSeparator()
-        private val dataTestPath = "$dataTestSourceSetProjectDirectory/fixture/LibClassTest.kt".toOsSeparator()
-        private val rootMainPath = "$rootMainSourceSetProjectDirectory/fixture/RootClass.kt".toOsSeparator()
-        private val rootMainPathWithDoubleSrcPackage = "$rootMainSourceSetProjectDirectory/fixture/src/RootSrcClass.kt".toOsSeparator()
+        private val appMainPath = "$appMainSourceSetProjectDirectory/fixture/AppClass.kt"
+        private val appIntegrationTestPath = "$appIntegrationTestSourceSetProjectDirectory/fixture/AppClassTest.kt"
+        private val dataMainPath = "$dataMainSourceSetProjectDirectory/fixture/LibClass.kt"
+        private val dataTestPath = "$dataTestSourceSetProjectDirectory/fixture/LibClassTest.kt"
+        private val rootMainPath = "$rootMainSourceSetProjectDirectory/fixture/RootClass.kt"
+        private val rootMainPathWithDoubleSrcPackage = "$rootMainSourceSetProjectDirectory/fixture/src/RootSrcClass.kt"
 
         @Suppress("unused")
         @JvmStatic

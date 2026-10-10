@@ -2,7 +2,6 @@ package com.lemonappdev.konsist.container
 
 import com.lemonappdev.konsist.api.Konsist
 import com.lemonappdev.konsist.helper.ext.mapToFilePaths
-import com.lemonappdev.konsist.helper.ext.toOsSeparator
 import com.lemonappdev.konsist.helper.util.PathProvider
 import com.lemonappdev.konsist.helper.util.PathProvider.dataMainSourceSetDirectory
 import com.lemonappdev.konsist.helper.util.PathProvider.dataTestSourceSetDirectory
@@ -27,7 +26,7 @@ class KoScopeTest {
     fun `toString method`() {
         // given
         val sut = Konsist
-            .scopeFromDirectory("${PathProvider.appMainSourceSetProjectDirectory}/fixture/".toOsSeparator())
+            .scopeFromDirectory("${PathProvider.appMainSourceSetProjectDirectory}/fixture/")
             .toString()
 
         // then
@@ -57,7 +56,7 @@ class KoScopeTest {
                 "$dataTestSourceSetDirectory/fixture/LibClassSpec.kt",
                 "$dataTestSourceSetDirectory/fixture/LibClassSpec.kt",
                 "$dataTestSourceSetDirectory/fixture/data/LibDataClassTest.kt",
-            ).toOsSeparator(),
+            ),
         )
     }
 
@@ -111,7 +110,7 @@ class KoScopeTest {
                     "$dataTestSourceSetDirectory/fixture/LibClassSpec.kt",
                     "$dataTestSourceSetDirectory/fixture/LibClassSpec.kt",
                     "$dataTestSourceSetDirectory/fixture/data/LibDataClassTest.kt",
-                ).toOsSeparator(),
+                ),
             )
     }
 

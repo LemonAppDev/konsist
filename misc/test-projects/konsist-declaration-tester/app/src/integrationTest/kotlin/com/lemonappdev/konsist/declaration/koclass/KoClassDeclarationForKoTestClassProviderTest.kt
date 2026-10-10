@@ -1,7 +1,6 @@
 package com.lemonappdev.konsist.declaration.koclass
 
 import com.lemonappdev.konsist.api.Konsist
-import com.lemonappdev.konsist.helper.ext.toOsSeparator
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
@@ -14,7 +13,7 @@ class KoClassDeclarationForKoTestClassProviderTest {
     fun `class-has-not-test`() {
         // given
         val sut = Konsist
-            .scopeFromDirectory("buildSrc/".toOsSeparator())
+            .scopeFromDirectory("buildSrc/")
             .classes()
             .first()
 

@@ -4,7 +4,6 @@ import com.lemonappdev.konsist.api.Konsist
 import com.lemonappdev.konsist.api.ext.list.children
 import com.lemonappdev.konsist.api.ext.list.print
 import com.lemonappdev.konsist.api.ext.list.withName
-import com.lemonappdev.konsist.helper.ext.toOsSeparator
 import com.lemonappdev.konsist.helper.util.PathProvider.appMainSourceSetProjectDirectory
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
@@ -15,7 +14,7 @@ class KoChildDeclarationForKoFullyQualifiedNameProviderTest {
     fun `class child fully qualified name`() {
         // given
         val sut = Konsist
-            .scopeFromFile("$appMainSourceSetProjectDirectory/fixture/AppClass.kt".toOsSeparator())
+            .scopeFromFile("$appMainSourceSetProjectDirectory/fixture/AppClass.kt")
             .classes()
             .withName("ParentSuperClass")
             .children()
@@ -29,7 +28,7 @@ class KoChildDeclarationForKoFullyQualifiedNameProviderTest {
     fun `object child fully qualified name`() {
         // given
         val sut = Konsist
-            .scopeFromFile("$appMainSourceSetProjectDirectory/fixture/AppClass.kt".toOsSeparator())
+            .scopeFromFile("$appMainSourceSetProjectDirectory/fixture/AppClass.kt")
             .classes()
             .withName("ParentClassForObject")
             .children()
@@ -43,7 +42,7 @@ class KoChildDeclarationForKoFullyQualifiedNameProviderTest {
     fun `interface child fully qualified name`() {
         // given
         val sut = Konsist
-            .scopeFromFile("$appMainSourceSetProjectDirectory/fixture/AppClass.kt".toOsSeparator())
+            .scopeFromFile("$appMainSourceSetProjectDirectory/fixture/AppClass.kt")
             .interfaces()
             .withName("ParentSuperInterface")
             .children()

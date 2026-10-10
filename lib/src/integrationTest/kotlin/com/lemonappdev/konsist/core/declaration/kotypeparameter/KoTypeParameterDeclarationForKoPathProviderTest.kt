@@ -5,7 +5,6 @@ import com.lemonappdev.konsist.api.ext.list.parameters
 import com.lemonappdev.konsist.api.ext.list.primaryConstructors
 import com.lemonappdev.konsist.api.ext.list.properties
 import com.lemonappdev.konsist.api.ext.list.returnTypes
-import com.lemonappdev.konsist.helper.ext.toOsSeparator
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
@@ -24,7 +23,7 @@ class KoTypeParameterDeclarationForKoPathProviderTest {
         // then
         assertSoftly(sut?.path) {
             it?.startsWith("//") shouldBeEqualTo false
-            it?.endsWith("kotypeparameter/snippet/forkopathprovider/function-type-parameter-path.kt".toOsSeparator()) shouldBeEqualTo true
+            it?.endsWith("kotypeparameter/snippet/forkopathprovider/function-type-parameter-path.kt") shouldBeEqualTo true
         }
     }
 
@@ -42,10 +41,8 @@ class KoTypeParameterDeclarationForKoPathProviderTest {
         sut
             ?.projectPath
             .shouldBeEqualTo(
-                (
-                    "/lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core/declaration/kotypeparameter/snippet/" +
-                        "forkopathprovider/function-type-parameter-path.kt"
-                ).toOsSeparator(),
+                "/lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core/declaration/kotypeparameter/snippet/" +
+                    "forkopathprovider/function-type-parameter-path.kt",
             )
     }
 
@@ -102,7 +99,7 @@ class KoTypeParameterDeclarationForKoPathProviderTest {
         // then
         assertSoftly(sut?.path) {
             it?.startsWith("//") shouldBeEqualTo false
-            it?.endsWith("kotypeparameter/snippet/forkopathprovider/class-type-parameter-path.kt".toOsSeparator()) shouldBeEqualTo true
+            it?.endsWith("kotypeparameter/snippet/forkopathprovider/class-type-parameter-path.kt") shouldBeEqualTo true
         }
     }
 
@@ -122,10 +119,8 @@ class KoTypeParameterDeclarationForKoPathProviderTest {
         sut
             ?.projectPath
             .shouldBeEqualTo(
-                (
-                    "/lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core/declaration/kotypeparameter/snippet/" +
-                        "forkopathprovider/class-type-parameter-path.kt"
-                ).toOsSeparator(),
+                "/lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core/declaration/kotypeparameter/snippet/" +
+                    "forkopathprovider/class-type-parameter-path.kt",
             )
     }
 
@@ -185,7 +180,7 @@ class KoTypeParameterDeclarationForKoPathProviderTest {
         // then
         assertSoftly(sut?.path) {
             it?.startsWith("//") shouldBeEqualTo false
-            it?.endsWith("kotypeparameter/snippet/forkopathprovider/interface-type-parameter-path.kt".toOsSeparator()) shouldBeEqualTo true
+            it?.endsWith("kotypeparameter/snippet/forkopathprovider/interface-type-parameter-path.kt") shouldBeEqualTo true
         }
     }
 
@@ -204,10 +199,8 @@ class KoTypeParameterDeclarationForKoPathProviderTest {
         sut
             ?.projectPath
             .shouldBeEqualTo(
-                (
-                    "/lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core/declaration/kotypeparameter/snippet/" +
-                        "forkopathprovider/interface-type-parameter-path.kt"
-                ).toOsSeparator(),
+                "/lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core/declaration/kotypeparameter/snippet/" +
+                    "forkopathprovider/interface-type-parameter-path.kt",
             )
     }
 
@@ -264,7 +257,7 @@ class KoTypeParameterDeclarationForKoPathProviderTest {
         // then
         assertSoftly(sut?.path) {
             it?.startsWith("//") shouldBeEqualTo false
-            it?.endsWith("kotypeparameter/snippet/forkopathprovider/property-type-parameter-path.kt".toOsSeparator()) shouldBeEqualTo true
+            it?.endsWith("kotypeparameter/snippet/forkopathprovider/property-type-parameter-path.kt") shouldBeEqualTo true
         }
     }
 
@@ -282,10 +275,8 @@ class KoTypeParameterDeclarationForKoPathProviderTest {
         sut
             ?.projectPath
             .shouldBeEqualTo(
-                (
-                    "/lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core/declaration/kotypeparameter/snippet/" +
-                        "forkopathprovider/property-type-parameter-path.kt"
-                ).toOsSeparator(),
+                "/lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core/declaration/kotypeparameter/snippet/" +
+                    "forkopathprovider/property-type-parameter-path.kt",
             )
     }
 
@@ -343,7 +334,7 @@ class KoTypeParameterDeclarationForKoPathProviderTest {
         // then
         assertSoftly(sut?.path) {
             it?.startsWith("//") shouldBeEqualTo false
-            it?.endsWith("kotypeparameter/snippet/forkopathprovider/typealias-type-parameter-path.kt".toOsSeparator()) shouldBeEqualTo true
+            it?.endsWith("kotypeparameter/snippet/forkopathprovider/typealias-type-parameter-path.kt") shouldBeEqualTo true
         }
     }
 
@@ -364,10 +355,8 @@ class KoTypeParameterDeclarationForKoPathProviderTest {
         sut
             ?.projectPath
             .shouldBeEqualTo(
-                (
-                    "/lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core/declaration/kotypeparameter/snippet/" +
-                        "forkopathprovider/typealias-type-parameter-path.kt"
-                ).toOsSeparator(),
+                "/lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core/declaration/kotypeparameter/snippet/" +
+                    "forkopathprovider/typealias-type-parameter-path.kt",
             )
     }
 

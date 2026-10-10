@@ -4,7 +4,6 @@ import com.lemonappdev.konsist.api.Konsist
 import com.lemonappdev.konsist.api.ext.list.children
 import com.lemonappdev.konsist.api.ext.list.print
 import com.lemonappdev.konsist.api.ext.list.withName
-import com.lemonappdev.konsist.helper.ext.toOsSeparator
 import com.lemonappdev.konsist.helper.util.PathProvider.appMainSourceSetProjectDirectory
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
@@ -15,7 +14,7 @@ class KoChildDeclarationForKoResideInPackageProviderTest {
     fun `class child not reside in file package`() {
         // given
         val sut = Konsist
-            .scopeFromFile("$appMainSourceSetProjectDirectory/fixture/AppClass.kt".toOsSeparator())
+            .scopeFromFile("$appMainSourceSetProjectDirectory/fixture/AppClass.kt")
             .classes()
             .withName("ParentSuperClass")
             .children()
@@ -29,7 +28,7 @@ class KoChildDeclarationForKoResideInPackageProviderTest {
     fun `class child reside in file package`() {
         // given
         val sut = Konsist
-            .scopeFromFile("$appMainSourceSetProjectDirectory/fixture/AppClass.kt".toOsSeparator())
+            .scopeFromFile("$appMainSourceSetProjectDirectory/fixture/AppClass.kt")
             .classes()
             .withName("ParentSuperClass")
             .children()
@@ -43,7 +42,7 @@ class KoChildDeclarationForKoResideInPackageProviderTest {
     fun `class child not reside outside file package`() {
         // given
         val sut = Konsist
-            .scopeFromFile("$appMainSourceSetProjectDirectory/fixture/AppClass.kt".toOsSeparator())
+            .scopeFromFile("$appMainSourceSetProjectDirectory/fixture/AppClass.kt")
             .classes()
             .withName("ParentSuperClass")
             .children()
@@ -57,7 +56,7 @@ class KoChildDeclarationForKoResideInPackageProviderTest {
     fun `class child reside outside file package`() {
         // given
         val sut = Konsist
-            .scopeFromFile("$appMainSourceSetProjectDirectory/fixture/AppClass.kt".toOsSeparator())
+            .scopeFromFile("$appMainSourceSetProjectDirectory/fixture/AppClass.kt")
             .classes()
             .withName("ParentSuperClass")
             .children()
@@ -71,7 +70,7 @@ class KoChildDeclarationForKoResideInPackageProviderTest {
     fun `object child not reside in file package`() {
         // given
         val sut = Konsist
-            .scopeFromFile("$appMainSourceSetProjectDirectory/fixture/AppClass.kt".toOsSeparator())
+            .scopeFromFile("$appMainSourceSetProjectDirectory/fixture/AppClass.kt")
             .classes()
             .withName("ParentClassForObject")
             .children()
@@ -85,7 +84,7 @@ class KoChildDeclarationForKoResideInPackageProviderTest {
     fun `object child reside in file package`() {
         // given
         val sut = Konsist
-            .scopeFromFile("$appMainSourceSetProjectDirectory/fixture/AppClass.kt".toOsSeparator())
+            .scopeFromFile("$appMainSourceSetProjectDirectory/fixture/AppClass.kt")
             .classes()
             .withName("ParentClassForObject")
             .children()
@@ -99,7 +98,7 @@ class KoChildDeclarationForKoResideInPackageProviderTest {
     fun `object child not reside outside file package`() {
         // given
         val sut = Konsist
-            .scopeFromFile("$appMainSourceSetProjectDirectory/fixture/AppClass.kt".toOsSeparator())
+            .scopeFromFile("$appMainSourceSetProjectDirectory/fixture/AppClass.kt")
             .classes()
             .withName("ParentClassForObject")
             .children()
@@ -113,7 +112,7 @@ class KoChildDeclarationForKoResideInPackageProviderTest {
     fun `object child reside outside file package`() {
         // given
         val sut = Konsist
-            .scopeFromFile("$appMainSourceSetProjectDirectory/fixture/AppClass.kt".toOsSeparator())
+            .scopeFromFile("$appMainSourceSetProjectDirectory/fixture/AppClass.kt")
             .classes()
             .withName("ParentClassForObject")
             .children()
@@ -127,7 +126,7 @@ class KoChildDeclarationForKoResideInPackageProviderTest {
     fun `interface child not reside in file package`() {
         // given
         val sut = Konsist
-            .scopeFromFile("$appMainSourceSetProjectDirectory/fixture/AppClass.kt".toOsSeparator())
+            .scopeFromFile("$appMainSourceSetProjectDirectory/fixture/AppClass.kt")
             .interfaces()
             .withName("ParentSuperInterface")
             .children()
@@ -141,7 +140,7 @@ class KoChildDeclarationForKoResideInPackageProviderTest {
     fun `interface child reside in file package`() {
         // given
         val sut = Konsist
-            .scopeFromFile("$appMainSourceSetProjectDirectory/fixture/AppClass.kt".toOsSeparator())
+            .scopeFromFile("$appMainSourceSetProjectDirectory/fixture/AppClass.kt")
             .interfaces()
             .withName("ParentSuperInterface")
             .children()
@@ -155,7 +154,7 @@ class KoChildDeclarationForKoResideInPackageProviderTest {
     fun `interface child not reside outside file package`() {
         // given
         val sut = Konsist
-            .scopeFromFile("$appMainSourceSetProjectDirectory/fixture/AppClass.kt".toOsSeparator())
+            .scopeFromFile("$appMainSourceSetProjectDirectory/fixture/AppClass.kt")
             .interfaces()
             .withName("ParentSuperInterface")
             .children()
@@ -169,7 +168,7 @@ class KoChildDeclarationForKoResideInPackageProviderTest {
     fun `interface child reside outside file package`() {
         // given
         val sut = Konsist
-            .scopeFromFile("$appMainSourceSetProjectDirectory/fixture/AppClass.kt".toOsSeparator())
+            .scopeFromFile("$appMainSourceSetProjectDirectory/fixture/AppClass.kt")
             .interfaces()
             .withName("ParentSuperInterface")
             .children()

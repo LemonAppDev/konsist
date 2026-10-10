@@ -9,6 +9,7 @@ package com.lemonappdev.konsist.api.container
 interface KoScopeCreator {
     /**
      * Creates a path to the root project directory.
+     * Uses "/" separators on all OSes, e.g. "C:/project" on Windows.
      */
     val projectRootPath: String
 

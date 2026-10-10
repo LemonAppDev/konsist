@@ -1,7 +1,6 @@
 package com.lemonappdev.konsist.declaration.kopackage
 
 import com.lemonappdev.konsist.api.Konsist
-import com.lemonappdev.konsist.helper.ext.toOsSeparator
 import com.lemonappdev.konsist.helper.util.PathProvider
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
@@ -11,7 +10,7 @@ class KoPackageDeclarationForKoPackageMatchingPathProviderTest {
     fun `package-with-matching-file-path`() {
         // given
         val sut = Konsist
-            .scopeFromFile("${PathProvider.appMainSourceSetProjectDirectory}/fixture/AppClass.kt".toOsSeparator())
+            .scopeFromFile("${PathProvider.appMainSourceSetProjectDirectory}/fixture/AppClass.kt")
             .packages
             .first()
 
@@ -24,7 +23,7 @@ class KoPackageDeclarationForKoPackageMatchingPathProviderTest {
         // given
         val sut = Konsist
             .scopeFromFile(
-                "${PathProvider.appMainSourceSetProjectDirectory}/fixture/AppClassWithPackageNotMatchingToPath.kt".toOsSeparator()
+                "${PathProvider.appMainSourceSetProjectDirectory}/fixture/AppClassWithPackageNotMatchingToPath.kt"
             )
             .packages
             .first()

@@ -1,7 +1,6 @@
 package com.lemonappdev.konsist.container
 
 import com.lemonappdev.konsist.api.Konsist
-import com.lemonappdev.konsist.helper.ext.toOsSeparator
 import com.lemonappdev.konsist.helper.util.PathProvider.featurePaymentMainSourceSetProjectDirectory
 import com.lemonappdev.konsist.helper.util.PathProvider.projectRootDirectory
 import org.amshove.kluent.shouldBeEqualTo
@@ -17,7 +16,7 @@ class KoScopePathTest {
         "$projectRootDirectory/feature/payment/src/main/kotlin/com/lemonappdev/fixture/FeaturePaymentClass.kt"
 
     private val sut = Konsist
-        .scopeFromFile("$featurePaymentMainSourceSetProjectDirectory/fixture/FeaturePaymentClass.kt".toOsSeparator())
+        .scopeFromFile("$featurePaymentMainSourceSetProjectDirectory/fixture/FeaturePaymentClass.kt")
 
     @Test
     fun `toString uses unix separator`() {

@@ -1,7 +1,6 @@
 package com.lemonappdev.konsist.declaration.kotypealias
 
 import com.lemonappdev.konsist.api.Konsist
-import com.lemonappdev.konsist.helper.ext.toOsSeparator
 import com.lemonappdev.konsist.helper.util.PathProvider.appIntegrationTestSourceSetProjectDirectory
 import com.lemonappdev.konsist.helper.util.PathProvider.appMainSourceSetProjectDirectory
 import com.lemonappdev.konsist.helper.util.PathProvider.dataMainSourceSetProjectDirectory
@@ -16,7 +15,7 @@ class KoTypeAliasForKoSourceSetProviderTest {
     fun `source set name is 'main' in app module`() {
         // given
         val sut = Konsist
-            .scopeFromFile("$appMainSourceSetProjectDirectory/fixture/AppClass.kt".toOsSeparator())
+            .scopeFromFile("$appMainSourceSetProjectDirectory/fixture/AppClass.kt")
             .typeAliases
             .first()
 
@@ -32,7 +31,7 @@ class KoTypeAliasForKoSourceSetProviderTest {
     fun `source set name is 'integrationTest' in app module`() {
         // given
         val sut = Konsist
-            .scopeFromFile("$appIntegrationTestSourceSetProjectDirectory/fixture/AppClassTest.kt".toOsSeparator())
+            .scopeFromFile("$appIntegrationTestSourceSetProjectDirectory/fixture/AppClassTest.kt")
             .typeAliases
             .first()
 
@@ -48,7 +47,7 @@ class KoTypeAliasForKoSourceSetProviderTest {
     fun `source set name is 'main' in data module`() {
         // given
         val sut = Konsist
-            .scopeFromFile("$dataMainSourceSetProjectDirectory/fixture/LibClass.kt".toOsSeparator())
+            .scopeFromFile("$dataMainSourceSetProjectDirectory/fixture/LibClass.kt")
             .typeAliases
             .first()
 
@@ -64,7 +63,7 @@ class KoTypeAliasForKoSourceSetProviderTest {
     fun `source set name is 'test' in data module`() {
         // given
         val sut = Konsist
-            .scopeFromFile("$dataTestSourceSetProjectDirectory/fixture/LibClassTest.kt".toOsSeparator())
+            .scopeFromFile("$dataTestSourceSetProjectDirectory/fixture/LibClassTest.kt")
             .typeAliases
             .first()
 
@@ -80,7 +79,7 @@ class KoTypeAliasForKoSourceSetProviderTest {
     fun `source set name is 'main' in root module`() {
         // given
         val sut = Konsist
-            .scopeFromFile("$rootMainSourceSetProjectDirectory/fixture/RootClass.kt".toOsSeparator())
+            .scopeFromFile("$rootMainSourceSetProjectDirectory/fixture/RootClass.kt")
             .typeAliases
             .first()
 
@@ -96,7 +95,7 @@ class KoTypeAliasForKoSourceSetProviderTest {
     fun `source set name is 'main' in root module with double src package`() {
         // given
         val sut = Konsist
-            .scopeFromFile("$rootMainSourceSetProjectDirectory/fixture/src/RootSrcClass.kt".toOsSeparator())
+            .scopeFromFile("$rootMainSourceSetProjectDirectory/fixture/src/RootSrcClass.kt")
             .typeAliases
             .first()
 

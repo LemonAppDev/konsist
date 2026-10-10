@@ -3,7 +3,7 @@ package com.lemonappdev.konsist.core.declaration
 import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoFileDeclaration
 import com.lemonappdev.konsist.api.declaration.KoPackageDeclaration
-import com.lemonappdev.konsist.core.ext.toOsSeparator
+import com.lemonappdev.konsist.core.ext.toMacOsSeparator
 import com.lemonappdev.konsist.core.provider.KoAnnotationProviderCore
 import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
 import com.lemonappdev.konsist.core.provider.KoClassAndInterfaceAndObjectProviderCore
@@ -72,7 +72,7 @@ internal class KoFileDeclarationCore(
     override val path: String by lazy {
         ktFile
             .name
-            .toOsSeparator()
+            .toMacOsSeparator()
     }
 
     override val packagee: KoPackageDeclaration? by lazy {

@@ -4,7 +4,6 @@ import com.lemonappdev.konsist.api.Konsist
 import com.lemonappdev.konsist.api.ext.list.constructors
 import com.lemonappdev.konsist.api.ext.list.parameters
 import com.lemonappdev.konsist.api.ext.list.parents
-import com.lemonappdev.konsist.helper.ext.toOsSeparator
 import com.lemonappdev.konsist.helper.util.PathProvider.appMainSourceSetProjectDirectory
 import com.lemonappdev.konsist.helper.util.PathProvider.dataMainSourceSetProjectDirectory
 import com.lemonappdev.konsist.helper.util.PathProvider.rootMainSourceSetProjectDirectory
@@ -21,7 +20,7 @@ class KoParentForKoModuleProviderTest {
     fun `module name for parameter in constructor is 'app'`() {
         // given
         val sut = Konsist
-            .scopeFromFile("$appMainSourceSetProjectDirectory/fixture/AppClass.kt".toOsSeparator())
+            .scopeFromFile("$appMainSourceSetProjectDirectory/fixture/AppClass.kt")
             .classes()
             .parents()
             .first()
@@ -38,7 +37,7 @@ class KoParentForKoModuleProviderTest {
     fun `module name for parameter in constructor is 'data'`() {
         // given
         val sut = Konsist
-            .scopeFromFile("$dataMainSourceSetProjectDirectory/fixture/LibClass.kt".toOsSeparator())
+            .scopeFromFile("$dataMainSourceSetProjectDirectory/fixture/LibClass.kt")
             .classes()
             .parents()
             .first()
@@ -55,7 +54,7 @@ class KoParentForKoModuleProviderTest {
     fun `module name for parameter in constructor is 'root'`() {
         // given
         val sut = Konsist
-            .scopeFromFile("$rootMainSourceSetProjectDirectory/fixture/RootClass.kt".toOsSeparator())
+            .scopeFromFile("$rootMainSourceSetProjectDirectory/fixture/RootClass.kt")
             .classes()
             .parents()
             .first()

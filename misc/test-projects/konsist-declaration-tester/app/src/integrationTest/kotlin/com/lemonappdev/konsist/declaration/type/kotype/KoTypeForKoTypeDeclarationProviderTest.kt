@@ -10,7 +10,6 @@ import com.lemonappdev.konsist.api.ext.list.parameters
 import com.lemonappdev.konsist.api.ext.list.primaryConstructors
 import com.lemonappdev.konsist.api.ext.list.withName
 import com.lemonappdev.konsist.api.provider.KoFullyQualifiedNameProvider
-import com.lemonappdev.konsist.helper.ext.toOsSeparator
 import com.lemonappdev.konsist.helper.util.PathProvider.appMainSourceSetProjectDirectory
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
@@ -24,7 +23,7 @@ class KoTypeForKoTypeDeclarationProviderTest {
         val sut =
             Konsist
                 .scopeFromFile(
-                    "$appMainSourceSetProjectDirectory/fixture/fortypetest/packagecase/DeclarationsWithParameter.kt".toOsSeparator()
+                    "$appMainSourceSetProjectDirectory/fixture/fortypetest/packagecase/DeclarationsWithParameter.kt"
                 )
                 .classes()
                 .withName("ClassWithClassTypeParameter")
@@ -48,7 +47,7 @@ class KoTypeForKoTypeDeclarationProviderTest {
         val sut =
             Konsist
                 .scopeFromFile(
-                    "$appMainSourceSetProjectDirectory/fixture/fortypetest/packagecase/DeclarationsWithParameter.kt".toOsSeparator()
+                    "$appMainSourceSetProjectDirectory/fixture/fortypetest/packagecase/DeclarationsWithParameter.kt"
                 )
                 .functions()
                 .withName("functionWithClassTypeParameter")
@@ -71,7 +70,7 @@ class KoTypeForKoTypeDeclarationProviderTest {
         val sut =
             Konsist
                 .scopeFromFile(
-                    "$appMainSourceSetProjectDirectory/fixture/fortypetest/packagecase/DeclarationsWithParameter.kt".toOsSeparator()
+                    "$appMainSourceSetProjectDirectory/fixture/fortypetest/packagecase/DeclarationsWithParameter.kt"
                 )
                 .classes()
                 .withName("ClassWithInterfaceTypeParameter")
@@ -95,7 +94,7 @@ class KoTypeForKoTypeDeclarationProviderTest {
         val sut =
             Konsist
                 .scopeFromFile(
-                    "$appMainSourceSetProjectDirectory/fixture/fortypetest/packagecase/DeclarationsWithParameter.kt".toOsSeparator()
+                    "$appMainSourceSetProjectDirectory/fixture/fortypetest/packagecase/DeclarationsWithParameter.kt"
                 )
                 .functions()
                 .withName("functionWithInterfaceTypeParameter")
@@ -118,7 +117,7 @@ class KoTypeForKoTypeDeclarationProviderTest {
         val sut =
             Konsist
                 .scopeFromFile(
-                    "$appMainSourceSetProjectDirectory/fixture/fortypetest/packagecase/DeclarationsWithParameter.kt".toOsSeparator()
+                    "$appMainSourceSetProjectDirectory/fixture/fortypetest/packagecase/DeclarationsWithParameter.kt"
                 )
                 .classes()
                 .withName("ClassWithObjectTypeParameter")
@@ -142,7 +141,7 @@ class KoTypeForKoTypeDeclarationProviderTest {
         val sut =
             Konsist
                 .scopeFromFile(
-                    "$appMainSourceSetProjectDirectory/fixture/fortypetest/packagecase/DeclarationsWithParameter.kt".toOsSeparator()
+                    "$appMainSourceSetProjectDirectory/fixture/fortypetest/packagecase/DeclarationsWithParameter.kt"
                 )
                 .functions()
                 .withName("functionWithObjectTypeParameter")
@@ -165,7 +164,7 @@ class KoTypeForKoTypeDeclarationProviderTest {
         val sut =
             Konsist
                 .scopeFromFile(
-                    "$appMainSourceSetProjectDirectory/fixture/fortypetest/packagecase/DeclarationsWithParameter.kt".toOsSeparator()
+                    "$appMainSourceSetProjectDirectory/fixture/fortypetest/packagecase/DeclarationsWithParameter.kt"
                 )
                 .classes()
                 .withName("ClassWithTypeAliasTypeParameter")
@@ -189,7 +188,7 @@ class KoTypeForKoTypeDeclarationProviderTest {
         val sut =
             Konsist
                 .scopeFromFile(
-                    "$appMainSourceSetProjectDirectory/fixture/fortypetest/packagecase/DeclarationsWithParameter.kt".toOsSeparator()
+                    "$appMainSourceSetProjectDirectory/fixture/fortypetest/packagecase/DeclarationsWithParameter.kt"
                 )
                 .functions()
                 .withName("functionWithTypeAliasTypeParameter")
@@ -213,7 +212,7 @@ class KoTypeForKoTypeDeclarationProviderTest {
             Konsist
                 .scopeFromFile(
                     "$appMainSourceSetProjectDirectory/fixture/fortypetest/importaliascase/DeclarationsWithImportAliasType.kt"
-                        .toOsSeparator()
+                        
                 )
                 .classes()
                 .withName("ClassContainingParameterWithClassTypeWithImportAlias")
@@ -238,7 +237,7 @@ class KoTypeForKoTypeDeclarationProviderTest {
             Konsist
                 .scopeFromFile(
                     "$appMainSourceSetProjectDirectory/fixture/fortypetest/importaliascase/DeclarationsWithImportAliasType.kt"
-                        .toOsSeparator()
+                        
                 )
                 .functions()
                 .withName("functionContainingParameterWithClassTypeWithImportAlias")
@@ -262,7 +261,7 @@ class KoTypeForKoTypeDeclarationProviderTest {
             Konsist
                 .scopeFromFile(
                     "$appMainSourceSetProjectDirectory/fixture/fortypetest/importaliascase/DeclarationsWithImportAliasType.kt"
-                        .toOsSeparator()
+                        
                 )
                 .classes()
                 .withName("ClassContainingParameterWithInterfaceTypeWithImportAlias")
@@ -287,7 +286,7 @@ class KoTypeForKoTypeDeclarationProviderTest {
             Konsist
                 .scopeFromFile(
                     "$appMainSourceSetProjectDirectory/fixture/fortypetest/importaliascase/DeclarationsWithImportAliasType.kt"
-                        .toOsSeparator()
+                        
                 )
                 .functions()
                 .withName("functionContainingParameterWithInterfaceTypeWithImportAlias")
@@ -311,7 +310,7 @@ class KoTypeForKoTypeDeclarationProviderTest {
             Konsist
                 .scopeFromFile(
                     "$appMainSourceSetProjectDirectory/fixture/fortypetest/importaliascase/DeclarationsWithImportAliasType.kt"
-                        .toOsSeparator()
+                        
                 )
                 .classes()
                 .withName("ClassContainingParameterWithObjectTypeWithImportAlias")
@@ -336,7 +335,7 @@ class KoTypeForKoTypeDeclarationProviderTest {
             Konsist
                 .scopeFromFile(
                     "$appMainSourceSetProjectDirectory/fixture/fortypetest/importaliascase/DeclarationsWithImportAliasType.kt"
-                        .toOsSeparator()
+                        
                 )
                 .functions()
                 .withName("functionContainingParameterWithObjectTypeWithImportAlias")
@@ -360,7 +359,7 @@ class KoTypeForKoTypeDeclarationProviderTest {
             Konsist
                 .scopeFromFile(
                     "$appMainSourceSetProjectDirectory/fixture/fortypetest/importaliascase/DeclarationsWithImportAliasType.kt"
-                        .toOsSeparator()
+                        
                 )
                 .classes()
                 .withName("ClassContainingParameterWithTypeAliasTypeWithImportAlias")
@@ -385,7 +384,7 @@ class KoTypeForKoTypeDeclarationProviderTest {
             Konsist
                 .scopeFromFile(
                     "$appMainSourceSetProjectDirectory/fixture/fortypetest/importaliascase/DeclarationsWithImportAliasType.kt"
-                        .toOsSeparator()
+                        
                 )
                 .functions()
                 .withName("functionContainingParameterWithTypeAliasTypeWithImportAlias")
@@ -409,7 +408,7 @@ class KoTypeForKoTypeDeclarationProviderTest {
             Konsist
                 .scopeFromFile(
                     "$appMainSourceSetProjectDirectory/fixture/fortypetest/importaliascase/DeclarationsWithoutImportAliasType.kt"
-                        .toOsSeparator()
+                        
                 )
                 .classes()
                 .withName("ClassContainingParameterWithClassTypeWithoutImportAlias")
@@ -434,7 +433,7 @@ class KoTypeForKoTypeDeclarationProviderTest {
             Konsist
                 .scopeFromFile(
                     "$appMainSourceSetProjectDirectory/fixture/fortypetest/importaliascase/DeclarationsWithoutImportAliasType.kt"
-                        .toOsSeparator()
+                        
                 )
                 .functions()
                 .withName("functionContainingParameterWithClassTypeWithoutImportAlias")
@@ -458,7 +457,7 @@ class KoTypeForKoTypeDeclarationProviderTest {
             Konsist
                 .scopeFromFile(
                     "$appMainSourceSetProjectDirectory/fixture/fortypetest/importaliascase/DeclarationsWithoutImportAliasType.kt"
-                        .toOsSeparator()
+                        
                 )
                 .classes()
                 .withName("ClassContainingParameterWithInterfaceTypeWithoutImportAlias")
@@ -483,7 +482,7 @@ class KoTypeForKoTypeDeclarationProviderTest {
             Konsist
                 .scopeFromFile(
                     "$appMainSourceSetProjectDirectory/fixture/fortypetest/importaliascase/DeclarationsWithoutImportAliasType.kt"
-                        .toOsSeparator()
+                        
                 )
                 .functions()
                 .withName("functionContainingParameterWithInterfaceTypeWithoutImportAlias")
@@ -507,7 +506,7 @@ class KoTypeForKoTypeDeclarationProviderTest {
             Konsist
                 .scopeFromFile(
                     "$appMainSourceSetProjectDirectory/fixture/fortypetest/importaliascase/DeclarationsWithoutImportAliasType.kt"
-                        .toOsSeparator()
+                        
                 )
                 .classes()
                 .withName("ClassContainingParameterWithObjectTypeWithoutImportAlias")
@@ -532,7 +531,7 @@ class KoTypeForKoTypeDeclarationProviderTest {
             Konsist
                 .scopeFromFile(
                     "$appMainSourceSetProjectDirectory/fixture/fortypetest/importaliascase/DeclarationsWithoutImportAliasType.kt"
-                        .toOsSeparator()
+                        
                 )
                 .functions()
                 .withName("functionContainingParameterWithObjectTypeWithoutImportAlias")
@@ -556,7 +555,7 @@ class KoTypeForKoTypeDeclarationProviderTest {
             Konsist
                 .scopeFromFile(
                     "$appMainSourceSetProjectDirectory/fixture/fortypetest/importaliascase/DeclarationsWithoutImportAliasType.kt"
-                        .toOsSeparator()
+                        
                 )
                 .classes()
                 .withName("ClassContainingParameterWithTypeAliasTypeWithoutImportAlias")
@@ -581,7 +580,7 @@ class KoTypeForKoTypeDeclarationProviderTest {
             Konsist
                 .scopeFromFile(
                     "$appMainSourceSetProjectDirectory/fixture/fortypetest/importaliascase/DeclarationsWithoutImportAliasType.kt"
-                        .toOsSeparator()
+                        
                 )
                 .functions()
                 .withName("functionContainingParameterWithTypeAliasTypeWithoutImportAlias")

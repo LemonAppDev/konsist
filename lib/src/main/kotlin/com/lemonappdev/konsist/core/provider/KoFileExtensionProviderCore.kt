@@ -1,7 +1,7 @@
 package com.lemonappdev.konsist.core.provider
 
 import com.lemonappdev.konsist.api.provider.KoFileExtensionProvider
-import com.lemonappdev.konsist.core.ext.sep
+import com.lemonappdev.konsist.core.ext.toMacOsSeparator
 import org.jetbrains.kotlin.psi.KtFile
 
 internal interface KoFileExtensionProviderCore :
@@ -16,7 +16,8 @@ internal interface KoFileExtensionProviderCore :
         get() =
             ktFile
                 .name
-                .split(sep)
+                .toMacOsSeparator()
+                .split("/")
                 .last()
 
     override fun hasExtension(extension: String): Boolean = extension == this.extension

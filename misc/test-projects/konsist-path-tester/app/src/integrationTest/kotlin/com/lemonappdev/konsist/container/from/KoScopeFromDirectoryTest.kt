@@ -1,9 +1,7 @@
 package com.lemonappdev.konsist.container.from
 
 import com.lemonappdev.konsist.api.Konsist
-import com.lemonappdev.konsist.helper.ext.fileSeparator
 import com.lemonappdev.konsist.helper.ext.mapToFilePaths
-import com.lemonappdev.konsist.helper.ext.toOsSeparator
 import com.lemonappdev.konsist.helper.util.PathProvider.appMainSourceSetDirectory
 import org.amshove.kluent.shouldBeEqualTo
 import org.amshove.kluent.shouldThrow
@@ -16,7 +14,7 @@ class KoScopeFromDirectoryTest {
     fun `scopeFromDirectory`() {
         // given
         val sut = Konsist
-            .scopeFromDirectory("app/src/main/kotlin/com/lemonappdev/fixture/".toOsSeparator())
+            .scopeFromDirectory("app/src/main/kotlin/com/lemonappdev/fixture/")
             .mapToFilePaths()
 
         // then
@@ -24,7 +22,7 @@ class KoScopeFromDirectoryTest {
             listOf(
                 "$appMainSourceSetDirectory/fixture/AppClass.kt",
                 "$appMainSourceSetDirectory/fixture/data/AppDataClass.kt",
-            ).toOsSeparator(),
+            ),
         )
     }
 
@@ -32,10 +30,10 @@ class KoScopeFromDirectoryTest {
     fun `scopeFromDirectory throws exception if path does not exist`() {
         // given
         val func =
-            { Konsist.scopeFromDirectory("app/src/main/kotlin/com/lemonappdev/nonExisting/".toOsSeparator()) }
+            { Konsist.scopeFromDirectory("app/src/main/kotlin/com/lemonappdev/nonExisting/") }
 
         // then
-        val message = "Directory does not exist: $appMainSourceSetDirectory${fileSeparator}nonExisting$fileSeparator"
+        val message = "Directory does not exist: $appMainSourceSetDirectory/nonExisting/"
         func shouldThrow IllegalArgumentException::class withMessage message
     }
 
@@ -45,13 +43,13 @@ class KoScopeFromDirectoryTest {
         val func =
             {
                 Konsist.scopeFromDirectory(
-                    "app/src/main/kotlin/com/lemonappdev/fixture/AppClass.kt".toOsSeparator(),
+                    "app/src/main/kotlin/com/lemonappdev/fixture/AppClass.kt",
                 )
             }
 
         // then
         val message =
-            "Path is a file, but should be a directory: $appMainSourceSetDirectory${fileSeparator}fixture${fileSeparator}AppClass.kt"
+            "Path is a file, but should be a directory: $appMainSourceSetDirectory/fixture/AppClass.kt"
         func shouldThrow IllegalArgumentException::class withMessage message
     }
 }

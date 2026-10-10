@@ -2,7 +2,6 @@ package com.lemonappdev.konsist.core.declaration.koparent
 
 import com.lemonappdev.konsist.TestSnippetProvider
 import com.lemonappdev.konsist.api.ext.list.parents
-import com.lemonappdev.konsist.helper.ext.toOsSeparator
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.params.ParameterizedTest
@@ -23,7 +22,7 @@ class KoParentDeclarationForKoPathProviderTest {
         // then
         assertSoftly(sut.path) {
             startsWith("//") shouldBeEqualTo false
-            endsWith("koparent/snippet/forkopathprovider/$fileName.kt".toOsSeparator()) shouldBeEqualTo true
+            endsWith("koparent/snippet/forkopathprovider/$fileName.kt") shouldBeEqualTo true
         }
     }
 
@@ -40,7 +39,7 @@ class KoParentDeclarationForKoPathProviderTest {
         // then
         assertSoftly(sut.path) {
             startsWith("//") shouldBeEqualTo false
-            endsWith("koparent/snippet/forkopathprovider/$fileName.kt".toOsSeparator()) shouldBeEqualTo true
+            endsWith("koparent/snippet/forkopathprovider/$fileName.kt") shouldBeEqualTo true
         }
     }
 
@@ -57,7 +56,7 @@ class KoParentDeclarationForKoPathProviderTest {
         // then
         assertSoftly(sut.path) {
             startsWith("//") shouldBeEqualTo false
-            endsWith("koparent/snippet/forkopathprovider/$fileName.kt".toOsSeparator()) shouldBeEqualTo true
+            endsWith("koparent/snippet/forkopathprovider/$fileName.kt") shouldBeEqualTo true
         }
     }
 

@@ -1,7 +1,6 @@
 package com.lemonappdev.konsist.core.declaration.koannotation
 
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
-import com.lemonappdev.konsist.helper.ext.toOsSeparator
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
@@ -20,7 +19,7 @@ class KoAnnotationDeclarationForKoPathProviderTest {
         // then
         assertSoftly(sut.path) {
             startsWith("//") shouldBeEqualTo false
-            endsWith("koannotation/snippet/forkopathprovider/annotation-file-path.kt".toOsSeparator()) shouldBeEqualTo true
+            endsWith("koannotation/snippet/forkopathprovider/annotation-file-path.kt") shouldBeEqualTo true
         }
     }
 
@@ -38,10 +37,8 @@ class KoAnnotationDeclarationForKoPathProviderTest {
         sut
             .projectPath
             .shouldBeEqualTo(
-                (
-                    "/lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core/declaration/koannotation/snippet/" +
-                        "forkopathprovider/annotation-project-file-path.kt"
-                ).toOsSeparator(),
+                "/lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core/declaration/koannotation/snippet/" +
+                    "forkopathprovider/annotation-project-file-path.kt",
             )
     }
 

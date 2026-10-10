@@ -6,11 +6,13 @@ package com.lemonappdev.konsist.api.provider
 interface KoPathProvider : KoBaseProvider {
     /**
      * File path of the declaration or path of the file.
+     * Uses "/" separators on all OSes, e.g. "C:/project/app/src/main/kotlin/Sample.kt" on Windows.
      */
     val path: String
 
     /**
      * Project file path of the declaration or root project path of the file.
+     * Uses "/" separators on all OSes, e.g. "/app/src/main/kotlin/Sample.kt".
      */
     val projectPath: String
 

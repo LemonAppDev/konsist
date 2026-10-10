@@ -18,7 +18,7 @@ object PathProvider {
             val message = "Project directory not found. Searched in ${toMacOsSeparator(file.absoluteFile.path)} and parent directories"
             throw KoInternalException(message)
         } else {
-            projectRootDirectory.absoluteFile.path
+            toMacOsSeparator(projectRootDirectory.absoluteFile.path)
         }
     }
 

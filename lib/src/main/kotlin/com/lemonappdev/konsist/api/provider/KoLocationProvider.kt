@@ -7,6 +7,7 @@ package com.lemonappdev.konsist.api.provider
 interface KoLocationProvider : KoBaseProvider {
     /**
      * Location of the declaration containing the file path, line and column.
+     * Uses "/" separators on all OSes, e.g. "C:/project/app/src/main/kotlin/Sample.kt:3:1" on Windows.
      */
     val location: String
 

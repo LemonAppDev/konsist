@@ -5,7 +5,6 @@ import com.lemonappdev.konsist.api.container.KoScopeCreator
 import com.lemonappdev.konsist.api.declaration.KoFileDeclaration
 import com.lemonappdev.konsist.api.ext.list.withPackage
 import com.lemonappdev.konsist.core.ext.isKotlinFile
-import com.lemonappdev.konsist.core.ext.sep
 import com.lemonappdev.konsist.core.ext.toKoFile
 import com.lemonappdev.konsist.core.ext.toMacOsSeparator
 import com.lemonappdev.konsist.core.filesystem.PathProvider
@@ -103,7 +102,7 @@ internal class KoScopeCreatorCore : KoScopeCreator {
                 }.toMacOsSeparator()
 
             return@coroutineScope localProjectKotlinFiles
-                .filter { it.path.toMacOsSeparator().matches(Regex(pathPrefix)) }
+                .filter { it.path.matches(Regex(pathPrefix)) }
         }
 
     override fun scopeFromProduction(
@@ -158,8 +157,8 @@ internal class KoScopeCreatorCore : KoScopeCreator {
      */
     private fun getFilesFromDirectory(absolutePath: String): List<KoFileDeclaration> {
         val directory = File(absolutePath)
-        require(directory.exists()) { "Directory does not exist: $absolutePath" }
-        require(!directory.isFile) { "Path is a file, but should be a directory: $absolutePath" }
+        require(directory.exists()) { "Directory does not exist: ${absolutePath.toMacOsSeparator()}" }
+        require(!directory.isFile) { "Path is a file, but should be a directory: ${absolutePath.toMacOsSeparator()}" }
 
         return directory.toKoFiles()
     }
@@ -198,8 +197,8 @@ internal class KoScopeCreatorCore : KoScopeCreator {
                 .map { getAbsolutePath(it) }
                 .map { File(it) }
                 .onEach {
-                    require(it.exists()) { "File does not exist: ${it.absolutePath}" }
-                    require(it.isFile) { "Path is a directory, but should be a file: ${it.absolutePath}" }
+                    require(it.exists()) { "File does not exist: ${it.absolutePath.toMacOsSeparator()}" }
+                    require(it.isFile) { "Path is a directory, but should be a file: ${it.absolutePath.toMacOsSeparator()}" }
                 }
 
         val notKotlinFiles =
@@ -212,7 +211,7 @@ internal class KoScopeCreatorCore : KoScopeCreator {
         return KoScopeCore(koFiles + notKotlinFiles)
     }
 
-    private fun getAbsolutePath(projectPath: String): String = "$projectRootPath$sep$projectPath"
+    private fun getAbsolutePath(projectPath: String): String = "$projectRootPath/$projectPath"
 
     private fun isTestSourceSet(name: String): Boolean {
         val lowercaseName = name.lowercase()
@@ -220,7 +219,7 @@ internal class KoScopeCreatorCore : KoScopeCreator {
     }
 
     private fun KoFileDeclaration.isBuildConfigFile(): Boolean {
-        val lowercasePath = path.lowercase().toMacOsSeparator()
+        val lowercasePath = path.lowercase()
         val gradleBuildConfigDirectoryName = "buildSrc".lowercase()
         return lowercasePath.matches(Regex(".*/$gradleBuildConfigDirectoryName.*"))
     }
@@ -237,7 +236,7 @@ internal class KoScopeCreatorCore : KoScopeCreator {
                 .getKoFileDeclarations()
                 .filter {
                     files.any { file ->
-                        file.path == it.path
+                        file.path.toMacOsSeparator() == it.path
                     }
                 }
         }

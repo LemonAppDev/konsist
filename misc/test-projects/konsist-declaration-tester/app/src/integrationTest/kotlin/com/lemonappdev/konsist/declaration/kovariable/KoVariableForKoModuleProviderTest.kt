@@ -7,7 +7,6 @@ import com.lemonappdev.konsist.api.ext.list.initBlocks
 import com.lemonappdev.konsist.api.ext.list.setters
 import com.lemonappdev.konsist.api.ext.list.variables
 import com.lemonappdev.konsist.api.provider.KoVariableProvider
-import com.lemonappdev.konsist.helper.ext.toOsSeparator
 import com.lemonappdev.konsist.helper.util.PathProvider.appMainSourceSetProjectDirectory
 import com.lemonappdev.konsist.helper.util.PathProvider.dataMainSourceSetProjectDirectory
 import com.lemonappdev.konsist.helper.util.PathProvider.rootMainSourceSetProjectDirectory
@@ -73,9 +72,9 @@ class KoVariableForKoModuleProviderTest {
     }
 
     companion object {
-        private val appPath = "$appMainSourceSetProjectDirectory/fixture/AppClass.kt".toOsSeparator()
-        private val dataPath = "$dataMainSourceSetProjectDirectory/fixture/LibClass.kt".toOsSeparator()
-        private val rootPath = "$rootMainSourceSetProjectDirectory/fixture/RootClass.kt".toOsSeparator()
+        private val appPath = "$appMainSourceSetProjectDirectory/fixture/AppClass.kt"
+        private val dataPath = "$dataMainSourceSetProjectDirectory/fixture/LibClass.kt"
+        private val rootPath = "$rootMainSourceSetProjectDirectory/fixture/RootClass.kt"
 
         @Suppress("unused")
         @JvmStatic

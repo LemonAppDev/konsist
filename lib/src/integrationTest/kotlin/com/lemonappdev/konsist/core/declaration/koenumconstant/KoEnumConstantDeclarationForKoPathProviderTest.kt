@@ -1,7 +1,6 @@
 package com.lemonappdev.konsist.core.declaration.koenumconstant
 
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
-import com.lemonappdev.konsist.helper.ext.toOsSeparator
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
@@ -20,7 +19,7 @@ class KoEnumConstantDeclarationForKoPathProviderTest {
         // then
         assertSoftly(sut.path) {
             startsWith("//") shouldBeEqualTo false
-            endsWith("koenumconstant/snippet/forkopathprovider/enum-const-file-path.kt".toOsSeparator()) shouldBeEqualTo true
+            endsWith("koenumconstant/snippet/forkopathprovider/enum-const-file-path.kt") shouldBeEqualTo true
         }
     }
 
@@ -38,10 +37,8 @@ class KoEnumConstantDeclarationForKoPathProviderTest {
         sut
             .projectPath
             .shouldBeEqualTo(
-                (
-                    "/lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core/declaration/koenumconstant/snippet/" +
-                        "forkopathprovider/enum-const-project-file-path.kt"
-                ).toOsSeparator(),
+                "/lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core/declaration/koenumconstant/snippet/" +
+                    "forkopathprovider/enum-const-project-file-path.kt",
             )
     }
 

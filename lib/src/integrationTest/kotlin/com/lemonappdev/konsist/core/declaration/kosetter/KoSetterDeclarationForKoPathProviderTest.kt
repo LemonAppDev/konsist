@@ -1,7 +1,6 @@
 package com.lemonappdev.konsist.core.declaration.kosetter
 
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
-import com.lemonappdev.konsist.helper.ext.toOsSeparator
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
@@ -19,7 +18,7 @@ class KoSetterDeclarationForKoPathProviderTest {
         // then
         assertSoftly {
             sut?.path?.startsWith("//") shouldBeEqualTo false
-            sut?.path?.endsWith("kosetter/snippet/forkopathprovider/setter-file-path.kt".toOsSeparator()) shouldBeEqualTo true
+            sut?.path?.endsWith("kosetter/snippet/forkopathprovider/setter-file-path.kt") shouldBeEqualTo true
         }
     }
 
@@ -36,10 +35,8 @@ class KoSetterDeclarationForKoPathProviderTest {
         sut
             ?.projectPath
             .shouldBeEqualTo(
-                (
-                    "/lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core/declaration/kosetter/snippet/" +
-                        "forkopathprovider/setter-project-file-path.kt"
-                ).toOsSeparator(),
+                "/lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core/declaration/kosetter/snippet/" +
+                    "forkopathprovider/setter-project-file-path.kt",
             )
     }
 

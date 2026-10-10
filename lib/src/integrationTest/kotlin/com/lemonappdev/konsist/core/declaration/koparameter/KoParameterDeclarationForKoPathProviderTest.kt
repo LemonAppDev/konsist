@@ -1,7 +1,6 @@
 package com.lemonappdev.konsist.core.declaration.koparameter
 
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
-import com.lemonappdev.konsist.helper.ext.toOsSeparator
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
@@ -21,7 +20,7 @@ class KoParameterDeclarationForKoPathProviderTest {
         // then
         assertSoftly(sut?.path) {
             it?.startsWith("//") shouldBeEqualTo false
-            it?.endsWith("koparameter/snippet/forkopathprovider/parameter-in-constructor-file-path.kt".toOsSeparator()) shouldBeEqualTo true
+            it?.endsWith("koparameter/snippet/forkopathprovider/parameter-in-constructor-file-path.kt") shouldBeEqualTo true
         }
     }
 
@@ -38,8 +37,7 @@ class KoParameterDeclarationForKoPathProviderTest {
         // then
         assertSoftly(sut.path) {
             startsWith("//") shouldBeEqualTo false
-            endsWith("koparameter/snippet/forkopathprovider/parameter-in-function-invocation-file-path.kt".toOsSeparator()) shouldBeEqualTo
-                true
+            endsWith("koparameter/snippet/forkopathprovider/parameter-in-function-invocation-file-path.kt") shouldBeEqualTo true
         }
     }
 
@@ -58,10 +56,8 @@ class KoParameterDeclarationForKoPathProviderTest {
         sut
             ?.projectPath
             .shouldBeEqualTo(
-                (
-                    "/lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core/declaration/koparameter/snippet/" +
-                        "forkopathprovider/parameter-in-constructor-project-file-path.kt"
-                ).toOsSeparator(),
+                "/lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core/declaration/koparameter/snippet/" +
+                    "forkopathprovider/parameter-in-constructor-project-file-path.kt",
             )
     }
 
@@ -79,10 +75,8 @@ class KoParameterDeclarationForKoPathProviderTest {
         sut
             .projectPath
             .shouldBeEqualTo(
-                (
-                    "/lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core/declaration/koparameter/snippet/" +
-                        "forkopathprovider/parameter-in-function-invocation-project-file-path.kt"
-                ).toOsSeparator(),
+                "/lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core/declaration/koparameter/snippet/" +
+                    "forkopathprovider/parameter-in-function-invocation-project-file-path.kt",
             )
     }
 

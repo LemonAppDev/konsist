@@ -6,7 +6,6 @@ import com.lemonappdev.konsist.api.architecture.Layer
 import com.lemonappdev.konsist.api.verify.assertEmpty
 import com.lemonappdev.konsist.api.verify.assertTrue
 import com.lemonappdev.konsist.core.exception.KoAssertionFailedException
-import com.lemonappdev.konsist.helper.ext.toOsSeparator
 import com.lemonappdev.konsist.helper.util.PathProvider.featurePaymentMainSourceSetProjectDirectory
 import com.lemonappdev.konsist.helper.util.PathProvider.projectRootDirectory
 import org.amshove.kluent.shouldContain
@@ -31,7 +30,7 @@ class ErrorOutputPathTest {
     fun `file assert error output uses file url with unix separator`() {
         // given
         val sut = Konsist
-            .scopeFromFile("$featurePaymentMainSourceSetProjectDirectory/fixture/FeaturePaymentClass.kt".toOsSeparator())
+            .scopeFromFile("$featurePaymentMainSourceSetProjectDirectory/fixture/FeaturePaymentClass.kt")
             .files
 
         // when
@@ -47,7 +46,7 @@ class ErrorOutputPathTest {
     fun `declaration assert error output uses file url with unix separator`() {
         // given
         val sut = Konsist
-            .scopeFromFile("$featurePaymentMainSourceSetProjectDirectory/fixture/FeaturePaymentClass.kt".toOsSeparator())
+            .scopeFromFile("$featurePaymentMainSourceSetProjectDirectory/fixture/FeaturePaymentClass.kt")
             .classes()
 
         // when
@@ -63,7 +62,7 @@ class ErrorOutputPathTest {
     fun `assert empty error output uses file url with unix separator`() {
         // given
         val sut = Konsist
-            .scopeFromFile("$featurePaymentMainSourceSetProjectDirectory/fixture/FeaturePaymentClass.kt".toOsSeparator())
+            .scopeFromFile("$featurePaymentMainSourceSetProjectDirectory/fixture/FeaturePaymentClass.kt")
             .classes()
 
         // when

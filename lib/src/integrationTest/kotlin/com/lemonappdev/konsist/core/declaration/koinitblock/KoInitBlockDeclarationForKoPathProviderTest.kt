@@ -2,7 +2,6 @@ package com.lemonappdev.konsist.core.declaration.koinitblock
 
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
 import com.lemonappdev.konsist.api.ext.list.initBlocks
-import com.lemonappdev.konsist.helper.ext.toOsSeparator
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
@@ -20,7 +19,7 @@ class KoInitBlockDeclarationForKoPathProviderTest {
         // then
         assertSoftly {
             sut.path.startsWith("//") shouldBeEqualTo false
-            sut.path.endsWith("koinitblock/snippet/forkopathprovider/init-block-file-path.kt".toOsSeparator()) shouldBeEqualTo true
+            sut.path.endsWith("koinitblock/snippet/forkopathprovider/init-block-file-path.kt") shouldBeEqualTo true
         }
     }
 
@@ -37,10 +36,8 @@ class KoInitBlockDeclarationForKoPathProviderTest {
         sut
             .projectPath
             .shouldBeEqualTo(
-                (
-                    "/lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core/declaration/koinitblock/snippet/" +
-                        "forkopathprovider/init-block-project-file-path.kt"
-                ).toOsSeparator(),
+                "/lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core/declaration/koinitblock/snippet/" +
+                    "forkopathprovider/init-block-project-file-path.kt",
             )
     }
 

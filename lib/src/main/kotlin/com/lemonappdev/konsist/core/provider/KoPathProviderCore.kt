@@ -1,7 +1,7 @@
 package com.lemonappdev.konsist.core.provider
 
 import com.lemonappdev.konsist.api.provider.KoPathProvider
-import com.lemonappdev.konsist.core.ext.toOsSeparator
+import com.lemonappdev.konsist.core.ext.toMacOsSeparator
 import com.lemonappdev.konsist.core.filesystem.PathProvider
 import com.lemonappdev.konsist.core.util.LocationUtil
 import org.jetbrains.kotlin.com.intellij.psi.PsiElement
@@ -16,18 +16,11 @@ internal interface KoPathProviderCore :
             psiElement
                 .containingFile
                 ?.name
-                ?.toOsSeparator()
+                ?.toMacOsSeparator()
                 ?: ""
 
     override val projectPath: String
-        get() {
-            val rootPathProvider =
-                PathProvider
-                    .rootProjectPath
-                    .toOsSeparator()
-
-            return path.removePrefix(rootPathProvider)
-        }
+        get() = path.removePrefix(PathProvider.rootProjectPath)
 
     override fun resideInPath(
         path: String,

@@ -1,7 +1,6 @@
 package com.lemonappdev.konsist.core.declaration.koimport
 
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
-import com.lemonappdev.konsist.helper.ext.toOsSeparator
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
@@ -18,7 +17,7 @@ class KoImportDeclarationForKoPathProviderTest {
         // then
         assertSoftly(sut.path) {
             startsWith("//") shouldBeEqualTo false
-            endsWith("koimport/snippet/forkopathprovider/import-file-path.kt".toOsSeparator()) shouldBeEqualTo true
+            endsWith("koimport/snippet/forkopathprovider/import-file-path.kt") shouldBeEqualTo true
         }
     }
 
@@ -34,10 +33,8 @@ class KoImportDeclarationForKoPathProviderTest {
         sut
             .projectPath
             .shouldBeEqualTo(
-                (
-                    "/lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core/declaration/koimport/snippet/" +
-                        "forkopathprovider/import-project-file-path.kt"
-                ).toOsSeparator(),
+                "/lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core/declaration/koimport/snippet/" +
+                    "forkopathprovider/import-project-file-path.kt",
             )
     }
 

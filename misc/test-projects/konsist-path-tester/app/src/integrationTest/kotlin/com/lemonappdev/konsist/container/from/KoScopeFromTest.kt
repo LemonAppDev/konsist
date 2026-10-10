@@ -2,7 +2,6 @@ package com.lemonappdev.konsist.container.from
 
 import com.lemonappdev.konsist.api.Konsist
 import com.lemonappdev.konsist.helper.ext.mapToFilePaths
-import com.lemonappdev.konsist.helper.ext.toOsSeparator
 import com.lemonappdev.konsist.helper.util.PathProvider.appIntegrationTestSourceSetDirectory
 import com.lemonappdev.konsist.helper.util.PathProvider.dataTestSourceSetDirectory
 import org.amshove.kluent.shouldBeEqualTo
@@ -38,11 +37,10 @@ class KoScopeFromTest {
                 "$appIntegrationTestSourceSetDirectory/konsist/container/from/KoScopeFromSourceSetsTest.kt",
                 "$appIntegrationTestSourceSetDirectory/konsist/container/from/KoScopeFromTest.kt",
                 "$appIntegrationTestSourceSetDirectory/konsist/helper/ext/KoScopeExt.kt",
-                "$appIntegrationTestSourceSetDirectory/konsist/helper/ext/PathExt.kt",
                 "$appIntegrationTestSourceSetDirectory/konsist/helper/util/PathProvider.kt",
                 "$dataTestSourceSetDirectory/fixture/LibClassSpec.kt",
                 "$dataTestSourceSetDirectory/fixture/data/LibDataClassTest.kt",
-            ).toOsSeparator(),
+            ),
         )
     }
 
@@ -83,9 +81,8 @@ class KoScopeFromTest {
                 "$appIntegrationTestSourceSetDirectory/konsist/container/from/KoScopeFromSourceSetsTest.kt",
                 "$appIntegrationTestSourceSetDirectory/konsist/container/from/KoScopeFromTest.kt",
                 "$appIntegrationTestSourceSetDirectory/konsist/helper/ext/KoScopeExt.kt",
-                "$appIntegrationTestSourceSetDirectory/konsist/helper/ext/PathExt.kt",
                 "$appIntegrationTestSourceSetDirectory/konsist/helper/util/PathProvider.kt",
-            ).toOsSeparator(),
+            ),
         )
     }
 
@@ -101,7 +98,7 @@ class KoScopeFromTest {
             listOf(
                 "$dataTestSourceSetDirectory/fixture/LibClassSpec.kt",
                 "$dataTestSourceSetDirectory/fixture/data/LibDataClassTest.kt",
-            ).toOsSeparator(),
+            ),
         )
     }
 
@@ -132,9 +129,8 @@ class KoScopeFromTest {
                 "$appIntegrationTestSourceSetDirectory/konsist/container/from/KoScopeFromSourceSetsTest.kt",
                 "$appIntegrationTestSourceSetDirectory/konsist/container/from/KoScopeFromTest.kt",
                 "$appIntegrationTestSourceSetDirectory/konsist/helper/ext/KoScopeExt.kt",
-                "$appIntegrationTestSourceSetDirectory/konsist/helper/ext/PathExt.kt",
                 "$appIntegrationTestSourceSetDirectory/konsist/helper/util/PathProvider.kt",
-            ).toOsSeparator(),
+            ),
         )
     }
 
@@ -175,9 +171,8 @@ class KoScopeFromTest {
                 "$appIntegrationTestSourceSetDirectory/konsist/container/from/KoScopeFromSourceSetsTest.kt",
                 "$appIntegrationTestSourceSetDirectory/konsist/container/from/KoScopeFromTest.kt",
                 "$appIntegrationTestSourceSetDirectory/konsist/helper/ext/KoScopeExt.kt",
-                "$appIntegrationTestSourceSetDirectory/konsist/helper/ext/PathExt.kt",
                 "$appIntegrationTestSourceSetDirectory/konsist/helper/util/PathProvider.kt",
-            ).toOsSeparator(),
+            ),
         )
     }
 
@@ -204,7 +199,7 @@ class KoScopeFromTest {
             listOf(
                 "$dataTestSourceSetDirectory/fixture/LibClassSpec.kt",
                 "$dataTestSourceSetDirectory/fixture/data/LibDataClassTest.kt",
-            ).toOsSeparator(),
+            ),
         )
     }
 
@@ -241,7 +236,7 @@ class KoScopeFromTest {
             listOf(
                 "$dataTestSourceSetDirectory/fixture/LibClassSpec.kt",
                 "$dataTestSourceSetDirectory/fixture/data/LibDataClassTest.kt",
-            ).toOsSeparator(),
+            ),
         )
     }
 
