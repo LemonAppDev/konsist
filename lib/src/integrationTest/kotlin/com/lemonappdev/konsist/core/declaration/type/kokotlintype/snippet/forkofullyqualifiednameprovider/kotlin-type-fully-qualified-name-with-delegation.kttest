@@ -1,0 +1,1 @@
+class SampleClass(value: CharSequence) : CharSequence by value

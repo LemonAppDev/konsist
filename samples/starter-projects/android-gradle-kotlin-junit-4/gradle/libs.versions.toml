@@ -6,7 +6,7 @@ junit = "4.13.2"
 lifecycleRuntimeKtx = "2.11.0"
 activityCompose = "1.13.0"
 composeBom = "2026.09.00"
-konsist = "0.18.0"
+konsist = "0.18.1"
 appcompat = "1.8.0"
 
 [libraries]

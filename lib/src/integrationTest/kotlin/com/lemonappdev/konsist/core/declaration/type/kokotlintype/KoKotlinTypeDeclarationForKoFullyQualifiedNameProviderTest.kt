@@ -117,6 +117,68 @@ class KoKotlinTypeDeclarationForKoFullyQualifiedNameProviderTest {
         sut?.fullyQualifiedName shouldBeEqualTo "kotlin.String"
     }
 
+    @Test
+    fun `kotlin-type-fully-qualified-name-with-constructor-arguments`() {
+        // given
+        val sut =
+            getSnippetFile("kotlin-type-fully-qualified-name-with-constructor-arguments")
+                .classes()
+                .first()
+                .parents()
+                .firstOrNull()
+                ?.sourceDeclaration
+                ?.asKotlinTypeDeclaration()
+
+        // then
+        sut?.fullyQualifiedName shouldBeEqualTo "kotlin.RuntimeException"
+    }
+
+    @Test
+    fun `kotlin-type-fully-qualified-name-with-type-arguments`() {
+        // given
+        val sut =
+            getSnippetFile("kotlin-type-fully-qualified-name-with-type-arguments")
+                .classes()
+                .first()
+                .parents()
+                .firstOrNull()
+                ?.sourceDeclaration
+                ?.asKotlinTypeDeclaration()
+
+        // then
+        sut?.fullyQualifiedName shouldBeEqualTo "kotlin.Comparable"
+    }
+
+    @Test
+    fun `kotlin-type-fully-qualified-name-with-delegation`() {
+        // given
+        val sut =
+            getSnippetFile("kotlin-type-fully-qualified-name-with-delegation")
+                .classes()
+                .first()
+                .parents()
+                .firstOrNull()
+                ?.sourceDeclaration
+                ?.asKotlinTypeDeclaration()
+
+        // then
+        sut?.fullyQualifiedName shouldBeEqualTo "kotlin.CharSequence"
+    }
+
+    @Test
+    fun `kotlin-type-fully-qualified-name-with-package`() {
+        // given
+        val sut =
+            getSnippetFile("kotlin-type-fully-qualified-name-with-package")
+                .properties()
+                .first()
+                .type
+                ?.asKotlinTypeDeclaration()
+
+        // then
+        sut?.fullyQualifiedName shouldBeEqualTo "kotlin.String"
+    }
+
     private fun getSnippetFile(fileName: String) =
         TestSnippetProvider.getSnippetKoScope("core/declaration/type/kokotlintype/snippet/forkofullyqualifiednameprovider/", fileName)
 }

@@ -1,3 +1,3 @@
 # Kotest Snippets
 
-Sample tests writen using [Kotest](https://kotest.io/) library.
+Sample tests written using the [Kotest](https://kotest.io/) library.
