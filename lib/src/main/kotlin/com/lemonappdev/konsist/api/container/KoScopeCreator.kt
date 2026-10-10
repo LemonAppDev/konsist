@@ -19,6 +19,7 @@ interface KoScopeCreator {
      * hidden directories (e.g. ".git", ".gradle", ".idea") and "node_modules" directories.
      *
      * @param moduleName The name of the module. If null, all modules will be included.
+     * Both `/` and `\` separators are accepted on all OSes.
      * @param sourceSetName The name of the source set. If null, all source sets will be included.
      * @param ignoreBuildConfig If true, build config files and directories such as Gradle buildSrc directory will be ignored.
      * @return a [KoScope] containing all of Kotlin files in the project.
@@ -35,7 +36,9 @@ interface KoScopeCreator {
      * hidden directories (e.g. ".git", ".gradle", ".idea") and "node_modules" directories.
      *
      * @param moduleName The name of the module.
+     * Both `/` and `\` separators are accepted on all OSes.
      * @param moduleNames The name(s) of the module(s).
+     * Both `/` and `\` separators are accepted on all OSes.
      * @return a [KoScope] containing all of Kotlin files in the module.
      */
     fun scopeFromModule(
@@ -49,6 +52,7 @@ interface KoScopeCreator {
      * hidden directories (e.g. ".git", ".gradle", ".idea") and "node_modules" directories.
      *
      * @param moduleNames Set of the module names.
+     * Both `/` and `\` separators are accepted on all OSes.
      * @return a [KoScope] containing all of Kotlin files in the module.
      */
     fun scopeFromModules(moduleNames: Collection<String>): KoScope
@@ -60,6 +64,7 @@ interface KoScopeCreator {
      *
      * @param packagee The name of the package.
      * @param moduleName The name of the module. If null, all modules will be included.
+     * Both `/` and `\` separators are accepted on all OSes.
      * @param sourceSetName The name of the source set. If null, all source sets will be included.
      * @return a [KoScope] containing all of Kotlin files in the given package.
      */
@@ -102,6 +107,7 @@ interface KoScopeCreator {
      * hidden directories (e.g. ".git", ".gradle", ".idea") and "node_modules" directories.
      *
      * @param moduleName The name of the module. If null, all modules will be included.
+     * Both `/` and `\` separators are accepted on all OSes.
      * @param sourceSetName The name of the source set. If null, all source sets will be included.
      * @return a [KoScope] containing all of Kotlin files in the production source sets.
      *
@@ -119,6 +125,7 @@ interface KoScopeCreator {
      * hidden directories (e.g. ".git", ".gradle", ".idea") and "node_modules" directories.
      *
      * @param moduleName The name of the module. If null, all modules will be included.
+     * Both `/` and `\` separators are accepted on all OSes.
      * @param sourceSetName The name of the source set. If null, all source sets will be included.
      * @return a [KoScope] containing all of Kotlin files in the test source sets.
      *

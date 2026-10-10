@@ -5,6 +5,8 @@ import com.lemonappdev.konsist.api.provider.KoPathProvider
 /**
  * List containing declarations with path.
  *
+ * Both `/` and `\` separators are accepted on all OSes.
+ *
  * @param path The path to include.
  * @param paths The paths to include.
  * @param absolutePath Determines whether the paths should be treated as absolute paths. By default, false.
@@ -18,6 +20,8 @@ fun <T : KoPathProvider> List<T>.withPath(
 
 /**
  * List containing declarations with path.
+ *
+ * Both `/` and `\` separators are accepted on all OSes.
  *
  * @param paths The paths to include.
  * @param absolutePath Determines whether the paths should be treated as absolute paths. By default, false.
@@ -37,6 +41,8 @@ fun <T : KoPathProvider> List<T>.withPath(
 /**
  * List containing declarations without path.
  *
+ * Both `/` and `\` separators are accepted on all OSes.
+ *
  * @param path The path to exclude.
  * @param paths The paths to exclude.
  * @param absolutePath Determines whether the paths should be treated as absolute paths. By default, false.
@@ -50,6 +56,8 @@ fun <T : KoPathProvider> List<T>.withoutPath(
 
 /**
  * List containing declarations without path.
+ *
+ * Both `/` and `\` separators are accepted on all OSes.
  *
  * @param paths The paths to exclude.
  * @param absolutePath Determines whether the paths should be treated as absolute paths. By default, false.
@@ -69,6 +77,8 @@ fun <T : KoPathProvider> List<T>.withoutPath(
 /**
  * List containing declarations with absolute path.
  *
+ * Both `/` and `\` separators are accepted on all OSes.
+ *
  * @param path The absolute path to include.
  * @param paths The absolute paths to include.
  * @return A list containing declarations that reside in any of the specified absolute paths.
@@ -81,6 +91,8 @@ fun <T : KoPathProvider> List<T>.withAbsolutePath(
 /**
  * List containing declarations with absolute path.
  *
+ * Both `/` and `\` separators are accepted on all OSes.
+ *
  * @param paths The absolute paths to include.
  * @return A list containing declarations that reside in any of the specified absolute paths.
  */
@@ -89,6 +101,8 @@ fun <T : KoPathProvider> List<T>.withAbsolutePath(paths: Collection<String>): Li
 /**
  * List containing declarations with absolute path.
  *
+ * Both `/` and `\` separators are accepted on all OSes.
+ *
  * @param paths The absolute paths to include.
  * @return A list containing declarations that reside in any of the specified absolute paths.
  */
@@ -96,6 +110,8 @@ fun <T : KoPathProvider> List<T>.withAbsolutePath(paths: List<String>): List<T> 
 
 /**
  * List containing declarations without absolute path.
+ *
+ * Both `/` and `\` separators are accepted on all OSes.
  *
  * @param path The absolute path to exclude.
  * @param paths The absolute paths to exclude.
@@ -109,6 +125,8 @@ fun <T : KoPathProvider> List<T>.withoutAbsolutePath(
 /**
  * List containing declarations without absolute path.
  *
+ * Both `/` and `\` separators are accepted on all OSes.
+ *
  * @param paths The absolute paths to exclude.
  * @return A list containing declarations that don't reside in any of the specified absolute paths.
  */
@@ -117,6 +135,8 @@ fun <T : KoPathProvider> List<T>.withoutAbsolutePath(paths: Collection<String>):
 /**
  * List containing declarations without absolute path.
  *
+ * Both `/` and `\` separators are accepted on all OSes.
+ *
  * @param paths The absolute paths to exclude.
  * @return A list containing declarations that don't reside in any of the specified absolute paths.
  */
@@ -124,6 +144,8 @@ fun <T : KoPathProvider> List<T>.withoutAbsolutePath(paths: List<String>): List<
 
 /**
  * List containing declarations with project path.
+ *
+ * Both `/` and `\` separators are accepted on all OSes.
  *
  * @param path The project path to include.
  * @param paths The project paths to include.
@@ -137,6 +159,8 @@ fun <T : KoPathProvider> List<T>.withProjectPath(
 /**
  * List containing declarations with project path.
  *
+ * Both `/` and `\` separators are accepted on all OSes.
+ *
  * @param paths The project paths to include.
  * @return A list containing declarations that reside in any of the specified project paths.
  */
@@ -145,6 +169,8 @@ fun <T : KoPathProvider> List<T>.withProjectPath(paths: Collection<String>): Lis
 /**
  * List containing declarations with project path.
  *
+ * Both `/` and `\` separators are accepted on all OSes.
+ *
  * @param paths The project paths to include.
  * @return A list containing declarations that reside in any of the specified project paths.
  */
@@ -152,6 +178,8 @@ fun <T : KoPathProvider> List<T>.withProjectPath(paths: List<String>): List<T> =
 
 /**
  * List containing declarations without project path.
+ *
+ * Both `/` and `\` separators are accepted on all OSes.
  *
  * @param path The project path to exclude.
  * @param paths The project paths to exclude.
@@ -165,6 +193,8 @@ fun <T : KoPathProvider> List<T>.withoutProjectPath(
 /**
  * List containing declarations without project path.
  *
+ * Both `/` and `\` separators are accepted on all OSes.
+ *
  * @param paths The project paths to exclude.
  * @return A list containing declarations that don't reside in any of the specified project paths.
  */
@@ -172,6 +202,8 @@ fun <T : KoPathProvider> List<T>.withoutProjectPath(paths: Collection<String>): 
 
 /**
  * List containing declarations without project path.
+ *
+ * Both `/` and `\` separators are accepted on all OSes.
  *
  * @param paths The project paths to exclude.
  * @return A list containing declarations that don't reside in any of the specified project paths.
