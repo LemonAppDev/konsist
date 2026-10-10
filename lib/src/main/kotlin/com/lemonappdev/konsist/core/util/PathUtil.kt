@@ -19,4 +19,13 @@ object PathUtil {
             }
 
     fun toMacOsSeparator(path: String): String = path.replace("\\", "/")
+
+    /**
+     * Returns [path] relative to [rootProjectPath], starting with a separator, e.g. "/app/src/main/kotlin/A.kt".
+     * Trailing separator of [rootProjectPath] is ignored, so drive roots (e.g. "X:\") and "/" work like other paths.
+     */
+    internal fun getProjectPath(
+        path: String,
+        rootProjectPath: String,
+    ): String = path.removePrefix(toOsSeparator(rootProjectPath).trimEnd(File.separatorChar))
 }
