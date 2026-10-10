@@ -13,6 +13,7 @@ interface KoLocationProvider : KoBaseProvider {
 
     /**
      * Text of the declaration with the location (file path, line and column).
+     * File path uses OS-specific separators (`\` on Windows, `/` on other OSes).
      */
     val locationWithText: String
 }
