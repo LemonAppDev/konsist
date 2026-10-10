@@ -350,7 +350,7 @@ class Architecture2Test {
             .shouldBeEqualTo(
                 "'fails when dependency is set that presentation layer not depends on domain (lambda scope)' " +
                     "test has failed. \n" +
-                    "'Presentation' layer does not depends on 'Domain' layer failed. Files that depend on 'Domain' layer:\n" +
+                    "'Presentation' layer should not depend on 'Domain' layer but has dependencies in files:\n" +
                     "└── File $filepath\n" +
                     "    └── Import com.lemonappdev.konsist.architecture.assertarchitecture.architecture2." +
                     "project.domain.DomainFirstClass ($filepath:3:1)",
@@ -380,7 +380,7 @@ class Architecture2Test {
             .shouldBeEqualTo(
                 "'fails when dependency is set that presentation layer not depends on domain (lambda files)' " +
                     "test has failed. \n" +
-                    "'Presentation' layer does not depends on 'Domain' layer failed. Files that depend on 'Domain' layer:\n" +
+                    "'Presentation' layer should not depend on 'Domain' layer but has dependencies in files:\n" +
                     "└── File $filepath\n" +
                     "    └── Import com.lemonappdev.konsist.architecture.assertarchitecture.architecture2." +
                     "project.domain.DomainFirstClass ($filepath:3:1)",
@@ -413,7 +413,7 @@ class Architecture2Test {
             .shouldBeEqualTo(
                 "'fails when dependency is set that presentation layer not depends on domain (parameter scope)' " +
                     "test has failed. \n" +
-                    "'Presentation' layer does not depends on 'Domain' layer failed. Files that depend on 'Domain' layer:\n" +
+                    "'Presentation' layer should not depend on 'Domain' layer but has dependencies in files:\n" +
                     "└── File $filepath\n" +
                     "    └── Import com.lemonappdev.konsist.architecture.assertarchitecture.architecture2." +
                     "project.domain.DomainFirstClass ($filepath:3:1)",
@@ -448,7 +448,7 @@ class Architecture2Test {
             .shouldBeEqualTo(
                 "'fails when dependency is set that presentation layer not depends on domain (parameter files)' " +
                     "test has failed. \n" +
-                    "'Presentation' layer does not depends on 'Domain' layer failed. Files that depend on 'Domain' layer:\n" +
+                    "'Presentation' layer should not depend on 'Domain' layer but has dependencies in files:\n" +
                     "└── File $filepath\n" +
                     "    └── Import com.lemonappdev.konsist.architecture.assertarchitecture.architecture2." +
                     "project.domain.DomainFirstClass ($filepath:3:1)",
