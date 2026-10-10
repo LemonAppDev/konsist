@@ -18,7 +18,7 @@ internal class UniqueLayerRule(
     private fun extractLayers(dependencies: Set<LayerDependency>): List<Layer> =
         dependencies
             .flatMap { listOfNotNull(it.layer1, it.layer2) }
-            .distinctBy { System.identityHashCode(it) } // Referential Equality
+            .distinct()
 
     private fun requireUniqueLayers(layers: List<Layer>) {
         val nameViolations = mutableListOf<String>()
