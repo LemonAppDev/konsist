@@ -1,10 +1,15 @@
 package com.lemonappdev.konsist.core.util
 
 object LocationUtil {
+    // Wildcard '..' with optional separator ('/' or '\') on each side, e.g. "..", "/..", "../", "\..\"
+    private val WILDCARD_WITH_SEPARATORS_REGEX = Regex("""[/\\]?\.\.[/\\]?""")
+
     /**
-     * Use '..' as a wildcard for any number of characters.
+     * Use '..' as a wildcard for any number of packages (or path segments), including none.
      *
      * This class can be used with both file paths and packages.
+     * Paths accept both '/' and '\' separators. Leading separators and separators next to '..' are ignored,
+     * e.g. "/feature/data/.." is the same as "feature/data..".
      */
     fun resideInLocation(
         desiredLocation: String,
@@ -13,13 +18,22 @@ object LocationUtil {
         require(desiredLocation.isNotEmpty()) { "Location name is empty" }
         require(desiredLocation != ".") { "Incorrect location format: $desiredLocation" }
 
-        if (desiredLocation == "..") return true
-
-        val desiredPackageRegexString =
+        val desiredLocationCanonical =
             desiredLocation
                 .lowercase()
+                // Current location is matched without its leading separator, so the pattern must be too,
+                // e.g. copied projectPath "/feature/data/.." -> "feature/data/.."
+                .trimStart('/', '\\')
+                // Separator next to '..' would become an extra '.' after conversion and break the wildcard,
+                // e.g. "data/.." -> "data..." (segments "data" and "."), so it is removed: "data/.." -> "data.."
+                // Package patterns have no separators, so they stay unchanged.
+                .replace(WILDCARD_WITH_SEPARATORS_REGEX, "..")
                 .toDotSeparatedLocation()
-                .toPackageRegex()
+
+        // Checked after normalization, so "/.." and "\.." match any location too
+        if (desiredLocationCanonical == "..") return true
+
+        val desiredPackageRegexString = desiredLocationCanonical.toPackageRegex()
 
         val currentLocationCanonical =
             currentLocation
@@ -45,20 +59,20 @@ private fun String.toPackageRegex(): String {
     val suffixOptional = endsWith("..")
 
     return buildString {
-        // Match any package prefix or no prefix at all
+        // Leading '..': zero or more packages, each followed by '.', e.g. "", "com.", "com.app."
         if (prefixOptional) append("(?:[^.]+\\.)*?")
 
         segments.forEachIndexed { index, segment ->
-            // Match any package in between segments with at least one dot
+            // '..' between segments: zero or more '.package', then '.', e.g. ".", ".domain.", ".domain.usecase."
             if (index > 0 && index < segments.size) append("(?:\\.[^.]+)*?\\.")
-            append(Regex.escape(segment)) // Match the exact segment
+            append(Regex.escape(segment)) // Match the exact segment ('.' inside it is literal, not a wildcard)
         }
 
         if (suffixOptional) {
-            // Match any package suffix or no suffix at all
+            // Trailing '..': zero or more '.package', e.g. "", ".data", ".data.repository"
             append("(?:\\.[^.]+)*?")
         } else {
-            // If there is no suffix, the pattern should match the end of the string
+            // No trailing '..': location must end with the last segment
             append("$")
         }
     }
