@@ -3,11 +3,7 @@ package com.lemonappdev.konsist.core.verify
 import com.lemonappdev.konsist.api.declaration.KoAnnotationDeclaration
 import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoFileDeclaration
-import com.lemonappdev.konsist.api.provider.KoAnnotationProvider
-import com.lemonappdev.konsist.api.provider.KoBaseProvider
-import com.lemonappdev.konsist.api.provider.KoContainingDeclarationProvider
-import com.lemonappdev.konsist.api.provider.KoLocationProvider
-import com.lemonappdev.konsist.api.provider.KoNameProvider
+import com.lemonappdev.konsist.api.provider.*
 import com.lemonappdev.konsist.core.architecture.validator.ascii.AsciiTreeCreator
 import com.lemonappdev.konsist.core.architecture.validator.ascii.AsciiTreeNode
 import com.lemonappdev.konsist.core.exception.KoAssertionFailedException
@@ -18,11 +14,47 @@ import com.lemonappdev.konsist.core.util.HyperlinkUtil
 
 internal fun <E : KoBaseProvider> List<E?>.assert(
     strict: Boolean,
+    testName: String?,
+    function: (E, StringBuilder) -> Boolean?,
+    positiveCheck: Boolean,
+) {
+    val stringBuilder = StringBuilder()
+    val result =
+        assert(strict, testName, positiveCheck) { element ->
+            function(element, stringBuilder)
+        }
+    getResult(
+        result.notSuppressedDeclarations,
+        result.results,
+        positiveCheck,
+        result.localSuppressName,
+        stringBuilder.toString()
+    )
+}
+
+internal fun <E : KoBaseProvider> List<E?>.assert(
+    strict: Boolean,
     additionalMessage: String?,
     testName: String?,
     function: (E) -> Boolean?,
     positiveCheck: Boolean,
 ) {
+    val result = assert(strict, testName, positiveCheck, function)
+    getResult(
+        result.notSuppressedDeclarations,
+        result.results,
+        positiveCheck,
+        result.localSuppressName,
+        additionalMessage
+    )
+}
+
+private fun <E : KoBaseProvider> List<E?>.assert(
+    strict: Boolean,
+    testName: String?,
+    positiveCheck: Boolean,
+    assertElement: (E) -> Boolean?,
+): AssertionResult<E> {
     var lastDeclaration: KoBaseProvider? = null
 
     try {
@@ -47,13 +79,13 @@ internal fun <E : KoBaseProvider> List<E?>.assert(
 
         val notSuppressedDeclarations = checkIfAnnotatedWithSuppress(this.filterNotNull(), localSuppressName)
 
-        val result =
+        val results =
             notSuppressedDeclarations.groupBy {
                 lastDeclaration = it
-                function(it) ?: positiveCheck
+                assertElement(it) ?: positiveCheck
             }
 
-        getResult(notSuppressedDeclarations, result, positiveCheck, localSuppressName, additionalMessage)
+        return AssertionResult(localSuppressName, notSuppressedDeclarations, results)
     } catch (e: KoException) {
         throw e
     } catch (
@@ -62,6 +94,12 @@ internal fun <E : KoBaseProvider> List<E?>.assert(
         throw KoInternalException(e.message.orEmpty(), e, lastDeclaration)
     }
 }
+
+private data class AssertionResult<E>(
+    val localSuppressName: String,
+    val notSuppressedDeclarations: List<E>,
+    val results: Map<Boolean, List<E>>,
+)
 
 internal fun <E : KoBaseProvider> List<E?>.assert(
     strict: Boolean,
