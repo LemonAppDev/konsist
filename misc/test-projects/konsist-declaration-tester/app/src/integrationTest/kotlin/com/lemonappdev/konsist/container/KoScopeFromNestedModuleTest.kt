@@ -2,6 +2,7 @@ package com.lemonappdev.konsist.container
 
 import com.lemonappdev.konsist.api.Konsist
 import com.lemonappdev.konsist.api.container.KoScope
+import com.lemonappdev.konsist.helper.ext.toOsSeparator
 import com.lemonappdev.konsist.helper.util.PathProvider.featurePaymentMainSourceSetDirectory
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
@@ -10,12 +11,13 @@ import org.junit.jupiter.api.Test
  * Nested module name ("feature/payment") should select module files with both "/" and "\" separators on all OSes.
  */
 class KoScopeFromNestedModuleTest {
-    private val featurePaymentClassPath = "$featurePaymentMainSourceSetDirectory/fixture/FeaturePaymentClass.kt"
+    private val featurePaymentClassPath = "$featurePaymentMainSourceSetDirectory/fixture/FeaturePaymentClass.kt".toOsSeparator()
 
-    private val paymentDomainClassPath = "$featurePaymentMainSourceSetDirectory/fixture/payment/domain/PaymentDomainClass.kt"
+    private val paymentDomainClassPath =
+        "$featurePaymentMainSourceSetDirectory/fixture/payment/domain/PaymentDomainClass.kt".toOsSeparator()
 
     private val paymentPresentationClassPath =
-        "$featurePaymentMainSourceSetDirectory/fixture/payment/presentation/PaymentPresentationClass.kt"
+        "$featurePaymentMainSourceSetDirectory/fixture/payment/presentation/PaymentPresentationClass.kt".toOsSeparator()
 
     private val featurePaymentFilePaths =
         listOf(
