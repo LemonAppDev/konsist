@@ -7,8 +7,11 @@ import com.lemonappdev.konsist.helper.util.PathProvider.appIntegrationTestSource
 import com.lemonappdev.konsist.helper.util.PathProvider.appMainSourceSetDirectory
 import com.lemonappdev.konsist.helper.util.PathProvider.dataMainSourceSetDirectory
 import com.lemonappdev.konsist.helper.util.PathProvider.dataTestSourceSetDirectory
+import com.lemonappdev.konsist.helper.util.PathProvider.projectRootDirectory
 import com.lemonappdev.konsist.helper.util.PathProvider.rootMainSourceSetDirectory
 import org.amshove.kluent.shouldBeEqualTo
+import org.amshove.kluent.shouldThrow
+import org.amshove.kluent.withMessage
 import org.junit.jupiter.api.Test
 
 class KoScopeFromModuleTest {
@@ -119,5 +122,98 @@ class KoScopeFromModuleTest {
                 "$dataTestSourceSetDirectory/fixture/data/LibDataClassTest.kt",
             ).toOsSeparator(),
         )
+    }
+
+    @Test
+    fun `scopeFromModule for data module with gradle project path`() {
+        // given
+        val sut = Konsist
+            .scopeFromModule(":data")
+            .mapToFilePaths()
+
+        // then
+        sut.shouldBeEqualTo(
+            listOf(
+                "$dataMainSourceSetDirectory/fixture/LibClass.kt",
+                "$dataMainSourceSetDirectory/fixture/data/LibDataClass.kt",
+                "$dataTestSourceSetDirectory/fixture/LibClassSpec.kt",
+                "$dataTestSourceSetDirectory/fixture/data/LibDataClassTest.kt",
+            ).toOsSeparator(),
+        )
+    }
+
+    @Test
+    fun `scopeFromModule for root module with gradle root project path`() {
+        // given
+        val sut = Konsist
+            .scopeFromModule(":")
+            .mapToFilePaths()
+
+        // then
+        sut.shouldBeEqualTo(
+            listOf(
+                "$rootMainSourceSetDirectory/fixture/RootClass.kt",
+                "$rootMainSourceSetDirectory/fixture/data/RootDataClass.kt",
+                "$rootMainSourceSetDirectory/fixture/src/RootSrcClass.kt",
+            ).toOsSeparator(),
+        )
+    }
+
+    @Test
+    fun `scopeFromModule does not duplicate files when module is passed in different formats`() {
+        // given
+        val sut = Konsist
+            .scopeFromModule(":data", "data", "/data/", """data\""")
+            .mapToFilePaths()
+
+        // then
+        sut.shouldBeEqualTo(
+            listOf(
+                "$dataMainSourceSetDirectory/fixture/LibClass.kt",
+                "$dataMainSourceSetDirectory/fixture/data/LibDataClass.kt",
+                "$dataTestSourceSetDirectory/fixture/LibClassSpec.kt",
+                "$dataTestSourceSetDirectory/fixture/data/LibDataClassTest.kt",
+            ).toOsSeparator(),
+        )
+    }
+
+    @Test
+    fun `scopeFromModule throws exception if module does not exist`() {
+        // given
+        val func = { Konsist.scopeFromModule(":nonExisting") }
+
+        // then
+        val message = "Module does not exist: ':nonExisting'. Directory not found (module names are case-sensitive): " +
+            "$projectRootDirectory/nonExisting".toOsSeparator()
+        func shouldThrow IllegalArgumentException::class withMessage message
+    }
+
+    @Test
+    fun `scopeFromModule throws exception if module name has different letter case`() {
+        // given
+        val func = { Konsist.scopeFromModule(":Data") }
+
+        // then
+        val message = "Module does not exist: ':Data'. Directory not found (module names are case-sensitive): " +
+            "$projectRootDirectory/Data".toOsSeparator()
+        func shouldThrow IllegalArgumentException::class withMessage message
+    }
+
+    @Test
+    fun `scopeFromModule throws exception if module does not contain any Kotlin files`() {
+        // given
+        val func = { Konsist.scopeFromModule(":gradle") }
+
+        // then
+        func shouldThrow IllegalArgumentException::class withMessage "Module does not contain any Kotlin files: ':gradle'"
+    }
+
+    @Test
+    fun `scopeFromModule throws exception if module name is blank`() {
+        // given
+        val func = { Konsist.scopeFromModule(" ") }
+
+        // then
+        func shouldThrow IllegalArgumentException::class withMessage "Module name is blank: ' '"
     }
 }

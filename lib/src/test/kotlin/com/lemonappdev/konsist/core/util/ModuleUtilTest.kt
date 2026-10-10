@@ -1,6 +1,8 @@
 package com.lemonappdev.konsist.core.util
 
 import org.amshove.kluent.shouldBeEqualTo
+import org.amshove.kluent.shouldThrow
+import org.amshove.kluent.withMessage
 import org.junit.jupiter.api.Test
 
 class ModuleUtilTest {
@@ -98,5 +100,77 @@ class ModuleUtilTest {
 
         // then
         result shouldBeEqualTo "project"
+    }
+
+    @Test
+    fun `should normalize gradle project path`() {
+        // when
+        val result = ModuleUtil.normalizeModuleName(":feature:auth")
+
+        // then
+        result shouldBeEqualTo "feature/auth"
+    }
+
+    @Test
+    fun `should normalize gradle project path without leading colon`() {
+        // when
+        val result = ModuleUtil.normalizeModuleName("feature:auth")
+
+        // then
+        result shouldBeEqualTo "feature/auth"
+    }
+
+    @Test
+    fun `should normalize gradle root project path to root`() {
+        // when
+        val result = ModuleUtil.normalizeModuleName(":")
+
+        // then
+        result shouldBeEqualTo "root"
+    }
+
+    @Test
+    fun `should normalize module name with unix separators`() {
+        // when
+        val result = ModuleUtil.normalizeModuleName("/feature/auth/")
+
+        // then
+        result shouldBeEqualTo "feature/auth"
+    }
+
+    @Test
+    fun `should normalize module name with windows separators`() {
+        // when
+        val result = ModuleUtil.normalizeModuleName("""\feature\auth\""")
+
+        // then
+        result shouldBeEqualTo "feature/auth"
+    }
+
+    @Test
+    fun `should keep root module name`() {
+        // when
+        val result = ModuleUtil.normalizeModuleName("root")
+
+        // then
+        result shouldBeEqualTo "root"
+    }
+
+    @Test
+    fun `should throw exception when module name is blank`() {
+        // given
+        val func = { ModuleUtil.normalizeModuleName(" ") }
+
+        // then
+        func shouldThrow IllegalArgumentException::class withMessage "Module name is blank: ' '"
+    }
+
+    @Test
+    fun `should throw exception when module name contains only separators`() {
+        // given
+        val func = { ModuleUtil.normalizeModuleName("/") }
+
+        // then
+        func shouldThrow IllegalArgumentException::class withMessage "Module name is blank: '/'"
     }
 }

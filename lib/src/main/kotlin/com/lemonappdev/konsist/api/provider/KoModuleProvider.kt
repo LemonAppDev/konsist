@@ -13,9 +13,11 @@ interface KoModuleProvider : KoBaseProvider {
     /**
      * Determines whatever declaration reside in module.
      *
-     * @param name The name of the module to check. If this is the top-module, use "root".
-     * Both `/` and `\` separators are accepted on all OSes.
+     * @param name The name of the module to check. If this is the top-module, use "root" (or ":").
+     * Gradle project path (e.g. `:feature:auth`) is the preferred format, but `feature/auth` and `feature\auth`
+     * are also accepted on all OSes.
      * @return `true` if a declaration resides in the specified module, `false` otherwise.
+     * @throws IllegalArgumentException if the module name is blank.
      */
     fun resideInModule(name: String): Boolean
 }

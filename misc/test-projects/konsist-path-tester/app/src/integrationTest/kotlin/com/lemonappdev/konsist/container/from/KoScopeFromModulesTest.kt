@@ -9,6 +9,8 @@ import com.lemonappdev.konsist.helper.util.PathProvider.dataMainSourceSetDirecto
 import com.lemonappdev.konsist.helper.util.PathProvider.dataTestSourceSetDirectory
 import com.lemonappdev.konsist.helper.util.PathProvider.rootMainSourceSetDirectory
 import org.amshove.kluent.shouldBeEqualTo
+import org.amshove.kluent.shouldThrow
+import org.amshove.kluent.withMessage
 import org.junit.jupiter.api.Test
 
 class KoScopeFromModulesTest {
@@ -245,5 +247,35 @@ class KoScopeFromModulesTest {
                 "$dataTestSourceSetDirectory/fixture/data/LibDataClassTest.kt",
             ).toOsSeparator(),
         )
+    }
+
+    @Test
+    fun `scopeFromModules(list) for data module with gradle project path`() {
+        // given
+        val moduleNames = listOf(":data")
+
+        val sut = Konsist
+            .scopeFromModules(moduleNames)
+            .mapToFilePaths()
+
+        // then
+        sut.shouldBeEqualTo(
+            listOf(
+                "$dataMainSourceSetDirectory/fixture/LibClass.kt",
+                "$dataMainSourceSetDirectory/fixture/data/LibDataClass.kt",
+                "$dataTestSourceSetDirectory/fixture/LibClassSpec.kt",
+                "$dataTestSourceSetDirectory/fixture/data/LibDataClassTest.kt",
+            ).toOsSeparator(),
+        )
+    }
+
+    @Test
+    fun `scopeFromModules throws exception if module names are empty`() {
+        // given
+        val func = { Konsist.scopeFromModules(emptyList()) }
+
+        // then
+        val message = "Module names are empty, but at least one module name should be provided."
+        func shouldThrow IllegalArgumentException::class withMessage message
     }
 }
