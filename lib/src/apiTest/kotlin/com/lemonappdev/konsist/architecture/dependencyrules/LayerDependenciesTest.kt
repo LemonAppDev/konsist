@@ -46,6 +46,21 @@ class LayerDependenciesTest {
     }
 
     @Test
+    fun `does not throw an exception when equal layer instances are used`() {
+        // given
+        val layer1 = Layer("name1", "package1..")
+        val layer1Copy = Layer("name1", "package1..")
+        val layer2 = Layer("name2", "package2..")
+        val layer3 = Layer("name3", "package3..")
+
+        // then
+        architecture {
+            layer1.dependsOn(layer2)
+            layer1Copy.doesNotDependOn(layer3)
+        }
+    }
+
+    @Test
     fun `throws an exception when self dependency is set`() {
         // given
         val layer = Layer("name", "package..")
