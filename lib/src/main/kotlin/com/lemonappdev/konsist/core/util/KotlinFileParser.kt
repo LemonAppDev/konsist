@@ -7,7 +7,6 @@ import com.lemonappdev.konsist.core.ext.isKotlinFile
 import com.lemonappdev.konsist.core.ext.isKotlinSnippetFile
 import com.lemonappdev.konsist.core.util.FileExtension.KOTLIN
 import com.lemonappdev.konsist.core.util.FileExtension.KOTLIN_TEST_SNIPPET
-import com.lemonappdev.konsist.core.util.PathUtil.toMacOsSeparator
 import org.jetbrains.kotlin.CoreEnvironmentDeprecation
 import org.jetbrains.kotlin.cli.jvm.compiler.EnvironmentConfigFiles
 import org.jetbrains.kotlin.cli.jvm.compiler.KotlinCoreEnvironment
@@ -59,7 +58,7 @@ object KotlinFileParser {
 
     @Suppress("detekt.TooGenericExceptionCaught")
     private fun getKtFile(file: File): KtFile {
-        require(file.isKotlinFile || file.isKotlinSnippetFile) { "File must be a Kotlin file: ${toMacOsSeparator(file.path)}" }
+        require(file.isKotlinFile || file.isKotlinSnippetFile) { "File must be a Kotlin file: ${file.path}" }
 
         try {
             val fileContent =
@@ -73,7 +72,7 @@ object KotlinFileParser {
             val psiFile = psiManager.findFile(lightVirtualFile)
             return psiFile as KtFile
         } catch (e: Exception) {
-            throw KoInternalException("Failed to parse Kotlin file: ${toMacOsSeparator(file.path)}", e)
+            throw KoInternalException("Failed to parse Kotlin file: ${file.path}", e)
         }
     }
 

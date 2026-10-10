@@ -8,6 +8,7 @@ import com.lemonappdev.konsist.core.ext.isKotlinFile
 import com.lemonappdev.konsist.core.ext.sep
 import com.lemonappdev.konsist.core.ext.toKoFile
 import com.lemonappdev.konsist.core.ext.toMacOsSeparator
+import com.lemonappdev.konsist.core.ext.toOsSeparator
 import com.lemonappdev.konsist.core.filesystem.PathProvider
 import com.lemonappdev.konsist.core.provider.util.KoFileDeclarationProvider
 import kotlinx.coroutines.coroutineScope
@@ -143,9 +144,10 @@ internal class KoScopeCreatorCore : KoScopeCreator {
      *  - the path is a file.
      */
     private fun getFilesFromDirectory(absolutePath: String): List<KoFileDeclaration> {
-        val directory = File(absolutePath)
-        require(directory.exists()) { "Directory does not exist: $absolutePath" }
-        require(!directory.isFile) { "Path is a file, but should be a directory: $absolutePath" }
+        val osAbsolutePath = absolutePath.toOsSeparator()
+        val directory = File(osAbsolutePath)
+        require(directory.exists()) { "Directory does not exist: $osAbsolutePath" }
+        require(!directory.isFile) { "Path is a file, but should be a directory: $osAbsolutePath" }
 
         return directory.toKoFiles()
     }
@@ -198,7 +200,7 @@ internal class KoScopeCreatorCore : KoScopeCreator {
         return KoScopeCore(koFiles + notKotlinFiles)
     }
 
-    private fun getAbsolutePath(projectPath: String): String = "$projectRootPath$sep$projectPath"
+    private fun getAbsolutePath(projectPath: String): String = "$projectRootPath$sep${projectPath.toOsSeparator()}"
 
     private fun isTestSourceSet(name: String): Boolean {
         val lowercaseName = name.lowercase()

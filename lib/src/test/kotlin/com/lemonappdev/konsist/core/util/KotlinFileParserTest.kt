@@ -7,13 +7,12 @@ import java.io.File
 
 class KotlinFileParserTest {
     @Test
-    fun `should use unix separators in error message for windows path`() {
+    fun `should use os separators in error message`() {
         // given
-        val file = File("""C:\Users\user\project\src\main\kotlin\com\app\NonExisting.kt""")
-        val func = { KotlinFileParser.getKoFile(file) }
+        val path = listOf("project", "src", "main", "kotlin", "com", "app", "NonExisting.kt").joinToString(File.separator)
+        val func = { KotlinFileParser.getKoFile(File(path)) }
 
         // then
-        func shouldThrow IllegalArgumentException::class withMessage
-            "File must be a Kotlin file: C:/Users/user/project/src/main/kotlin/com/app/NonExisting.kt"
+        func shouldThrow IllegalArgumentException::class withMessage "File must be a Kotlin file: $path"
     }
 }

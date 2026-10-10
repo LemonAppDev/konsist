@@ -33,6 +33,28 @@ class KoScopeFromFileTest {
     }
 
     @Test
+    fun `scopeFromFile accepts unix separators`() {
+        // given
+        val sut = Konsist
+            .scopeFromFile("app/src/main/kotlin/com/lemonappdev/fixture/AppClass.kt")
+            .mapToFilePaths()
+
+        // then
+        sut shouldBeEqualTo listOf("$appMainSourceSetDirectory/fixture/AppClass.kt".toOsSeparator())
+    }
+
+    @Test
+    fun `scopeFromFile accepts windows separators`() {
+        // given
+        val sut = Konsist
+            .scopeFromFile("""app\src\main\kotlin\com\lemonappdev\fixture\AppClass.kt""")
+            .mapToFilePaths()
+
+        // then
+        sut shouldBeEqualTo listOf("$appMainSourceSetDirectory/fixture/AppClass.kt".toOsSeparator())
+    }
+
+    @Test
     fun `scopeFromFile throws exception if path does not exist`() {
         // given
         val func =

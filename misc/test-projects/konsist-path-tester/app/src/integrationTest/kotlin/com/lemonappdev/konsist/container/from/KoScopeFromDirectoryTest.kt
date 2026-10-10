@@ -29,6 +29,58 @@ class KoScopeFromDirectoryTest {
     }
 
     @Test
+    fun `scopeFromDirectory accepts unix separators`() {
+        // given
+        val sut = Konsist
+            .scopeFromDirectory("app/src/main/kotlin/com/lemonappdev/fixture/")
+            .mapToFilePaths()
+
+        // then
+        sut.shouldBeEqualTo(
+            listOf(
+                "$appMainSourceSetDirectory/fixture/AppClass.kt",
+                "$appMainSourceSetDirectory/fixture/data/AppDataClass.kt",
+            ).toOsSeparator(),
+        )
+    }
+
+    @Test
+    fun `scopeFromDirectory accepts windows separators`() {
+        // given
+        val sut = Konsist
+            .scopeFromDirectory("""app\src\main\kotlin\com\lemonappdev\fixture\""")
+            .mapToFilePaths()
+
+        // then
+        sut.shouldBeEqualTo(
+            listOf(
+                "$appMainSourceSetDirectory/fixture/AppClass.kt",
+                "$appMainSourceSetDirectory/fixture/data/AppDataClass.kt",
+            ).toOsSeparator(),
+        )
+    }
+
+    @Test
+    fun `scopeFromExternalDirectory accepts unix and windows separators`() {
+        // given
+        val unixPath = "$appMainSourceSetDirectory/fixture/".replace("\\", "/")
+        val windowsPath = "$appMainSourceSetDirectory/fixture/".replace("/", "\\")
+
+        // when
+        val unixSut = Konsist.scopeFromExternalDirectory(unixPath).mapToFilePaths()
+        val windowsSut = Konsist.scopeFromExternalDirectory(windowsPath).mapToFilePaths()
+
+        // then
+        val expected =
+            listOf(
+                "$appMainSourceSetDirectory/fixture/AppClass.kt",
+                "$appMainSourceSetDirectory/fixture/data/AppDataClass.kt",
+            ).toOsSeparator()
+        unixSut shouldBeEqualTo expected
+        windowsSut shouldBeEqualTo expected
+    }
+
+    @Test
     fun `scopeFromDirectory throws exception if path does not exist`() {
         // given
         val func =
