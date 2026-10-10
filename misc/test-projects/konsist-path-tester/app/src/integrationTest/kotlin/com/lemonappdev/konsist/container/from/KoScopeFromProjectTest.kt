@@ -49,8 +49,10 @@ class KoScopeFromProjectTest {
                 "$dataTestSourceSetDirectory/fixture/LibClassSpec.kt",
                 "$dataTestSourceSetDirectory/fixture/data/LibDataClassTest.kt",
                 "$rootMainSourceSetDirectory/fixture/RootClass.kt",
+                "$rootMainSourceSetDirectory/fixture/build/RootBuildClass.kt",
                 "$rootMainSourceSetDirectory/fixture/data/RootDataClass.kt",
                 "$rootMainSourceSetDirectory/fixture/src/RootSrcClass.kt",
+                "$rootMainSourceSetDirectory/fixture/target/RootTargetClass.kt",
             ).toOsSeparator(),
         )
     }
@@ -92,10 +94,48 @@ class KoScopeFromProjectTest {
                 "$dataTestSourceSetDirectory/fixture/LibClassSpec.kt",
                 "$dataTestSourceSetDirectory/fixture/data/LibDataClassTest.kt",
                 "$rootMainSourceSetDirectory/fixture/RootClass.kt",
+                "$rootMainSourceSetDirectory/fixture/build/RootBuildClass.kt",
                 "$rootMainSourceSetDirectory/fixture/data/RootDataClass.kt",
                 "$rootMainSourceSetDirectory/fixture/src/RootSrcClass.kt",
+                "$rootMainSourceSetDirectory/fixture/target/RootTargetClass.kt",
             ).toOsSeparator(),
         )
+    }
+
+    @Test
+    fun `scopeFromProject does not contain files from build output, hidden and node_modules directories`() {
+        // given
+        val sut = Konsist
+            .scopeFromProject(ignoreBuildConfig = false)
+            .mapToFilePaths()
+
+        // then
+        sut
+            .filter {
+                it.startsWith("$projectRootDirectory/data/target/".toOsSeparator()) ||
+                    it.startsWith("$projectRootDirectory/.worktrees/".toOsSeparator()) ||
+                    it.startsWith("$projectRootDirectory/node_modules/".toOsSeparator())
+            }.shouldBeEqualTo(emptyList())
+    }
+
+    @Test
+    fun `scopeFromProject contains files from build and target packages`() {
+        // given
+        val sut = Konsist
+            .scopeFromProject(moduleName = "root")
+            .mapToFilePaths()
+
+        // then
+        sut
+            .filter {
+                it.startsWith("$rootMainSourceSetDirectory/fixture/build/".toOsSeparator()) ||
+                    it.startsWith("$rootMainSourceSetDirectory/fixture/target/".toOsSeparator())
+            }.shouldBeEqualTo(
+                listOf(
+                    "$rootMainSourceSetDirectory/fixture/build/RootBuildClass.kt",
+                    "$rootMainSourceSetDirectory/fixture/target/RootTargetClass.kt",
+                ).toOsSeparator(),
+            )
     }
 
     @Test
@@ -127,8 +167,10 @@ class KoScopeFromProjectTest {
         sut.shouldBeEqualTo(
             listOf(
                 "$rootMainSourceSetDirectory/fixture/RootClass.kt",
+                "$rootMainSourceSetDirectory/fixture/build/RootBuildClass.kt",
                 "$rootMainSourceSetDirectory/fixture/data/RootDataClass.kt",
                 "$rootMainSourceSetDirectory/fixture/src/RootSrcClass.kt",
+                "$rootMainSourceSetDirectory/fixture/target/RootTargetClass.kt",
             ).toOsSeparator(),
         )
     }
@@ -148,8 +190,10 @@ class KoScopeFromProjectTest {
                 "$dataMainSourceSetDirectory/fixture/LibClass.kt",
                 "$dataMainSourceSetDirectory/fixture/data/LibDataClass.kt",
                 "$rootMainSourceSetDirectory/fixture/RootClass.kt",
+                "$rootMainSourceSetDirectory/fixture/build/RootBuildClass.kt",
                 "$rootMainSourceSetDirectory/fixture/data/RootDataClass.kt",
                 "$rootMainSourceSetDirectory/fixture/src/RootSrcClass.kt",
+                "$rootMainSourceSetDirectory/fixture/target/RootTargetClass.kt",
             ).toOsSeparator(),
         )
     }
@@ -317,8 +361,10 @@ class KoScopeFromProjectTest {
         sut.shouldBeEqualTo(
             listOf(
                 "$rootMainSourceSetDirectory/fixture/RootClass.kt",
+                "$rootMainSourceSetDirectory/fixture/build/RootBuildClass.kt",
                 "$rootMainSourceSetDirectory/fixture/data/RootDataClass.kt",
                 "$rootMainSourceSetDirectory/fixture/src/RootSrcClass.kt",
+                "$rootMainSourceSetDirectory/fixture/target/RootTargetClass.kt",
             ).toOsSeparator(),
         )
     }

@@ -27,8 +27,10 @@ class KoScopeFromProductionTest {
                 "$dataMainSourceSetDirectory/fixture/LibClass.kt",
                 "$dataMainSourceSetDirectory/fixture/data/LibDataClass.kt",
                 "$rootMainSourceSetDirectory/fixture/RootClass.kt",
+                "$rootMainSourceSetDirectory/fixture/build/RootBuildClass.kt",
                 "$rootMainSourceSetDirectory/fixture/data/RootDataClass.kt",
                 "$rootMainSourceSetDirectory/fixture/src/RootSrcClass.kt",
+                "$rootMainSourceSetDirectory/fixture/target/RootTargetClass.kt",
             ).toOsSeparator(),
         )
     }
@@ -48,8 +50,10 @@ class KoScopeFromProductionTest {
                 "$dataMainSourceSetDirectory/fixture/LibClass.kt",
                 "$dataMainSourceSetDirectory/fixture/data/LibDataClass.kt",
                 "$rootMainSourceSetDirectory/fixture/RootClass.kt",
+                "$rootMainSourceSetDirectory/fixture/build/RootBuildClass.kt",
                 "$rootMainSourceSetDirectory/fixture/data/RootDataClass.kt",
                 "$rootMainSourceSetDirectory/fixture/src/RootSrcClass.kt",
+                "$rootMainSourceSetDirectory/fixture/target/RootTargetClass.kt",
             ).toOsSeparator(),
         )
     }
@@ -117,8 +121,10 @@ class KoScopeFromProductionTest {
         sut.shouldBeEqualTo(
             listOf(
                 "$rootMainSourceSetDirectory/fixture/RootClass.kt",
+                "$rootMainSourceSetDirectory/fixture/build/RootBuildClass.kt",
                 "$rootMainSourceSetDirectory/fixture/data/RootDataClass.kt",
                 "$rootMainSourceSetDirectory/fixture/src/RootSrcClass.kt",
+                "$rootMainSourceSetDirectory/fixture/target/RootTargetClass.kt",
             ).toOsSeparator(),
         )
     }
@@ -134,8 +140,10 @@ class KoScopeFromProductionTest {
         sut.shouldBeEqualTo(
             listOf(
                 "$rootMainSourceSetDirectory/fixture/RootClass.kt",
+                "$rootMainSourceSetDirectory/fixture/build/RootBuildClass.kt",
                 "$rootMainSourceSetDirectory/fixture/data/RootDataClass.kt",
                 "$rootMainSourceSetDirectory/fixture/src/RootSrcClass.kt",
+                "$rootMainSourceSetDirectory/fixture/target/RootTargetClass.kt",
             ).toOsSeparator(),
         )
     }

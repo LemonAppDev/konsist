@@ -20,3 +20,8 @@ build/
 # Operating System Files
 **/.DS_Store
 Thumbs.db
+
+# Test fixtures (directory names match the ignored build directories above)
+!/src/main/kotlin/com/lemonappdev/fixture/build/
+!/src/main/kotlin/com/lemonappdev/fixture/target/
+!/data/target/

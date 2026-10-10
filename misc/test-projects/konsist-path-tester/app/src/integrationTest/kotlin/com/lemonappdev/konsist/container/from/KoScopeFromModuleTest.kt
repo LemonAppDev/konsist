@@ -76,8 +76,10 @@ class KoScopeFromModuleTest {
         sut.shouldBeEqualTo(
             listOf(
                 "$rootMainSourceSetDirectory/fixture/RootClass.kt",
+                "$rootMainSourceSetDirectory/fixture/build/RootBuildClass.kt",
                 "$rootMainSourceSetDirectory/fixture/data/RootDataClass.kt",
                 "$rootMainSourceSetDirectory/fixture/src/RootSrcClass.kt",
+                "$rootMainSourceSetDirectory/fixture/target/RootTargetClass.kt",
             ).toOsSeparator(),
         )
     }

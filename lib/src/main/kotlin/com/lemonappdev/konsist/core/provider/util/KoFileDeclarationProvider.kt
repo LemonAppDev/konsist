@@ -4,6 +4,7 @@ import com.lemonappdev.konsist.api.declaration.KoFileDeclaration
 import com.lemonappdev.konsist.core.ext.isKotlinFile
 import com.lemonappdev.konsist.core.ext.toKoFile
 import com.lemonappdev.konsist.core.filesystem.PathProvider
+import com.lemonappdev.konsist.core.util.ProjectPathUtil
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
@@ -29,6 +30,8 @@ internal object KoFileDeclarationProvider {
     /**
      * Retrieves a list of [KoFileDeclaration]s asynchronously from the project's root directory.
      * This function scans the directory for Kotlin files and parses them to obtain list of KoFileDeclaration.
+     * Ignored directories (see [ProjectPathUtil.isIgnoredDirectory]) are skipped during the scan, so their content
+     * is never traversed.
      *
      * The parsing operations are performed concurrently.
      *
@@ -45,19 +48,18 @@ internal object KoFileDeclarationProvider {
      * 4. getKoFileDeclarations  started at Thread 1 completes
      * 5. getKoFileDeclarations  started at Thread 2 completes
      *
-     * @param filter - Block to filter files. Return true to include the file.
      * @return A list of [KoFileDeclaration]s representing the parsed Kotlin files.
      * @throws Exception if there's an issue accessing the file system or parsing the files.
      */
-    suspend fun getKoFileDeclarations(filter: ((File) -> Boolean)? = null): List<KoFileDeclaration> =
+    suspend fun getKoFileDeclarations(): List<KoFileDeclaration> =
         coroutineScope {
             val currentDeferred: Deferred<List<KoFileDeclaration>> =
                 mutex.withLock {
                     createKoFilesDeclarationDeferred ?: async(Dispatchers.IO) {
                         projectRootDir
                             .walk()
+                            .onEnter { !ProjectPathUtil.isIgnoredDirectory(projectRootDir.path, it.path) }
                             .filter { it.isKotlinFile }
-                            .filter { filter == null || filter(it) }
                             .map { async { parseKotlinFile(it) } }
                             .toList()
                             .awaitAll()
@@ -71,8 +73,8 @@ internal object KoFileDeclarationProvider {
     private fun parseKotlinFile(file: File): KoFileDeclaration? {
         /*
         Due to asynchronous execution, the file's state may have changed since the initial file tree walk.
-        This is particularly common with code generators. We don't exclude build or generated files at this stage
-        (that happens later), so we need to be more permissive in the initial loading process.
+        This is particularly common with code generators, so we need to be more permissive in the initial loading
+        process.
         We verify the file is still a valid Kotlin file before parsing to handle cases where files may have been
         removed or altered. If the file is no longer valid, we return null instead of attempting to parse it.
          */
