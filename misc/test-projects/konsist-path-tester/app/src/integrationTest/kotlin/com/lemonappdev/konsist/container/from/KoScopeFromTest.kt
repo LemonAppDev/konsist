@@ -40,6 +40,7 @@ class KoScopeFromTest {
                 "$appIntegrationTestSourceSetDirectory/konsist/helper/ext/KoScopeExt.kt",
                 "$appIntegrationTestSourceSetDirectory/konsist/helper/ext/PathExt.kt",
                 "$appIntegrationTestSourceSetDirectory/konsist/helper/util/PathProvider.kt",
+                "$appIntegrationTestSourceSetDirectory/konsist/path/AbsolutePathTest.kt",
                 "$dataTestSourceSetDirectory/fixture/LibClassSpec.kt",
                 "$dataTestSourceSetDirectory/fixture/data/LibDataClassTest.kt",
             ).toOsSeparator(),
@@ -85,6 +86,7 @@ class KoScopeFromTest {
                 "$appIntegrationTestSourceSetDirectory/konsist/helper/ext/KoScopeExt.kt",
                 "$appIntegrationTestSourceSetDirectory/konsist/helper/ext/PathExt.kt",
                 "$appIntegrationTestSourceSetDirectory/konsist/helper/util/PathProvider.kt",
+                "$appIntegrationTestSourceSetDirectory/konsist/path/AbsolutePathTest.kt",
             ).toOsSeparator(),
         )
     }
@@ -134,6 +136,7 @@ class KoScopeFromTest {
                 "$appIntegrationTestSourceSetDirectory/konsist/helper/ext/KoScopeExt.kt",
                 "$appIntegrationTestSourceSetDirectory/konsist/helper/ext/PathExt.kt",
                 "$appIntegrationTestSourceSetDirectory/konsist/helper/util/PathProvider.kt",
+                "$appIntegrationTestSourceSetDirectory/konsist/path/AbsolutePathTest.kt",
             ).toOsSeparator(),
         )
     }
@@ -177,6 +180,7 @@ class KoScopeFromTest {
                 "$appIntegrationTestSourceSetDirectory/konsist/helper/ext/KoScopeExt.kt",
                 "$appIntegrationTestSourceSetDirectory/konsist/helper/ext/PathExt.kt",
                 "$appIntegrationTestSourceSetDirectory/konsist/helper/util/PathProvider.kt",
+                "$appIntegrationTestSourceSetDirectory/konsist/path/AbsolutePathTest.kt",
             ).toOsSeparator(),
         )
     }

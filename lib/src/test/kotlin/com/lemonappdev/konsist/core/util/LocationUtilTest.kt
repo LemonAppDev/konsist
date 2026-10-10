@@ -133,4 +133,69 @@ class LocationUtilTest {
         // then
         result shouldBeEqualTo true
     }
+
+    @Test
+    fun `should match windows absolute path with windows separator`() {
+        // when
+        val result =
+            LocationUtil.resideInLocation(
+                desiredLocation = """C:\project\feature\..""",
+                currentLocation = """C:\project\feature\data\SampleClass.kt""",
+            )
+
+        // then
+        result shouldBeEqualTo true
+    }
+
+    @Test
+    fun `should match windows absolute path with unix separator and lowercase drive letter`() {
+        // when
+        val result =
+            LocationUtil.resideInLocation(
+                desiredLocation = "c:/project/feature/..",
+                currentLocation = """C:\project\feature\data\SampleClass.kt""",
+            )
+
+        // then
+        result shouldBeEqualTo true
+    }
+
+    @Test
+    fun `should match windows absolute path with wildcard inside path`() {
+        // when
+        val result =
+            LocationUtil.resideInLocation(
+                desiredLocation = """C:\project\..\data\..""",
+                currentLocation = """C:\project\feature\data\SampleClass.kt""",
+            )
+
+        // then
+        result shouldBeEqualTo true
+    }
+
+    @Test
+    fun `should not match windows absolute path with different drive letter`() {
+        // when
+        val result =
+            LocationUtil.resideInLocation(
+                desiredLocation = """D:\project\feature\..""",
+                currentLocation = """C:\project\feature\data\SampleClass.kt""",
+            )
+
+        // then
+        result shouldBeEqualTo false
+    }
+
+    @Test
+    fun `should not match windows absolute path without drive letter`() {
+        // when
+        val result =
+            LocationUtil.resideInLocation(
+                desiredLocation = """\project\feature\..""",
+                currentLocation = """C:\project\feature\data\SampleClass.kt""",
+            )
+
+        // then
+        result shouldBeEqualTo false
+    }
 }

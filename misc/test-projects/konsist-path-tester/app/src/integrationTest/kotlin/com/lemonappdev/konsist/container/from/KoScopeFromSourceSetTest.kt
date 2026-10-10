@@ -62,6 +62,7 @@ class KoScopeFromSourceSetTest {
                 "$appIntegrationTestSourceSetDirectory/konsist/helper/ext/KoScopeExt.kt",
                 "$appIntegrationTestSourceSetDirectory/konsist/helper/ext/PathExt.kt",
                 "$appIntegrationTestSourceSetDirectory/konsist/helper/util/PathProvider.kt",
+                "$appIntegrationTestSourceSetDirectory/konsist/path/AbsolutePathTest.kt",
             ).toOsSeparator(),
         )
     }
