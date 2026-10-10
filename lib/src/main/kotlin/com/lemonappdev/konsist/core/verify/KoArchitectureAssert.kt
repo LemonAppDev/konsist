@@ -2,6 +2,7 @@ package com.lemonappdev.konsist.core.verify
 
 import com.lemonappdev.konsist.api.architecture.Layer
 import com.lemonappdev.konsist.api.declaration.KoFileDeclaration
+import com.lemonappdev.konsist.api.declaration.KoImportDeclaration
 import com.lemonappdev.konsist.api.ext.list.withPackage
 import com.lemonappdev.konsist.core.architecture.KoArchitectureFiles
 import com.lemonappdev.konsist.core.architecture.KoArchitectureScope
@@ -149,8 +150,7 @@ private fun getFailedDependsOnNotAllowedLayersMessage(failures: List<DependsOnNo
 
 private fun getFailedDoesNotDependsOnLayersMessage(failures: List<DoesNotDependsOnLayerDependencyFailure>): String? =
     getFailureMessage(failures) {
-        "'${it.layer1.name}' layer does not depends on '${it.doesNotDependOnLayer.name}' layer failed. " +
-            "Files that depend on '${it.doesNotDependOnLayer.name}' layer:"
+        "'${it.layer1.name}' layer should not depend on '${it.doesNotDependOnLayer.name}' layer but has dependencies in files:"
     }
 
 private fun <T> getFailureMessage(
@@ -162,20 +162,17 @@ private fun <T> getFailureMessage(
     }
 
     return failures.joinToString("\n\n") { failure ->
-        val files =
+        val failedFiles =
             when (failure) {
                 is DependsOnNothingDependencyFailure -> failure.failedFiles
                 is DependsOnNotAllowedLayerDependencyFailure -> failure.failedFiles
                 is DoesNotDependsOnLayerDependencyFailure -> failure.failedFiles
-                else -> emptyList()
+                else -> emptyMap()
             }
 
         val asciiTreeNodes =
-            files.map { file ->
-                val children =
-                    file
-                        .imports
-                        .map { AsciiTreeNode(it, emptyList()) }
+            failedFiles.map { (file, imports) ->
+                val children = imports.map { AsciiTreeNode(it, emptyList()) }
 
                 AsciiTreeNode(file, children)
             }
@@ -195,7 +192,7 @@ private fun getFailedDependsOnMessage(dependsOnLayerDependencyFailures: List<Dep
     }
 
     return dependsOnLayerDependencyFailures.joinToString("\n") {
-        "Layer '${it.layer1.name}' does not depends on '${it.dependsOnLayer.name}' layer."
+        "'${it.layer1.name}' layer is required to depend on '${it.dependsOnLayer.name}' layer (strict), but has no dependency on it."
     }
 }
 
@@ -306,67 +303,44 @@ private fun Layer.isDependentOn(
 private fun Layer.getDependentOnFiles(
     otherLayer: Layer,
     files: List<KoFileDeclaration>,
-): List<KoFileDeclaration> {
-    val layerFiles = files.withPackage(rootPackage)
-
-    val dependOnFiles =
-        layerFiles
-            .mapNotNull { koFile ->
-                val imports = koFile.imports
-
-                val hasImportToOtherLayer = imports.any { import -> LocationUtil.resideInLocation(otherLayer.rootPackage, import.name) }
-
-                if (hasImportToOtherLayer) {
-                    koFile
-                } else {
-                    null
-                }
-            }
-
-    return dependOnFiles
-}
+): Map<KoFileDeclaration, List<KoImportDeclaration>> =
+    files
+        .withPackage(rootPackage)
+        .getFailedImports { import -> LocationUtil.resideInLocation(otherLayer.rootPackage, import.name) }
 
 private fun Layer.getDependentOnNotAllowedLayerFiles(
     notAllowedLayer: Layer,
     allowedLayers: Set<Layer>,
     files: List<KoFileDeclaration>,
-): List<KoFileDeclaration> =
+): Map<KoFileDeclaration, List<KoImportDeclaration>> =
     files
         .withPackage(rootPackage)
-        .filter { koFile ->
-            koFile
-                .imports
-                // Import is not part of layer
-                .filterNot { LocationUtil.resideInLocation(rootPackage, it.name) }
+        .getFailedImports { import ->
+            // Import is not part of layer
+            !LocationUtil.resideInLocation(rootPackage, import.name) &&
                 // Import is not part of allowed layer
-                .filterNot { import -> allowedLayers.any { LocationUtil.resideInLocation(it.rootPackage, import.name) } }
-                .any { LocationUtil.resideInLocation(notAllowedLayer.rootPackage, it.name) }
+                allowedLayers.none { LocationUtil.resideInLocation(it.rootPackage, import.name) } &&
+                LocationUtil.resideInLocation(notAllowedLayer.rootPackage, import.name)
         }
 
 private fun Layer.getDependentOnAnyLayerFiles(
     files: List<KoFileDeclaration>,
     layerDependencies: LayerDependenciesCore,
-): List<KoFileDeclaration> {
-    val layerFiles = files.withPackage(rootPackage)
-
-    return layerFiles
-        .mapNotNull { koFile ->
-            val imports =
-                koFile
-                    .imports
-                    // Import is not part of layer
-                    .filterNot { LocationUtil.resideInLocation(rootPackage, it.name) }
-                    // Import is part of other layer
-                    .filter {
-                        layerDependencies.layers.any { layer ->
-                            LocationUtil.resideInLocation(layer.rootPackage, it.name)
-                        }
-                    }
-
-            if (imports.isNotEmpty()) {
-                koFile
-            } else {
-                null
-            }
+): Map<KoFileDeclaration, List<KoImportDeclaration>> =
+    files
+        .withPackage(rootPackage)
+        .getFailedImports { import ->
+            // Import is not part of layer
+            !LocationUtil.resideInLocation(rootPackage, import.name) &&
+                // Import is part of other layer
+                layerDependencies.layers.any { LocationUtil.resideInLocation(it.rootPackage, import.name) }
         }
-}
+
+/**
+ * Maps each file to its imports matching [isFailedImport]. Files without such imports are skipped.
+ */
+private fun List<KoFileDeclaration>.getFailedImports(
+    isFailedImport: (KoImportDeclaration) -> Boolean,
+): Map<KoFileDeclaration, List<KoImportDeclaration>> =
+    associateWith { koFile -> koFile.imports.filter(isFailedImport) }
+        .filterValues { it.isNotEmpty() }
