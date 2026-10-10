@@ -2,7 +2,7 @@ name: Check Test Project
 
 on:
   push:
-    branches: [ main ]
+    branches: [ main, develop ]
 
   pull_request:
     types: [ opened, synchronize ]
@@ -28,6 +28,9 @@ jobs:
             11
             25
           distribution: 'corretto'
+
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v6
 
       - name: Publish Konsist Artifact To Local Maven Repository
         run: >
@@ -59,6 +62,9 @@ jobs:
             25
           distribution: 'corretto'
 
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v6
+
       - name: Publish Konsist Artifact To Local Maven Repository
         run: >
           ./gradlew publishToMavenLocal
@@ -88,6 +94,9 @@ jobs:
             11
             25
           distribution: 'corretto'
+
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v6
 
       - name: Publish Konsist Artifact To Local Maven Repository
         run: >
@@ -121,6 +130,9 @@ jobs:
             25
           distribution: 'corretto'
 
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v6
+
       - name: Publish Konsist Artifact To Local Maven Repository
         run: >
           ./gradlew publishToMavenLocal
@@ -150,6 +162,9 @@ jobs:
         with:
           java-version: 25
           distribution: 'corretto'
+
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v6
 
       - name: Publish Konsist Artifact To Local Maven Repository
         run: >
@@ -185,6 +200,9 @@ jobs:
           java-version: 25
           distribution: 'corretto'
 
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v6
+
       - name: Publish Konsist Artifact To Local Maven Repository
         run: >
           ./gradlew publishToMavenLocal
@@ -215,6 +233,9 @@ jobs:
             25
           distribution: 'corretto'
 
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v6
+
       - name: Publish Konsist Artifact To Local Maven Repository
         run: >
           ./gradlew publishToMavenLocal
@@ -242,6 +263,9 @@ jobs:
         with:
           java-version: 25
           distribution: 'corretto'
+
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v6
 
       - name: Publish Konsist Artifact To Local Maven Repository
         run: >
@@ -281,6 +305,9 @@ jobs:
           java-version: 25
           distribution: 'corretto'
 
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v6
+
       - name: Publish Konsist Artifact To Local Maven Repository
         run: >
           ./gradlew publishToMavenLocal
@@ -313,6 +340,9 @@ jobs:
             11
             25
           distribution: 'corretto'
+
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v6
 
       - name: Publish Konsist Artifact To Local Maven Repository
         run: >

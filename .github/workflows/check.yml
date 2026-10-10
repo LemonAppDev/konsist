@@ -2,7 +2,7 @@ name: Check
 
 on:
   push:
-    branches: [ main ]
+    branches: [ main, develop ]
 
   pull_request:
     types: [ opened, synchronize ]
@@ -25,6 +25,9 @@ jobs:
         with:
           java-version: 25
           distribution: 'corretto'
+
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v6
 
       - name: Run JUnit Test
         run: ./gradlew :lib:test
@@ -49,6 +52,9 @@ jobs:
           java-version: 25
           distribution: 'corretto'
 
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v6
+
       - name: Run JUnit Test
         run: ./gradlew :lib:test
 
@@ -71,6 +77,9 @@ jobs:
         with:
           java-version: 25
           distribution: 'corretto'
+
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v6
 
       - name: Run Konsist Test
         run: ./gradlew lib:konsistTest
@@ -95,6 +104,9 @@ jobs:
           java-version: 25
           distribution: 'corretto'
 
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v6
+
       - name: Run Integration Test
         run: ./gradlew lib:integrationTest
 
@@ -118,6 +130,9 @@ jobs:
           java-version: 25
           distribution: 'corretto'
 
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v6
+
       - name: Run Integration Test
         run: ./gradlew lib:integrationTest
 
@@ -140,6 +155,9 @@ jobs:
         with:
           java-version: 25
           distribution: 'corretto'
+
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v6
 
       - name: Run Api Test
         run: ./gradlew lib:apiTest
@@ -166,6 +184,9 @@ jobs:
           java-version: 25
           distribution: 'corretto'
 
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v6
+
       - name: Run Spotless
         run: ./gradlew spotlessCheck
 
@@ -181,6 +202,9 @@ jobs:
         with:
           java-version: 25
           distribution: 'corretto'
+
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v6
 
       - name: Run Detekt
         run: ./gradlew detektCheck
@@ -205,6 +229,9 @@ jobs:
         with:
           java-version: 25
           distribution: 'corretto'
+
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v6
 
       - name: Set up Python
         uses: actions/setup-python@v7
