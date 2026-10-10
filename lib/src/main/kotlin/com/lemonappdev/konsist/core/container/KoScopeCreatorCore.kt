@@ -234,7 +234,8 @@ internal class KoScopeCreatorCore : KoScopeCreator {
 
         /**
          * Builds regex matching file paths of given module and source set. Path parts are escaped, so folder names
-         * containing regex characters (e.g. `C:\Projects (1)\app`) are matched literally.
+         * containing regex characters (e.g. `C:\Projects (1)\app`) are matched literally. Leading and trailing
+         * separators of module and source set names are ignored (e.g. `feature/auth/` is treated as `feature/auth`).
          */
         internal fun getPathRegex(
             projectRootPath: String,
@@ -247,12 +248,12 @@ internal class KoScopeCreatorCore : KoScopeCreator {
                 when (moduleName) {
                     ROOT_MODULE_NAME -> rootPathPattern
                     null -> "$rootPathPattern.*"
-                    else -> "$rootPathPattern/${Regex.escape(moduleName.toMacOsSeparator())}"
+                    else -> "$rootPathPattern/${Regex.escape(moduleName.toMacOsSeparator().trim('/'))}"
                 }
 
             val sourceSetPattern =
                 if (sourceSetName != null) {
-                    "/src/${Regex.escape(sourceSetName.toMacOsSeparator())}/.*"
+                    "/src/${Regex.escape(sourceSetName.toMacOsSeparator().trim('/'))}/.*"
                 } else {
                     "/src/.*"
                 }
