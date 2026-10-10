@@ -4,6 +4,7 @@ import com.lemonappdev.konsist.api.Konsist
 import com.lemonappdev.konsist.helper.ext.toOsSeparator
 import com.lemonappdev.konsist.helper.util.PathProvider.appMainSourceSetProjectDirectory
 import com.lemonappdev.konsist.helper.util.PathProvider.dataMainSourceSetProjectDirectory
+import com.lemonappdev.konsist.helper.util.PathProvider.featurePaymentMainSourceSetProjectDirectory
 import com.lemonappdev.konsist.helper.util.PathProvider.rootMainSourceSetProjectDirectory
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
@@ -13,6 +14,7 @@ class KoFileForKoModuleProviderTest {
     private val app = "app"
     private val data = "data"
     private val root = "root"
+    private val featurePayment = "feature/payment"
 
     @Test
     fun `module name is 'app'`() {
@@ -59,6 +61,23 @@ class KoFileForKoModuleProviderTest {
             moduleName shouldBeEqualTo root
             resideInModule(root) shouldBeEqualTo true
             resideInModule(app) shouldBeEqualTo false
+        }
+    }
+
+    @Test
+    fun `module name of nested module uses unix separator on all OSes`() {
+        // given
+        val sut = Konsist
+            .scopeFromFile("$featurePaymentMainSourceSetProjectDirectory/fixture/FeaturePaymentClass.kt".toOsSeparator())
+            .files
+            .first()
+
+        // then
+        assertSoftly(sut) {
+            moduleName shouldBeEqualTo featurePayment
+            resideInModule(featurePayment) shouldBeEqualTo true
+            resideInModule("""feature\payment""") shouldBeEqualTo true
+            resideInModule(data) shouldBeEqualTo false
         }
     }
 }
