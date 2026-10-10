@@ -27,7 +27,7 @@ class KoScopeTest {
     fun `toString method`() {
         // given
         val sut = Konsist
-            .scopeFromDirectory("${PathProvider.appMainSourceSetProjectDirectory}/fixture/".toOsSeparator())
+            .scopeFromDirectory("${PathProvider.appMainSourceSetProjectDirectory}/fixture/")
             .toString()
 
         // then

@@ -16,22 +16,6 @@ class KoScopeFromDirectoryTest {
     fun `scopeFromDirectory`() {
         // given
         val sut = Konsist
-            .scopeFromDirectory("app/src/main/kotlin/com/lemonappdev/fixture/".toOsSeparator())
-            .mapToFilePaths()
-
-        // then
-        sut.shouldBeEqualTo(
-            listOf(
-                "$appMainSourceSetDirectory/fixture/AppClass.kt",
-                "$appMainSourceSetDirectory/fixture/data/AppDataClass.kt",
-            ).toOsSeparator(),
-        )
-    }
-
-    @Test
-    fun `scopeFromDirectory accepts unix separators`() {
-        // given
-        val sut = Konsist
             .scopeFromDirectory("app/src/main/kotlin/com/lemonappdev/fixture/")
             .mapToFilePaths()
 
@@ -84,7 +68,7 @@ class KoScopeFromDirectoryTest {
     fun `scopeFromDirectory throws exception if path does not exist`() {
         // given
         val func =
-            { Konsist.scopeFromDirectory("app/src/main/kotlin/com/lemonappdev/nonExisting/".toOsSeparator()) }
+            { Konsist.scopeFromDirectory("app/src/main/kotlin/com/lemonappdev/nonExisting/") }
 
         // then
         val message = "Directory does not exist: $appMainSourceSetDirectory${fileSeparator}nonExisting$fileSeparator"
@@ -97,7 +81,7 @@ class KoScopeFromDirectoryTest {
         val func =
             {
                 Konsist.scopeFromDirectory(
-                    "app/src/main/kotlin/com/lemonappdev/fixture/AppClass.kt".toOsSeparator(),
+                    "app/src/main/kotlin/com/lemonappdev/fixture/AppClass.kt",
                 )
             }
 

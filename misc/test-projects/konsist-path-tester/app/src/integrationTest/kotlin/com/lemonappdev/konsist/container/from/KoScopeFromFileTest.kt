@@ -17,8 +17,8 @@ class KoScopeFromFileTest {
         // given
         val sut = Konsist
             .scopeFromFile(
-                "/app/src/main/kotlin/com/lemonappdev/fixture/AppClass.kt".toOsSeparator(),
-                "/app/src/main/kotlin/com/lemonappdev/fixture/data/AppDataClass.kt".toOsSeparator()
+                "/app/src/main/kotlin/com/lemonappdev/fixture/AppClass.kt",
+                "/app/src/main/kotlin/com/lemonappdev/fixture/data/AppDataClass.kt"
             )
             .mapToFilePaths()
 
@@ -58,7 +58,7 @@ class KoScopeFromFileTest {
     fun `scopeFromFile throws exception if path does not exist`() {
         // given
         val func =
-            { Konsist.scopeFromFile("app/src/main/kotlin/com/lemonappdev/NonExistingTest.kt".toOsSeparator()) }
+            { Konsist.scopeFromFile("app/src/main/kotlin/com/lemonappdev/NonExistingTest.kt") }
 
         // then
         val message = "File does not exist: $appMainSourceSetDirectory${fileSeparator}NonExistingTest.kt"
@@ -68,7 +68,7 @@ class KoScopeFromFileTest {
     @Test
     fun `scopeFromFile throws exception if path points to directory`() {
         // given
-        val func = { Konsist.scopeFromFile("app/src/main/kotlin/com/lemonappdev/fixture".toOsSeparator()) }
+        val func = { Konsist.scopeFromFile("app/src/main/kotlin/com/lemonappdev/fixture") }
 
         // then
         val message = "Path is a directory, but should be a file: $appMainSourceSetDirectory${fileSeparator}fixture"
