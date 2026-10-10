@@ -241,4 +241,55 @@ class KoScopeCreatorCoreTest {
         // then
         result shouldBeEqualTo false
     }
+
+    @Test
+    fun `should match file from root module when root path is windows drive root`() {
+        // given
+        val regex =
+            KoScopeCreatorCore.getPathRegex(
+                projectRootPath = """X:\""",
+                moduleName = "root",
+                sourceSetName = null,
+            )
+
+        // when
+        val result = "X:/src/main/kotlin/SampleClass.kt".matches(regex)
+
+        // then
+        result shouldBeEqualTo true
+    }
+
+    @Test
+    fun `should match file from module and source set when root path is windows drive root`() {
+        // given
+        val regex =
+            KoScopeCreatorCore.getPathRegex(
+                projectRootPath = """X:\""",
+                moduleName = "feature",
+                sourceSetName = "main",
+            )
+
+        // when
+        val result = "X:/feature/src/main/kotlin/SampleClass.kt".matches(regex)
+
+        // then
+        result shouldBeEqualTo true
+    }
+
+    @Test
+    fun `should match file from root module when root path is unix root`() {
+        // given
+        val regex =
+            KoScopeCreatorCore.getPathRegex(
+                projectRootPath = "/",
+                moduleName = "root",
+                sourceSetName = "test",
+            )
+
+        // when
+        val result = "/src/test/kotlin/SampleClass.kt".matches(regex)
+
+        // then
+        result shouldBeEqualTo true
+    }
 }

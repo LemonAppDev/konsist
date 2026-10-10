@@ -279,13 +279,14 @@ internal class KoScopeCreatorCore : KoScopeCreator {
          * containing regex characters (e.g. `C:\Projects (1)\app`) are matched literally. Leading and trailing
          * separators of module and source set names are ignored (e.g. `feature/auth/` is treated as `feature/auth`).
          * Module name can be a Gradle project path (e.g. `:feature:auth` is treated as `feature/auth`).
+         * Trailing separator of the project root path is ignored, so drive roots (e.g. `X:\`) and `/` are supported.
          */
         internal fun getPathRegex(
             projectRootPath: String,
             moduleName: String?,
             sourceSetName: String?,
         ): Regex {
-            val rootPathPattern = Regex.escape(projectRootPath.toMacOsSeparator())
+            val rootPathPattern = Regex.escape(projectRootPath.toMacOsSeparator().trimEnd('/'))
 
             val modulePattern =
                 when (val normalizedModuleName = moduleName?.let { ModuleUtil.normalizeModuleName(it) }) {
