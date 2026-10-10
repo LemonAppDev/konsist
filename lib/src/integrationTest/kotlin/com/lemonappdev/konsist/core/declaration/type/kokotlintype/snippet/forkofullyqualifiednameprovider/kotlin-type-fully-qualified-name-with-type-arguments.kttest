@@ -1,0 +1,3 @@
+class SampleClass : Comparable<SampleClass> {
+    override fun compareTo(other: SampleClass): Int = 0
+}

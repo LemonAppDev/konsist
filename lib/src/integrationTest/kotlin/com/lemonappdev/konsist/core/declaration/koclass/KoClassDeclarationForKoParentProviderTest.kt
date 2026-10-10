@@ -305,6 +305,26 @@ class KoClassDeclarationForKoParentProviderTest {
     }
 
     @Test
+    fun `class-has-kotlin-parent-with-type-arguments`() {
+        // given
+        val sut =
+            getSnippetFile("class-has-kotlin-parent-with-type-arguments")
+                .classes()
+                .first()
+
+        // then
+        assertSoftly(sut) {
+            hasParentOf(FixtureParentClass::class, indirectParents = true) shouldBeEqualTo false
+            hasAllParentsOf(FixtureParentInterface1::class, indirectParents = true) shouldBeEqualTo true
+            parents()
+                .first()
+                .sourceDeclaration
+                ?.asKotlinTypeDeclaration()
+                ?.fullyQualifiedName shouldBeEqualTo "kotlin.Comparable"
+        }
+    }
+
+    @Test
     fun `class-has-no-parents-ignore-case`() {
         // given
         val sut =
