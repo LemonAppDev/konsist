@@ -38,4 +38,31 @@ class KoModuleProviderCoreTest {
         // then
         result shouldBeEqualTo false
     }
+
+    @Test
+    fun `resideInModule returns true for gradle project path`() {
+        // when
+        val result = sut.resideInModule(":feature:payment")
+
+        // then
+        result shouldBeEqualTo true
+    }
+
+    @Test
+    fun `resideInModule returns true for gradle project path without leading colon`() {
+        // when
+        val result = sut.resideInModule("feature:payment")
+
+        // then
+        result shouldBeEqualTo true
+    }
+
+    @Test
+    fun `resideInModule returns false for different gradle project path`() {
+        // when
+        val result = sut.resideInModule(":feature:data")
+
+        // then
+        result shouldBeEqualTo false
+    }
 }

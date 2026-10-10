@@ -10,6 +10,8 @@ import com.lemonappdev.konsist.helper.util.PathProvider.dataTestSourceSetDirecto
 import com.lemonappdev.konsist.helper.util.PathProvider.projectRootDirectory
 import com.lemonappdev.konsist.helper.util.PathProvider.rootMainSourceSetDirectory
 import org.amshove.kluent.shouldBeEqualTo
+import org.amshove.kluent.shouldThrow
+import org.amshove.kluent.withMessage
 import org.junit.jupiter.api.Test
 
 class KoScopeFromProjectTest {
@@ -321,5 +323,32 @@ class KoScopeFromProjectTest {
                 "$rootMainSourceSetDirectory/fixture/src/RootSrcClass.kt",
             ).toOsSeparator(),
         )
+    }
+
+    @Test
+    fun `scopeFromProject for data module with gradle project path and main source set`() {
+        // given
+        val sut = Konsist
+            .scopeFromProject(moduleName = ":data", sourceSetName = "main")
+            .mapToFilePaths()
+
+        // then
+        sut.shouldBeEqualTo(
+            listOf(
+                "$dataMainSourceSetDirectory/fixture/LibClass.kt",
+                "$dataMainSourceSetDirectory/fixture/data/LibDataClass.kt",
+            ).toOsSeparator(),
+        )
+    }
+
+    @Test
+    fun `scopeFromProject throws exception if module does not exist`() {
+        // given
+        val func = { Konsist.scopeFromProject(moduleName = ":nonExisting") }
+
+        // then
+        val message = "Module does not exist: ':nonExisting'. Directory not found: " +
+            "$projectRootDirectory/nonExisting".toOsSeparator()
+        func shouldThrow IllegalArgumentException::class withMessage message
     }
 }

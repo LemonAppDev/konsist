@@ -5,7 +5,8 @@ import com.lemonappdev.konsist.api.provider.KoModuleProvider
 /**
  * List containing declarations with module.
  *
- * Both `/` and `\` separators are accepted on all OSes.
+ * Gradle project path (e.g. `:feature:auth`) is the preferred module name format,
+ * but `feature/auth` and `feature\auth` are also accepted on all OSes.
  *
  * @param name The module name to include.
  * @param names The module name(s) to include.
@@ -19,7 +20,8 @@ fun <T : KoModuleProvider> List<T>.withModule(
 /**
  * List containing declarations with module.
  *
- * Both `/` and `\` separators are accepted on all OSes.
+ * Gradle project path (e.g. `:feature:auth`) is the preferred module name format,
+ * but `feature/auth` and `feature\auth` are also accepted on all OSes.
  *
  * @param names The module name(s) to include.
  * @return A list containing declarations that reside in any of the specified modules.
@@ -35,7 +37,8 @@ fun <T : KoModuleProvider> List<T>.withModule(names: Collection<String>): List<T
 /**
  * List containing declarations without module.
  *
- * Both `/` and `\` separators are accepted on all OSes.
+ * Gradle project path (e.g. `:feature:auth`) is the preferred module name format,
+ * but `feature/auth` and `feature\auth` are also accepted on all OSes.
  *
  * @param name The module name to exclude.
  * @param names The module name(s) to exclude.
@@ -49,7 +52,8 @@ fun <T : KoModuleProvider> List<T>.withoutModule(
 /**
  * List containing declarations without module.
  *
- * Both `/` and `\` separators are accepted on all OSes.
+ * Gradle project path (e.g. `:feature:auth`) is the preferred module name format,
+ * but `feature/auth` and `feature\auth` are also accepted on all OSes.
  *
  * @param names The module name(s) to exclude.
  * @return A list containing declarations that don't reside in any of the specified modules.

@@ -19,10 +19,12 @@ interface KoScopeCreator {
      * hidden directories (e.g. ".git", ".gradle", ".idea") and "node_modules" directories.
      *
      * @param moduleName The name of the module. If null, all modules will be included.
-     * Both `/` and `\` separators are accepted on all OSes.
+     * Gradle project path (e.g. `:feature:auth`) is the preferred format, but `feature/auth` and `feature\auth`
+     * are also accepted on all OSes. Use `root` (or `:`) for the top-level module.
      * @param sourceSetName The name of the source set. If null, all source sets will be included.
      * @param ignoreBuildConfig If true, build config files and directories such as Gradle buildSrc directory will be ignored.
      * @return a [KoScope] containing all of Kotlin files in the project.
+     * @throws IllegalArgumentException if the module name is blank or the module directory does not exist.
      */
     fun scopeFromProject(
         moduleName: String? = null,
@@ -36,10 +38,12 @@ interface KoScopeCreator {
      * hidden directories (e.g. ".git", ".gradle", ".idea") and "node_modules" directories.
      *
      * @param moduleName The name of the module.
-     * Both `/` and `\` separators are accepted on all OSes.
-     * @param moduleNames The name(s) of the module(s).
-     * Both `/` and `\` separators are accepted on all OSes.
+     * Gradle project path (e.g. `:feature:auth`) is the preferred format, but `feature/auth` and `feature\auth`
+     * are also accepted on all OSes. Use `root` (or `:`) for the top-level module.
+     * @param moduleNames The name(s) of the module(s), in the same format as [moduleName].
      * @return a [KoScope] containing all of Kotlin files in the module.
+     * @throws IllegalArgumentException if the module name is blank, the module directory does not exist,
+     * or the module does not contain any Kotlin files.
      */
     fun scopeFromModule(
         moduleName: String,
@@ -52,8 +56,11 @@ interface KoScopeCreator {
      * hidden directories (e.g. ".git", ".gradle", ".idea") and "node_modules" directories.
      *
      * @param moduleNames Set of the module names.
-     * Both `/` and `\` separators are accepted on all OSes.
+     * Gradle project path (e.g. `:feature:auth`) is the preferred format, but `feature/auth` and `feature\auth`
+     * are also accepted on all OSes. Use `root` (or `:`) for the top-level module.
      * @return a [KoScope] containing all of Kotlin files in the module.
+     * @throws IllegalArgumentException if [moduleNames] is empty, any module name is blank, any module directory
+     * does not exist, or any module does not contain any Kotlin files.
      */
     fun scopeFromModules(moduleNames: Collection<String>): KoScope
 
@@ -64,9 +71,11 @@ interface KoScopeCreator {
      *
      * @param packagee The name of the package.
      * @param moduleName The name of the module. If null, all modules will be included.
-     * Both `/` and `\` separators are accepted on all OSes.
+     * Gradle project path (e.g. `:feature:auth`) is the preferred format, but `feature/auth` and `feature\auth`
+     * are also accepted on all OSes. Use `root` (or `:`) for the top-level module.
      * @param sourceSetName The name of the source set. If null, all source sets will be included.
      * @return a [KoScope] containing all of Kotlin files in the given package.
+     * @throws IllegalArgumentException if the module name is blank or the module directory does not exist.
      */
     fun scopeFromPackage(
         packagee: String,
@@ -107,9 +116,11 @@ interface KoScopeCreator {
      * hidden directories (e.g. ".git", ".gradle", ".idea") and "node_modules" directories.
      *
      * @param moduleName The name of the module. If null, all modules will be included.
-     * Both `/` and `\` separators are accepted on all OSes.
+     * Gradle project path (e.g. `:feature:auth`) is the preferred format, but `feature/auth` and `feature\auth`
+     * are also accepted on all OSes. Use `root` (or `:`) for the top-level module.
      * @param sourceSetName The name of the source set. If null, all source sets will be included.
      * @return a [KoScope] containing all of Kotlin files in the production source sets.
+     * @throws IllegalArgumentException if the module name is blank or the module directory does not exist.
      *
      * @See [scopeFromProduction]
      */
@@ -125,9 +136,11 @@ interface KoScopeCreator {
      * hidden directories (e.g. ".git", ".gradle", ".idea") and "node_modules" directories.
      *
      * @param moduleName The name of the module. If null, all modules will be included.
-     * Both `/` and `\` separators are accepted on all OSes.
+     * Gradle project path (e.g. `:feature:auth`) is the preferred format, but `feature/auth` and `feature\auth`
+     * are also accepted on all OSes. Use `root` (or `:`) for the top-level module.
      * @param sourceSetName The name of the source set. If null, all source sets will be included.
      * @return a [KoScope] containing all of Kotlin files in the test source sets.
+     * @throws IllegalArgumentException if the module name is blank or the module directory does not exist.
      *
      * @See [scopeFromTest]
      */

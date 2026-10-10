@@ -11,6 +11,8 @@ import com.lemonappdev.konsist.core.ext.toMacOsSeparator
 import com.lemonappdev.konsist.core.ext.toOsSeparator
 import com.lemonappdev.konsist.core.filesystem.PathProvider
 import com.lemonappdev.konsist.core.provider.util.KoFileDeclarationProvider
+import com.lemonappdev.konsist.core.util.ModuleUtil
+import com.lemonappdev.konsist.core.util.ModuleUtil.ROOT_MODULE_NAME
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.runBlocking
 import java.io.File
@@ -36,9 +38,15 @@ internal class KoScopeCreatorCore : KoScopeCreator {
 
     override fun scopeFromModules(moduleNames: Collection<String>): KoScopeCore =
         runBlocking {
+            require(moduleNames.isNotEmpty()) { "Module names are empty, but at least one module name should be provided." }
+
             moduleNames
-                .flatMap { getFiles(it) }
-                .let { KoScopeCore(it) }
+                .distinctBy { ModuleUtil.normalizeModuleName(it) }
+                .flatMap { moduleName ->
+                    getFiles(moduleName).also {
+                        require(it.isNotEmpty()) { "Module does not contain any Kotlin files: '$moduleName'" }
+                    }
+                }.let { KoScopeCore(it) }
         }
 
     override fun scopeFromPackage(
@@ -72,6 +80,8 @@ internal class KoScopeCreatorCore : KoScopeCreator {
         ignoreBuildConfig: Boolean = true,
     ): List<KoFileDeclaration> =
         coroutineScope {
+            moduleName?.let { requireModuleDirectoryExists(it) }
+
             val localProjectKotlinFiles =
                 KoFileDeclarationProvider
                     .getKoFileDeclarations()
@@ -200,6 +210,23 @@ internal class KoScopeCreatorCore : KoScopeCreator {
         return KoScopeCore(koFiles + notKotlinFiles)
     }
 
+    /**
+     * Throws an [IllegalArgumentException] when the module directory does not exist, so a misspelled module name
+     * does not silently produce an empty scope.
+     */
+    private fun requireModuleDirectoryExists(moduleName: String) {
+        val normalizedModuleName = ModuleUtil.normalizeModuleName(moduleName)
+
+        if (normalizedModuleName == ROOT_MODULE_NAME) {
+            return
+        }
+
+        val moduleDirectory = File(getAbsolutePath(normalizedModuleName))
+        require(moduleDirectory.isDirectory) {
+            "Module does not exist: '$moduleName'. Directory not found: ${moduleDirectory.path}"
+        }
+    }
+
     private fun getAbsolutePath(projectPath: String): String = "$projectRootPath$sep${projectPath.toOsSeparator()}"
 
     private fun isTestSourceSet(name: String): Boolean {
@@ -232,12 +259,12 @@ internal class KoScopeCreatorCore : KoScopeCreator {
 
     companion object {
         private const val TEST_NAME_IN_PATH = "test"
-        private const val ROOT_MODULE_NAME = "root"
 
         /**
          * Builds regex matching file paths of given module and source set. Path parts are escaped, so folder names
          * containing regex characters (e.g. `C:\Projects (1)\app`) are matched literally. Leading and trailing
          * separators of module and source set names are ignored (e.g. `feature/auth/` is treated as `feature/auth`).
+         * Module name can be a Gradle project path (e.g. `:feature:auth` is treated as `feature/auth`).
          */
         internal fun getPathRegex(
             projectRootPath: String,
@@ -247,10 +274,10 @@ internal class KoScopeCreatorCore : KoScopeCreator {
             val rootPathPattern = Regex.escape(projectRootPath.toMacOsSeparator())
 
             val modulePattern =
-                when (moduleName) {
+                when (val normalizedModuleName = moduleName?.let { ModuleUtil.normalizeModuleName(it) }) {
                     ROOT_MODULE_NAME -> rootPathPattern
                     null -> "$rootPathPattern.*"
-                    else -> "$rootPathPattern/${Regex.escape(moduleName.toMacOsSeparator().trim('/'))}"
+                    else -> "$rootPathPattern/${Regex.escape(normalizedModuleName)}"
                 }
 
             val sourceSetPattern =
