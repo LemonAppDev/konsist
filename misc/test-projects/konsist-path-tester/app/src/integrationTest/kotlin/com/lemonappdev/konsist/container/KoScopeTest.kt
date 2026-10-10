@@ -31,12 +31,12 @@ class KoScopeTest {
             .toString()
 
         // then
+        // toString uses "/" separators on all OSes
         sut shouldBeEqualTo """
-            ${PathProvider.appMainSourceSetDirectory}/fixture/AppClass.kt
-            ${PathProvider.appMainSourceSetDirectory}/fixture/data/AppDataClass.kt
+            ${PathProvider.projectRootDirectory}/app/src/main/kotlin/com/lemonappdev/fixture/AppClass.kt
+            ${PathProvider.projectRootDirectory}/app/src/main/kotlin/com/lemonappdev/fixture/data/AppDataClass.kt
         """
             .trimIndent()
-            .toOsSeparator()
     }
 
     @Test
