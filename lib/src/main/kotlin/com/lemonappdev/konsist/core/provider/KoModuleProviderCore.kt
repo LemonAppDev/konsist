@@ -2,6 +2,7 @@ package com.lemonappdev.konsist.core.provider
 
 import com.lemonappdev.konsist.api.provider.KoModuleProvider
 import com.lemonappdev.konsist.core.ext.sep
+import com.lemonappdev.konsist.core.ext.toMacOsSeparator
 import com.lemonappdev.konsist.core.filesystem.PathProvider
 
 internal interface KoModuleProviderCore :
@@ -15,10 +16,12 @@ internal interface KoModuleProviderCore :
                     .rootProjectPath
                     .substringAfterLast(sep)
 
+            // Module name always uses "/" separator (e.g. "feature/data"), regardless of the OS
             val moduleName =
                 projectPath
-                    .substringBefore("${sep}src$sep")
-                    .substringAfter(sep)
+                    .toMacOsSeparator()
+                    .substringBefore("/src/")
+                    .substringAfter("/")
 
             return if (moduleName == projectName || moduleName == "") {
                 "root"
@@ -27,5 +30,5 @@ internal interface KoModuleProviderCore :
             }
         }
 
-    override fun resideInModule(name: String): Boolean = name == moduleName
+    override fun resideInModule(name: String): Boolean = name.toMacOsSeparator() == moduleName
 }
