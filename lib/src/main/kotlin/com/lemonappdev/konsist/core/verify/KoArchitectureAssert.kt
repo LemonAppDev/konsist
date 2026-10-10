@@ -131,8 +131,9 @@ private fun getExceptionMessage(
     val errorMessage = messages.joinToString("\n")
     val customMessage = if (additionalMessage != null) "\n$additionalMessage" else ""
     val localTestName = testName ?: getTestMethodNameFromNinthIndex()
+    val testMessage = localTestName?.let { "'$it' test has failed." } ?: "Test has failed."
 
-    return "'$localTestName' test has failed. ${customMessage}\n$errorMessage"
+    return "$testMessage ${customMessage}\n$errorMessage"
 }
 
 private fun getFailedDependsOnNothingMessage(failures: List<DependsOnNothingDependencyFailure>): String? =
