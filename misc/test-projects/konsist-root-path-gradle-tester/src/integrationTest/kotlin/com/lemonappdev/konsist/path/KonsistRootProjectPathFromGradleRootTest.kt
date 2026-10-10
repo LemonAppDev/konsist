@@ -11,6 +11,7 @@ class KonsistRootProjectPathFromGradleRootTest {
         val projectRootPath = File("")
             .absoluteFile
             .path
+            .replace(File.separator, "/")
 
         // then
         Konsist.projectRootPath shouldBeEqualTo projectRootPath
