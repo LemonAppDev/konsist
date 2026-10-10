@@ -105,4 +105,72 @@ class KoScopeCreatorCoreTest {
         // then
         result shouldBeEqualTo false
     }
+
+    @Test
+    fun `should match file from module when module name has trailing slash`() {
+        // given
+        val regex =
+            KoScopeCreatorCore.getPathRegex(
+                projectRootPath = "/Users/user/project",
+                moduleName = "feature/auth/",
+                sourceSetName = null,
+            )
+
+        // when
+        val result = "/Users/user/project/feature/auth/src/main/kotlin/SampleClass.kt".matches(regex)
+
+        // then
+        result shouldBeEqualTo true
+    }
+
+    @Test
+    fun `should match file from module when module name has trailing windows separator`() {
+        // given
+        val regex =
+            KoScopeCreatorCore.getPathRegex(
+                projectRootPath = """C:\Users\user\project""",
+                moduleName = """feature\auth\""",
+                sourceSetName = null,
+            )
+
+        // when
+        val result = "C:/Users/user/project/feature/auth/src/main/kotlin/SampleClass.kt".matches(regex)
+
+        // then
+        result shouldBeEqualTo true
+    }
+
+    @Test
+    fun `should match file from module when module name has leading slash`() {
+        // given
+        val regex =
+            KoScopeCreatorCore.getPathRegex(
+                projectRootPath = "/Users/user/project",
+                moduleName = "/feature/auth",
+                sourceSetName = null,
+            )
+
+        // when
+        val result = "/Users/user/project/feature/auth/src/main/kotlin/SampleClass.kt".matches(regex)
+
+        // then
+        result shouldBeEqualTo true
+    }
+
+    @Test
+    fun `should match file from source set when source set name has trailing slash`() {
+        // given
+        val regex =
+            KoScopeCreatorCore.getPathRegex(
+                projectRootPath = "/Users/user/project",
+                moduleName = "app",
+                sourceSetName = "main/",
+            )
+
+        // when
+        val result = "/Users/user/project/app/src/main/kotlin/SampleClass.kt".matches(regex)
+
+        // then
+        result shouldBeEqualTo true
+    }
 }
