@@ -80,15 +80,11 @@ Snapshot and release publishing require these properties in `local.properties`:
 15. Upgrade `konist` version on `develop` branch
 16. Notify devs who have reported the issue (community link in original ticket)
 
-## Sonatype
+## Central Portal Links
 
-- [Central Portal Deployments](https://central.sonatype.com/publishing/deployments)
-- [Central Portal Namespaces](https://central.sonatype.com/publishing/namespaces)
-
-## Repositories Links
-
-- [mvnrepository.com](https://mvnrepository.com/artifact/com.lemonappdev/konsist/)
-- [central.sonatype.com](https://central.sonatype.com/artifact/com.lemonappdev/konsist/)
+- [Artifact](https://mvnrepository.com/artifact/com.lemonappdev/konsist/) (public)
+- [Deployments](https://central.sonatype.com/publishing/deployments) (private)
+- [Namespaces](https://central.sonatype.com/publishing/namespaces) (private)
 
 ## Naming Conventions
 
