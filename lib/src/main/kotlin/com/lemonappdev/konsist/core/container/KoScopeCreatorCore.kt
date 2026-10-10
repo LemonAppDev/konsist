@@ -86,24 +86,10 @@ internal class KoScopeCreatorCore : KoScopeCreator {
                 return@coroutineScope localProjectKotlinFiles
             }
 
-            var pathPrefix =
-                if (moduleName == ROOT_MODULE_NAME) {
-                    projectRootPath
-                } else if (moduleName != null) {
-                    "$projectRootPath/$moduleName"
-                } else {
-                    "$projectRootPath.*"
-                }
-
-            pathPrefix =
-                if (sourceSetName != null) {
-                    "$pathPrefix/src/$sourceSetName/.*"
-                } else {
-                    "$pathPrefix/src/.*"
-                }.toMacOsSeparator()
+            val pathRegex = getPathRegex(projectRootPath, moduleName, sourceSetName)
 
             return@coroutineScope localProjectKotlinFiles
-                .filter { it.path.toMacOsSeparator().matches(Regex(pathPrefix)) }
+                .filter { it.path.toMacOsSeparator().matches(pathRegex) }
         }
 
     override fun scopeFromProduction(
@@ -245,5 +231,33 @@ internal class KoScopeCreatorCore : KoScopeCreator {
     companion object {
         private const val TEST_NAME_IN_PATH = "test"
         private const val ROOT_MODULE_NAME = "root"
+
+        /**
+         * Builds regex matching file paths of given module and source set. Path parts are escaped, so folder names
+         * containing regex characters (e.g. `C:\Projects (1)\app`) are matched literally.
+         */
+        internal fun getPathRegex(
+            projectRootPath: String,
+            moduleName: String?,
+            sourceSetName: String?,
+        ): Regex {
+            val rootPathPattern = Regex.escape(projectRootPath.toMacOsSeparator())
+
+            val modulePattern =
+                when (moduleName) {
+                    ROOT_MODULE_NAME -> rootPathPattern
+                    null -> "$rootPathPattern.*"
+                    else -> "$rootPathPattern/${Regex.escape(moduleName.toMacOsSeparator())}"
+                }
+
+            val sourceSetPattern =
+                if (sourceSetName != null) {
+                    "/src/${Regex.escape(sourceSetName.toMacOsSeparator())}/.*"
+                } else {
+                    "/src/.*"
+                }
+
+            return Regex("$modulePattern$sourceSetPattern")
+        }
     }
 }
