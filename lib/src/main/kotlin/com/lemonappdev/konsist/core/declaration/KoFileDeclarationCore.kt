@@ -69,6 +69,11 @@ internal class KoFileDeclarationCore(
 
     override val name: String by lazy { nameWithExtension.substringBeforeLast('.') }
 
+    override fun hasName(
+        text: String,
+        ignoreCase: Boolean,
+    ): Boolean = name.equals(text, ignoreCase) || nameWithExtension.equals(text, ignoreCase)
+
     override val path: String by lazy {
         ktFile
             .name
