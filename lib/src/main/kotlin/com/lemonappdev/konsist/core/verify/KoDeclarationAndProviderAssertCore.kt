@@ -26,26 +26,16 @@ internal fun <E : KoBaseProvider> List<E?>.assert(
     var lastDeclaration: KoBaseProvider? = null
 
     try {
-        val fifthIndexMethodName = getTestMethodNameFromFifthIndex()
+        val testMethodName = testName ?: getTestMethodNameFromFifthIndex()
 
-        val testMethodName =
-            testName
-                ?: if (fifthIndexMethodName.contains("\$default")) {
-                    getTestMethodNameFromSixthIndex()
-                } else {
-                    fifthIndexMethodName
-                }
-
-        val assertMethodName = getTestMethodNameFromFourthIndex()
+        val assertMethodName = getAssertMethodNameFromFourthIndex()
 
         if (strict) {
             checkIfLocalListIsEmpty(this, assertMethodName)
             checkIfLocalListHasOnlyNullElements(this, assertMethodName)
         }
 
-        val localSuppressName = testName ?: testMethodName
-
-        val notSuppressedDeclarations = checkIfAnnotatedWithSuppress(this.filterNotNull(), localSuppressName)
+        val notSuppressedDeclarations = checkIfAnnotatedWithSuppress(this.filterNotNull(), testMethodName)
 
         val result =
             notSuppressedDeclarations.groupBy {
@@ -53,7 +43,7 @@ internal fun <E : KoBaseProvider> List<E?>.assert(
                 function(it) ?: positiveCheck
             }
 
-        getResult(notSuppressedDeclarations, result, positiveCheck, localSuppressName, additionalMessage)
+        getResult(notSuppressedDeclarations, result, positiveCheck, testMethodName, additionalMessage)
     } catch (e: KoException) {
         throw e
     } catch (
@@ -71,22 +61,12 @@ internal fun <E : KoBaseProvider> List<E?>.assert(
     onSingleElement: Boolean,
 ) {
     try {
-        val fifthIndexMethodName = getTestMethodNameFromFifthIndex()
-
-        val testMethodName =
-            testName
-                ?: if (fifthIndexMethodName.contains("\$default")) {
-                    getTestMethodNameFromSixthIndex()
-                } else {
-                    fifthIndexMethodName
-                }
-
-        val localSuppressName = testName ?: testMethodName
+        val testMethodName = testName ?: getTestMethodNameFromFifthIndex()
 
         val declarationWithoutNull = filterNotNull()
 
         val suppressedDeclarations =
-            declarationWithoutNull - checkIfAnnotatedWithSuppress(declarationWithoutNull, localSuppressName).toSet()
+            declarationWithoutNull - checkIfAnnotatedWithSuppress(declarationWithoutNull, testMethodName).toSet()
 
         val notSuppressedDeclarations = this - suppressedDeclarations.toSet()
 
@@ -138,8 +118,12 @@ fun checkIfLocalListIsEmpty(
 
 private fun <E : KoBaseProvider> checkIfAnnotatedWithSuppress(
     localList: List<E>,
-    suppressName: String,
+    suppressName: String?,
 ): List<E> {
+    if (suppressName == null) {
+        return localList
+    }
+
     val declarations: MutableMap<E, Boolean> = mutableMapOf()
 
     // First we need to exclude (if exist) file suppress test annotation
@@ -213,7 +197,7 @@ private fun getResult(
     items: List<*>,
     result: Map<Boolean, List<Any>>,
     positiveCheck: Boolean,
-    testName: String,
+    testName: String?,
     additionalMessage: String?,
 ): Unit {
     val allChecksPassed = (result[positiveCheck]?.size ?: 0) == items.size
@@ -226,7 +210,7 @@ private fun getResult(
 
 private fun getCheckFailedMessage(
     failedItems: List<*>,
-    testName: String,
+    testName: String?,
     additionalMessage: String?,
 ): String {
     val (types, failedDeclarationsMessage) = processFailedItems(failedItems)
@@ -235,7 +219,7 @@ private fun getCheckFailedMessage(
     val times = if (failedItems.size == 1) "time" else "times"
 
     val getRootMessage =
-        "Assert '$testName' was violated (${failedItems.size} $times).$customMessage" +
+        "Assert${testName.toMessageName("'")} was violated (${failedItems.size} $times).$customMessage" +
             "Invalid $types:"
 
     val failedDeclarationAsciiTreeNodes = failedDeclarationsMessage.map { AsciiTreeNode(it, emptyList()) }
@@ -295,7 +279,7 @@ private fun getEmptyResult(
     items: List<*>,
     additionalMessage: String?,
     isEmpty: Boolean,
-    testMethodName: String,
+    testMethodName: String?,
 ) {
     val itemsListIsEmpty = items.isEmpty()
 
@@ -327,7 +311,7 @@ private fun getEmptyResult(
         val customMessage = if (additionalMessage != null) "\n${additionalMessage}\n" else " "
 
         val getRootMessage =
-            "Assert '$testMethodName' failed.${customMessage}Declaration list is$negation empty.$values"
+            "Assert${testMethodName.toMessageName("'")} failed.${customMessage}Declaration list is$negation empty.$values"
 
         val failedDeclarationAsciiTreeNodes =
             items
@@ -366,7 +350,7 @@ private fun getNullResult(
     item: Any?,
     additionalMessage: String?,
     isNull: Boolean,
-    testMethodName: String,
+    testMethodName: String?,
 ) {
     val itemIsNull = item == null
 
@@ -376,7 +360,7 @@ private fun getNullResult(
         val customMessage = if (additionalMessage != null) "\n${additionalMessage}\n" else " "
 
         val getRootMessage =
-            "Assert `$testMethodName` failed.${customMessage}Declaration has$negation null value$value."
+            "Assert${testMethodName.toMessageName("`")} failed.${customMessage}Declaration has$negation null value$value."
 
         val failedDeclarationAsciiTreeNode: AsciiTreeNode? =
             item.createErrorOutput()?.let { string -> AsciiTreeNode(string, emptyList()) }
@@ -400,3 +384,8 @@ private fun Any.getDeclarationType(): String? =
         .simpleName
         ?.removePrefix("Ko")
         ?.removeSuffix("DeclarationCore")
+
+/**
+ * Test name can't be determined for some test frameworks (e.g. Kotest), so it is omitted from the message.
+ */
+private fun String?.toMessageName(quote: String) = this?.let { " $quote$it$quote" }.orEmpty()
