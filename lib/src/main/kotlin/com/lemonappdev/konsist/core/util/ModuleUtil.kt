@@ -24,22 +24,16 @@ object ModuleUtil {
      *
      * Accepts Gradle project paths (e.g. ":feature:auth" or "feature:auth"), "/" and "\" separators,
      * e.g. ":feature:auth", "feature/auth" and "feature\auth" are all converted to "feature/auth".
-     * Gradle root project path (":") is converted to "root".
-     *
-     * @throws IllegalArgumentException when the module name is blank.
+     * Gradle root project path (":") is converted to "root". Blank module name is converted to an empty string,
+     * which does not match any module.
      */
     internal fun normalizeModuleName(moduleName: String): String {
         if (moduleName.trim() == GRADLE_ROOT_PROJECT_PATH) {
             return ROOT_MODULE_NAME
         }
 
-        val normalizedModuleName =
-            toMacOsSeparator(moduleName.trim())
-                .replace(':', '/')
-                .trim('/')
-
-        require(normalizedModuleName.isNotBlank()) { "Module name is blank: '$moduleName'" }
-
-        return normalizedModuleName
+        return toMacOsSeparator(moduleName.trim())
+            .replace(':', '/')
+            .trim('/')
     }
 }

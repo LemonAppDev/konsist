@@ -24,7 +24,6 @@ interface KoScopeCreator {
      * @param sourceSetName The name of the source set. If null, all source sets will be included.
      * @param ignoreBuildConfig If true, build config files and directories such as Gradle buildSrc directory will be ignored.
      * @return a [KoScope] containing all of Kotlin files in the project.
-     * @throws IllegalArgumentException if the module name is blank or the module directory does not exist.
      */
     fun scopeFromProject(
         moduleName: String? = null,
@@ -42,8 +41,6 @@ interface KoScopeCreator {
      * are also accepted on all OSes. Use `root` (or `:`) for the top-level module. Module names are case-sensitive.
      * @param moduleNames The name(s) of the module(s), in the same format as [moduleName].
      * @return a [KoScope] containing all of Kotlin files in the module.
-     * @throws IllegalArgumentException if the module name is blank, the module directory does not exist,
-     * or the module does not contain any Kotlin files.
      */
     fun scopeFromModule(
         moduleName: String,
@@ -59,8 +56,6 @@ interface KoScopeCreator {
      * Gradle project path (e.g. `:feature:auth`) is the preferred format, but `feature/auth` and `feature\auth`
      * are also accepted on all OSes. Use `root` (or `:`) for the top-level module. Module names are case-sensitive.
      * @return a [KoScope] containing all of Kotlin files in the module.
-     * @throws IllegalArgumentException if [moduleNames] is empty, any module name is blank, any module directory
-     * does not exist, or any module does not contain any Kotlin files.
      */
     fun scopeFromModules(moduleNames: Collection<String>): KoScope
 
@@ -75,7 +70,6 @@ interface KoScopeCreator {
      * are also accepted on all OSes. Use `root` (or `:`) for the top-level module. Module names are case-sensitive.
      * @param sourceSetName The name of the source set. If null, all source sets will be included.
      * @return a [KoScope] containing all of Kotlin files in the given package.
-     * @throws IllegalArgumentException if the module name is blank or the module directory does not exist.
      */
     fun scopeFromPackage(
         packagee: String,
@@ -120,8 +114,7 @@ interface KoScopeCreator {
      * are also accepted on all OSes. Use `root` (or `:`) for the top-level module. Module names are case-sensitive.
      * @param sourceSetName The name of the source set. If null, all source sets will be included.
      * @return a [KoScope] containing all of Kotlin files in the production source sets.
-     * @throws IllegalArgumentException if the module name is blank, the module directory does not exist,
-     * or [sourceSetName] is a test source set.
+     * @throws IllegalArgumentException if [sourceSetName] is a test source set.
      *
      * @see [scopeFromTest]
      */
@@ -141,8 +134,7 @@ interface KoScopeCreator {
      * are also accepted on all OSes. Use `root` (or `:`) for the top-level module. Module names are case-sensitive.
      * @param sourceSetName The name of the source set. If null, all source sets will be included.
      * @return a [KoScope] containing all of Kotlin files in the test source sets.
-     * @throws IllegalArgumentException if the module name is blank, the module directory does not exist,
-     * or [sourceSetName] is a production source set.
+     * @throws IllegalArgumentException if [sourceSetName] is a production source set.
      *
      * @see [scopeFromProduction]
      */

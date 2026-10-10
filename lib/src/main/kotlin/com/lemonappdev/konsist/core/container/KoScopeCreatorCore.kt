@@ -38,15 +38,10 @@ internal class KoScopeCreatorCore : KoScopeCreator {
 
     override fun scopeFromModules(moduleNames: Collection<String>): KoScopeCore =
         runBlocking {
-            require(moduleNames.isNotEmpty()) { "Module names are empty, but at least one module name should be provided." }
-
             moduleNames
                 .distinctBy { ModuleUtil.normalizeModuleName(it) }
-                .flatMap { moduleName ->
-                    getFiles(moduleName).also {
-                        require(it.isNotEmpty()) { "Module does not contain any Kotlin files: '$moduleName'" }
-                    }
-                }.let { KoScopeCore(it) }
+                .flatMap { getFiles(it) }
+                .let { KoScopeCore(it) }
         }
 
     override fun scopeFromPackage(
@@ -80,8 +75,6 @@ internal class KoScopeCreatorCore : KoScopeCreator {
         ignoreBuildConfig: Boolean = true,
     ): List<KoFileDeclaration> =
         coroutineScope {
-            moduleName?.let { requireModuleDirectoryExists(it) }
-
             val localProjectKotlinFiles =
                 KoFileDeclarationProvider
                     .getKoFileDeclarations()
@@ -208,37 +201,6 @@ internal class KoScopeCreatorCore : KoScopeCreator {
         val koFiles = getKoFiles(files)
 
         return KoScopeCore(koFiles + notKotlinFiles)
-    }
-
-    /**
-     * Throws an [IllegalArgumentException] when the module directory does not exist, so a misspelled module name
-     * does not silently produce an empty scope.
-     */
-    private fun requireModuleDirectoryExists(moduleName: String) {
-        val normalizedModuleName = ModuleUtil.normalizeModuleName(moduleName)
-
-        if (normalizedModuleName == ROOT_MODULE_NAME) {
-            return
-        }
-
-        require(isModuleDirectory(normalizedModuleName)) {
-            "Module does not exist: '$moduleName'. Directory not found (module names are case-sensitive): " +
-                getAbsolutePath(normalizedModuleName)
-        }
-    }
-
-    /**
-     * Checks each module path segment with exact letter case, because [File.isDirectory] ignores letter case on
-     * case-insensitive file systems (macOS, Windows), while module files are matched case-sensitively.
-     */
-    private fun isModuleDirectory(normalizedModuleName: String): Boolean {
-        var directory = File(projectRootPath)
-
-        return normalizedModuleName.split("/").all { segment ->
-            val exists = directory.list()?.contains(segment) == true
-            directory = File(directory, segment)
-            exists
-        } && directory.isDirectory
     }
 
     private fun getAbsolutePath(projectPath: String): String = "$projectRootPath$sep${projectPath.toOsSeparator()}"

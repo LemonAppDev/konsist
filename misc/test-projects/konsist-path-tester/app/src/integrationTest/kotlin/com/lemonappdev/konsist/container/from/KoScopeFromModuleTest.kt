@@ -7,11 +7,8 @@ import com.lemonappdev.konsist.helper.util.PathProvider.appIntegrationTestSource
 import com.lemonappdev.konsist.helper.util.PathProvider.appMainSourceSetDirectory
 import com.lemonappdev.konsist.helper.util.PathProvider.dataMainSourceSetDirectory
 import com.lemonappdev.konsist.helper.util.PathProvider.dataTestSourceSetDirectory
-import com.lemonappdev.konsist.helper.util.PathProvider.projectRootDirectory
 import com.lemonappdev.konsist.helper.util.PathProvider.rootMainSourceSetDirectory
 import org.amshove.kluent.shouldBeEqualTo
-import org.amshove.kluent.shouldThrow
-import org.amshove.kluent.withMessage
 import org.junit.jupiter.api.Test
 
 class KoScopeFromModuleTest {
@@ -180,42 +177,38 @@ class KoScopeFromModuleTest {
     }
 
     @Test
-    fun `scopeFromModule throws exception if module does not exist`() {
+    fun `scopeFromModule is empty if module does not exist`() {
         // given
-        val func = { Konsist.scopeFromModule(":nonExisting") }
+        val sut = Konsist.scopeFromModule(":nonExisting")
 
         // then
-        val message = "Module does not exist: ':nonExisting'. Directory not found (module names are case-sensitive): " +
-            "$projectRootDirectory/nonExisting".toOsSeparator()
-        func shouldThrow IllegalArgumentException::class withMessage message
+        sut.mapToFilePaths() shouldBeEqualTo emptyList()
     }
 
     @Test
-    fun `scopeFromModule throws exception if module name has different letter case`() {
+    fun `scopeFromModule is empty if module name has different letter case`() {
         // given
-        val func = { Konsist.scopeFromModule(":Data") }
+        val sut = Konsist.scopeFromModule(":Data")
 
         // then
-        val message = "Module does not exist: ':Data'. Directory not found (module names are case-sensitive): " +
-            "$projectRootDirectory/Data".toOsSeparator()
-        func shouldThrow IllegalArgumentException::class withMessage message
+        sut.mapToFilePaths() shouldBeEqualTo emptyList()
     }
 
     @Test
-    fun `scopeFromModule throws exception if module does not contain any Kotlin files`() {
+    fun `scopeFromModule is empty if module does not contain any Kotlin files`() {
         // given
-        val func = { Konsist.scopeFromModule(":gradle") }
+        val sut = Konsist.scopeFromModule(":gradle")
 
         // then
-        func shouldThrow IllegalArgumentException::class withMessage "Module does not contain any Kotlin files: ':gradle'"
+        sut.mapToFilePaths() shouldBeEqualTo emptyList()
     }
 
     @Test
-    fun `scopeFromModule throws exception if module name is blank`() {
+    fun `scopeFromModule is empty if module name is blank`() {
         // given
-        val func = { Konsist.scopeFromModule(" ") }
+        val sut = Konsist.scopeFromModule(" ")
 
         // then
-        func shouldThrow IllegalArgumentException::class withMessage "Module name is blank: ' '"
+        sut.mapToFilePaths() shouldBeEqualTo emptyList()
     }
 }

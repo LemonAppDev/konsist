@@ -5,8 +5,6 @@ import com.lemonappdev.konsist.api.container.KoScope
 import com.lemonappdev.konsist.helper.ext.toOsSeparator
 import com.lemonappdev.konsist.helper.util.PathProvider.featurePaymentMainSourceSetDirectory
 import org.amshove.kluent.shouldBeEqualTo
-import org.amshove.kluent.shouldThrow
-import org.amshove.kluent.withMessage
 import org.junit.jupiter.api.Test
 
 /**
@@ -57,12 +55,12 @@ class KoScopeFromNestedModuleTest {
     }
 
     @Test
-    fun `scopeFromModule throws exception for parent directory of nested module`() {
+    fun `scopeFromModule for parent directory of nested module is empty`() {
         // given
-        val func = { Konsist.scopeFromModule("feature") }
+        val sut = Konsist.scopeFromModule("feature")
 
         // then
-        func shouldThrow IllegalArgumentException::class withMessage "Module does not contain any Kotlin files: 'feature'"
+        sut.mapToFilePaths() shouldBeEqualTo emptyList()
     }
 
     @Test

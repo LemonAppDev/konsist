@@ -17,7 +17,6 @@ interface KoModuleProvider : KoBaseProvider {
      * Gradle project path (e.g. `:feature:auth`) is the preferred format, but `feature/auth` and `feature\auth`
      * are also accepted on all OSes.
      * @return `true` if a declaration resides in the specified module, `false` otherwise.
-     * @throws IllegalArgumentException if the module name is blank.
      */
     fun resideInModule(name: String): Boolean
 }
