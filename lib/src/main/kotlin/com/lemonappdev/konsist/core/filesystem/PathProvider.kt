@@ -1,6 +1,7 @@
 package com.lemonappdev.konsist.core.filesystem
 
 import com.lemonappdev.konsist.core.exception.KoInternalException
+import com.lemonappdev.konsist.core.util.PathUtil.toMacOsSeparator
 import java.io.File
 
 object PathProvider {
@@ -14,7 +15,7 @@ object PathProvider {
         val projectRootDirectory = getProjectRootDirectory(file)
 
         if (projectRootDirectory == null) {
-            val message = "Project directory not found. Searched in ${file.absoluteFile.path} and parent directories"
+            val message = "Project directory not found. Searched in ${toMacOsSeparator(file.absoluteFile.path)} and parent directories"
             throw KoInternalException(message)
         } else {
             projectRootDirectory.absoluteFile.path

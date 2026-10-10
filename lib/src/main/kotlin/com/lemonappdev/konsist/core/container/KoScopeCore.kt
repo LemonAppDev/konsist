@@ -17,6 +17,7 @@ import com.lemonappdev.konsist.api.declaration.combined.KoClassAndInterfaceAndOb
 import com.lemonappdev.konsist.api.declaration.combined.KoClassAndInterfaceDeclaration
 import com.lemonappdev.konsist.api.declaration.combined.KoClassAndObjectDeclaration
 import com.lemonappdev.konsist.api.declaration.combined.KoInterfaceAndObjectDeclaration
+import com.lemonappdev.konsist.core.util.PathUtil.toMacOsSeparator
 
 @Suppress("detekt.TooManyFunctions")
 class KoScopeCore(
@@ -93,7 +94,7 @@ class KoScopeCore(
     override fun toString(): String =
         files
             .toList()
-            .joinToString("\n") { it.path }
+            .joinToString("\n") { toMacOsSeparator(it.path) }
 
     override fun print(
         prefix: String?,
