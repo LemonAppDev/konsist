@@ -14,7 +14,8 @@ interface KoScopeCreator {
 
     /**
      * Creates a [KoScope] containing all of Kotlin files in the project.
-     * Method does return Kotlin files present in build directories such as "build" and "target".
+     * Method does not return Kotlin files present in build directories ("build" and "target" outside "src" directory),
+     * hidden directories (e.g. ".git", ".gradle", ".idea") and "node_modules" directories.
      *
      * @param moduleName The name of the module. If null, all modules will be included.
      * @param sourceSetName The name of the source set. If null, all source sets will be included.
@@ -29,7 +30,8 @@ interface KoScopeCreator {
 
     /**
      * Creates a [KoScope] containing all of Kotlin files in the module.
-     * Method does return Kotlin files present in build directories such as "build" and "target".
+     * Method does not return Kotlin files present in build directories ("build" and "target" outside "src" directory),
+     * hidden directories (e.g. ".git", ".gradle", ".idea") and "node_modules" directories.
      *
      * @param moduleName The name of the module.
      * @param moduleNames The name(s) of the module(s).
@@ -42,7 +44,8 @@ interface KoScopeCreator {
 
     /**
      * Creates a [KoScope] containing all of Kotlin files in the module.
-     * Method does return Kotlin files present in build directories such as "build" and "target".
+     * Method does not return Kotlin files present in build directories ("build" and "target" outside "src" directory),
+     * hidden directories (e.g. ".git", ".gradle", ".idea") and "node_modules" directories.
      *
      * @param moduleNames Set of the module names.
      * @return a [KoScope] containing all of Kotlin files in the module.
@@ -51,7 +54,8 @@ interface KoScopeCreator {
 
     /**
      * Creates a [KoScope] containing all of Kotlin files in the given package.
-     * Method does return Kotlin files present in build directories such as "build" and "target".
+     * Method does not return Kotlin files present in build directories ("build" and "target" outside "src" directory),
+     * hidden directories (e.g. ".git", ".gradle", ".idea") and "node_modules" directories.
      *
      * @param packagee The name of the package.
      * @param moduleName The name of the module. If null, all modules will be included.
@@ -67,7 +71,8 @@ interface KoScopeCreator {
     /**
      * Creates a [KoScope] containing all of Kotlin files in source set. If the source set is present in multiple modules
      * then all of them will be included.
-     * Method does return Kotlin files present in build directories such as "build" and "target".
+     * Method does not return Kotlin files present in build directories ("build" and "target" outside "src" directory),
+     * hidden directories (e.g. ".git", ".gradle", ".idea") and "node_modules" directories.
      *
      * @param sourceSetName The name of the source set.
      * @param sourceSetNames The name(s) of the source set(s).
@@ -81,7 +86,8 @@ interface KoScopeCreator {
     /**
      * Creates a [KoScope] containing all of Kotlin files in source set. If the source set is present in multiple modules
      * then all of them will be included.
-     * Method does return Kotlin files present in build directories such as "build" and "target".
+     * Method does not return Kotlin files present in build directories ("build" and "target" outside "src" directory),
+     * hidden directories (e.g. ".git", ".gradle", ".idea") and "node_modules" directories.
      *
      * @param sourceSetNames Set of the source set names.
      * @return a [KoScope] containing all of Kotlin files in source set.
@@ -91,7 +97,8 @@ interface KoScopeCreator {
     /**
      * Creates a [KoScope] containing all of Kotlin files in the production source sets.
      * The production source set is the source set which name does not start and ends with "test".
-     * Method does return Kotlin files present in build directories such as "build" and "target".
+     * Method does not return Kotlin files present in build directories ("build" and "target" outside "src" directory),
+     * hidden directories (e.g. ".git", ".gradle", ".idea") and "node_modules" directories.
      *
      * @param moduleName The name of the module. If null, all modules will be included.
      * @param sourceSetName The name of the source set. If null, all source sets will be included.
@@ -107,7 +114,8 @@ interface KoScopeCreator {
     /**
      * Creates a [KoScope] containing all of Kotlin files in the test source sets.
      * The test source set is the source set which name starts or ends with "test".
-     * Method does return Kotlin files present in build directories such as "build" and "target".
+     * Method does not return Kotlin files present in build directories ("build" and "target" outside "src" directory),
+     * hidden directories (e.g. ".git", ".gradle", ".idea") and "node_modules" directories.
      *
      * @param moduleName The name of the module. If null, all modules will be included.
      * @param sourceSetName The name of the source set. If null, all source sets will be included.
