@@ -1,0 +1,108 @@
+package com.lemonappdev.konsist.core.container
+
+import org.amshove.kluent.shouldBeEqualTo
+import org.junit.jupiter.api.Test
+
+class KoScopeCreatorCoreTest {
+    @Test
+    fun `should match file from module when windows root path contains brackets`() {
+        // given
+        val regex =
+            KoScopeCreatorCore.getPathRegex(
+                projectRootPath = """C:\Projects (1)\app""",
+                moduleName = "feature",
+                sourceSetName = null,
+            )
+
+        // when
+        val result = "C:/Projects (1)/app/feature/src/main/kotlin/SampleClass.kt".matches(regex)
+
+        // then
+        result shouldBeEqualTo true
+    }
+
+    @Test
+    fun `should match file from source set when root path contains regex characters`() {
+        // given
+        val regex =
+            KoScopeCreatorCore.getPathRegex(
+                projectRootPath = "/Users/user/c++ [new] project",
+                moduleName = null,
+                sourceSetName = "main",
+            )
+
+        // when
+        val result = "/Users/user/c++ [new] project/app/src/main/kotlin/SampleClass.kt".matches(regex)
+
+        // then
+        result shouldBeEqualTo true
+    }
+
+    @Test
+    fun `should match file from root module when root path contains brackets`() {
+        // given
+        val regex =
+            KoScopeCreatorCore.getPathRegex(
+                projectRootPath = "/Users/user/project (1)",
+                moduleName = "root",
+                sourceSetName = "test",
+            )
+
+        // when
+        val result = "/Users/user/project (1)/src/test/kotlin/SampleClass.kt".matches(regex)
+
+        // then
+        result shouldBeEqualTo true
+    }
+
+    @Test
+    fun `should match file from nested module with windows separators`() {
+        // given
+        val regex =
+            KoScopeCreatorCore.getPathRegex(
+                projectRootPath = """C:\Users\user\project""",
+                moduleName = """feature\data""",
+                sourceSetName = "main",
+            )
+
+        // when
+        val result = "C:/Users/user/project/feature/data/src/main/kotlin/SampleClass.kt".matches(regex)
+
+        // then
+        result shouldBeEqualTo true
+    }
+
+    @Test
+    fun `should not treat root path regex characters as wildcards`() {
+        // given
+        val regex =
+            KoScopeCreatorCore.getPathRegex(
+                projectRootPath = "/Users/user/my.project",
+                moduleName = null,
+                sourceSetName = null,
+            )
+
+        // when
+        val result = "/Users/user/myXproject/app/src/main/kotlin/SampleClass.kt".matches(regex)
+
+        // then
+        result shouldBeEqualTo false
+    }
+
+    @Test
+    fun `should not match file from other module`() {
+        // given
+        val regex =
+            KoScopeCreatorCore.getPathRegex(
+                projectRootPath = "/Users/user/project (1)",
+                moduleName = "app",
+                sourceSetName = null,
+            )
+
+        // when
+        val result = "/Users/user/project (1)/data/src/main/kotlin/SampleClass.kt".matches(regex)
+
+        // then
+        result shouldBeEqualTo false
+    }
+}
