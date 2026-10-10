@@ -75,6 +75,9 @@ jobs:
           java-version: 25
           distribution: 'corretto'
 
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v6
+
       - name: Set up Python
         uses: actions/setup-python@v7
         with:
@@ -112,6 +115,9 @@ jobs:
         with:
           java-version: 25
           distribution: 'corretto'
+
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v6
 
       - name: Set up Python
         uses: actions/setup-python@v7
@@ -151,6 +157,9 @@ jobs:
           java-version: 25
           distribution: 'corretto'
 
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v6
+
       - name: Set up Python
         uses: actions/setup-python@v7
         with:
@@ -189,6 +198,9 @@ jobs:
           java-version: 25
           distribution: 'corretto'
 
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v6
+
       - name: Set up Python
         uses: actions/setup-python@v7
         with:
@@ -225,6 +237,9 @@ jobs:
         with:
           java-version: 25
           distribution: 'corretto'
+
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v6
 
       - name: Set up Python
         uses: actions/setup-python@v7
@@ -263,6 +278,9 @@ jobs:
           java-version: 25
           distribution: 'corretto'
 
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v6
+
       - name: Set up Python
         uses: actions/setup-python@v7
         with:
@@ -299,6 +317,9 @@ jobs:
         with:
           java-version: 25
           distribution: 'corretto'
+
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v6
 
       - name: Set up Python
         uses: actions/setup-python@v7
@@ -337,6 +358,9 @@ jobs:
           java-version: 25
           distribution: 'corretto'
 
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v6
+
       - name: Set up Python
         uses: actions/setup-python@v7
         with:
@@ -373,6 +397,9 @@ jobs:
         with:
           java-version: 25
           distribution: 'corretto'
+
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v6
 
       - name: Set up Python
         uses: actions/setup-python@v7
@@ -412,6 +439,9 @@ jobs:
           java-version: 25
           distribution: 'corretto'
 
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v6
+
       - name: Set up Python
         uses: actions/setup-python@v7
         with:
@@ -449,6 +479,9 @@ jobs:
           java-version: 25
           distribution: 'corretto'
 
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v6
+
       - name: Set up Python
         uses: actions/setup-python@v7
         with:
@@ -485,6 +518,9 @@ jobs:
         with:
           java-version: 25
           distribution: 'corretto'
+
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v6
 
       - name: Set up Python
         uses: actions/setup-python@v7
