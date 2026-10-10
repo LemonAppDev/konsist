@@ -9,7 +9,7 @@ interface KoFunModifierProvider :
     KoBaseProvider,
     KoModifierProvider {
     /**
-     * Determines whatever declaration has a `fun` modifier.
+     * Determines whether the declaration has the `fun` modifier.
      */
     val hasFunModifier: Boolean
 }

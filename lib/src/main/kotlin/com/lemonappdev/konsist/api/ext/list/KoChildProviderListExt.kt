@@ -16,19 +16,18 @@ fun <T : KoChildProvider> List<T>.children(indirectChildren: Boolean = false): L
     flatMap { it.children(indirectChildren) }
 
 /**
- * List containing declarations with class or interface child.
+ * List containing declarations with any child.
  *
  * @param indirectChildren Whether to include indirect children.
- * @return A list containing declarations with class or interface child.
+ * @return A list containing declarations with any child.
  */
 fun <T : KoChildProvider> List<T>.withChildren(indirectChildren: Boolean = false): List<T> = filter { it.hasChildren(indirectChildren) }
 
 /**
- * List containing declarations with no child - class does not extend any class and does not implement any interface.
+ * List containing declarations with no children.
  *
  * @param indirectChildren Whether to include indirect children.
- * @return A list containing declarations with no child - class does not extend any class and does not implement any
- * interface.
+ * @return A list containing declarations with no children.
  */
 fun <T : KoChildProvider> List<T>.withoutChildren(indirectChildren: Boolean = false): List<T> =
     filterNot { it.hasChildren(indirectChildren) }
@@ -40,9 +39,9 @@ fun <T : KoChildProvider> List<T>.withoutChildren(indirectChildren: Boolean = fa
  * @param names The names of additional children to include.
  * @param indirectChildren Whether to include indirect children.
  * @param ignoreCase Specifies whether the comparison should ignore case.
- *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
- * @return A list containing declarations with at least one of the specified child(s).
+ * @return A list containing declarations with at least one of the specified child(ren).
  */
 fun <T : KoChildProvider> List<T>.withChildNamed(
     name: String,
@@ -54,12 +53,12 @@ fun <T : KoChildProvider> List<T>.withChildNamed(
 /**
  * List containing declarations that have at least one child with the specified name(s).
  *
- * @param names The names of additional children to include.
+ * @param names The names of the children to include.
  * @param indirectChildren Whether to include indirect children.
  * @param ignoreCase Specifies whether the comparison should ignore case.
- *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
- * @return A list containing declarations with at least one of the specified child(s).
+ * @return A list containing declarations with at least one of the specified child(ren).
  */
 fun <T : KoChildProvider> List<T>.withChildNamed(
     names: Collection<String>,
@@ -74,15 +73,15 @@ fun <T : KoChildProvider> List<T>.withChildNamed(
     }
 
 /**
- * List containing declarations without any of specified children.
+ * List containing declarations without any of the specified children.
  *
  * @param name The name of the child to exclude.
  * @param names The names of additional children to exclude.
  * @param indirectChildren Whether to include indirect children.
  * @param ignoreCase Specifies whether the comparison should ignore case.
- *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
- * @return A list containing declarations without any of specified children.
+ * @return A list containing declarations without any of the specified children.
  */
 fun <T : KoChildProvider> List<T>.withoutChildNamed(
     name: String,
@@ -92,14 +91,14 @@ fun <T : KoChildProvider> List<T>.withoutChildNamed(
 ): List<T> = withoutChildNamed(listOf(name, *names), indirectChildren, ignoreCase)
 
 /**
- * List containing declarations without any of specified children.
+ * List containing declarations without any of the specified children.
  *
- * @param names The names of additional children to exclude.
+ * @param names The names of the children to exclude.
  * @param indirectChildren Whether to include indirect children.
  * @param ignoreCase Specifies whether the comparison should ignore case.
- *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
- * @return A list containing declarations without any of specified children.
+ * @return A list containing declarations without any of the specified children.
  */
 fun <T : KoChildProvider> List<T>.withoutChildNamed(
     names: Collection<String>,
@@ -117,12 +116,12 @@ fun <T : KoChildProvider> List<T>.withoutChildNamed(
  * List containing declarations that have all specified children.
  *
  * @param name The name of the child to include.
- * @param names The name(s) of the child(s) to include.
+ * @param names The names of additional children to include.
  * @param indirectChildren Whether to include indirect children.
  * @param ignoreCase Specifies whether the comparison should ignore case.
- *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
- * @return A list containing declarations with all specified child(s).
+ * @return A list containing declarations with all specified child(ren).
  */
 fun <T : KoChildProvider> List<T>.withAllChildrenNamed(
     name: String,
@@ -134,12 +133,12 @@ fun <T : KoChildProvider> List<T>.withAllChildrenNamed(
 /**
  * List containing declarations that have all specified children.
  *
- * @param names The name(s) of the child(s) to include.
+ * @param names The names of the children to include.
  * @param indirectChildren Whether to include indirect children.
  * @param ignoreCase Specifies whether the comparison should ignore case.
- *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
- * @return A list containing declarations with all specified child(s).
+ * @return A list containing declarations with all specified child(ren).
  */
 fun <T : KoChildProvider> List<T>.withAllChildrenNamed(
     names: Collection<String>,
@@ -157,12 +156,12 @@ fun <T : KoChildProvider> List<T>.withAllChildrenNamed(
  * List containing declarations without all specified children.
  *
  * @param name The name of the child to exclude.
- * @param names The name(s) of the child(s) to exclude.
+ * @param names The names of additional children to exclude.
  * @param indirectChildren Whether to include indirect children.
  * @param ignoreCase Specifies whether the comparison should ignore case.
- *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
- * @return A list containing declarations without all specified child(s).
+ * @return A list containing declarations without all specified child(ren).
  */
 fun <T : KoChildProvider> List<T>.withoutAllChildrenNamed(
     name: String,
@@ -174,12 +173,12 @@ fun <T : KoChildProvider> List<T>.withoutAllChildrenNamed(
 /**
  * List containing declarations without all specified children.
  *
- * @param names The name(s) of the child(s) to exclude.
+ * @param names The names of the children to exclude.
  * @param indirectChildren Whether to include indirect children.
  * @param ignoreCase Specifies whether the comparison should ignore case.
- *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
- * @return A list containing declarations without all specified child(s).
+ * @return A list containing declarations without all specified child(ren).
  */
 fun <T : KoChildProvider> List<T>.withoutAllChildrenNamed(
     names: Collection<String>,
@@ -209,11 +208,11 @@ fun <T : KoChildProvider> List<T>.withChild(
     }
 
 /**
- * List containing declarations that not have child satisfying the provided predicate.
+ * List containing declarations that do not have any child satisfying the provided predicate.
  *
  * @param indirectChildren Whether to include indirect children.
  * @param predicate A function that defines the condition to be met by a child declaration.
- * @return A list containing declarations without child satisfying the provided predicate.
+ * @return A list containing declarations without any child satisfying the provided predicate.
  */
 fun <T : KoChildProvider> List<T>.withoutChild(
     indirectChildren: Boolean = false,

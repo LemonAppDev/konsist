@@ -5,7 +5,7 @@ import kotlin.reflect.KClass
 
 /**
  * An interface representing a Kotlin declaration that provides access to the external parents.
- * The external parent is a parent defined outside the project codebase (defined inside external library).
+ * The external parent is a parent defined outside the project codebase (defined inside an external library).
  */
 interface KoExternalParentProvider : KoBaseProvider {
     /**
@@ -17,12 +17,12 @@ interface KoExternalParentProvider : KoBaseProvider {
      *                        For example:
      *
      *                        // Android
-     *                        class AppCompactActivity: Activity
+     *                        class AppCompatActivity: Activity
      *                        interface Activity
      *
      *                        // Project
-     *                        class BaseActivity: AppCompactActivity() // externalParents(indirectParents = true) returns [AppCompactActivity]
-     *                        class MyActivity: BaseActivity() // externalParents(indirectParents = true) returns [AppCompactActivity]
+     *                        class BaseActivity: AppCompatActivity() // externalParents(indirectParents = true) returns [AppCompatActivity]
+     *                        class MyActivity: BaseActivity() // externalParents(indirectParents = true) returns [AppCompatActivity]
      * @return a list of [KoParentDeclaration] representing the external parents of the declaration.
      */
     fun externalParents(indirectParents: Boolean = false): List<KoParentDeclaration>
@@ -36,18 +36,18 @@ interface KoExternalParentProvider : KoBaseProvider {
      *                        For example:
      *
      *                        // Android
-     *                        class AppCompactActivity: Activity
+     *                        class AppCompatActivity: Activity
      *                        interface Activity
      *
      *                        // Project
-     *                        class BaseActivity: AppCompactActivity() // externalParents(indirectParents = true) returns [AppCompactActivity]
-     *                        class MyActivity: BaseActivity() // externalParents(indirectParents = true) returns [AppCompactActivity]
+     *                        class BaseActivity: AppCompatActivity() // externalParents(indirectParents = true) returns [AppCompatActivity]
+     *                        class MyActivity: BaseActivity() // externalParents(indirectParents = true) returns [AppCompatActivity]
      * @return The number of external parents.
      */
     fun numExternalParents(indirectParents: Boolean = false): Int
 
     /**
-     * Returns the number of external parents that satisfies the specified predicate present in the declaration.
+     * Returns the number of external parents that satisfy the specified predicate present in the declaration.
      *
      * @param indirectParents specifies whether to include external parents defined in other files such as parent of the parent.
      *                        If `true`, it includes only those external parents defined within our scope and those used
@@ -55,14 +55,14 @@ interface KoExternalParentProvider : KoBaseProvider {
      *                        For example:
      *
      *                        // Android
-     *                        class AppCompactActivity: Activity
+     *                        class AppCompatActivity: Activity
      *                        interface Activity
      *
      *                        // Project
-     *                        class BaseActivity: AppCompactActivity() // externalParents(indirectParents = true) returns [AppCompactActivity]
-     *                        class MyActivity: BaseActivity() // externalParents(indirectParents = true) returns [AppCompactActivity]
+     *                        class BaseActivity: AppCompatActivity() // externalParents(indirectParents = true) returns [AppCompatActivity]
+     *                        class MyActivity: BaseActivity() // externalParents(indirectParents = true) returns [AppCompatActivity]
      * @param predicate The predicate function to determine if an external parent satisfies a condition.
-     * @return The number of external parents in the declaration satisfying predicate.
+     * @return The number of external parents in the declaration satisfying the predicate.
      */
     fun countExternalParents(
         indirectParents: Boolean = false,
@@ -70,8 +70,8 @@ interface KoExternalParentProvider : KoBaseProvider {
     ): Int
 
     /**
-     * Determines whatever declaration has any external parents. The external parent is a parent defined outside
-     * project codebase (defined inside external library).
+     * Determines whether the declaration has any external parents. The external parent is a parent defined outside
+     * the project codebase (defined inside an external library).
      *
      * @param indirectParents specifies whether to include external parents defined in other files such as parent of the parent.
      *                        If `true`, it includes only those external parents defined within our scope and those used
@@ -79,18 +79,18 @@ interface KoExternalParentProvider : KoBaseProvider {
      *                        For example:
      *
      *                        // Android
-     *                        class AppCompactActivity: Activity
+     *                        class AppCompatActivity: Activity
      *                        interface Activity
      *
      *                        // Project
-     *                        class BaseActivity: AppCompactActivity() // externalParents(indirectParents = true) returns [AppCompactActivity]
-     *                        class MyActivity: BaseActivity() // externalParents(indirectParents = true) returns [AppCompactActivity]
+     *                        class BaseActivity: AppCompatActivity() // externalParents(indirectParents = true) returns [AppCompatActivity]
+     *                        class MyActivity: BaseActivity() // externalParents(indirectParents = true) returns [AppCompatActivity]
      * @return `true` if the declaration has any external parent, `false` otherwise.
      */
     fun hasExternalParents(indirectParents: Boolean = false): Boolean
 
     /**
-     * Determines whether the declaration has at least one external parent whose name matches any of the specified.
+     * Determines whether the declaration has at least one external parent whose name matches any of the specified names.
      *
      * @param name the name of the external parent to check.
      * @param names the names of the external parents to check.
@@ -100,14 +100,14 @@ interface KoExternalParentProvider : KoBaseProvider {
      *                        For example:
      *
      *                        // Android
-     *                        class AppCompactActivity: Activity
+     *                        class AppCompatActivity: Activity
      *                        interface Activity
      *
      *                        // Project
-     *                        class BaseActivity: AppCompactActivity() // externalParents(indirectParents = true) returns [AppCompactActivity]
-     *                        class MyActivity: BaseActivity() // externalParents(indirectParents = true) returns [AppCompactActivity]
+     *                        class BaseActivity: AppCompatActivity() // externalParents(indirectParents = true) returns [AppCompatActivity]
+     *                        class MyActivity: BaseActivity() // externalParents(indirectParents = true) returns [AppCompatActivity]
      * @param ignoreCase Specifies whether the comparison should ignore case.
-     *        If `true`, the prefix comparison will be case-insensitive.
+     *        If `true`, the comparison will be case-insensitive.
      *        If `false`, the comparison will consider case sensitivity.
      * @return `true` if there is a matching declaration, `false` otherwise.
      */
@@ -119,7 +119,7 @@ interface KoExternalParentProvider : KoBaseProvider {
     ): Boolean
 
     /**
-     * Determines whether the declaration has at least one external parent whose name matches any of the specified.
+     * Determines whether the declaration has at least one external parent whose name matches any of the specified names.
      *
      * @param names the names of the external parents to check.
      * @param indirectParents specifies whether to include external parents defined in other files such as parent of the parent.
@@ -128,14 +128,14 @@ interface KoExternalParentProvider : KoBaseProvider {
      *                        For example:
      *
      *                        // Android
-     *                        class AppCompactActivity: Activity
+     *                        class AppCompatActivity: Activity
      *                        interface Activity
      *
      *                        // Project
-     *                        class BaseActivity: AppCompactActivity() // externalParents(indirectParents = true) returns [AppCompactActivity]
-     *                        class MyActivity: BaseActivity() // externalParents(indirectParents = true) returns [AppCompactActivity]
+     *                        class BaseActivity: AppCompatActivity() // externalParents(indirectParents = true) returns [AppCompatActivity]
+     *                        class MyActivity: BaseActivity() // externalParents(indirectParents = true) returns [AppCompatActivity]
      * @param ignoreCase Specifies whether the comparison should ignore case.
-     *        If `true`, the prefix comparison will be case-insensitive.
+     *        If `true`, the comparison will be case-insensitive.
      *        If `false`, the comparison will consider case sensitivity.
      * @return `true` if there is a matching declaration, `false` otherwise.
      */
@@ -146,24 +146,24 @@ interface KoExternalParentProvider : KoBaseProvider {
     ): Boolean
 
     /**
-     * Determines whether the declaration has parents interface defined project codebase (external == false)
+     * Determines whether the declaration has external parents with all the specified names.
      *
      * @param name The name of the external parent to check.
-     * @param names The names of the external parents to check.
+     * @param names The names of additional external parents to check.
      * @param indirectParents specifies whether to include external parents defined in other files such as parent of the parent.
      *                        If `true`, it includes only those external parents defined within our scope and those used
      *                        by our declarations.
      *                        For example:
      *
      *                        // Android
-     *                        class AppCompactActivity: Activity
+     *                        class AppCompatActivity: Activity
      *                        interface Activity
      *
      *                        // Project
-     *                        class BaseActivity: AppCompactActivity() // externalParents(indirectParents = true) returns [AppCompactActivity]
-     *                        class MyActivity: BaseActivity() // externalParents(indirectParents = true) returns [AppCompactActivity]
+     *                        class BaseActivity: AppCompatActivity() // externalParents(indirectParents = true) returns [AppCompatActivity]
+     *                        class MyActivity: BaseActivity() // externalParents(indirectParents = true) returns [AppCompatActivity]
      * @param ignoreCase Specifies whether the comparison should ignore case.
-     *        If `true`, the prefix comparison will be case-insensitive.
+     *        If `true`, the comparison will be case-insensitive.
      *        If `false`, the comparison will consider case sensitivity.
      * @return `true` if there are declarations with all the specified names, `false` otherwise.
      */
@@ -175,7 +175,7 @@ interface KoExternalParentProvider : KoBaseProvider {
     ): Boolean
 
     /**
-     * Determines whether the declaration has parents interface defined project codebase (external == false)
+     * Determines whether the declaration has external parents with all the specified names.
      *
      * @param names The names of the external parents to check.
      * @param indirectParents specifies whether to include external parents defined in other files such as parent of the parent.
@@ -184,14 +184,14 @@ interface KoExternalParentProvider : KoBaseProvider {
      *                        For example:
      *
      *                        // Android
-     *                        class AppCompactActivity: Activity
+     *                        class AppCompatActivity: Activity
      *                        interface Activity
      *
      *                        // Project
-     *                        class BaseActivity: AppCompactActivity() // externalParents(indirectParents = true) returns [AppCompactActivity]
-     *                        class MyActivity: BaseActivity() // externalParents(indirectParents = true) returns [AppCompactActivity]
+     *                        class BaseActivity: AppCompatActivity() // externalParents(indirectParents = true) returns [AppCompatActivity]
+     *                        class MyActivity: BaseActivity() // externalParents(indirectParents = true) returns [AppCompatActivity]
      * @param ignoreCase Specifies whether the comparison should ignore case.
-     *        If `true`, the prefix comparison will be case-insensitive.
+     *        If `true`, the comparison will be case-insensitive.
      *        If `false`, the comparison will consider case sensitivity.
      * @return `true` if there are declarations with all the specified names, `false` otherwise.
      */
@@ -210,12 +210,12 @@ interface KoExternalParentProvider : KoBaseProvider {
      *                        For example:
      *
      *                        // Android
-     *                        class AppCompactActivity: Activity
+     *                        class AppCompatActivity: Activity
      *                        interface Activity
      *
      *                        // Project
-     *                        class BaseActivity: AppCompactActivity() // externalParents(indirectParents = true) returns [AppCompactActivity]
-     *                        class MyActivity: BaseActivity() // externalParents(indirectParents = true) returns [AppCompactActivity]
+     *                        class BaseActivity: AppCompatActivity() // externalParents(indirectParents = true) returns [AppCompatActivity]
+     *                        class MyActivity: BaseActivity() // externalParents(indirectParents = true) returns [AppCompatActivity]
      * @param predicate A function that defines the condition to be met by an external parent.
      * @return `true` if there is a matching declaration, `false` otherwise.
      */
@@ -227,7 +227,7 @@ interface KoExternalParentProvider : KoBaseProvider {
     /**
      * Determines whether the declaration has all external parents that satisfy the provided predicate.
      *
-     * Note that if the external parents contains no elements, the function returns `true` because there are no
+     * Note that if the external parents contain no elements, the function returns `true` because there are no
      * elements in it that do not match the predicate.
      *
      * @param indirectParents specifies whether to include external parents defined in other files such as parent of the parent.
@@ -236,12 +236,12 @@ interface KoExternalParentProvider : KoBaseProvider {
      *                        For example:
      *
      *                        // Android
-     *                        class AppCompactActivity: Activity
+     *                        class AppCompatActivity: Activity
      *                        interface Activity
      *
      *                        // Project
-     *                        class BaseActivity: AppCompactActivity() // externalParents(indirectParents = true) returns [AppCompactActivity]
-     *                        class MyActivity: BaseActivity() // externalParents(indirectParents = true) returns [AppCompactActivity]
+     *                        class BaseActivity: AppCompatActivity() // externalParents(indirectParents = true) returns [AppCompatActivity]
+     *                        class MyActivity: BaseActivity() // externalParents(indirectParents = true) returns [AppCompatActivity]
      * @param predicate A function that defines the condition to be met by external parents.
      * @return `true` if all external parents satisfy the predicate, `false` otherwise.
      */
@@ -261,12 +261,12 @@ interface KoExternalParentProvider : KoBaseProvider {
      *                        For example:
      *
      *                        // Android
-     *                        class AppCompactActivity: Activity
+     *                        class AppCompatActivity: Activity
      *                        interface Activity
      *
      *                        // Project
-     *                        class BaseActivity: AppCompactActivity() // externalParents(indirectParents = true) returns [AppCompactActivity]
-     *                        class MyActivity: BaseActivity() // externalParents(indirectParents = true) returns [AppCompactActivity]
+     *                        class BaseActivity: AppCompatActivity() // externalParents(indirectParents = true) returns [AppCompatActivity]
+     *                        class MyActivity: BaseActivity() // externalParents(indirectParents = true) returns [AppCompatActivity]
      * @return `true` if there is a matching declaration, `false` otherwise.
      */
     fun hasExternalParentOf(
@@ -285,12 +285,12 @@ interface KoExternalParentProvider : KoBaseProvider {
      *                        For example:
      *
      *                        // Android
-     *                        class AppCompactActivity: Activity
+     *                        class AppCompatActivity: Activity
      *                        interface Activity
      *
      *                        // Project
-     *                        class BaseActivity: AppCompactActivity() // externalParents(indirectParents = true) returns [AppCompactActivity]
-     *                        class MyActivity: BaseActivity() // externalParents(indirectParents = true) returns [AppCompactActivity]
+     *                        class BaseActivity: AppCompatActivity() // externalParents(indirectParents = true) returns [AppCompatActivity]
+     *                        class MyActivity: BaseActivity() // externalParents(indirectParents = true) returns [AppCompatActivity]
      * @return `true` if there is a matching declaration, `false` otherwise.
      */
     fun hasExternalParentOf(
@@ -299,7 +299,7 @@ interface KoExternalParentProvider : KoBaseProvider {
     ): Boolean
 
     /**
-     * Determines whether the declaration has external parents with all the specified `KClass` type.
+     * Determines whether the declaration has external parents with all the specified `KClass` types.
      *
      * @param name the `KClass` type of the external parent to check.
      * @param names the `KClass` types of the external parents to check.
@@ -309,12 +309,12 @@ interface KoExternalParentProvider : KoBaseProvider {
      *                        For example:
      *
      *                        // Android
-     *                        class AppCompactActivity: Activity
+     *                        class AppCompatActivity: Activity
      *                        interface Activity
      *
      *                        // Project
-     *                        class BaseActivity: AppCompactActivity() // externalParents(indirectParents = true) returns [AppCompactActivity]
-     *                        class MyActivity: BaseActivity() // externalParents(indirectParents = true) returns [AppCompactActivity]
+     *                        class BaseActivity: AppCompatActivity() // externalParents(indirectParents = true) returns [AppCompatActivity]
+     *                        class MyActivity: BaseActivity() // externalParents(indirectParents = true) returns [AppCompatActivity]
      * @return `true` if the declaration has external parents of all the specified `KClass` types, `false` otherwise.
      */
     fun hasAllExternalParentsOf(
@@ -324,7 +324,7 @@ interface KoExternalParentProvider : KoBaseProvider {
     ): Boolean
 
     /**
-     * Determines whether the declaration has external parents with all the specified `KClass` type.
+     * Determines whether the declaration has external parents with all the specified `KClass` types.
      *
      * @param names the `KClass` types of the external parents to check.
      * @param indirectParents specifies whether to include external parents defined in other files such as parent of the parent.
@@ -333,12 +333,12 @@ interface KoExternalParentProvider : KoBaseProvider {
      *                        For example:
      *
      *                        // Android
-     *                        class AppCompactActivity: Activity
+     *                        class AppCompatActivity: Activity
      *                        interface Activity
      *
      *                        // Project
-     *                        class BaseActivity: AppCompactActivity() // externalParents(indirectParents = true) returns [AppCompactActivity]
-     *                        class MyActivity: BaseActivity() // externalParents(indirectParents = true) returns [AppCompactActivity]
+     *                        class BaseActivity: AppCompatActivity() // externalParents(indirectParents = true) returns [AppCompatActivity]
+     *                        class MyActivity: BaseActivity() // externalParents(indirectParents = true) returns [AppCompatActivity]
      * @return `true` if the declaration has external parents of all the specified `KClass` types, `false` otherwise.
      */
     fun hasAllExternalParentsOf(

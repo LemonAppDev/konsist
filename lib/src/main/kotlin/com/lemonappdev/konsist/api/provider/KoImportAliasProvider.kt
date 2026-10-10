@@ -18,15 +18,15 @@ interface KoImportAliasProvider : KoBaseProvider {
     val numImportAliases: Int
 
     /**
-     * Returns the number of import aliases that satisfies the specified predicate present in the declaration.
+     * Returns the number of import aliases that satisfy the specified predicate present in the declaration.
      *
-     * @param predicate The predicate function to determine if a import alias satisfies a condition.
+     * @param predicate The predicate function to determine if an import alias satisfies a condition.
      * @return The number of import aliases in the declaration.
      */
     fun countImportAliases(predicate: (KoImportAliasDeclaration) -> Boolean): Int
 
     /**
-     * Determines whatever declaration has any import alias.
+     * Determines whether the declaration has any import alias.
      *
      * @return `true` if the declaration has any import alias, `false` otherwise.
      */
@@ -38,7 +38,7 @@ interface KoImportAliasProvider : KoBaseProvider {
      * @param name the name of the import alias to check.
      * @param names the names of the import aliases to check.
      * @param ignoreCase Specifies whether the comparison should ignore case.
-     *        If `true`, the prefix comparison will be case-insensitive.
+     *        If `true`, the comparison will be case-insensitive.
      *        If `false`, the comparison will consider case sensitivity.
      * @return `true` if there is a matching declaration, `false` otherwise.
      */
@@ -53,7 +53,7 @@ interface KoImportAliasProvider : KoBaseProvider {
      *
      * @param names the names of the import aliases to check.
      * @param ignoreCase Specifies whether the comparison should ignore case.
-     *        If `true`, the prefix comparison will be case-insensitive.
+     *        If `true`, the comparison will be case-insensitive.
      *        If `false`, the comparison will consider case sensitivity.
      * @return `true` if there is a matching declaration, `false` otherwise.
      */
@@ -66,9 +66,9 @@ interface KoImportAliasProvider : KoBaseProvider {
      * Determines whether the declaration has import aliases with all the specified names.
      *
      * @param name The name of the import alias to check.
-     * @param names The names of the import aliases to check.
+     * @param names The names of additional import aliases to check.
      * @param ignoreCase Specifies whether the comparison should ignore case.
-     *        If `true`, the prefix comparison will be case-insensitive.
+     *        If `true`, the comparison will be case-insensitive.
      *        If `false`, the comparison will consider case sensitivity.
      * @return `true` if there are declarations with all the specified names, `false` otherwise.
      */
@@ -83,7 +83,7 @@ interface KoImportAliasProvider : KoBaseProvider {
      *
      * @param names The names of the import aliases to check.
      * @param ignoreCase Specifies whether the comparison should ignore case.
-     *        If `true`, the prefix comparison will be case-insensitive.
+     *        If `true`, the comparison will be case-insensitive.
      *        If `false`, the comparison will consider case sensitivity.
      * @return `true` if there are declarations with all the specified names, `false` otherwise.
      */
@@ -95,7 +95,7 @@ interface KoImportAliasProvider : KoBaseProvider {
     /**
      * Determines whether the declaration has at least one import alias that satisfies the provided predicate.
      *
-     * @param predicate A function that defines the condition to be met by a import alias declaration.
+     * @param predicate A function that defines the condition to be met by an import alias declaration.
      * @return `true` if there is a matching declaration, `false` otherwise.
      */
     fun hasImportAlias(predicate: (KoImportAliasDeclaration) -> Boolean): Boolean
@@ -103,7 +103,7 @@ interface KoImportAliasProvider : KoBaseProvider {
     /**
      * Determines whether the declaration has all import aliases that satisfy the provided predicate.
      *
-     * Note that if the import aliases contains no elements, the function returns `true` because there are no elements in
+     * Note that if the import aliases contain no elements, the function returns `true` because there are no elements in
      * it that do not match the predicate.
      *
      * @param predicate A function that defines the condition to be met by import alias declarations.

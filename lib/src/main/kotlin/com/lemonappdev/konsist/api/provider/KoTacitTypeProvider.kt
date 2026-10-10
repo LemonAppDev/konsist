@@ -10,15 +10,15 @@ import kotlin.reflect.KClass
  */
 interface KoTacitTypeProvider : KoBaseProvider {
     /**
-     * Determines whether declaration has an explicitly declared type or if its value contains the
+     * Determines whether the declaration has an explicitly declared type or if its value contains the
      * given type with parentheses '('.
      *
      * e.g.
      *
      * ```kotlin
-     * val sampleProperty: Foo = someCollection.first() // hasTacitTypeOf(SampleClass::class) == true
-     * val sampleProperty  = Foo("some text") // hasTacitTypeOf(SampleClass::class) == true
-     * val sampleProperty = someCollection.first() // hasTacitTypeOf(SampleClass::class) == false
+     * val sampleProperty: Foo = someCollection.first() // hasTacitType("Foo") == true
+     * val sampleProperty = Foo("some text") // hasTacitType("Foo") == true
+     * val sampleProperty = someCollection.first() // hasTacitType("Foo") == false
      * ```
      *
      * @param type The type to check.
@@ -27,7 +27,7 @@ interface KoTacitTypeProvider : KoBaseProvider {
     fun hasTacitType(type: String): Boolean
 
     /**
-     * Determines whether declaration has an explicitly declared type of the specified Kotlin class,
+     * Determines whether the declaration has an explicitly declared type of the specified Kotlin class,
      * or if its value contains an instance of that class with parentheses '('.
      *
      * @param kClass The Kotlin class to check.

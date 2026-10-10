@@ -29,9 +29,9 @@ fun <T : KoTypeAliasProvider> List<T>.withoutTypeAliases(): List<T> = filterNot 
  * @param name The name of the type alias to include.
  * @param names The names of additional type aliases to include.
  * @param ignoreCase Specifies whether the comparison should ignore case.
- *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
- * @return A list containing declarations with at least one of the specified type alias(s).
+ * @return A list containing declarations with at least one of the specified type alias(es).
  */
 fun <T : KoTypeAliasProvider> List<T>.withTypeAliasNamed(
     name: String,
@@ -42,11 +42,11 @@ fun <T : KoTypeAliasProvider> List<T>.withTypeAliasNamed(
 /**
  * List containing declarations that have at least one type alias with the specified name(s).
  *
- * @param names The names of additional type aliases to include.
+ * @param names The names of the type aliases to include.
  * @param ignoreCase Specifies whether the comparison should ignore case.
- *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
- * @return A list containing declarations with at least one of the specified type alias(s).
+ * @return A list containing declarations with at least one of the specified type alias(es).
  */
 fun <T : KoTypeAliasProvider> List<T>.withTypeAliasNamed(
     names: Collection<String>,
@@ -60,14 +60,14 @@ fun <T : KoTypeAliasProvider> List<T>.withTypeAliasNamed(
     }
 
 /**
- * List containing declarations without any of specified type aliases.
+ * List containing declarations without any of the specified type aliases.
  *
  * @param name The name of the type alias to exclude.
  * @param names The names of additional type aliases to exclude.
  * @param ignoreCase Specifies whether the comparison should ignore case.
- *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
- * @return A list containing declarations without any of specified type aliases.
+ * @return A list containing declarations without any of the specified type aliases.
  */
 fun <T : KoTypeAliasProvider> List<T>.withoutTypeAliasNamed(
     name: String,
@@ -76,13 +76,13 @@ fun <T : KoTypeAliasProvider> List<T>.withoutTypeAliasNamed(
 ): List<T> = withoutTypeAliasNamed(listOf(name, *names), ignoreCase = ignoreCase)
 
 /**
- * List containing declarations without any of specified type aliases.
+ * List containing declarations without any of the specified type aliases.
  *
- * @param names The names of additional type aliases to exclude.
+ * @param names The names of the type aliases to exclude.
  * @param ignoreCase Specifies whether the comparison should ignore case.
- *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
- * @return A list containing declarations without any of specified type aliases.
+ * @return A list containing declarations without any of the specified type aliases.
  */
 fun <T : KoTypeAliasProvider> List<T>.withoutTypeAliasNamed(
     names: Collection<String>,
@@ -99,11 +99,11 @@ fun <T : KoTypeAliasProvider> List<T>.withoutTypeAliasNamed(
  * List containing declarations that have all specified type aliases.
  *
  * @param name The name of the type alias to include.
- * @param names The name(s) of the type alias(s) to include.
+ * @param names The names of additional type aliases to include.
  * @param ignoreCase Specifies whether the comparison should ignore case.
- *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
- * @return A list containing declarations with all specified type alias(s).
+ * @return A list containing declarations with all specified type alias(es).
  */
 fun <T : KoTypeAliasProvider> List<T>.withAllTypeAliasesNamed(
     name: String,
@@ -114,11 +114,11 @@ fun <T : KoTypeAliasProvider> List<T>.withAllTypeAliasesNamed(
 /**
  * List containing declarations that have all specified type aliases.
  *
- * @param names The name(s) of the type alias(s) to include.
+ * @param names The names of the type aliases to include.
  * @param ignoreCase Specifies whether the comparison should ignore case.
- *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
- * @return A list containing declarations with all specified type alias(s).
+ * @return A list containing declarations with all specified type alias(es).
  */
 fun <T : KoTypeAliasProvider> List<T>.withAllTypeAliasesNamed(
     names: Collection<String>,
@@ -135,11 +135,11 @@ fun <T : KoTypeAliasProvider> List<T>.withAllTypeAliasesNamed(
  * List containing declarations without all specified type aliases.
  *
  * @param name The name of the type alias to exclude.
- * @param names The name(s) of the type alias(s) to exclude.
+ * @param names The names of additional type aliases to exclude.
  * @param ignoreCase Specifies whether the comparison should ignore case.
- *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
- * @return A list containing declarations without all specified type alias(s).
+ * @return A list containing declarations without all specified type alias(es).
  */
 fun <T : KoTypeAliasProvider> List<T>.withoutAllTypeAliasesNamed(
     name: String,
@@ -150,11 +150,11 @@ fun <T : KoTypeAliasProvider> List<T>.withoutAllTypeAliasesNamed(
 /**
  * List containing declarations without all specified type aliases.
  *
- * @param names The name(s) of the type alias(s) to exclude.
+ * @param names The names of the type aliases to exclude.
  * @param ignoreCase Specifies whether the comparison should ignore case.
- *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
- * @return A list containing declarations without all specified type alias(s).
+ * @return A list containing declarations without all specified type alias(es).
  */
 fun <T : KoTypeAliasProvider> List<T>.withoutAllTypeAliasesNamed(
     names: Collection<String>,
@@ -177,10 +177,10 @@ fun <T : KoTypeAliasProvider> List<T>.withTypeAlias(predicate: (KoTypeAliasDecla
     filter { it.hasTypeAlias(predicate) }
 
 /**
- * List containing declarations that not have type alias satisfying the provided predicate.
+ * List containing declarations that do not have a type alias satisfying the provided predicate.
  *
  * @param predicate A function that defines the condition to be met by a type alias declaration.
- * @return A list containing declarations without type alias satisfying the provided predicate.
+ * @return A list containing declarations without a type alias satisfying the provided predicate.
  */
 fun <T : KoTypeAliasProvider> List<T>.withoutTypeAlias(predicate: (KoTypeAliasDeclaration) -> Boolean): List<T> =
     filterNot { it.hasTypeAlias(predicate) }
@@ -189,7 +189,7 @@ fun <T : KoTypeAliasProvider> List<T>.withoutTypeAlias(predicate: (KoTypeAliasDe
  * List containing declarations that have all type aliases satisfying the provided predicate.
  *
  * @param predicate A function that defines the condition to be met by all type alias declarations.
- * @return A filtered list containing declarations with all type aliases satisfying the predicate.
+ * @return A list containing declarations with all type aliases satisfying the predicate.
  */
 fun <T : KoTypeAliasProvider> List<T>.withAllTypeAliases(predicate: (KoTypeAliasDeclaration) -> Boolean): List<T> =
     filter { it.hasAllTypeAliases(predicate) }

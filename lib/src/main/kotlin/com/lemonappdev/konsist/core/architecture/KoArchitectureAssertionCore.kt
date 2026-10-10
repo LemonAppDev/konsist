@@ -57,7 +57,7 @@ class KoArchitectureAssertionCore : KoArchitectureAssertion {
         instanceLayerDependencies(layerDependenciesFunc)
 
     /**
-     * Obtain the dependency rules from dependencies literal function
+     * Obtains the dependency rules from the dependencies function literal.
      */
     private fun instanceLayerDependencies(layerDependenciesFunc: LayerDependencies.() -> Unit): LayerDependencies {
         val layerDependenciesCore = LayerDependenciesCore()

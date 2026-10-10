@@ -9,7 +9,7 @@ interface KoInfixModifierProvider :
     KoBaseProvider,
     KoModifierProvider {
     /**
-     * Determines whatever the declaration has `infix` modifier.
+     * Determines whether the declaration has the `infix` modifier.
      */
     val hasInfixModifier: Boolean
 }

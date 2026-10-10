@@ -10,15 +10,15 @@ val <T : KoSetterProvider> List<T>.setters: List<KoSetterDeclaration>
     get() = mapNotNull { it.setter }
 
 /**
- * List containing declarations with setter.
+ * List containing declarations with a setter.
  *
- * @return List containing declarations with setter.
+ * @return A list containing declarations with a setter.
  */
 fun <T : KoSetterProvider> List<T>.withSetter(): List<T> = filter { it.hasSetter }
 
 /**
- * List containing declarations without setter.
+ * List containing declarations without a setter.
  *
- * @return List containing declarations without setter.
+ * @return A list containing declarations without a setter.
  */
 fun <T : KoSetterProvider> List<T>.withoutSetter(): List<T> = filterNot { it.hasSetter }

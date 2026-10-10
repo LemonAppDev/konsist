@@ -5,7 +5,7 @@ import com.lemonappdev.konsist.api.provider.KoKDocProvider
 import com.lemonappdev.konsist.api.provider.KoParametersProvider
 
 /**
- * Determines whatever declaration has a valid KDoc with a PARAM tag.
+ * Determines whether the declaration has a valid KDoc with a PARAM tag.
  *
  * @return `true` if the declaration has a valid KDoc with the PARAM tag, `false` otherwise.
  */

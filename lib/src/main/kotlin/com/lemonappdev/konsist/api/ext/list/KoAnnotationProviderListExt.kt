@@ -32,7 +32,7 @@ fun <T : KoAnnotationProvider> List<T>.withoutAnnotations(): List<T> = filterNot
  * @param name The name of the annotation to include.
  * @param names The names of additional annotations to include.
  * @param ignoreCase Specifies whether the comparison should ignore case.
- *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations with at least one of the specified annotation(s).
  */
@@ -45,9 +45,9 @@ fun <T : KoAnnotationProvider> List<T>.withAnnotationNamed(
 /**
  * List containing declarations that have at least one annotation with the specified name(s).
  *
- * @param names The names of additional annotations to include.
+ * @param names The names of the annotations to include.
  * @param ignoreCase Specifies whether the comparison should ignore case.
- *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations with at least one of the specified annotation(s).
  */
@@ -63,14 +63,14 @@ fun <T : KoAnnotationProvider> List<T>.withAnnotationNamed(
     }
 
 /**
- * List containing declarations without any of specified annotations.
+ * List containing declarations without any of the specified annotations.
  *
  * @param name The name of the annotation to exclude.
  * @param names The names of additional annotations to exclude.
  * @param ignoreCase Specifies whether the comparison should ignore case.
- *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
- * @return A list containing declarations without any of specified annotations.
+ * @return A list containing declarations without any of the specified annotations.
  */
 fun <T : KoAnnotationProvider> List<T>.withoutAnnotationNamed(
     name: String,
@@ -79,13 +79,13 @@ fun <T : KoAnnotationProvider> List<T>.withoutAnnotationNamed(
 ): List<T> = withoutAnnotationNamed(listOf(name, *names), ignoreCase)
 
 /**
- * List containing declarations without any of specified annotations.
+ * List containing declarations without any of the specified annotations.
  *
- * @param names The names of additional annotations to exclude.
+ * @param names The names of the annotations to exclude.
  * @param ignoreCase Specifies whether the comparison should ignore case.
- *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
- * @return A list containing declarations without any of specified annotations.
+ * @return A list containing declarations without any of the specified annotations.
  */
 fun <T : KoAnnotationProvider> List<T>.withoutAnnotationNamed(
     names: Collection<String>,
@@ -102,9 +102,9 @@ fun <T : KoAnnotationProvider> List<T>.withoutAnnotationNamed(
  * List containing declarations that have all specified annotations.
  *
  * @param name The name of the annotation to include.
- * @param names The name(s) of the annotation(s) to include.
+ * @param names The names of additional annotations to include.
  * @param ignoreCase Specifies whether the comparison should ignore case.
- *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations with all specified annotation(s).
  */
@@ -117,9 +117,9 @@ fun <T : KoAnnotationProvider> List<T>.withAllAnnotationsNamed(
 /**
  * List containing declarations that have all specified annotations.
  *
- * @param names The name(s) of the annotation(s) to include.
+ * @param names The names of the annotations to include.
  * @param ignoreCase Specifies whether the comparison should ignore case.
- *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations with all specified annotation(s).
  */
@@ -138,9 +138,9 @@ fun <T : KoAnnotationProvider> List<T>.withAllAnnotationsNamed(
  * List containing declarations without all specified annotations.
  *
  * @param name The name of the annotation to exclude.
- * @param names The name(s) of the annotation(s) to exclude.
+ * @param names The names of additional annotations to exclude.
  * @param ignoreCase Specifies whether the comparison should ignore case.
- *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations without all specified annotation(s).
  */
@@ -153,9 +153,9 @@ fun <T : KoAnnotationProvider> List<T>.withoutAllAnnotationsNamed(
 /**
  * List containing declarations without all specified annotations.
  *
- * @param names The name(s) of the annotation(s) to exclude.
+ * @param names The names of the annotations to exclude.
  * @param ignoreCase Specifies whether the comparison should ignore case.
- *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations without all specified annotation(s).
  */
@@ -180,10 +180,10 @@ fun <T : KoAnnotationProvider> List<T>.withAnnotation(predicate: (KoAnnotationDe
     filter { it.hasAnnotation(predicate) }
 
 /**
- * List containing declarations that not have annotation satisfying the provided predicate.
+ * List containing declarations that do not have any annotation satisfying the provided predicate.
  *
  * @param predicate A function that defines the condition to be met by an annotation declaration.
- * @return A list containing declarations without annotation satisfying the provided predicate.
+ * @return A list containing declarations without any annotation satisfying the provided predicate.
  */
 fun <T : KoAnnotationProvider> List<T>.withoutAnnotation(predicate: (KoAnnotationDeclaration) -> Boolean): List<T> =
     filterNot { it.hasAnnotation(predicate) }

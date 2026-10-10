@@ -5,14 +5,14 @@ import com.lemonappdev.konsist.api.provider.KoKDocProvider
 import com.lemonappdev.konsist.api.provider.KoReturnProvider
 
 /**
- * Determines whatever declaration has return type.
+ * Determines whether the declaration has a return type of type [T].
  *
- * @return `true` if the declaration has return type with the specified KClass name, `false` otherwise.
+ * @return `true` if the declaration has a return type matching [T], `false` otherwise.
  */
 inline fun <reified T> KoReturnProvider.hasReturnTypeOf(): Boolean = hasReturnTypeOf(T::class)
 
 /**
- * Determines whatever declaration has a valid KDoc with a RETURN tag.
+ * Determines whether the declaration has a valid KDoc with a RETURN tag.
  *
  * @return `true` if the declaration has a valid KDoc with the RETURN tag, `false` otherwise.
  */

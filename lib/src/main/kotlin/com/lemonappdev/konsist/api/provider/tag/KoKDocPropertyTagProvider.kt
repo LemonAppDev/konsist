@@ -18,7 +18,7 @@ interface KoKDocPropertyTagProvider : KoBaseProvider {
     val numPropertyTags: Int
 
     /**
-     * Determines whatever the declaration has property tags.
+     * Determines whether the declaration has property tags.
      */
     val hasPropertyTags: Boolean
 }

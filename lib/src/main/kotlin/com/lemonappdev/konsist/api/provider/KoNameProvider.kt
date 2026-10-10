@@ -14,7 +14,7 @@ interface KoNameProvider : KoBaseProvider {
      *
      * @param text The text to compare with. Must be a non-null string representing the expected name.
      * @param ignoreCase Specifies whether the comparison should ignore case.
-     *        If `true`, the prefix comparison will be case-insensitive.
+     *        If `true`, the comparison will be case-insensitive.
      *        If `false`, the comparison will consider case sensitivity.
      * @return `true` if the declaration's name equals the specified text, `false` otherwise.
      */
@@ -24,11 +24,11 @@ interface KoNameProvider : KoBaseProvider {
     ): Boolean
 
     /**
-     * Name of the declaration with prefix.
+     * Checks whether the declaration's name starts with the specified prefix.
      *
      * @param prefix The prefix to check against. It is a non-null string representing the desired prefix.
      * @param ignoreCase Specifies whether the comparison should ignore case.
-     *        If `true`, the prefix comparison will be case-insensitive.
+     *        If `true`, the comparison will be case-insensitive.
      *        If `false`, the comparison will consider case sensitivity.
      * @return `true` if the declaration's name starts with the prefix, `false` otherwise.
      */
@@ -38,13 +38,13 @@ interface KoNameProvider : KoBaseProvider {
     ): Boolean
 
     /**
-     * Name of the declaration with suffix.
+     * Checks whether the declaration's name ends with the specified suffix.
      *
      * @param suffix The suffix to check against. It is a non-null string representing the desired suffix.
      * @param ignoreCase Specifies whether the comparison should ignore case.
-     *        If `true`, the prefix comparison will be case-insensitive.
+     *        If `true`, the comparison will be case-insensitive.
      *        If `false`, the comparison will consider case sensitivity.
-     * @return `true` if the declaration's name ends with the prefix, `false` otherwise.
+     * @return `true` if the declaration's name ends with the suffix, `false` otherwise.
      */
     fun hasNameEndingWith(
         suffix: String,
@@ -52,11 +52,11 @@ interface KoNameProvider : KoBaseProvider {
     ): Boolean
 
     /**
-     * Name of the declaration containing text.
+     * Checks whether the declaration's name contains the specified text.
      *
      * @param text The text to check against. It is a non-null string representing the desired text.
      * @param ignoreCase Specifies whether the comparison should ignore case.
-     *        If `true`, the prefix comparison will be case-insensitive.
+     *        If `true`, the comparison will be case-insensitive.
      *        If `false`, the comparison will consider case sensitivity.
      * @return `true` if the declaration's name contains the text, `false` otherwise.
      */
@@ -66,10 +66,10 @@ interface KoNameProvider : KoBaseProvider {
     ): Boolean
 
     /**
-     * Name of the declaration matching regex.
+     * Checks whether the declaration's name matches the specified regex.
      *
-     * @param regex The regex to check against. It is a non-null string representing the desired regex.
-     * @return `true` if the declaration's name matching with the regex, `false` otherwise.
+     * @param regex The regex to check against.
+     * @return `true` if the declaration's name matches the regex, `false` otherwise.
      */
     fun hasNameMatching(regex: Regex): Boolean
 }

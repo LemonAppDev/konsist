@@ -10,7 +10,7 @@ package com.lemonappdev.konsist.api.provider
  * For example, using `by lazy`:
  *
  * ```kotlin
- * val lazyValue: String by lazy { "Hello, World!"}
+ * val lazyValue: String by lazy { "Hello, World!" }
  * ```
  */
 interface KoPropertyDelegateProvider : KoDelegateProvider

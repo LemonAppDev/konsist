@@ -29,7 +29,7 @@ fun <T : KoTypeParameterProvider> List<T>.withoutTypeParameters(): List<T> = fil
  * @param name The name of the type parameter to include.
  * @param names The names of additional type parameters to include.
  * @param ignoreCase Specifies whether the comparison should ignore case.
- *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations with at least one of the specified type parameter(s).
  */
@@ -42,9 +42,9 @@ fun <T : KoTypeParameterProvider> List<T>.withTypeParameterNamed(
 /**
  * List containing declarations that have at least one type parameter with the specified name(s).
  *
- * @param names The names of additional type parameters to include.
+ * @param names The names of the type parameters to include.
  * @param ignoreCase Specifies whether the comparison should ignore case.
- *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations with at least one of the specified type parameter(s).
  */
@@ -60,14 +60,14 @@ fun <T : KoTypeParameterProvider> List<T>.withTypeParameterNamed(
     }
 
 /**
- * List containing declarations without any of specified type parameters.
+ * List containing declarations without any of the specified type parameters.
  *
  * @param name The name of the type parameter to exclude.
  * @param names The names of additional type parameters to exclude.
  * @param ignoreCase Specifies whether the comparison should ignore case.
- *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
- * @return A list containing declarations without any of specified type parameters.
+ * @return A list containing declarations without any of the specified type parameters.
  */
 fun <T : KoTypeParameterProvider> List<T>.withoutTypeParameterNamed(
     name: String,
@@ -76,13 +76,13 @@ fun <T : KoTypeParameterProvider> List<T>.withoutTypeParameterNamed(
 ): List<T> = withoutTypeParameterNamed(listOf(name, *names), ignoreCase)
 
 /**
- * List containing declarations without any of specified type parameters.
+ * List containing declarations without any of the specified type parameters.
  *
- * @param names The names of additional type parameters to exclude.
+ * @param names The names of the type parameters to exclude.
  * @param ignoreCase Specifies whether the comparison should ignore case.
- *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
- * @return A list containing declarations without any of specified type parameters.
+ * @return A list containing declarations without any of the specified type parameters.
  */
 fun <T : KoTypeParameterProvider> List<T>.withoutTypeParameterNamed(
     names: Collection<String>,
@@ -99,9 +99,9 @@ fun <T : KoTypeParameterProvider> List<T>.withoutTypeParameterNamed(
  * List containing declarations that have all specified type parameters.
  *
  * @param name The name of the type parameter to include.
- * @param names The name(s) of the type parameter(s) to include.
+ * @param names The names of additional type parameters to include.
  * @param ignoreCase Specifies whether the comparison should ignore case.
- *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations with all specified type parameter(s).
  */
@@ -114,9 +114,9 @@ fun <T : KoTypeParameterProvider> List<T>.withAllTypeParametersNamed(
 /**
  * List containing declarations that have all specified type parameters.
  *
- * @param names The name(s) of the type parameter(s) to include.
+ * @param names The names of the type parameters to include.
  * @param ignoreCase Specifies whether the comparison should ignore case.
- *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations with all specified type parameter(s).
  */
@@ -135,9 +135,9 @@ fun <T : KoTypeParameterProvider> List<T>.withAllTypeParametersNamed(
  * List containing declarations without all specified type parameters.
  *
  * @param name The name of the type parameter to exclude.
- * @param names The name(s) of the type parameter(s) to exclude.
+ * @param names The names of additional type parameters to exclude.
  * @param ignoreCase Specifies whether the comparison should ignore case.
- *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations without all specified type parameter(s).
  */
@@ -150,9 +150,9 @@ fun <T : KoTypeParameterProvider> List<T>.withoutAllTypeParametersNamed(
 /**
  * List containing declarations without all specified type parameters.
  *
- * @param names The name(s) of the type parameter(s) to exclude.
+ * @param names The names of the type parameters to exclude.
  * @param ignoreCase Specifies whether the comparison should ignore case.
- *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations without all specified type parameter(s).
  */
@@ -179,10 +179,10 @@ fun <T : KoTypeParameterProvider> List<T>.withTypeParameter(predicate: (KoTypePa
     }
 
 /**
- * List containing declarations that not have type parameter satisfying the provided predicate.
+ * List containing declarations that do not have a type parameter satisfying the provided predicate.
  *
  * @param predicate A function that defines the condition to be met by a type parameter declaration.
- * @return A list containing declarations without type parameter satisfying the provided predicate.
+ * @return A list containing declarations without a type parameter satisfying the provided predicate.
  */
 fun <T : KoTypeParameterProvider> List<T>.withoutTypeParameter(predicate: (KoTypeParameterDeclaration) -> Boolean): List<T> =
     filterNot {
@@ -193,7 +193,7 @@ fun <T : KoTypeParameterProvider> List<T>.withoutTypeParameter(predicate: (KoTyp
  * List containing declarations that have all type parameters satisfying the provided predicate.
  *
  * @param predicate A function that defines the condition to be met by all type parameter declarations.
- * @return A filtered list containing declarations with all type parameters satisfying the predicate.
+ * @return A list containing declarations with all type parameters satisfying the predicate.
  */
 fun <T : KoTypeParameterProvider> List<T>.withAllTypeParameters(predicate: (KoTypeParameterDeclaration) -> Boolean): List<T> =
     filter {

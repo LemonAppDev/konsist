@@ -13,7 +13,7 @@ interface KoKDocConstructorTagProvider : KoBaseProvider {
     val constructorTag: KoKDocTagDeclaration?
 
     /**
-     * Determines whatever the declaration has constructor tag.
+     * Determines whether the declaration has a constructor tag.
      */
     val hasConstructorTag: Boolean
 }

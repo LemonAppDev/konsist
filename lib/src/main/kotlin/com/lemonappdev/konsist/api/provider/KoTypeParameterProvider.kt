@@ -17,7 +17,7 @@ interface KoTypeParameterProvider : KoBaseProvider {
     val numTypeParameters: Int
 
     /**
-     * Returns the number of type parameters that satisfies the specified predicate present in the declaration.
+     * Returns the number of type parameters that satisfy the specified predicate present in the declaration.
      *
      * @param predicate The predicate function to determine if a type parameter satisfies a condition.
      * @return The number of type parameters in the declaration.
@@ -25,7 +25,7 @@ interface KoTypeParameterProvider : KoBaseProvider {
     fun countTypeParameters(predicate: (KoTypeParameterDeclaration) -> Boolean): Int
 
     /**
-     * Determines whatever declaration has any type parameter.
+     * Determines whether the declaration has any type parameter.
      *
      * @return `true` if the declaration has any type parameter, `false` otherwise.
      */
@@ -37,7 +37,7 @@ interface KoTypeParameterProvider : KoBaseProvider {
      * @param name the name of the type parameter to check.
      * @param names the names of the type parameters to check.
      * @param ignoreCase Specifies whether the comparison should ignore case.
-     *        If `true`, the prefix comparison will be case-insensitive.
+     *        If `true`, the comparison will be case-insensitive.
      *        If `false`, the comparison will consider case sensitivity.
      * @return `true` if there is a matching declaration, `false` otherwise.
      */
@@ -52,7 +52,7 @@ interface KoTypeParameterProvider : KoBaseProvider {
      *
      * @param names the names of the type parameters to check.
      * @param ignoreCase Specifies whether the comparison should ignore case.
-     *        If `true`, the prefix comparison will be case-insensitive.
+     *        If `true`, the comparison will be case-insensitive.
      *        If `false`, the comparison will consider case sensitivity.
      * @return `true` if there is a matching declaration, `false` otherwise.
      */
@@ -65,9 +65,9 @@ interface KoTypeParameterProvider : KoBaseProvider {
      * Determines whether the declaration has type parameters with all the specified names.
      *
      * @param name The name of the type parameter to check.
-     * @param names The names of the type parameters to check.
+     * @param names The names of additional type parameters to check.
      * @param ignoreCase Specifies whether the comparison should ignore case.
-     *        If `true`, the prefix comparison will be case-insensitive.
+     *        If `true`, the comparison will be case-insensitive.
      *        If `false`, the comparison will consider case sensitivity.
      * @return `true` if there are declarations with all the specified names, `false` otherwise.
      */
@@ -82,7 +82,7 @@ interface KoTypeParameterProvider : KoBaseProvider {
      *
      * @param names The names of the type parameters to check.
      * @param ignoreCase Specifies whether the comparison should ignore case.
-     *        If `true`, the prefix comparison will be case-insensitive.
+     *        If `true`, the comparison will be case-insensitive.
      *        If `false`, the comparison will consider case sensitivity.
      * @return `true` if there are declarations with all the specified names, `false` otherwise.
      */
@@ -102,7 +102,7 @@ interface KoTypeParameterProvider : KoBaseProvider {
     /**
      * Determines whether the declaration has all type parameters that satisfy the provided predicate.
      *
-     * Note that if the type parameters contains no elements, the function returns `true` because there are no elements in it
+     * Note that if the type parameters contain no elements, the function returns `true` because there are no elements in it
      * that do not match the predicate.
      *
      * @param predicate A function that defines the condition to be met by type parameter declarations.

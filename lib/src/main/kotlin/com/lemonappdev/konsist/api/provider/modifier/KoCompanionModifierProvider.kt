@@ -9,7 +9,7 @@ interface KoCompanionModifierProvider :
     KoBaseProvider,
     KoModifierProvider {
     /**
-     * Determines whatever the declaration has a `companion` modifier.
+     * Determines whether the declaration has the `companion` modifier.
      */
     val hasCompanionModifier: Boolean
 }

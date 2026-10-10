@@ -29,7 +29,7 @@ fun <T : KoResideInPackageProvider> List<T>.withPackage(names: Collection<String
  * List containing elements without package.
  *
  * @param names The package names to exclude.
- * @return A list containing elements that don't reside in any of the specified packages (or none package if [names] is empty).
+ * @return A list containing elements that don't reside in any of the specified packages (or without a package if [names] is empty).
  */
 fun <T : KoResideInPackageProvider> List<T>.withoutPackage(vararg names: String): List<T> = withoutPackage(listOf(*names))
 
@@ -37,7 +37,7 @@ fun <T : KoResideInPackageProvider> List<T>.withoutPackage(vararg names: String)
  * List containing elements without package.
  *
  * @param names The package names to exclude.
- * @return A list containing elements that don't reside in any of the specified packages (or none package if [names] is empty).
+ * @return A list containing elements that don't reside in any of the specified packages (or without a package if [names] is empty).
  */
 fun <T : KoResideInPackageProvider> List<T>.withoutPackage(names: Collection<String>): List<T> =
     filter {

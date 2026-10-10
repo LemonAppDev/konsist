@@ -18,7 +18,7 @@ interface KoArgumentProvider : KoBaseProvider {
     val numArguments: Int
 
     /**
-     * Returns the number of arguments that satisfies the specified predicate present in the declaration.
+     * Returns the number of arguments that satisfy the specified predicate present in the declaration.
      *
      * @param predicate The predicate function to determine if an argument satisfies a condition.
      * @return The number of arguments in the declaration.
@@ -26,7 +26,7 @@ interface KoArgumentProvider : KoBaseProvider {
     fun countArguments(predicate: (KoArgumentDeclaration) -> Boolean): Int
 
     /**
-     * Determines whatever the declaration has arguments.
+     * Determines whether the declaration has arguments.
      *
      * @return `true` if the declaration has any argument, `false` otherwise.
      */
@@ -37,8 +37,8 @@ interface KoArgumentProvider : KoBaseProvider {
      *
      * @param name the name of the argument to check.
      * @param names the names of the arguments to check.
-     * @param ignoreCase Specifies whether the comparison should ignore a case.
-     *        If `true`, the prefix comparison will be case-insensitive.
+     * @param ignoreCase Specifies whether the comparison should ignore case.
+     *        If `true`, the comparison will be case-insensitive.
      *        If `false`, the comparison will consider case sensitivity.
      * @return `true` if there is a matching declaration, `false` otherwise.
      */
@@ -52,8 +52,8 @@ interface KoArgumentProvider : KoBaseProvider {
      * Determines whether the declaration has at least one argument whose name matches any of the specified names.
      *
      * @param names the names of the arguments to check.
-     * @param ignoreCase Specifies whether the comparison should ignore a case.
-     *        If `true`, the prefix comparison will be case-insensitive.
+     * @param ignoreCase Specifies whether the comparison should ignore case.
+     *        If `true`, the comparison will be case-insensitive.
      *        If `false`, the comparison will consider case sensitivity.
      * @return `true` if there is a matching declaration, `false` otherwise.
      */
@@ -66,9 +66,9 @@ interface KoArgumentProvider : KoBaseProvider {
      * Determines whether the declaration has arguments with all the specified names.
      *
      * @param name The name of the argument to check.
-     * @param names The names of the arguments to check.
-     * @param ignoreCase Specifies whether the comparison should ignore a case.
-     *        If `true`, the prefix comparison will be case-insensitive.
+     * @param names The names of additional arguments to check.
+     * @param ignoreCase Specifies whether the comparison should ignore case.
+     *        If `true`, the comparison will be case-insensitive.
      *        If `false`, the comparison will consider case sensitivity.
      * @return `true` if there are declarations with all the specified names, `false` otherwise.
      */
@@ -82,8 +82,8 @@ interface KoArgumentProvider : KoBaseProvider {
      * Determines whether the declaration has arguments with all the specified names.
      *
      * @param names The names of the arguments to check.
-     * @param ignoreCase Specifies whether the comparison should ignore a case.
-     *        If `true`, the prefix comparison will be case-insensitive.
+     * @param ignoreCase Specifies whether the comparison should ignore case.
+     *        If `true`, the comparison will be case-insensitive.
      *        If `false`, the comparison will consider case sensitivity.
      * @return `true` if there are declarations with all the specified names, `false` otherwise.
      */
@@ -95,7 +95,7 @@ interface KoArgumentProvider : KoBaseProvider {
     /**
      * Determines whether the declaration has at least one argument that satisfies the provided predicate.
      *
-     * @param predicate A function that defines the condition to be met by a argument declaration.
+     * @param predicate A function that defines the condition to be met by an argument declaration.
      * @return `true` if there is a matching declaration, `false` otherwise.
      */
     fun hasArgument(predicate: (KoArgumentDeclaration) -> Boolean): Boolean
@@ -103,7 +103,7 @@ interface KoArgumentProvider : KoBaseProvider {
     /**
      * Determines whether the declaration has all arguments that satisfy the provided predicate.
      *
-     * Note that if the arguments contains no elements, the function returns `true` because there are no elements in it
+     * Note that if the arguments contain no elements, the function returns `true` because there are no elements in it
      * that do not match the predicate.
      *
      * @param predicate A function that defines the condition to be met by argument declarations.

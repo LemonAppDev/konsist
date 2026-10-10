@@ -17,7 +17,7 @@ interface KoParametersProvider : KoBaseProvider {
     val numParameters: Int
 
     /**
-     * Returns the number of parameters that satisfies the specified predicate present in the declaration.
+     * Returns the number of parameters that satisfy the specified predicate present in the declaration.
      *
      * @param predicate The predicate function to determine if a parameter satisfies a condition.
      * @return The number of parameters in the declaration.
@@ -25,7 +25,7 @@ interface KoParametersProvider : KoBaseProvider {
     fun countParameters(predicate: (KoParameterDeclaration) -> Boolean): Int
 
     /**
-     * Determines whatever declaration has any parameter.
+     * Determines whether the declaration has any parameter.
      *
      * @return `true` if the declaration has any parameter, `false` otherwise.
      */
@@ -36,8 +36,8 @@ interface KoParametersProvider : KoBaseProvider {
      *
      * @param name the name of the parameter to check.
      * @param names the names of the parameters to check.
-     * @param ignoreCase Specifies whether the comparison should ignore a case.
-     *        If `true`, the prefix comparison will be case-insensitive.
+     * @param ignoreCase Specifies whether the comparison should ignore case.
+     *        If `true`, the comparison will be case-insensitive.
      *        If `false`, the comparison will consider case sensitivity.
      * @return `true` if there is a matching declaration, `false` otherwise.
      */
@@ -51,8 +51,8 @@ interface KoParametersProvider : KoBaseProvider {
      * Determines whether the declaration has at least one parameter whose name matches any of the specified names.
      *
      * @param names the names of the parameters to check.
-     * @param ignoreCase Specifies whether the comparison should ignore a case.
-     *        If `true`, the prefix comparison will be case-insensitive.
+     * @param ignoreCase Specifies whether the comparison should ignore case.
+     *        If `true`, the comparison will be case-insensitive.
      *        If `false`, the comparison will consider case sensitivity.
      * @return `true` if there is a matching declaration, `false` otherwise.
      */
@@ -65,9 +65,9 @@ interface KoParametersProvider : KoBaseProvider {
      * Determines whether the declaration has parameters with all the specified names.
      *
      * @param name The name of the parameter to check.
-     * @param names The names of the parameters to check.
-     * @param ignoreCase Specifies whether the comparison should ignore a case.
-     *        If `true`, the prefix comparison will be case-insensitive.
+     * @param names The names of additional parameters to check.
+     * @param ignoreCase Specifies whether the comparison should ignore case.
+     *        If `true`, the comparison will be case-insensitive.
      *        If `false`, the comparison will consider case sensitivity.
      * @return `true` if there are declarations with all the specified names, `false` otherwise.
      */
@@ -81,8 +81,8 @@ interface KoParametersProvider : KoBaseProvider {
      * Determines whether the declaration has parameters with all the specified names.
      *
      * @param names The names of the parameters to check.
-     * @param ignoreCase Specifies whether the comparison should ignore a case.
-     *        If `true`, the prefix comparison will be case-insensitive.
+     * @param ignoreCase Specifies whether the comparison should ignore case.
+     *        If `true`, the comparison will be case-insensitive.
      *        If `false`, the comparison will consider case sensitivity.
      * @return `true` if there are declarations with all the specified names, `false` otherwise.
      */
@@ -102,7 +102,7 @@ interface KoParametersProvider : KoBaseProvider {
     /**
      * Determines whether the declaration has all parameters that satisfy the provided predicate.
      *
-     * Note that if the parameters contains no elements, the function returns `true` because there are no elements in it
+     * Note that if the parameters contain no elements, the function returns `true` because there are no elements in it
      * that do not match the predicate.
      *
      * @param predicate A function that defines the condition to be met by parameter declarations.

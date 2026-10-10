@@ -36,7 +36,7 @@ fun <T : KoPropertyProvider> List<T>.withoutProperties(includeNested: Boolean = 
  * @param names The names of additional properties to include.
  * @param includeNested Whether to include nested properties.
  * @param ignoreCase Specifies whether the comparison should ignore case.
- *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations with at least one of the specified properties.
  */
@@ -50,10 +50,10 @@ fun <T : KoPropertyProvider> List<T>.withPropertyNamed(
 /**
  * List containing declarations that have at least one property with the specified name(s).
  *
- * @param names The names of additional properties to include.
+ * @param names The names of the properties to include.
  * @param includeNested Whether to include nested properties.
  * @param ignoreCase Specifies whether the comparison should ignore case.
- *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations with at least one of the specified properties.
  */
@@ -70,15 +70,15 @@ fun <T : KoPropertyProvider> List<T>.withPropertyNamed(
     }
 
 /**
- * List containing declarations without any of specified properties.
+ * List containing declarations without any of the specified properties.
  *
  * @param name The name of the property to exclude.
  * @param names The names of additional properties to exclude.
  * @param includeNested Whether to include nested properties.
  * @param ignoreCase Specifies whether the comparison should ignore case.
- *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
- * @return A list containing declarations without any of specified properties.
+ * @return A list containing declarations without any of the specified properties.
  */
 fun <T : KoPropertyProvider> List<T>.withoutPropertyNamed(
     name: String,
@@ -88,14 +88,14 @@ fun <T : KoPropertyProvider> List<T>.withoutPropertyNamed(
 ): List<T> = withoutPropertyNamed(listOf(name, *names), includeNested, ignoreCase)
 
 /**
- * List containing declarations without any of specified properties.
+ * List containing declarations without any of the specified properties.
  *
- * @param names The names of additional properties to exclude.
+ * @param names The names of the properties to exclude.
  * @param includeNested Whether to include nested properties.
  * @param ignoreCase Specifies whether the comparison should ignore case.
- *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
- * @return A list containing declarations without any of specified properties.
+ * @return A list containing declarations without any of the specified properties.
  */
 fun <T : KoPropertyProvider> List<T>.withoutPropertyNamed(
     names: Collection<String>,
@@ -113,10 +113,10 @@ fun <T : KoPropertyProvider> List<T>.withoutPropertyNamed(
  * List containing declarations that have all specified properties.
  *
  * @param name The name of the property to include.
- * @param names The name(s) of the properties to include.
+ * @param names The names of additional properties to include.
  * @param includeNested Whether to include nested properties.
  * @param ignoreCase Specifies whether the comparison should ignore case.
- *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations with all specified properties.
  */
@@ -130,10 +130,10 @@ fun <T : KoPropertyProvider> List<T>.withAllPropertiesNamed(
 /**
  * List containing declarations that have all specified properties.
  *
- * @param names The name(s) of the properties to include.
+ * @param names The names of the properties to include.
  * @param includeNested Whether to include nested properties.
  * @param ignoreCase Specifies whether the comparison should ignore case.
- *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations with all specified properties.
  */
@@ -153,10 +153,10 @@ fun <T : KoPropertyProvider> List<T>.withAllPropertiesNamed(
  * List containing declarations without all specified properties.
  *
  * @param name The name of the property to exclude.
- * @param names The name(s) of the properties to exclude.
+ * @param names The names of additional properties to exclude.
  * @param includeNested Whether to include nested properties.
  * @param ignoreCase Specifies whether the comparison should ignore case.
- *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations without all specified properties.
  */
@@ -170,10 +170,10 @@ fun <T : KoPropertyProvider> List<T>.withoutAllPropertiesNamed(
 /**
  * List containing declarations without all specified properties.
  *
- * @param names The name(s) of the properties to exclude.
+ * @param names The names of the properties to exclude.
  * @param includeNested Whether to include nested properties.
  * @param ignoreCase Specifies whether the comparison should ignore case.
- *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations without all specified properties.
  */
@@ -202,11 +202,11 @@ fun <T : KoPropertyProvider> List<T>.withProperty(
 ): List<T> = filter { it.hasProperty(includeNested, predicate) }
 
 /**
- * List containing declarations that not have property satisfying the provided predicate.
+ * List containing declarations that do not have a property satisfying the provided predicate.
  *
  * @param includeNested Whether to include nested properties.
  * @param predicate A function that defines the condition to be met by a property declaration.
- * @return A list containing declarations without property satisfying the provided predicate.
+ * @return A list containing declarations without a property satisfying the provided predicate.
  */
 fun <T : KoPropertyProvider> List<T>.withoutProperty(
     includeNested: Boolean = true,
@@ -218,7 +218,7 @@ fun <T : KoPropertyProvider> List<T>.withoutProperty(
  *
  * @param includeNested Whether to include nested properties.
  * @param predicate A function that defines the condition to be met by all property declarations.
- * @return A filtered list containing declarations with all properties satisfying the predicate.
+ * @return A list containing declarations with all properties satisfying the predicate.
  */
 fun <T : KoPropertyProvider> List<T>.withAllProperties(
     includeNested: Boolean = true,

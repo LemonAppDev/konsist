@@ -9,7 +9,7 @@ interface KoCrossInlineModifierProvider :
     KoBaseProvider,
     KoModifierProvider {
     /**
-     * Determines whatever the declaration has `crossinline` modifier.
+     * Determines whether the declaration has the `crossinline` modifier.
      */
     val hasCrossInlineModifier: Boolean
 }

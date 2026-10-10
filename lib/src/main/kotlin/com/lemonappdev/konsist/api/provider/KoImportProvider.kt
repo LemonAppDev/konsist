@@ -17,7 +17,7 @@ interface KoImportProvider : KoBaseProvider {
     val numImports: Int
 
     /**
-     * Returns the number of imports that satisfies the specified predicate present in the declaration.
+     * Returns the number of imports that satisfy the specified predicate present in the declaration.
      *
      * @param predicate The predicate function to determine if an import satisfies a condition.
      * @return The number of imports in the declaration.
@@ -25,7 +25,7 @@ interface KoImportProvider : KoBaseProvider {
     fun countImports(predicate: (KoImportDeclaration) -> Boolean): Int
 
     /**
-     * Determines whatever the declaration has any import.
+     * Determines whether the declaration has any import.
      *
      * @return `true` if the declaration has any import, `false` otherwise.
      */
@@ -37,7 +37,7 @@ interface KoImportProvider : KoBaseProvider {
      * @param name the name of the import to check.
      * @param names the names of the imports to check.
      * @param ignoreCase Specifies whether the comparison should ignore case.
-     *        If `true`, the prefix comparison will be case-insensitive.
+     *        If `true`, the comparison will be case-insensitive.
      *        If `false`, the comparison will consider case sensitivity.
      * @return `true` if there is a matching declaration, `false` otherwise.
      */
@@ -52,7 +52,7 @@ interface KoImportProvider : KoBaseProvider {
      *
      * @param names the names of the imports to check.
      * @param ignoreCase Specifies whether the comparison should ignore case.
-     *        If `true`, the prefix comparison will be case-insensitive.
+     *        If `true`, the comparison will be case-insensitive.
      *        If `false`, the comparison will consider case sensitivity.
      * @return `true` if there is a matching declaration, `false` otherwise.
      */
@@ -65,9 +65,9 @@ interface KoImportProvider : KoBaseProvider {
      * Determines whether the declaration has imports with all the specified names.
      *
      * @param name The name of the import to check.
-     * @param names The names of the imports to check.
+     * @param names The names of additional imports to check.
      * @param ignoreCase Specifies whether the comparison should ignore case.
-     *        If `true`, the prefix comparison will be case-insensitive.
+     *        If `true`, the comparison will be case-insensitive.
      *        If `false`, the comparison will consider case sensitivity.
      * @return `true` if there are declarations with all the specified names, `false` otherwise.
      */
@@ -82,7 +82,7 @@ interface KoImportProvider : KoBaseProvider {
      *
      * @param names The names of the imports to check.
      * @param ignoreCase Specifies whether the comparison should ignore case.
-     *        If `true`, the prefix comparison will be case-insensitive.
+     *        If `true`, the comparison will be case-insensitive.
      *        If `false`, the comparison will consider case sensitivity.
      * @return `true` if there are declarations with all the specified names, `false` otherwise.
      */
@@ -92,7 +92,7 @@ interface KoImportProvider : KoBaseProvider {
     ): Boolean
 
     /**
-     * Determines whatever the declaration has any import with the specified predicate.
+     * Determines whether the declaration has any import with the specified predicate.
      *
      * @param predicate The predicate function to determine if an import satisfies a condition.
      * @return `true` if the declaration has imports with the specified predicate, `false` otherwise.
@@ -100,9 +100,9 @@ interface KoImportProvider : KoBaseProvider {
     fun hasImport(predicate: (KoImportDeclaration) -> Boolean): Boolean
 
     /**
-     * Determines whatever the declaration has all imports with the specified predicate.
+     * Determines whether the declaration has all imports with the specified predicate.
      *
-     * Note that if the imports contains no elements, the function returns `true` because there are no elements in it
+     * Note that if the imports contain no elements, the function returns `true` because there are no elements in it
      * that do not match the predicate.
      *
      * @param predicate The predicate function to determine if an import satisfies a condition.

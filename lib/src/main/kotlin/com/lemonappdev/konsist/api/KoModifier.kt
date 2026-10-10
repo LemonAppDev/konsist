@@ -47,7 +47,7 @@ enum class KoModifier(
     DATA("data"),
 
     /**
-     * The `num` modifier.
+     * The `enum` modifier.
      */
     ENUM("enum"),
 

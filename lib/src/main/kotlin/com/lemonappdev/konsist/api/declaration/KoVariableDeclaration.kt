@@ -23,7 +23,7 @@ import com.lemonappdev.konsist.api.provider.modifier.KoValModifierProvider
 import com.lemonappdev.konsist.api.provider.modifier.KoVarModifierProvider
 
 /**
- * Represents a Kotlin property declaration.
+ * Represents a Kotlin variable declaration.
  */
 interface KoVariableDeclaration :
     KoBaseDeclaration,

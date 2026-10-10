@@ -16,12 +16,12 @@ interface KoParentProvider : KoBaseProvider {
      *                        For example:
      *
      *                        // Android
-     *                        class AppCompactActivity: Activity
+     *                        class AppCompatActivity: Activity
      *                        interface Activity
      *
      *                        // Project
-     *                        class BaseActivity: AppCompactActivity() // parents(indirectParents = true) returns [AppCompactActivity]
-     *                        class MyActivity: BaseActivity() // parents(indirectParents = true) returns [BaseActivity, AppCompactActivity]
+     *                        class BaseActivity: AppCompatActivity() // parents(indirectParents = true) returns [AppCompatActivity]
+     *                        class MyActivity: BaseActivity() // parents(indirectParents = true) returns [BaseActivity, AppCompatActivity]
      * @return a list of [KoParentDeclaration] representing the parents of the declaration.
      */
     fun parents(indirectParents: Boolean = false): List<KoParentDeclaration>
@@ -35,18 +35,18 @@ interface KoParentProvider : KoBaseProvider {
      *                        For example:
      *
      *                        // Android
-     *                        class AppCompactActivity: Activity
+     *                        class AppCompatActivity: Activity
      *                        interface Activity
      *
      *                        // Project
-     *                        class BaseActivity: AppCompactActivity() // parents(indirectParents = true) returns [AppCompactActivity]
-     *                        class MyActivity: BaseActivity() // parents(indirectParents = true) returns [BaseActivity, AppCompactActivity]
+     *                        class BaseActivity: AppCompatActivity() // parents(indirectParents = true) returns [AppCompatActivity]
+     *                        class MyActivity: BaseActivity() // parents(indirectParents = true) returns [BaseActivity, AppCompatActivity]
      * @return The number of parents.
      */
     fun numParents(indirectParents: Boolean = false): Int
 
     /**
-     * Returns the number of parents that satisfies the specified predicate present in the declaration.
+     * Returns the number of parents that satisfy the specified predicate present in the declaration.
      *
      * @param indirectParents specifies whether to include parents defined in other files such as parent of the parent.
      *                        If `true`, it includes only those parents defined within our scope and those used
@@ -54,12 +54,12 @@ interface KoParentProvider : KoBaseProvider {
      *                        For example:
      *
      *                        // Android
-     *                        class AppCompactActivity: Activity
+     *                        class AppCompatActivity: Activity
      *                        interface Activity
      *
      *                        // Project
-     *                        class BaseActivity: AppCompactActivity() // parents(indirectParents = true) returns [AppCompactActivity]
-     *                        class MyActivity: BaseActivity() // parents(indirectParents = true) returns [BaseActivity, AppCompactActivity]
+     *                        class BaseActivity: AppCompatActivity() // parents(indirectParents = true) returns [AppCompatActivity]
+     *                        class MyActivity: BaseActivity() // parents(indirectParents = true) returns [BaseActivity, AppCompatActivity]
      * @param predicate The predicate function to determine if a parent satisfies a condition.
      * @return The number of parents in the declaration satisfying predicate.
      */
@@ -69,7 +69,7 @@ interface KoParentProvider : KoBaseProvider {
     ): Int
 
     /**
-     * Determines whatever declaration has any parent (parent class and parent interfaces).
+     * Determines whether the declaration has any parent (parent class and parent interfaces).
      *
      * @param indirectParents specifies whether to include parents defined in other files such as parent of the parent.
      *                        If `true`, it includes only those parents defined within our scope and those used
@@ -77,12 +77,12 @@ interface KoParentProvider : KoBaseProvider {
      *                        For example:
      *
      *                        // Android
-     *                        class AppCompactActivity: Activity
+     *                        class AppCompatActivity: Activity
      *                        interface Activity
      *
      *                        // Project
-     *                        class BaseActivity: AppCompactActivity() // parents(indirectParents = true) returns [AppCompactActivity]
-     *                        class MyActivity: BaseActivity() // parents(indirectParents = true) returns [BaseActivity, AppCompactActivity]
+     *                        class BaseActivity: AppCompatActivity() // parents(indirectParents = true) returns [AppCompatActivity]
+     *                        class MyActivity: BaseActivity() // parents(indirectParents = true) returns [BaseActivity, AppCompatActivity]
      * @return `true` if the declaration has any parent, `false` otherwise.
      */
     fun hasParents(indirectParents: Boolean = false): Boolean
@@ -99,14 +99,14 @@ interface KoParentProvider : KoBaseProvider {
      *                        For example:
      *
      *                        // Android
-     *                        class AppCompactActivity: Activity
+     *                        class AppCompatActivity: Activity
      *                        interface Activity
      *
      *                        // Project
-     *                        class BaseActivity: AppCompactActivity() // parents(indirectParents = true) returns [AppCompactActivity]
-     *                        class MyActivity: BaseActivity() // parents(indirectParents = true) returns [BaseActivity, AppCompactActivity]
+     *                        class BaseActivity: AppCompatActivity() // parents(indirectParents = true) returns [AppCompatActivity]
+     *                        class MyActivity: BaseActivity() // parents(indirectParents = true) returns [BaseActivity, AppCompatActivity]
      * @param ignoreCase Specifies whether the comparison should ignore case.
-     *        If `true`, the prefix comparison will be case-insensitive.
+     *        If `true`, the comparison will be case-insensitive.
      *        If `false`, the comparison will consider case sensitivity.
      * @return `true` if there is a matching declaration, `false` otherwise.
      */
@@ -128,14 +128,14 @@ interface KoParentProvider : KoBaseProvider {
      *                        For example:
      *
      *                        // Android
-     *                        class AppCompactActivity: Activity
+     *                        class AppCompatActivity: Activity
      *                        interface Activity
      *
      *                        // Project
-     *                        class BaseActivity: AppCompactActivity() // parents(indirectParents = true) returns [AppCompactActivity]
-     *                        class MyActivity: BaseActivity() // parents(indirectParents = true) returns [BaseActivity, AppCompactActivity]
+     *                        class BaseActivity: AppCompatActivity() // parents(indirectParents = true) returns [AppCompatActivity]
+     *                        class MyActivity: BaseActivity() // parents(indirectParents = true) returns [BaseActivity, AppCompatActivity]
      * @param ignoreCase Specifies whether the comparison should ignore case.
-     *        If `true`, the prefix comparison will be case-insensitive.
+     *        If `true`, the comparison will be case-insensitive.
      *        If `false`, the comparison will consider case sensitivity.
      * @return `true` if there is a matching declaration, `false` otherwise.
      */
@@ -149,21 +149,21 @@ interface KoParentProvider : KoBaseProvider {
      * Determines whether the declaration has parents (parent classes and parent interfaces) with all the specified names.
      *
      * @param name The name of the parent to check.
-     * @param names The names of the parents to check.
+     * @param names The names of additional parents to check.
      * @param indirectParents specifies whether to include parents defined in other files such as parent of the parent.
      *                        If `true`, it includes only those parents defined within our scope and those used
      *                        by our declarations.
      *                        For example:
      *
      *                        // Android
-     *                        class AppCompactActivity: Activity
+     *                        class AppCompatActivity: Activity
      *                        interface Activity
      *
      *                        // Project
-     *                        class BaseActivity: AppCompactActivity() // parents(indirectParents = true) returns [AppCompactActivity]
-     *                        class MyActivity: BaseActivity() // parents(indirectParents = true) returns [BaseActivity, AppCompactActivity]
+     *                        class BaseActivity: AppCompatActivity() // parents(indirectParents = true) returns [AppCompatActivity]
+     *                        class MyActivity: BaseActivity() // parents(indirectParents = true) returns [BaseActivity, AppCompatActivity]
      * @param ignoreCase Specifies whether the comparison should ignore case.
-     *        If `true`, the prefix comparison will be case-insensitive.
+     *        If `true`, the comparison will be case-insensitive.
      *        If `false`, the comparison will consider case sensitivity.
      * @return `true` if there are declarations with all the specified names, `false` otherwise.
      */
@@ -184,14 +184,14 @@ interface KoParentProvider : KoBaseProvider {
      *                        For example:
      *
      *                        // Android
-     *                        class AppCompactActivity: Activity
+     *                        class AppCompatActivity: Activity
      *                        interface Activity
      *
      *                        // Project
-     *                        class BaseActivity: AppCompactActivity() // parents(indirectParents = true) returns [AppCompactActivity]
-     *                        class MyActivity: BaseActivity() // parents(indirectParents = true) returns [BaseActivity, AppCompactActivity]
+     *                        class BaseActivity: AppCompatActivity() // parents(indirectParents = true) returns [AppCompatActivity]
+     *                        class MyActivity: BaseActivity() // parents(indirectParents = true) returns [BaseActivity, AppCompatActivity]
      * @param ignoreCase Specifies whether the comparison should ignore case.
-     *        If `true`, the prefix comparison will be case-insensitive.
+     *        If `true`, the comparison will be case-insensitive.
      *        If `false`, the comparison will consider case sensitivity.
      * @return `true` if there are declarations with all the specified names, `false` otherwise.
      */
@@ -211,12 +211,12 @@ interface KoParentProvider : KoBaseProvider {
      *                        For example:
      *
      *                        // Android
-     *                        class AppCompactActivity: Activity
+     *                        class AppCompatActivity: Activity
      *                        interface Activity
      *
      *                        // Project
-     *                        class BaseActivity: AppCompactActivity() // parents(indirectParents = true) returns [AppCompactActivity]
-     *                        class MyActivity: BaseActivity() // parents(indirectParents = true) returns [BaseActivity, AppCompactActivity]
+     *                        class BaseActivity: AppCompatActivity() // parents(indirectParents = true) returns [AppCompatActivity]
+     *                        class MyActivity: BaseActivity() // parents(indirectParents = true) returns [BaseActivity, AppCompatActivity]
      * @param predicate A function that defines the condition to be met by a parent declaration.
      * @return `true` if there is a matching declaration, `false` otherwise.
      */
@@ -229,7 +229,7 @@ interface KoParentProvider : KoBaseProvider {
      * Determines whether the declaration has all parents (parent classes and parent interfaces) that satisfy the
      * provided predicate.
      *
-     * Note that if the parents contains no elements, the function returns `true` because there are no elements in it
+     * Note that if the parents contain no elements, the function returns `true` because there are no elements in it
      * that do not match the predicate.
      *
      * @param indirectParents specifies whether to include parents defined in other files such as parent of the parent.
@@ -238,12 +238,12 @@ interface KoParentProvider : KoBaseProvider {
      *                        For example:
      *
      *                        // Android
-     *                        class AppCompactActivity: Activity
+     *                        class AppCompatActivity: Activity
      *                        interface Activity
      *
      *                        // Project
-     *                        class BaseActivity: AppCompactActivity() // parents(indirectParents = true) returns [AppCompactActivity]
-     *                        class MyActivity: BaseActivity() // parents(indirectParents = true) returns [BaseActivity, AppCompactActivity]
+     *                        class BaseActivity: AppCompatActivity() // parents(indirectParents = true) returns [AppCompatActivity]
+     *                        class MyActivity: BaseActivity() // parents(indirectParents = true) returns [BaseActivity, AppCompatActivity]
      * @param predicate A function that defines the condition to be met by parent declarations.
      * @return `true` if all parent declarations satisfy the predicate, `false` otherwise.
      */
@@ -263,12 +263,12 @@ interface KoParentProvider : KoBaseProvider {
      *                        For example:
      *
      *                        // Android
-     *                        class AppCompactActivity: Activity
+     *                        class AppCompatActivity: Activity
      *                        interface Activity
      *
      *                        // Project
-     *                        class BaseActivity: AppCompactActivity() // parents(indirectParents = true) returns [AppCompactActivity]
-     *                        class MyActivity: BaseActivity() // parents(indirectParents = true) returns [BaseActivity, AppCompactActivity]
+     *                        class BaseActivity: AppCompatActivity() // parents(indirectParents = true) returns [AppCompatActivity]
+     *                        class MyActivity: BaseActivity() // parents(indirectParents = true) returns [BaseActivity, AppCompatActivity]
      * @return `true` if there is a matching declaration, `false` otherwise.
      */
     fun hasParentOf(
@@ -287,12 +287,12 @@ interface KoParentProvider : KoBaseProvider {
      *                        For example:
      *
      *                        // Android
-     *                        class AppCompactActivity: Activity
+     *                        class AppCompatActivity: Activity
      *                        interface Activity
      *
      *                        // Project
-     *                        class BaseActivity: AppCompactActivity() // parents(indirectParents = true) returns [AppCompactActivity]
-     *                        class MyActivity: BaseActivity() // parents(indirectParents = true) returns [BaseActivity, AppCompactActivity]
+     *                        class BaseActivity: AppCompatActivity() // parents(indirectParents = true) returns [AppCompatActivity]
+     *                        class MyActivity: BaseActivity() // parents(indirectParents = true) returns [BaseActivity, AppCompatActivity]
      * @return `true` if there is a matching declaration, `false` otherwise.
      */
     fun hasParentOf(
@@ -301,7 +301,7 @@ interface KoParentProvider : KoBaseProvider {
     ): Boolean
 
     /**
-     * Determines whether the declaration has parents with all the specified `KClass` type.
+     * Determines whether the declaration has parents of all the specified `KClass` types.
      *
      * @param name the `KClass` type of the parent to check.
      * @param names the `KClass` types of the parents to check.
@@ -311,12 +311,12 @@ interface KoParentProvider : KoBaseProvider {
      *                        For example:
      *
      *                        // Android
-     *                        class AppCompactActivity: Activity
+     *                        class AppCompatActivity: Activity
      *                        interface Activity
      *
      *                        // Project
-     *                        class BaseActivity: AppCompactActivity() // parents(indirectParents = true) returns [AppCompactActivity]
-     *                        class MyActivity: BaseActivity() // parents(indirectParents = true) returns [BaseActivity, AppCompactActivity]
+     *                        class BaseActivity: AppCompatActivity() // parents(indirectParents = true) returns [AppCompatActivity]
+     *                        class MyActivity: BaseActivity() // parents(indirectParents = true) returns [BaseActivity, AppCompatActivity]
      * @return `true` if the declaration has parents of all the specified `KClass` types, `false` otherwise.
      */
     fun hasAllParentsOf(
@@ -326,7 +326,7 @@ interface KoParentProvider : KoBaseProvider {
     ): Boolean
 
     /**
-     * Determines whether the declaration has parents with all the specified `KClass` type.
+     * Determines whether the declaration has parents of all the specified `KClass` types.
      *
      * @param names the `KClass` types of the parents to check.
      * @param indirectParents specifies whether to include parents defined in other files such as parent of the parent.
@@ -335,12 +335,12 @@ interface KoParentProvider : KoBaseProvider {
      *                        For example:
      *
      *                        // Android
-     *                        class AppCompactActivity: Activity
+     *                        class AppCompatActivity: Activity
      *                        interface Activity
      *
      *                        // Project
-     *                        class BaseActivity: AppCompactActivity() // parents(indirectParents = true) returns [AppCompactActivity]
-     *                        class MyActivity: BaseActivity() // parents(indirectParents = true) returns [BaseActivity, AppCompactActivity]
+     *                        class BaseActivity: AppCompatActivity() // parents(indirectParents = true) returns [AppCompatActivity]
+     *                        class MyActivity: BaseActivity() // parents(indirectParents = true) returns [BaseActivity, AppCompatActivity]
      * @return `true` if the declaration has parents of all the specified `KClass` types, `false` otherwise.
      */
     fun hasAllParentsOf(

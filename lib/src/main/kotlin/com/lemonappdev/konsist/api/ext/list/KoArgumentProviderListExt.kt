@@ -29,7 +29,7 @@ fun <T : KoArgumentProvider> List<T>.withoutArguments(): List<T> = filterNot { i
  * @param name The name of the argument to include.
  * @param names The names of additional arguments to include.
  * @param ignoreCase Specifies whether the comparison should ignore case.
- *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations with at least one of the specified argument(s).
  */
@@ -42,9 +42,9 @@ fun <T : KoArgumentProvider> List<T>.withArgumentNamed(
 /**
  * List containing declarations that have at least one argument with the specified name(s).
  *
- * @param names The names of additional arguments to include.
+ * @param names The names of the arguments to include.
  * @param ignoreCase Specifies whether the comparison should ignore case.
- *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations with at least one of the specified argument(s).
  */
@@ -60,14 +60,14 @@ fun <T : KoArgumentProvider> List<T>.withArgumentNamed(
     }
 
 /**
- * List containing declarations without any of specified arguments.
+ * List containing declarations without any of the specified arguments.
  *
  * @param name The name of the argument to exclude.
  * @param names The names of additional arguments to exclude.
  * @param ignoreCase Specifies whether the comparison should ignore case.
- *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
- * @return A list containing declarations without any of specified arguments.
+ * @return A list containing declarations without any of the specified arguments.
  */
 fun <T : KoArgumentProvider> List<T>.withoutArgumentNamed(
     name: String,
@@ -76,13 +76,13 @@ fun <T : KoArgumentProvider> List<T>.withoutArgumentNamed(
 ): List<T> = withoutArgumentNamed(listOf(name, *names), ignoreCase)
 
 /**
- * List containing declarations without any of specified arguments.
+ * List containing declarations without any of the specified arguments.
  *
- * @param names The names of additional arguments to exclude.
+ * @param names The names of the arguments to exclude.
  * @param ignoreCase Specifies whether the comparison should ignore case.
- *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
- * @return A list containing declarations without any of specified arguments.
+ * @return A list containing declarations without any of the specified arguments.
  */
 fun <T : KoArgumentProvider> List<T>.withoutArgumentNamed(
     names: Collection<String>,
@@ -99,9 +99,9 @@ fun <T : KoArgumentProvider> List<T>.withoutArgumentNamed(
  * List containing declarations that have all specified arguments.
  *
  * @param name The name of the argument to include.
- * @param names The name(s) of the argument(s) to include.
+ * @param names The names of additional arguments to include.
  * @param ignoreCase Specifies whether the comparison should ignore case.
- *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations with all specified argument(s).
  */
@@ -114,9 +114,9 @@ fun <T : KoArgumentProvider> List<T>.withAllArgumentsNamed(
 /**
  * List containing declarations that have all specified arguments.
  *
- * @param names The name(s) of the argument(s) to include.
+ * @param names The names of the arguments to include.
  * @param ignoreCase Specifies whether the comparison should ignore case.
- *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations with all specified argument(s).
  */
@@ -135,9 +135,9 @@ fun <T : KoArgumentProvider> List<T>.withAllArgumentsNamed(
  * List containing declarations without all specified arguments.
  *
  * @param name The name of the argument to exclude.
- * @param names The name(s) of the argument(s) to exclude.
+ * @param names The names of additional arguments to exclude.
  * @param ignoreCase Specifies whether the comparison should ignore case.
- *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations without all specified argument(s).
  */
@@ -150,9 +150,9 @@ fun <T : KoArgumentProvider> List<T>.withoutAllArgumentsNamed(
 /**
  * List containing declarations without all specified arguments.
  *
- * @param names The name(s) of the argument(s) to exclude.
+ * @param names The names of the arguments to exclude.
  * @param ignoreCase Specifies whether the comparison should ignore case.
- *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations without all specified argument(s).
  */
@@ -179,10 +179,10 @@ fun <T : KoArgumentProvider> List<T>.withArgument(predicate: (KoArgumentDeclarat
     }
 
 /**
- * List containing declarations that not have argument satisfying the provided predicate.
+ * List containing declarations that do not have any argument satisfying the provided predicate.
  *
  * @param predicate A function that defines the condition to be met by an argument declaration.
- * @return A list containing declarations without argument satisfying the provided predicate.
+ * @return A list containing declarations without any argument satisfying the provided predicate.
  */
 fun <T : KoArgumentProvider> List<T>.withoutArgument(predicate: (KoArgumentDeclaration) -> Boolean): List<T> =
     filterNot { it.hasArgument(predicate) }

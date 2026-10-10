@@ -42,20 +42,20 @@ fun <T : KoHasPackageProvider> List<T>.withPackage(names: Collection<String>): L
     }
 
 /**
- * List containing declarations with some package.
+ * List containing declarations without package.
  *
  * @param names The package names to exclude.
  * @return A list containing declarations without a package matching any of the specified package names
- * (or none package if [names] is empty).
+ * (or without any package if [names] is empty).
  */
 fun <T : KoHasPackageProvider> List<T>.withoutPackage(vararg names: String): List<T> = withoutPackage(listOf(*names))
 
 /**
- * List containing declarations with some package.
+ * List containing declarations without package.
  *
  * @param names The package names to exclude.
  * @return A list containing declarations without a package matching any of the specified package names
- * (or none package if [names] is empty).
+ * (or without any package if [names] is empty).
  */
 fun <T : KoHasPackageProvider> List<T>.withoutPackage(names: Collection<String>): List<T> =
     filter {

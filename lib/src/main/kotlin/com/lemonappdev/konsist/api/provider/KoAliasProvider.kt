@@ -12,7 +12,7 @@ interface KoAliasProvider : KoBaseProvider {
     val alias: KoImportAliasDeclaration?
 
     /**
-     * Determines whatever declaration has a specified alias.
+     * Determines whether the declaration has a specified alias.
      *
      * @param predicate The predicate function used to determine if a declaration alias satisfies a condition.
      * @return `true` if the declaration has the specified alias (or any alias if [predicate] is `null`),

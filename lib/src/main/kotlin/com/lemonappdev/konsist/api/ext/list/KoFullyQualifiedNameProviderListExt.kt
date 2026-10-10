@@ -3,12 +3,12 @@ package com.lemonappdev.konsist.api.ext.list
 import com.lemonappdev.konsist.api.provider.KoFullyQualifiedNameProvider
 
 /**
- * List containing declarations with the fully qualified name.
+ * List containing declarations with any of the specified fully qualified names.
  *
  * @param name The name to include.
  * @param names The names to include.
  * @param ignoreCase Specifies whether the comparison should ignore case.
- *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations with the specified fully qualified names.
  */
@@ -19,11 +19,11 @@ fun <T : KoFullyQualifiedNameProvider> List<T>.withFullyQualifiedName(
 ): List<T> = withFullyQualifiedName(listOf(name, *names), ignoreCase)
 
 /**
- * List containing declarations with the fully qualified name.
+ * List containing declarations with any of the specified fully qualified names.
  *
  * @param names The names to include.
  * @param ignoreCase Specifies whether the comparison should ignore case.
- *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations with the specified fully qualified names.
  */
@@ -39,12 +39,12 @@ fun <T : KoFullyQualifiedNameProvider> List<T>.withFullyQualifiedName(
     }
 
 /**
- * List containing declarations without fully qualified name.
+ * List containing declarations without any of the specified fully qualified names.
  *
  * @param name The name to exclude.
  * @param names The names to exclude.
  * @param ignoreCase Specifies whether the comparison should ignore case.
- *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations without the specified fully qualified names.
  */
@@ -55,11 +55,11 @@ fun <T : KoFullyQualifiedNameProvider> List<T>.withoutFullyQualifiedName(
 ): List<T> = withoutFullyQualifiedName(listOf(name, *names), ignoreCase)
 
 /**
- * List containing declarations without fully qualified name.
+ * List containing declarations without any of the specified fully qualified names.
  *
  * @param names The names to exclude.
  * @param ignoreCase Specifies whether the comparison should ignore case.
- *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations without the specified fully qualified names.
  */

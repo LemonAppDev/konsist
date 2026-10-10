@@ -4,7 +4,7 @@ import com.lemonappdev.konsist.api.provider.KoBaseProvider
 import com.lemonappdev.konsist.core.verify.assert
 
 /**
- * Asserts that element match the specified predicate.
+ * Asserts that the element matches the specified predicate.
  *
  * @param strict A flag indicating whether strict checking should be enabled.
  *               If set to `true`, an assertion error will be thrown if assert is called on null.
@@ -28,7 +28,7 @@ fun <E : KoBaseProvider> E?.assertTrue(
 }
 
 /**
- * Asserts that element not match the specified predicate.
+ * Asserts that the element does not match the specified predicate.
  *
  * @param strict A flag indicating whether strict checking should be enabled.
  *               If set to `true`, an assertion error will be thrown if assert is called on null.
@@ -55,8 +55,7 @@ fun <E : KoBaseProvider> E?.assertFalse(
  * Asserts that all elements in the list match the specified predicate.
  *
  * @param strict A flag indicating whether strict checking should be enabled.
- *               If set to `true`, an assertion error will be thrown if the declaration list is empty or contains only
- *               null values.
+ *               If set to `true`, an assertion error will be thrown if the list is empty or contains only null values.
  *               If set to `false`, the method will pass successfully when called on an empty list.
  *               By default, false.
  * @param additionalMessage An optional message to provide additional context when the assertion fails.
@@ -149,7 +148,7 @@ fun <E : KoBaseProvider> Sequence<E?>.assertFalse(
 }
 
 /**
- * Asserts that the element has `null` value.
+ * Asserts that the element has a `null` value.
  *
  * @param additionalMessage An optional message to provide additional context when the assertion fails.
  *                          This message will be included in the assertion error if the assertion fails.
@@ -165,7 +164,7 @@ fun <E : KoBaseProvider> E?.assertNull(
 }
 
 /**
- * Asserts that the element has not `null` value.
+ * Asserts that the element does not have a `null` value.
  *
  * @param additionalMessage An optional message to provide additional context when the assertion fails.
  *                          This message will be included in the assertion error if the assertion fails.

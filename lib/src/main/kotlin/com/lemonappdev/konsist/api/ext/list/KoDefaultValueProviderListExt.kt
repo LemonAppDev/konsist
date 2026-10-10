@@ -28,7 +28,7 @@ fun <T : KoDefaultValueProvider> List<T>.withDefaultValue(values: Collection<Str
  * List containing declarations without default value.
  *
  * @param values The default values to exclude.
- * @return A list containing declarations without the specified default values (or none default value if [values] is empty).
+ * @return A list containing declarations without the specified default values (or no default value if [values] is empty).
  */
 fun <T : KoDefaultValueProvider> List<T>.withoutDefaultValue(vararg values: String): List<T> = withoutDefaultValue(listOf(*values))
 
@@ -36,7 +36,7 @@ fun <T : KoDefaultValueProvider> List<T>.withoutDefaultValue(vararg values: Stri
  * List containing declarations without default value.
  *
  * @param values The default values to exclude.
- * @return A list containing declarations without the specified default values (or none default value if [values] is empty).
+ * @return A list containing declarations without the specified default values (or no default value if [values] is empty).
  */
 fun <T : KoDefaultValueProvider> List<T>.withoutDefaultValue(values: Collection<String>): List<T> =
     filter {

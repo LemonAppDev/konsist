@@ -42,7 +42,7 @@ fun <T : KoEnumConstantDeclaration> List<T>.withLocalClassNamed(
 /**
  * List containing declarations that have at least one local class with the specified name(s).
  *
- * @param names The names of additional local classes to include.
+ * @param names The names of the local classes to include.
  * @return A list containing declarations with at least one of the specified local class(es).
  */
 @Deprecated("Will be removed in version 0.20.0", ReplaceWith("withClassNamed()"))
@@ -55,11 +55,11 @@ fun <T : KoEnumConstantDeclaration> List<T>.withLocalClassNamed(names: Collectio
     }
 
 /**
- * List containing declarations without any of specified local classes.
+ * List containing declarations without any of the specified local classes.
  *
  * @param name The name of the local class to exclude.
  * @param names The names of additional local classes to exclude.
- * @return A list containing declarations without any of specified local classes.
+ * @return A list containing declarations without any of the specified local classes.
  */
 @Deprecated("Will be removed in version 0.20.0", ReplaceWith("withoutClassNamed()"))
 fun <T : KoEnumConstantDeclaration> List<T>.withoutLocalClassNamed(
@@ -68,10 +68,10 @@ fun <T : KoEnumConstantDeclaration> List<T>.withoutLocalClassNamed(
 ): List<T> = withoutLocalClassNamed(listOf(name, *names))
 
 /**
- * List containing declarations without any of specified local classes.
+ * List containing declarations without any of the specified local classes.
  *
- * @param names The names of additional local classes to exclude.
- * @return A list containing declarations without any of specified local classes.
+ * @param names The names of the local classes to exclude.
+ * @return A list containing declarations without any of the specified local classes.
  */
 @Deprecated("Will be removed in version 0.20.0", ReplaceWith("withoutClassNamed()"))
 fun <T : KoEnumConstantDeclaration> List<T>.withoutLocalClassNamed(names: Collection<String>): List<T> =
@@ -86,7 +86,7 @@ fun <T : KoEnumConstantDeclaration> List<T>.withoutLocalClassNamed(names: Collec
  * List containing declarations that have all specified local classes.
  *
  * @param name The name of the local class to include.
- * @param names The name(s) of the local class(es) to include.
+ * @param names The names of additional local classes to include.
  * @return A list containing declarations with all specified local class(es).
  */
 @Deprecated("Will be removed in version 0.20.0", ReplaceWith("withAllClassesNamed()"))
@@ -98,7 +98,7 @@ fun <T : KoEnumConstantDeclaration> List<T>.withAllLocalClassesNamed(
 /**
  * List containing declarations that have all specified local classes.
  *
- * @param names The name(s) of the local class(es) to include.
+ * @param names The names of the local classes to include.
  * @return A list containing declarations with all specified local class(es).
  */
 @Deprecated("Will be removed in version 0.20.0", ReplaceWith("withAllClassesNamed()"))
@@ -114,7 +114,7 @@ fun <T : KoEnumConstantDeclaration> List<T>.withAllLocalClassesNamed(names: Coll
  * List containing declarations without all specified local classes.
  *
  * @param name The name of the local class to exclude.
- * @param names The name(s) of the local class(es) to exclude.
+ * @param names The names of additional local classes to exclude.
  * @return A list containing declarations without all specified local class(es).
  */
 @Deprecated("Will be removed in version 0.20.0", ReplaceWith("withoutAllClassesNamed()"))
@@ -126,7 +126,7 @@ fun <T : KoEnumConstantDeclaration> List<T>.withoutAllLocalClassesNamed(
 /**
  * List containing declarations without all specified local classes.
  *
- * @param names The name(s) of the local class(es) to exclude.
+ * @param names The names of the local classes to exclude.
  * @return A list containing declarations without all specified local class(es).
  */
 @Deprecated("Will be removed in version 0.20.0", ReplaceWith("withoutAllClassesNamed()"))
@@ -149,10 +149,10 @@ fun <T : KoEnumConstantDeclaration> List<T>.withLocalClass(predicate: (KoClassDe
     filter { it.hasLocalClass(predicate) }
 
 /**
- * List containing declarations that not have local class satisfying the provided predicate.
+ * List containing declarations that do not have any local class satisfying the provided predicate.
  *
  * @param predicate A function that defines the condition to be met by a local class declaration.
- * @return A list containing declarations without local class satisfying the provided predicate.
+ * @return A list containing declarations without any local class satisfying the provided predicate.
  */
 @Deprecated("Will be removed in version 0.20.0", ReplaceWith("withoutClass()"))
 fun <T : KoEnumConstantDeclaration> List<T>.withoutLocalClass(predicate: (KoClassDeclaration) -> Boolean): List<T> =

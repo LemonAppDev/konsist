@@ -5,7 +5,7 @@ package com.lemonappdev.konsist.api.provider
  */
 interface KoKDocTagValueProvider : KoBaseProvider {
     /**
-     * The value of the tag
+     * The value of the tag.
      */
     val value: String
 }

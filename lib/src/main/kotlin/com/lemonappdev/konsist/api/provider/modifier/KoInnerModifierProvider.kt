@@ -9,7 +9,7 @@ interface KoInnerModifierProvider :
     KoBaseProvider,
     KoModifierProvider {
     /**
-     * Determines whatever declaration has `inner` modifier.
+     * Determines whether the declaration has the `inner` modifier.
      */
     val hasInnerModifier: Boolean
 }

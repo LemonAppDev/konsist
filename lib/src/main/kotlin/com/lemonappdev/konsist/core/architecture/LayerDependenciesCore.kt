@@ -38,11 +38,11 @@ internal class LayerDependenciesCore(
     }
 
     /**
-     * Validate that all the layers are not empty
+     * Validates that each layer contains at least one file.
      *
-     * @param files within the scope
+     * @param files The files within the scope.
      *
-     * @throws KoPreconditionFailedException Layers do not contain files
+     * @throws KoPreconditionFailedException if a layer does not contain any files.
      */
     fun checkLayersWithoutFiles(files: List<KoFileDeclaration>) {
         layers

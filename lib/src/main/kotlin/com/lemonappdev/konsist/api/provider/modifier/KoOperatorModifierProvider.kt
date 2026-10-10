@@ -9,7 +9,7 @@ interface KoOperatorModifierProvider :
     KoBaseProvider,
     KoModifierProvider {
     /**
-     * Determines whatever the declaration has `operator` modifier.
+     * Determines whether the declaration has the `operator` modifier.
      */
     val hasOperatorModifier: Boolean
 }

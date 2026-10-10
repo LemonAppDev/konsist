@@ -34,7 +34,7 @@ fun <T : KoObjectProvider> List<T>.withoutObjects(includeNested: Boolean = true)
  * @param names The names of additional objects to include.
  * @param includeNested Whether to include nested objects.
  * @param ignoreCase Specifies whether the comparison should ignore case.
- *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations with at least one of the specified object(s).
  */
@@ -48,10 +48,10 @@ fun <T : KoObjectProvider> List<T>.withObjectNamed(
 /**
  * List containing declarations that have at least one object with the specified name(s).
  *
- * @param names The names of additional objects to include.
+ * @param names The names of the objects to include.
  * @param includeNested Whether to include nested objects.
  * @param ignoreCase Specifies whether the comparison should ignore case.
- *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations with at least one of the specified object(s).
  */
@@ -68,15 +68,15 @@ fun <T : KoObjectProvider> List<T>.withObjectNamed(
     }
 
 /**
- * List containing declarations without any of specified objects.
+ * List containing declarations without any of the specified objects.
  *
  * @param name The name of the object to exclude.
  * @param names The names of additional objects to exclude.
  * @param includeNested Whether to include nested objects.
  * @param ignoreCase Specifies whether the comparison should ignore case.
- *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
- * @return A list containing declarations without any of specified objects.
+ * @return A list containing declarations without any of the specified objects.
  */
 fun <T : KoObjectProvider> List<T>.withoutObjectNamed(
     name: String,
@@ -86,14 +86,14 @@ fun <T : KoObjectProvider> List<T>.withoutObjectNamed(
 ): List<T> = withoutObjectNamed(listOf(name, *names), includeNested, ignoreCase)
 
 /**
- * List containing declarations without any of specified objects.
+ * List containing declarations without any of the specified objects.
  *
- * @param names The names of additional objects to exclude.
+ * @param names The names of the objects to exclude.
  * @param includeNested Whether to include nested objects.
  * @param ignoreCase Specifies whether the comparison should ignore case.
- *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
- * @return A list containing declarations without any of specified objects.
+ * @return A list containing declarations without any of the specified objects.
  */
 fun <T : KoObjectProvider> List<T>.withoutObjectNamed(
     names: Collection<String>,
@@ -111,10 +111,10 @@ fun <T : KoObjectProvider> List<T>.withoutObjectNamed(
  * List containing declarations that have all specified objects.
  *
  * @param name The name of the object to include.
- * @param names The name(s) of the object(s) to include.
+ * @param names The names of additional objects to include.
  * @param includeNested Whether to include nested objects.
  * @param ignoreCase Specifies whether the comparison should ignore case.
- *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations with all specified object(s).
  */
@@ -128,10 +128,10 @@ fun <T : KoObjectProvider> List<T>.withAllObjectsNamed(
 /**
  * List containing declarations that have all specified objects.
  *
- * @param names The name(s) of the object(s) to include.
+ * @param names The names of the objects to include.
  * @param includeNested Whether to include nested objects.
  * @param ignoreCase Specifies whether the comparison should ignore case.
- *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations with all specified object(s).
  */
@@ -151,10 +151,10 @@ fun <T : KoObjectProvider> List<T>.withAllObjectsNamed(
  * List containing declarations without all specified objects.
  *
  * @param name The name of the object to exclude.
- * @param names The name(s) of the object(s) to exclude.
+ * @param names The names of additional objects to exclude.
  * @param includeNested Whether to include nested objects.
  * @param ignoreCase Specifies whether the comparison should ignore case.
- *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations without all specified object(s).
  */
@@ -166,14 +166,14 @@ fun <T : KoObjectProvider> List<T>.withoutAllObjectsNamed(
 ): List<T> = withoutAllObjectsNamed(listOf(name, *names), includeNested, ignoreCase)
 
 /**
- * List containing declarations without any of specified objects.
+ * List containing declarations without all specified objects.
  *
- * @param names The names of additional objects to exclude.
+ * @param names The names of the objects to exclude.
  * @param includeNested Whether to include nested objects.
  * @param ignoreCase Specifies whether the comparison should ignore case.
- *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
- * @return A list containing declarations without any of specified objects.
+ * @return A list containing declarations without all specified object(s).
  */
 fun <T : KoObjectProvider> List<T>.withoutAllObjectsNamed(
     names: Collection<String>,
@@ -203,11 +203,11 @@ fun <T : KoObjectProvider> List<T>.withObject(
     }
 
 /**
- * List containing declarations that not have object satisfying the provided predicate.
+ * List containing declarations that do not have any object satisfying the provided predicate.
  *
  * @param includeNested Whether to include nested objects.
  * @param predicate A function that defines the condition to be met by an object declaration.
- * @return A list containing declarations without object satisfying the provided predicate.
+ * @return A list containing declarations without any object satisfying the provided predicate.
  */
 fun <T : KoObjectProvider> List<T>.withoutObject(
     includeNested: Boolean = true,
@@ -219,7 +219,7 @@ fun <T : KoObjectProvider> List<T>.withoutObject(
  *
  * @param includeNested Whether to include nested objects.
  * @param predicate A function that defines the condition to be met by all object declarations.
- * @return A filtered list containing declarations with all objects satisfying the predicate.
+ * @return A list containing declarations with all objects satisfying the predicate.
  */
 fun <T : KoObjectProvider> List<T>.withAllObjects(
     includeNested: Boolean = true,

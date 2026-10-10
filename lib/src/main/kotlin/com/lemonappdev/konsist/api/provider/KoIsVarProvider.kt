@@ -5,7 +5,7 @@ package com.lemonappdev.konsist.api.provider
  */
 interface KoIsVarProvider : KoBaseProvider {
     /**
-     * Determines whatever the declaration has `var` keyword.
+     * Determines whether the declaration has the `var` keyword.
      */
     val isVar: Boolean
 }

@@ -7,7 +7,7 @@ object LocationUtil {
     /**
      * Use '..' as a wildcard for any number of packages (or path segments), including none.
      *
-     * This class can be used with both file paths and packages.
+     * This function can be used with both file paths and packages.
      * Paths accept both '/' and '\' separators. Leading separators and separators next to '..' are ignored,
      * e.g. "/feature/data/.." is the same as "feature/data..".
      */

@@ -79,7 +79,7 @@ interface KoScope {
      * The companion objects present in the scope.
      *
      * @param includeNested specifies whether to include nested companion objects, by default `true`.
-     * @return a list of [KoObjectDeclaration] representing the companion objects in the scope.
+     * @return a list of [KoCompanionObjectDeclaration] representing the companion objects in the scope.
      */
     fun companionObjects(includeNested: Boolean = true): List<KoCompanionObjectDeclaration>
 
@@ -132,10 +132,10 @@ interface KoScope {
     ): List<KoClassAndObjectDeclaration>
 
     /**
-     * The interface and objects present in the scope.
+     * The interfaces and objects present in the scope.
      *
-     * @param includeNested specifies whether to include nested interface and objects, by default `true`.
-     * @return a list of [KoInterfaceAndObjectDeclaration] representing the interface and objects in the scope.
+     * @param includeNested specifies whether to include nested interfaces and objects, by default `true`.
+     * @return a list of [KoInterfaceAndObjectDeclaration] representing the interfaces and objects in the scope.
      */
     fun interfacesAndObjects(includeNested: Boolean = true): List<KoInterfaceAndObjectDeclaration>
 
@@ -160,7 +160,7 @@ interface KoScope {
     fun properties(includeNested: Boolean = true): List<KoPropertyDeclaration>
 
     /**
-     * The scope with given predicate.
+     * Creates a new scope containing only the files that satisfy the given predicate.
      *
      * @param predicate the predicate function to filter file declarations.
      * @return a new [KoScope] containing the file declarations that satisfy the predicate.
@@ -168,7 +168,7 @@ interface KoScope {
     fun slice(predicate: (KoFileDeclaration) -> Boolean): KoScope
 
     /**
-     * Add a scope files to this scope.
+     * Add the files of the given scope to this scope.
      *
      * @param scope the scope to be added.
      * @return a new [KoScope] containing the combined file declarations from this scope and the specified scope.
@@ -176,7 +176,7 @@ interface KoScope {
     operator fun plus(scope: KoScope): KoScope
 
     /**
-     * Subtract scope files from this scope.
+     * Subtract the files of the given scope from this scope.
      *
      * @param scope the scope to be subtracted.
      * @return a new [KoScope] containing the file declarations from this scope excluding the file declarations in the specified scope.
@@ -184,14 +184,14 @@ interface KoScope {
     operator fun minus(scope: KoScope): KoScope
 
     /**
-     * Add a scope files and create a new scope.
+     * Add the files of the given scope to this scope (modifies this scope in place).
      *
      * @param scope the scope to be added.
      */
     operator fun plusAssign(scope: KoScope): Unit
 
     /**
-     * Subtract a scope files and create a new scope.
+     * Subtract the files of the given scope from this scope (modifies this scope in place).
      *
      * @param scope the scope to be subtracted.
      */
@@ -221,7 +221,7 @@ interface KoScope {
      * Indicates whether some other object is "equal to" this one.
      *
      * @param other the object to compare.
-     * @return `true` if the objects are equal, `true` otherwise.
+     * @return `true` if the objects are equal, `false` otherwise.
      */
     override fun equals(other: Any?): Boolean
 

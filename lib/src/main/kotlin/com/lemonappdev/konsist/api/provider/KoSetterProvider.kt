@@ -3,7 +3,7 @@ package com.lemonappdev.konsist.api.provider
 import com.lemonappdev.konsist.api.declaration.KoSetterDeclaration
 
 /**
- * An interface representing a Kotlin declaration that provides access to setter declaration.
+ * An interface representing a Kotlin declaration that provides access to its setter declaration.
  */
 interface KoSetterProvider : KoBaseProvider {
     /**
@@ -12,7 +12,7 @@ interface KoSetterProvider : KoBaseProvider {
     val setter: KoSetterDeclaration?
 
     /**
-     * Determines whatever declaration has setter.
+     * Determines whether the declaration has a setter.
      */
     val hasSetter: Boolean
 }

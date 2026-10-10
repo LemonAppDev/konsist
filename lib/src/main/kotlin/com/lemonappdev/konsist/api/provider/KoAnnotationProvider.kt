@@ -4,7 +4,7 @@ import com.lemonappdev.konsist.api.declaration.KoAnnotationDeclaration
 import kotlin.reflect.KClass
 
 /**
- * An interface representing a Kotlin declaration that provides an annotations.
+ * An interface representing a Kotlin declaration that provides annotations.
  */
 interface KoAnnotationProvider : KoBaseProvider {
     /**
@@ -18,7 +18,7 @@ interface KoAnnotationProvider : KoBaseProvider {
     val numAnnotations: Int
 
     /**
-     * Returns the number of annotations that satisfies the specified predicate present in the declaration.
+     * Returns the number of annotations that satisfy the specified predicate present in the declaration.
      *
      * @param predicate The predicate function to determine if an annotation satisfies a condition.
      * @return The number of annotations in the declaration.
@@ -26,7 +26,7 @@ interface KoAnnotationProvider : KoBaseProvider {
     fun countAnnotations(predicate: (KoAnnotationDeclaration) -> Boolean): Int
 
     /**
-     * Determines whatever declaration has any annotation.
+     * Determines whether the declaration has any annotation.
      *
      * @return `true` if the declaration has any annotation, `false` otherwise.
      */
@@ -35,10 +35,10 @@ interface KoAnnotationProvider : KoBaseProvider {
     /**
      * Determines whether the declaration has at least one annotation whose name matches any of the specified names.
      *
-     * @param name the name of the annotations to check. It can be either a simple name or a fully qualified name.
+     * @param name the name of the annotation to check. It can be either a simple name or a fully qualified name.
      * @param names the names of the annotations to check. It can be either a simple name or a fully qualified name.
-     * @param ignoreCase Specifies whether the comparison should ignore a case.
-     *        If `true`, the prefix comparison will be case-insensitive.
+     * @param ignoreCase Specifies whether the comparison should ignore case.
+     *        If `true`, the comparison will be case-insensitive.
      *        If `false`, the comparison will consider case sensitivity.
      * @return `true` if there is a matching declaration, `false` otherwise.
      */
@@ -52,8 +52,8 @@ interface KoAnnotationProvider : KoBaseProvider {
      * Determines whether the declaration has at least one annotation whose name matches any of the specified names.
      *
      * @param names the names of the annotations to check. It can be either a simple name or a fully qualified name.
-     * @param ignoreCase Specifies whether the comparison should ignore a case.
-     *        If `true`, the prefix comparison will be case-insensitive.
+     * @param ignoreCase Specifies whether the comparison should ignore case.
+     *        If `true`, the comparison will be case-insensitive.
      *        If `false`, the comparison will consider case sensitivity.
      * @return `true` if there is a matching declaration, `false` otherwise.
      */
@@ -65,10 +65,10 @@ interface KoAnnotationProvider : KoBaseProvider {
     /**
      * Determines whether the declaration has annotations with all the specified names.
      *
-     * @param name the name of the annotations to check. It can be either a simple name or a fully qualified name.
-     * @param names The names of the annotations to check. It can be either a simple name or a fully qualified name.
-     * @param ignoreCase Specifies whether the comparison should ignore a case.
-     *        If `true`, the prefix comparison will be case-insensitive.
+     * @param name the name of the annotation to check. It can be either a simple name or a fully qualified name.
+     * @param names The names of additional annotations to check. It can be either a simple name or a fully qualified name.
+     * @param ignoreCase Specifies whether the comparison should ignore case.
+     *        If `true`, the comparison will be case-insensitive.
      *        If `false`, the comparison will consider case sensitivity.
      * @return `true` if there are declarations with all the specified names, `false` otherwise.
      */
@@ -82,8 +82,8 @@ interface KoAnnotationProvider : KoBaseProvider {
      * Determines whether the declaration has annotations with all the specified names.
      *
      * @param names The names of the annotations to check. It can be either a simple name or a fully qualified name.
-     * @param ignoreCase Specifies whether the comparison should ignore a case.
-     *        If `true`, the prefix comparison will be case-insensitive.
+     * @param ignoreCase Specifies whether the comparison should ignore case.
+     *        If `true`, the comparison will be case-insensitive.
      *        If `false`, the comparison will consider case sensitivity.
      * @return `true` if there are declarations with all the specified names, `false` otherwise.
      */
@@ -103,7 +103,7 @@ interface KoAnnotationProvider : KoBaseProvider {
     /**
      * Determines whether the declaration has all annotations that satisfy the provided predicate.
      *
-     * Note that if the annotations contains no elements, the function returns `true` because there are no elements in it
+     * Note that if the annotations contain no elements, the function returns `true` because there are no elements in it
      * that do not match the predicate.
      *
      * @param predicate A function that defines the condition to be met by annotation declarations.
@@ -132,7 +132,7 @@ interface KoAnnotationProvider : KoBaseProvider {
     fun hasAnnotationOf(names: Collection<KClass<*>>): Boolean
 
     /**
-     * Determines whether the declaration has annotations with all the specified `KClass` type.
+     * Determines whether the declaration has annotations with all the specified `KClass` types.
      *
      * @param name the `KClass` type of the annotation to check.
      * @param names the `KClass` types of the annotations to check.
@@ -144,7 +144,7 @@ interface KoAnnotationProvider : KoBaseProvider {
     ): Boolean
 
     /**
-     * Determines whether the declaration has annotations with all the specified `KClass` type.
+     * Determines whether the declaration has annotations with all the specified `KClass` types.
      *
      * @param names the `KClass` types of the annotations to check.
      * @return `true` if the declaration has annotations of all the specified `KClass` types, `false` otherwise.

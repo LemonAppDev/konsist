@@ -9,7 +9,7 @@ interface KoOverrideModifierProvider :
     KoBaseProvider,
     KoModifierProvider {
     /**
-     * Determines whatever the declaration has `override` modifier.
+     * Determines whether the declaration has the `override` modifier.
      */
     val hasOverrideModifier: Boolean
 }

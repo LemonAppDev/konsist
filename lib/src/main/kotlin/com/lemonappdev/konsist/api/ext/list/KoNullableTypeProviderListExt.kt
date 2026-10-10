@@ -28,7 +28,7 @@ fun <T : KoNullableTypeProvider> List<T>.withType(predicate: ((KoTypeDeclaration
  * List containing declarations without the specified type.
  *
  * @param predicate The predicate function to determine if a declaration type satisfies a condition.
- * @return A list containing declarations without the specified type (or none type if [predicate] is null).
+ * @return A list containing declarations without the specified type (or without any type if [predicate] is null).
  */
 fun <T : KoNullableTypeProvider> List<T>.withoutType(predicate: ((KoTypeDeclaration) -> Boolean)? = null): List<T> =
     filterNot {
@@ -39,7 +39,7 @@ fun <T : KoNullableTypeProvider> List<T>.withoutType(predicate: ((KoTypeDeclarat
     }
 
 /**
- * List containing declarations with type of.
+ * List containing declarations with the type of the specified Kotlin class(es).
  *
  * @param kClass The Kotlin class representing the type to include.
  * @param kClasses The Kotlin class(es) representing the type(s) to include.
@@ -51,7 +51,7 @@ fun <T : KoNullableTypeProvider> List<T>.withTypeOf(
 ): List<T> = withTypeOf(listOf(kClass, *kClasses))
 
 /**
- * List containing declarations with type of.
+ * List containing declarations with the type of the specified Kotlin class(es).
  *
  * @param kClasses The Kotlin class(es) representing the type(s) to include.
  * @return A list containing declarations with the type of the specified Kotlin class(es).
@@ -65,11 +65,11 @@ fun <T : KoNullableTypeProvider> List<T>.withTypeOf(kClasses: Collection<KClass<
     }
 
 /**
- * List containing declarations without type of.
+ * List containing declarations without the type of the specified Kotlin class(es).
  *
  * @param kClass The Kotlin class representing the type to exclude.
  * @param kClasses The Kotlin class(es) representing the type(s) to exclude.
- * @return A list containing declarations without type of the specified Kotlin class(es).
+ * @return A list containing declarations without the type of the specified Kotlin class(es).
  */
 fun <T : KoNullableTypeProvider> List<T>.withoutTypeOf(
     kClass: KClass<*>,
@@ -77,10 +77,10 @@ fun <T : KoNullableTypeProvider> List<T>.withoutTypeOf(
 ): List<T> = withoutTypeOf(listOf(kClass, *kClasses))
 
 /**
- * List containing declarations without type of.
+ * List containing declarations without the type of the specified Kotlin class(es).
  *
  * @param kClasses The Kotlin class(es) representing the type(s) to exclude.
- * @return A list containing declarations without type of the specified Kotlin class(es).
+ * @return A list containing declarations without the type of the specified Kotlin class(es).
  */
 fun <T : KoNullableTypeProvider> List<T>.withoutTypeOf(kClasses: Collection<KClass<*>>): List<T> =
     filterNot {
