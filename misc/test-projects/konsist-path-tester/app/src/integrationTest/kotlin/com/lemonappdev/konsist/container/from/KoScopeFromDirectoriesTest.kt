@@ -17,8 +17,8 @@ class KoScopeFromDirectoriesTest {
     fun `scopeFromDirectories(set)`() {
         // given
         val paths = setOf(
-            "app/src/main/kotlin/com/lemonappdev/fixture/".toOsSeparator(),
-            "app/src/integrationTest/kotlin/com/lemonappdev/fixture/".toOsSeparator(),
+            "app/src/main/kotlin/com/lemonappdev/fixture/",
+            "app/src/integrationTest/kotlin/com/lemonappdev/fixture/",
         )
         val sut = Konsist
             .scopeFromDirectories(paths)
@@ -39,8 +39,30 @@ class KoScopeFromDirectoriesTest {
     fun `scopeFromDirectories(list)`() {
         // given
         val paths = listOf(
-            "app/src/main/kotlin/com/lemonappdev/fixture/".toOsSeparator(),
-            "app/src/integrationTest/kotlin/com/lemonappdev/fixture/".toOsSeparator(),
+            "app/src/main/kotlin/com/lemonappdev/fixture/",
+            "app/src/integrationTest/kotlin/com/lemonappdev/fixture/",
+        )
+        val sut = Konsist
+            .scopeFromDirectories(paths)
+            .mapToFilePaths()
+
+        // then
+        sut.shouldBeEqualTo(
+            listOf(
+                "$appIntegrationTestSourceSetDirectory/fixture/AppClassTest.kt",
+                "$appIntegrationTestSourceSetDirectory/fixture/data/AppDataClassTest.kt",
+                "$appMainSourceSetDirectory/fixture/AppClass.kt",
+                "$appMainSourceSetDirectory/fixture/data/AppDataClass.kt",
+            ).toOsSeparator(),
+        )
+    }
+
+    @Test
+    fun `scopeFromDirectories accepts windows separators`() {
+        // given
+        val paths = listOf(
+            """app\src\main\kotlin\com\lemonappdev\fixture\""",
+            """app\src\integrationTest\kotlin\com\lemonappdev\fixture\""",
         )
         val sut = Konsist
             .scopeFromDirectories(paths)
@@ -60,7 +82,7 @@ class KoScopeFromDirectoriesTest {
     @Test
     fun `scopeFromDirectories(set) throws exception if path does not exist`() {
         // given
-        val paths = setOf("app/src/main/kotlin/com/lemonappdev/nonExisting/".toOsSeparator())
+        val paths = setOf("app/src/main/kotlin/com/lemonappdev/nonExisting/")
 
         val func = { Konsist.scopeFromDirectories(paths) }
 
@@ -72,7 +94,7 @@ class KoScopeFromDirectoriesTest {
     @Test
     fun `scopeFromDirectories(list) throws exception if path does not exist`() {
         // given
-        val paths = listOf("app/src/main/kotlin/com/lemonappdev/nonExisting/".toOsSeparator())
+        val paths = listOf("app/src/main/kotlin/com/lemonappdev/nonExisting/")
 
         val func = { Konsist.scopeFromDirectories(paths) }
 
@@ -84,7 +106,7 @@ class KoScopeFromDirectoriesTest {
     @Test
     fun `scopeFromDirectories(set) throws exception if path points to file`() {
         // given
-        val paths = setOf("app/src/main/kotlin/com/lemonappdev/fixture/AppClass.kt".toOsSeparator())
+        val paths = setOf("app/src/main/kotlin/com/lemonappdev/fixture/AppClass.kt")
 
         val func = { Konsist.scopeFromDirectories(paths) }
 
@@ -97,7 +119,7 @@ class KoScopeFromDirectoriesTest {
     @Test
     fun `scopeFromDirectories(list) throws exception if path points to file`() {
         // given
-        val paths = listOf("app/src/main/kotlin/com/lemonappdev/fixture/AppClass.kt".toOsSeparator())
+        val paths = listOf("app/src/main/kotlin/com/lemonappdev/fixture/AppClass.kt")
 
         val func = { Konsist.scopeFromDirectories(paths) }
 
