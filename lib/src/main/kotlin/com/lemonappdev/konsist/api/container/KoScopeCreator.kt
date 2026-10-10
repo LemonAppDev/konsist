@@ -133,6 +133,8 @@ interface KoScopeCreator {
      * Creates a [KoScope] containing all of Kotlin files in the given directory.
      *
      * Both `/` and `\` separators are accepted on all OSes.
+     * Paths are case-sensitive on all OSes (as on Linux), so letter case must match the file system,
+     * also on case-insensitive file systems (macOS, Windows), e.g. `app/src` does not match `App/src`.
      *
      * @param path The path relative to the project root directory.
      * @param paths The path(s) relative to the project root directory
@@ -147,6 +149,8 @@ interface KoScopeCreator {
      * Creates a [KoScope] containing all of Kotlin files in the given directories.
      *
      * Both `/` and `\` separators are accepted on all OSes.
+     * Paths are case-sensitive on all OSes (as on Linux), so letter case must match the file system,
+     * also on case-insensitive file systems (macOS, Windows), e.g. `app/src` does not match `App/src`.
      *
      * @param paths The set of paths relative to the project root directory.
      * @return a [KoScope] containing all of Kotlin files in the given directories.
@@ -157,6 +161,8 @@ interface KoScopeCreator {
      * Creates a [KoScope] containing all of Kotlin files in the given directory.
      * Some features (as `KoFile.projectPath`, `KoFile.moduleName`) do not work with this method.
      * Both `/` and `\` separators are accepted on all OSes.
+     * Paths are case-sensitive on all OSes (as on Linux), so letter case must match the file system,
+     * also on case-insensitive file systems (macOS, Windows), e.g. `app/src` does not match `App/src`.
      *
      * @param absolutePath The absolute path to the directory from outside the project.
      * @param paths The absolute path(s) to the project root directory
@@ -171,6 +177,8 @@ interface KoScopeCreator {
      * Creates a [KoScope] containing all of Kotlin files in the given directories.
      * Some features (as `KoFile.projectPath`, `KoFile.moduleName`) do not work with this method.
      * Both `/` and `\` separators are accepted on all OSes.
+     * Paths are case-sensitive on all OSes (as on Linux), so letter case must match the file system,
+     * also on case-insensitive file systems (macOS, Windows), e.g. `app/src` does not match `App/src`.
      *
      * @param absolutePaths Set of the absolute paths to the directory from outside the project.
      * @return a [KoScope] containing all of Kotlin files in the given directory.
@@ -181,6 +189,8 @@ interface KoScopeCreator {
      * Creates a [KoScope] of a given file.
      *
      * Both `/` and `\` separators are accepted on all OSes.
+     * Paths are case-sensitive on all OSes (as on Linux), so letter case must match the file system,
+     * also on case-insensitive file systems (macOS, Windows), e.g. `app/src` does not match `App/src`.
      *
      * @param path The path relative to the project root directory.
      * @param paths The path(s) relative to the project root directory
@@ -195,6 +205,8 @@ interface KoScopeCreator {
      * Creates a [KoScope] of a given files.
      *
      * Both `/` and `\` separators are accepted on all OSes.
+     * Paths are case-sensitive on all OSes (as on Linux), so letter case must match the file system,
+     * also on case-insensitive file systems (macOS, Windows), e.g. `app/src` does not match `App/src`.
      *
      * @param paths The set of paths relative to the project root directory.
      * @return a [KoScope] of a given files.
