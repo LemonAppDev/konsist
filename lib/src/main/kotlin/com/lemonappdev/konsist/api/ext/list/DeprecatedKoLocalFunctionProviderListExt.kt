@@ -42,7 +42,7 @@ fun <T : KoEnumConstantDeclaration> List<T>.withLocalFunctionNamed(
 /**
  * List containing declarations that have at least one local function with the specified name(s).
  *
- * @param names The names of additional local functions to include.
+ * @param names The names of the local functions to include.
  * @return A list containing declarations with at least one of the specified local function(s).
  */
 @Deprecated("Will be removed in version 0.20.0", ReplaceWith("withFunctionNamed()"))
@@ -55,11 +55,11 @@ fun <T : KoEnumConstantDeclaration> List<T>.withLocalFunctionNamed(names: Collec
     }
 
 /**
- * List containing declarations without any of specified local functions.
+ * List containing declarations without any of the specified local functions.
  *
  * @param name The name of the local function to exclude.
  * @param names The names of additional local functions to exclude.
- * @return A list containing declarations without any of specified local functions.
+ * @return A list containing declarations without any of the specified local functions.
  */
 @Deprecated("Will be removed in version 0.20.0", ReplaceWith("withoutFunctionNamed()"))
 fun <T : KoEnumConstantDeclaration> List<T>.withoutLocalFunctionNamed(
@@ -68,10 +68,10 @@ fun <T : KoEnumConstantDeclaration> List<T>.withoutLocalFunctionNamed(
 ): List<T> = withoutLocalFunctionNamed(listOf(name, *names))
 
 /**
- * List containing declarations without any of specified local functions.
+ * List containing declarations without any of the specified local functions.
  *
- * @param names The names of additional local functions to exclude.
- * @return A list containing declarations without any of specified local functions.
+ * @param names The names of the local functions to exclude.
+ * @return A list containing declarations without any of the specified local functions.
  */
 @Deprecated("Will be removed in version 0.20.0", ReplaceWith("withoutFunctionNamed()"))
 fun <T : KoEnumConstantDeclaration> List<T>.withoutLocalFunctionNamed(names: Collection<String>): List<T> =
@@ -86,7 +86,7 @@ fun <T : KoEnumConstantDeclaration> List<T>.withoutLocalFunctionNamed(names: Col
  * List containing declarations that have all specified local functions.
  *
  * @param name The name of the local function to include.
- * @param names The name(s) of the local function(s) to include.
+ * @param names The names of additional local functions to include.
  * @return A list containing declarations with all specified local function(s).
  */
 @Deprecated("Will be removed in version 0.20.0", ReplaceWith("withAllFunctionsNamed()"))
@@ -98,7 +98,7 @@ fun <T : KoEnumConstantDeclaration> List<T>.withAllLocalFunctionsNamed(
 /**
  * List containing declarations that have all specified local functions.
  *
- * @param names The name(s) of the local function(s) to include.
+ * @param names The names of the local functions to include.
  * @return A list containing declarations with all specified local function(s).
  */
 @Deprecated("Will be removed in version 0.20.0", ReplaceWith("withAllFunctionsNamed()"))
@@ -114,7 +114,7 @@ fun <T : KoEnumConstantDeclaration> List<T>.withAllLocalFunctionsNamed(names: Co
  * List containing declarations without all specified local functions.
  *
  * @param name The name of the local function to exclude.
- * @param names The name(s) of the local function(s) to exclude.
+ * @param names The names of additional local functions to exclude.
  * @return A list containing declarations without all specified local function(s).
  */
 @Deprecated("Will be removed in version 0.20.0", ReplaceWith("withoutAllFunctionsNamed()"))
@@ -126,7 +126,7 @@ fun <T : KoEnumConstantDeclaration> List<T>.withoutAllLocalFunctionsNamed(
 /**
  * List containing declarations without all specified local functions.
  *
- * @param names The name(s) of the local function(s) to exclude.
+ * @param names The names of the local functions to exclude.
  * @return A list containing declarations without all specified local function(s).
  */
 @Deprecated("Will be removed in version 0.20.0", ReplaceWith("withoutAllFunctionsNamed()"))
@@ -149,10 +149,10 @@ fun <T : KoEnumConstantDeclaration> List<T>.withLocalFunction(predicate: (KoFunc
     filter { it.hasLocalFunction(predicate) }
 
 /**
- * List containing declarations that not have local function satisfying the provided predicate.
+ * List containing declarations that do not have any local function satisfying the provided predicate.
  *
  * @param predicate A function that defines the condition to be met by a local function declaration.
- * @return A list containing declarations without local function satisfying the provided predicate.
+ * @return A list containing declarations without any local function satisfying the provided predicate.
  */
 @Deprecated("Will be removed in version 0.20.0", ReplaceWith("withoutFunction()"))
 fun <T : KoEnumConstantDeclaration> List<T>.withoutLocalFunction(predicate: (KoFunctionDeclaration) -> Boolean): List<T> =

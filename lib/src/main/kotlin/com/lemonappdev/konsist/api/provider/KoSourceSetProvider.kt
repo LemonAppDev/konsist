@@ -10,10 +10,10 @@ interface KoSourceSetProvider : KoBaseProvider {
     val sourceSetName: String
 
     /**
-     * Determines whatever declaration reside in source set.
+     * Determines whether the declaration resides in the specified source set.
      *
      * @param sourceSetName The name of the source set to check.
-     * @return `true` if a declaration resides in the specified source set, `false` otherwise.
+     * @return `true` if the declaration resides in the specified source set, `false` otherwise.
      */
     fun resideInSourceSet(sourceSetName: String): Boolean
 }

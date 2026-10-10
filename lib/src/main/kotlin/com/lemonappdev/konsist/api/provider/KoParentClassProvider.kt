@@ -29,7 +29,7 @@ interface KoParentClassProvider : KoBaseProvider {
     fun numParentClasses(indirectParents: Boolean = false): Int
 
     /**
-     * Returns the number of parent classes that satisfies the specified predicate present in the declaration.
+     * Returns the number of parent classes that satisfy the specified predicate present in the declaration.
      *
      * @param indirectParents specifies whether to include parent classes defined in other files such as parent of the parent.
      * @param predicate The predicate function to determine if a parent class satisfies a condition.
@@ -41,14 +41,14 @@ interface KoParentClassProvider : KoBaseProvider {
     ): Int
 
     /**
-     * Determines whether declaration has a direct parent class.
+     * Determines whether the declaration has a direct parent class.
      *
      * @return `true` if the declaration has any direct parent class, `false` otherwise.
      */
     fun hasParentClass(): Boolean
 
     /**
-     * Determines whatever declaration has any parent class.
+     * Determines whether the declaration has any parent class.
      *
      * @param indirectParents specifies whether to include parent classes defined in other files such as parent of the parent.
      * @return `true` if the declaration has any parent class, `false` otherwise.
@@ -56,8 +56,7 @@ interface KoParentClassProvider : KoBaseProvider {
     fun hasParentClasses(indirectParents: Boolean = false): Boolean
 
     /**
-     * Determines whether the declaration has a specified parent class.
-     * If `indirectParents` is set to `true`, it verifies if there's at least one parent class that satisfies the provided predicate.
+     * Determines whether the declaration has a parent class that satisfies the provided predicate.
      *
      * @param indirectParents specifies whether to include parent classes defined in other files such as parent of the parent.
      * @param predicate A function that defines the condition to be met by a parent class.
@@ -71,7 +70,7 @@ interface KoParentClassProvider : KoBaseProvider {
     /**
      * Determines whether the declaration has all parent classes that satisfy the provided predicate.
      *
-     * Note that if the parent classes contains no elements, the function returns `true` because there are no elements in it
+     * Note that if the parent classes contain no elements, the function returns `true` because there are no elements in it
      * that do not match the predicate.
      *
      * @param indirectParents specifies whether to include parent classes defined in other files such as parent of the parent.
@@ -91,7 +90,7 @@ interface KoParentClassProvider : KoBaseProvider {
      * @param names the names of the parent classes to check.
      * @param indirectParents specifies whether to include parent classes defined in other files such as parent of the parent.
      * @param ignoreCase Specifies whether the comparison should ignore case.
-     *        If `true`, the prefix comparison will be case-insensitive.
+     *        If `true`, the comparison will be case-insensitive.
      *        If `false`, the comparison will consider case sensitivity.
      * @return `true` if there is a matching declaration, `false` otherwise.
      */
@@ -109,7 +108,7 @@ interface KoParentClassProvider : KoBaseProvider {
      * @param names the names of the parent classes to check.
      * @param indirectParents specifies whether to include parent classes defined in other files such as parent of the parent.
      * @param ignoreCase Specifies whether the comparison should ignore case.
-     *        If `true`, the prefix comparison will be case-insensitive.
+     *        If `true`, the comparison will be case-insensitive.
      *        If `false`, the comparison will consider case sensitivity.
      * @return `true` if there is a matching declaration, `false` otherwise.
      */
@@ -123,10 +122,10 @@ interface KoParentClassProvider : KoBaseProvider {
      * Determines whether the declaration has parent classes with all the specified names.
      *
      * @param name The name of the parent class to check.
-     * @param names The names of the parent classes to check.
+     * @param names The names of additional parent classes to check.
      * @param indirectParents specifies whether to include parent classes defined in other files such as parent of the parent.
      * @param ignoreCase Specifies whether the comparison should ignore case.
-     *        If `true`, the prefix comparison will be case-insensitive.
+     *        If `true`, the comparison will be case-insensitive.
      *        If `false`, the comparison will consider case sensitivity.
      * @return `true` if there are declarations with all the specified names, `false` otherwise.
      */
@@ -143,7 +142,7 @@ interface KoParentClassProvider : KoBaseProvider {
      * @param names The names of the parent classes to check.
      * @param indirectParents specifies whether to include parent classes defined in other files such as parent of the parent.
      * @param ignoreCase Specifies whether the comparison should ignore case.
-     *        If `true`, the prefix comparison will be case-insensitive.
+     *        If `true`, the comparison will be case-insensitive.
      *        If `false`, the comparison will consider case sensitivity.
      * @return `true` if there are declarations with all the specified names, `false` otherwise.
      */
@@ -182,7 +181,7 @@ interface KoParentClassProvider : KoBaseProvider {
     ): Boolean
 
     /**
-     * Determines whether the declaration has parent classes with all the specified `KClass` type.
+     * Determines whether the declaration has parent classes of all the specified `KClass` types.
      *
      * @param name the `KClass` type of the parent class to check.
      * @param names the `KClass` types of the parent classes to check.
@@ -196,7 +195,7 @@ interface KoParentClassProvider : KoBaseProvider {
     ): Boolean
 
     /**
-     * Determines whether the declaration has parent classes with all the specified `KClass` type.
+     * Determines whether the declaration has parent classes of all the specified `KClass` types.
      *
      * @param names the `KClass` types of the parent classes to check.
      * @param indirectParents specifies whether to include parent classes defined in other files such as parent of the parent.

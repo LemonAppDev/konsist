@@ -129,7 +129,7 @@ internal class KoScopeCreatorCore : KoScopeCreator {
         }
 
     /**
-     * Get the scope of the paths obtaining the absolute path of it and, getting the files from that directory
+     * Creates a scope from the given paths by resolving their absolute paths and collecting the files from those directories.
      */
     private fun getScopeFromPaths(paths: Collection<String>): KoScope {
         val filesFromPaths =
@@ -141,7 +141,7 @@ internal class KoScopeCreatorCore : KoScopeCreator {
     }
 
     /**
-     * Obtain all the files belonging to [absolutePath].
+     * Obtains all the files belonging to [absolutePath].
      * The function will throw an [IllegalArgumentException] when:
      *  - the directory does not exist.
      *  - the path is a file.

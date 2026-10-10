@@ -28,7 +28,7 @@ fun <T : KoValueProvider> List<T>.withValue(values: Collection<String>): List<T>
  * List containing elements without value.
  *
  * @param values The value(s) to exclude.
- * @return A list containing elements without the specified values (or none value if [values] is empty).
+ * @return A list containing elements without the specified values (or without a value if [values] is empty).
  */
 fun <T : KoValueProvider> List<T>.withoutValue(vararg values: String): List<T> = withoutValue(listOf(*values))
 
@@ -36,7 +36,7 @@ fun <T : KoValueProvider> List<T>.withoutValue(vararg values: String): List<T> =
  * List containing elements without value.
  *
  * @param values The value(s) to exclude.
- * @return A list containing elements without the specified values (or none value if [values] is empty).
+ * @return A list containing elements without the specified values (or without a value if [values] is empty).
  */
 fun <T : KoValueProvider> List<T>.withoutValue(values: Collection<String>): List<T> =
     filter {

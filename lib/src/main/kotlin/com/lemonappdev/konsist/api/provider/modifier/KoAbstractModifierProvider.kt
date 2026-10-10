@@ -9,7 +9,7 @@ interface KoAbstractModifierProvider :
     KoBaseProvider,
     KoModifierProvider {
     /**
-     * Determines whatever declaration has `abstract` modifier.
+     * Determines whether the declaration has the `abstract` modifier.
      */
     val hasAbstractModifier: Boolean
 }

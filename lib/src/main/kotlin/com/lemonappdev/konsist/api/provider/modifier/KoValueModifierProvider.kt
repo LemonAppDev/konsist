@@ -9,7 +9,7 @@ interface KoValueModifierProvider :
     KoBaseProvider,
     KoModifierProvider {
     /**
-     * Determines whatever declaration has `value` modifier.
+     * Determines whether the declaration has the `value` modifier.
      */
     val hasValueModifier: Boolean
 }

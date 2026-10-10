@@ -39,10 +39,10 @@ fun <T : KoEnumConstantDeclaration> List<T>.withLocalDeclaration(predicate: (KoB
     }
 
 /**
- * List containing declarations that not have local declaration satisfying the provided predicate.
+ * List containing declarations that do not have any local declaration satisfying the provided predicate.
  *
  * @param predicate A function that defines the condition to be met by a local declaration.
- * @return A list containing declarations without local declaration satisfying the provided predicate.
+ * @return A list containing declarations without any local declaration satisfying the provided predicate.
  */
 @Deprecated("Will be removed in version 0.20.0", ReplaceWith("withoutDeclaration()"))
 fun <T : KoEnumConstantDeclaration> List<T>.withoutLocalDeclaration(predicate: (KoBaseDeclaration) -> Boolean): List<T> =

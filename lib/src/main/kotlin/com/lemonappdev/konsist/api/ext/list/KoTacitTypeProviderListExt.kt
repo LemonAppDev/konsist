@@ -34,7 +34,7 @@ fun <T : KoTacitTypeProvider> List<T>.withTacitType(types: Collection<String>): 
  *
  * @param type The tacit type to exclude.
  * @param types The tacit type(s) to exclude.
- * @return A list containing declarations without specified tacit types.
+ * @return A list containing declarations without the specified tacit types.
  */
 fun <T : KoTacitTypeProvider> List<T>.withoutTacitType(
     type: String,
@@ -45,7 +45,7 @@ fun <T : KoTacitTypeProvider> List<T>.withoutTacitType(
  * List containing declarations without tacit type.
  *
  * @param types The tacit type(s) to exclude.
- * @return A list containing declarations without specified tacit types.
+ * @return A list containing declarations without the specified tacit types.
  */
 fun <T : KoTacitTypeProvider> List<T>.withoutTacitType(types: Collection<String>): List<T> =
     filterNot {
@@ -86,7 +86,7 @@ fun <T : KoTacitTypeProvider> List<T>.withTacitTypeOf(kClasses: Collection<KClas
  *
  * @param kClass The Kotlin class representing the tacit type to exclude.
  * @param kClasses The Kotlin class(es) representing the tacit type(s) to exclude.
- * @return A list containing declarations without tacit type of the specified Kotlin class(es).
+ * @return A list containing declarations without the tacit type of the specified Kotlin class(es).
  */
 fun <T : KoTacitTypeProvider> List<T>.withoutTacitTypeOf(
     kClass: KClass<*>,
@@ -97,7 +97,7 @@ fun <T : KoTacitTypeProvider> List<T>.withoutTacitTypeOf(
  * List containing declarations without tacit type.
  *
  * @param kClasses The Kotlin class(es) representing the tacit type(s) to exclude.
- * @return A list containing declarations without tacit type of the specified Kotlin class(es).
+ * @return A list containing declarations without the tacit type of the specified Kotlin class(es).
  */
 fun <T : KoTacitTypeProvider> List<T>.withoutTacitTypeOf(kClasses: Collection<KClass<*>>): List<T> =
     filterNot {

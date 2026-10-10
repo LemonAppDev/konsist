@@ -5,7 +5,7 @@ import com.lemonappdev.konsist.api.declaration.combined.KoInterfaceAndObjectDecl
 import com.lemonappdev.konsist.api.provider.modifier.KoFunModifierProvider
 
 /**
- * Represents a Kotlin import declaration.
+ * Represents a Kotlin interface declaration.
  */
 interface KoInterfaceDeclaration :
     KoClassAndInterfaceDeclaration,

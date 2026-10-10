@@ -11,25 +11,25 @@ val <T : KoKDocTagProvider> List<T>.tags: List<KoKDocTagDeclaration>
     get() = flatMap { it.tags }
 
 /**
- * List containing declarations with any specified tag.
+ * List containing declarations with any tag.
  *
  * @return A list containing declarations with any tag.
  */
 fun <T : KoKDocTagProvider> List<T>.withTags(): List<T> = filter { it.hasTags() }
 
 /**
- * List containing declarations with no tag.
+ * List containing declarations with no tags.
  *
- * @return A list containing declarations with no tag.
+ * @return A list containing declarations with no tags.
  */
 fun <T : KoKDocTagProvider> List<T>.withoutTags(): List<T> = filterNot { it.hasTags() }
 
 /**
- * List containing declarations with all the specified tags.
+ * List containing declarations with at least one of the specified tag(s).
  *
  * @param tag The tag to include.
  * @param tags The tags to include.
- * @return A list containing declarations with all the specified tags.
+ * @return A list containing declarations with at least one of the specified tag(s).
  */
 fun <T : KoKDocTagProvider> List<T>.withTag(
     tag: KoKDocTag,
@@ -37,10 +37,10 @@ fun <T : KoKDocTagProvider> List<T>.withTag(
 ): List<T> = withTag(listOf(tag, *tags))
 
 /**
- * List containing declarations with all the specified tags.
+ * List containing declarations with at least one of the specified tag(s).
  *
  * @param tags The tags to include.
- * @return A list containing declarations with all the specified tags.
+ * @return A list containing declarations with at least one of the specified tag(s).
  */
 fun <T : KoKDocTagProvider> List<T>.withTag(tags: Collection<KoKDocTag>): List<T> =
     filter {
@@ -51,11 +51,11 @@ fun <T : KoKDocTagProvider> List<T>.withTag(tags: Collection<KoKDocTag>): List<T
     }
 
 /**
- * List containing declarations without all specified tags.
+ * List containing declarations without any of the specified tags.
  *
  * @param tag The tag to exclude.
  * @param tags The tags to exclude.
- * @return A list containing declarations without all the specified tags.
+ * @return A list containing declarations without any of the specified tags.
  */
 fun <T : KoKDocTagProvider> List<T>.withoutTag(
     tag: KoKDocTag,
@@ -63,10 +63,10 @@ fun <T : KoKDocTagProvider> List<T>.withoutTag(
 ): List<T> = withoutTag(listOf(tag, *tags))
 
 /**
- * List containing declarations without all specified tags.
+ * List containing declarations without any of the specified tags.
  *
  * @param tags The tags to exclude.
- * @return A list containing declarations without all the specified tags.
+ * @return A list containing declarations without any of the specified tags.
  */
 fun <T : KoKDocTagProvider> List<T>.withoutTag(tags: Collection<KoKDocTag>): List<T> =
     filterNot {

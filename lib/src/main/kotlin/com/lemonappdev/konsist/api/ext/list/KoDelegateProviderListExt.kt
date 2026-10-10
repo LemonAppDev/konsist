@@ -28,7 +28,7 @@ fun <T : KoDelegateProvider> List<T>.withDelegate(names: Collection<String>): Li
  * List containing declarations without delegate with given name.
  *
  * @param names The delegate names to exclude.
- * @return A list containing declarations without the specified delegate name(s) (or none delegate if [names] is empty).
+ * @return A list containing declarations without the specified delegate name(s) (or no delegate if [names] is empty).
  */
 fun <T : KoDelegateProvider> List<T>.withoutDelegate(vararg names: String): List<T> = withoutDelegate(listOf(*names))
 
@@ -36,7 +36,7 @@ fun <T : KoDelegateProvider> List<T>.withoutDelegate(vararg names: String): List
  * List containing declarations without delegate with given name.
  *
  * @param names The delegate names to exclude.
- * @return A list containing declarations without the specified delegate name(s) (or none delegate if [names] is empty).
+ * @return A list containing declarations without the specified delegate name(s) (or no delegate if [names] is empty).
  */
 fun <T : KoDelegateProvider> List<T>.withoutDelegate(names: Collection<String>): List<T> =
     filter {

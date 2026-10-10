@@ -19,14 +19,14 @@ fun <T : KoVisibilityModifierProvider> List<T>.withoutPublicModifier(): List<T> 
 /**
  * List containing declarations with the `public` or no visibility modifier.
  *
- * @return A list containing declarations with the `public` or no visibility modifier..
+ * @return A list containing declarations with the `public` or no visibility modifier.
  */
 fun <T : KoVisibilityModifierProvider> List<T>.withPublicOrDefaultModifier(): List<T> = filter { it.hasPublicOrDefaultModifier }
 
 /**
- * List containing declarations without `public` or no visibility modifier.
+ * List containing declarations with a visibility modifier other than `public`.
  *
- * @return A list containing declarations without the `public` or no visibility modifier..
+ * @return A list containing declarations with a visibility modifier other than `public`.
  */
 fun <T : KoVisibilityModifierProvider> List<T>.withoutPublicOrDefaultModifier(): List<T> = filterNot { it.hasPublicOrDefaultModifier }
 

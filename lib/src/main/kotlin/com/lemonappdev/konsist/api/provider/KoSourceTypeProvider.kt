@@ -9,7 +9,7 @@ interface KoSourceTypeProvider : KoBaseProvider {
      * For `val car:MyClass` it will be "MyClass".
      * For `val car:MyClass<String>` it will be "MyClass<String>".
      *
-     *  @see bareSourceType
+     * @see bareSourceType
      */
     val sourceType: String
 
@@ -18,9 +18,9 @@ interface KoSourceTypeProvider : KoBaseProvider {
      *
      * For `val car:MyClass` value will be "MyClass".
      * For `val car:MyClass?` value will be "MyClass".
-     * For `val car:MyClass<String>` value will be "MyClass"
-     * For `val car:MyClass<String?>?` value will be "MyClass"
-     * For `val car:com.app.MyClass` value will be "MyClass"
+     * For `val car:MyClass<String>` value will be "MyClass".
+     * For `val car:MyClass<String?>?` value will be "MyClass".
+     * For `val car:com.app.MyClass` value will be "MyClass".
      *
      * @see sourceType
      */

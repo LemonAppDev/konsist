@@ -24,7 +24,7 @@ fun <T : KoParentProvider> List<T>.parents(indirectParents: Boolean = false): Li
 fun <T : KoParentProvider> List<T>.withParents(indirectParents: Boolean = false): List<T> = filter { it.hasParents(indirectParents) }
 
 /**
- * List containing declarations with none parent - declaration does not extend any class and does not implement any interface.
+ * List containing declarations with no parent - declaration does not extend any class and does not implement any interface.
  *
  * @param indirectParents Whether to include indirect parents.
  * @return A list containing declarations with no parent - declaration does not extend any class and does not implement any
@@ -39,7 +39,7 @@ fun <T : KoParentProvider> List<T>.withoutParents(indirectParents: Boolean = fal
  * @param names The names of additional parents to include.
  * @param indirectParents Whether to include indirect parents.
  * @param ignoreCase Specifies whether the comparison should ignore case.
- *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations with at least one of the specified parent(s).
  */
@@ -53,10 +53,10 @@ fun <T : KoParentProvider> List<T>.withParentNamed(
 /**
  * List containing declarations that have at least one parent with the specified name(s).
  *
- * @param names The names of additional parents to include.
+ * @param names The names of the parents to include.
  * @param indirectParents Whether to include indirect parents.
  * @param ignoreCase Specifies whether the comparison should ignore case.
- *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations with at least one of the specified parent(s).
  */
@@ -73,15 +73,15 @@ fun <T : KoParentProvider> List<T>.withParentNamed(
     }
 
 /**
- * List containing declarations without any of specified parents.
+ * List containing declarations without any of the specified parents.
  *
  * @param name The name of the parent to exclude.
  * @param names The names of additional parents to exclude.
  * @param indirectParents Whether to include indirect parents.
  * @param ignoreCase Specifies whether the comparison should ignore case.
- *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
- * @return A list containing declarations without any of specified parents.
+ * @return A list containing declarations without any of the specified parents.
  */
 fun <T : KoParentProvider> List<T>.withoutParentNamed(
     name: String,
@@ -91,14 +91,14 @@ fun <T : KoParentProvider> List<T>.withoutParentNamed(
 ): List<T> = withoutParentNamed(listOf(name, *names), indirectParents, ignoreCase)
 
 /**
- * List containing declarations without any of specified parents.
+ * List containing declarations without any of the specified parents.
  *
- * @param names The names of additional parents to exclude.
+ * @param names The names of the parents to exclude.
  * @param indirectParents Whether to include indirect parents.
  * @param ignoreCase Specifies whether the comparison should ignore case.
- *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
- * @return A list containing declarations without any of specified parents.
+ * @return A list containing declarations without any of the specified parents.
  */
 fun <T : KoParentProvider> List<T>.withoutParentNamed(
     names: Collection<String>,
@@ -116,10 +116,10 @@ fun <T : KoParentProvider> List<T>.withoutParentNamed(
  * List containing declarations that have all specified parents.
  *
  * @param name The name of the parent to include.
- * @param names The name(s) of the parent(s) to include.
+ * @param names The names of additional parents to include.
  * @param indirectParents Whether to include indirect parents.
  * @param ignoreCase Specifies whether the comparison should ignore case.
- *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations with all specified parent(s).
  */
@@ -133,10 +133,10 @@ fun <T : KoParentProvider> List<T>.withAllParentsNamed(
 /**
  * List containing declarations that have all specified parents.
  *
- * @param names The name(s) of the parent(s) to include.
+ * @param names The names of the parents to include.
  * @param indirectParents Whether to include indirect parents.
  * @param ignoreCase Specifies whether the comparison should ignore case.
- *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations with all specified parent(s).
  */
@@ -156,10 +156,10 @@ fun <T : KoParentProvider> List<T>.withAllParentsNamed(
  * List containing declarations without all specified parents.
  *
  * @param name The name of the parent to exclude.
- * @param names The name(s) of the parent(s) to exclude.
+ * @param names The names of additional parents to exclude.
  * @param indirectParents Whether to include indirect parents.
  * @param ignoreCase Specifies whether the comparison should ignore case.
- *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations without all specified parent(s).
  */
@@ -173,10 +173,10 @@ fun <T : KoParentProvider> List<T>.withoutAllParentsNamed(
 /**
  * List containing declarations without all specified parents.
  *
- * @param names The name(s) of the parent(s) to exclude.
+ * @param names The names of the parents to exclude.
  * @param indirectParents Whether to include indirect parents.
  * @param ignoreCase Specifies whether the comparison should ignore case.
- *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations without all specified parent(s).
  */
@@ -208,11 +208,11 @@ fun <T : KoParentProvider> List<T>.withParent(
     }
 
 /**
- * List containing declarations that not have parent satisfying the provided predicate.
+ * List containing declarations that do not have any parent satisfying the provided predicate.
  *
  * @param indirectParents Whether to include indirect parents.
  * @param predicate A function that defines the condition to be met by a parent declaration.
- * @return A list containing declarations without parent satisfying the provided predicate.
+ * @return A list containing declarations without any parent satisfying the provided predicate.
  */
 fun <T : KoParentProvider> List<T>.withoutParent(
     indirectParents: Boolean = false,
@@ -227,7 +227,7 @@ fun <T : KoParentProvider> List<T>.withoutParent(
  *
  * @param indirectParents Whether to include indirect parents.
  * @param predicate A function that defines the condition to be met by all parent declarations.
- * @return A filtered list containing declarations with all parents satisfying the predicate.
+ * @return A list containing declarations with all parents satisfying the predicate.
  */
 fun <T : KoParentProvider> List<T>.withAllParents(
     indirectParents: Boolean = false,

@@ -9,7 +9,7 @@ interface KoSuspendModifierProvider :
     KoBaseProvider,
     KoModifierProvider {
     /**
-     * Determines whatever the declaration has `suspend` modifier.
+     * Determines whether the declaration has the `suspend` modifier.
      */
     val hasSuspendModifier: Boolean
 }

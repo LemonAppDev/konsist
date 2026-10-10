@@ -5,7 +5,7 @@ package com.lemonappdev.konsist.api.provider
  */
 interface KoIsInitializedProvider : KoBaseProvider {
     /**
-     * Determines whatever this declaration has been initialized. Declaration that has been initialized has a body.
+     * Determines whether this declaration has been initialized. A declaration that has been initialized has a body.
      * e.g.
      * ```kotlin
      * val name: String = "John Doe" // true
@@ -16,11 +16,11 @@ interface KoIsInitializedProvider : KoBaseProvider {
      * fun greet() { println("Hello, World!") } // true
      * fun greet(): String // false
      *
-     * val speed: Int
+     * var speed: Int
      *    get() = 100 // true
      *    set(value) { field = value } // true
      *
-     * val speed: Int = 0
+     * var speed: Int = 0
      *   private set // false
      *
      * val speed: Int = 0

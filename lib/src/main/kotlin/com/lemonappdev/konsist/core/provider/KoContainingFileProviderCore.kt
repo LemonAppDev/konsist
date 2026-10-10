@@ -10,7 +10,7 @@ internal interface KoContainingFileProviderCore :
     val ktElement: KtElement?
 
     /**
-     * KoFile containing the declaration
+     * KoFile containing the declaration.
      */
     override val containingFile: KoFileDeclarationCore
         get() = ktElement?.containingKtFile?.let { KoFileDeclarationCore(it) } ?: this.containingFile

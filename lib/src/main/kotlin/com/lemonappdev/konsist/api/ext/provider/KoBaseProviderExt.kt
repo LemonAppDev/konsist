@@ -4,12 +4,12 @@ import com.lemonappdev.konsist.api.provider.KoBaseProvider
 import com.lemonappdev.konsist.api.provider.KoNameProvider
 
 /**
- * Print declaration.
+ * Prints the declaration.
  *
  * @param prefix An optional string to be printed before the declaration content. Default is `null`.
  * @param predicate An optional function that generates the string representation of the declaration.
  *                  If predicate is not provided (default is `null`), the function uses the declaration's
- *                  name (if available) or`toString` method otherwise.
+ *                  name (if available) or `toString` method otherwise.
  * @return The original declaration.
  */
 fun <T : KoBaseProvider> T.print(

@@ -6,7 +6,7 @@ package com.lemonappdev.konsist.api.provider
 @Deprecated("Will be removed in version 0.19.0", ReplaceWith("KoIsGenericProvider"))
 interface KoIsGenericTypeProvider : KoBaseProvider {
     /**
-     * Determines whatever type is generic type.
+     * Determines whether the type is a generic type.
      */
     @Deprecated("Will be removed in version 0.19.0", ReplaceWith("isGeneric"))
     val isGenericType: Boolean

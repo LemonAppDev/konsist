@@ -124,10 +124,10 @@ interface LayerDependencies {
      * Example:
      * ```kotlin
      * // Domain layer must never depend on UI layer
-     * domainLayer.doesNotDependOn(uiLayer, strict = true)
+     * domainLayer.doesNotDependOn(uiLayer)
      *
-     * // Domain layer should not depend on UI and Feature layers
-     * domainLayer.doesNotDependOn(uiLayer, featureLayer, strict = false)
+     * // Domain layer must never depend on UI or Feature layers
+     * domainLayer.doesNotDependOn(uiLayer, featureLayer)
      * ```
      *
      * @receiver The source [Layer] for which dependencies will be forbidden.
@@ -172,7 +172,7 @@ interface LayerDependencies {
      *
      * Example:
      * ```kotlin
-     * // Domain and Data layers must never depend on UI and Feature layers
+     * // Domain and Data layers must never depend on UI or Feature layers
      * val sourceLayers = setOf(domainLayer, dataLayer)
      * val targetLayers = setOf(uiLayer, featureLayer)
      * sourceLayers.doesNotDependOn(targetLayers)
@@ -211,7 +211,7 @@ interface LayerDependencies {
     fun Collection<Layer>.dependsOnNothing(): Unit
 
     /**
-     * Includes a Layer in the architecture without specifying any dependencies.
+     * Includes a layer in the architecture without specifying any dependencies.
      * Can be used in combination with dependsOnNothing() to specify that a layer
      * should be isolated from other layers.
      *

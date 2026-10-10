@@ -1,10 +1,10 @@
 package com.lemonappdev.konsist.api.provider
 
 /**
- * Provides functionality related to extension types in Kotlin.
+ * Provides functionality related to extension declarations in Kotlin.
  *
- * This interface extends [KoBaseProvider] and offers methods to determine
- * if a declaration is an extension and to retrieve its extension receiver type.
+ * This interface extends [KoBaseProvider] and offers a property to determine
+ * if a declaration is an extension.
  */
 interface KoIsExtensionProvider : KoBaseProvider {
     /**

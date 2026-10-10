@@ -15,7 +15,7 @@ interface KoReturnProvider : KoBaseProvider {
     /**
      * Indicates whether a declaration has a non-`Unit` return value.
      *
-     * - If a declaration explicitly specifies a return type, [hasReturnValue] returns true only if the declared type is not `Unit`.
+     * - If a declaration explicitly specifies a return type, [hasReturnValue] returns `true` only if the declared type is not `Unit`.
      *
      * - For declarations without an explicit return type:
      *      1) If the declaration has a block body, [hasReturnValue] always returns `false`.
@@ -33,12 +33,12 @@ interface KoReturnProvider : KoBaseProvider {
      *
      *          fun sampleFunction2() = println("some text") // hasReturnValue == true, because Konsist is not able to
      *                                                       // determine value of the "println("some text")" expression
-     *       ```
+     *          ```
      */
     val hasReturnValue: Boolean
 
     /**
-     * Determines whatever declaration has a specified return type.
+     * Determines whether the declaration has a specified return type.
      *
      * @param predicate The predicate function used to determine if a declaration return type satisfies a condition.
      * @return `true` if the declaration has the specified return type (or any return type if [predicate] is `null`),
@@ -47,7 +47,7 @@ interface KoReturnProvider : KoBaseProvider {
     fun hasReturnType(predicate: ((KoTypeDeclaration) -> Boolean)? = null): Boolean
 
     /**
-     * Determines whatever declaration has a return type of the specified Kotlin class.
+     * Determines whether the declaration has a return type of the specified Kotlin class.
      *
      * @param kClass The Kotlin class representing the return type to check for.
      * @return `true` if the declaration has a return type matching the specified KClass, `false` otherwise.

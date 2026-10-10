@@ -5,7 +5,7 @@ package com.lemonappdev.konsist.api.provider
  */
 interface KoIsWildcardProvider : KoBaseProvider {
     /**
-     * Determines whatever this declaration is a wildcard.
+     * Determines whether this declaration is a wildcard.
      */
     val isWildcard: Boolean
 }

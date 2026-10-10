@@ -12,8 +12,8 @@ package com.lemonappdev.konsist.api.architecture
  * val domainLayer = Layer("Domain", "com.example.domain..")
  * val presentationLayer = Layer("Presentation", "com.example.presentation..")
  *
- * // Wildcards layer definitions (wildcards at the start and at the end)
- * val specificDomainLayer = Layer("Domain", "..domain..")  // matches any path ending with "domain"
+ * // Wildcard layer definitions (wildcards at the start and at the end)
+ * val specificDomainLayer = Layer("Domain", "..domain..")  // matches any package containing a "domain" segment
  * ```
  *
  * Package Pattern Rules:

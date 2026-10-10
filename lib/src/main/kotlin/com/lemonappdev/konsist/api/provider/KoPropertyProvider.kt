@@ -23,7 +23,7 @@ interface KoPropertyProvider : KoBaseProvider {
     fun numProperties(includeNested: Boolean = true): Int
 
     /**
-     * Returns the number of properties that satisfies the specified predicate present in the declaration.
+     * Returns the number of properties that satisfy the specified predicate present in the declaration.
      *
      * @param includeNested Specifies whether to include nested properties in the count (optional, default is `true`).
      * @param predicate The predicate function to determine if a property satisfies a condition.
@@ -35,7 +35,7 @@ interface KoPropertyProvider : KoBaseProvider {
     ): Int
 
     /**
-     * Determines whatever the declaration has properties.
+     * Determines whether the declaration has properties.
      *
      * @param includeNested Specifies whether to include nested properties in the check (optional, default is `true`).
      * @return `true` if the declaration has any property, `false` otherwise.
@@ -49,7 +49,7 @@ interface KoPropertyProvider : KoBaseProvider {
      * @param names the names of the properties to check.
      * @param includeNested Specifies whether to include nested properties in the check (optional, default is `true`).
      * @param ignoreCase Specifies whether the comparison should ignore case.
-     *        If `true`, the prefix comparison will be case-insensitive.
+     *        If `true`, the comparison will be case-insensitive.
      *        If `false`, the comparison will consider case sensitivity.
      * @return `true` if there is a matching declaration, `false` otherwise.
      */
@@ -66,7 +66,7 @@ interface KoPropertyProvider : KoBaseProvider {
      * @param names the names of the properties to check.
      * @param includeNested Specifies whether to include nested properties in the check (optional, default is `true`).
      * @param ignoreCase Specifies whether the comparison should ignore case.
-     *        If `true`, the prefix comparison will be case-insensitive.
+     *        If `true`, the comparison will be case-insensitive.
      *        If `false`, the comparison will consider case sensitivity.
      * @return `true` if there is a matching declaration, `false` otherwise.
      */
@@ -80,10 +80,10 @@ interface KoPropertyProvider : KoBaseProvider {
      * Determines whether the declaration has properties with all the specified names.
      *
      * @param name The name of the property to check.
-     * @param names The names of the properties to check.
+     * @param names The names of additional properties to check.
      * @param includeNested Specifies whether to include nested properties in the check (optional, default is `true`).
      * @param ignoreCase Specifies whether the comparison should ignore case.
-     *        If `true`, the prefix comparison will be case-insensitive.
+     *        If `true`, the comparison will be case-insensitive.
      *        If `false`, the comparison will consider case sensitivity.
      * @return `true` if there are declarations with all the specified names, `false` otherwise.
      */
@@ -100,7 +100,7 @@ interface KoPropertyProvider : KoBaseProvider {
      * @param names The names of the properties to check.
      * @param includeNested Specifies whether to include nested properties in the check (optional, default is `true`).
      * @param ignoreCase Specifies whether the comparison should ignore case.
-     *        If `true`, the prefix comparison will be case-insensitive.
+     *        If `true`, the comparison will be case-insensitive.
      *        If `false`, the comparison will consider case sensitivity.
      * @return `true` if there are declarations with all the specified names, `false` otherwise.
      */
@@ -125,7 +125,7 @@ interface KoPropertyProvider : KoBaseProvider {
     /**
      * Determines whether the declaration has all properties that satisfy the provided predicate.
      *
-     * Note that if the properties contains no elements, the function returns `true` because there are no elements in it
+     * Note that if the properties contain no elements, the function returns `true` because there are no elements in it
      * that do not match the predicate.
      *
      * @param includeNested Specifies whether to include nested properties in the check (optional, default is `true`).

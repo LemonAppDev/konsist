@@ -57,12 +57,12 @@ fun <T : KoDeclarationProvider> List<T>.withDeclaration(
     }
 
 /**
- * List containing declarations that not have declaration satisfying the provided predicate.
+ * List containing declarations that do not have any declaration satisfying the provided predicate.
  *
  * @param includeNested Whether to include nested declarations.
  * @param includeLocal Whether to include local declarations.
  * @param predicate A function that defines the condition to be met by a declaration.
- * @return A list containing declarations without declaration satisfying the provided predicate.
+ * @return A list containing declarations without any declaration satisfying the provided predicate.
  */
 fun <T : KoDeclarationProvider> List<T>.withoutDeclaration(
     includeNested: Boolean = true,

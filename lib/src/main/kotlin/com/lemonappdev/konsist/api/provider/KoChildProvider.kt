@@ -24,11 +24,11 @@ interface KoChildProvider : KoBaseProvider {
     fun numChildren(indirectChildren: Boolean = false): Int
 
     /**
-     * Gets the number of children that satisfies the specified predicate present in the declaration.
+     * Gets the number of children that satisfy the specified predicate present in the declaration.
      *
      * @param indirectChildren specifies whether to include children defined in other files such as child of the child.
      * @param predicate The predicate function to determine if a child satisfies a condition.
-     * @return The number of children in the declaration satisfying predicate.
+     * @return The number of children in the declaration satisfying the predicate.
      */
     fun countChildren(
         indirectChildren: Boolean = false,
@@ -36,7 +36,7 @@ interface KoChildProvider : KoBaseProvider {
     ): Int
 
     /**
-     * Whatever declaration has any child defined directly in the Kotlin file.
+     * Determines whether the declaration has any child.
      *
      * @param indirectChildren specifies whether to include children defined in other files such as child of the child.
      * @return `true` if the declaration has any child, `false` otherwise.
@@ -44,14 +44,13 @@ interface KoChildProvider : KoBaseProvider {
     fun hasChildren(indirectChildren: Boolean = false): Boolean
 
     /**
-     * Determines whether the declaration has at least one child defined directly
-     * in the Kotlin file whose name matches any of the specified names.
+     * Determines whether the declaration has at least one child whose name matches any of the specified names.
      *
      * @param name the name of the child to check.
      * @param names the names of the children to check.
      * @param indirectChildren specifies whether to include children defined in other files such as child of the child.
      * @param ignoreCase Specifies whether the comparison should ignore case.
-     *        If `true`, the prefix comparison will be case-insensitive.
+     *        If `true`, the comparison will be case-insensitive.
      *        If `false`, the comparison will consider case sensitivity.
      * @return `true` if there is a matching declaration, `false` otherwise.
      */
@@ -63,13 +62,12 @@ interface KoChildProvider : KoBaseProvider {
     ): Boolean
 
     /**
-     * Determines whether the declaration has at least one child defined directly
-     * in the Kotlin file whose name matches any of the specified names.
+     * Determines whether the declaration has at least one child whose name matches any of the specified names.
      *
      * @param names the names of the children to check.
      * @param indirectChildren specifies whether to include children defined in other files such as child of the child.
      * @param ignoreCase Specifies whether the comparison should ignore case.
-     *        If `true`, the prefix comparison will be case-insensitive.
+     *        If `true`, the comparison will be case-insensitive.
      *        If `false`, the comparison will consider case sensitivity.
      * @return `true` if there is a matching declaration, `false` otherwise.
      */
@@ -80,14 +78,13 @@ interface KoChildProvider : KoBaseProvider {
     ): Boolean
 
     /**
-     * Determines whether the declaration has children defined directly in the Kotlin
-     * file with all the specified names.
+     * Determines whether the declaration has children with all the specified names.
      *
      * @param name The name of the child to check.
-     * @param names The names of the children to check.
+     * @param names The names of additional children to check.
      * @param indirectChildren specifies whether to include children defined in other files such as child of the child.
      * @param ignoreCase Specifies whether the comparison should ignore case.
-     *        If `true`, the prefix comparison will be case-insensitive.
+     *        If `true`, the comparison will be case-insensitive.
      *        If `false`, the comparison will consider case sensitivity.
      * @return `true` if there are declarations with all the specified names, `false` otherwise.
      */
@@ -99,13 +96,12 @@ interface KoChildProvider : KoBaseProvider {
     ): Boolean
 
     /**
-     * Determines whether the declaration has children defined directly in the Kotlin
-     * file with all the specified names.
+     * Determines whether the declaration has children with all the specified names.
      *
      * @param names The names of the children to check.
      * @param indirectChildren specifies whether to include children defined in other files such as child of the child.
      * @param ignoreCase Specifies whether the comparison should ignore case.
-     *        If `true`, the prefix comparison will be case-insensitive.
+     *        If `true`, the comparison will be case-insensitive.
      *        If `false`, the comparison will consider case sensitivity.
      * @return `true` if there are declarations with all the specified names, `false` otherwise.
      */
@@ -116,8 +112,7 @@ interface KoChildProvider : KoBaseProvider {
     ): Boolean
 
     /**
-     * Determines whether the declaration has at least one child defined directly
-     * in the Kotlin file that satisfies the provided predicate.
+     * Determines whether the declaration has at least one child that satisfies the provided predicate.
      *
      * @param indirectChildren specifies whether to include children defined in other files such as child of the child.
      * @param predicate A function that defines the condition to be met by a child declaration.
@@ -129,10 +124,9 @@ interface KoChildProvider : KoBaseProvider {
     ): Boolean
 
     /**
-     * Determines whether the declaration has all children defined directly
-     * in the Kotlin file that satisfy the provided predicate.
+     * Determines whether the declaration has all children that satisfy the provided predicate.
      *
-     * Note that if the children contains no elements, the function returns `true` because there are no elements in it
+     * Note that if the children contain no elements, the function returns `true` because there are no elements in it
      * that do not match the predicate. See a more detailed explanation of this logic concept in
      * ["Vacuous truth"](https://en.wikipedia.org/wiki/Vacuous_truth) article.
      *
@@ -172,7 +166,7 @@ interface KoChildProvider : KoBaseProvider {
     ): Boolean
 
     /**
-     * Determines whether the declaration has children with all the specified `KClass` type.
+     * Determines whether the declaration has children with all the specified `KClass` types.
      *
      * @param name the `KClass` type of the child to check.
      * @param names the `KClass` types of the children to check.
@@ -186,7 +180,7 @@ interface KoChildProvider : KoBaseProvider {
     ): Boolean
 
     /**
-     * Determines whether the declaration has children with all the specified `KClass` type.
+     * Determines whether the declaration has children with all the specified `KClass` types.
      *
      * @param names the `KClass` types of the children to check.
      * @param indirectChildren specifies whether to include children defined in other files such as child of the child.

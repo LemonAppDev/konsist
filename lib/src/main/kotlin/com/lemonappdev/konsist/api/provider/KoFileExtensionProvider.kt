@@ -15,10 +15,10 @@ interface KoFileExtensionProvider : KoBaseProvider {
     val nameWithExtension: String
 
     /**
-     * Determines whatever declaration has file extension.
+     * Determines whether the declaration has the specified file extension.
      *
      * @param extension The extension to check against. It is a non-null string representing the desired extension.
-     * @return `true` if the declaration's extension matching with the extension, `false` otherwise.
+     * @return `true` if the declaration's extension matches the specified extension, `false` otherwise.
      */
     fun hasExtension(extension: String): Boolean
 }

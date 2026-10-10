@@ -24,7 +24,7 @@ interface KoParentInterfaceProvider : KoBaseProvider {
     fun numParentInterfaces(indirectParents: Boolean = false): Int
 
     /**
-     * Returns the number of parent interfaces that satisfies the specified predicate present in the declaration.
+     * Returns the number of parent interfaces that satisfy the specified predicate present in the declaration.
      *
      * @param indirectParents specifies whether to include parent interfaces defined in other files such as parent of the parent.
      * @param predicate The predicate function to determine if a parent interface satisfies a condition.
@@ -36,7 +36,7 @@ interface KoParentInterfaceProvider : KoBaseProvider {
     ): Int
 
     /**
-     * Determines whatever declaration has any parent interface.
+     * Determines whether the declaration has any parent interface.
      *
      * @param indirectParents specifies whether to include parent interfaces defined in other files such as parent of the parent.
      * @return `true` if the declaration has any parent interface, `false` otherwise.
@@ -50,7 +50,7 @@ interface KoParentInterfaceProvider : KoBaseProvider {
      * @param names the names of the parent interfaces to check.
      * @param indirectParents specifies whether to include parent interfaces defined in other files such as parent of the parent.
      * @param ignoreCase Specifies whether the comparison should ignore case.
-     *        If `true`, the prefix comparison will be case-insensitive.
+     *        If `true`, the comparison will be case-insensitive.
      *        If `false`, the comparison will consider case sensitivity.
      * @return `true` if there is a matching declaration, `false` otherwise.
      */
@@ -67,7 +67,7 @@ interface KoParentInterfaceProvider : KoBaseProvider {
      * @param names the names of the parent interfaces to check.
      * @param indirectParents specifies whether to include parent interfaces defined in other files such as parent of the parent.
      * @param ignoreCase Specifies whether the comparison should ignore case.
-     *        If `true`, the prefix comparison will be case-insensitive.
+     *        If `true`, the comparison will be case-insensitive.
      *        If `false`, the comparison will consider case sensitivity.
      * @return `true` if there is a matching declaration, `false` otherwise.
      */
@@ -78,13 +78,13 @@ interface KoParentInterfaceProvider : KoBaseProvider {
     ): Boolean
 
     /**
-     * Determines whether the declaration has parent interfaces defined with all the specified names.
+     * Determines whether the declaration has parent interfaces with all the specified names.
      *
      * @param name The name of the parent interface to check.
-     * @param names The names of the parent interfaces to check.
+     * @param names The names of additional parent interfaces to check.
      * @param indirectParents specifies whether to include parent interfaces defined in other files such as parent of the parent.
      * @param ignoreCase Specifies whether the comparison should ignore case.
-     *        If `true`, the prefix comparison will be case-insensitive.
+     *        If `true`, the comparison will be case-insensitive.
      *        If `false`, the comparison will consider case sensitivity.
      * @return `true` if there are declarations with all the specified names, `false` otherwise.
      */
@@ -96,12 +96,12 @@ interface KoParentInterfaceProvider : KoBaseProvider {
     ): Boolean
 
     /**
-     * Determines whether the declaration has parent interfaces defined with all the specified names.
+     * Determines whether the declaration has parent interfaces with all the specified names.
      *
      * @param names The names of the parent interfaces to check.
      * @param indirectParents specifies whether to include parent interfaces defined in other files such as parent of the parent.
      * @param ignoreCase Specifies whether the comparison should ignore case.
-     *        If `true`, the prefix comparison will be case-insensitive.
+     *        If `true`, the comparison will be case-insensitive.
      *        If `false`, the comparison will consider case sensitivity.
      * @return `true` if there are declarations with all the specified names, `false` otherwise.
      */
@@ -126,7 +126,7 @@ interface KoParentInterfaceProvider : KoBaseProvider {
     /**
      * Determines whether the declaration has all parent interfaces that satisfy the provided predicate.
      *
-     * Note that if the parent interfaces contains no elements, the function returns `true` because there are no elements in it
+     * Note that if the parent interfaces contain no elements, the function returns `true` because there are no elements in it
      * that do not match the predicate.
      *
      * @param indirectParents specifies whether to include parent interfaces defined in other files such as parent of the parent.
@@ -165,7 +165,7 @@ interface KoParentInterfaceProvider : KoBaseProvider {
     ): Boolean
 
     /**
-     * Determines whether the declaration has parent interfaces with all the specified `KClass` type.
+     * Determines whether the declaration has parent interfaces of all the specified `KClass` types.
      *
      * @param name the `KClass` type of the parent interface to check.
      * @param names the `KClass` types of the parent interfaces to check.
@@ -179,7 +179,7 @@ interface KoParentInterfaceProvider : KoBaseProvider {
     ): Boolean
 
     /**
-     * Determines whether the declaration has parent interfaces with all the specified `KClass` type.
+     * Determines whether the declaration has parent interfaces of all the specified `KClass` types.
      *
      * @param names the `KClass` types of the parent interfaces to check.
      * @param indirectParents specifies whether to include parent interfaces defined in other files such as parent of the parent.

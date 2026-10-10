@@ -8,7 +8,7 @@ import com.lemonappdev.konsist.api.provider.KoBaseProvider
 @Deprecated("Will be removed in version 0.19.0", ReplaceWith("KoIsValProvider"))
 interface KoValModifierProvider : KoBaseProvider {
     /**
-     * Determines whatever the declaration has `val` modifier.
+     * Determines whether the declaration has the `val` modifier.
      */
     @Deprecated("Will be removed in version 0.19.0", ReplaceWith("isVal"))
     val hasValModifier: Boolean

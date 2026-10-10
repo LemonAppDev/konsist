@@ -6,7 +6,7 @@ package com.lemonappdev.konsist.api.provider
 @Deprecated("Will be removed in version 0.19.0", ReplaceWith("KoSourceTypeProvider"))
 interface KoSourceAndAliasTypeProvider : KoBaseProvider {
     /**
-     * Returns `true` if this type is defined by the import alias.
+     * Returns `true` if this type is defined by an import alias.
      *
      * For the type import `import com.app.MyClass as MyAlias` the `isAlias` will be `true`.
      * For the type import `import com.app.MyClass` the `isAlias` will be `false`.
@@ -19,7 +19,7 @@ interface KoSourceAndAliasTypeProvider : KoBaseProvider {
      * For `val car:MyClass` it will be "MyClass".
      * For `val car:MyClass<String>` it will be "MyClass<String>".
      *
-     *  @see bareSourceType
+     * @see bareSourceType
      */
     val sourceType: String
 
@@ -28,9 +28,9 @@ interface KoSourceAndAliasTypeProvider : KoBaseProvider {
      *
      * For `val car:MyClass` value will be "MyClass".
      * For `val car:MyClass?` value will be "MyClass".
-     * For `val car:MyClass<String>` value will be "MyClass"
-     * For `val car:MyClass<String?>?` value will be "MyClass"
-     * For `val car:com.app.MyClass` value will be "MyClass"
+     * For `val car:MyClass<String>` value will be "MyClass".
+     * For `val car:MyClass<String?>?` value will be "MyClass".
+     * For `val car:com.app.MyClass` value will be "MyClass".
      *
      * @see sourceType
      */

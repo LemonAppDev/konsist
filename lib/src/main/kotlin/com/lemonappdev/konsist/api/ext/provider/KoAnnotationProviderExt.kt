@@ -3,8 +3,8 @@ package com.lemonappdev.konsist.api.ext.provider
 import com.lemonappdev.konsist.api.provider.KoAnnotationProvider
 
 /**
- * Returns `true` if declaration represents the type of [T].
+ * Determines whether the declaration has an annotation of type [T].
  *
- * @return `true` if declaration represents the type of [T], `false` otherwise.
+ * @return `true` if the declaration has an annotation of type [T], `false` otherwise.
  */
 inline fun <reified T> KoAnnotationProvider.hasAnnotationOf(): Boolean = hasAnnotationOf(T::class)

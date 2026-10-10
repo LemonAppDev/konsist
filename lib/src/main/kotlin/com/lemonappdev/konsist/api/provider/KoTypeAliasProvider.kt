@@ -4,7 +4,6 @@ import com.lemonappdev.konsist.api.declaration.KoTypeAliasDeclaration
 
 /**
  * An interface representing a Kotlin declaration that provides access to type aliases.
- *
  */
 interface KoTypeAliasProvider : KoBaseProvider {
     /**
@@ -18,7 +17,7 @@ interface KoTypeAliasProvider : KoBaseProvider {
     val numTypeAliases: Int
 
     /**
-     * Returns the number of type aliases that satisfies the specified predicate present in the declaration.
+     * Returns the number of type aliases that satisfy the specified predicate present in the declaration.
      *
      * @param predicate The predicate function to determine if a type alias satisfies a condition.
      * @return The number of type aliases in the declaration.
@@ -26,7 +25,7 @@ interface KoTypeAliasProvider : KoBaseProvider {
     fun countTypeAliases(predicate: (KoTypeAliasDeclaration) -> Boolean): Int
 
     /**
-     * Determines whatever declaration has any type alias.
+     * Determines whether the declaration has any type alias.
      *
      * @return `true` if the declaration has any type alias, `false` otherwise.
      */
@@ -37,8 +36,8 @@ interface KoTypeAliasProvider : KoBaseProvider {
      *
      * @param name the name of the type alias to check.
      * @param names the names of the type aliases to check.
-     * @param ignoreCase Specifies whether the comparison should ignore a case.
-     *        If `true`, the prefix comparison will be case-insensitive.
+     * @param ignoreCase Specifies whether the comparison should ignore case.
+     *        If `true`, the comparison will be case-insensitive.
      *        If `false`, the comparison will consider case sensitivity.
      * @return `true` if there is a matching declaration, `false` otherwise.
      */
@@ -52,8 +51,8 @@ interface KoTypeAliasProvider : KoBaseProvider {
      * Determines whether the declaration has at least one type alias whose name matches any of the specified names.
      *
      * @param names the names of the type aliases to check.
-     * @param ignoreCase Specifies whether the comparison should ignore a case.
-     *        If `true`, the prefix comparison will be case-insensitive.
+     * @param ignoreCase Specifies whether the comparison should ignore case.
+     *        If `true`, the comparison will be case-insensitive.
      *        If `false`, the comparison will consider case sensitivity.
      * @return `true` if there is a matching declaration, `false` otherwise.
      */
@@ -66,9 +65,9 @@ interface KoTypeAliasProvider : KoBaseProvider {
      * Determines whether the declaration has type aliases with all the specified names.
      *
      * @param name The name of the type alias to check.
-     * @param names The names of the type aliases to check.
-     * @param ignoreCase Specifies whether the comparison should ignore a case.
-     *        If `true`, the prefix comparison will be case-insensitive.
+     * @param names The names of additional type aliases to check.
+     * @param ignoreCase Specifies whether the comparison should ignore case.
+     *        If `true`, the comparison will be case-insensitive.
      *        If `false`, the comparison will consider case sensitivity.
      * @return `true` if there are declarations with all the specified names, `false` otherwise.
      */
@@ -82,8 +81,8 @@ interface KoTypeAliasProvider : KoBaseProvider {
      * Determines whether the declaration has type aliases with all the specified names.
      *
      * @param names The names of the type aliases to check.
-     * @param ignoreCase Specifies whether the comparison should ignore a case.
-     *        If `true`, the prefix comparison will be case-insensitive.
+     * @param ignoreCase Specifies whether the comparison should ignore case.
+     *        If `true`, the comparison will be case-insensitive.
      *        If `false`, the comparison will consider case sensitivity.
      * @return `true` if there are declarations with all the specified names, `false` otherwise.
      */
@@ -103,7 +102,7 @@ interface KoTypeAliasProvider : KoBaseProvider {
     /**
      * Determines whether the declaration has all type aliases that satisfy the provided predicate.
      *
-     * Note that if the type aliases contains no elements, the function returns `true` because there are no elements in
+     * Note that if the type aliases contain no elements, the function returns `true` because there are no elements in
      * it that do not match the predicate.
      *
      * @param predicate A function that defines the condition to be met by type alias declarations.

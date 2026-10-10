@@ -17,7 +17,7 @@ interface KoVariableProvider : KoBaseProvider {
     val numVariables: Int
 
     /**
-     * Gets the number of variables that satisfies the specified predicate present in the declaration.
+     * Returns the number of variables that satisfy the specified predicate present in the declaration.
      *
      * @param predicate The predicate function to determine if a variable satisfies a condition.
      * @return The number of variables in the declaration.
@@ -25,7 +25,7 @@ interface KoVariableProvider : KoBaseProvider {
     fun countVariables(predicate: (KoVariableDeclaration) -> Boolean): Int
 
     /**
-     * Whether the declaration has variables.
+     * Determines whether the declaration has any variable.
      *
      * @return `true` if the declaration has any variable, `false` otherwise.
      */
@@ -37,7 +37,7 @@ interface KoVariableProvider : KoBaseProvider {
      * @param name the name of the variable to check.
      * @param names the names of the variables to check.
      * @param ignoreCase Specifies whether the comparison should ignore case.
-     *        If `true`, the prefix comparison will be case-insensitive.
+     *        If `true`, the comparison will be case-insensitive.
      *        If `false`, the comparison will consider case sensitivity.
      * @return `true` if there is a matching declaration, `false` otherwise.
      */
@@ -52,7 +52,7 @@ interface KoVariableProvider : KoBaseProvider {
      *
      * @param names the names of the variables to check.
      * @param ignoreCase Specifies whether the comparison should ignore case.
-     *        If `true`, the prefix comparison will be case-insensitive.
+     *        If `true`, the comparison will be case-insensitive.
      *        If `false`, the comparison will consider case sensitivity.
      * @return `true` if there is a matching declaration, `false` otherwise.
      */
@@ -65,9 +65,9 @@ interface KoVariableProvider : KoBaseProvider {
      * Determines whether the declaration has variables with all the specified names.
      *
      * @param name The name of the variable to check.
-     * @param names The names of the variables to check.
+     * @param names The names of additional variables to check.
      * @param ignoreCase Specifies whether the comparison should ignore case.
-     *        If `true`, the prefix comparison will be case-insensitive.
+     *        If `true`, the comparison will be case-insensitive.
      *        If `false`, the comparison will consider case sensitivity.
      * @return `true` if there are declarations with all the specified names, `false` otherwise.
      */
@@ -82,7 +82,7 @@ interface KoVariableProvider : KoBaseProvider {
      *
      * @param names The names of the variables to check.
      * @param ignoreCase Specifies whether the comparison should ignore case.
-     *        If `true`, the prefix comparison will be case-insensitive.
+     *        If `true`, the comparison will be case-insensitive.
      *        If `false`, the comparison will consider case sensitivity.
      * @return `true` if there are declarations with all the specified names, `false` otherwise.
      */
@@ -94,7 +94,7 @@ interface KoVariableProvider : KoBaseProvider {
     /**
      * Determines whether the declaration has at least one variable that satisfies the provided predicate.
      *
-     * @param predicate A variable that defines the condition to be met by a variable declaration.
+     * @param predicate A function that defines the condition to be met by a variable declaration.
      * @return `true` if there is a matching declaration, `false` otherwise.
      */
     fun hasVariable(predicate: (KoVariableDeclaration) -> Boolean): Boolean
@@ -102,11 +102,11 @@ interface KoVariableProvider : KoBaseProvider {
     /**
      * Determines whether the declaration has all variables that satisfy the provided predicate.
      *
-     * Note that if the variables contains no elements, the variable returns `true` because there are no elements in it
+     * Note that if the variables contain no elements, the function returns `true` because there are no elements in it
      * that do not match the predicate. See a more detailed explanation of this logic concept in
      * ["Vacuous truth"](https://en.wikipedia.org/wiki/Vacuous_truth) article.
      *
-     * @param predicate A variable that defines the condition to be met by variable declarations.
+     * @param predicate A function that defines the condition to be met by variable declarations.
      * @return `true` if all variable declarations satisfy the predicate, `false` otherwise.
      */
     fun hasAllVariables(predicate: (KoVariableDeclaration) -> Boolean): Boolean

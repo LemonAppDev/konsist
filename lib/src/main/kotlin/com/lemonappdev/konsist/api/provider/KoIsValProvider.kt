@@ -5,7 +5,7 @@ package com.lemonappdev.konsist.api.provider
  */
 interface KoIsValProvider : KoBaseProvider {
     /**
-     * Determines whatever the declaration has `val` keyword.
+     * Determines whether the declaration has the `val` keyword.
      */
     val isVal: Boolean
 }

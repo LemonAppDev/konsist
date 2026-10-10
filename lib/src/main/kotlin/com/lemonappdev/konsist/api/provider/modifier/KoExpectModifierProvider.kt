@@ -9,7 +9,7 @@ interface KoExpectModifierProvider :
     KoBaseProvider,
     KoModifierProvider {
     /**
-     * Determines whatever declaration has `expect` modifier.
+     * Determines whether the declaration has the `expect` modifier.
      */
     val hasExpectModifier: Boolean
 }

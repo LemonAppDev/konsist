@@ -27,7 +27,7 @@ fun <T : KoAliasProvider> List<T>.withAlias(predicate: ((KoImportAliasDeclaratio
  * List containing declarations without the specified import alias.
  *
  * @param predicate The predicate function to determine if a declaration import alias satisfies a condition.
- * @return A list containing declarations without the specified import alias (or none import alias if [predicate] is null).
+ * @return A list containing declarations without the specified import alias (or no import alias if [predicate] is null).
  */
 fun <T : KoAliasProvider> List<T>.withoutAlias(predicate: ((KoImportAliasDeclaration) -> Boolean)? = null): List<T> =
     filterNot {

@@ -17,7 +17,7 @@ interface KoUpperBoundsProvider : KoBaseProvider {
     val numUpperBounds: Int
 
     /**
-     * Returns the number of upper bounds that satisfies the specified predicate present in the declaration.
+     * Returns the number of upper bounds that satisfy the specified predicate present in the declaration.
      *
      * @param predicate The predicate function to determine if an upper bound satisfies a condition.
      * @return The number of upper bounds in the declaration.
@@ -25,7 +25,7 @@ interface KoUpperBoundsProvider : KoBaseProvider {
     fun countUpperBounds(predicate: (KoTypeDeclaration) -> Boolean): Int
 
     /**
-     * Determines whatever declaration has any upper bound.
+     * Determines whether the declaration has any upper bound.
      *
      * @return `true` if the declaration has any upper bound, `false` otherwise.
      */
@@ -36,10 +36,9 @@ interface KoUpperBoundsProvider : KoBaseProvider {
      *
      * @param name the name of the upper bound to check.
      * @param names the names of the upper bounds to check.
-     * @param ignoreCase Specifies whether the comparison should ignore a case.
-     *        If `true`, the prefix comparison will be case-insensitive.
+     * @param ignoreCase Specifies whether the comparison should ignore case.
+     *        If `true`, the comparison will be case-insensitive.
      *        If `false`, the comparison will consider case sensitivity.
-     *
      * @return `true` if there is a matching declaration, `false` otherwise.
      */
     fun hasUpperBoundWithName(
@@ -52,8 +51,8 @@ interface KoUpperBoundsProvider : KoBaseProvider {
      * Determines whether the declaration has at least one upper bound whose name matches any of the specified names.
      *
      * @param names the names of the upper bounds to check.
-     * @param ignoreCase Specifies whether the comparison should ignore a case.
-     *        If `true`, the prefix comparison will be case-insensitive.
+     * @param ignoreCase Specifies whether the comparison should ignore case.
+     *        If `true`, the comparison will be case-insensitive.
      *        If `false`, the comparison will consider case sensitivity.
      * @return `true` if there is a matching declaration, `false` otherwise.
      */
@@ -66,9 +65,9 @@ interface KoUpperBoundsProvider : KoBaseProvider {
      * Determines whether the declaration has upper bounds with all the specified names.
      *
      * @param name The name of the upper bound to check.
-     * @param names The names of the upper bounds to check.
-     * @param ignoreCase Specifies whether the comparison should ignore a case.
-     *        If `true`, the prefix comparison will be case-insensitive.
+     * @param names The names of additional upper bounds to check.
+     * @param ignoreCase Specifies whether the comparison should ignore case.
+     *        If `true`, the comparison will be case-insensitive.
      *        If `false`, the comparison will consider case sensitivity.
      * @return `true` if there are declarations with all the specified names, `false` otherwise.
      */
@@ -82,8 +81,8 @@ interface KoUpperBoundsProvider : KoBaseProvider {
      * Determines whether the declaration has upper bounds with all the specified names.
      *
      * @param names The names of the upper bounds to check.
-     * @param ignoreCase Specifies whether the comparison should ignore a case.
-     *        If `true`, the prefix comparison will be case-insensitive.
+     * @param ignoreCase Specifies whether the comparison should ignore case.
+     *        If `true`, the comparison will be case-insensitive.
      *        If `false`, the comparison will consider case sensitivity.
      * @return `true` if there are declarations with all the specified names, `false` otherwise.
      */
@@ -103,7 +102,7 @@ interface KoUpperBoundsProvider : KoBaseProvider {
     /**
      * Determines whether the declaration has all upper bounds that satisfy the provided predicate.
      *
-     * Note that if the upper bounds contains no elements, the function returns `true` because there are no elements in it
+     * Note that if the upper bounds contain no elements, the function returns `true` because there are no elements in it
      * that do not match the predicate.
      *
      * @param predicate A function that defines the condition to be met by upper bound declarations.

@@ -28,7 +28,7 @@ fun <T : KoReceiverTypeProvider> List<T>.withReceiverType(predicate: ((KoTypeDec
  * List containing declarations without the specified receiver type.
  *
  * @param predicate The predicate function to determine if a declaration receiver type satisfies a condition.
- * @return A list containing declarations without the specified receiver type (or none receiver type if [predicate] is null).
+ * @return A list containing declarations without the specified receiver type (or without a receiver type if [predicate] is null).
  */
 fun <T : KoReceiverTypeProvider> List<T>.withoutReceiverType(predicate: ((KoTypeDeclaration) -> Boolean)? = null): List<T> =
     filterNot {
@@ -69,7 +69,7 @@ fun <T : KoReceiverTypeProvider> List<T>.withReceiverTypeOf(kClasses: Collection
  *
  * @param kClass The Kotlin class representing the receiver type to exclude.
  * @param kClasses The Kotlin class(es) representing the receiver type(s) to exclude.
- * @return A list containing declarations without receiver type of the specified Kotlin class(es).
+ * @return A list containing declarations without the receiver type of the specified Kotlin class(es).
  */
 fun <T : KoReceiverTypeProvider> List<T>.withoutReceiverTypeOf(
     kClass: KClass<*>,
@@ -80,7 +80,7 @@ fun <T : KoReceiverTypeProvider> List<T>.withoutReceiverTypeOf(
  * List containing declarations without receiver type.
  *
  * @param kClasses The Kotlin class(es) representing the receiver type(s) to exclude.
- * @return A list containing declarations without receiver type of the specified Kotlin class(es).
+ * @return A list containing declarations without the receiver type of the specified Kotlin class(es).
  */
 fun <T : KoReceiverTypeProvider> List<T>.withoutReceiverTypeOf(kClasses: Collection<KClass<*>>): List<T> =
     filterNot {

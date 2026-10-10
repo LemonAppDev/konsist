@@ -9,7 +9,7 @@ interface KoExternalModifierProvider :
     KoBaseProvider,
     KoModifierProvider {
     /**
-     * Determines whatever the declaration has `external` modifier.
+     * Determines whether the declaration has the `external` modifier.
      */
     val hasExternalModifier: Boolean
 }

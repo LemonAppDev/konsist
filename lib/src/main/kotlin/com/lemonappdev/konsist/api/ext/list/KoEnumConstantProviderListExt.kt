@@ -29,7 +29,7 @@ fun <T : KoEnumConstantProvider> List<T>.withoutEnumConstants(): List<T> = filte
  * @param name The name of the enum constant to include.
  * @param names The names of additional enum constants to include.
  * @param ignoreCase Specifies whether the comparison should ignore case.
- *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations with at least one of the specified enum constant(s).
  */
@@ -42,9 +42,9 @@ fun <T : KoEnumConstantProvider> List<T>.withEnumConstantNamed(
 /**
  * List containing declarations that have at least one enum constant with the specified name(s).
  *
- * @param names The names of additional enum constants to include.
+ * @param names The names of the enum constants to include.
  * @param ignoreCase Specifies whether the comparison should ignore case.
- *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations with at least one of the specified enum constant(s).
  */
@@ -60,14 +60,14 @@ fun <T : KoEnumConstantProvider> List<T>.withEnumConstantNamed(
     }
 
 /**
- * List containing declarations without any of specified enum constants.
+ * List containing declarations without any of the specified enum constants.
  *
  * @param name The name of the enum constant to exclude.
  * @param names The names of additional enum constants to exclude.
  * @param ignoreCase Specifies whether the comparison should ignore case.
- *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
- * @return A list containing declarations without any of specified enum constants.
+ * @return A list containing declarations without any of the specified enum constants.
  */
 fun <T : KoEnumConstantProvider> List<T>.withoutEnumConstantNamed(
     name: String,
@@ -76,13 +76,13 @@ fun <T : KoEnumConstantProvider> List<T>.withoutEnumConstantNamed(
 ): List<T> = withoutEnumConstantNamed(listOf(name, *names), ignoreCase)
 
 /**
- * List containing declarations without any of specified enum constants.
+ * List containing declarations without any of the specified enum constants.
  *
- * @param names The names of additional enum constants to exclude.
+ * @param names The names of the enum constants to exclude.
  * @param ignoreCase Specifies whether the comparison should ignore case.
- *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
- * @return A list containing declarations without any of specified enum constants.
+ * @return A list containing declarations without any of the specified enum constants.
  */
 fun <T : KoEnumConstantProvider> List<T>.withoutEnumConstantNamed(
     names: Collection<String>,
@@ -99,9 +99,9 @@ fun <T : KoEnumConstantProvider> List<T>.withoutEnumConstantNamed(
  * List containing declarations that have all specified enum constants.
  *
  * @param name The name of the enum constant to include.
- * @param names The name(s) of the enum constant(s) to include.
+ * @param names The names of additional enum constants to include.
  * @param ignoreCase Specifies whether the comparison should ignore case.
- *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations with all specified enum constant(s).
  */
@@ -114,9 +114,9 @@ fun <T : KoEnumConstantProvider> List<T>.withAllEnumConstantsNamed(
 /**
  * List containing declarations that have all specified enum constants.
  *
- * @param names The name(s) of the enum constant(s) to include.
+ * @param names The names of the enum constants to include.
  * @param ignoreCase Specifies whether the comparison should ignore case.
- *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations with all specified enum constant(s).
  */
@@ -135,9 +135,9 @@ fun <T : KoEnumConstantProvider> List<T>.withAllEnumConstantsNamed(
  * List containing declarations without all specified enum constants.
  *
  * @param name The name of the enum constant to exclude.
- * @param names The name(s) of the enum constant(s) to exclude.
+ * @param names The names of additional enum constants to exclude.
  * @param ignoreCase Specifies whether the comparison should ignore case.
- *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations without all specified enum constant(s).
  */
@@ -150,9 +150,9 @@ fun <T : KoEnumConstantProvider> List<T>.withoutAllEnumConstantsNamed(
 /**
  * List containing declarations without all specified enum constants.
  *
- * @param names The name(s) of the enum constant(s) to exclude.
+ * @param names The names of the enum constants to exclude.
  * @param ignoreCase Specifies whether the comparison should ignore case.
- *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations without all specified enum constant(s).
  */
@@ -177,10 +177,10 @@ fun <T : KoEnumConstantProvider> List<T>.withEnumConstant(predicate: (KoEnumCons
     filter { it.hasEnumConstant(predicate) }
 
 /**
- * List containing declarations that not have enum constant satisfying the provided predicate.
+ * List containing declarations that do not have any enum constant satisfying the provided predicate.
  *
  * @param predicate A function that defines the condition to be met by an enum constant declaration.
- * @return A list containing declarations without enum constant satisfying the provided predicate.
+ * @return A list containing declarations without any enum constant satisfying the provided predicate.
  */
 fun <T : KoEnumConstantProvider> List<T>.withoutEnumConstant(predicate: (KoEnumConstantDeclaration) -> Boolean): List<T> =
     filterNot { it.hasEnumConstant(predicate) }

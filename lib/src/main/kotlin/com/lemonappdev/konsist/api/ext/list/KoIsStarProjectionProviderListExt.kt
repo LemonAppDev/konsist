@@ -10,8 +10,8 @@ import com.lemonappdev.konsist.api.provider.KoIsStarProjectionProvider
 fun <T : KoIsStarProjectionProvider> List<T>.withStarProjection(): List<T> = filter { it.isStarProjection }
 
 /**
- * List containing the star projection declarations.
+ * List containing the non-star projection declarations.
  *
- * @return A list containing the star projection declarations.
+ * @return A list containing the non-star projection declarations.
  */
 fun <T : KoIsStarProjectionProvider> List<T>.withoutStarProjection(): List<T> = filterNot { it.isStarProjection }

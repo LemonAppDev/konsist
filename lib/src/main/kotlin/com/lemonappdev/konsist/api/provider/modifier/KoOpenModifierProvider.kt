@@ -9,7 +9,7 @@ interface KoOpenModifierProvider :
     KoBaseProvider,
     KoModifierProvider {
     /**
-     * Determines whatever declaration has `open` modifier.
+     * Determines whether the declaration has the `open` modifier.
      */
     val hasOpenModifier: Boolean
 }
