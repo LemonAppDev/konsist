@@ -6,18 +6,24 @@ package com.lemonappdev.konsist.api.provider
 interface KoPathProvider : KoBaseProvider {
     /**
      * File path of the declaration or path of the file.
+     * Uses OS-specific separators (`\` on Windows, `/` on other OSes),
+     * e.g. `C:\project\app\src\main\kotlin\SampleClass.kt` on Windows.
+     * To check path portably, use [resideInPath] which accepts both `/` and `\` separators.
      */
     val path: String
 
     /**
      * Project file path of the declaration or root project path of the file.
+     * Uses OS-specific separators (`\` on Windows, `/` on other OSes),
+     * e.g. `\app\src\main\kotlin\SampleClass.kt` on Windows.
+     * To check path portably, use [resideInPath] which accepts both `/` and `\` separators.
      */
     val projectPath: String
 
     /**
      * Determines whatever declaration reside in file path or file reside in path.
      *
-     * @param path the (file) path to check.
+     * @param path the (file) path to check. Both `/` and `\` separators are accepted on all OSes.
      * @param absolutePath Flag indicating whether the provided path is an absolute path.
      *                    If set to `true`, the `path` parameter represents an absolute path.
      *                    If set to `false` (default), the `path` parameter represents a relative path.

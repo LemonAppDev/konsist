@@ -10,23 +10,23 @@ import java.io.ByteArrayOutputStream
 import java.io.PrintStream
 
 /**
- * Scope output paths should use "/" separators on all OSes.
+ * Scope output paths should use OS separators.
  */
 class KoScopePathTest {
     private val featurePaymentClassPath =
-        "$projectRootDirectory/feature/payment/src/main/kotlin/com/lemonappdev/fixture/FeaturePaymentClass.kt"
+        "$projectRootDirectory/feature/payment/src/main/kotlin/com/lemonappdev/fixture/FeaturePaymentClass.kt".toOsSeparator()
 
     private val sut = Konsist
         .scopeFromFile("$featurePaymentMainSourceSetProjectDirectory/fixture/FeaturePaymentClass.kt".toOsSeparator())
 
     @Test
-    fun `toString uses unix separator`() {
+    fun `toString uses os separator`() {
         // then
         sut.toString() shouldBeEqualTo featurePaymentClassPath
     }
 
     @Test
-    fun `print uses unix separator`() {
+    fun `print uses os separator`() {
         // given
         val outputStream = ByteArrayOutputStream()
         val originalOut = System.out

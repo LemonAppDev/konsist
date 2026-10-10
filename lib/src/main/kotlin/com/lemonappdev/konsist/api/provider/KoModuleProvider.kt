@@ -6,6 +6,7 @@ package com.lemonappdev.konsist.api.provider
 interface KoModuleProvider : KoBaseProvider {
     /**
      * The declaration's module name.
+     * Uses `/` separators on all OSes, e.g. "feature/data", or "root" for the top-level module.
      */
     val moduleName: String
 
@@ -13,6 +14,7 @@ interface KoModuleProvider : KoBaseProvider {
      * Determines whatever declaration reside in module.
      *
      * @param name The name of the module to check. If this is the top-module, use "root".
+     * Both `/` and `\` separators are accepted on all OSes.
      * @return `true` if a declaration resides in the specified module, `false` otherwise.
      */
     fun resideInModule(name: String): Boolean

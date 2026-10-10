@@ -198,7 +198,7 @@ interface KoScope {
     operator fun minusAssign(scope: KoScope): Unit
 
     /**
-     * String representing the scope.
+     * String representing the scope: file paths with OS-specific separators (`\` on Windows, `/` on other OSes).
      *
      * @return a string representing the scope.
      */
