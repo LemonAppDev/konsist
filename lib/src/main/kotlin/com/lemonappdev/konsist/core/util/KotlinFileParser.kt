@@ -21,6 +21,8 @@ import org.jetbrains.kotlin.psi.KtFile
 import java.io.File
 
 object KotlinFileParser {
+    private const val UTF8_BOM = "\uFEFF"
+
     @OptIn(CoreEnvironmentDeprecation::class, CompilerConfiguration.Internals::class)
     private val project by lazy {
         KotlinCoreEnvironment
@@ -64,6 +66,8 @@ object KotlinFileParser {
             val fileContent =
                 file
                     .readText()
+                    // Files saved by some editors (mostly on Windows) start with UTF-8 BOM that breaks package parsing
+                    .removePrefix(UTF8_BOM)
                     .replace(Regex(EndOfLine.WINDOWS.value), EndOfLine.UNIX.value)
 
             // Tests are using code snippets with txt extension that is messing up with Kotlin file parsing
