@@ -5,10 +5,13 @@ import com.lemonappdev.konsist.api.container.KoScope
 import com.lemonappdev.konsist.helper.ext.toOsSeparator
 import com.lemonappdev.konsist.helper.util.PathProvider.featurePaymentMainSourceSetDirectory
 import org.amshove.kluent.shouldBeEqualTo
+import org.amshove.kluent.shouldThrow
+import org.amshove.kluent.withMessage
 import org.junit.jupiter.api.Test
 
 /**
- * Nested module name ("feature/payment") should select module files with both "/" and "\" separators on all OSes.
+ * Nested module name should select module files with Gradle project path (":feature:payment"),
+ * "/" and "\" separators ("feature/payment", "feature\payment") on all OSes.
  */
 class KoScopeFromNestedModuleTest {
     private val featurePaymentClassPath = "$featurePaymentMainSourceSetDirectory/fixture/FeaturePaymentClass.kt".toOsSeparator()
@@ -45,12 +48,21 @@ class KoScopeFromNestedModuleTest {
     }
 
     @Test
-    fun `scopeFromModule for parent directory of nested module is empty`() {
+    fun `scopeFromModule for nested module with gradle project path`() {
         // given
-        val sut = Konsist.scopeFromModule("feature")
+        val sut = Konsist.scopeFromModule(":feature:payment")
 
         // then
-        sut.mapToFilePaths() shouldBeEqualTo emptyList()
+        sut.mapToFilePaths() shouldBeEqualTo featurePaymentFilePaths
+    }
+
+    @Test
+    fun `scopeFromModule throws exception for parent directory of nested module`() {
+        // given
+        val func = { Konsist.scopeFromModule("feature") }
+
+        // then
+        func shouldThrow IllegalArgumentException::class withMessage "Module does not contain any Kotlin files: 'feature'"
     }
 
     @Test
@@ -66,6 +78,15 @@ class KoScopeFromNestedModuleTest {
     fun `scopeFromProject for nested module with windows separator and main source set`() {
         // given
         val sut = Konsist.scopeFromProject(moduleName = """feature\payment""", sourceSetName = "main")
+
+        // then
+        sut.mapToFilePaths() shouldBeEqualTo featurePaymentFilePaths
+    }
+
+    @Test
+    fun `scopeFromProject for nested module with gradle project path`() {
+        // given
+        val sut = Konsist.scopeFromProject(moduleName = ":feature:payment")
 
         // then
         sut.mapToFilePaths() shouldBeEqualTo featurePaymentFilePaths
