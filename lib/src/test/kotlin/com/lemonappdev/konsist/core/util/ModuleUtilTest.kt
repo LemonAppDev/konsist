@@ -44,11 +44,63 @@ class ModuleUtilTest {
     }
 
     @Test
-    fun `should return root for root module file`() {
+    fun `should return root for root module file for windows path`() {
         // when
         val result =
             ModuleUtil.getModuleName(
                 projectPath = """\src\main\kotlin\com\app\SampleClass.kt""",
+                rootProjectPath = """C:\Users\user\project""",
+            )
+
+        // then
+        result shouldBeEqualTo "root"
+    }
+
+    @Test
+    fun `should return single module name for unix path`() {
+        // when
+        val result =
+            ModuleUtil.getModuleName(
+                projectPath = "/app/src/main/kotlin/com/app/SampleClass.kt",
+                rootProjectPath = "/Users/user/project",
+            )
+
+        // then
+        result shouldBeEqualTo "app"
+    }
+
+    @Test
+    fun `should return root for root module file for unix path`() {
+        // when
+        val result =
+            ModuleUtil.getModuleName(
+                projectPath = "/src/main/kotlin/com/app/SampleClass.kt",
+                rootProjectPath = "/Users/user/project",
+            )
+
+        // then
+        result shouldBeEqualTo "root"
+    }
+
+    @Test
+    fun `should return root when module name equals project name for unix path`() {
+        // when
+        val result =
+            ModuleUtil.getModuleName(
+                projectPath = "/project/src/main/kotlin/com/app/SampleClass.kt",
+                rootProjectPath = "/Users/user/project",
+            )
+
+        // then
+        result shouldBeEqualTo "root"
+    }
+
+    @Test
+    fun `should return root when module name equals project name for windows path`() {
+        // when
+        val result =
+            ModuleUtil.getModuleName(
+                projectPath = """\project\src\main\kotlin\com\app\SampleClass.kt""",
                 rootProjectPath = """C:\Users\user\project""",
             )
 
