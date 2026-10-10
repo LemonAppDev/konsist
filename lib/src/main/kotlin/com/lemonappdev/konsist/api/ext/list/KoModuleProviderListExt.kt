@@ -11,7 +11,6 @@ import com.lemonappdev.konsist.api.provider.KoModuleProvider
  * @param name The module name to include.
  * @param names The module name(s) to include.
  * @return A list containing declarations that reside in any of the specified modules.
- * @throws IllegalArgumentException if any module name is blank.
  */
 fun <T : KoModuleProvider> List<T>.withModule(
     name: String,
@@ -26,7 +25,6 @@ fun <T : KoModuleProvider> List<T>.withModule(
  *
  * @param names The module name(s) to include.
  * @return A list containing declarations that reside in any of the specified modules.
- * @throws IllegalArgumentException if any module name is blank.
  */
 fun <T : KoModuleProvider> List<T>.withModule(names: Collection<String>): List<T> =
     filter {
@@ -45,7 +43,6 @@ fun <T : KoModuleProvider> List<T>.withModule(names: Collection<String>): List<T
  * @param name The module name to exclude.
  * @param names The module name(s) to exclude.
  * @return A list containing declarations that don't reside in any of the specified modules.
- * @throws IllegalArgumentException if any module name is blank.
  */
 fun <T : KoModuleProvider> List<T>.withoutModule(
     name: String,
@@ -60,7 +57,6 @@ fun <T : KoModuleProvider> List<T>.withoutModule(
  *
  * @param names The module name(s) to exclude.
  * @return A list containing declarations that don't reside in any of the specified modules.
- * @throws IllegalArgumentException if any module name is blank.
  */
 fun <T : KoModuleProvider> List<T>.withoutModule(names: Collection<String>): List<T> =
     filterNot {

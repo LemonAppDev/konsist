@@ -1,8 +1,6 @@
 package com.lemonappdev.konsist.core.util
 
 import org.amshove.kluent.shouldBeEqualTo
-import org.amshove.kluent.shouldThrow
-import org.amshove.kluent.withMessage
 import org.junit.jupiter.api.Test
 
 class ModuleUtilTest {
@@ -157,20 +155,20 @@ class ModuleUtilTest {
     }
 
     @Test
-    fun `should throw exception when module name is blank`() {
-        // given
-        val func = { ModuleUtil.normalizeModuleName(" ") }
+    fun `should convert blank module name to empty string`() {
+        // when
+        val result = ModuleUtil.normalizeModuleName(" ")
 
         // then
-        func shouldThrow IllegalArgumentException::class withMessage "Module name is blank: ' '"
+        result shouldBeEqualTo ""
     }
 
     @Test
-    fun `should throw exception when module name contains only separators`() {
-        // given
-        val func = { ModuleUtil.normalizeModuleName("/") }
+    fun `should convert module name containing only separators to empty string`() {
+        // when
+        val result = ModuleUtil.normalizeModuleName("/")
 
         // then
-        func shouldThrow IllegalArgumentException::class withMessage "Module name is blank: '/'"
+        result shouldBeEqualTo ""
     }
 }

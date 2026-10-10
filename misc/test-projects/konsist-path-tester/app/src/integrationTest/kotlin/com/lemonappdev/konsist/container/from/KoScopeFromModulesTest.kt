@@ -9,8 +9,6 @@ import com.lemonappdev.konsist.helper.util.PathProvider.dataMainSourceSetDirecto
 import com.lemonappdev.konsist.helper.util.PathProvider.dataTestSourceSetDirectory
 import com.lemonappdev.konsist.helper.util.PathProvider.rootMainSourceSetDirectory
 import org.amshove.kluent.shouldBeEqualTo
-import org.amshove.kluent.shouldThrow
-import org.amshove.kluent.withMessage
 import org.junit.jupiter.api.Test
 
 class KoScopeFromModulesTest {
@@ -270,12 +268,11 @@ class KoScopeFromModulesTest {
     }
 
     @Test
-    fun `scopeFromModules throws exception if module names are empty`() {
+    fun `scopeFromModules is empty if module names are empty`() {
         // given
-        val func = { Konsist.scopeFromModules(emptyList()) }
+        val sut = Konsist.scopeFromModules(emptyList())
 
         // then
-        val message = "Module names are empty, but at least one module name should be provided."
-        func shouldThrow IllegalArgumentException::class withMessage message
+        sut.mapToFilePaths() shouldBeEqualTo emptyList()
     }
 }
