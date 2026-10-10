@@ -123,7 +123,8 @@ internal class KoParentDeclarationCore(
                 ?: getInterface(innerName, fullyQualifiedName, isAlias, containingFile)
                 ?: getTypeAlias(innerName, fullyQualifiedName, containingFile)
                 ?: if (isKotlinType(name)) {
-                    KoKotlinTypeDeclarationCore.getInstance(ktElement, containingDeclaration)
+                    // Pass only the type, without constructor arguments (`Foo(bar)`) or delegation (`Foo by bar`)
+                    ktUserType?.let { KoKotlinTypeDeclarationCore.getInstance(it, containingDeclaration) }
                 } else {
                     null
                 }
