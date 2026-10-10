@@ -221,10 +221,24 @@ internal class KoScopeCreatorCore : KoScopeCreator {
             return
         }
 
-        val moduleDirectory = File(getAbsolutePath(normalizedModuleName))
-        require(moduleDirectory.isDirectory) {
-            "Module does not exist: '$moduleName'. Directory not found: ${moduleDirectory.path}"
+        require(isModuleDirectory(normalizedModuleName)) {
+            "Module does not exist: '$moduleName'. Directory not found (module names are case-sensitive): " +
+                getAbsolutePath(normalizedModuleName)
         }
+    }
+
+    /**
+     * Checks each module path segment with exact letter case, because [File.isDirectory] ignores letter case on
+     * case-insensitive file systems (macOS, Windows), while module files are matched case-sensitively.
+     */
+    private fun isModuleDirectory(normalizedModuleName: String): Boolean {
+        var directory = File(projectRootPath)
+
+        return normalizedModuleName.split("/").all { segment ->
+            val exists = directory.list()?.contains(segment) == true
+            directory = File(directory, segment)
+            exists
+        } && directory.isDirectory
     }
 
     private fun getAbsolutePath(projectPath: String): String = "$projectRootPath$sep${projectPath.toOsSeparator()}"

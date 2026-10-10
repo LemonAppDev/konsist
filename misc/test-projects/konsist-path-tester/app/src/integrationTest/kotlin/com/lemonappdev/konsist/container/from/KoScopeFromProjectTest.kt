@@ -347,7 +347,7 @@ class KoScopeFromProjectTest {
         val func = { Konsist.scopeFromProject(moduleName = ":nonExisting") }
 
         // then
-        val message = "Module does not exist: ':nonExisting'. Directory not found: " +
+        val message = "Module does not exist: ':nonExisting'. Directory not found (module names are case-sensitive): " +
             "$projectRootDirectory/nonExisting".toOsSeparator()
         func shouldThrow IllegalArgumentException::class withMessage message
     }

@@ -9,24 +9,13 @@ object ModuleUtil {
     /**
      * Returns module name with "/" separators (regardless of OS), e.g. "feature/data", or "root" for the top-level module.
      */
-    fun getModuleName(
-        projectPath: String,
-        rootProjectPath: String,
-    ): String {
-        val projectName =
-            toMacOsSeparator(rootProjectPath)
-                .substringAfterLast("/")
-
+    fun getModuleName(projectPath: String): String {
         val moduleName =
             toMacOsSeparator(projectPath)
                 .substringBefore("/src/")
                 .substringAfter("/")
 
-        return if (moduleName == projectName || moduleName == "") {
-            ROOT_MODULE_NAME
-        } else {
-            moduleName
-        }
+        return moduleName.ifEmpty { ROOT_MODULE_NAME }
     }
 
     /**

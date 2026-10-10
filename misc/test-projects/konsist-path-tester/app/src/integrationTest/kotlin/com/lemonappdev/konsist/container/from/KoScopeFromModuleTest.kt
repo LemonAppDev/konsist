@@ -183,8 +183,19 @@ class KoScopeFromModuleTest {
         val func = { Konsist.scopeFromModule(":nonExisting") }
 
         // then
-        val message = "Module does not exist: ':nonExisting'. Directory not found: " +
+        val message = "Module does not exist: ':nonExisting'. Directory not found (module names are case-sensitive): " +
             "$projectRootDirectory/nonExisting".toOsSeparator()
+        func shouldThrow IllegalArgumentException::class withMessage message
+    }
+
+    @Test
+    fun `scopeFromModule throws exception if module name has different letter case`() {
+        // given
+        val func = { Konsist.scopeFromModule(":Data") }
+
+        // then
+        val message = "Module does not exist: ':Data'. Directory not found (module names are case-sensitive): " +
+            "$projectRootDirectory/Data".toOsSeparator()
         func shouldThrow IllegalArgumentException::class withMessage message
     }
 
