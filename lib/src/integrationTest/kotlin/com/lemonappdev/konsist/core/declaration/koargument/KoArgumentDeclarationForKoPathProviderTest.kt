@@ -4,6 +4,7 @@ import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
 import com.lemonappdev.konsist.api.ext.list.annotations
 import com.lemonappdev.konsist.api.ext.list.arguments
 import com.lemonappdev.konsist.api.ext.list.enumConstants
+import com.lemonappdev.konsist.helper.ext.toOsSeparator
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
@@ -22,7 +23,7 @@ class KoArgumentDeclarationForKoPathProviderTest {
         // then
         assertSoftly(sut.path) {
             startsWith("//") shouldBeEqualTo false
-            endsWith("koargument/snippet/forkopathprovider/argument-in-enum-const-file-path.kt") shouldBeEqualTo true
+            endsWith("koargument/snippet/forkopathprovider/argument-in-enum-const-file-path.kt".toOsSeparator()) shouldBeEqualTo true
         }
     }
 
@@ -40,8 +41,10 @@ class KoArgumentDeclarationForKoPathProviderTest {
         sut
             .projectPath
             .shouldBeEqualTo(
-                "/lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core/declaration/koargument/snippet/" +
-                    "forkopathprovider/argument-in-enum-const-project-file-path.kt",
+                (
+                    "/lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core/declaration/koargument/snippet/" +
+                        "forkopathprovider/argument-in-enum-const-project-file-path.kt"
+                ).toOsSeparator(),
             )
     }
 
@@ -96,7 +99,7 @@ class KoArgumentDeclarationForKoPathProviderTest {
         // then
         assertSoftly(sut.path) {
             startsWith("//") shouldBeEqualTo false
-            endsWith("koargument/snippet/forkopathprovider/argument-in-annotation-file-path.kt") shouldBeEqualTo true
+            endsWith("koargument/snippet/forkopathprovider/argument-in-annotation-file-path.kt".toOsSeparator()) shouldBeEqualTo true
         }
     }
 
@@ -114,8 +117,10 @@ class KoArgumentDeclarationForKoPathProviderTest {
         sut
             .projectPath
             .shouldBeEqualTo(
-                "/lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core/declaration/koargument/snippet/" +
-                    "forkopathprovider/argument-in-annotation-project-file-path.kt",
+                (
+                    "/lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core/declaration/koargument/snippet/" +
+                        "forkopathprovider/argument-in-annotation-project-file-path.kt"
+                ).toOsSeparator(),
             )
     }
 

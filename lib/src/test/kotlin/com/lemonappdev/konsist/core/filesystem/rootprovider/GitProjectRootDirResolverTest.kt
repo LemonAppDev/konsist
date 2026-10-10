@@ -1,5 +1,6 @@
 package com.lemonappdev.konsist.core.filesystem.rootprovider
 
+import com.lemonappdev.konsist.core.ext.toOsSeparator
 import com.lemonappdev.konsist.core.filesystem.PathVerifier
 import io.mockk.every
 import io.mockk.mockk
@@ -13,9 +14,9 @@ class GitProjectRootDirResolverTest {
         // given
         val file = mockk<File>()
         val pathVerifier = mockk<PathVerifier>()
-        every { pathVerifier.verifyPathIfExists(file, ".git/config") } returns true
-        every { pathVerifier.verifyPathIfExists(file, ".git/HEAD") } returns true
-        every { pathVerifier.verifyPathIfExists(file, ".git/refs") } returns true
+        every { pathVerifier.verifyPathIfExists(file, ".git/config".toOsSeparator()) } returns true
+        every { pathVerifier.verifyPathIfExists(file, ".git/HEAD".toOsSeparator()) } returns true
+        every { pathVerifier.verifyPathIfExists(file, ".git/refs".toOsSeparator()) } returns true
         val sut = GitProjectRootDirResolver(pathVerifier)
 
         // when

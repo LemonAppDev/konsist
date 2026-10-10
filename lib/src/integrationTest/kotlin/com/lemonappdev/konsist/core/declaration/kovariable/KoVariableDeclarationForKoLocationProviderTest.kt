@@ -7,6 +7,7 @@ import com.lemonappdev.konsist.api.ext.list.initBlocks
 import com.lemonappdev.konsist.api.ext.list.setters
 import com.lemonappdev.konsist.api.ext.list.variables
 import com.lemonappdev.konsist.api.provider.KoVariableProvider
+import com.lemonappdev.konsist.core.filesystem.PathProvider
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.params.ParameterizedTest
@@ -48,7 +49,7 @@ class KoVariableDeclarationForKoLocationProviderTest {
         // then
         val declaration = "Declaration:\nval fixtureVariable = \"\""
         assertSoftly(sut.locationWithText) {
-            startsWith("Location: /") shouldBeEqualTo true
+            startsWith("Location: ${PathProvider.rootProjectPath}") shouldBeEqualTo true
             contains(projectPath) shouldBeEqualTo true
             endsWith(declaration) shouldBeEqualTo true
         }

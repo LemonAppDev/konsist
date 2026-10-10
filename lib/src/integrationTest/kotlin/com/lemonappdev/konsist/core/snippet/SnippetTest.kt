@@ -17,12 +17,12 @@ class SnippetTest {
                 .walk()
                 .filter { it.isKotlinSnippetFile }
                 // Filter out snippets used to generate documentation
-                .filterNot { it.path.contains("lib/src/snippet/") }
+                .filterNot { it.invariantSeparatorsPath.contains("lib/src/snippet/") }
                 .toList()
 
         val snippetPaths: List<String> =
             snippets.map {
-                val path = it.path.removePrefix("../lib/")
+                val path = it.invariantSeparatorsPath.removePrefix("../lib/")
 
                 HyperlinkUtil.toHyperlink(path)
             }
@@ -107,6 +107,6 @@ class SnippetTest {
 
     companion object {
         private val File.isKotlinSnippetFile: Boolean get() = isFile && name.endsWith(FileExtension.KOTLIN_TEST_SNIPPET)
-        private val File.isKotlinNotSnippetFile: Boolean get() = isFile && !name.endsWith(FileExtension.KOTLIN_TEST_SNIPPET)
+        private val File.isKotlinNotSnippetFile: Boolean get() = isFile && name.endsWith(FileExtension.KOTLIN)
     }
 }

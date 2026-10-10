@@ -1,6 +1,7 @@
 package com.lemonappdev.konsist.core.declaration.koconstructor
 
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
+import com.lemonappdev.konsist.core.filesystem.PathProvider
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
@@ -41,7 +42,7 @@ class KoConstructorDeclarationForKoLocationProviderTest {
         // then
         val declaration = "Declaration:\n(val fixtureParameter: FixtureType)"
         assertSoftly(sut.locationWithText) {
-            startsWith("Location: /") shouldBeEqualTo true
+            startsWith("Location: ${PathProvider.rootProjectPath}") shouldBeEqualTo true
             contains(projectPath) shouldBeEqualTo true
             endsWith(declaration) shouldBeEqualTo true
         }
