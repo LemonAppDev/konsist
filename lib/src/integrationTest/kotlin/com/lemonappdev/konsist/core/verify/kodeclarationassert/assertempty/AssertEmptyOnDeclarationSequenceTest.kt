@@ -5,12 +5,13 @@ import com.lemonappdev.konsist.api.verify.assertEmpty
 import com.lemonappdev.konsist.api.verify.assertNotEmpty
 import com.lemonappdev.konsist.core.exception.KoAssertionFailedException
 import com.lemonappdev.konsist.core.filesystem.PathProvider
+import com.lemonappdev.konsist.core.util.HyperlinkUtil
 import org.amshove.kluent.shouldContain
 import org.amshove.kluent.shouldThrow
 import org.junit.jupiter.api.Test
 
 class AssertEmptyOnDeclarationSequenceTest {
-    private val rootPath = PathProvider.rootProjectPath
+    private val rootPathUrl = HyperlinkUtil.toHyperlink(PathProvider.rootProjectPath)
 
     @Test
     fun `declaration-assert-test-method-name-derived-from-junit-method-name`() {
@@ -103,7 +104,7 @@ class AssertEmptyOnDeclarationSequenceTest {
             sut.assertEmpty()
         } catch (e: Exception) {
             val filepath =
-                "file://$rootPath/lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core/verify/kodeclarationassert/" +
+                "$rootPathUrl/lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core/verify/kodeclarationassert/" +
                     "assertempty/snippet/declaration-assert-empty-error-on-list-containing-non-null-values.kt"
 
             e.message?.shouldContain(
@@ -130,7 +131,7 @@ class AssertEmptyOnDeclarationSequenceTest {
             sut.assertEmpty()
         } catch (e: Exception) {
             val filepath =
-                "file://$rootPath/lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core/verify/kodeclarationassert/" +
+                "$rootPathUrl/lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core/verify/kodeclarationassert/" +
                     "assertempty/snippet/declaration-assert-empty-error-on-list-containing-null-and-non-null-values.kt:1:25"
 
             e.message?.shouldContain(
@@ -156,7 +157,7 @@ class AssertEmptyOnDeclarationSequenceTest {
             sut.assertEmpty(additionalMessage = message)
         } catch (e: Exception) {
             val filepath =
-                "file://$rootPath/lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core/verify/kodeclarationassert/" +
+                "$rootPathUrl/lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core/verify/kodeclarationassert/" +
                     "assertempty/snippet/declaration-assert-empty-error-with-custom-message.kt:1:1"
 
             e.message?.shouldContain(
@@ -182,7 +183,7 @@ class AssertEmptyOnDeclarationSequenceTest {
             sut.assertEmpty(strict = true, additionalMessage = message)
         } catch (e: Exception) {
             val filepath =
-                "file://$rootPath/lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core/verify/kodeclarationassert/" +
+                "$rootPathUrl/lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core/verify/kodeclarationassert/" +
                     "assertempty/snippet/declaration-assert-empty-error-with-custom-message-and-strict-set-to-true.kt:1:1"
 
             e.message?.shouldContain(

@@ -107,6 +107,6 @@ class SnippetTest {
 
     companion object {
         private val File.isKotlinSnippetFile: Boolean get() = isFile && name.endsWith(FileExtension.KOTLIN_TEST_SNIPPET)
-        private val File.isKotlinNotSnippetFile: Boolean get() = isFile && !name.endsWith(FileExtension.KOTLIN_TEST_SNIPPET)
+        private val File.isKotlinNotSnippetFile: Boolean get() = isFile && name.endsWith(FileExtension.KOTLIN)
     }
 }

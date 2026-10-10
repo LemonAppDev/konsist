@@ -1,6 +1,7 @@
 package com.lemonappdev.konsist.core.declaration.kosetter
 
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
+import com.lemonappdev.konsist.core.filesystem.PathProvider
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
@@ -37,7 +38,7 @@ class KoSetterDeclarationForKoLocationProviderTest {
 
         // then
         assertSoftly(sut?.locationWithText) {
-            it?.startsWith("Location: /") shouldBeEqualTo true
+            it?.startsWith("Location: ${PathProvider.rootProjectPath}") shouldBeEqualTo true
             projectPath?.let { path -> it?.contains(path) } shouldBeEqualTo true
             it?.contains("set(value) {") shouldBeEqualTo true
         }

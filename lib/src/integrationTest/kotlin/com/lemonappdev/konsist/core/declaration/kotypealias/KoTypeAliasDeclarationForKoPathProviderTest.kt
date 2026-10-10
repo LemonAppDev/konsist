@@ -1,6 +1,7 @@
 package com.lemonappdev.konsist.core.declaration.kotypealias
 
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
+import com.lemonappdev.konsist.helper.ext.toOsSeparator
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
@@ -17,7 +18,7 @@ class KoTypeAliasDeclarationForKoPathProviderTest {
         // then
         assertSoftly(sut.path) {
             startsWith("//") shouldBeEqualTo false
-            endsWith("kotypealias/snippet/forkopathprovider/typealias-file-path.kt") shouldBeEqualTo true
+            endsWith("kotypealias/snippet/forkopathprovider/typealias-file-path.kt".toOsSeparator()) shouldBeEqualTo true
         }
     }
 
@@ -33,8 +34,10 @@ class KoTypeAliasDeclarationForKoPathProviderTest {
         sut
             .projectPath
             .shouldBeEqualTo(
-                "/lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core/declaration/kotypealias/snippet/" +
-                    "forkopathprovider/typealias-project-file-path.kt",
+                (
+                    "/lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core/declaration/kotypealias/snippet/" +
+                        "forkopathprovider/typealias-project-file-path.kt"
+                ).toOsSeparator(),
             )
     }
 
