@@ -132,7 +132,7 @@ class KoClassDeclarationForKoTestClassProviderTest {
         val sut = Konsist
             .scopeFromProduction("app")
             .classes()
-            .first()
+            .first { it.name == "AppClass" }
 
         // then
         assertSoftly(sut) {
