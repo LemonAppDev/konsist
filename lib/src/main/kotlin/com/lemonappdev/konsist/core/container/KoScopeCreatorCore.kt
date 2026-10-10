@@ -18,25 +18,6 @@ import java.io.File
 internal class KoScopeCreatorCore : KoScopeCreator {
     override val projectRootPath: String by lazy { PathProvider.rootProjectPath }
 
-    private val gradleRootBuildDirectoryRegex by lazy {
-        Regex("$projectRootPath/$GRADLE_BUILD_DIR/.*".toMacOsSeparator())
-    }
-    private val gradleModuleBuildDirectoryRegex by lazy {
-        Regex("$projectRootPath/.+/$GRADLE_BUILD_DIR/.*".toMacOsSeparator())
-    }
-    private val mavenRootBuildDirectoryRegex by lazy {
-        Regex("$projectRootPath/$MAVEN_BUILD_DIR/.*".toMacOsSeparator())
-    }
-    private val mavenModuleBuildDirectoryRegex by lazy {
-        Regex("$projectRootPath/.+/$MAVEN_BUILD_DIR/.*".toMacOsSeparator())
-    }
-    private val gradleDotGradleDirectoryRegex by lazy {
-        Regex("$projectRootPath/.gradle/.*".toMacOsSeparator())
-    }
-    private val gitDotDirectoryRegex by lazy {
-        Regex("$projectRootPath/.git/.*".toMacOsSeparator())
-    }
-
     override fun scopeFromProject(
         moduleName: String?,
         sourceSetName: String?,
@@ -92,7 +73,7 @@ internal class KoScopeCreatorCore : KoScopeCreator {
         coroutineScope {
             val localProjectKotlinFiles =
                 KoFileDeclarationProvider
-                    .getKoFileDeclarations { !isIgnoredPath(it.path.toMacOsSeparator()) }
+                    .getKoFileDeclarations()
                     .let {
                         if (ignoreBuildConfig) {
                             it.filterNot { file -> file.isBuildConfigFile() }
@@ -233,53 +214,6 @@ internal class KoScopeCreatorCore : KoScopeCreator {
 
     private fun getAbsolutePath(projectPath: String): String = "$projectRootPath$sep$projectPath"
 
-    /**
-     * Determines whether the provided path should be ignored during file scanning.
-     *
-     * The path is ignored if it belongs to:
-     * - a build tool directory (Gradle or Maven)
-     * - a repository configuration directory (e.g.git).
-     *
-     * Ignored paths are excluded from scope creation and code analysis.
-     */
-    private fun isIgnoredPath(path: String) = isBuildToolPath(path) || isRepositoryConfigPath(path)
-
-    /**
-     * Determines whether the provided path corresponds to a directory created by a build tool (Gradle, Maven)
-     */
-    private fun isBuildToolPath(path: String): Boolean = isBuildOrTargetPath(path) || isDotGradlePath(path)
-
-    /**
-     * Determines whether the provided path corresponds to a repository configuration directory.
-     */
-    private fun isRepositoryConfigPath(path: String): Boolean = path.matches(gitDotDirectoryRegex)
-
-    /**
-     * Determines if the given path is a build directory "build" for Gradle and "target" for Maven.
-     *
-     * Maven target directory and the Gradle build directory are used to store the results of the build process,
-     * such as compiled code and packaged artifacts. The specific names ("target" for Maven and "build" for Gradle)
-     * are conventions established by each build tool to organize and manage these files. Developers working with
-     * these tools need to be aware of these directories to locate and work with the output of their builds.
-     */
-    private fun isBuildOrTargetPath(path: String): Boolean =
-        path.matches(gradleRootBuildDirectoryRegex) ||
-            path.matches(gradleModuleBuildDirectoryRegex) ||
-            path.matches(mavenRootBuildDirectoryRegex) ||
-            path.matches(mavenModuleBuildDirectoryRegex)
-
-    /**
-     * Determines if the given path is a directory ".gradle".
-     * This directory is not intended to store project files however Gradle can cache some Kotlin files there
-     * (.gradle/caches directory).
-     *
-     * The .gradle directory is a directory created and used by the Gradle build tool. It stores various files and
-     * caches related to the build process, including the Gradle Wrapper scripts, dependency caches, and build-related
-     * metadata. This directory helps improve the efficiency of Gradle builds by storing and managing essential
-     * information and artifacts.
-     */
-    private fun isDotGradlePath(path: String): Boolean = path.matches(gradleDotGradleDirectoryRegex)
-
     private fun isTestSourceSet(name: String): Boolean {
         val lowercaseName = name.lowercase()
         return lowercaseName.substringAfter(':').matches(Regex(".*$TEST_NAME_IN_PATH.*"))
@@ -300,7 +234,7 @@ internal class KoScopeCreatorCore : KoScopeCreator {
     private fun getKoFiles(files: List<File>) =
         runBlocking {
             KoFileDeclarationProvider
-                .getKoFileDeclarations { !isIgnoredPath(it.path.toMacOsSeparator()) }
+                .getKoFileDeclarations()
                 .filter {
                     files.any { file ->
                         file.path == it.path
@@ -311,8 +245,5 @@ internal class KoScopeCreatorCore : KoScopeCreator {
     companion object {
         private const val TEST_NAME_IN_PATH = "test"
         private const val ROOT_MODULE_NAME = "root"
-
-        private const val GRADLE_BUILD_DIR = "build"
-        private const val MAVEN_BUILD_DIR = "target"
     }
 }

@@ -4,6 +4,7 @@ import com.lemonappdev.konsist.api.declaration.KoFileDeclaration
 import com.lemonappdev.konsist.core.ext.isKotlinFile
 import com.lemonappdev.konsist.core.ext.toKoFile
 import com.lemonappdev.konsist.core.filesystem.PathProvider
+import com.lemonappdev.konsist.core.filesystem.ProjectDirectoryFilter
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
@@ -15,6 +16,8 @@ import java.io.File
 
 internal object KoFileDeclarationProvider {
     private val projectRootDir: File = File(PathProvider.rootProjectPath)
+
+    private val projectDirectoryFilter = ProjectDirectoryFilter(projectRootDir)
 
     private val mutex: Mutex = Mutex()
 
@@ -29,6 +32,7 @@ internal object KoFileDeclarationProvider {
     /**
      * Retrieves a list of [KoFileDeclaration]s asynchronously from the project's root directory.
      * This function scans the directory for Kotlin files and parses them to obtain list of KoFileDeclaration.
+     * Directories ignored by [ProjectDirectoryFilter] (build outputs, hidden directories, node_modules) are not scanned.
      *
      * The parsing operations are performed concurrently.
      *
@@ -45,19 +49,18 @@ internal object KoFileDeclarationProvider {
      * 4. getKoFileDeclarations  started at Thread 1 completes
      * 5. getKoFileDeclarations  started at Thread 2 completes
      *
-     * @param filter - Block to filter files. Return true to include the file.
      * @return A list of [KoFileDeclaration]s representing the parsed Kotlin files.
      * @throws Exception if there's an issue accessing the file system or parsing the files.
      */
-    suspend fun getKoFileDeclarations(filter: ((File) -> Boolean)? = null): List<KoFileDeclaration> =
+    suspend fun getKoFileDeclarations(): List<KoFileDeclaration> =
         coroutineScope {
             val currentDeferred: Deferred<List<KoFileDeclaration>> =
                 mutex.withLock {
                     createKoFilesDeclarationDeferred ?: async(Dispatchers.IO) {
                         projectRootDir
                             .walk()
+                            .onEnter { !projectDirectoryFilter.isIgnored(it) }
                             .filter { it.isKotlinFile }
-                            .filter { filter == null || filter(it) }
                             .map { async { parseKotlinFile(it) } }
                             .toList()
                             .awaitAll()
