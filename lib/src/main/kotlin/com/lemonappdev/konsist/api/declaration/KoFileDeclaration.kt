@@ -55,6 +55,27 @@ interface KoFileDeclaration :
     KoTypeAliasProvider,
     KoCompanionObjectProvider {
     /**
+     * Name of the file without extension e.g. `SampleClass` for `SampleClass.kt` file.
+     * Use [nameWithExtension] to get the name with extension.
+     */
+    override val name: String
+
+    /**
+     * Checks whether the file name is equal to the specified text.
+     * The text can contain the file extension e.g. both `SampleClass` and `SampleClass.kt` match the `SampleClass.kt` file.
+     *
+     * @param text The text to compare with. Can be the file name with or without extension.
+     * @param ignoreCase Specifies whether the comparison should ignore case.
+     *        If `true`, the comparison will be case-insensitive.
+     *        If `false`, the comparison will consider case sensitivity.
+     * @return `true` if the file name (with or without extension) equals the specified text, `false` otherwise.
+     */
+    override fun hasName(
+        text: String,
+        ignoreCase: Boolean,
+    ): Boolean
+
+    /**
      * Indicates whether some other element is "equal to" this one.
      *
      * @param other the element to compare.
