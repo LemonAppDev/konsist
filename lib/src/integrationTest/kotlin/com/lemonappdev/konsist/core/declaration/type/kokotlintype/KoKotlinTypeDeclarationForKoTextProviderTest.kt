@@ -54,6 +54,54 @@ class KoKotlinTypeDeclarationForKoTextProviderTest {
         }
     }
 
+    @Test
+    fun `kotlin-type-text-with-constructor-arguments`() {
+        // given
+        val sut =
+            getSnippetFile("kotlin-type-text-with-constructor-arguments")
+                .classes()
+                .first()
+                .parents()
+                .firstOrNull()
+                ?.sourceDeclaration
+                ?.asKotlinTypeDeclaration()
+
+        // then
+        sut?.text shouldBeEqualTo "RuntimeException"
+    }
+
+    @Test
+    fun `kotlin-type-text-with-type-arguments`() {
+        // given
+        val sut =
+            getSnippetFile("kotlin-type-text-with-type-arguments")
+                .classes()
+                .first()
+                .parents()
+                .firstOrNull()
+                ?.sourceDeclaration
+                ?.asKotlinTypeDeclaration()
+
+        // then
+        sut?.text shouldBeEqualTo "Comparable<SampleClass>"
+    }
+
+    @Test
+    fun `kotlin-type-text-with-delegation`() {
+        // given
+        val sut =
+            getSnippetFile("kotlin-type-text-with-delegation")
+                .classes()
+                .first()
+                .parents()
+                .firstOrNull()
+                ?.sourceDeclaration
+                ?.asKotlinTypeDeclaration()
+
+        // then
+        sut?.text shouldBeEqualTo "CharSequence"
+    }
+
     private fun getSnippetFile(fileName: String) =
         TestSnippetProvider.getSnippetKoScope("core/declaration/type/kokotlintype/snippet/forkotextprovider/", fileName)
 }
