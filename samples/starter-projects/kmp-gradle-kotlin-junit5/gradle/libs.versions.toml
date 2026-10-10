@@ -2,7 +2,7 @@
 kotlin = "2.4.21"
 ktor = "3.6.0"
 kotlinx-html = "0.12.0"
-konsist = "0.18.0"
+konsist = "0.18.1"
 kotlin-wrappers = "18.3.1-pre.839"
 kotlin-emotion = "11.13.5-pre.839"
 material = "1.14.0"
