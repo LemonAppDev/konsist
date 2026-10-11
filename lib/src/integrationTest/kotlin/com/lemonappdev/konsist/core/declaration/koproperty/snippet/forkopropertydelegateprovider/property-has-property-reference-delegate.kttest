@@ -1,0 +1,3 @@
+val fixtureProperty by ::otherProperty
+
+val otherProperty = 0

@@ -1,0 +1,3 @@
+val lock = Any()
+
+val fixtureProperty by lazy(lock) { 0 }

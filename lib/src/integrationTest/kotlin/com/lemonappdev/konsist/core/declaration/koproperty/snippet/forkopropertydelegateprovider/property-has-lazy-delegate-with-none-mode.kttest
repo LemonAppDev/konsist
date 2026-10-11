@@ -1,0 +1,1 @@
+val fixtureProperty by lazy(LazyThreadSafetyMode.NONE) { 0 }

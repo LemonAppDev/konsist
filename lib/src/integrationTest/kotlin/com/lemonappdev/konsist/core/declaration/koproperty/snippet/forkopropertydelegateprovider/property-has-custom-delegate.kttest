@@ -1,0 +1,3 @@
+val fixtureProperty by lazyValue()
+
+fun lazyValue() = lazy { 0 }

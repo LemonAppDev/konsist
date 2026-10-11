@@ -1,0 +1,5 @@
+class SampleClass {
+    val fixtureProperty by this::otherProperty
+
+    val otherProperty = 0
+}
