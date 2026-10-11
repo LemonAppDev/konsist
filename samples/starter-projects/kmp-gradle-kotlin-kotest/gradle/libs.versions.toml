@@ -31,3 +31,4 @@ kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref =
 kotlinJvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 androidApplication = { id = "com.android.application", version.ref = "android-gradle" }
 androidLibrary = { id = "com.android.library", version.ref = "android-gradle" }
+kotest = { id = "io.kotest", version.ref = "kotest" }

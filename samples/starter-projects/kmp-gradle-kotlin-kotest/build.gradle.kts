@@ -1,6 +1,6 @@
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
-    id("io.kotest.multiplatform") version "6.0.0-LOCAL"
+    alias(libs.plugins.kotest)
 }
 
 group = "org.example"
