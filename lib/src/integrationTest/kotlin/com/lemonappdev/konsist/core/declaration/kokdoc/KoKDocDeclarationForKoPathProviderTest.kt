@@ -51,10 +51,10 @@ class KoKDocDeclarationForKoPathProviderTest {
 
         // then
         assertSoftly(sut) {
-            resideInPath("..snippet..", true) shouldBeEqualTo true
-            resideInPath("..kokdoc/snippet..", true) shouldBeEqualTo true
-            resideInPath("..kokdoc..kdoc-reside-in-file-path.kt", true) shouldBeEqualTo true
-            resideInPath("kokdoc/snippet/", true) shouldBeEqualTo false
+            residesInPath("..snippet..", true) shouldBeEqualTo true
+            residesInPath("..kokdoc/snippet..", true) shouldBeEqualTo true
+            residesInPath("..kokdoc..kdoc-reside-in-file-path.kt", true) shouldBeEqualTo true
+            residesInPath("kokdoc/snippet/", true) shouldBeEqualTo false
         }
     }
 
@@ -68,10 +68,10 @@ class KoKDocDeclarationForKoPathProviderTest {
 
         // then
         assertSoftly(sut) {
-            resideInPath("..snippet..", false) shouldBeEqualTo true
-            resideInPath("..kokdoc/snippet..", false) shouldBeEqualTo true
-            resideInPath("..kokdoc..kdoc-reside-in-project-file-path.kt", false) shouldBeEqualTo true
-            resideInPath("kokdoc/snippet/", false) shouldBeEqualTo false
+            residesInPath("..snippet..", false) shouldBeEqualTo true
+            residesInPath("..kokdoc/snippet..", false) shouldBeEqualTo true
+            residesInPath("..kokdoc..kdoc-reside-in-project-file-path.kt", false) shouldBeEqualTo true
+            residesInPath("kokdoc/snippet/", false) shouldBeEqualTo false
         }
     }
 

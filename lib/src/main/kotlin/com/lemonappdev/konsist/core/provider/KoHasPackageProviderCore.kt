@@ -20,5 +20,5 @@ internal interface KoHasPackageProviderCore :
     override fun hasPackage(name: String): Boolean =
         packagee
             ?.name
-            ?.let { LocationUtil.resideInLocation(name, it) } ?: false
+            ?.let { LocationUtil.residesInLocation(name, it) } ?: false
 }

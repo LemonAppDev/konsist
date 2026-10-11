@@ -61,10 +61,10 @@ class KoTypeParameterDeclarationForKoPathProviderTest {
 
         // then
         assertSoftly(sut) {
-            it?.resideInPath("..snippet..", true) shouldBeEqualTo true
-            it?.resideInPath("..kotypeparameter/snippet..", true) shouldBeEqualTo true
-            it?.resideInPath("..kotypeparameter..function-type-parameter-path.kt", true) shouldBeEqualTo true
-            it?.resideInPath("kotypeparameter/snippet/", true) shouldBeEqualTo false
+            it?.residesInPath("..snippet..", true) shouldBeEqualTo true
+            it?.residesInPath("..kotypeparameter/snippet..", true) shouldBeEqualTo true
+            it?.residesInPath("..kotypeparameter..function-type-parameter-path.kt", true) shouldBeEqualTo true
+            it?.residesInPath("kotypeparameter/snippet/", true) shouldBeEqualTo false
         }
     }
 
@@ -80,10 +80,10 @@ class KoTypeParameterDeclarationForKoPathProviderTest {
 
         // then
         assertSoftly(sut) {
-            it?.resideInPath("..snippet..", false) shouldBeEqualTo true
-            it?.resideInPath("..kotypeparameter/snippet..", false) shouldBeEqualTo true
-            it?.resideInPath("..kotypeparameter..function-type-parameter-path.kt", false) shouldBeEqualTo true
-            it?.resideInPath("kotypeparameter/snippet/", false) shouldBeEqualTo false
+            it?.residesInPath("..snippet..", false) shouldBeEqualTo true
+            it?.residesInPath("..kotypeparameter/snippet..", false) shouldBeEqualTo true
+            it?.residesInPath("..kotypeparameter..function-type-parameter-path.kt", false) shouldBeEqualTo true
+            it?.residesInPath("kotypeparameter/snippet/", false) shouldBeEqualTo false
         }
     }
 
@@ -143,10 +143,10 @@ class KoTypeParameterDeclarationForKoPathProviderTest {
 
         // then
         assertSoftly(sut) {
-            it?.resideInPath("..snippet..", true) shouldBeEqualTo true
-            it?.resideInPath("..kotypeparameter/snippet..", true) shouldBeEqualTo true
-            it?.resideInPath("..kotypeparameter..class-type-parameter-path.kt", true) shouldBeEqualTo true
-            it?.resideInPath("kotypeparameter/snippet/", true) shouldBeEqualTo false
+            it?.residesInPath("..snippet..", true) shouldBeEqualTo true
+            it?.residesInPath("..kotypeparameter/snippet..", true) shouldBeEqualTo true
+            it?.residesInPath("..kotypeparameter..class-type-parameter-path.kt", true) shouldBeEqualTo true
+            it?.residesInPath("kotypeparameter/snippet/", true) shouldBeEqualTo false
         }
     }
 
@@ -164,10 +164,10 @@ class KoTypeParameterDeclarationForKoPathProviderTest {
 
         // then
         assertSoftly(sut) {
-            it?.resideInPath("..snippet..", false) shouldBeEqualTo true
-            it?.resideInPath("..kotypeparameter/snippet..", false) shouldBeEqualTo true
-            it?.resideInPath("..kotypeparameter..class-type-parameter-path.kt", false) shouldBeEqualTo true
-            it?.resideInPath("kotypeparameter/snippet/", false) shouldBeEqualTo false
+            it?.residesInPath("..snippet..", false) shouldBeEqualTo true
+            it?.residesInPath("..kotypeparameter/snippet..", false) shouldBeEqualTo true
+            it?.residesInPath("..kotypeparameter..class-type-parameter-path.kt", false) shouldBeEqualTo true
+            it?.residesInPath("kotypeparameter/snippet/", false) shouldBeEqualTo false
         }
     }
 
@@ -224,10 +224,10 @@ class KoTypeParameterDeclarationForKoPathProviderTest {
 
         // then
         assertSoftly(sut) {
-            it?.resideInPath("..snippet..", true) shouldBeEqualTo true
-            it?.resideInPath("..kotypeparameter/snippet..", true) shouldBeEqualTo true
-            it?.resideInPath("..kotypeparameter..interface-type-parameter-path.kt", true) shouldBeEqualTo true
-            it?.resideInPath("kotypeparameter/snippet/", true) shouldBeEqualTo false
+            it?.residesInPath("..snippet..", true) shouldBeEqualTo true
+            it?.residesInPath("..kotypeparameter/snippet..", true) shouldBeEqualTo true
+            it?.residesInPath("..kotypeparameter..interface-type-parameter-path.kt", true) shouldBeEqualTo true
+            it?.residesInPath("kotypeparameter/snippet/", true) shouldBeEqualTo false
         }
     }
 
@@ -244,10 +244,10 @@ class KoTypeParameterDeclarationForKoPathProviderTest {
 
         // then
         assertSoftly(sut) {
-            it?.resideInPath("..snippet..", false) shouldBeEqualTo true
-            it?.resideInPath("..kotypeparameter/snippet..", false) shouldBeEqualTo true
-            it?.resideInPath("..kotypeparameter..interface-type-parameter-path.kt", false) shouldBeEqualTo true
-            it?.resideInPath("kotypeparameter/snippet/", false) shouldBeEqualTo false
+            it?.residesInPath("..snippet..", false) shouldBeEqualTo true
+            it?.residesInPath("..kotypeparameter/snippet..", false) shouldBeEqualTo true
+            it?.residesInPath("..kotypeparameter..interface-type-parameter-path.kt", false) shouldBeEqualTo true
+            it?.residesInPath("kotypeparameter/snippet/", false) shouldBeEqualTo false
         }
     }
 
@@ -301,10 +301,10 @@ class KoTypeParameterDeclarationForKoPathProviderTest {
 
         // then
         assertSoftly(sut) {
-            it?.resideInPath("..snippet..", true) shouldBeEqualTo true
-            it?.resideInPath("..kotypeparameter/snippet..", true) shouldBeEqualTo true
-            it?.resideInPath("..kotypeparameter..property-type-parameter-path.kt", true) shouldBeEqualTo true
-            it?.resideInPath("kotypeparameter/snippet/", true) shouldBeEqualTo false
+            it?.residesInPath("..snippet..", true) shouldBeEqualTo true
+            it?.residesInPath("..kotypeparameter/snippet..", true) shouldBeEqualTo true
+            it?.residesInPath("..kotypeparameter..property-type-parameter-path.kt", true) shouldBeEqualTo true
+            it?.residesInPath("kotypeparameter/snippet/", true) shouldBeEqualTo false
         }
     }
 
@@ -320,10 +320,10 @@ class KoTypeParameterDeclarationForKoPathProviderTest {
 
         // then
         assertSoftly(sut) {
-            it?.resideInPath("..snippet..", false) shouldBeEqualTo true
-            it?.resideInPath("..kotypeparameter/snippet..", false) shouldBeEqualTo true
-            it?.resideInPath("..kotypeparameter..property-type-parameter-path.kt", false) shouldBeEqualTo true
-            it?.resideInPath("kotypeparameter/snippet/", false) shouldBeEqualTo false
+            it?.residesInPath("..snippet..", false) shouldBeEqualTo true
+            it?.residesInPath("..kotypeparameter/snippet..", false) shouldBeEqualTo true
+            it?.residesInPath("..kotypeparameter..property-type-parameter-path.kt", false) shouldBeEqualTo true
+            it?.residesInPath("kotypeparameter/snippet/", false) shouldBeEqualTo false
         }
     }
 
@@ -386,10 +386,10 @@ class KoTypeParameterDeclarationForKoPathProviderTest {
 
         // then
         assertSoftly(sut) {
-            it?.resideInPath("..snippet..", true) shouldBeEqualTo true
-            it?.resideInPath("..kotypeparameter/snippet..", true) shouldBeEqualTo true
-            it?.resideInPath("..kotypeparameter..typealias-type-parameter-path.kt", true) shouldBeEqualTo true
-            it?.resideInPath("kotypeparameter/snippet/", true) shouldBeEqualTo false
+            it?.residesInPath("..snippet..", true) shouldBeEqualTo true
+            it?.residesInPath("..kotypeparameter/snippet..", true) shouldBeEqualTo true
+            it?.residesInPath("..kotypeparameter..typealias-type-parameter-path.kt", true) shouldBeEqualTo true
+            it?.residesInPath("kotypeparameter/snippet/", true) shouldBeEqualTo false
         }
     }
 
@@ -408,10 +408,10 @@ class KoTypeParameterDeclarationForKoPathProviderTest {
 
         // then
         assertSoftly(sut) {
-            it?.resideInPath("..snippet..", false) shouldBeEqualTo true
-            it?.resideInPath("..kotypeparameter/snippet..", false) shouldBeEqualTo true
-            it?.resideInPath("..kotypeparameter..typealias-type-parameter-path.kt", false) shouldBeEqualTo true
-            it?.resideInPath("kotypeparameter/snippet/", false) shouldBeEqualTo false
+            it?.residesInPath("..snippet..", false) shouldBeEqualTo true
+            it?.residesInPath("..kotypeparameter/snippet..", false) shouldBeEqualTo true
+            it?.residesInPath("..kotypeparameter..typealias-type-parameter-path.kt", false) shouldBeEqualTo true
+            it?.residesInPath("kotypeparameter/snippet/", false) shouldBeEqualTo false
         }
     }
 

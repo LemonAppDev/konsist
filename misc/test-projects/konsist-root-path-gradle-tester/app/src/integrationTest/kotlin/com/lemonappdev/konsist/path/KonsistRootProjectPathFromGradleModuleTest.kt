@@ -37,7 +37,7 @@ class KonsistRootProjectPathFromGradleModuleTest {
     }
 
     @Test
-    fun `resideInPath with absolutePath true resolved from Gradle module`() {
+    fun `residesInPath with absolutePath true resolved from Gradle module`() {
         // given
         val sut =
             Konsist
@@ -46,7 +46,7 @@ class KonsistRootProjectPathFromGradleModuleTest {
                 .first { it.name == "KonsistRootProjectPathFromGradleModuleTest" }
 
         // then
-        sut.resideInPath("${Konsist.projectRootPath}/app/..", absolutePath = true) shouldBeEqualTo true
-        sut.resideInPath("${Konsist.projectRootPath}/src/..", absolutePath = true) shouldBeEqualTo false
+        sut.residesInPath("${Konsist.projectRootPath}/app/..", absolutePath = true) shouldBeEqualTo true
+        sut.residesInPath("${Konsist.projectRootPath}/src/..", absolutePath = true) shouldBeEqualTo false
     }
 }

@@ -71,10 +71,10 @@ class KoVariableDeclarationForKoPathProviderTest {
 
         // then
         assertSoftly(sut) {
-            resideInPath("..snippet..", true) shouldBeEqualTo true
-            resideInPath("..kovariable/snippet..", true) shouldBeEqualTo true
-            resideInPath("..kovariable..$name.kt", true) shouldBeEqualTo true
-            resideInPath("kovariable/snippet/", true) shouldBeEqualTo false
+            residesInPath("..snippet..", true) shouldBeEqualTo true
+            residesInPath("..kovariable/snippet..", true) shouldBeEqualTo true
+            residesInPath("..kovariable..$name.kt", true) shouldBeEqualTo true
+            residesInPath("kovariable/snippet/", true) shouldBeEqualTo false
         }
     }
 
@@ -92,10 +92,10 @@ class KoVariableDeclarationForKoPathProviderTest {
 
         // then
         assertSoftly(sut) {
-            resideInPath("..snippet..", false) shouldBeEqualTo true
-            resideInPath("..kovariable/snippet..", false) shouldBeEqualTo true
-            resideInPath("..kovariable..$name.kt", false) shouldBeEqualTo true
-            resideInPath("kovariable/snippet/", false) shouldBeEqualTo false
+            residesInPath("..snippet..", false) shouldBeEqualTo true
+            residesInPath("..kovariable/snippet..", false) shouldBeEqualTo true
+            residesInPath("..kovariable..$name.kt", false) shouldBeEqualTo true
+            residesInPath("kovariable/snippet/", false) shouldBeEqualTo false
         }
     }
 

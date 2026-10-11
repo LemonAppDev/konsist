@@ -34,7 +34,7 @@ fun <T : KoPathProvider> List<T>.withPath(
     filter {
         when {
             paths.isEmpty() -> true
-            else -> paths.any { path -> it.resideInPath(path, absolutePath) }
+            else -> paths.any { path -> it.residesInPath(path, absolutePath) }
         }
     }
 
@@ -70,7 +70,7 @@ fun <T : KoPathProvider> List<T>.withoutPath(
     filter {
         when {
             paths.isEmpty() -> false
-            else -> paths.none { path -> it.resideInPath(path, absolutePath) }
+            else -> paths.none { path -> it.residesInPath(path, absolutePath) }
         }
     }
 

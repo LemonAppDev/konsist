@@ -51,10 +51,10 @@ class KoClassDeclarationForKoPathProviderTest {
 
         // then
         assertSoftly(sut) {
-            resideInPath("..snippet..", true) shouldBeEqualTo true
-            resideInPath("..koclass/snippet..", true) shouldBeEqualTo true
-            resideInPath("..koclass..class-reside-in-file-path.kt", true) shouldBeEqualTo true
-            resideInPath("koclass/snippet/", true) shouldBeEqualTo false
+            residesInPath("..snippet..", true) shouldBeEqualTo true
+            residesInPath("..koclass/snippet..", true) shouldBeEqualTo true
+            residesInPath("..koclass..class-reside-in-file-path.kt", true) shouldBeEqualTo true
+            residesInPath("koclass/snippet/", true) shouldBeEqualTo false
         }
     }
 
@@ -68,10 +68,26 @@ class KoClassDeclarationForKoPathProviderTest {
 
         // then
         assertSoftly(sut) {
-            resideInPath("..snippet..", false) shouldBeEqualTo true
-            resideInPath("..koclass/snippet..", false) shouldBeEqualTo true
-            resideInPath("..koclass..class-reside-in-project-file-path.kt", false) shouldBeEqualTo true
-            resideInPath("koclass/snippet/", false) shouldBeEqualTo false
+            residesInPath("..snippet..", false) shouldBeEqualTo true
+            residesInPath("..koclass/snippet..", false) shouldBeEqualTo true
+            residesInPath("..koclass..class-reside-in-project-file-path.kt", false) shouldBeEqualTo true
+            residesInPath("koclass/snippet/", false) shouldBeEqualTo false
+        }
+    }
+
+    @Suppress("DEPRECATION")
+    @Test
+    fun `deprecated resideInPath delegates to residesInPath`() {
+        // given
+        val sut =
+            getSnippetFile("class-reside-in-project-file-path")
+                .classes()
+                .first()
+
+        // then
+        assertSoftly(sut) {
+            resideInPath("..koclass/snippet..") shouldBeEqualTo true
+            resideInPath("koclass/snippet/") shouldBeEqualTo false
         }
     }
 

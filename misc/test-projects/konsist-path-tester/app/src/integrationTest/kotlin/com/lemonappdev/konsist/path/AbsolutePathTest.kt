@@ -147,12 +147,12 @@ class AbsolutePathTest {
     }
 
     @Test
-    fun `resideInPath with absolutePath true`() {
+    fun `residesInPath with absolutePath true`() {
         // given
         val sut = files.first { it.name == "LibClass" }
 
         // then
-        sut.resideInPath("$dataMainSourceSetDirectory/..", absolutePath = true) shouldBeEqualTo true
-        sut.resideInPath("$projectRootDirectory/app/..", absolutePath = true) shouldBeEqualTo false
+        sut.residesInPath("$dataMainSourceSetDirectory/..", absolutePath = true) shouldBeEqualTo true
+        sut.residesInPath("$projectRootDirectory/app/..", absolutePath = true) shouldBeEqualTo false
     }
 }

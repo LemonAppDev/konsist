@@ -51,10 +51,10 @@ class KoInterfaceDeclarationForKoPathProviderTest {
 
         // then
         assertSoftly(sut) {
-            resideInPath("..snippet..", true) shouldBeEqualTo true
-            resideInPath("..kointerface/snippet..", true) shouldBeEqualTo true
-            resideInPath("..kointerface..interface-reside-in-file-path.kt", true) shouldBeEqualTo true
-            resideInPath("kointerface/snippet/", true) shouldBeEqualTo false
+            residesInPath("..snippet..", true) shouldBeEqualTo true
+            residesInPath("..kointerface/snippet..", true) shouldBeEqualTo true
+            residesInPath("..kointerface..interface-reside-in-file-path.kt", true) shouldBeEqualTo true
+            residesInPath("kointerface/snippet/", true) shouldBeEqualTo false
         }
     }
 
@@ -68,10 +68,10 @@ class KoInterfaceDeclarationForKoPathProviderTest {
 
         // then
         assertSoftly(sut) {
-            resideInPath("..snippet..", false) shouldBeEqualTo true
-            resideInPath("..kointerface/snippet..", false) shouldBeEqualTo true
-            resideInPath("..kointerface..interface-reside-in-project-file-path.kt", false) shouldBeEqualTo true
-            resideInPath("kointerface/snippet/", false) shouldBeEqualTo false
+            residesInPath("..snippet..", false) shouldBeEqualTo true
+            residesInPath("..kointerface/snippet..", false) shouldBeEqualTo true
+            residesInPath("..kointerface..interface-reside-in-project-file-path.kt", false) shouldBeEqualTo true
+            residesInPath("kointerface/snippet/", false) shouldBeEqualTo false
         }
     }
 

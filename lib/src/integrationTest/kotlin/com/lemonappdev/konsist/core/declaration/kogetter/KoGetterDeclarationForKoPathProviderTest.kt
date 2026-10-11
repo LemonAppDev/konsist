@@ -54,10 +54,10 @@ class KoGetterDeclarationForKoPathProviderTest {
 
         // then
         assertSoftly {
-            sut?.resideInPath("..snippet..", true) shouldBeEqualTo true
-            sut?.resideInPath("..kogetter/snippet..", true) shouldBeEqualTo true
-            sut?.resideInPath("..kogetter..getter-reside-in-file-path.kt", true) shouldBeEqualTo true
-            sut?.resideInPath("kogetter/snippet/", true) shouldBeEqualTo false
+            sut?.residesInPath("..snippet..", true) shouldBeEqualTo true
+            sut?.residesInPath("..kogetter/snippet..", true) shouldBeEqualTo true
+            sut?.residesInPath("..kogetter..getter-reside-in-file-path.kt", true) shouldBeEqualTo true
+            sut?.residesInPath("kogetter/snippet/", true) shouldBeEqualTo false
         }
     }
 
@@ -72,10 +72,10 @@ class KoGetterDeclarationForKoPathProviderTest {
 
         // then
         assertSoftly {
-            sut?.resideInPath("..snippet..", false) shouldBeEqualTo true
-            sut?.resideInPath("..kogetter/snippet..", false) shouldBeEqualTo true
-            sut?.resideInPath("..kogetter..getter-reside-in-project-file-path.kt", false) shouldBeEqualTo true
-            sut?.resideInPath("kogetter/snippet/", false) shouldBeEqualTo false
+            sut?.residesInPath("..snippet..", false) shouldBeEqualTo true
+            sut?.residesInPath("..kogetter/snippet..", false) shouldBeEqualTo true
+            sut?.residesInPath("..kogetter..getter-reside-in-project-file-path.kt", false) shouldBeEqualTo true
+            sut?.residesInPath("kogetter/snippet/", false) shouldBeEqualTo false
         }
     }
 

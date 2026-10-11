@@ -34,7 +34,7 @@ fun <T : KoModuleProvider> List<T>.withModule(names: Collection<String>): List<T
     filter {
         when {
             names.isEmpty() -> true
-            else -> names.any { module -> it.resideInModule(module) }
+            else -> names.any { module -> it.residesInModule(module) }
         }
     }
 
@@ -70,6 +70,6 @@ fun <T : KoModuleProvider> List<T>.withoutModule(names: Collection<String>): Lis
     filterNot {
         when {
             names.isEmpty() -> true
-            else -> names.any { module -> it.resideInModule(module) }
+            else -> names.any { module -> it.residesInModule(module) }
         }
     }

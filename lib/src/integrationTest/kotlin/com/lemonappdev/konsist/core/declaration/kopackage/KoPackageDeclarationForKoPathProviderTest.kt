@@ -51,10 +51,10 @@ class KoPackageDeclarationForKoPathProviderTest {
 
         // then
         assertSoftly(sut) {
-            resideInPath("..snippet..", true) shouldBeEqualTo true
-            resideInPath("..kopackage/snippet..", true) shouldBeEqualTo true
-            resideInPath("..kopackage..package-reside-in-file-path.kt", true) shouldBeEqualTo true
-            resideInPath("kopackage/snippet/", true) shouldBeEqualTo false
+            residesInPath("..snippet..", true) shouldBeEqualTo true
+            residesInPath("..kopackage/snippet..", true) shouldBeEqualTo true
+            residesInPath("..kopackage..package-reside-in-file-path.kt", true) shouldBeEqualTo true
+            residesInPath("kopackage/snippet/", true) shouldBeEqualTo false
         }
     }
 
@@ -68,10 +68,10 @@ class KoPackageDeclarationForKoPathProviderTest {
 
         // then
         assertSoftly(sut) {
-            resideInPath("..snippet..", false) shouldBeEqualTo true
-            resideInPath("..kopackage/snippet..", false) shouldBeEqualTo true
-            resideInPath("..kopackage..package-reside-in-project-file-path.kt", false) shouldBeEqualTo true
-            resideInPath("kopackage/snippet/", false) shouldBeEqualTo false
+            residesInPath("..snippet..", false) shouldBeEqualTo true
+            residesInPath("..kopackage/snippet..", false) shouldBeEqualTo true
+            residesInPath("..kopackage..package-reside-in-project-file-path.kt", false) shouldBeEqualTo true
+            residesInPath("kopackage/snippet/", false) shouldBeEqualTo false
         }
     }
 

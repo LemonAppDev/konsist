@@ -60,7 +60,7 @@ class SpringTestSnippets {
             .scopeFromProject()
             .classes()
             .withAnnotationOf(RestController::class)
-            .assertTrue { it.resideInPackage("..controller..") }
+            .assertTrue { it.residesInPackage("..controller..") }
     }
 
     fun `classes with 'RestController' annotation should never return collection`() {

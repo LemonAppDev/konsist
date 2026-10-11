@@ -14,81 +14,81 @@ class KoModuleProviderCoreTest {
         }
 
     @Test
-    fun `resideInModule returns true for module name with unix separator`() {
+    fun `residesInModule returns true for module name with unix separator`() {
         // when
-        val result = sut.resideInModule("feature/payment")
+        val result = sut.residesInModule("feature/payment")
 
         // then
         result shouldBeEqualTo true
     }
 
     @Test
-    fun `resideInModule returns true for module name with windows separator`() {
+    fun `residesInModule returns true for module name with windows separator`() {
         // when
-        val result = sut.resideInModule("""feature\payment""")
+        val result = sut.residesInModule("""feature\payment""")
 
         // then
         result shouldBeEqualTo true
     }
 
     @Test
-    fun `resideInModule returns false for different module name`() {
+    fun `residesInModule returns false for different module name`() {
         // when
-        val result = sut.resideInModule("""feature\data""")
+        val result = sut.residesInModule("""feature\data""")
 
         // then
         result shouldBeEqualTo false
     }
 
     @Test
-    fun `resideInModule returns true for gradle project path`() {
+    fun `residesInModule returns true for gradle project path`() {
         // when
-        val result = sut.resideInModule(":feature:payment")
+        val result = sut.residesInModule(":feature:payment")
 
         // then
         result shouldBeEqualTo true
     }
 
     @Test
-    fun `resideInModule returns true for gradle project path without leading colon`() {
+    fun `residesInModule returns true for gradle project path without leading colon`() {
         // when
-        val result = sut.resideInModule("feature:payment")
+        val result = sut.residesInModule("feature:payment")
 
         // then
         result shouldBeEqualTo true
     }
 
     @Test
-    fun `resideInModule returns false for different gradle project path`() {
+    fun `residesInModule returns false for different gradle project path`() {
         // when
-        val result = sut.resideInModule(":feature:data")
+        val result = sut.residesInModule(":feature:data")
 
         // then
         result shouldBeEqualTo false
     }
 
     @Test
-    fun `resideInModule returns true for module name with leading and trailing slashes`() {
+    fun `residesInModule returns true for module name with leading and trailing slashes`() {
         // when
-        val result = sut.resideInModule("/feature/payment/")
+        val result = sut.residesInModule("/feature/payment/")
 
         // then
         result shouldBeEqualTo true
     }
 
     @Test
-    fun `resideInModule returns true for module name with trailing slash`() {
+    fun `residesInModule returns true for module name with trailing slash`() {
         // when
-        val result = sut.resideInModule("feature/payment/")
+        val result = sut.residesInModule("feature/payment/")
 
         // then
         result shouldBeEqualTo true
     }
 
     @Test
-    fun `resideInModule returns true for module name with leading and trailing backslashes`() {
+    fun `residesInModule returns true for module name with leading and trailing backslashes`() {
         // when
-        val result = sut.resideInModule("""\feature\payment\""")
+        val result = sut.residesInModule("""\feature\payment\""")
 
         // then
         result shouldBeEqualTo true
@@ -107,7 +107,7 @@ class KoModuleProviderCoreTest {
     }
 
     @Test
-    fun `resideInModule returns true for three level gradle project path`() {
+    fun `residesInModule returns true for three level gradle project path`() {
         // given
         val sut =
             object : KoModuleProviderCore {
@@ -116,14 +116,14 @@ class KoModuleProviderCoreTest {
             }
 
         // when
-        val result = sut.resideInModule(":feature:payment:api")
+        val result = sut.residesInModule(":feature:payment:api")
 
         // then
         result shouldBeEqualTo true
     }
 
     @Test
-    fun `resideInModule returns false for parent of three level module`() {
+    fun `residesInModule returns false for parent of three level module`() {
         // given
         val sut =
             object : KoModuleProviderCore {
@@ -132,7 +132,7 @@ class KoModuleProviderCoreTest {
             }
 
         // when
-        val result = sut.resideInModule(":feature:payment")
+        val result = sut.residesInModule(":feature:payment")
 
         // then
         result shouldBeEqualTo false

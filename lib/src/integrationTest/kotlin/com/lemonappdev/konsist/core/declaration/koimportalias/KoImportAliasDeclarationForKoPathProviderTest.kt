@@ -71,10 +71,10 @@ class KoImportAliasDeclarationForKoPathProviderTest {
 
         // then
         assertSoftly(sut) {
-            it?.resideInPath("..snippet..", true) shouldBeEqualTo true
-            it?.resideInPath("..koimportalias/snippet..", true) shouldBeEqualTo true
-            it?.resideInPath("..koimportalias..$fileName.kt", true) shouldBeEqualTo true
-            it?.resideInPath("koimportalias/snippet/", true) shouldBeEqualTo false
+            it?.residesInPath("..snippet..", true) shouldBeEqualTo true
+            it?.residesInPath("..koimportalias/snippet..", true) shouldBeEqualTo true
+            it?.residesInPath("..koimportalias..$fileName.kt", true) shouldBeEqualTo true
+            it?.residesInPath("koimportalias/snippet/", true) shouldBeEqualTo false
         }
     }
 
@@ -94,10 +94,10 @@ class KoImportAliasDeclarationForKoPathProviderTest {
 
         // then
         assertSoftly(sut) {
-            it?.resideInPath("..snippet..", false) shouldBeEqualTo true
-            it?.resideInPath("..koimportalias/snippet..", false) shouldBeEqualTo true
-            it?.resideInPath("..koimportalias..$fileName.kt", false) shouldBeEqualTo true
-            it?.resideInPath("koimportalias/snippet/", false) shouldBeEqualTo false
+            it?.residesInPath("..snippet..", false) shouldBeEqualTo true
+            it?.residesInPath("..koimportalias/snippet..", false) shouldBeEqualTo true
+            it?.residesInPath("..koimportalias..$fileName.kt", false) shouldBeEqualTo true
+            it?.residesInPath("koimportalias/snippet/", false) shouldBeEqualTo false
         }
     }
 

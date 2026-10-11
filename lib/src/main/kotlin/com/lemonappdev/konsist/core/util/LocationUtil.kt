@@ -11,7 +11,7 @@ object LocationUtil {
      * Paths accept both '/' and '\' separators. Leading separators and separators next to '..' are ignored,
      * e.g. "/feature/data/.." is the same as "feature/data..".
      */
-    fun resideInLocation(
+    fun residesInLocation(
         desiredLocation: String,
         currentLocation: String,
     ): Boolean {

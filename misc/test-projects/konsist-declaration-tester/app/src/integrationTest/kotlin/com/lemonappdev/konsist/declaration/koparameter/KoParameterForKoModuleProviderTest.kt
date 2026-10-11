@@ -31,8 +31,8 @@ class KoParameterForKoModuleProviderTest {
         // then
         assertSoftly(sut) {
             moduleName shouldBeEqualTo app
-            resideInModule(app) shouldBeEqualTo true
-            resideInModule(data) shouldBeEqualTo false
+            residesInModule(app) shouldBeEqualTo true
+            residesInModule(data) shouldBeEqualTo false
         }
     }
 
@@ -49,8 +49,8 @@ class KoParameterForKoModuleProviderTest {
         // then
         assertSoftly(sut) {
             moduleName shouldBeEqualTo app
-            resideInModule(app) shouldBeEqualTo true
-            resideInModule(data) shouldBeEqualTo false
+            residesInModule(app) shouldBeEqualTo true
+            residesInModule(data) shouldBeEqualTo false
         }
     }
 
@@ -67,8 +67,8 @@ class KoParameterForKoModuleProviderTest {
         // then
         assertSoftly(sut) {
             moduleName shouldBeEqualTo data
-            resideInModule(data) shouldBeEqualTo true
-            resideInModule(app) shouldBeEqualTo false
+            residesInModule(data) shouldBeEqualTo true
+            residesInModule(app) shouldBeEqualTo false
         }
     }
 
@@ -85,8 +85,8 @@ class KoParameterForKoModuleProviderTest {
         // then
         assertSoftly(sut) {
             moduleName shouldBeEqualTo data
-            resideInModule(data) shouldBeEqualTo true
-            resideInModule(app) shouldBeEqualTo false
+            residesInModule(data) shouldBeEqualTo true
+            residesInModule(app) shouldBeEqualTo false
         }
     }
 
@@ -103,8 +103,8 @@ class KoParameterForKoModuleProviderTest {
         // then
         assertSoftly(sut) {
             moduleName shouldBeEqualTo root
-            resideInModule(root) shouldBeEqualTo true
-            resideInModule(app) shouldBeEqualTo false
+            residesInModule(root) shouldBeEqualTo true
+            residesInModule(app) shouldBeEqualTo false
         }
     }
 
@@ -121,8 +121,8 @@ class KoParameterForKoModuleProviderTest {
         // then
         assertSoftly(sut) {
             moduleName shouldBeEqualTo root
-            resideInModule(root) shouldBeEqualTo true
-            resideInModule(app) shouldBeEqualTo false
+            residesInModule(root) shouldBeEqualTo true
+            residesInModule(app) shouldBeEqualTo false
         }
     }
 }

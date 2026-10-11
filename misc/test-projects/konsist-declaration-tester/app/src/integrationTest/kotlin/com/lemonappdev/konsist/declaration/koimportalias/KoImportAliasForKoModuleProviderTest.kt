@@ -28,8 +28,8 @@ class KoImportAliasForKoModuleProviderTest {
         // then
         assertSoftly(sut) {
             it?.moduleName shouldBeEqualTo app
-            it?.resideInModule(app) shouldBeEqualTo true
-            it?.resideInModule(data) shouldBeEqualTo false
+            it?.residesInModule(app) shouldBeEqualTo true
+            it?.residesInModule(data) shouldBeEqualTo false
         }
     }
 
@@ -46,8 +46,8 @@ class KoImportAliasForKoModuleProviderTest {
         // then
         assertSoftly(sut) {
             it?.moduleName shouldBeEqualTo data
-            it?.resideInModule(data) shouldBeEqualTo true
-            it?.resideInModule(app) shouldBeEqualTo false
+            it?.residesInModule(data) shouldBeEqualTo true
+            it?.residesInModule(app) shouldBeEqualTo false
         }
     }
 
@@ -64,8 +64,8 @@ class KoImportAliasForKoModuleProviderTest {
         // then
         assertSoftly(sut) {
             it?.moduleName shouldBeEqualTo root
-            it?.resideInModule(root) shouldBeEqualTo true
-            it?.resideInModule(app) shouldBeEqualTo false
+            it?.residesInModule(root) shouldBeEqualTo true
+            it?.residesInModule(app) shouldBeEqualTo false
         }
     }
 }

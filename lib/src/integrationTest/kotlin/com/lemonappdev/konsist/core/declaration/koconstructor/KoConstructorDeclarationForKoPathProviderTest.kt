@@ -57,10 +57,10 @@ class KoConstructorDeclarationForKoPathProviderTest {
 
         // then
         assertSoftly(sut) {
-            resideInPath("..snippet..", true) shouldBeEqualTo true
-            resideInPath("..koconstructor/snippet..", true) shouldBeEqualTo true
-            resideInPath("..koconstructor..constructor-reside-in-file-path.kt", true) shouldBeEqualTo true
-            resideInPath("koconstructor/snippet/", true) shouldBeEqualTo false
+            residesInPath("..snippet..", true) shouldBeEqualTo true
+            residesInPath("..koconstructor/snippet..", true) shouldBeEqualTo true
+            residesInPath("..koconstructor..constructor-reside-in-file-path.kt", true) shouldBeEqualTo true
+            residesInPath("koconstructor/snippet/", true) shouldBeEqualTo false
         }
     }
 
@@ -76,13 +76,13 @@ class KoConstructorDeclarationForKoPathProviderTest {
 
         // then
         assertSoftly(sut) {
-            resideInPath("..snippet..", false) shouldBeEqualTo true
-            resideInPath("..koconstructor/snippet..", false) shouldBeEqualTo true
-            resideInPath(
+            residesInPath("..snippet..", false) shouldBeEqualTo true
+            residesInPath("..koconstructor/snippet..", false) shouldBeEqualTo true
+            residesInPath(
                 "..koconstructor..constructor-reside-in-project-file-path.kt",
                 false,
             ) shouldBeEqualTo true
-            resideInPath("koconstructor/snippet/", false) shouldBeEqualTo false
+            residesInPath("koconstructor/snippet/", false) shouldBeEqualTo false
         }
     }
 

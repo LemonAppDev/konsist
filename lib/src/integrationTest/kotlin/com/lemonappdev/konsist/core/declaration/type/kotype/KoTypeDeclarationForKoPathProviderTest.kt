@@ -68,10 +68,10 @@ class KoTypeDeclarationForKoPathProviderTest {
 
         // then
         assertSoftly(sut) {
-            it?.resideInPath("..snippet..", true) shouldBeEqualTo true
-            it?.resideInPath("..type/kotype/snippet..", true) shouldBeEqualTo true
-            it?.resideInPath("..type/kotype..$fileName.kt", true) shouldBeEqualTo true
-            it?.resideInPath("type/kotype/snippet/", true) shouldBeEqualTo false
+            it?.residesInPath("..snippet..", true) shouldBeEqualTo true
+            it?.residesInPath("..type/kotype/snippet..", true) shouldBeEqualTo true
+            it?.residesInPath("..type/kotype..$fileName.kt", true) shouldBeEqualTo true
+            it?.residesInPath("type/kotype/snippet/", true) shouldBeEqualTo false
         }
     }
 
@@ -90,10 +90,10 @@ class KoTypeDeclarationForKoPathProviderTest {
 
         // then
         assertSoftly(sut) {
-            it?.resideInPath("..snippet..", false) shouldBeEqualTo true
-            it?.resideInPath("..type/kotype/snippet..", false) shouldBeEqualTo true
-            it?.resideInPath("..type/kotype..$fileName.kt", false) shouldBeEqualTo true
-            it?.resideInPath("type/kotype/snippet/", false) shouldBeEqualTo false
+            it?.residesInPath("..snippet..", false) shouldBeEqualTo true
+            it?.residesInPath("..type/kotype/snippet..", false) shouldBeEqualTo true
+            it?.residesInPath("..type/kotype..$fileName.kt", false) shouldBeEqualTo true
+            it?.residesInPath("type/kotype/snippet/", false) shouldBeEqualTo false
         }
     }
 

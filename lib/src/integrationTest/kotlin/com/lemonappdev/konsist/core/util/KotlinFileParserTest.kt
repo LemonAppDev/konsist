@@ -13,7 +13,7 @@ class KotlinFileParserTest {
                 .classes()
 
         // then
-        sut.assertTrue { it.resideInPackage("..mapper") }
+        sut.assertTrue { it.residesInPackage("..mapper") }
     }
 
     private fun getSnippetFile(fileName: String) = TestSnippetProvider.getSnippetKoScope("core/util/snippet/", fileName)
