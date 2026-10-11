@@ -5,12 +5,16 @@ import com.lemonappdev.konsist.api.verify.assertFalse
 import com.lemonappdev.konsist.api.verify.assertTrue
 import com.lemonappdev.konsist.core.exception.KoAssertionFailedException
 import com.lemonappdev.konsist.core.exception.KoPreconditionFailedException
+import com.lemonappdev.konsist.core.filesystem.PathProvider
+import com.lemonappdev.konsist.core.util.HyperlinkUtil
 import org.amshove.kluent.shouldContain
 import org.amshove.kluent.shouldThrow
 import org.amshove.kluent.withMessage
 import org.junit.jupiter.api.Test
 
 class AssertTrueOnDeclarationListTest {
+    private val rootPathUrl = HyperlinkUtil.toHyperlink(PathProvider.rootProjectPath)
+
     @Test
     fun `declaration-assert-test-method-name-derived-from-junit-method-name`() {
         // given
@@ -477,6 +481,102 @@ class AssertTrueOnDeclarationListTest {
 
         // then
         func shouldThrow KoAssertionFailedException::class
+    }
+
+    @Test
+    fun `assert-fails-with-added-reason`() {
+        // given
+        val sut =
+            getSnippetFile("assert-fails-with-added-reason")
+                .classes()
+        val filepath =
+            "$rootPathUrl/lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core/verify/kodeclarationassert/" +
+                "asserttrue/snippet/assert-fails-with-added-reason.kt"
+
+        // when
+        val func = {
+            sut.assertTrue {
+                addReason("${it.name} reason")
+                it.name == "FixtureClass1"
+            }
+        }
+
+        // then
+        func shouldThrow KoAssertionFailedException::class withMessage
+            "Assert 'assert-fails-with-added-reason' was violated (1 time). Invalid declarations:\n" +
+            "└── Class FixtureClass2 $filepath:3:1\n" +
+            "    └── FixtureClass2 reason"
+    }
+
+    @Test
+    fun `assert-fails-with-multiple-added-reasons`() {
+        // given
+        val sut =
+            getSnippetFile("assert-fails-with-multiple-added-reasons")
+                .classes()
+        val filepath =
+            "$rootPathUrl/lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core/verify/kodeclarationassert/" +
+                "asserttrue/snippet/assert-fails-with-multiple-added-reasons.kt"
+
+        // when
+        val func = {
+            sut.assertTrue {
+                if (it.name == "FixtureClass1") {
+                    addReason("first reason")
+                    addReason("second reason")
+                }
+                false
+            }
+        }
+
+        // then
+        func shouldThrow KoAssertionFailedException::class withMessage
+            "Assert 'assert-fails-with-multiple-added-reasons' was violated (3 times). Invalid declarations:\n" +
+            "├── Class FixtureClass1 $filepath:1:1\n" +
+            "│   ├── first reason\n" +
+            "│   └── second reason\n" +
+            "├── Class FixtureClass2 $filepath:3:1\n" +
+            "└── Class FixtureClass3 $filepath:5:1"
+    }
+
+    @Test
+    fun `assert-false-fails-with-added-reason`() {
+        // given
+        val message = "CUSTOM ASSERT MESSAGE"
+        val sut =
+            getSnippetFile("assert-false-fails-with-added-reason")
+                .classes()
+        val filepath =
+            "$rootPathUrl/lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core/verify/kodeclarationassert/" +
+                "asserttrue/snippet/assert-false-fails-with-added-reason.kt"
+
+        // when
+        val func = {
+            sut.assertFalse(additionalMessage = message) {
+                addReason("${it.name} reason")
+                it.name == "FixtureClass2"
+            }
+        }
+
+        // then
+        func shouldThrow KoAssertionFailedException::class withMessage
+            "Assert 'assert-false-fails-with-added-reason' was violated (1 time).\n$message\nInvalid declarations:\n" +
+            "└── Class FixtureClass2 $filepath:3:1\n" +
+            "    └── FixtureClass2 reason"
+    }
+
+    @Test
+    fun `assert-passes-with-added-reason`() {
+        // given
+        val sut =
+            getSnippetFile("assert-passes-with-added-reason")
+                .classes()
+
+        // then
+        sut.assertTrue {
+            addReason("reason")
+            it.name == "FixtureClass"
+        }
     }
 
     private fun getSnippetFile(fileName: String) =

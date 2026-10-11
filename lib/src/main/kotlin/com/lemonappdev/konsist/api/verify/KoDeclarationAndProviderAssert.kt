@@ -17,12 +17,13 @@ import com.lemonappdev.konsist.core.verify.assert
  *                 and enable suppression.
  * @param function The predicate function that takes an element of type [E] and returns a [Boolean] value.
  *                If the function returns `true`, the element is considered valid; otherwise, it's considered invalid.
+ *                Inside the function [KoAssertScope.addReason] can be used to add a reason displayed under the failed element.
  */
 fun <E : KoBaseProvider> E?.assertTrue(
     strict: Boolean = false,
     additionalMessage: String? = null,
     testName: String? = null,
-    function: (E) -> Boolean?,
+    function: KoAssertScope.(E) -> Boolean?,
 ): Unit {
     listOf(this).assert(strict, additionalMessage, testName, function, positiveCheck = true)
 }
@@ -41,12 +42,13 @@ fun <E : KoBaseProvider> E?.assertTrue(
  *                 and enable suppression.
  * @param function The predicate function that takes an element of type [E] and returns a [Boolean] value.
  *                If the function returns `true`, the element is considered invalid; otherwise, it's considered valid.
+ *                Inside the function [KoAssertScope.addReason] can be used to add a reason displayed under the failed element.
  */
 fun <E : KoBaseProvider> E?.assertFalse(
     strict: Boolean = false,
     additionalMessage: String? = null,
     testName: String? = null,
-    function: (E) -> Boolean?,
+    function: KoAssertScope.(E) -> Boolean?,
 ): Unit {
     listOf(this).assert(strict, additionalMessage, testName, function, positiveCheck = false)
 }
@@ -65,12 +67,13 @@ fun <E : KoBaseProvider> E?.assertFalse(
  *                 and enable suppression.
  * @param function The predicate function that takes an element of type [E] and returns a [Boolean] value.
  *                If the function returns `true`, the element is considered valid; otherwise, it's considered invalid.
+ *                Inside the function [KoAssertScope.addReason] can be used to add a reason displayed under the failed element.
  */
 fun <E : KoBaseProvider> List<E?>.assertTrue(
     strict: Boolean = false,
     additionalMessage: String? = null,
     testName: String? = null,
-    function: (E) -> Boolean?,
+    function: KoAssertScope.(E) -> Boolean?,
 ): Unit {
     assert(strict, additionalMessage, testName, function, positiveCheck = true)
 }
@@ -89,12 +92,13 @@ fun <E : KoBaseProvider> List<E?>.assertTrue(
  *                 and enable suppression.
  * @param function The predicate function that takes an element of type [E] and returns a [Boolean] value.
  *                If the function returns `true`, the element is considered invalid; otherwise, it's considered valid.
+ *                Inside the function [KoAssertScope.addReason] can be used to add a reason displayed under the failed element.
  */
 fun <E : KoBaseProvider> List<E?>.assertFalse(
     strict: Boolean = false,
     additionalMessage: String? = null,
     testName: String? = null,
-    function: (E) -> Boolean?,
+    function: KoAssertScope.(E) -> Boolean?,
 ): Unit {
     assert(strict, additionalMessage, testName, function, positiveCheck = false)
 }
@@ -113,12 +117,13 @@ fun <E : KoBaseProvider> List<E?>.assertFalse(
  *                 and enable suppression.
  * @param function The predicate function that takes an element of type [E] and returns a [Boolean] value.
  *                If the function returns `true`, the element is considered valid; otherwise, it's considered invalid.
+ *                Inside the function [KoAssertScope.addReason] can be used to add a reason displayed under the failed element.
  */
 fun <E : KoBaseProvider> Sequence<E?>.assertTrue(
     strict: Boolean = false,
     additionalMessage: String? = null,
     testName: String? = null,
-    function: (E) -> Boolean?,
+    function: KoAssertScope.(E) -> Boolean?,
 ): Unit {
     this.toList().assert(strict, additionalMessage, testName, function, true)
 }
@@ -137,12 +142,13 @@ fun <E : KoBaseProvider> Sequence<E?>.assertTrue(
  *                 and enable suppression.
  * @param function The predicate function that takes an element of type [E] and returns a [Boolean] value.
  *                If the function returns `true`, the element is considered invalid; otherwise, it's considered valid.
+ *                Inside the function [KoAssertScope.addReason] can be used to add a reason displayed under the failed element.
  */
 fun <E : KoBaseProvider> Sequence<E?>.assertFalse(
     strict: Boolean = false,
     additionalMessage: String? = null,
     testName: String? = null,
-    function: (E) -> Boolean?,
+    function: KoAssertScope.(E) -> Boolean?,
 ): Unit {
     this.toList().assert(strict, additionalMessage, testName, function, false)
 }
