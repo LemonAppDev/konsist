@@ -27,7 +27,7 @@ import com.lemonappdev.konsist.api.verify.assertTrue
 import java.util.Locale
 import javax.inject.Inject
 
-class GeneralSnippets {
+class GeneralTestSnippets {
     fun `files in 'ext' package must have name ending with 'Ext'`() {
         Konsist
             .scopeFromProject()

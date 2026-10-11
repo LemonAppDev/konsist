@@ -16,7 +16,7 @@ import com.lemonappdev.konsist.api.ext.list.withoutKotlinBasicTypeDeclaration
 import com.lemonappdev.konsist.api.verify.assertFalse
 import com.lemonappdev.konsist.api.verify.assertTrue
 
-class AndroidSnippets {
+class AndroidTestSnippets {
     fun `classes extending 'ViewModel' should have 'ViewModel' suffix`() {
         Konsist
             .scopeFromProject()

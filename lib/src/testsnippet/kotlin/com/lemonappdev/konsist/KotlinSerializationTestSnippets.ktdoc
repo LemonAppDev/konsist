@@ -9,7 +9,7 @@ import com.lemonappdev.konsist.api.verify.assertTrue
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
-class KotlinSerializationSnippets {
+class KotlinSerializationTestSnippets {
     fun `classes annotated with 'Serializable' have all properties annotated with 'SerialName'`() {
         Konsist
             .scopeFromProject()

@@ -20,7 +20,7 @@ import jakarta.persistence.Id
 import dummyclasses.jakarta.transaction.annotation.Transactional
 import org.junit.jupiter.api.Test
 
-class SpringSnippets {
+class SpringTestSnippets {
     fun `interfaces with 'Repository' annotation should have 'Repository' suffix`() {
         Konsist
             .scopeFromProject()

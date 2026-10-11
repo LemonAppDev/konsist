@@ -9,7 +9,7 @@ import com.lemonappdev.konsist.api.provider.KoFunctionProvider
 import com.lemonappdev.konsist.api.verify.assertTrue
 import org.springframework.stereotype.Repository
 
-class CleanArchitectureSnippets {
+class CleanArchitectureTestSnippets {
     fun `clean architecture layers have correct dependencies`() {
         Konsist
             .scopeFromProduction()

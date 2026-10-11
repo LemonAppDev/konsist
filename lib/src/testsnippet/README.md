@@ -1,4 +1,4 @@
-# Snippet Source Set
+# Test Snippet Source Set
 
 The source set includes code snippets (`.ktdoc` files) for the documentation under the `com.lemonappdev.konsist`
 package, as well as classes and interfaces that simulate commonly used Kotlin classes and interfaces (`androidx`, 
@@ -9,4 +9,4 @@ The snippets are placed here to ensure that the documentation always reflects th
 functional code.
 
 To update GitBook documentation run
-[deploy_snippets_to_konsist_documentation_repo.py](../../../misc/scripts/deploy_snippets_to_konsist_documentation_repo) script.
+[deploy_snippets_to_konsist_documentation_repo.py](../../../misc/scripts/deploy_snippets_to_konsist_documentation_repo.py) script.
