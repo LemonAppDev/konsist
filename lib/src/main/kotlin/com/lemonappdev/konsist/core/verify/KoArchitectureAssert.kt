@@ -242,7 +242,10 @@ private fun getFailedDependsOnLayers(
                         Triple(layer1, layer2, dep.strict)
                     }
                 }.filter { (layer1, layer2, strict) ->
-                    strict == true && !layer1.isDependentOn(layer2, files)
+                    // Empty (optional) layer has no code that could depend on other layer
+                    strict == true &&
+                        files.withPackage(layer1.rootPackage).isNotEmpty() &&
+                        !layer1.isDependentOn(layer2, files)
                 }.map { (layer1, layer2, _) ->
                     DependsOnLayerDependencyFailure(layer1, layer2)
                 }

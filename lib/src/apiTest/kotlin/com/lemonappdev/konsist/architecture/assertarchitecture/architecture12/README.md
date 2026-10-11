@@ -1,10 +1,13 @@
 # Architecture 12
 
-Test scenario where `Util` package and a file without a package reside outside every declared layer.
-`assertArchitecture` reports these files unless `requireAllFilesInLayers = false`:
+Test `optional` parameter for `Layer`.
+
+Test scenario where `Presentation` layer depends on `Domain` one and optional `Data` layer has no files
+(reuses `architecture2` project):
 
 ```mermaid
 %%{init: {'theme': 'forest'}}%%
 flowchart LR
-    Data --> Domain
+    Presentation --> Domain
+    Data[Data optional, empty] --> Domain
 ```
