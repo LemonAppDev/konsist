@@ -131,7 +131,7 @@ private fun getExceptionMessage(
 
     val errorMessage = messages.joinToString("\n")
     val customMessage = if (additionalMessage != null) "\n$additionalMessage" else ""
-    val localTestName = testName ?: getTestMethodNameFromNinthIndex()
+    val localTestName = testName ?: KoTestNameContext.current ?: getTestMethodNameFromNinthIndex()
     val testMessage = localTestName?.let { "'$it' test has failed." } ?: "Test has failed."
 
     return "$testMessage ${customMessage}\n$errorMessage"

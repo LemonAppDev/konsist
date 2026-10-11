@@ -1,0 +1,3 @@
+@file:Suppress("assert-suppress-by-factory-name-with-extension")
+
+class FixtureClass

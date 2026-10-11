@@ -1,0 +1,3 @@
+@file:Suppress(*arrayOf("other", "suppress-text"))
+
+class FixtureClassWithIncorrectSuffix
