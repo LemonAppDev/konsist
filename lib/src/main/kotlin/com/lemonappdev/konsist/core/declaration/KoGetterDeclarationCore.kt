@@ -3,6 +3,7 @@ package com.lemonappdev.konsist.core.declaration
 import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoGetterDeclaration
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
+import com.lemonappdev.konsist.core.cache.KoPropertyCache
 import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
 import com.lemonappdev.konsist.core.provider.KoBodyProviderCore
 import com.lemonappdev.konsist.core.provider.KoContainingDeclarationProviderCore
@@ -47,28 +48,40 @@ internal class KoGetterDeclarationCore private constructor(
     KoTextProviderCore,
     KoModifierProviderCore,
     KoVisibilityModifierProviderCore {
-    override val ktElement: KtElement by lazy { ktPropertyAccessor }
+    override val ktElement: KtElement
+        get() = ktPropertyAccessor
 
-    override val psiElement: PsiElement by lazy { ktPropertyAccessor }
+    override val psiElement: PsiElement
+        get() = ktPropertyAccessor
 
-    override val ktDeclarationWithBody: KtDeclarationWithBody by lazy { ktPropertyAccessor }
+    override val ktDeclarationWithBody: KtDeclarationWithBody
+        get() = ktPropertyAccessor
 
-    override val ktModifierListOwner: KtModifierListOwner by lazy { ktPropertyAccessor }
+    override val ktModifierListOwner: KtModifierListOwner
+        get() = ktPropertyAccessor
 
-    override val ktDeclaration: KtDeclaration by lazy { ktPropertyAccessor }
+    override val ktDeclaration: KtDeclaration
+        get() = ktPropertyAccessor
 
-    override val localDeclarations: List<KoBaseDeclaration> by lazy {
-        val psiElements =
-            ktPropertyAccessor
-                .bodyBlockExpression
-                ?.children
+    @Volatile
+    private var cachedLocalDeclarations: Any? = KoPropertyCache.NOT_COMPUTED
 
-        KoLocalDeclarationProviderCoreUtil.getKoLocalDeclarations(psiElements, this)
-    }
+    override val localDeclarations: List<KoBaseDeclaration>
+        get() =
+            KoPropertyCache.getOrCompute(cachedLocalDeclarations, { cachedLocalDeclarations = it }) {
+                val psiElements =
+                    ktPropertyAccessor
+                        .bodyBlockExpression
+                        ?.children
 
-    override val hasPublicOrDefaultModifier: Boolean by lazy { !(hasPrivateModifier || hasProtectedModifier || hasInternalModifier) }
+                KoLocalDeclarationProviderCoreUtil.getKoLocalDeclarations(psiElements, this)
+            }
 
-    override val isInitialized: Boolean by lazy { hasExpressionBody || hasBlockBody }
+    override val hasPublicOrDefaultModifier: Boolean
+        get() = !(hasPrivateModifier || hasProtectedModifier || hasInternalModifier)
+
+    override val isInitialized: Boolean
+        get() = hasExpressionBody || hasBlockBody
 
     override fun toString(): String = locationWithText
 

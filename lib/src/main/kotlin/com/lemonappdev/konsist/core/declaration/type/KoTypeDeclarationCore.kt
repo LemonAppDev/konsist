@@ -20,6 +20,7 @@ import com.lemonappdev.konsist.api.declaration.type.KoKotlinTypeDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoTypeDeclaration
 import com.lemonappdev.konsist.core.annotation.RemoveInVersion
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
+import com.lemonappdev.konsist.core.cache.KoPropertyCache
 import com.lemonappdev.konsist.core.provider.KoAnnotationProviderCore
 import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
 import com.lemonappdev.konsist.core.provider.KoContainingDeclarationProviderCore
@@ -92,23 +93,19 @@ internal class KoTypeDeclarationCore private constructor(
         }
     }
 
-    override val psiElement: PsiElement by lazy {
-        ktTypeReference ?: ktNameReferenceExpression ?: ktTypeProjection
-            ?: error("KtTypeReference, KtNameReferenceExpression and KtTypeProjection are null")
-    }
+    override val psiElement: PsiElement
+        get() = ktElement
 
-    override val ktElement: KtElement by lazy {
-        ktTypeReference ?: ktNameReferenceExpression ?: ktTypeProjection
-            ?: error("KtTypeReference, KtNameReferenceExpression and KtTypeProjection are null")
-    }
+    override val ktElement: KtElement
+        get() =
+            ktTypeReference ?: ktNameReferenceExpression ?: ktTypeProjection
+                ?: error("KtTypeReference, KtNameReferenceExpression and KtTypeProjection are null")
 
-    override val ktUserType: KtUserType? by lazy {
-        extractEffectiveType<KtUserType>(ktTypeReference)
-    }
+    override val ktUserType: KtUserType?
+        get() = extractEffectiveType<KtUserType>(ktTypeReference)
 
-    override val ktFunctionType: KtFunctionType? by lazy {
-        extractEffectiveType<KtFunctionType>(ktTypeReference)
-    }
+    override val ktFunctionType: KtFunctionType?
+        get() = extractEffectiveType<KtFunctionType>(ktTypeReference)
 
     private inline fun <reified T : KtElement> extractEffectiveType(ktTypeReference: KtTypeReference?): T? {
         val children = ktTypeReference?.children
@@ -126,82 +123,127 @@ internal class KoTypeDeclarationCore private constructor(
             ?.lastOrNull()
     }
 
-    override val ktAnnotationEntries: List<KtAnnotationEntry>? by lazy { ktTypeReference?.annotationEntries }
+    override val ktAnnotationEntries: List<KtAnnotationEntry>?
+        get() = ktTypeReference?.annotationEntries
 
-    override val koDeclarationCastProviderDeclaration: KoSourceDeclaration? by lazy { sourceDeclaration }
+    @Volatile
+    private var cachedKoDeclarationCastProviderDeclaration: Any? = KoPropertyCache.NOT_COMPUTED
 
-    override val name: String by lazy {
-        val typeReference =
-            ktTypeReference
-                ?.children
-                // The last item is chosen because when a type is preceded by an annotation or modifier,
-                // the type being searched for is the last item in the list.
-                ?.lastOrNull()
-                ?: ktNameReferenceExpression
-                ?: ktTypeProjection
+    override val koDeclarationCastProviderDeclaration: KoSourceDeclaration?
+        get() =
+            KoPropertyCache.getOrCompute(cachedKoDeclarationCastProviderDeclaration, {
+                cachedKoDeclarationCastProviderDeclaration = it
+            }) { sourceDeclaration }
 
-        if (typeReference is KtNullableType) {
-            typeReference.children.firstOrNull()?.text ?: ""
-        } else {
-            typeReference?.text ?: ""
-        }
-    }
+    @Volatile
+    private var cachedName: Any? = KoPropertyCache.NOT_COMPUTED
 
-    override val packagee: KoPackageDeclaration? by lazy { containingFile.packagee }
+    override val name: String
+        get() =
+            KoPropertyCache.getOrCompute(cachedName, { cachedName = it }) {
+                val typeReference =
+                    ktTypeReference
+                        ?.children
+                        // The last item is chosen because when a type is preceded by an annotation or modifier,
+                        // the type being searched for is the last item in the list.
+                        ?.lastOrNull()
+                        ?: ktNameReferenceExpression
+                        ?: ktTypeProjection
+
+                if (typeReference is KtNullableType) {
+                    typeReference.children.firstOrNull()?.text ?: ""
+                } else {
+                    typeReference?.text ?: ""
+                }
+            }
+
+    @Volatile
+    private var cachedPackagee: Any? = KoPropertyCache.NOT_COMPUTED
+
+    override val packagee: KoPackageDeclaration?
+        get() = KoPropertyCache.getOrCompute(cachedPackagee, { cachedPackagee = it }) { containingFile.packagee }
+
+    @Volatile
+    private var cachedSourceType: Any? = KoPropertyCache.NOT_COMPUTED
 
     @RemoveInVersion("0.19.0")
-    override val sourceType: String by lazy { super<KoSourceTypeProviderCore>.sourceType }
+    override val sourceType: String
+        get() = KoPropertyCache.getOrCompute(cachedSourceType, { cachedSourceType = it }) { super<KoSourceTypeProviderCore>.sourceType }
+
+    @Volatile
+    private var cachedBareSourceType: Any? = KoPropertyCache.NOT_COMPUTED
 
     @RemoveInVersion("0.19.0")
-    override val bareSourceType: String by lazy { super<KoSourceTypeProviderCore>.bareSourceType }
+    override val bareSourceType: String
+        get() =
+            KoPropertyCache.getOrCompute(
+                cachedBareSourceType,
+                { cachedBareSourceType = it },
+            ) { super<KoSourceTypeProviderCore>.bareSourceType }
 
     @Deprecated("Will be removed in version 0.19.0", ReplaceWith("sourceDeclaration?.isClass"))
-    override val isClass: Boolean by lazy { super<KoDeclarationCastProviderCore>.isClass }
+    override val isClass: Boolean
+        get() = super<KoDeclarationCastProviderCore>.isClass
 
     @Deprecated("Will be removed in version 0.19.0", ReplaceWith("sourceDeclaration?.isObject"))
-    override val isObject: Boolean by lazy { super<KoDeclarationCastProviderCore>.isObject }
+    override val isObject: Boolean
+        get() = super<KoDeclarationCastProviderCore>.isObject
 
     @Deprecated("Will be removed in version 0.19.0", ReplaceWith("sourceDeclaration?.isInterface"))
-    override val isInterface: Boolean by lazy { super<KoDeclarationCastProviderCore>.isInterface }
+    override val isInterface: Boolean
+        get() = super<KoDeclarationCastProviderCore>.isInterface
 
     @Deprecated("Will be removed in version 0.19.0", ReplaceWith("sourceDeclaration?.isClassOrObject"))
-    override val isClassOrObject: Boolean by lazy { super<KoDeclarationCastProviderCore>.isClassOrObject }
+    override val isClassOrObject: Boolean
+        get() = super<KoDeclarationCastProviderCore>.isClassOrObject
 
     @Deprecated("Will be removed in version 0.19.0", ReplaceWith("sourceDeclaration?.isClassOrInterface"))
-    override val isClassOrInterface: Boolean by lazy { super<KoDeclarationCastProviderCore>.isClassOrInterface }
+    override val isClassOrInterface: Boolean
+        get() = super<KoDeclarationCastProviderCore>.isClassOrInterface
 
     @Deprecated("Will be removed in version 0.19.0", ReplaceWith("sourceDeclaration?.isInterfaceOrObject"))
-    override val isInterfaceOrObject: Boolean by lazy { super<KoDeclarationCastProviderCore>.isInterfaceOrObject }
+    override val isInterfaceOrObject: Boolean
+        get() = super<KoDeclarationCastProviderCore>.isInterfaceOrObject
 
     @Deprecated("Will be removed in version 0.19.0", ReplaceWith("sourceDeclaration?.isClassOrInterfaceOrObject"))
-    override val isClassOrInterfaceOrObject: Boolean by lazy { super<KoDeclarationCastProviderCore>.isClassOrInterfaceOrObject }
+    override val isClassOrInterfaceOrObject: Boolean
+        get() = super<KoDeclarationCastProviderCore>.isClassOrInterfaceOrObject
 
     @Deprecated("Will be removed in version 0.19.0", ReplaceWith("sourceDeclaration?.isTypeAlias"))
-    override val isTypeAlias: Boolean by lazy { super<KoDeclarationCastProviderCore>.isTypeAlias }
+    override val isTypeAlias: Boolean
+        get() = super<KoDeclarationCastProviderCore>.isTypeAlias
 
     @Deprecated("Will be removed in version 0.19.0", ReplaceWith("sourceDeclaration?.isImportAlias"))
-    override val isImportAlias: Boolean by lazy { super<KoDeclarationCastProviderCore>.isImportAlias }
+    override val isImportAlias: Boolean
+        get() = super<KoDeclarationCastProviderCore>.isImportAlias
 
     @Deprecated("Will be removed in version 0.19.0", ReplaceWith("sourceDeclaration?.isKotlinType"))
-    override val isKotlinType: Boolean by lazy { super<KoDeclarationCastProviderCore>.isKotlinType }
+    override val isKotlinType: Boolean
+        get() = super<KoDeclarationCastProviderCore>.isKotlinType
 
     @Deprecated("Will be removed in version 0.19.0", ReplaceWith("sourceDeclaration?.isKotlinBasicType"))
-    override val isKotlinBasicType: Boolean by lazy { super<KoDeclarationCastProviderCore>.isKotlinBasicType }
+    override val isKotlinBasicType: Boolean
+        get() = super<KoDeclarationCastProviderCore>.isKotlinBasicType
 
     @Deprecated("Will be removed in version 0.19.0", ReplaceWith("sourceDeclaration?.isKotlinCollectionType"))
-    override val isKotlinCollectionType: Boolean by lazy { super<KoDeclarationCastProviderCore>.isKotlinCollectionType }
+    override val isKotlinCollectionType: Boolean
+        get() = super<KoDeclarationCastProviderCore>.isKotlinCollectionType
 
     @Deprecated("Will be removed in version 0.19.0", ReplaceWith("sourceDeclaration?.isTypeParameter"))
-    override val isTypeParameter: Boolean by lazy { super<KoDeclarationCastProviderCore>.isTypeParameter }
+    override val isTypeParameter: Boolean
+        get() = super<KoDeclarationCastProviderCore>.isTypeParameter
 
     @Deprecated("Will be removed in version 0.19.0", ReplaceWith("sourceDeclaration?.isExternal"))
-    override val isExternal: Boolean by lazy { super<KoDeclarationCastProviderCore>.isExternal }
+    override val isExternal: Boolean
+        get() = super<KoDeclarationCastProviderCore>.isExternal
 
     @Deprecated("Will be removed in version 0.19.0", ReplaceWith("sourceDeclaration?.isFunction"))
-    override val isFunction: Boolean by lazy { super<KoDeclarationCastProviderCore>.isFunction }
+    override val isFunction: Boolean
+        get() = super<KoDeclarationCastProviderCore>.isFunction
 
     @Deprecated("Will be removed in version 0.19.0", ReplaceWith("sourceDeclaration?.isProperty"))
-    override val isProperty: Boolean by lazy { super<KoDeclarationCastProviderCore>.isProperty }
+    override val isProperty: Boolean
+        get() = super<KoDeclarationCastProviderCore>.isProperty
 
     @Deprecated("Will be removed in version 0.19.0", ReplaceWith("sourceDeclaration?.asClassDeclaration()"))
     override fun asClassDeclaration(): KoClassDeclaration? = super<KoDeclarationCastProviderCore>.asClassDeclaration()

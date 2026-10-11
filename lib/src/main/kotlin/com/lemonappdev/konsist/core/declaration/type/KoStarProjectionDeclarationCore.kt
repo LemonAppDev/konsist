@@ -12,13 +12,17 @@ object KoStarProjectionDeclarationCore :
     KoSourceDeclarationCore,
     KoBaseProviderCore,
     KoDeclarationCastProviderCore {
-    override val ktElement: KtElement? by lazy { null }
+    override val ktElement: KtElement?
+        get() = null
 
-    override val psiElement: PsiElement? by lazy { null }
+    override val psiElement: PsiElement?
+        get() = null
 
-    override val name: String by lazy { text }
+    override val name: String
+        get() = text
 
-    override val text: String by lazy { "*" }
+    override val text: String
+        get() = "*"
 
     override fun toString(): String = text
 }

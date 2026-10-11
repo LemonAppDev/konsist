@@ -3,6 +3,7 @@ package com.lemonappdev.konsist.core.declaration
 import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoVariableDeclaration
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
+import com.lemonappdev.konsist.core.cache.KoPropertyCache
 import com.lemonappdev.konsist.core.provider.KoAnnotationProviderCore
 import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
 import com.lemonappdev.konsist.core.provider.KoContainingDeclarationProviderCore
@@ -57,31 +58,44 @@ internal class KoVariableDeclarationCore private constructor(
     KoTacitTypeProviderCore,
     KoIsValProviderCore,
     KoIsVarProviderCore {
-    override val ktAnnotationEntries: List<KtAnnotationEntry>? by lazy { ktProperty.annotationEntries }
+    override val ktAnnotationEntries: List<KtAnnotationEntry>?
+        get() = ktProperty.annotationEntries
 
-    override val ktCallableDeclaration: KtCallableDeclaration by lazy { ktProperty }
+    override val ktCallableDeclaration: KtCallableDeclaration
+        get() = ktProperty
 
-    override val psiElement: PsiElement by lazy { ktProperty }
+    override val psiElement: PsiElement
+        get() = ktProperty
 
-    override val ktElement: KtElement by lazy { ktProperty }
+    override val ktElement: KtElement
+        get() = ktProperty
 
-    override val ktExpression: KtExpression? by lazy {
-        ktProperty
-            .children
-            .filterNot { it is KtPropertyAccessor }
-            .filterIsInstance<KtExpression>()
-            .firstOrNull()
-    }
+    @Volatile
+    private var cachedKtExpression: Any? = KoPropertyCache.NOT_COMPUTED
+
+    override val ktExpression: KtExpression?
+        get() =
+            KoPropertyCache.getOrCompute(cachedKtExpression, { cachedKtExpression = it }) {
+                ktProperty
+                    .children
+                    .filterNot { it is KtPropertyAccessor }
+                    .filterIsInstance<KtExpression>()
+                    .firstOrNull()
+            }
 
     @Deprecated("Will be removed in version 0.19.0", ReplaceWith("isVal"))
-    override val hasValModifier: Boolean by lazy { !ktProperty.isVar }
+    override val hasValModifier: Boolean
+        get() = !ktProperty.isVar
 
     @Deprecated("Will be removed in version 0.19.0", ReplaceWith("isVar"))
-    override val hasVarModifier: Boolean by lazy { ktProperty.isVar }
+    override val hasVarModifier: Boolean
+        get() = ktProperty.isVar
 
-    override val isVal: Boolean by lazy { !ktProperty.isVar }
+    override val isVal: Boolean
+        get() = !ktProperty.isVar
 
-    override val isVar: Boolean by lazy { ktProperty.isVar }
+    override val isVar: Boolean
+        get() = ktProperty.isVar
 
     override fun toString(): String = name
 

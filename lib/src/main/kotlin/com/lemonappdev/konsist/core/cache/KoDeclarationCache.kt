@@ -3,70 +3,68 @@ package com.lemonappdev.konsist.core.cache
 import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoExternalDeclaration
 import com.lemonappdev.konsist.api.provider.KoBaseProvider
+import org.jetbrains.kotlin.com.intellij.openapi.util.Key
+import org.jetbrains.kotlin.com.intellij.openapi.util.UserDataHolderEx
 import org.jetbrains.kotlin.psi.KtElement
 import java.util.concurrent.ConcurrentHashMap
 
+/*
+Declarations are stored in the user data of the PSI element, so the cache does not need a map entry (with a key object)
+for every declaration, and declarations are released together with the PSI tree.
+
+Instances are created atomically, so all threads (tests can run in parallel) get the same instance for the given key.
+Declarations are compared by identity (e.g. when removing duplicated parents), so two instances of the same declaration
+would break the comparison.
+ */
 internal class KoDeclarationCache<T : KoBaseProvider> {
-    val elements = ConcurrentHashMap<Pair<KtElement, KoBaseProvider?>, T>()
-
-    private fun get(key: Pair<KtElement, KoBaseProvider?>): T {
-        var value = elements[key]
-        value = requireNotNull(value) { "Cache doesn't allow to null value of key: ${key.first.name}" }
-        return value
-    }
-
-    private fun set(
-        key: Pair<KtElement, KoBaseProvider?>,
-        value: T,
-    ) {
-        elements[key] = value
-    }
-
-    private fun hasKey(key: Pair<KtElement, KoBaseProvider?>) = elements.containsKey(key)
+    private val key = Key.create<Entry<T>>("KoDeclarationCache")
 
     fun getOrCreateInstance(
         ktElement: KtElement,
         containingDeclaration: KoBaseDeclaration,
         value: (KtElement) -> T,
-    ): T {
-        val cacheKey = ktElement to containingDeclaration
+    ): T =
+        ktElement.getUserData(key)?.getInstance(containingDeclaration)
+            ?: putIfAbsent(ktElement, containingDeclaration, value(ktElement))
 
-        return if (hasKey(cacheKey)) {
-            get(cacheKey)
-        } else {
-            set(cacheKey, value.invoke(ktElement))
-            get(cacheKey)
-        }
+    private tailrec fun putIfAbsent(
+        ktElement: KtElement,
+        containingDeclaration: KoBaseDeclaration,
+        instance: T,
+    ): T {
+        val entry = ktElement.getUserData(key)
+
+        entry?.getInstance(containingDeclaration)?.let { return it }
+
+        val isStored = (ktElement as UserDataHolderEx).replace(key, entry, Entry(containingDeclaration, instance, entry))
+
+        return if (isStored) instance else putIfAbsent(ktElement, containingDeclaration, instance)
+    }
+
+    /**
+     * Declaration instances of the element for each containing declaration. Element usually has one containing
+     * declaration (e.g. parameter defining property has a different one for parameter and property declaration).
+     */
+    private class Entry<T>(
+        private val containingDeclaration: KoBaseProvider?,
+        private val instance: T,
+        private val next: Entry<T>?,
+    ) {
+        fun getInstance(containingDeclaration: KoBaseProvider?): T? =
+            if (this.containingDeclaration == containingDeclaration) {
+                instance
+            } else {
+                next?.getInstance(containingDeclaration)
+            }
     }
 }
 
 internal object KoExternalDeclarationCache {
-    val elements = ConcurrentHashMap<String, KoExternalDeclaration>()
-
-    private fun get(key: String): KoExternalDeclaration {
-        var value = elements[key]
-        value = requireNotNull(value) { "Cache doesn't allow to null value of key: $key" }
-        return value
-    }
-
-    private fun set(
-        key: String,
-        value: KoExternalDeclaration,
-    ) {
-        elements[key] = value
-    }
-
-    private fun hasKey(key: String) = elements.containsKey(key)
+    private val elements = ConcurrentHashMap<String, KoExternalDeclaration>()
 
     fun getOrCreateInstance(
         key: String,
         ktElement: KtElement,
         value: (ktElement: KtElement) -> KoExternalDeclaration,
-    ): KoExternalDeclaration =
-        if (hasKey(key)) {
-            get(key)
-        } else {
-            set(key, value.invoke(ktElement))
-            get(key)
-        }
+    ): KoExternalDeclaration = elements[key] ?: value(ktElement).let { elements.putIfAbsent(key, it) ?: it }
 }

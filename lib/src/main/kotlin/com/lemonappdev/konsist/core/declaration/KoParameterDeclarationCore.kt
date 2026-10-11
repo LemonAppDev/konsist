@@ -4,6 +4,7 @@ import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoParameterDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoTypeDeclaration
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
+import com.lemonappdev.konsist.core.cache.KoPropertyCache
 import com.lemonappdev.konsist.core.declaration.type.KoTypeDeclarationCore
 import com.lemonappdev.konsist.core.exception.KoInternalException
 import com.lemonappdev.konsist.core.provider.KoAnnotationProviderCore
@@ -61,24 +62,33 @@ internal class KoParameterDeclarationCore private constructor(
     KoCrossInlineModifierProviderCore,
     KoIsValProviderCore,
     KoIsVarProviderCore {
-    override val ktAnnotationEntries: List<KtAnnotationEntry>? by lazy { ktParameter.annotationEntries }
+    override val ktAnnotationEntries: List<KtAnnotationEntry>?
+        get() = ktParameter.annotationEntries
 
-    override val ktModifierListOwner: KtModifierListOwner by lazy { ktParameter }
+    override val ktModifierListOwner: KtModifierListOwner
+        get() = ktParameter
 
-    override val psiElement: PsiElement by lazy { ktParameter }
+    override val psiElement: PsiElement
+        get() = ktParameter
 
-    override val ktElement: KtElement by lazy { ktParameter }
+    override val ktElement: KtElement
+        get() = ktParameter
 
-    override val type: KoTypeDeclaration by lazy {
-        val type =
-            ktParameter
-                .children
-                .filterIsInstance<KtTypeReference>()
-                .firstOrNull()
+    @Volatile
+    private var cachedType: Any? = KoPropertyCache.NOT_COMPUTED
 
-        type?.let { KoTypeDeclarationCore.getInstance(it, this) }
-            ?: throw KoInternalException("Class type cannot be null")
-    }
+    override val type: KoTypeDeclaration
+        get() =
+            KoPropertyCache.getOrCompute(cachedType, { cachedType = it }) {
+                val type =
+                    ktParameter
+                        .children
+                        .filterIsInstance<KtTypeReference>()
+                        .firstOrNull()
+
+                type?.let { KoTypeDeclarationCore.getInstance(it, this) }
+                    ?: throw KoInternalException("Class type cannot be null")
+            }
 
     override fun representsType(
         name: String?,
@@ -86,14 +96,18 @@ internal class KoParameterDeclarationCore private constructor(
     ): Boolean = name?.let { type.hasName(it, ignoreCase) } == true
 
     @Deprecated("Will be removed in version 0.19.0", ReplaceWith("isVal"))
-    override val hasValModifier: Boolean by lazy { ktParameter.valOrVarKeyword?.text == "val" }
+    override val hasValModifier: Boolean
+        get() = ktParameter.valOrVarKeyword?.text == "val"
 
     @Deprecated("Will be removed in version 0.19.0", ReplaceWith("isVar"))
-    override val hasVarModifier: Boolean by lazy { ktParameter.valOrVarKeyword?.text == "var" }
+    override val hasVarModifier: Boolean
+        get() = ktParameter.valOrVarKeyword?.text == "var"
 
-    override val isVal: Boolean by lazy { ktParameter.valOrVarKeyword?.text == "val" }
+    override val isVal: Boolean
+        get() = ktParameter.valOrVarKeyword?.text == "val"
 
-    override val isVar: Boolean by lazy { ktParameter.valOrVarKeyword?.text == "var" }
+    override val isVar: Boolean
+        get() = ktParameter.valOrVarKeyword?.text == "var"
 
     override fun toString(): String = name
 

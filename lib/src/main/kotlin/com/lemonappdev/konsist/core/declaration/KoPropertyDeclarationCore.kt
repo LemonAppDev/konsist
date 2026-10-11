@@ -5,6 +5,7 @@ import com.lemonappdev.konsist.api.declaration.KoKDocDeclaration
 import com.lemonappdev.konsist.api.declaration.KoPropertyDeclaration
 import com.lemonappdev.konsist.api.provider.KoKDocProvider
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
+import com.lemonappdev.konsist.core.cache.KoPropertyCache
 import com.lemonappdev.konsist.core.provider.KoAnnotationProviderCore
 import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
 import com.lemonappdev.konsist.core.provider.KoContainingDeclarationProviderCore
@@ -119,77 +120,99 @@ internal class KoPropertyDeclarationCore private constructor(
     KoIsVarProviderCore,
     KoIsGenericProviderCore,
     KoDeclarationCastProviderCore {
-    override val ktAnnotationEntries: List<KtAnnotationEntry>? by lazy { ktCallableDeclaration.annotationEntries }
+    override val ktAnnotationEntries: List<KtAnnotationEntry>?
+        get() = ktCallableDeclaration.annotationEntries
 
-    override val ktModifierListOwner: KtModifierListOwner by lazy { ktCallableDeclaration }
+    override val ktModifierListOwner: KtModifierListOwner
+        get() = ktCallableDeclaration
 
-    override val ktTypeParameterListOwner: KtTypeParameterListOwner by lazy { ktCallableDeclaration }
+    override val ktTypeParameterListOwner: KtTypeParameterListOwner
+        get() = ktCallableDeclaration
 
-    override val psiElement: PsiElement by lazy { ktCallableDeclaration }
+    override val psiElement: PsiElement
+        get() = ktCallableDeclaration
 
-    override val ktElement: KtElement by lazy { ktCallableDeclaration }
+    override val ktElement: KtElement
+        get() = ktCallableDeclaration
 
-    override val ktDeclaration: KtDeclaration by lazy { ktCallableDeclaration }
+    override val ktDeclaration: KtDeclaration
+        get() = ktCallableDeclaration
 
-    override val ktProperty: KtProperty? by lazy { ktCallableDeclaration as? KtProperty }
+    override val ktProperty: KtProperty?
+        get() = ktCallableDeclaration as? KtProperty
 
-    override val ktExpression: KtExpression? by lazy {
-        ktCallableDeclaration
-            .children
-            .filterNot { it is KtPropertyAccessor }
-            .filterIsInstance<KtExpression>()
-            .firstOrNull()
-    }
+    @Volatile
+    private var cachedKtExpression: Any? = KoPropertyCache.NOT_COMPUTED
+
+    override val ktExpression: KtExpression?
+        get() =
+            KoPropertyCache.getOrCompute(cachedKtExpression, { cachedKtExpression = it }) {
+                ktCallableDeclaration
+                    .children
+                    .filterNot { it is KtPropertyAccessor }
+                    .filterIsInstance<KtExpression>()
+                    .firstOrNull()
+            }
 
     @Deprecated("Will be removed in version 0.19.0", ReplaceWith("isVal"))
-    override val hasValModifier: Boolean by lazy {
-        when (ktCallableDeclaration) {
-            is KtProperty -> !ktCallableDeclaration.isVar
-            is KtParameter -> ktCallableDeclaration.valOrVarKeyword?.text == "val"
-            else -> false
-        }
-    }
+    override val hasValModifier: Boolean
+        get() =
+            when (ktCallableDeclaration) {
+                is KtProperty -> !ktCallableDeclaration.isVar
+                is KtParameter -> ktCallableDeclaration.valOrVarKeyword?.text == "val"
+                else -> false
+            }
 
     @Deprecated("Will be removed in version 0.19.0", ReplaceWith("isVar"))
-    override val hasVarModifier: Boolean by lazy {
-        when (ktCallableDeclaration) {
-            is KtProperty -> ktCallableDeclaration.isVar
-            is KtParameter -> ktCallableDeclaration.valOrVarKeyword?.text == "var"
-            else -> false
-        }
-    }
+    override val hasVarModifier: Boolean
+        get() =
+            when (ktCallableDeclaration) {
+                is KtProperty -> ktCallableDeclaration.isVar
+                is KtParameter -> ktCallableDeclaration.valOrVarKeyword?.text == "var"
+                else -> false
+            }
 
-    override val isVal: Boolean by lazy {
-        when (ktCallableDeclaration) {
-            is KtProperty -> !ktCallableDeclaration.isVar
-            is KtParameter -> ktCallableDeclaration.valOrVarKeyword?.text == "val"
-            else -> false
-        }
-    }
+    override val isVal: Boolean
+        get() =
+            when (ktCallableDeclaration) {
+                is KtProperty -> !ktCallableDeclaration.isVar
+                is KtParameter -> ktCallableDeclaration.valOrVarKeyword?.text == "val"
+                else -> false
+            }
 
-    override val isVar: Boolean by lazy {
-        when (ktCallableDeclaration) {
-            is KtProperty -> ktCallableDeclaration.isVar
-            is KtParameter -> ktCallableDeclaration.valOrVarKeyword?.text == "var"
-            else -> false
-        }
-    }
+    override val isVar: Boolean
+        get() =
+            when (ktCallableDeclaration) {
+                is KtProperty -> ktCallableDeclaration.isVar
+                is KtParameter -> ktCallableDeclaration.valOrVarKeyword?.text == "var"
+                else -> false
+            }
 
-    override val kDoc: KoKDocDeclaration? by lazy {
-        if (ktCallableDeclaration is KtParameter) {
-            (containingDeclaration as? KoKDocProvider)?.kDoc
-        } else {
-            super<KoKDocProviderCore>.kDoc
-        }
-    }
+    @Volatile
+    private var cachedKDoc: Any? = KoPropertyCache.NOT_COMPUTED
 
-    override val fullyQualifiedName: String? by lazy {
-        if (this.isTopLevel) {
-            super.fullyQualifiedName
-        } else {
-            null
-        }
-    }
+    override val kDoc: KoKDocDeclaration?
+        get() =
+            KoPropertyCache.getOrCompute(cachedKDoc, { cachedKDoc = it }) {
+                if (ktCallableDeclaration is KtParameter) {
+                    (containingDeclaration as? KoKDocProvider)?.kDoc
+                } else {
+                    super<KoKDocProviderCore>.kDoc
+                }
+            }
+
+    @Volatile
+    private var cachedFullyQualifiedName: Any? = KoPropertyCache.NOT_COMPUTED
+
+    override val fullyQualifiedName: String?
+        get() =
+            KoPropertyCache.getOrCompute(cachedFullyQualifiedName, { cachedFullyQualifiedName = it }) {
+                if (this.isTopLevel) {
+                    super.fullyQualifiedName
+                } else {
+                    null
+                }
+            }
 
     override fun toString(): String = name
 

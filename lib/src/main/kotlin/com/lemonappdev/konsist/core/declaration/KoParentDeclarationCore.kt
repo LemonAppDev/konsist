@@ -5,6 +5,7 @@ import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoParentDeclaration
 import com.lemonappdev.konsist.api.provider.KoDeclarationCastProvider
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
+import com.lemonappdev.konsist.core.cache.KoPropertyCache
 import com.lemonappdev.konsist.core.declaration.type.KoKotlinTypeDeclarationCore
 import com.lemonappdev.konsist.core.model.getClass
 import com.lemonappdev.konsist.core.model.getInterface
@@ -59,105 +60,131 @@ internal class KoParentDeclarationCore(
     KoSourceSetProviderCore,
     KoArgumentProviderCore,
     KoInterfaceDelegateProviderCore {
-    override val psiElement: PsiElement by lazy { ktSuperTypeListEntry }
+    override val psiElement: PsiElement
+        get() = ktSuperTypeListEntry
 
-    override val ktElement: KtElement by lazy { ktSuperTypeListEntry }
+    override val ktElement: KtElement
+        get() = ktSuperTypeListEntry
 
-    override val ktTypeReference: KtTypeReference? by lazy { null }
+    override val ktTypeReference: KtTypeReference?
+        get() = null
 
-    override val ktNameReferenceExpression: KtNameReferenceExpression? by lazy { null }
+    override val ktNameReferenceExpression: KtNameReferenceExpression?
+        get() = null
 
-    override val ktTypeProjection: KtTypeProjection? by lazy { null }
+    override val ktTypeProjection: KtTypeProjection?
+        get() = null
 
-    override val ktUserType: KtUserType? by lazy { ktSuperTypeListEntry.typeAsUserType }
+    override val ktUserType: KtUserType?
+        get() = ktSuperTypeListEntry.typeAsUserType
 
-    override val ktAnnotationEntries: List<KtAnnotationEntry>? by lazy {
-        val children = ktSuperTypeListEntry.children
+    @Volatile
+    private var cachedKtAnnotationEntries: Any? = KoPropertyCache.NOT_COMPUTED
 
-        val targetChildren =
-            children
-                .filterIsInstance<KtConstructorCalleeExpression>()
-                .firstOrNull()
-                ?.children
-                ?: children
+    override val ktAnnotationEntries: List<KtAnnotationEntry>?
+        get() =
+            KoPropertyCache.getOrCompute(cachedKtAnnotationEntries, { cachedKtAnnotationEntries = it }) {
+                val children = ktSuperTypeListEntry.children
 
-        targetChildren
-            .firstOrNull { it is KtTypeReference }
-            ?.children
-            ?.firstOrNull { it is KtDeclarationModifierList }
-            ?.children
-            ?.filterIsInstance<KtAnnotationEntry>()
-    }
+                val targetChildren =
+                    children
+                        .filterIsInstance<KtConstructorCalleeExpression>()
+                        .firstOrNull()
+                        ?.children
+                        ?: children
 
-    override val sourceDeclaration: KoDeclarationCastProvider? by lazy {
-        val name =
-            ktSuperTypeListEntry
-                .text
-                .substringBefore(" ")
-                .substringBefore("(")
-                .substringBefore("<")
+                targetChildren
+                    .firstOrNull { it is KtTypeReference }
+                    ?.children
+                    ?.firstOrNull { it is KtDeclarationModifierList }
+                    ?.children
+                    ?.filterIsInstance<KtAnnotationEntry>()
+            }
 
-        val outerName = if (name.contains(".")) name.substringBeforeLast(".") else name
-        val innerName = if (name.contains(".")) name.substringAfterLast(".") else name
+    @Volatile
+    private var cachedSourceDeclaration: Any? = KoPropertyCache.NOT_COMPUTED
 
-        val import =
-            containingFile
-                .imports
-                .firstOrNull { import ->
-                    if (import.alias != null) {
-                        import.alias?.name == outerName
-                    } else {
-                        import.name.substringAfterLast(".") == outerName || import.name.endsWith(name)
-                    }
-                }
+    override val sourceDeclaration: KoDeclarationCastProvider?
+        get() =
+            KoPropertyCache.getOrCompute(cachedSourceDeclaration, { cachedSourceDeclaration = it }) {
+                val name =
+                    ktSuperTypeListEntry
+                        .text
+                        .substringBefore(" ")
+                        .substringBefore("(")
+                        .substringBefore("<")
 
-        val fullyQualifiedName =
-            import?.name
-                ?: "${containingFile.packagee?.name?.let { "$it." } ?: ""}$name"
+                val outerName = if (name.contains(".")) name.substringBeforeLast(".") else name
+                val innerName = if (name.contains(".")) name.substringAfterLast(".") else name
 
-        val isAlias = import?.alias != null
+                val import =
+                    containingFile
+                        .imports
+                        .firstOrNull { import ->
+                            if (import.alias != null) {
+                                import.alias?.name == outerName
+                            } else {
+                                import.name.substringAfterLast(".") == outerName || import.name.endsWith(name)
+                            }
+                        }
 
-        (
-            import?.alias
-                ?: getClass(innerName, fullyQualifiedName, isAlias, containingFile)
-                ?: getInterface(innerName, fullyQualifiedName, isAlias, containingFile)
-                ?: getTypeAlias(innerName, fullyQualifiedName, containingFile)
-                ?: if (isKotlinType(name)) {
-                    // Pass only the type, without constructor arguments (`Foo(bar)`) or delegation (`Foo by bar`)
-                    ktUserType?.let { KoKotlinTypeDeclarationCore.getInstance(it, containingDeclaration) }
-                } else {
-                    null
-                }
-                ?: KoExternalDeclarationCore.getInstance(innerName, ktSuperTypeListEntry)
-        )
-            as? KoDeclarationCastProvider
-    }
+                val fullyQualifiedName =
+                    import?.name
+                        ?: "${containingFile.packagee?.name?.let { "$it." } ?: ""}$name"
 
-    override val name: String by lazy {
-        val children = ktElement.children
+                val isAlias = import?.alias != null
 
-        children
-            .filterIsInstance<KtTypeReference>()
-            .firstOrNull()
-            ?.text
-            ?: children
-                .flatMap { it.children.toList() }
-                .filterIsInstance<KtTypeReference>()
-                .firstOrNull()
-                ?.text
-            ?: text
-    }
+                (
+                    import?.alias
+                        ?: getClass(innerName, fullyQualifiedName, isAlias, containingFile)
+                        ?: getInterface(innerName, fullyQualifiedName, isAlias, containingFile)
+                        ?: getTypeAlias(innerName, fullyQualifiedName, containingFile)
+                        ?: if (isKotlinType(name)) {
+                            // Pass only the type, without constructor arguments (`Foo(bar)`) or delegation (`Foo by bar`)
+                            ktUserType?.let { KoKotlinTypeDeclarationCore.getInstance(it, containingDeclaration) }
+                        } else {
+                            null
+                        }
+                        ?: KoExternalDeclarationCore.getInstance(innerName, ktSuperTypeListEntry)
+                )
+                    as? KoDeclarationCastProvider
+            }
 
-    override val arguments: List<KoArgumentDeclaration> by lazy {
-        ktSuperTypeListEntry
-            .children
-            .filterIsInstance<KtValueArgumentList>()
-            .firstOrNull()
-            ?.children
-            ?.filterIsInstance<KtValueArgument>()
-            ?.map { KoArgumentDeclarationCore.getInstance(it, this) }
-            .orEmpty()
-    }
+    @Volatile
+    private var cachedName: Any? = KoPropertyCache.NOT_COMPUTED
+
+    override val name: String
+        get() =
+            KoPropertyCache.getOrCompute(cachedName, { cachedName = it }) {
+                val children = ktElement.children
+
+                children
+                    .filterIsInstance<KtTypeReference>()
+                    .firstOrNull()
+                    ?.text
+                    ?: children
+                        .flatMap { it.children.toList() }
+                        .filterIsInstance<KtTypeReference>()
+                        .firstOrNull()
+                        ?.text
+                    ?: text
+            }
+
+    @Volatile
+    private var cachedArguments: Any? = KoPropertyCache.NOT_COMPUTED
+
+    override val arguments: List<KoArgumentDeclaration>
+        get() =
+            KoPropertyCache.getOrCompute(cachedArguments, { cachedArguments = it }) {
+                ktSuperTypeListEntry
+                    .children
+                    .filterIsInstance<KtValueArgumentList>()
+                    .firstOrNull()
+                    ?.children
+                    ?.filterIsInstance<KtValueArgument>()
+                    ?.map { KoArgumentDeclarationCore.getInstance(it, this) }
+                    .orEmpty()
+            }
 
     override fun toString(): String = text
 

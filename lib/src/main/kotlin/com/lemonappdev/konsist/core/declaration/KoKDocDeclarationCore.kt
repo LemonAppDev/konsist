@@ -1,6 +1,7 @@
 package com.lemonappdev.konsist.core.declaration
 
 import com.lemonappdev.konsist.api.declaration.KoKDocDeclaration
+import com.lemonappdev.konsist.core.cache.KoPropertyCache
 import com.lemonappdev.konsist.core.provider.KoKDocDescriptionProviderCore
 import com.lemonappdev.konsist.core.provider.KoLocationProviderCore
 import com.lemonappdev.konsist.core.provider.KoModuleProviderCore
@@ -54,42 +55,53 @@ internal class KoKDocDeclarationCore(
     KoKDocPropertySetterTagProviderCore,
     KoKDocConstructorTagProviderCore,
     KoKDocSinceTagProviderCore {
-    override val psiElement: PsiElement by lazy { kDocElement }
+    override val psiElement: PsiElement
+        get() = kDocElement
 
-    override val kDocTags: List<KDocTag> by lazy {
-        kDocElement
-            .children
-            .filterIsInstance<KDocSection>()
-            .flatMap { it.children.toList() }
-            .filterIsInstance<KDocTag>()
-    }
+    @Volatile
+    private var cachedKDocTags: Any? = KoPropertyCache.NOT_COMPUTED
 
-    override val text: String by lazy {
-        val splitKDoc =
-            kDocElement
-                .text
-                .split(EndOfLine.UNIX.value)
-                .toMutableList()
+    override val kDocTags: List<KDocTag>
+        get() =
+            KoPropertyCache.getOrCompute(cachedKDocTags, { cachedKDocTags = it }) {
+                kDocElement
+                    .children
+                    .filterIsInstance<KDocSection>()
+                    .flatMap { it.children.toList() }
+                    .filterIsInstance<KDocTag>()
+            }
 
-        if (splitKDoc.size == 1 && splitKDoc.first().startsWith("/**") && splitKDoc.first().endsWith("*/")) {
-            splitKDoc
-                .first()
-                .removePrefix("/**")
-                .removeSuffix("*/")
-                .trim()
-        } else {
-            splitKDoc
-                .also {
-                    it.removeFirst()
-                    it.removeLast()
-                }.joinToString("\n") {
-                    it
+    @Volatile
+    private var cachedText: Any? = KoPropertyCache.NOT_COMPUTED
+
+    override val text: String
+        get() =
+            KoPropertyCache.getOrCompute(cachedText, { cachedText = it }) {
+                val splitKDoc =
+                    kDocElement
+                        .text
+                        .split(EndOfLine.UNIX.value)
+                        .toMutableList()
+
+                if (splitKDoc.size == 1 && splitKDoc.first().startsWith("/**") && splitKDoc.first().endsWith("*/")) {
+                    splitKDoc
+                        .first()
+                        .removePrefix("/**")
+                        .removeSuffix("*/")
                         .trim()
-                        .removePrefix("*")
-                        .trim()
+                } else {
+                    splitKDoc
+                        .also {
+                            it.removeFirst()
+                            it.removeLast()
+                        }.joinToString("\n") {
+                            it
+                                .trim()
+                                .removePrefix("*")
+                                .trim()
+                        }
                 }
-        }
-    }
+            }
 
     override fun toString(): String = locationWithText
 }

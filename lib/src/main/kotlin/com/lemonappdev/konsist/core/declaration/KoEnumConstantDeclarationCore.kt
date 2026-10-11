@@ -8,6 +8,7 @@ import com.lemonappdev.konsist.api.declaration.KoFunctionDeclaration
 import com.lemonappdev.konsist.api.declaration.KoVariableDeclaration
 import com.lemonappdev.konsist.core.annotation.RemoveInVersion
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
+import com.lemonappdev.konsist.core.cache.KoPropertyCache
 import com.lemonappdev.konsist.core.provider.KoAnnotationProviderCore
 import com.lemonappdev.konsist.core.provider.KoArgumentProviderCore
 import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
@@ -77,65 +78,102 @@ internal class KoEnumConstantDeclarationCore private constructor(
     KoPackageDeclarationProviderCore,
     KoResideInPackageProviderCore,
     KoTextProviderCore {
-    override val ktTypeParameterListOwner: KtTypeParameterListOwner by lazy { ktEnumEntry }
+    override val ktTypeParameterListOwner: KtTypeParameterListOwner
+        get() = ktEnumEntry
 
-    override val ktAnnotationEntries: List<KtAnnotationEntry>? by lazy { ktEnumEntry.annotationEntries }
+    override val ktAnnotationEntries: List<KtAnnotationEntry>?
+        get() = ktEnumEntry.annotationEntries
 
-    override val psiElement: PsiElement by lazy { ktEnumEntry }
+    override val psiElement: PsiElement
+        get() = ktEnumEntry
 
-    override val ktElement: KtElement by lazy { ktEnumEntry }
+    override val ktElement: KtElement
+        get() = ktEnumEntry
 
     override fun declarations(
         includeNested: Boolean,
         includeLocal: Boolean,
     ): List<KoBaseDeclaration> = KoDeclarationProviderCoreUtil.getKoDeclarations(ktEnumEntry, includeNested, includeLocal, this)
 
-    override val arguments: List<KoArgumentDeclaration> by lazy {
-        ktEnumEntry
-            .initializerList
-            ?.initializers
-            ?.firstOrNull()
-            ?.children
-            ?.filterIsInstance<KtValueArgumentList>()
-            ?.firstOrNull()
-            ?.children
-            ?.filterIsInstance<KtValueArgument>()
-            ?.map { KoArgumentDeclarationCore.getInstance(it, this) }
-            .orEmpty()
-    }
+    @Volatile
+    private var cachedArguments: Any? = KoPropertyCache.NOT_COMPUTED
+
+    override val arguments: List<KoArgumentDeclaration>
+        get() =
+            KoPropertyCache.getOrCompute(cachedArguments, { cachedArguments = it }) {
+                ktEnumEntry
+                    .initializerList
+                    ?.initializers
+                    ?.firstOrNull()
+                    ?.children
+                    ?.filterIsInstance<KtValueArgumentList>()
+                    ?.firstOrNull()
+                    ?.children
+                    ?.filterIsInstance<KtValueArgument>()
+                    ?.map { KoArgumentDeclarationCore.getInstance(it, this) }
+                    .orEmpty()
+            }
 
     override fun toString(): String = name
 
+    @Volatile
+    private var cachedVariables: Any? = KoPropertyCache.NOT_COMPUTED
+
     @Deprecated("Will be removed in version 0.20.0", replaceWith = ReplaceWith("properties()"))
-    override val variables: List<KoVariableDeclaration> by lazy { super<KoVariableProviderCore>.variables }
+    override val variables: List<KoVariableDeclaration>
+        get() = KoPropertyCache.getOrCompute(cachedVariables, { cachedVariables = it }) { super<KoVariableProviderCore>.variables }
 
     @Deprecated("Will be removed in version 0.20.0", replaceWith = ReplaceWith("numProperties()"))
-    override val numVariables: Int by lazy { super<KoVariableProviderCore>.numVariables }
+    override val numVariables: Int
+        get() = super<KoVariableProviderCore>.numVariables
+
+    @Volatile
+    private var cachedLocalDeclarations: Any? = KoPropertyCache.NOT_COMPUTED
 
     @Deprecated("Will be removed in version 0.20.0", replaceWith = ReplaceWith("declarations()"))
-    override val localDeclarations: List<KoBaseDeclaration> by lazy {
-        val psiElements =
-            ktEnumEntry
-                .body
-                ?.children
+    override val localDeclarations: List<KoBaseDeclaration>
+        get() =
+            KoPropertyCache.getOrCompute(cachedLocalDeclarations, { cachedLocalDeclarations = it }) {
+                val psiElements =
+                    ktEnumEntry
+                        .body
+                        ?.children
 
-        KoLocalDeclarationProviderCoreUtil.getKoLocalDeclarations(psiElements, this)
-    }
+                KoLocalDeclarationProviderCoreUtil.getKoLocalDeclarations(psiElements, this)
+            }
 
     @Deprecated("Will be removed in version 0.20.0", replaceWith = ReplaceWith("numDeclarations()"))
-    override val numLocalDeclarations: Int by lazy { super<KoLocalDeclarationProviderCore>.numLocalDeclarations }
+    override val numLocalDeclarations: Int
+        get() = super<KoLocalDeclarationProviderCore>.numLocalDeclarations
+
+    @Volatile
+    private var cachedLocalClasses: Any? = KoPropertyCache.NOT_COMPUTED
 
     @Deprecated("Will be removed in version 0.20.0", replaceWith = ReplaceWith("classes()"))
-    override val localClasses: List<KoClassDeclaration> by lazy { super<KoLocalClassProviderCore>.localClasses }
+    override val localClasses: List<KoClassDeclaration>
+        get() =
+            KoPropertyCache.getOrCompute(
+                cachedLocalClasses,
+                { cachedLocalClasses = it },
+            ) { super<KoLocalClassProviderCore>.localClasses }
 
     @Deprecated("Will be removed in version 0.20.0", replaceWith = ReplaceWith("numClasses()"))
-    override val numLocalClasses: Int by lazy { super<KoLocalClassProviderCore>.numLocalClasses }
+    override val numLocalClasses: Int
+        get() = super<KoLocalClassProviderCore>.numLocalClasses
+
+    @Volatile
+    private var cachedLocalFunctions: Any? = KoPropertyCache.NOT_COMPUTED
 
     @Deprecated("Will be removed in version 0.20.0", replaceWith = ReplaceWith("functions()"))
-    override val localFunctions: List<KoFunctionDeclaration> by lazy { super<KoLocalFunctionProviderCore>.localFunctions }
+    override val localFunctions: List<KoFunctionDeclaration>
+        get() =
+            KoPropertyCache.getOrCompute(cachedLocalFunctions, {
+                cachedLocalFunctions = it
+            }) { super<KoLocalFunctionProviderCore>.localFunctions }
 
     @Deprecated("Will be removed in version 0.20.0", replaceWith = ReplaceWith("numFunctions()"))
-    override val numLocalFunctions: Int by lazy { super<KoLocalFunctionProviderCore>.numLocalFunctions }
+    override val numLocalFunctions: Int
+        get() = super<KoLocalFunctionProviderCore>.numLocalFunctions
 
     @Deprecated("Will be removed in version 0.20.0", replaceWith = ReplaceWith("countProperties()"))
     override fun countVariables(predicate: (KoVariableDeclaration) -> Boolean): Int =

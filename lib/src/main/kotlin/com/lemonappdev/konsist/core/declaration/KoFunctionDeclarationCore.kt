@@ -3,6 +3,7 @@ package com.lemonappdev.konsist.core.declaration
 import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoFunctionDeclaration
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
+import com.lemonappdev.konsist.core.cache.KoPropertyCache
 import com.lemonappdev.konsist.core.provider.KoAnnotationProviderCore
 import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
 import com.lemonappdev.konsist.core.provider.KoBodyProviderCore
@@ -103,38 +104,56 @@ internal class KoFunctionDeclarationCore private constructor(
     KoIsExtensionProviderCore,
     KoIsGenericProviderCore,
     KoDeclarationCastProviderCore {
-    override val ktCallableDeclaration: KtCallableDeclaration by lazy { ktFunction }
+    override val ktCallableDeclaration: KtCallableDeclaration
+        get() = ktFunction
 
-    override val ktAnnotationEntries: List<KtAnnotationEntry>? by lazy { ktCallableDeclaration.annotationEntries }
+    override val ktAnnotationEntries: List<KtAnnotationEntry>?
+        get() = ktCallableDeclaration.annotationEntries
 
-    override val ktModifierListOwner: KtModifierListOwner by lazy { ktCallableDeclaration }
+    override val ktModifierListOwner: KtModifierListOwner
+        get() = ktCallableDeclaration
 
-    override val ktTypeParameterListOwner: KtTypeParameterListOwner by lazy { ktCallableDeclaration }
+    override val ktTypeParameterListOwner: KtTypeParameterListOwner
+        get() = ktCallableDeclaration
 
-    override val psiElement: PsiElement by lazy { ktFunction }
+    override val psiElement: PsiElement
+        get() = ktFunction
 
-    override val ktElement: KtElement by lazy { ktFunction }
+    override val ktElement: KtElement
+        get() = ktFunction
 
-    override val ktDeclarationWithBody: KtDeclarationWithBody by lazy { ktFunction }
+    override val ktDeclarationWithBody: KtDeclarationWithBody
+        get() = ktFunction
 
-    override val ktDeclaration: KtDeclaration by lazy { ktFunction }
+    override val ktDeclaration: KtDeclaration
+        get() = ktFunction
 
-    override val localDeclarations: List<KoBaseDeclaration> by lazy {
-        val psiElements =
-            ktFunction
-                .bodyBlockExpression
-                ?.children
+    @Volatile
+    private var cachedLocalDeclarations: Any? = KoPropertyCache.NOT_COMPUTED
 
-        KoLocalDeclarationProviderCoreUtil.getKoLocalDeclarations(psiElements, this)
-    }
+    override val localDeclarations: List<KoBaseDeclaration>
+        get() =
+            KoPropertyCache.getOrCompute(cachedLocalDeclarations, { cachedLocalDeclarations = it }) {
+                val psiElements =
+                    ktFunction
+                        .bodyBlockExpression
+                        ?.children
 
-    override val fullyQualifiedName: String? by lazy {
-        if (this.isTopLevel) {
-            super.fullyQualifiedName
-        } else {
-            null
-        }
-    }
+                KoLocalDeclarationProviderCoreUtil.getKoLocalDeclarations(psiElements, this)
+            }
+
+    @Volatile
+    private var cachedFullyQualifiedName: Any? = KoPropertyCache.NOT_COMPUTED
+
+    override val fullyQualifiedName: String?
+        get() =
+            KoPropertyCache.getOrCompute(cachedFullyQualifiedName, { cachedFullyQualifiedName = it }) {
+                if (this.isTopLevel) {
+                    super.fullyQualifiedName
+                } else {
+                    null
+                }
+            }
 
     override fun toString(): String = name
 

@@ -3,6 +3,7 @@ package com.lemonappdev.konsist.core.declaration
 import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoInitBlockDeclaration
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
+import com.lemonappdev.konsist.core.cache.KoPropertyCache
 import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
 import com.lemonappdev.konsist.core.provider.KoContainingDeclarationProviderCore
 import com.lemonappdev.konsist.core.provider.KoContainingFileProviderCore
@@ -36,18 +37,25 @@ internal class KoInitBlockDeclarationCore private constructor(
     KoModuleProviderCore,
     KoSourceSetProviderCore,
     KoTextProviderCore {
-    override val psiElement: PsiElement by lazy { ktAnonymousInitializer }
+    override val psiElement: PsiElement
+        get() = ktAnonymousInitializer
 
-    override val ktElement: KtElement by lazy { ktAnonymousInitializer }
+    override val ktElement: KtElement
+        get() = ktAnonymousInitializer
 
-    override val localDeclarations: List<KoBaseDeclaration> by lazy {
-        val psiElements =
-            ktAnonymousInitializer
-                .body
-                ?.children
+    @Volatile
+    private var cachedLocalDeclarations: Any? = KoPropertyCache.NOT_COMPUTED
 
-        KoLocalDeclarationProviderCoreUtil.getKoLocalDeclarations(psiElements, this)
-    }
+    override val localDeclarations: List<KoBaseDeclaration>
+        get() =
+            KoPropertyCache.getOrCompute(cachedLocalDeclarations, { cachedLocalDeclarations = it }) {
+                val psiElements =
+                    ktAnonymousInitializer
+                        .body
+                        ?.children
+
+                KoLocalDeclarationProviderCoreUtil.getKoLocalDeclarations(psiElements, this)
+            }
 
     override fun toString(): String = locationWithText
 

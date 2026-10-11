@@ -3,6 +3,7 @@ package com.lemonappdev.konsist.core.declaration
 import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoPackageDeclaration
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
+import com.lemonappdev.konsist.core.cache.KoPropertyCache
 import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
 import com.lemonappdev.konsist.core.provider.KoContainingFileProviderCore
 import com.lemonappdev.konsist.core.provider.KoLocationProviderCore
@@ -39,17 +40,23 @@ internal class KoPackageDeclarationCore internal constructor(
         this.ktPackageDirective = ktPackageDirective
     }
 
-    override val psiElement: PsiElement by lazy { ktElement }
+    override val psiElement: PsiElement
+        get() = ktElement
 
-    override val name: String by lazy {
-        if (ktPackageDirective == null) {
-            qualifiedName.substringBeforeLast(".")
-        } else if (ktPackageDirective?.fqName != FqName.ROOT) {
-            ktPackageDirective?.fqName.toString()
-        } else {
-            name
-        }
-    }
+    @Volatile
+    private var cachedName: Any? = KoPropertyCache.NOT_COMPUTED
+
+    override val name: String
+        get() =
+            KoPropertyCache.getOrCompute(cachedName, { cachedName = it }) {
+                if (ktPackageDirective == null) {
+                    qualifiedName.substringBeforeLast(".")
+                } else if (ktPackageDirective?.fqName != FqName.ROOT) {
+                    ktPackageDirective?.fqName.toString()
+                } else {
+                    name
+                }
+            }
 
     override fun toString(): String = name
 
