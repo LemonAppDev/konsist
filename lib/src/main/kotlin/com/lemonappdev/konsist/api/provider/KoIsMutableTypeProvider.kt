@@ -16,7 +16,10 @@ interface KoIsMutableTypeProvider : KoBaseProvider {
      * `MutableLiveData`, etc.
      * - a known mutable Kotlin or Java type, such as `ArrayList`, `HashMap`, `Array`, `IntArray`, `StringBuilder`,
      * `AtomicInteger`, `ConcurrentHashMap`, etc.
-     * - a class, interface or object declared in the project whose name starts with "Mutable".
+     * - a class, interface or object declared in the project whose name starts with "Mutable", that declares
+     * a `var` property (including `var` constructor parameters and private properties), or whose parent is mutable,
+     * such as `class Foo(var bar: Int)` or `class Foo : ArrayList<String>()`. Properties declared in nested
+     * declarations (including companion objects) are not checked.
      *
      * Only the type itself is checked, so for `List<MutableList<String>>` value will be `false`.
      *

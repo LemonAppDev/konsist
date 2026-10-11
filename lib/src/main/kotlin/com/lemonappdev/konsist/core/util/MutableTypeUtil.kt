@@ -1,12 +1,10 @@
 package com.lemonappdev.konsist.core.util
 
-import com.lemonappdev.konsist.api.declaration.KoClassDeclaration
 import com.lemonappdev.konsist.api.declaration.KoExternalDeclaration
 import com.lemonappdev.konsist.api.declaration.KoImportAliasDeclaration
-import com.lemonappdev.konsist.api.declaration.KoInterfaceDeclaration
-import com.lemonappdev.konsist.api.declaration.KoObjectDeclaration
 import com.lemonappdev.konsist.api.declaration.KoTypeAliasDeclaration
 import com.lemonappdev.konsist.api.declaration.KoTypeArgumentDeclaration
+import com.lemonappdev.konsist.api.declaration.combined.KoClassAndInterfaceAndObjectDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoKotlinTypeDeclaration
 import com.lemonappdev.konsist.api.provider.KoDeclarationCastProvider
 
@@ -17,16 +15,37 @@ internal object MutableTypeUtil {
      * Checks if the source declaration is a mutable type.
      * Type aliases and import aliases are resolved to the declaration they point to, so their own names are ignored.
      */
-    internal fun isMutableType(sourceDeclaration: KoDeclarationCastProvider?): Boolean =
+    internal fun isMutableType(sourceDeclaration: KoDeclarationCastProvider?): Boolean = isMutableType(sourceDeclaration, mutableSetOf())
+
+    private fun isMutableType(
+        sourceDeclaration: KoDeclarationCastProvider?,
+        visitedDeclarations: MutableSet<KoClassAndInterfaceAndObjectDeclaration>,
+    ): Boolean =
         when (val declaration = sourceDeclaration.resolveImportAlias()) {
-            is KoTypeAliasDeclaration -> declaration.type.isMutableType
+            is KoTypeAliasDeclaration -> isMutableType(declaration.type.sourceDeclaration, visitedDeclarations)
             is KoKotlinTypeDeclaration -> isKnownMutableTypeName(declaration.name)
             is KoExternalDeclaration -> isKnownMutableTypeName(declaration.name)
-            is KoClassDeclaration -> declaration.name.startsWith(MUTABLE_TYPE_PREFIX)
-            is KoInterfaceDeclaration -> declaration.name.startsWith(MUTABLE_TYPE_PREFIX)
-            is KoObjectDeclaration -> declaration.name.startsWith(MUTABLE_TYPE_PREFIX)
+            is KoClassAndInterfaceAndObjectDeclaration -> isMutableProjectDeclaration(declaration, visitedDeclarations)
             else -> false
         }
+
+    /*
+     * Checks if the class, interface or object declared in the project is mutable:
+     * its name starts with "Mutable", it declares a `var` property (including `var` constructor parameters),
+     * or any of its parents is mutable.
+     * Properties of nested declarations (including companion objects) are not checked.
+     * Visited declarations are tracked to avoid infinite recursion when parents are resolved ambiguously.
+     */
+    private fun isMutableProjectDeclaration(
+        declaration: KoClassAndInterfaceAndObjectDeclaration,
+        visitedDeclarations: MutableSet<KoClassAndInterfaceAndObjectDeclaration>,
+    ): Boolean {
+        if (!visitedDeclarations.add(declaration)) return false
+
+        return declaration.name.startsWith(MUTABLE_TYPE_PREFIX) ||
+            declaration.properties(includeNested = false).any { it.isVar } ||
+            declaration.parents().any { isMutableType(it.sourceDeclaration, visitedDeclarations) }
+    }
 
     /*
      * Checks if any type argument (at any nesting level) is a mutable type.
