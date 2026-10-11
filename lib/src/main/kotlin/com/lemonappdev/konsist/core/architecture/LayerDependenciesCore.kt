@@ -40,16 +40,16 @@ internal class LayerDependenciesCore(
     }
 
     /**
-     * Validates that each layer contains at least one file.
+     * Validates that each non-optional layer contains at least one file.
      *
      * @param files The files within the scope.
      *
-     * @throws KoPreconditionFailedException if a layer does not contain any files.
+     * @throws KoPreconditionFailedException if a non-optional layer does not contain any files.
      */
     fun checkLayersWithoutFiles(files: List<KoFileDeclaration>) {
         layers
             .firstOrNull { layer ->
-                files.withPackage(layer.rootPackage).isEmpty()
+                !layer.optional && files.withPackage(layer.rootPackage).isEmpty()
             }?.let { invalidLayer ->
                 throw KoPreconditionFailedException("Layer ${invalidLayer.name} doesn't contain any files.")
             }
