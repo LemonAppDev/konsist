@@ -14,6 +14,9 @@ package com.lemonappdev.konsist.api.architecture
  *
  * // Wildcard layer definitions (wildcards at the start and at the end)
  * val specificDomainLayer = Layer("Domain", "..domain..")  // matches any package containing a "domain" segment
+ *
+ * // Optional layer definition (layer may not contain any files yet)
+ * val presentationLayer = Layer("Presentation", "com.example.presentation..", optional = true)
  * ```
  *
  * Package Pattern Rules:
@@ -32,12 +35,16 @@ package com.lemonappdev.konsist.api.architecture
  *
  * @property name Layer identifier (non-blank)
  * @property rootPackage Package pattern defining layer scope (must follow pattern rules)
+ * @property optional Controls the behaviour when the layer does not contain any files:
+ *                    - false: architecture assertion fails (default) - helps to detect invalid package definitions.
+ *                    - true: layer is allowed to be empty. Strict dependencies of an empty layer are not checked.
  * @throws IllegalArgumentException If name is blank or rootPackage violates pattern rules
  */
 @Suppress("detekt.ThrowsCount")
 data class Layer(
     internal val name: String,
     internal val rootPackage: String,
+    internal val optional: Boolean = false,
 ) {
     init {
         require(name.isNotBlank()) { "name is blank" }
