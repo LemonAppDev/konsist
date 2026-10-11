@@ -967,6 +967,23 @@ class KoTypeDeclarationForKoTypeArgumentProviderTest {
         }
     }
 
+    @Test
+    fun `kotlin-type-alias-type-argument`() {
+        // given
+        val sut =
+            getSnippetFile("kotlin-type-alias-type-argument")
+                .properties()
+                .first()
+                .type
+
+        // then
+        assertSoftly(sut) {
+            it?.hasTypeArgumentOf(RuntimeException::class) shouldBeEqualTo true
+            it?.hasTypeArgumentOf(Exception::class) shouldBeEqualTo false
+            it?.hasAllTypeArgumentsOf(RuntimeException::class) shouldBeEqualTo true
+        }
+    }
+
     private fun getSnippetFile(fileName: String) =
         TestSnippetProvider.getSnippetKoScope(
             "core/declaration/type/kotype/snippet/forkotypeargumentprovider/",

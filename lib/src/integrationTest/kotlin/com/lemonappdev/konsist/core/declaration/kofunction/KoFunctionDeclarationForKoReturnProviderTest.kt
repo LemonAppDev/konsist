@@ -182,5 +182,20 @@ class KoFunctionDeclarationForKoReturnProviderTest {
         sut.hasReturnValue shouldBeEqualTo true
     }
 
+    @Test
+    fun `function-return-kotlin-type-alias`() {
+        // given
+        val sut =
+            getSnippetFile("function-return-kotlin-type-alias")
+                .functions()
+                .first()
+
+        // then
+        assertSoftly(sut) {
+            hasReturnTypeOf(IllegalStateException::class) shouldBeEqualTo true
+            hasReturnTypeOf(RuntimeException::class) shouldBeEqualTo false
+        }
+    }
+
     private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/kofunction/snippet/forkoreturnprovider/", fileName)
 }

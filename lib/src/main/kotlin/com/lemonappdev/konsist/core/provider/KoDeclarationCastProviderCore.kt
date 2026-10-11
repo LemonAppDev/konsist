@@ -208,7 +208,7 @@ internal interface KoDeclarationCastProviderCore :
         }
 
     override fun hasKotlinTypeDeclarationOf(kClass: KClass<*>): Boolean =
-        kClass.qualifiedName == asKotlinTypeDeclaration()?.fullyQualifiedName
+        TypeUtil.matchesKClass(asKotlinTypeDeclaration()?.fullyQualifiedName, kClass)
 
     override fun hasKotlinBasicTypeDeclaration(predicate: ((KoKotlinTypeDeclaration) -> Boolean)?): Boolean =
         when (predicate) {
@@ -217,7 +217,7 @@ internal interface KoDeclarationCastProviderCore :
         }
 
     override fun hasKotlinBasicTypeDeclarationOf(kClass: KClass<*>): Boolean =
-        kClass.qualifiedName == asKotlinBasicTypeDeclaration()?.fullyQualifiedName
+        TypeUtil.matchesKClass(asKotlinBasicTypeDeclaration()?.fullyQualifiedName, kClass)
 
     override fun hasKotlinCollectionTypeDeclaration(predicate: ((KoKotlinTypeDeclaration) -> Boolean)?): Boolean =
         when (predicate) {
@@ -226,7 +226,7 @@ internal interface KoDeclarationCastProviderCore :
         }
 
     override fun hasKotlinCollectionTypeDeclarationOf(kClass: KClass<*>): Boolean =
-        kClass.qualifiedName == asKotlinCollectionTypeDeclaration()?.fullyQualifiedName
+        TypeUtil.matchesKClass(asKotlinCollectionTypeDeclaration()?.fullyQualifiedName, kClass)
 
     override fun hasTypeParameterDeclaration(predicate: ((KoTypeParameterDeclaration) -> Boolean)?): Boolean =
         when (predicate) {

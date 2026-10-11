@@ -10,6 +10,6 @@ object ParentUtil {
         list: List<T>,
     ): Boolean =
         list.any { parent ->
-            (parent.sourceDeclaration as? KoFullyQualifiedNameProvider)?.fullyQualifiedName == kClass.qualifiedName
+            TypeUtil.matchesKClass((parent.sourceDeclaration as? KoFullyQualifiedNameProvider)?.fullyQualifiedName, kClass)
         }
 }
