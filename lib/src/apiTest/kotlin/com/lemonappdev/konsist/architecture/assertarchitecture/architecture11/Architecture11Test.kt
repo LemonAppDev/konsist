@@ -1,186 +1,123 @@
 package com.lemonappdev.konsist.architecture.assertarchitecture.architecture11
 
 import com.lemonappdev.konsist.api.Konsist
-import com.lemonappdev.konsist.api.architecture.KoArchitectureCreator.architecture
 import com.lemonappdev.konsist.api.architecture.KoArchitectureCreator.assertArchitecture
 import com.lemonappdev.konsist.api.architecture.Layer
-import com.lemonappdev.konsist.core.exception.KoAssertionFailedException
+import com.lemonappdev.konsist.core.exception.KoPreconditionFailedException
+import com.lemonappdev.konsist.core.filesystem.PathProvider
+import io.kotest.assertions.throwables.shouldNotThrowAny
 import io.kotest.assertions.throwables.shouldThrow
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
 class Architecture11Test {
+    private val rootPath = PathProvider.rootProjectPath
+
     private val scope =
         Konsist.scopeFromDirectory(
-            "lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/assertarchitecture/architecture2/project",
+            "lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/assertarchitecture/architecture11/project",
+        )
+
+    private val app =
+        Layer(
+            "App",
+            "com.lemonappdev.konsist.architecture.assertarchitecture.architecture11.project..",
         )
 
     private val domain =
         Layer(
             "Domain",
-            "com.lemonappdev.konsist.architecture.assertarchitecture.architecture2.project.domain..",
+            "com.lemonappdev.konsist.architecture.assertarchitecture.architecture11.project.domain..",
         )
 
-    private val presentation =
-        Layer(
-            "Presentation",
-            "com.lemonappdev.konsist.architecture.assertarchitecture.architecture2.project.presentation..",
-        )
+    private val anyDomain = Layer("AnyDomain", "..domain..")
 
     private val data =
         Layer(
             "Data",
-            "com.lemonappdev.konsist.architecture.assertarchitecture.architecture2.project.data..",
-            optional = true,
+            "com.lemonappdev.konsist.architecture.assertarchitecture.architecture11.project.data..",
         )
 
-    // region passes when optional layer with no files has strict dependency
-    @Test
-    fun `passes when optional layer with no files has strict dependency (lambda scope)`() {
-        // then
-        scope
-            .assertArchitecture {
-                domain.dependsOnNothing()
-                presentation.dependsOn(domain, strict = true)
-                data.dependsOn(domain, strict = true)
-            }
-    }
+    private val projectPath =
+        "file://$rootPath/lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/assertarchitecture/architecture11/project"
+
+    private val domainFile = "File $projectPath/domain/DomainClass.kt"
+
+    private val dataFile = "File $projectPath/data/DataClass.kt"
 
     @Test
-    fun `passes when optional layer with no files has strict dependency (lambda files)`() {
-        // then
-        scope
-            .files
-            .assertArchitecture {
-                domain.dependsOnNothing()
-                presentation.dependsOn(domain, strict = true)
-                data.dependsOn(domain, strict = true)
-            }
-    }
-
-    @Test
-    fun `passes when optional layer with no files has strict dependency (parameter scope)`() {
-        // given
-        val layerDependencies =
-            architecture {
-                domain.dependsOnNothing()
-                presentation.dependsOn(domain, strict = true)
-                data.dependsOn(domain, strict = true)
-            }
-
-        // then
-        scope.assertArchitecture(layerDependencies)
-    }
-
-    @Test
-    fun `passes when optional layer with no files has strict dependency (parameter files)`() {
-        // given
-        val layerDependencies =
-            architecture {
-                domain.dependsOnNothing()
-                presentation.dependsOn(domain, strict = true)
-                data.dependsOn(domain, strict = true)
-            }
-
-        // then
-        scope
-            .files
-            .assertArchitecture(layerDependencies)
-    }
-    // endregion
-
-    // region fails when layer has strict dependency on optional layer with no files
-    @Test
-    fun `fails when layer has strict dependency on optional layer with no files (lambda scope)`() {
+    fun `nested layer fails precondition`() {
         // when
         val result =
-            shouldThrow<KoAssertionFailedException> {
-                scope
-                    .assertArchitecture {
-                        domain.dependsOnNothing()
-                        presentation.dependsOn(domain, data, strict = true)
-                    }
+            shouldThrow<KoPreconditionFailedException> {
+                scope.assertArchitecture {
+                    app.dependsOnNothing()
+                    domain.include()
+                }
             }
 
         // then
         result
             .message
             .shouldBeEqualTo(
-                "'fails when layer has strict dependency on optional layer with no files (lambda scope)' test has failed. \n" +
-                    "'Presentation' layer is required to depend on 'Data' layer (strict), but has no dependency on it.",
+                "Layers overlap. Each file must belong to only one layer:\n" +
+                    "└── Layers 'App', 'Domain' share files:\n" +
+                    "    └── $domainFile",
             )
     }
 
     @Test
-    fun `fails when layer has strict dependency on optional layer with no files (lambda files)`() {
+    fun `wildcard layer overlapping other layer fails precondition`() {
         // when
         val result =
-            shouldThrow<KoAssertionFailedException> {
-                scope
-                    .files
-                    .assertArchitecture {
-                        domain.dependsOnNothing()
-                        presentation.dependsOn(domain, data, strict = true)
-                    }
+            shouldThrow<KoPreconditionFailedException> {
+                scope.assertArchitecture {
+                    domain.dependsOnNothing()
+                    anyDomain.include()
+                }
             }
 
         // then
         result
             .message
             .shouldBeEqualTo(
-                "'fails when layer has strict dependency on optional layer with no files (lambda files)' test has failed. \n" +
-                    "'Presentation' layer is required to depend on 'Data' layer (strict), but has no dependency on it.",
+                "Layers overlap. Each file must belong to only one layer:\n" +
+                    "└── Layers 'Domain', 'AnyDomain' share files:\n" +
+                    "    └── $domainFile",
             )
     }
 
     @Test
-    fun `fails when layer has strict dependency on optional layer with no files (parameter scope)`() {
-        // given
-        val layerDependencies =
-            architecture {
+    fun `overlap failure lists files grouped by overlapping layers`() {
+        // when
+        val result =
+            shouldThrow<KoPreconditionFailedException> {
+                scope.assertArchitecture {
+                    app.doesNotDependOn(domain, data)
+                    anyDomain.include()
+                }
+            }
+
+        // then
+        result
+            .message
+            .shouldBeEqualTo(
+                "Layers overlap. Each file must belong to only one layer:\n" +
+                    "├── Layers 'App', 'Data' share files:\n" +
+                    "│   └── $dataFile\n" +
+                    "└── Layers 'App', 'Domain', 'AnyDomain' share files:\n" +
+                    "    └── $domainFile",
+            )
+    }
+
+    @Test
+    fun `non overlapping layers pass precondition`() {
+        // then
+        shouldNotThrowAny {
+            scope.assertArchitecture {
                 domain.dependsOnNothing()
-                presentation.dependsOn(domain, data, strict = true)
+                data.dependsOnNothing()
             }
-
-        // when
-        val result =
-            shouldThrow<KoAssertionFailedException> {
-                scope.assertArchitecture(layerDependencies)
-            }
-
-        // then
-        result
-            .message
-            .shouldBeEqualTo(
-                "'fails when layer has strict dependency on optional layer with no files (parameter scope)' test has failed. \n" +
-                    "'Presentation' layer is required to depend on 'Data' layer (strict), but has no dependency on it.",
-            )
+        }
     }
-
-    @Test
-    fun `fails when layer has strict dependency on optional layer with no files (parameter files)`() {
-        // given
-        val layerDependencies =
-            architecture {
-                domain.dependsOnNothing()
-                presentation.dependsOn(domain, data, strict = true)
-            }
-
-        // when
-        val result =
-            shouldThrow<KoAssertionFailedException> {
-                scope
-                    .files
-                    .assertArchitecture(layerDependencies)
-            }
-
-        // then
-        result
-            .message
-            .shouldBeEqualTo(
-                "'fails when layer has strict dependency on optional layer with no files (parameter files)' test has failed. \n" +
-                    "'Presentation' layer is required to depend on 'Data' layer (strict), but has no dependency on it.",
-            )
-    }
-    // endregion
 }

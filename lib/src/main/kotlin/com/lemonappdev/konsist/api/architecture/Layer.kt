@@ -33,6 +33,10 @@ package com.lemonappdev.konsist.api.architecture
  *    - ".." is allowed at start, middle, or end of pattern
  *    - No consecutive dots except for wildcard notation
  *
+ * 4. Overlapping Layers
+ *    - Each file must belong to only one layer, e.g. "com.example.." and "com.example.domain.." overlap
+ *    - Architecture assertion fails when a file belongs to more than one layer
+ *
  * @property name Layer identifier (non-blank)
  * @property rootPackage Package pattern defining layer scope (must follow pattern rules)
  * @property optional Controls the behaviour when the layer does not contain any files:
