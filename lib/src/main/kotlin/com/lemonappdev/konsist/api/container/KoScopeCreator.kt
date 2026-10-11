@@ -21,6 +21,8 @@ interface KoScopeCreator {
      * @param moduleName The name of the module. If null, all modules will be included.
      * Gradle project path (e.g. `:feature:auth`) is the preferred format, but `feature/auth` and `feature\auth`
      * are also accepted on all OSes. Use `root` (or `:`) for the top-level module. Module names are case-sensitive.
+     * Module name is the module directory path, so Gradle project path works only when it matches the directory
+     * (Gradle `projectDir` overrides in settings.gradle(.kts) are not supported).
      * @param sourceSetName The name of the source set. If null, all source sets will be included.
      * @param ignoreBuildConfig If true, build config files and directories such as Gradle buildSrc directory will be ignored.
      * @return a [KoScope] containing all Kotlin files in the project.
@@ -39,6 +41,8 @@ interface KoScopeCreator {
      * @param moduleName The name of the module.
      * Gradle project path (e.g. `:feature:auth`) is the preferred format, but `feature/auth` and `feature\auth`
      * are also accepted on all OSes. Use `root` (or `:`) for the top-level module. Module names are case-sensitive.
+     * Module name is the module directory path, so Gradle project path works only when it matches the directory
+     * (Gradle `projectDir` overrides in settings.gradle(.kts) are not supported).
      * @param moduleNames The name(s) of the module(s), in the same format as [moduleName].
      * @return a [KoScope] containing all Kotlin files in the module.
      */
@@ -55,6 +59,8 @@ interface KoScopeCreator {
      * @param moduleNames Set of the module names.
      * Gradle project path (e.g. `:feature:auth`) is the preferred format, but `feature/auth` and `feature\auth`
      * are also accepted on all OSes. Use `root` (or `:`) for the top-level module. Module names are case-sensitive.
+     * Module name is the module directory path, so Gradle project path works only when it matches the directory
+     * (Gradle `projectDir` overrides in settings.gradle(.kts) are not supported).
      * @return a [KoScope] containing all Kotlin files in the module.
      */
     fun scopeFromModules(moduleNames: Collection<String>): KoScope
@@ -68,6 +74,8 @@ interface KoScopeCreator {
      * @param moduleName The name of the module. If null, all modules will be included.
      * Gradle project path (e.g. `:feature:auth`) is the preferred format, but `feature/auth` and `feature\auth`
      * are also accepted on all OSes. Use `root` (or `:`) for the top-level module. Module names are case-sensitive.
+     * Module name is the module directory path, so Gradle project path works only when it matches the directory
+     * (Gradle `projectDir` overrides in settings.gradle(.kts) are not supported).
      * @param sourceSetName The name of the source set. If null, all source sets will be included.
      * @return a [KoScope] containing all Kotlin files in the given package.
      */
@@ -112,6 +120,8 @@ interface KoScopeCreator {
      * @param moduleName The name of the module. If null, all modules will be included.
      * Gradle project path (e.g. `:feature:auth`) is the preferred format, but `feature/auth` and `feature\auth`
      * are also accepted on all OSes. Use `root` (or `:`) for the top-level module. Module names are case-sensitive.
+     * Module name is the module directory path, so Gradle project path works only when it matches the directory
+     * (Gradle `projectDir` overrides in settings.gradle(.kts) are not supported).
      * @param sourceSetName The name of the source set. If null, all source sets will be included.
      * @return a [KoScope] containing all Kotlin files in the production source sets.
      * @throws IllegalArgumentException if [sourceSetName] is a test source set.
@@ -132,6 +142,8 @@ interface KoScopeCreator {
      * @param moduleName The name of the module. If null, all modules will be included.
      * Gradle project path (e.g. `:feature:auth`) is the preferred format, but `feature/auth` and `feature\auth`
      * are also accepted on all OSes. Use `root` (or `:`) for the top-level module. Module names are case-sensitive.
+     * Module name is the module directory path, so Gradle project path works only when it matches the directory
+     * (Gradle `projectDir` overrides in settings.gradle(.kts) are not supported).
      * @param sourceSetName The name of the source set. If null, all source sets will be included.
      * @return a [KoScope] containing all Kotlin files in the test source sets.
      * @throws IllegalArgumentException if [sourceSetName] is a production source set.

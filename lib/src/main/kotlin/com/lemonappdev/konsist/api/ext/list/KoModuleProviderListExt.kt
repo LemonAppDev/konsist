@@ -7,6 +7,8 @@ import com.lemonappdev.konsist.api.provider.KoModuleProvider
  *
  * Gradle project path (e.g. `:feature:auth`) is the preferred module name format,
  * but `feature/auth` and `feature\auth` are also accepted on all OSes.
+ * Module name is the module directory path, so Gradle project path works only when it matches the directory
+ * (Gradle `projectDir` overrides in settings.gradle(.kts) are not supported).
  *
  * @param name The module name to include.
  * @param names The module name(s) to include.
@@ -22,6 +24,8 @@ fun <T : KoModuleProvider> List<T>.withModule(
  *
  * Gradle project path (e.g. `:feature:auth`) is the preferred module name format,
  * but `feature/auth` and `feature\auth` are also accepted on all OSes.
+ * Module name is the module directory path, so Gradle project path works only when it matches the directory
+ * (Gradle `projectDir` overrides in settings.gradle(.kts) are not supported).
  *
  * @param names The module name(s) to include.
  * @return A list containing declarations that reside in any of the specified modules.
@@ -39,6 +43,8 @@ fun <T : KoModuleProvider> List<T>.withModule(names: Collection<String>): List<T
  *
  * Gradle project path (e.g. `:feature:auth`) is the preferred module name format,
  * but `feature/auth` and `feature\auth` are also accepted on all OSes.
+ * Module name is the module directory path, so Gradle project path works only when it matches the directory
+ * (Gradle `projectDir` overrides in settings.gradle(.kts) are not supported).
  *
  * @param name The module name to exclude.
  * @param names The module name(s) to exclude.
@@ -54,6 +60,8 @@ fun <T : KoModuleProvider> List<T>.withoutModule(
  *
  * Gradle project path (e.g. `:feature:auth`) is the preferred module name format,
  * but `feature/auth` and `feature\auth` are also accepted on all OSes.
+ * Module name is the module directory path, so Gradle project path works only when it matches the directory
+ * (Gradle `projectDir` overrides in settings.gradle(.kts) are not supported).
  *
  * @param names The module name(s) to exclude.
  * @return A list containing declarations that don't reside in any of the specified modules.

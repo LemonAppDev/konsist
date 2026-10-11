@@ -5,7 +5,7 @@ package com.lemonappdev.konsist.api.provider
  */
 interface KoModuleProvider : KoBaseProvider {
     /**
-     * The declaration's module name.
+     * The declaration's module name - module directory path relative to the project root (not Gradle project path).
      * Uses `/` separators on all OSes, e.g. "feature/data", or "root" for the top-level module.
      */
     val moduleName: String
@@ -16,6 +16,8 @@ interface KoModuleProvider : KoBaseProvider {
      * @param name The name of the module to check. If this is the top-level module, use "root" (or ":").
      * Gradle project path (e.g. `:feature:auth`) is the preferred format, but `feature/auth` and `feature\auth`
      * are also accepted on all OSes.
+     * Module name is the module directory path, so Gradle project path works only when it matches the directory
+     * (Gradle `projectDir` overrides in settings.gradle(.kts) are not supported).
      * @return `true` if the declaration resides in the specified module, `false` otherwise.
      */
     fun resideInModule(name: String): Boolean
