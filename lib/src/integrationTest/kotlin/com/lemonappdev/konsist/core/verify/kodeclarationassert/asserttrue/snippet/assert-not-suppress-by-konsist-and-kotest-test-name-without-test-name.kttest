@@ -1,0 +1,3 @@
+@file:Suppress("konsist.assert-not-suppress-by-konsist-and-kotest-test-name-without-test-name")
+
+class FixtureClass
