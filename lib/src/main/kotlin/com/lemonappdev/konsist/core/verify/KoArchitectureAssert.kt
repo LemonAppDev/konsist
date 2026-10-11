@@ -29,6 +29,7 @@ internal fun KoArchitectureFiles.assert(
         assertCommon(
             files,
             layerDependenciesCore,
+            requireAllFilesInLayers,
             additionalMessage,
             testName,
         )
@@ -52,6 +53,7 @@ internal fun KoArchitectureScope.assert(
         assertCommon(
             koScope.files,
             layerDependenciesCore,
+            requireAllFilesInLayers,
             additionalMessage,
             testName,
         )
@@ -68,6 +70,7 @@ internal fun KoArchitectureScope.assert(
 private fun assertCommon(
     files: List<KoFileDeclaration>,
     layerDependenciesCore: LayerDependenciesCore,
+    requireAllFilesInLayers: Boolean,
     additionalMessage: String?,
     testName: String?,
 ) {
@@ -79,7 +82,12 @@ private fun assertCommon(
     val failedDependsOnNotAllowedLayers = getFailedDependsOnNotAllowedLayers(files, layerDependenciesCore)
     val failedDoesNotDependsOnLayers = getFailedDoesNotDependsOnLayers(files, layerDependenciesCore)
     val failedDependsOnNothing = getFailedDependsOnNothing(files, layerDependenciesCore)
-    val filesOutsideLayers = getFilesOutsideLayers(files, layerDependenciesCore)
+    val filesOutsideLayers =
+        if (requireAllFilesInLayers) {
+            getFilesOutsideLayers(files, layerDependenciesCore)
+        } else {
+            emptyList()
+        }
 
     val hasFailures =
         listOf(
@@ -315,10 +323,6 @@ private fun getFilesOutsideLayers(
     files: List<KoFileDeclaration>,
     layerDependencies: LayerDependenciesCore,
 ): List<KoFileDeclaration> {
-    if (!layerDependencies.allFilesInLayersRequired) {
-        return emptyList()
-    }
-
     val layerPackages = layerDependencies.layers.map { it.rootPackage }
 
     return files.filter { file ->

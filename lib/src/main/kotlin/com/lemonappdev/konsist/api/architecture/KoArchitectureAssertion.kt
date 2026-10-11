@@ -26,12 +26,18 @@ interface KoArchitectureAssertion {
      *                 method name. For Kotest and JUnit 5 dynamic tests register [KoKotestExtension] or [KoJUnitExtension],
      *                 or pass the test name manually.
      *                 Architecture assertions do not support `@Suppress`; remove files from the scope instead.
+     * @param requireAllFilesInLayers Controls files that reside in no declared layer:
+     *              - true: every file must reside in exactly one declared layer (default). Files that reside in no layer,
+     *                     including files without a package, are reported as a violation.
+     *              - false: files that reside in no layer are ignored.
+     *              A file that resides in more than one layer always fails.
      * @param layerDependenciesFunc The function literal with receiver [LayerDependencies] that allows configuring the dependencies
      * of the architecture.
      */
     fun KoScope.assertArchitecture(
         additionalMessage: String? = null,
         testName: String? = null,
+        requireAllFilesInLayers: Boolean = true,
         layerDependenciesFunc: LayerDependencies.() -> Unit,
     ): Unit
 
@@ -51,11 +57,17 @@ interface KoArchitectureAssertion {
      *                 method name. For Kotest and JUnit 5 dynamic tests register [KoKotestExtension] or [KoJUnitExtension],
      *                 or pass the test name manually.
      *                 Architecture assertions do not support `@Suppress`; remove files from the scope instead.
+     * @param requireAllFilesInLayers Controls files that reside in no declared layer:
+     *              - true: every file must reside in exactly one declared layer (default). Files that reside in no layer,
+     *                     including files without a package, are reported as a violation.
+     *              - false: files that reside in no layer are ignored.
+     *              A file that resides in more than one layer always fails.
      * @param layerDependenciesFunc The [LayerDependencies] instance representing the configured dependencies of the architecture.
      */
     fun KoScope.assertArchitecture(
         additionalMessage: String? = null,
         testName: String? = null,
+        requireAllFilesInLayers: Boolean = true,
         layerDependenciesFunc: LayerDependencies,
     ): Unit
 
@@ -76,12 +88,18 @@ interface KoArchitectureAssertion {
      *                 method name. For Kotest and JUnit 5 dynamic tests register [KoKotestExtension] or [KoJUnitExtension],
      *                 or pass the test name manually.
      *                 Architecture assertions do not support `@Suppress`; remove files from the scope instead.
+     * @param requireAllFilesInLayers Controls files that reside in no declared layer:
+     *              - true: every file must reside in exactly one declared layer (default). Files that reside in no layer,
+     *                     including files without a package, are reported as a violation.
+     *              - false: files that reside in no layer are ignored.
+     *              A file that resides in more than one layer always fails.
      * @param layerDependenciesFunc The function literal with receiver [LayerDependencies] that allows configuring the dependencies
      * of the architecture.
      */
     fun List<KoFileDeclaration>.assertArchitecture(
         additionalMessage: String? = null,
         testName: String? = null,
+        requireAllFilesInLayers: Boolean = true,
         layerDependenciesFunc: LayerDependencies.() -> Unit,
     ): Unit
 
@@ -101,11 +119,17 @@ interface KoArchitectureAssertion {
      *                 method name. For Kotest and JUnit 5 dynamic tests register [KoKotestExtension] or [KoJUnitExtension],
      *                 or pass the test name manually.
      *                 Architecture assertions do not support `@Suppress`; remove files from the scope instead.
+     * @param requireAllFilesInLayers Controls files that reside in no declared layer:
+     *              - true: every file must reside in exactly one declared layer (default). Files that reside in no layer,
+     *                     including files without a package, are reported as a violation.
+     *              - false: files that reside in no layer are ignored.
+     *              A file that resides in more than one layer always fails.
      * @param layerDependenciesFunc The [LayerDependencies] instance representing the configured dependencies of the architecture.
      */
     fun List<KoFileDeclaration>.assertArchitecture(
         additionalMessage: String? = null,
         testName: String? = null,
+        requireAllFilesInLayers: Boolean = true,
         layerDependenciesFunc: LayerDependencies,
     ): Unit
 

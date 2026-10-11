@@ -1,7 +1,7 @@
 # Architecture 12
 
 Test scenario where `Util` package and a file without a package reside outside every declared layer.
-`requireAllFilesInLayers()` should report these files:
+`assertArchitecture` reports these files unless `requireAllFilesInLayers = false`:
 
 ```mermaid
 %%{init: {'theme': 'forest'}}%%

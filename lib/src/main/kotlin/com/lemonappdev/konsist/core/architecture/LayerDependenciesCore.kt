@@ -15,8 +15,6 @@ internal class LayerDependenciesCore(
 ) : LayerDependencies {
     internal val layerDependencies = mutableSetOf<LayerDependency>()
     internal var layers = mutableSetOf<Layer>()
-    internal var allFilesInLayersRequired = false
-        private set
 
     // ToDO: Create type
     internal val dependsOnDependencies: Set<LayerDependency>
@@ -222,10 +220,6 @@ internal class LayerDependenciesCore(
 
     override fun Collection<Layer>.include() {
         forEach { it.include() }
-    }
-
-    override fun requireAllFilesInLayers() {
-        allFilesInLayersRequired = true
     }
 
     private fun getLayerWithDependOnNothingDependency(layer: Layer): LayerDependency? {

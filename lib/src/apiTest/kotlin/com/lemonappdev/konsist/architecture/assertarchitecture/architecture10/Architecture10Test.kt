@@ -74,7 +74,7 @@ class Architecture10Test {
         // when
         val result =
             shouldThrow<KoAssertionFailedException> {
-                scope.assertArchitecture {
+                scope.assertArchitecture(requireAllFilesInLayers = false) {
                     presentation.doesNotDependOn(data)
                 }
             }

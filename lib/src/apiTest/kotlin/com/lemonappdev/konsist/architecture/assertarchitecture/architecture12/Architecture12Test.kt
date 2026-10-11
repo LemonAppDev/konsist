@@ -46,12 +46,25 @@ class Architecture12Test {
     private val dataFilePath = "$projectPath/data/DataClass.kt"
 
     @Test
-    fun `passes when files reside outside layers and requireAllFilesInLayers is not set`() {
+    fun `passes when files reside outside layers and requireAllFilesInLayers is false (lambda scope)`() {
         // then
-        scope.assertArchitecture {
+        scope.assertArchitecture(requireAllFilesInLayers = false) {
             domain.dependsOnNothing()
             data.dependsOn(domain)
         }
+    }
+
+    @Test
+    fun `passes when files reside outside layers and requireAllFilesInLayers is false (parameter files)`() {
+        // given
+        val layerDependencies =
+            architecture {
+                domain.dependsOnNothing()
+                data.dependsOn(domain)
+            }
+
+        // then
+        scope.files.assertArchitecture(requireAllFilesInLayers = false, layerDependenciesFunc = layerDependencies)
     }
 
     @Test
@@ -64,7 +77,6 @@ class Architecture12Test {
                 domain.dependsOnNothing()
                 data.dependsOn(domain)
                 util.include()
-                requireAllFilesInLayers()
             }
     }
 
@@ -76,7 +88,6 @@ class Architecture12Test {
                 scope.assertArchitecture {
                     domain.dependsOnNothing()
                     data.dependsOn(domain)
-                    requireAllFilesInLayers()
                 }
             }
 
@@ -99,7 +110,6 @@ class Architecture12Test {
                 domain.dependsOnNothing()
                 data.dependsOn(domain)
                 util.include()
-                requireAllFilesInLayers()
             }
 
         // when
@@ -126,7 +136,6 @@ class Architecture12Test {
                 scope.assertArchitecture {
                     domain.dependsOnNothing()
                     data.dependsOnNothing()
-                    requireAllFilesInLayers()
                 }
             }
 
