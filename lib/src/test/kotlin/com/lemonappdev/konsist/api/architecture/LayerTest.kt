@@ -25,14 +25,72 @@ class LayerTest {
     }
 
     @Test
-    fun `create Layer with package not ending in double dots should throw exception`() {
+    fun `create Layer with package ending in single dot should throw exception`() {
         // when
-        val func = { Layer(name = "name", rootPackage = "com.example") }
+        val func = { Layer(name = "name", rootPackage = "com.example.") }
 
         // then
         func shouldThrow IllegalArgumentException::class withMessage
-            "Invalid package definition for layer 'name'. To include subpackages, the definition must end with '..'. " +
-            "Current definition: com.example"
+            "Invalid package definition for layer 'name'. To include subpackages, the definition must end with '..', " +
+            "to include only the package, the definition must end with a package segment. Current definition: com.example."
+    }
+
+    @Test
+    fun `create Layer with package ending in three dots should throw exception`() {
+        // when
+        val func = { Layer(name = "name", rootPackage = "com.example...") }
+
+        // then
+        func shouldThrow IllegalArgumentException::class withMessage
+            "Invalid package definition for layer 'name'. To include subpackages, the definition must end with '..', " +
+            "to include only the package, the definition must end with a package segment. Current definition: com.example..."
+    }
+
+    @Test
+    fun `create Layer with invalid excluded package should throw exception`() {
+        // when
+        val func = { Layer(name = "name", rootPackage = "com.example..", excludedPackages = setOf("com.Example..")) }
+
+        // then
+        func shouldThrow IllegalArgumentException::class withMessage
+            "Invalid package definition for layer 'name'. Invalid package segment 'Example' at position 2. " +
+            "Package segments must start with a lowercase letter and contain only letters, numbers, or underscores. " +
+            "Current definition: com.Example.."
+    }
+
+    @Test
+    fun `create Layer with blank excluded package should throw exception`() {
+        // when
+        val func = { Layer(name = "name", rootPackage = "com.example..", excludedPackages = setOf(" ")) }
+
+        // then
+        func shouldThrow IllegalArgumentException::class withMessage "excludedPackages contain blank package"
+    }
+
+    @Test
+    fun `create Layer excluding its root package should throw exception`() {
+        // when
+        val func = { Layer(name = "name", rootPackage = "com.example..", excludedPackages = setOf("com.example..")) }
+
+        // then
+        func shouldThrow IllegalArgumentException::class withMessage
+            "Invalid excludedPackages definition for layer 'name'. Layer cannot exclude its rootPackage. " +
+            "Current definition: com.example.."
+    }
+
+    @Test
+    fun `create Layer with valid excluded packages should not throw exception`() {
+        // when
+        val func = {
+            Layer(
+                name = "name",
+                rootPackage = "com.example..",
+                excludedPackages = setOf("com.example.viewmodel..", "com.example.ui", "..internal.."),
+            )
+        }
+
+        // then
+        func shouldNotThrow IllegalArgumentException::class
     }
 
     @Test
@@ -112,6 +170,10 @@ class LayerTest {
                 "com.example1.test2..",
                 "com.example_test..",
                 "com.exampleTest..",
+                "com.example",
+                "example",
+                "..example",
+                "com..example",
             )
 
         // then

@@ -49,6 +49,12 @@ internal class ProjectDeclarationIndex(
             .groupBy({ it.first }, { it.second })
     }
 
+    /**
+     * Names of the project packages (empty for the root package).
+     */
+    val packageNames: Set<String>
+        get() = filesByPackageName.keys
+
     private val typesByPackageName = KoReferenceCache<Map<String, KoBaseDeclaration>> { SoftReference(it) }
 
     private val declarationsByPackageName = KoReferenceCache<Map<String, KoBaseDeclaration>> { SoftReference(it) }

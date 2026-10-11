@@ -3,7 +3,6 @@ package com.lemonappdev.konsist.core.architecture
 import com.lemonappdev.konsist.api.architecture.Layer
 import com.lemonappdev.konsist.api.architecture.LayerDependencies
 import com.lemonappdev.konsist.api.declaration.KoFileDeclaration
-import com.lemonappdev.konsist.api.ext.list.withPackage
 import com.lemonappdev.konsist.core.architecture.validator.LayerValidatorManager
 import com.lemonappdev.konsist.core.exception.KoInvalidAssertArchitectureConfigurationException
 import com.lemonappdev.konsist.core.exception.KoPreconditionFailedException
@@ -45,9 +44,11 @@ internal class LayerDependenciesCore(
      * @throws KoPreconditionFailedException if a layer does not contain any files.
      */
     fun checkLayersWithoutFiles(files: List<KoFileDeclaration>) {
+        val layerMatcher = LayerMatcher(files)
+
         layers
             .firstOrNull { layer ->
-                files.withPackage(layer.rootPackage).isEmpty()
+                layerMatcher.getFiles(layer).isEmpty()
             }?.let { invalidLayer ->
                 throw KoPreconditionFailedException("Layer ${invalidLayer.name} doesn't contain any files.")
             }
