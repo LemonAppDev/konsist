@@ -103,7 +103,7 @@ class Architecture5Test {
     @Test
     fun `passes when  using doesNotDependsOn (lambda scope)`() {
         // then
-        scope.assertArchitecture(requireAllFilesInLayers = false) {
+        scope.assertArchitecture(allowFilesOutsideLayers = true) {
             presentation.doesNotDependOn(domain, infrastructure)
         }
     }
@@ -113,7 +113,7 @@ class Architecture5Test {
         // then
         scope
             .files
-            .assertArchitecture(requireAllFilesInLayers = false) {
+            .assertArchitecture(allowFilesOutsideLayers = true) {
                 presentation.doesNotDependOn(domain, infrastructure)
             }
     }
@@ -127,7 +127,7 @@ class Architecture5Test {
             }
 
         // then
-        scope.assertArchitecture(requireAllFilesInLayers = false, layerDependenciesFunc = layerDependencies)
+        scope.assertArchitecture(allowFilesOutsideLayers = true, layerDependenciesFunc = layerDependencies)
     }
 
     @Test
@@ -141,7 +141,7 @@ class Architecture5Test {
         // then
         scope
             .files
-            .assertArchitecture(requireAllFilesInLayers = false, layerDependenciesFunc = layerDependencies)
+            .assertArchitecture(allowFilesOutsideLayers = true, layerDependenciesFunc = layerDependencies)
     }
 
     // endregion

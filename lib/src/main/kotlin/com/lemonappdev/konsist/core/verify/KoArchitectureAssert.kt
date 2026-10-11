@@ -29,7 +29,7 @@ internal fun KoArchitectureFiles.assert(
         assertCommon(
             files,
             layerDependenciesCore,
-            requireAllFilesInLayers,
+            allowFilesOutsideLayers,
             additionalMessage,
             testName,
         )
@@ -53,7 +53,7 @@ internal fun KoArchitectureScope.assert(
         assertCommon(
             koScope.files,
             layerDependenciesCore,
-            requireAllFilesInLayers,
+            allowFilesOutsideLayers,
             additionalMessage,
             testName,
         )
@@ -70,7 +70,7 @@ internal fun KoArchitectureScope.assert(
 private fun assertCommon(
     files: List<KoFileDeclaration>,
     layerDependenciesCore: LayerDependenciesCore,
-    requireAllFilesInLayers: Boolean,
+    allowFilesOutsideLayers: Boolean,
     additionalMessage: String?,
     testName: String?,
 ) {
@@ -83,10 +83,10 @@ private fun assertCommon(
     val failedDoesNotDependsOnLayers = getFailedDoesNotDependsOnLayers(files, layerDependenciesCore)
     val failedDependsOnNothing = getFailedDependsOnNothing(files, layerDependenciesCore)
     val filesOutsideLayers =
-        if (requireAllFilesInLayers) {
-            getFilesOutsideLayers(files, layerDependenciesCore)
-        } else {
+        if (allowFilesOutsideLayers) {
             emptyList()
+        } else {
+            getFilesOutsideLayers(files, layerDependenciesCore)
         }
 
     val hasFailures =

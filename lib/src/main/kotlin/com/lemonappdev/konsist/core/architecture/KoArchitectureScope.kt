@@ -9,12 +9,12 @@ import com.lemonappdev.konsist.api.declaration.KoFileDeclaration
  *
  * @param layerDependencies dependency configuration for a particular Layer
  * @param koScope Scope of declaration
- * @param requireAllFilesInLayers Whether every file must reside in a declared layer
+ * @param allowFilesOutsideLayers Whether files that reside in no declared layer are ignored
  */
 internal data class KoArchitectureScope(
     val layerDependencies: LayerDependencies,
     val koScope: KoScope,
-    val requireAllFilesInLayers: Boolean,
+    val allowFilesOutsideLayers: Boolean,
 )
 
 /**
@@ -22,10 +22,10 @@ internal data class KoArchitectureScope(
  *
  * @param layerDependencies dependency configuration for a particular Layer
  * @param files Files within the scope
- * @param requireAllFilesInLayers Whether every file must reside in a declared layer
+ * @param allowFilesOutsideLayers Whether files that reside in no declared layer are ignored
  */
 internal data class KoArchitectureFiles(
     val layerDependencies: LayerDependencies,
     val files: List<KoFileDeclaration>,
-    val requireAllFilesInLayers: Boolean,
+    val allowFilesOutsideLayers: Boolean,
 )
