@@ -29,6 +29,8 @@ class KoVariableDeclarationForKoPropertyDelegateProviderTest {
             hasDelegate() shouldBeEqualTo true
             hasDelegate("lazy") shouldBeEqualTo true
             hasDelegate("Delegates.observable()") shouldBeEqualTo false
+            hasLazyDelegate() shouldBeEqualTo true
+            hasObservableDelegate shouldBeEqualTo false
         }
     }
 
@@ -46,6 +48,7 @@ class KoVariableDeclarationForKoPropertyDelegateProviderTest {
             delegateName shouldBeEqualTo null
             hasDelegate() shouldBeEqualTo false
             hasDelegate("lazy") shouldBeEqualTo false
+            hasLazyDelegate() shouldBeEqualTo false
         }
     }
 

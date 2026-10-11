@@ -1,0 +1,3 @@
+import kotlin.properties.Delegates
+
+var fixtureProperty by Delegates.observable(0) { _, _, _ -> }

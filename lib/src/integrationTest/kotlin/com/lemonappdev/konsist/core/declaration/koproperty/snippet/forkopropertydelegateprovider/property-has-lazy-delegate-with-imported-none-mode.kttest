@@ -1,0 +1,3 @@
+import kotlin.LazyThreadSafetyMode.NONE
+
+val fixtureProperty by lazy(NONE) { 0 }

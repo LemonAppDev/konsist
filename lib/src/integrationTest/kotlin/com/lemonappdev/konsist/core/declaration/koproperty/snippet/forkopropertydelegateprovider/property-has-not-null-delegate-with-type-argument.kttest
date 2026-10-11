@@ -1,0 +1,3 @@
+import kotlin.properties.Delegates
+
+var fixtureProperty by Delegates.notNull<Int>()
