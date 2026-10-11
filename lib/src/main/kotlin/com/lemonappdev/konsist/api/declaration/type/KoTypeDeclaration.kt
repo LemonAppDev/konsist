@@ -7,6 +7,7 @@ import com.lemonappdev.konsist.api.declaration.KoFunctionDeclaration
 import com.lemonappdev.konsist.api.declaration.KoImportAliasDeclaration
 import com.lemonappdev.konsist.api.declaration.KoInterfaceDeclaration
 import com.lemonappdev.konsist.api.declaration.KoObjectDeclaration
+import com.lemonappdev.konsist.api.declaration.KoPackageDeclaration
 import com.lemonappdev.konsist.api.declaration.KoPropertyDeclaration
 import com.lemonappdev.konsist.api.declaration.KoTypeAliasDeclaration
 import com.lemonappdev.konsist.api.declaration.KoTypeParameterDeclaration
@@ -70,6 +71,16 @@ interface KoTypeDeclaration :
     KoFunctionTypeDeclarationProvider,
     @RemoveInVersion("0.19.0")
     KoDeclarationCastProvider {
+    /**
+     * Package of the file where the type is referenced (the use site), not the package where the type is declared,
+     * e.g. for `fun Foo.bar()` declared in `com.app`, `receiverType.packagee` is `com.app` even if `Foo` is declared
+     * in `com.lib`. [resideInPackage] and [resideOutsidePackage] check this package too.
+     *
+     * To get the package where the type is declared use [sourceDeclaration], e.g.
+     * `type.sourceDeclaration?.asClassDeclaration()?.packagee`.
+     */
+    override val packagee: KoPackageDeclaration?
+
     @Deprecated("Will be removed in version 0.19.0", ReplaceWith("sourceDeclaration?.isClass"))
     override val isClass: Boolean
 

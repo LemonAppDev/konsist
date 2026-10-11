@@ -9,7 +9,10 @@ import kotlin.reflect.KType
  */
 interface KoReturnProvider : KoBaseProvider {
     /**
-     * Return type of the declaration.
+     * Explicitly declared return type of the declaration.
+     *
+     * Konsist does not infer types, so this is `null` when the return type is not declared, e.g. for
+     * `fun foo() = 1` or `fun foo() { }`.
      */
     val returnType: KoTypeDeclaration?
 
@@ -40,6 +43,15 @@ interface KoReturnProvider : KoBaseProvider {
 
     /**
      * Determines whether the declaration has a specified return type.
+     *
+     * Only an explicitly declared return type counts, an inferred one does not:
+     * ```kotlin
+     * fun foo(): Int = 1 // hasReturnType() == true
+     * fun foo() = 1      // hasReturnType() == false
+     * fun foo() { }      // hasReturnType() == false
+     * ```
+     * To require an explicit return type for expression-bodied functions combine it with `hasExpressionBody`, e.g.
+     * `functions().assertFalse { it.hasExpressionBody && !it.hasReturnType() }`.
      *
      * @param predicate The predicate function used to determine if a declaration return type satisfies a condition.
      * @return `true` if the declaration has the specified return type (or any return type if [predicate] is `null`),

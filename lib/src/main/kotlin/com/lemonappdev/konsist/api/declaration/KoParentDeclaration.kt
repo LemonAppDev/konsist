@@ -37,4 +37,13 @@ interface KoParentDeclaration :
     KoModuleProvider,
     KoSourceSetProvider,
     KoArgumentProvider,
-    KoInterfaceDelegateProvider
+    KoInterfaceDelegateProvider {
+    /**
+     * Package of the file where the parent is referenced (the use site), not the package where the parent is declared.
+     * [resideInPackage] and [resideOutsidePackage] check this package too.
+     *
+     * To get the package where the parent is declared use [sourceDeclaration], e.g.
+     * `parent.sourceDeclaration?.asInterfaceDeclaration()?.packagee`.
+     */
+    override val packagee: KoPackageDeclaration?
+}

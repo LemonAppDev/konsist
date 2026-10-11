@@ -2,6 +2,7 @@ package com.lemonappdev.konsist.core.declaration
 
 import com.lemonappdev.konsist.api.declaration.KoArgumentDeclaration
 import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
+import com.lemonappdev.konsist.api.declaration.KoPackageDeclaration
 import com.lemonappdev.konsist.api.declaration.KoParentDeclaration
 import com.lemonappdev.konsist.api.provider.KoContainingDeclarationProvider
 import com.lemonappdev.konsist.api.provider.KoDeclarationCastProvider
@@ -76,6 +77,9 @@ internal class KoParentDeclarationCore(
 
     override val ktUserType: KtUserType?
         get() = ktSuperTypeListEntry.typeAsUserType
+
+    override val packagee: KoPackageDeclaration?
+        get() = super<KoPackageDeclarationProviderCore>.packagee
 
     @Volatile
     private var cachedKtAnnotationEntries: Any? = KoPropertyCache.NOT_COMPUTED
