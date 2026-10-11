@@ -237,7 +237,7 @@ fun <T : KoTypeDeclaration> List<T>.externalDeclarations(
 fun <T : KoTypeDeclaration> List<T>.withClassDeclaration(predicate: ((KoClassDeclaration) -> Boolean)? = null): List<T> =
     filter {
         when (predicate) {
-            null -> it.isClass
+            null -> it.asClassDeclaration() != null
             else -> it.asClassDeclaration()?.let { classDeclaration -> predicate(classDeclaration) } == true
         }
     }
@@ -252,7 +252,7 @@ fun <T : KoTypeDeclaration> List<T>.withClassDeclaration(predicate: ((KoClassDec
 fun <T : KoTypeDeclaration> List<T>.withoutClassDeclaration(predicate: ((KoClassDeclaration) -> Boolean)? = null): List<T> =
     filterNot {
         when (predicate) {
-            null -> it.isClass
+            null -> it.asClassDeclaration() != null
             else -> it.asClassDeclaration()?.let { classDeclaration -> predicate(classDeclaration) } == true
         }
     }
@@ -323,7 +323,7 @@ fun <T : KoTypeDeclaration> List<T>.withoutClassDeclarationOf(kClasses: Collecti
 fun <T : KoTypeDeclaration> List<T>.withObjectDeclaration(predicate: ((KoObjectDeclaration) -> Boolean)? = null): List<T> =
     filter {
         when (predicate) {
-            null -> it.isObject
+            null -> it.asObjectDeclaration() != null
             else -> it.asObjectDeclaration()?.let { objectDeclaration -> predicate(objectDeclaration) } == true
         }
     }
@@ -338,7 +338,7 @@ fun <T : KoTypeDeclaration> List<T>.withObjectDeclaration(predicate: ((KoObjectD
 fun <T : KoTypeDeclaration> List<T>.withoutObjectDeclaration(predicate: ((KoObjectDeclaration) -> Boolean)? = null): List<T> =
     filterNot {
         when (predicate) {
-            null -> it.isObject
+            null -> it.asObjectDeclaration() != null
             else -> it.asObjectDeclaration()?.let { objectDeclaration -> predicate(objectDeclaration) } == true
         }
     }
@@ -410,7 +410,7 @@ fun <T : KoTypeDeclaration> List<T>.withInterfaceDeclaration(predicate: ((KoInte
     filter {
         when (predicate) {
             null -> {
-                it.isInterface
+                it.asInterfaceDeclaration() != null
             }
 
             else -> {
@@ -430,7 +430,7 @@ fun <T : KoTypeDeclaration> List<T>.withoutInterfaceDeclaration(predicate: ((KoI
     filterNot {
         when (predicate) {
             null -> {
-                it.isInterface
+                it.asInterfaceDeclaration() != null
             }
 
             else -> {
@@ -505,7 +505,7 @@ fun <T : KoTypeDeclaration> List<T>.withoutInterfaceDeclarationOf(kClasses: Coll
 fun <T : KoTypeDeclaration> List<T>.withClassOrObjectDeclaration(predicate: ((KoClassAndObjectDeclaration) -> Boolean)? = null): List<T> =
     filter {
         when (predicate) {
-            null -> it.isClassOrObject
+            null -> it.asClassOrObjectDeclaration() != null
             else -> it.asClassOrObjectDeclaration()?.let { declaration -> predicate(declaration) } == true
         }
     }
@@ -522,7 +522,7 @@ fun <T : KoTypeDeclaration> List<T>.withoutClassOrObjectDeclaration(
 ): List<T> =
     filterNot {
         when (predicate) {
-            null -> it.isClassOrObject
+            null -> it.asClassOrObjectDeclaration() != null
             else -> it.asClassOrObjectDeclaration()?.let { declaration -> predicate(declaration) } == true
         }
     }
@@ -602,7 +602,7 @@ fun <T : KoTypeDeclaration> List<T>.withClassOrInterfaceDeclaration(
 ): List<T> =
     filter {
         when (predicate) {
-            null -> it.isClassOrInterface
+            null -> it.asClassOrInterfaceDeclaration() != null
             else -> it.asClassOrInterfaceDeclaration()?.let { declaration -> predicate(declaration) } == true
         }
     }
@@ -622,7 +622,7 @@ fun <T : KoTypeDeclaration> List<T>.withoutClassOrInterfaceDeclaration(
 ): List<T> =
     filterNot {
         when (predicate) {
-            null -> it.isClassOrInterface
+            null -> it.asClassOrInterfaceDeclaration() != null
             else -> it.asClassOrInterfaceDeclaration()?.let { declaration -> predicate(declaration) } == true
         }
     }
@@ -708,7 +708,7 @@ fun <T : KoTypeDeclaration> List<T>.withInterfaceOrObjectDeclaration(
 ): List<T> =
     filter {
         when (predicate) {
-            null -> it.isInterfaceOrObject
+            null -> it.asInterfaceOrObjectDeclaration() != null
             else -> it.asInterfaceOrObjectDeclaration()?.let { declaration -> predicate(declaration) } == true
         }
     }
@@ -728,7 +728,7 @@ fun <T : KoTypeDeclaration> List<T>.withoutInterfaceOrObjectDeclaration(
 ): List<T> =
     filterNot {
         when (predicate) {
-            null -> it.isInterfaceOrObject
+            null -> it.asInterfaceOrObjectDeclaration() != null
             else -> it.asInterfaceOrObjectDeclaration()?.let { declaration -> predicate(declaration) } == true
         }
     }
@@ -817,7 +817,7 @@ fun <T : KoTypeDeclaration> List<T>.withClassOrInterfaceOrObjectDeclaration(
 ): List<T> =
     filter {
         when (predicate) {
-            null -> it.isClassOrInterfaceOrObject
+            null -> it.asClassOrInterfaceOrObjectDeclaration() != null
             else -> it.asClassOrInterfaceOrObjectDeclaration()?.let { declaration -> predicate(declaration) } == true
         }
     }
@@ -837,7 +837,7 @@ fun <T : KoTypeDeclaration> List<T>.withoutClassOrInterfaceOrObjectDeclaration(
 ): List<T> =
     filterNot {
         when (predicate) {
-            null -> it.isClassOrInterfaceOrObject
+            null -> it.asClassOrInterfaceOrObjectDeclaration() != null
             else -> it.asClassOrInterfaceOrObjectDeclaration()?.let { declaration -> predicate(declaration) } == true
         }
     }

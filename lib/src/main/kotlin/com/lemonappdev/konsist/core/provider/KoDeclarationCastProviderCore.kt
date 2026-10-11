@@ -18,6 +18,8 @@ import com.lemonappdev.konsist.api.declaration.type.KoKotlinTypeDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoStarProjectionDeclaration
 import com.lemonappdev.konsist.api.provider.KoDeclarationCastProvider
 import com.lemonappdev.konsist.core.declaration.KoSourceDeclarationCore
+import com.lemonappdev.konsist.core.util.TypeKind
+import com.lemonappdev.konsist.core.util.TypeKindUtil
 import com.lemonappdev.konsist.core.util.TypeUtil
 import kotlin.reflect.KClass
 
@@ -40,13 +42,13 @@ internal interface KoDeclarationCastProviderCore :
         get() = TypeUtil.isKotlinCollectionTypes(name)
 
     override val isClass: Boolean
-        get() = koDeclarationCastProviderDeclaration is KoClassDeclaration
+        get() = TypeKindUtil.getKind(koDeclarationCastProviderDeclaration) == TypeKind.CLASS
 
     override val isObject: Boolean
-        get() = koDeclarationCastProviderDeclaration is KoObjectDeclaration
+        get() = TypeKindUtil.getKind(koDeclarationCastProviderDeclaration) == TypeKind.OBJECT
 
     override val isInterface: Boolean
-        get() = koDeclarationCastProviderDeclaration is KoInterfaceDeclaration
+        get() = TypeKindUtil.getKind(koDeclarationCastProviderDeclaration) == TypeKind.INTERFACE
 
     override val isClassOrObject: Boolean
         get() = isClass || isObject
@@ -142,7 +144,7 @@ internal interface KoDeclarationCastProviderCore :
 
     override fun hasClassDeclaration(predicate: ((KoClassDeclaration) -> Boolean)?): Boolean =
         when (predicate) {
-            null -> isClass
+            null -> asClassDeclaration() != null
             else -> asClassDeclaration()?.let { predicate(it) } ?: false
         }
 
@@ -150,7 +152,7 @@ internal interface KoDeclarationCastProviderCore :
 
     override fun hasObjectDeclaration(predicate: ((KoObjectDeclaration) -> Boolean)?): Boolean =
         when (predicate) {
-            null -> isObject
+            null -> asObjectDeclaration() != null
             else -> asObjectDeclaration()?.let { predicate(it) } ?: false
         }
 
@@ -158,7 +160,7 @@ internal interface KoDeclarationCastProviderCore :
 
     override fun hasInterfaceDeclaration(predicate: ((KoInterfaceDeclaration) -> Boolean)?): Boolean =
         when (predicate) {
-            null -> isInterface
+            null -> asInterfaceDeclaration() != null
             else -> asInterfaceDeclaration()?.let { predicate(it) } ?: false
         }
 

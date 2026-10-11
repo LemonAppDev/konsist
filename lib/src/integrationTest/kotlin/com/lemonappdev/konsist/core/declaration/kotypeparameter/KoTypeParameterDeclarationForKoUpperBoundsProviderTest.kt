@@ -153,7 +153,7 @@ class KoTypeParameterDeclarationForKoUpperBoundsProviderTest {
             hasUpperBound { it.hasNameStartingWith("List") } shouldBeEqualTo true
             hasUpperBound { upperBound -> upperBound.isKotlinType } shouldBeEqualTo true
             hasAllUpperBounds { it.hasNameStartingWith("List") || it.hasNameStartingWith("Char") } shouldBeEqualTo true
-            hasAllUpperBounds { upperBound -> upperBound.isInterface } shouldBeEqualTo false
+            hasAllUpperBounds { upperBound -> upperBound.isInterface } shouldBeEqualTo true
         }
     }
 
@@ -304,7 +304,7 @@ class KoTypeParameterDeclarationForKoUpperBoundsProviderTest {
             hasUpperBound { it.hasNameStartingWith("List") } shouldBeEqualTo true
             hasUpperBound { upperBound -> upperBound.isKotlinType } shouldBeEqualTo true
             hasAllUpperBounds { it.hasNameStartingWith("List") || it.hasNameStartingWith("Char") } shouldBeEqualTo true
-            hasAllUpperBounds { upperBound -> upperBound.isInterface } shouldBeEqualTo false
+            hasAllUpperBounds { upperBound -> upperBound.isInterface } shouldBeEqualTo true
         }
     }
 
@@ -455,7 +455,7 @@ class KoTypeParameterDeclarationForKoUpperBoundsProviderTest {
             hasUpperBound { it.hasNameStartingWith("List") } shouldBeEqualTo true
             hasUpperBound { upperBound -> upperBound.isKotlinType } shouldBeEqualTo true
             hasAllUpperBounds { it.hasNameStartingWith("List") || it.hasNameStartingWith("Char") } shouldBeEqualTo true
-            hasAllUpperBounds { upperBound -> upperBound.isInterface } shouldBeEqualTo false
+            hasAllUpperBounds { upperBound -> upperBound.isInterface } shouldBeEqualTo true
         }
     }
 
@@ -606,7 +606,7 @@ class KoTypeParameterDeclarationForKoUpperBoundsProviderTest {
             hasUpperBound { it.hasNameStartingWith("List") } shouldBeEqualTo true
             hasUpperBound { upperBound -> upperBound.isKotlinType } shouldBeEqualTo true
             hasAllUpperBounds { it.hasNameStartingWith("List") || it.hasNameStartingWith("Char") } shouldBeEqualTo true
-            hasAllUpperBounds { upperBound -> upperBound.isInterface } shouldBeEqualTo false
+            hasAllUpperBounds { upperBound -> upperBound.isInterface } shouldBeEqualTo true
         }
     }
 

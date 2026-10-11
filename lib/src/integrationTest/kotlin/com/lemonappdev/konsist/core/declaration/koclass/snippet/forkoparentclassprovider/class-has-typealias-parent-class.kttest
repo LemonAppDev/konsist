@@ -1,0 +1,5 @@
+import com.lemonappdev.konsist.testdata.FixtureParentClass
+
+typealias FixtureTypeAlias = FixtureParentClass
+
+class FixtureClass : FixtureTypeAlias()

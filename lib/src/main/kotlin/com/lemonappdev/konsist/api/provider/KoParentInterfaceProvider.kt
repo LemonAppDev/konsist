@@ -10,6 +10,10 @@ interface KoParentInterfaceProvider : KoBaseProvider {
     /**
      * The parent interfaces of the declaration.
      *
+     * Parents declared outside the project (e.g. in a library) are included. Their kind is read from the class
+     * on the classpath. When the class is not on the classpath, the kind is inferred from the declaration,
+     * e.g. `: Foo()` is a class and `: Foo by foo` is an interface.
+     *
      * @param indirectParents specifies whether to include parent interfaces defined in other files such as parent of the parent.
      * @return a list of [KoParentDeclaration] representing the parent interfaces of the declaration.
      */

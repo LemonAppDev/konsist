@@ -25,6 +25,8 @@ import com.lemonappdev.konsist.core.provider.KoSourceSetProviderCore
 import com.lemonappdev.konsist.core.provider.KoTextProviderCore
 import com.lemonappdev.konsist.core.provider.KoTypeArgumentProviderCore
 import com.lemonappdev.konsist.core.provider.packagee.KoPackageDeclarationProviderCore
+import com.lemonappdev.konsist.core.util.TypeKind
+import com.lemonappdev.konsist.core.util.TypeKindUtil
 import com.lemonappdev.konsist.core.util.TypeResolver
 import com.lemonappdev.konsist.core.util.TypeUtil
 import org.jetbrains.kotlin.com.intellij.psi.PsiElement
@@ -138,6 +140,15 @@ internal class KoParentDeclarationCore(
                         ?: KoExternalDeclarationCore.getInstance(name, fullyQualifiedName ?: name, ktSuperTypeListEntry)
                 )
                     as? KoDeclarationCastProvider
+            }
+
+    @Volatile
+    private var cachedKind: Any? = KoPropertyCache.NOT_COMPUTED
+
+    internal val kind: TypeKind
+        get() =
+            KoPropertyCache.getOrCompute(cachedKind, { cachedKind = it }) {
+                TypeKindUtil.getParentKind(sourceDeclaration, ktSuperTypeListEntry)
             }
 
     @Volatile

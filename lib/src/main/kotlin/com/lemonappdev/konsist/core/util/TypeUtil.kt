@@ -187,10 +187,13 @@ object TypeUtil {
         fullyQualifiedName: String?,
         kClass: KClass<*>,
     ): Boolean {
-        val qualifiedName = fullyQualifiedName?.let { kotlinTypeQualifiedNames[it] } ?: fullyQualifiedName
+        val qualifiedName = fullyQualifiedName?.let { getKotlinTypeQualifiedName(it) }
 
         return kClass.qualifiedName == qualifiedName
     }
+
+    internal fun getKotlinTypeQualifiedName(fullyQualifiedName: String): String =
+        kotlinTypeQualifiedNames[fullyQualifiedName] ?: fullyQualifiedName
 
     private fun transformPsiElementToKoTypeDeclaration(
         type: PsiElement?,

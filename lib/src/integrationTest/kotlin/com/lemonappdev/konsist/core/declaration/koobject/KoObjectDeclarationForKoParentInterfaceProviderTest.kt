@@ -1,6 +1,8 @@
 package com.lemonappdev.konsist.core.declaration.koobject
 
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
+import com.lemonappdev.konsist.api.Konsist
+import com.lemonappdev.konsist.externalfixture.FixtureExternalInterface
 import com.lemonappdev.konsist.testdata.FixtureParentClass
 import com.lemonappdev.konsist.testdata.FixtureParentInterface
 import com.lemonappdev.konsist.testdata.FixtureParentInterface1
@@ -122,8 +124,11 @@ class KoObjectDeclarationForKoParentInterfaceProviderTest {
 
         // then
         assertSoftly(sut) {
-            parentInterfaces().map { it.name } shouldBeEqualTo listOf("FixtureParentInterface1", "FixtureParentInterface2")
-            numParentInterfaces() shouldBeEqualTo 2
+            parentInterfaces().map { it.name } shouldBeEqualTo
+                listOf("FixtureParentInterface1", "FixtureParentInterface2", "FixtureExternalInterface")
+            numParentInterfaces() shouldBeEqualTo 3
+            hasParentInterfaceWithName("FixtureExternalInterface") shouldBeEqualTo true
+            hasParentInterfaceOf(FixtureExternalInterface::class) shouldBeEqualTo true
             countParentInterfaces { it.name == "FixtureParentInterface1" } shouldBeEqualTo 1
             countParentInterfaces { it.hasNameStartingWith("FixtureParentInterface") } shouldBeEqualTo 2
             hasParentInterfaces() shouldBeEqualTo true
@@ -378,6 +383,24 @@ class KoObjectDeclarationForKoParentInterfaceProviderTest {
         }
     }
 
+    @Test
+    fun `parent-interface-not-on-classpath`() {
+        // given
+        val sut =
+            Konsist
+                .scopeFromFile(UNCOMPILED_PARENT_TEST_DATA_PATH)
+                .objects()
+                .first { it.name == "FixtureObjectWithParentInterfaceNotOnClasspath" }
+
+        // then
+        sut.parentInterfaces().map { it.name } shouldBeEqualTo listOf("UnknownInterface")
+    }
+
     private fun getSnippetFile(fileName: String) =
         getSnippetKoScope("core/declaration/koobject/snippet/forkoparentinterfaceprovider/", fileName)
+
+    companion object {
+        private const val UNCOMPILED_PARENT_TEST_DATA_PATH =
+            "lib/src/integrationTest/resources/com/lemonappdev/konsist/testdata/UncompiledParentTestData.kt"
+    }
 }
