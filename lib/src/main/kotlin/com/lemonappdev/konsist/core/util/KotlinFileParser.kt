@@ -76,8 +76,18 @@ object KotlinFileParser {
             val psiFile = psiManager.findFile(lightVirtualFile)
             return psiFile as KtFile
         } catch (e: Exception) {
-            throw KoInternalException("Failed to parse Kotlin file: ${file.path}", e)
+            throw KoInternalException(getParseErrorMessage(file), e)
+        } catch (e: LinkageError) {
+            // Kotlin compiler classpath conflict may result in NoClassDefFoundError, NoSuchMethodError, etc.
+            throw KoInternalException(getParseErrorMessage(file), e)
         }
+    }
+
+    private fun getParseErrorMessage(file: File): String {
+        val message = "Failed to parse Kotlin file: ${file.path}"
+        val conflictMessage = KotlinCompilerClasspathUtil.getConflictMessage(javaClass.classLoader)
+
+        return if (conflictMessage == null) message else "$message\n$conflictMessage"
     }
 
     fun getKoFile(file: File): KoFileDeclaration {
