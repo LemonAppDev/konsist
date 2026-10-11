@@ -9,6 +9,8 @@ import com.lemonappdev.konsist.testdata.FixtureParentInterface2
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
+import java.io.Closeable
+import java.io.InputStream
 
 @Suppress("detekt.LongMethod")
 class KoClassDeclarationForKoParentProviderTest {
@@ -270,6 +272,79 @@ class KoClassDeclarationForKoParentProviderTest {
                 )
             numParents(indirectParents = false) shouldBeEqualTo 3
             numParents(indirectParents = true) shouldBeEqualTo 4
+        }
+    }
+
+    @Test
+    fun `class-has-indirect-library-parents`() {
+        // given
+        val sut =
+            getSnippetFile("class-has-indirect-library-parents")
+                .classes()
+                .first()
+
+        // then
+        assertSoftly(sut) {
+            parents(indirectParents = true).map { it.name } shouldBeEqualTo
+                listOf(
+                    "FixtureParentClass",
+                    "ByteArrayInputStream",
+                    "InputStream",
+                    "Closeable",
+                    "AutoCloseable",
+                )
+            parentClasses(indirectParents = true).map { it.name } shouldBeEqualTo
+                listOf("FixtureParentClass", "ByteArrayInputStream", "InputStream")
+            parentInterfaces(indirectParents = true).map { it.name } shouldBeEqualTo listOf("Closeable", "AutoCloseable")
+            externalParents(indirectParents = true).map { it.name } shouldBeEqualTo
+                listOf("ByteArrayInputStream", "InputStream", "Closeable")
+            hasParentOf(InputStream::class) shouldBeEqualTo false
+            hasParentOf(InputStream::class, indirectParents = true) shouldBeEqualTo true
+            hasParentOf(AutoCloseable::class, indirectParents = true) shouldBeEqualTo true
+            hasExternalParentOf(Closeable::class, indirectParents = true) shouldBeEqualTo true
+            hasParentClassOf(InputStream::class, indirectParents = true) shouldBeEqualTo true
+            hasParentInterfaceOf(Closeable::class, indirectParents = true) shouldBeEqualTo true
+            hasParentWithName("InputStream", indirectParents = true) shouldBeEqualTo true
+        }
+
+        assertSoftly(sut.parents(indirectParents = true).first { it.name == "InputStream" }) {
+            text shouldBeEqualTo "InputStream"
+            arguments shouldBeEqualTo emptyList()
+            typeArguments shouldBeEqualTo null
+            containingDeclaration shouldBeEqualTo sut.containingFile.classes().first { it.name == "FixtureParentClass" }
+            sourceDeclaration?.isExternal shouldBeEqualTo true
+            sourceDeclaration?.asExternalDeclaration()?.fullyQualifiedName shouldBeEqualTo "java.io.InputStream"
+        }
+    }
+
+    @Test
+    fun `class-has-indirect-kotlin-parents`() {
+        // given
+        val sut =
+            getSnippetFile("class-has-indirect-kotlin-parents")
+                .classes()
+                .first()
+
+        // then
+        assertSoftly(sut) {
+            parents(indirectParents = true).map { it.name } shouldBeEqualTo
+                listOf(
+                    "IllegalStateException",
+                    "Serializable",
+                    "RuntimeException",
+                    "Exception",
+                    "Throwable",
+                )
+            parentInterfaces(indirectParents = true).map { it.name } shouldBeEqualTo listOf("Serializable")
+            externalParents(indirectParents = true).map { it.name } shouldBeEqualTo listOf("Serializable")
+            hasParentOf(Throwable::class) shouldBeEqualTo false
+            hasParentOf(Throwable::class, indirectParents = true) shouldBeEqualTo true
+            hasParentClassOf(RuntimeException::class, Exception::class, indirectParents = true) shouldBeEqualTo true
+        }
+
+        assertSoftly(sut.parents(indirectParents = true).last()) {
+            sourceDeclaration?.isKotlinType shouldBeEqualTo true
+            sourceDeclaration?.asKotlinTypeDeclaration()?.fullyQualifiedName shouldBeEqualTo "kotlin.Throwable"
         }
     }
 

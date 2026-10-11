@@ -195,6 +195,12 @@ object TypeUtil {
     internal fun getKotlinTypeQualifiedName(fullyQualifiedName: String): String =
         kotlinTypeQualifiedNames[fullyQualifiedName] ?: fullyQualifiedName
 
+    /*
+     * Returns the name of the Kotlin type alias of the Java type, e.g. `kotlin.RuntimeException`
+     * for `java.lang.RuntimeException`.
+     */
+    internal fun getKotlinTypeAliasName(qualifiedName: String): String = kotlinTypeAliasNames[qualifiedName] ?: qualifiedName
+
     private fun transformPsiElementToKoTypeDeclaration(
         type: PsiElement?,
         parentDeclaration: KoBaseDeclaration,
@@ -474,6 +480,14 @@ object TypeUtil {
             "kotlin.text.CharacterCodingException" to CharacterCodingException::class,
             "kotlin.text.StringBuilder" to StringBuilder::class,
         ).mapValues { (_, kClass) -> kClass.qualifiedName.orEmpty() }
+
+    // Mutable collections are skipped, because they have the same qualified name as read-only ones
+    private val kotlinTypeAliasNames: Map<String, String> by lazy {
+        kotlinTypeQualifiedNames
+            .filterValues { !it.startsWith("kotlin.") }
+            .entries
+            .associate { (kotlinName, javaName) -> javaName to kotlinName }
+    }
 
     /*
         List of Kotlin standard library class declarations

@@ -1,10 +1,12 @@
 package com.lemonappdev.konsist.core.provider
 
 import com.lemonappdev.konsist.api.declaration.KoParentDeclaration
+import com.lemonappdev.konsist.api.provider.KoFullyQualifiedNameProvider
 import com.lemonappdev.konsist.api.provider.KoParentProvider
 import com.lemonappdev.konsist.core.declaration.KoParentDeclarationCore
 import com.lemonappdev.konsist.core.ext.castToKoBaseDeclaration
 import com.lemonappdev.konsist.core.util.ParentUtil.checkIfParentOf
+import com.lemonappdev.konsist.core.util.TypeUtil
 import org.jetbrains.kotlin.psi.KtClassOrObject
 import org.jetbrains.kotlin.psi.KtSuperTypeListEntry
 import kotlin.reflect.KClass
@@ -25,7 +27,9 @@ internal interface KoParentProviderCore :
                 directParentDeclarations
             }
 
-        return parentDeclarations.distinctBy { it.sourceDeclaration }
+        return parentDeclarations
+            .withoutDuplicatedClasspathParents()
+            .distinctBy { it.sourceDeclaration }
     }
 
     private fun getDirectParents(): List<KoParentDeclaration> =
@@ -37,6 +41,9 @@ internal interface KoParentProviderCore :
             .orEmpty()
 
     /*
+     * Parents declared in the project are searched in the code and parents declared outside the project (in a library
+     * or the Kotlin standard library) are searched on the classpath.
+     *
      * Parents of every declaration are searched once, so the search time grows linearly with the size of the hierarchy
      * (instead of exponentially with its depth) and the search ends for the cyclic hierarchy (invalid code, e.g.
      * `class A : B()` and `class B : A()`). Parents found again would be removed as duplicates anyway.
@@ -48,13 +55,45 @@ internal interface KoParentProviderCore :
         parents.flatMap { parent ->
             val sourceDeclaration = parent.sourceDeclaration as? KoParentProviderCore
 
-            if (sourceDeclaration == null || !visitedDeclarations.add(sourceDeclaration)) {
-                emptyList()
-            } else {
-                val nextParents = sourceDeclaration.getDirectParents()
-                nextParents + getIndirectParents(nextParents, visitedDeclarations)
+            when {
+                sourceDeclaration == null -> {
+                    (parent as? KoParentDeclarationCore)?.classpathParents.orEmpty()
+                }
+
+                !visitedDeclarations.add(sourceDeclaration) -> {
+                    emptyList()
+                }
+
+                else -> {
+                    val nextParents = sourceDeclaration.getDirectParents()
+                    nextParents + getIndirectParents(nextParents, visitedDeclarations)
+                }
             }
         }
+
+    /*
+     * Parent read from the classpath is removed when it is also written in the code
+     * (e.g. `Serializable` for `class Foo : Exception(), Serializable`).
+     */
+    private fun List<KoParentDeclaration>.withoutDuplicatedClasspathParents(): List<KoParentDeclaration> {
+        if (none { it.isClasspathParent() }) {
+            return this
+        }
+
+        val codeParentNames =
+            filterNot { it.isClasspathParent() }
+                .mapNotNull { it.getQualifiedName() }
+                .toSet()
+
+        return filterNot { it.isClasspathParent() && it.getQualifiedName() in codeParentNames }
+    }
+
+    private fun KoParentDeclaration.isClasspathParent(): Boolean = (this as? KoParentDeclarationCore)?.isClasspathParent == true
+
+    private fun KoParentDeclaration.getQualifiedName(): String? =
+        (sourceDeclaration as? KoFullyQualifiedNameProvider)
+            ?.fullyQualifiedName
+            ?.let { TypeUtil.getKotlinTypeQualifiedName(it) }
 
     override fun numParents(indirectParents: Boolean): Int = parents(indirectParents).size
 
