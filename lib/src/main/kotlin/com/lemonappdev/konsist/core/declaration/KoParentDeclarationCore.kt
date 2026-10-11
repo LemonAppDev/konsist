@@ -3,14 +3,11 @@ package com.lemonappdev.konsist.core.declaration
 import com.lemonappdev.konsist.api.declaration.KoArgumentDeclaration
 import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoParentDeclaration
+import com.lemonappdev.konsist.api.provider.KoContainingDeclarationProvider
 import com.lemonappdev.konsist.api.provider.KoDeclarationCastProvider
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
 import com.lemonappdev.konsist.core.cache.KoPropertyCache
 import com.lemonappdev.konsist.core.declaration.type.KoKotlinTypeDeclarationCore
-import com.lemonappdev.konsist.core.ext.endsWithName
-import com.lemonappdev.konsist.core.model.getClass
-import com.lemonappdev.konsist.core.model.getInterface
-import com.lemonappdev.konsist.core.model.getTypeAlias
 import com.lemonappdev.konsist.core.provider.KoAnnotationProviderCore
 import com.lemonappdev.konsist.core.provider.KoArgumentProviderCore
 import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
@@ -27,7 +24,8 @@ import com.lemonappdev.konsist.core.provider.KoSourceSetProviderCore
 import com.lemonappdev.konsist.core.provider.KoTextProviderCore
 import com.lemonappdev.konsist.core.provider.KoTypeArgumentProviderCore
 import com.lemonappdev.konsist.core.provider.packagee.KoPackageDeclarationProviderCore
-import com.lemonappdev.konsist.core.util.TypeUtil.isKotlinType
+import com.lemonappdev.konsist.core.util.TypeResolver
+import com.lemonappdev.konsist.core.util.TypeUtil
 import org.jetbrains.kotlin.com.intellij.psi.PsiElement
 import org.jetbrains.kotlin.psi.KtAnnotationEntry
 import org.jetbrains.kotlin.psi.KtConstructorCalleeExpression
@@ -109,44 +107,31 @@ internal class KoParentDeclarationCore(
         get() =
             KoPropertyCache.getOrCompute(cachedSourceDeclaration, { cachedSourceDeclaration = it }) {
                 val name =
-                    ktSuperTypeListEntry
-                        .text
-                        .substringBefore(" ")
-                        .substringBefore("(")
-                        .substringBefore("<")
+                    TypeUtil.getTypeName(ktUserType)
+                        ?: ktSuperTypeListEntry
+                            .text
+                            .substringBefore(" ")
+                            .substringBefore("(")
+                            .substringBefore("<")
 
-                val outerName = if (name.contains(".")) name.substringBeforeLast(".") else name
-                val innerName = if (name.contains(".")) name.substringAfterLast(".") else name
-
-                val import =
-                    containingFile
-                        .imports
-                        .firstOrNull { import ->
-                            if (import.alias != null) {
-                                import.alias?.name == outerName
-                            } else {
-                                import.name.substringAfterLast(".") == outerName || import.name.endsWithName(name)
-                            }
-                        }
-
+                // Nested types of the class are not visible in its parent list
                 val fullyQualifiedName =
-                    import?.name
-                        ?: "${containingFile.packagee?.name?.let { "$it." } ?: ""}$name"
-
-                val isAlias = import?.alias != null
+                    TypeResolver.resolveFullyQualifiedName(
+                        name,
+                        containingFile,
+                        (containingDeclaration as? KoContainingDeclarationProvider)?.containingDeclaration,
+                    )
 
                 (
-                    import?.alias
-                        ?: getClass(innerName, fullyQualifiedName, isAlias, containingFile)
-                        ?: getInterface(innerName, fullyQualifiedName, isAlias, containingFile)
-                        ?: getTypeAlias(innerName, fullyQualifiedName, containingFile)
-                        ?: if (isKotlinType(name)) {
+                    containingFile.imports.firstOrNull { it.alias?.name == name }?.alias
+                        ?: fullyQualifiedName?.let { TypeResolver.getTypeDeclaration(it, containingFile) }
+                        ?: if (fullyQualifiedName != null && TypeUtil.isKotlinTypeFullyQualifiedName(fullyQualifiedName)) {
                             // Pass only the type, without constructor arguments (`Foo(bar)`) or delegation (`Foo by bar`)
                             ktUserType?.let { KoKotlinTypeDeclarationCore.getInstance(it, containingDeclaration) }
                         } else {
                             null
                         }
-                        ?: KoExternalDeclarationCore.getInstance(innerName, ktSuperTypeListEntry)
+                        ?: KoExternalDeclarationCore.getInstance(name, fullyQualifiedName ?: name, ktSuperTypeListEntry)
                 )
                     as? KoDeclarationCastProvider
             }

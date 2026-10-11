@@ -1,14 +1,12 @@
 package com.lemonappdev.konsist.core.util
 
-import com.lemonappdev.konsist.api.Konsist
 import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoFileDeclaration
 import com.lemonappdev.konsist.api.declaration.KoSourceDeclaration
 import com.lemonappdev.konsist.api.declaration.KoTypeArgumentDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoTypeDeclaration
-import com.lemonappdev.konsist.api.provider.KoContainingDeclarationProvider
+import com.lemonappdev.konsist.api.provider.KoBaseProvider
 import com.lemonappdev.konsist.api.provider.KoDeclarationCastProvider
-import com.lemonappdev.konsist.api.provider.KoDeclarationProvider
 import com.lemonappdev.konsist.api.provider.KoFullyQualifiedNameProvider
 import com.lemonappdev.konsist.core.declaration.KoExternalDeclarationCore
 import com.lemonappdev.konsist.core.declaration.KoTypeArgumentDeclarationCore
@@ -17,11 +15,6 @@ import com.lemonappdev.konsist.core.declaration.private.KoFunctionTypeDeclaratio
 import com.lemonappdev.konsist.core.declaration.private.KoGenericTypeDeclarationCore
 import com.lemonappdev.konsist.core.declaration.type.KoKotlinTypeDeclarationCore
 import com.lemonappdev.konsist.core.declaration.type.KoStarProjectionDeclarationCore
-import com.lemonappdev.konsist.core.ext.endsWithName
-import com.lemonappdev.konsist.core.model.getClass
-import com.lemonappdev.konsist.core.model.getInterface
-import com.lemonappdev.konsist.core.model.getObject
-import com.lemonappdev.konsist.core.model.getTypeAlias
 import com.lemonappdev.konsist.core.provider.KoTypeParameterProviderCore
 import org.jetbrains.kotlin.com.intellij.psi.PsiElement
 import org.jetbrains.kotlin.psi.KtAnnotationEntry
@@ -197,7 +190,6 @@ object TypeUtil {
         return kClass.qualifiedName == qualifiedName
     }
 
-    @Suppress("detekt.CyclomaticComplexMethod", "detekt.LongMethod")
     private fun transformPsiElementToKoTypeDeclaration(
         type: PsiElement?,
         parentDeclaration: KoBaseDeclaration,
@@ -213,29 +205,6 @@ object TypeUtil {
             }
 
         val typeText = nestedType?.text
-
-        val fullyQualifiedName =
-            containingFile
-                .imports
-                .firstOrNull { import ->
-                    if (import.hasAlias()) {
-                        import.alias?.name == typeText
-                    } else {
-                        import.name.substringAfterLast(".") == typeText
-                    }
-                }?.name
-                ?: containingFile
-                    .declarations()
-                    .getDeclarationFullyQualifiedName(typeText, parentDeclaration)
-                ?: containingFile
-                    .packagee
-                    ?.name
-                    ?.let { packageName ->
-                        Konsist
-                            .scopeFromPackage(packageName)
-                            .declarations()
-                            .getDeclarationFullyQualifiedName(typeText, parentDeclaration)
-                    }
 
         val typeParameter =
             (parentDeclaration as? KoTypeParameterProviderCore)
@@ -260,50 +229,15 @@ object TypeUtil {
                 KoFunctionTypeDeclarationCore.getInstance(nestedType, containingFile)
             }
 
-            nestedType is KtUserType && typeText != null -> {
-                if (nestedType.children.filterIsInstance<KtTypeArgumentList>().isNotEmpty()) {
-                    KoGenericTypeDeclarationCore.getInstance(nestedType, parentDeclaration)
-                } else if (isKotlinType(typeText)) {
-                    KoKotlinTypeDeclarationCore.getInstance(nestedType, parentDeclaration)
-                } else {
-                    getClass(typeText, fullyQualifiedName, false, containingFile)
-                        ?: getInterface(typeText, fullyQualifiedName, false, containingFile)
-                        ?: getObject(typeText, fullyQualifiedName, false, containingFile)
-                        ?: getTypeAlias(typeText, fullyQualifiedName, containingFile)
-                        ?: KoExternalDeclarationCore.getInstance(typeText, nestedType)
-                }
+            nestedType is KtUserType && nestedType.children.filterIsInstance<KtTypeArgumentList>().isNotEmpty() -> {
+                KoGenericTypeDeclarationCore.getInstance(nestedType, parentDeclaration)
             }
 
-            nestedType is KtNameReferenceExpression && typeText != null -> {
-                if (isKotlinType(typeText)) {
-                    KoKotlinTypeDeclarationCore.getInstance(nestedType, parentDeclaration)
-                } else {
-                    getClass(typeText, fullyQualifiedName, false, containingFile)
-                        ?: getInterface(typeText, fullyQualifiedName, false, containingFile)
-                        ?: getObject(typeText, fullyQualifiedName, false, containingFile)
-                        ?: getTypeAlias(typeText, fullyQualifiedName, containingFile)
-                        ?: KoExternalDeclarationCore.getInstance(typeText, nestedType)
-                }
-            }
-
-            nestedType is KtTypeReference && typeText != null -> {
-                getClass(typeText, fullyQualifiedName, false, containingFile)
-                    ?: getInterface(typeText, fullyQualifiedName, false, containingFile)
-                    ?: getObject(typeText, fullyQualifiedName, false, containingFile)
-                    ?: getTypeAlias(typeText, fullyQualifiedName, containingFile)
-                    ?: KoExternalDeclarationCore.getInstance(typeText, nestedType)
-            }
-
-            nestedType is KtConstructorCalleeExpression && typeText != null -> {
-                if (isKotlinType(typeText)) {
-                    KoKotlinTypeDeclarationCore.getInstance(nestedType, parentDeclaration)
-                } else {
-                    getClass(typeText, fullyQualifiedName, false, containingFile)
-                        ?: getInterface(typeText, fullyQualifiedName, false, containingFile)
-                        ?: getObject(typeText, fullyQualifiedName, false, containingFile)
-                        ?: getTypeAlias(typeText, fullyQualifiedName, containingFile)
-                        ?: KoExternalDeclarationCore.getInstance(typeText, nestedType)
-                }
+            nestedType is KtUserType ||
+                nestedType is KtNameReferenceExpression ||
+                nestedType is KtTypeReference ||
+                nestedType is KtConstructorCalleeExpression -> {
+                getTypeDeclaration(nestedType, getTypeName(nestedType) ?: nestedType.text, parentDeclaration, containingFile)
             }
 
             else -> {
@@ -312,29 +246,64 @@ object TypeUtil {
         } as KoDeclarationCastProvider?
     }
 
-    private fun List<KoBaseDeclaration>.getDeclarationFullyQualifiedName(
-        typeText: String?,
-        parentDeclaration: KoBaseDeclaration,
-    ): String? {
-        val parentDeclarationFullyQualifiedName =
-            (parentDeclaration as? KoFullyQualifiedNameProvider)?.fullyQualifiedName.orEmpty()
+    /*
+     * Returns the declaration of the type with the given name: declaration from the file or project, Kotlin type
+     * or external declaration.
+     */
+    private fun getTypeDeclaration(
+        ktElement: KtElement,
+        name: String,
+        containingDeclaration: KoBaseDeclaration,
+        containingFile: KoFileDeclaration,
+    ): KoBaseProvider {
+        // Unresolved name is not searched in the project, because it would match a type from the default package
+        val fullyQualifiedName = TypeResolver.resolveFullyQualifiedName(name, containingFile, containingDeclaration)
 
-        val declarations =
-            filterIsInstance<KoFullyQualifiedNameProvider>()
-                .filter { typeText != null && it.fullyQualifiedName?.endsWithName(typeText) == true }
-
-        val declaration =
-            declarations.singleOrNull()
-                ?: declarations.firstOrNull { declaration ->
-                    declaration.fullyQualifiedName?.contains(parentDeclarationFullyQualifiedName) == true ||
-                        (
-                            (declaration as? KoContainingDeclarationProvider)
-                                ?.containingDeclaration as? KoDeclarationProvider
-                        )?.hasDeclaration { it == parentDeclaration } == true
-                }
-
-        return declaration?.fullyQualifiedName
+        return fullyQualifiedName?.let { TypeResolver.getTypeDeclaration(it, containingFile) }
+            ?: if (fullyQualifiedName != null && isKotlinTypeFullyQualifiedName(fullyQualifiedName)) {
+                KoKotlinTypeDeclarationCore.getInstance(ktElement, containingDeclaration)
+            } else {
+                null
+            }
+            ?: KoExternalDeclarationCore.getInstance(name, fullyQualifiedName ?: name, ktElement)
     }
+
+    /*
+     * Returns the name of the referenced type without type arguments.
+     * For `RecyclerView.ViewHolder<T>` value will be "RecyclerView.ViewHolder"
+     */
+    internal fun getTypeName(element: PsiElement?): String? =
+        when (element) {
+            is KtUserType -> {
+                element.getQualifiedName()
+            }
+
+            is KtNameReferenceExpression -> {
+                (element.parent as? KtUserType)?.getQualifiedName() ?: element.getReferencedName()
+            }
+
+            is KtTypeReference -> {
+                getTypeName(element.typeElement?.let { if (it is KtNullableType) it.innerType else it })
+            }
+
+            is KtConstructorCalleeExpression -> {
+                getTypeName(element.typeReference)
+            }
+
+            else -> {
+                null
+            }
+        }
+
+    private fun KtUserType.getQualifiedName(): String? =
+        referencedName?.let { name ->
+            qualifier
+                ?.getQualifiedName()
+                ?.let { "$it.$name" }
+                ?: name
+        }
+
+    internal fun isKotlinTypeFullyQualifiedName(fullyQualifiedName: String): Boolean = fullyQualifiedName in kotlinTypeNames
 
     internal fun isKotlinType(typeName: String): Boolean {
         val bareTypeName = getBareType(typeName)
@@ -500,6 +469,8 @@ object TypeUtil {
 
         https://kotlinlang.org/api/core/kotlin-stdlib/
      */
+    private val kotlinTypeNames: Set<String> by lazy { kotlinTypes.toSet() }
+
     val kotlinTypes =
         listOf(
             "kotlin.collections.AbstractCollection",
