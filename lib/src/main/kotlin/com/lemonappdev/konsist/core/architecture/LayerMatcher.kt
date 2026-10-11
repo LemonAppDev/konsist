@@ -36,7 +36,7 @@ internal class LayerMatcher(
         importMatches(layer.rootPackage, import.name) &&
             layer.excludedPackages.none { importMatches(it, import.name) }
 
-    private fun containsFile(
+    fun containsFile(
         layer: Layer,
         file: KoFileDeclaration,
     ): Boolean {

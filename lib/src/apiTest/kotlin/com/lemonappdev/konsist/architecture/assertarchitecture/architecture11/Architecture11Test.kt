@@ -6,9 +6,9 @@ import com.lemonappdev.konsist.api.architecture.Layer
 import com.lemonappdev.konsist.core.exception.KoAssertionFailedException
 import com.lemonappdev.konsist.core.exception.KoPreconditionFailedException
 import com.lemonappdev.konsist.core.filesystem.PathProvider
+import io.kotest.assertions.throwables.shouldNotThrowAny
 import io.kotest.assertions.throwables.shouldThrow
 import org.amshove.kluent.shouldBeEqualTo
-import org.amshove.kluent.shouldNotThrow
 import org.junit.jupiter.api.Test
 
 class Architecture11Test {
@@ -19,175 +19,166 @@ class Architecture11Test {
             "lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/assertarchitecture/architecture11/project",
         )
 
-    private val core =
+    private val app =
         Layer(
-            "Core",
-            "com.lemonappdev.konsist.architecture.assertarchitecture.architecture11.project.core",
+            "App",
+            "com.lemonappdev.konsist.architecture.assertarchitecture.architecture11.project..",
         )
 
-    private val coreApi =
+    private val domain =
         Layer(
-            "CoreApi",
-            "com.lemonappdev.konsist.architecture.assertarchitecture.architecture11.project.core.api..",
+            "Domain",
+            "com.lemonappdev.konsist.architecture.assertarchitecture.architecture11.project.domain..",
         )
 
-    private val ui =
-        Layer(
-            "UI",
-            "com.lemonappdev.konsist.architecture.assertarchitecture.architecture11.project.ui..",
-            excludedPackages = setOf("com.lemonappdev.konsist.architecture.assertarchitecture.architecture11.project.ui.viewmodel.."),
-        )
+    private val anyDomain = Layer("AnyDomain", "..domain..")
 
-    private val viewModel =
+    private val data =
         Layer(
-            "ViewModel",
-            "com.lemonappdev.konsist.architecture.assertarchitecture.architecture11.project.ui.viewmodel..",
+            "Data",
+            "com.lemonappdev.konsist.architecture.assertarchitecture.architecture11.project.data..",
         )
 
     private val projectPath =
         "file://$rootPath/lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/assertarchitecture/architecture11/project"
 
-    @Test
-    fun `passes when all layer dependencies are declared`() {
-        // when
-        val func = {
-            scope.assertArchitecture {
-                ui.dependsOn(core, viewModel)
-                core.dependsOn(coreApi)
-                viewModel.dependsOn(coreApi)
-                coreApi.dependsOnNothing()
-            }
-        }
+    private val domainFile = "File $projectPath/domain/DomainClass.kt"
 
-        // then
-        func shouldNotThrow KoAssertionFailedException::class
-    }
+    private val dataFile = "File $projectPath/data/DataClass.kt"
 
     @Test
-    fun `exact package layer does not contain imports of its subpackages`() {
+    fun `nested layer fails precondition`() {
         // when
         val result =
-            shouldThrow<KoAssertionFailedException> {
+            shouldThrow<KoPreconditionFailedException> {
                 scope.assertArchitecture {
-                    core.dependsOnNothing()
-                    coreApi.dependsOnNothing()
+                    app.dependsOnNothing()
+                    domain.include()
                 }
             }
 
         // then
-        val filepath = "$projectPath/core/CoreClass.kt"
-
         result
             .message
             .shouldBeEqualTo(
-                "'exact package layer does not contain imports of its subpackages' test has failed. \n" +
-                    "'Core' layer should not depend on anything but has dependencies in files:\n" +
-                    "└── File $filepath\n" +
-                    "    └── Import com.lemonappdev.konsist.architecture.assertarchitecture.architecture11.project.core.api." +
-                    "CoreApiClass ($filepath:3:1)",
+                "Layers overlap. Each file must belong to only one layer:\n" +
+                    "└── Layers 'App', 'Domain' share files:\n" +
+                    "    └── $domainFile",
             )
     }
 
     @Test
-    fun `exact package layer contains imports of nested classes`() {
-        // given
-        val exactCoreApi =
-            Layer(
-                "CoreApi",
-                "com.lemonappdev.konsist.architecture.assertarchitecture.architecture11.project.core.api",
-            )
-
+    fun `wildcard layer overlapping other layer fails precondition`() {
         // when
         val result =
-            shouldThrow<KoAssertionFailedException> {
+            shouldThrow<KoPreconditionFailedException> {
                 scope.assertArchitecture {
-                    viewModel.doesNotDependOn(exactCoreApi)
+                    domain.dependsOnNothing()
+                    anyDomain.include()
                 }
             }
 
         // then
-        val filepath = "$projectPath/ui/viewmodel/UiViewModel.kt"
-
         result
             .message
             .shouldBeEqualTo(
-                "'exact package layer contains imports of nested classes' test has failed. \n" +
-                    "'ViewModel' layer should not depend on 'CoreApi' layer but has dependencies in files:\n" +
-                    "└── File $filepath\n" +
-                    "    └── Import com.lemonappdev.konsist.architecture.assertarchitecture.architecture11.project.core.api." +
-                    "CoreApiClass.NestedClass ($filepath:3:1)",
+                "Layers overlap. Each file must belong to only one layer:\n" +
+                    "└── Layers 'Domain', 'AnyDomain' share files:\n" +
+                    "    └── $domainFile",
             )
     }
 
     @Test
-    fun `exact package layer does not contain subpackage imports of other layer`() {
+    fun `overlap failure lists files grouped by overlapping layers`() {
         // when
-        val func = {
-            scope.assertArchitecture {
-                viewModel.doesNotDependOn(core)
+        val result =
+            shouldThrow<KoPreconditionFailedException> {
+                scope.assertArchitecture {
+                    app.doesNotDependOn(domain, data)
+                    anyDomain.include()
+                }
             }
-        }
 
         // then
-        func shouldNotThrow KoAssertionFailedException::class
+        result
+            .message
+            .shouldBeEqualTo(
+                "Layers overlap. Each file must belong to only one layer:\n" +
+                    "├── Layers 'App', 'Data' share files:\n" +
+                    "│   └── $dataFile\n" +
+                    "└── Layers 'App', 'Domain', 'AnyDomain' share files:\n" +
+                    "    └── $domainFile",
+            )
     }
 
     @Test
-    fun `exact package layer without files in exact package throws exception`() {
+    fun `non overlapping layers pass precondition`() {
+        // then
+        shouldNotThrowAny {
+            scope.assertArchitecture {
+                domain.dependsOnNothing()
+                data.dependsOnNothing()
+            }
+        }
+    }
+
+    @Test
+    fun `exact package layer does not overlap its subpackage layers`() {
         // given
-        val project =
+        val exactApp =
             Layer(
-                "Project",
+                "App",
                 "com.lemonappdev.konsist.architecture.assertarchitecture.architecture11.project",
             )
 
         // when
         val result =
-            shouldThrow<KoPreconditionFailedException> {
+            shouldThrow<KoAssertionFailedException> {
                 scope.assertArchitecture {
-                    project.dependsOnNothing()
+                    exactApp.dependsOnNothing()
+                    domain.include()
                 }
             }
 
         // then
-        result.message shouldBeEqualTo "Layer Project doesn't contain any files."
+        result.message shouldBeEqualTo getAppDependsOnNothingMessage("exact package layer does not overlap its subpackage layers")
     }
 
     @Test
-    fun `layer does not contain imports of excluded packages`() {
+    fun `layer does not overlap its excluded packages`() {
+        // given
+        val appWithoutDomainAndData =
+            Layer(
+                "App",
+                "com.lemonappdev.konsist.architecture.assertarchitecture.architecture11.project..",
+                excludedPackages =
+                    setOf(
+                        "com.lemonappdev.konsist.architecture.assertarchitecture.architecture11.project.domain..",
+                        "com.lemonappdev.konsist.architecture.assertarchitecture.architecture11.project.data..",
+                    ),
+            )
+
         // when
         val result =
             shouldThrow<KoAssertionFailedException> {
                 scope.assertArchitecture {
-                    ui.dependsOnNothing()
-                    viewModel.dependsOnNothing()
+                    appWithoutDomainAndData.dependsOnNothing()
+                    domain.include()
+                    data.include()
                 }
             }
 
         // then
-        val filepath = "$projectPath/ui/UiClass.kt"
-
-        result
-            .message
-            .shouldBeEqualTo(
-                "'layer does not contain imports of excluded packages' test has failed. \n" +
-                    "'UI' layer should not depend on anything but has dependencies in files:\n" +
-                    "└── File $filepath\n" +
-                    "    └── Import com.lemonappdev.konsist.architecture.assertarchitecture.architecture11.project.ui.viewmodel." +
-                    "UiViewModel ($filepath:4:1)",
-            )
+        result.message shouldBeEqualTo getAppDependsOnNothingMessage("layer does not overlap its excluded packages")
     }
 
-    @Test
-    fun `layer does not contain files of excluded packages`() {
-        // when
-        val func = {
-            scope.assertArchitecture {
-                ui.doesNotDependOn(coreApi)
-            }
-        }
+    private fun getAppDependsOnNothingMessage(testName: String): String {
+        val appFilePath = "$projectPath/AppClass.kt"
 
-        // then
-        func shouldNotThrow KoAssertionFailedException::class
+        return "'$testName' test has failed. \n" +
+            "'App' layer should not depend on anything but has dependencies in files:\n" +
+            "└── File $appFilePath\n" +
+            "    └── Import com.lemonappdev.konsist.architecture.assertarchitecture.architecture11.project.domain." +
+            "DomainClass ($appFilePath:3:1)"
     }
 }

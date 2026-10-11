@@ -1,13 +1,13 @@
 # Architecture 11
 
-Test scenario with exact package layers (without subpackages) and layers with excluded packages:
-- `Core` layer contains only the `core` package, `CoreApi` layer contains the `core.api` subpackage
-- `UI` layer contains the `ui` package without the `ui.viewmodel` subpackage, `ViewModel` layer contains the `ui.viewmodel` subpackage
+Test scenario where layers overlap. `App` layer contains every package of the project, so it also contains all
+files of the nested `Domain` and `Data` layers. A file belonging to more than one layer should fail the precondition:
 
 ```mermaid
 %%{init: {'theme': 'forest'}}%%
 flowchart LR
-    UI --> Core & ViewModel
-    Core --> CoreApi
-    ViewModel --> CoreApi
+    subgraph App
+        Domain
+        Data
+    end
 ```
