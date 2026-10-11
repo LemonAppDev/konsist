@@ -3,6 +3,7 @@ package com.lemonappdev.konsist.core.declaration
 import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoFileDeclaration
 import com.lemonappdev.konsist.api.declaration.KoPackageDeclaration
+import com.lemonappdev.konsist.core.cache.KoPropertyCache
 import com.lemonappdev.konsist.core.ext.toOsSeparator
 import com.lemonappdev.konsist.core.provider.KoAnnotationProviderCore
 import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
@@ -70,26 +71,40 @@ internal class KoFileDeclarationCore(
     override val ktAnnotationEntries: List<KtAnnotationEntry>?
         get() = ktFile.annotationEntries
 
-    override val name: String by lazy { nameWithExtension.substringBeforeLast('.') }
+    @Volatile
+    private var cachedName: Any? = KoPropertyCache.NOT_COMPUTED
+
+    override val name: String
+        get() = KoPropertyCache.getOrCompute(cachedName, { cachedName = it }) { nameWithExtension.substringBeforeLast('.') }
 
     override fun hasName(
         text: String,
         ignoreCase: Boolean,
     ): Boolean = name.equals(text, ignoreCase) || nameWithExtension.equals(text, ignoreCase)
 
-    override val path: String by lazy {
-        ktFile
-            .name
-            .toOsSeparator()
-    }
+    @Volatile
+    private var cachedPath: Any? = KoPropertyCache.NOT_COMPUTED
 
-    override val packagee: KoPackageDeclaration? by lazy {
-        if (ktFile.packageDirective?.qualifiedName == "") {
-            null
-        } else {
-            ktFile.packageDirective?.let { KoPackageDeclarationCore.getInstance(it, this) }
-        }
-    }
+    override val path: String
+        get() =
+            KoPropertyCache.getOrCompute(cachedPath, { cachedPath = it }) {
+                ktFile
+                    .name
+                    .toOsSeparator()
+            }
+
+    @Volatile
+    private var cachedPackagee: Any? = KoPropertyCache.NOT_COMPUTED
+
+    override val packagee: KoPackageDeclaration?
+        get() =
+            KoPropertyCache.getOrCompute(cachedPackagee, { cachedPackagee = it }) {
+                if (ktFile.packageDirective?.qualifiedName == "") {
+                    null
+                } else {
+                    ktFile.packageDirective?.let { KoPackageDeclarationCore.getInstance(it, this) }
+                }
+            }
 
     override fun declarations(
         includeNested: Boolean,

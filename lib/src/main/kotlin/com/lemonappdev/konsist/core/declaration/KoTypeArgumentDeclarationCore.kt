@@ -3,6 +3,7 @@ package com.lemonappdev.konsist.core.declaration
 import com.lemonappdev.konsist.api.KoModifier
 import com.lemonappdev.konsist.api.declaration.KoTypeArgumentDeclaration
 import com.lemonappdev.konsist.api.provider.KoDeclarationCastProvider
+import com.lemonappdev.konsist.core.cache.KoPropertyCache
 import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
 import com.lemonappdev.konsist.core.provider.KoFunctionTypeDeclarationProviderCore
 import com.lemonappdev.konsist.core.provider.KoIsFunctionTypeProviderCore
@@ -64,23 +65,28 @@ data class KoTypeArgumentDeclarationCore(
     override val ktModifierListOwner: KtModifierListOwner
         get() = ktTypeProjection
 
-    override val ktFunctionType: KtFunctionType? by lazy {
-        val children =
-            ktTypeProjection
-                .children
-                .firstOrNull()
-                ?.children
+    @Volatile
+    private var cachedKtFunctionType: Any? = KoPropertyCache.NOT_COMPUTED
 
-        val effectiveChildren =
-            when (val nullableType = children?.filterIsInstance<KtNullableType>()?.firstOrNull()) {
-                null -> children
-                else -> nullableType.children
+    override val ktFunctionType: KtFunctionType?
+        get() =
+            KoPropertyCache.getOrCompute(cachedKtFunctionType, { cachedKtFunctionType = it }) {
+                val children =
+                    ktTypeProjection
+                        .children
+                        .firstOrNull()
+                        ?.children
+
+                val effectiveChildren =
+                    when (val nullableType = children?.filterIsInstance<KtNullableType>()?.firstOrNull()) {
+                        null -> children
+                        else -> nullableType.children
+                    }
+
+                effectiveChildren
+                    ?.filterIsInstance<KtFunctionType>()
+                    ?.firstOrNull()
             }
-
-        effectiveChildren
-            ?.filterIsInstance<KtFunctionType>()
-            ?.firstOrNull()
-    }
 
     override val ktNameReferenceExpression: KtNameReferenceExpression?
         get() = null
@@ -88,21 +94,31 @@ data class KoTypeArgumentDeclarationCore(
     override val ktTypeReference: KtTypeReference?
         get() = null
 
-    override val text: String by lazy {
-        when {
-            hasInModifier -> "in $name"
-            hasOutModifier -> "out $name"
-            else -> name
-        }
-    }
+    @Volatile
+    private var cachedText: Any? = KoPropertyCache.NOT_COMPUTED
 
-    override val modifiers: List<KoModifier> by lazy {
-        when {
-            hasInModifier -> listOf(KoModifier.IN)
-            hasOutModifier -> listOf(KoModifier.OUT)
-            else -> emptyList()
-        }
-    }
+    override val text: String
+        get() =
+            KoPropertyCache.getOrCompute(cachedText, { cachedText = it }) {
+                when {
+                    hasInModifier -> "in $name"
+                    hasOutModifier -> "out $name"
+                    else -> name
+                }
+            }
+
+    @Volatile
+    private var cachedModifiers: Any? = KoPropertyCache.NOT_COMPUTED
+
+    override val modifiers: List<KoModifier>
+        get() =
+            KoPropertyCache.getOrCompute(cachedModifiers, { cachedModifiers = it }) {
+                when {
+                    hasInModifier -> listOf(KoModifier.IN)
+                    hasOutModifier -> listOf(KoModifier.OUT)
+                    else -> emptyList()
+                }
+            }
 
     override fun toString(): String = text
 }

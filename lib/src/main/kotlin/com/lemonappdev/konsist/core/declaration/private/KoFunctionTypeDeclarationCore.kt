@@ -3,6 +3,7 @@ package com.lemonappdev.konsist.core.declaration.private
 import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoPackageDeclaration
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
+import com.lemonappdev.konsist.core.cache.KoPropertyCache
 import com.lemonappdev.konsist.core.declaration.type.KoBaseTypeDeclarationCore
 import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
 import com.lemonappdev.konsist.core.provider.KoContainingDeclarationProviderCore
@@ -34,9 +35,17 @@ internal class KoFunctionTypeDeclarationCore private constructor(
     override val ktElement: KtElement
         get() = ktFunctionType
 
-    override val name: String by lazy { ktFunctionType.text }
+    @Volatile
+    private var cachedName: Any? = KoPropertyCache.NOT_COMPUTED
 
-    override val packagee: KoPackageDeclaration? by lazy { containingFile.packagee }
+    override val name: String
+        get() = KoPropertyCache.getOrCompute(cachedName, { cachedName = it }) { ktFunctionType.text }
+
+    @Volatile
+    private var cachedPackagee: Any? = KoPropertyCache.NOT_COMPUTED
+
+    override val packagee: KoPackageDeclaration?
+        get() = KoPropertyCache.getOrCompute(cachedPackagee, { cachedPackagee = it }) { containingFile.packagee }
 
     override fun toString(): String = text
 

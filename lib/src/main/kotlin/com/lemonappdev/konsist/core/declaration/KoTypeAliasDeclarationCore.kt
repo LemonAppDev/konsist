@@ -4,6 +4,7 @@ import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoTypeAliasDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoTypeDeclaration
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
+import com.lemonappdev.konsist.core.cache.KoPropertyCache
 import com.lemonappdev.konsist.core.declaration.type.KoBaseTypeDeclarationCore
 import com.lemonappdev.konsist.core.declaration.type.KoTypeDeclarationCore
 import com.lemonappdev.konsist.core.exception.KoInternalException
@@ -74,12 +75,17 @@ internal class KoTypeAliasDeclarationCore private constructor(
     override val ktElement: KtElement
         get() = ktTypeAlias
 
-    override val type: KoTypeDeclaration by lazy {
-        val type = ktTypeAlias.getTypeReference()
+    @Volatile
+    private var cachedType: Any? = KoPropertyCache.NOT_COMPUTED
 
-        type?.let { KoTypeDeclarationCore.getInstance(it, this) }
-            ?: throw KoInternalException("Type alias has no specified type.")
-    }
+    override val type: KoTypeDeclaration
+        get() =
+            KoPropertyCache.getOrCompute(cachedType, { cachedType = it }) {
+                val type = ktTypeAlias.getTypeReference()
+
+                type?.let { KoTypeDeclarationCore.getInstance(it, this) }
+                    ?: throw KoInternalException("Type alias has no specified type.")
+            }
 
     override fun toString(): String = name
 

@@ -3,6 +3,7 @@ package com.lemonappdev.konsist.core.declaration
 import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoSetterDeclaration
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
+import com.lemonappdev.konsist.core.cache.KoPropertyCache
 import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
 import com.lemonappdev.konsist.core.provider.KoBodyProviderCore
 import com.lemonappdev.konsist.core.provider.KoContainingDeclarationProviderCore
@@ -62,14 +63,19 @@ internal class KoSetterDeclarationCore private constructor(
     override val ktDeclaration: KtDeclaration
         get() = ktPropertyAccessor
 
-    override val localDeclarations: List<KoBaseDeclaration> by lazy {
-        val psiElements =
-            ktPropertyAccessor
-                .bodyBlockExpression
-                ?.children
+    @Volatile
+    private var cachedLocalDeclarations: Any? = KoPropertyCache.NOT_COMPUTED
 
-        KoLocalDeclarationProviderCoreUtil.getKoLocalDeclarations(psiElements, this)
-    }
+    override val localDeclarations: List<KoBaseDeclaration>
+        get() =
+            KoPropertyCache.getOrCompute(cachedLocalDeclarations, { cachedLocalDeclarations = it }) {
+                val psiElements =
+                    ktPropertyAccessor
+                        .bodyBlockExpression
+                        ?.children
+
+                KoLocalDeclarationProviderCoreUtil.getKoLocalDeclarations(psiElements, this)
+            }
 
     override val hasPublicOrDefaultModifier: Boolean
         get() = !(hasPrivateModifier || hasProtectedModifier || hasInternalModifier)

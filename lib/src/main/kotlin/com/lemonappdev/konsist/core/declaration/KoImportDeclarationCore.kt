@@ -7,6 +7,7 @@ import com.lemonappdev.konsist.api.declaration.type.KoKotlinTypeDeclaration
 import com.lemonappdev.konsist.api.provider.KoDeclarationCastProvider
 import com.lemonappdev.konsist.api.provider.KoFullyQualifiedNameProvider
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
+import com.lemonappdev.konsist.core.cache.KoPropertyCache
 import com.lemonappdev.konsist.core.declaration.type.KoKotlinTypeDeclarationCore
 import com.lemonappdev.konsist.core.ext.castToKoBaseDeclaration
 import com.lemonappdev.konsist.core.model.DataCore
@@ -53,43 +54,58 @@ internal class KoImportDeclarationCore private constructor(
     override val ktElement: KtElement
         get() = ktImportDirective
 
+    @Volatile
+    private var cachedName: Any? = KoPropertyCache.NOT_COMPUTED
+
     /*
     Name is built from identifiers of the import reference AST nodes. 'KtImportDirective.importPath' is not used,
     because it creates PSI element for every name segment and caches FqName (with all its parents) in the import
     directive, which significantly increases memory usage of the project with many imports.
      */
-    override val name: String by lazy {
-        val identifiers =
-            ktImportDirective
-                .importedReference
-                ?.node
-                ?.let { getIdentifiers(it) }
-                .orEmpty()
+    override val name: String
+        get() =
+            KoPropertyCache.getOrCompute(cachedName, { cachedName = it }) {
+                val identifiers =
+                    ktImportDirective
+                        .importedReference
+                        ?.node
+                        ?.let { getIdentifiers(it) }
+                        .orEmpty()
 
-        // Import without reference has no import path, so its name is "null"
-        identifiers.joinToString(".").ifEmpty { null.toString() }
-    }
+                // Import without reference has no import path, so its name is "null"
+                identifiers.joinToString(".").ifEmpty { null.toString() }
+            }
 
-    override val alias: KoImportAliasDeclaration? by lazy {
-        ktImportDirective
-            .alias
-            ?.let { KoImportAliasDeclarationCore.getInstance(it, this) }
-    }
+    @Volatile
+    private var cachedAlias: Any? = KoPropertyCache.NOT_COMPUTED
 
-    override val sourceDeclaration: KoDeclarationCastProvider? by lazy {
-        val shortName = name.substringAfterLast(".")
+    override val alias: KoImportAliasDeclaration?
+        get() =
+            KoPropertyCache.getOrCompute(cachedAlias, { cachedAlias = it }) {
+                ktImportDirective
+                    .alias
+                    ?.let { KoImportAliasDeclarationCore.getInstance(it, this) }
+            }
 
-        (
-            DataCore
-                .declarations
-                .filterIsInstance<KoFullyQualifiedNameProvider>()
-                .firstOrNull { it.fullyQualifiedName == name }
-                as? KoDeclarationCastProvider
-                ?: getKotlinType(shortName)
-                ?: KoExternalDeclarationCore.getInstance(shortName, ktImportDirective)
-        )
-            as? KoDeclarationCastProvider
-    }
+    @Volatile
+    private var cachedSourceDeclaration: Any? = KoPropertyCache.NOT_COMPUTED
+
+    override val sourceDeclaration: KoDeclarationCastProvider?
+        get() =
+            KoPropertyCache.getOrCompute(cachedSourceDeclaration, { cachedSourceDeclaration = it }) {
+                val shortName = name.substringAfterLast(".")
+
+                (
+                    DataCore
+                        .declarations
+                        .filterIsInstance<KoFullyQualifiedNameProvider>()
+                        .firstOrNull { it.fullyQualifiedName == name }
+                        as? KoDeclarationCastProvider
+                        ?: getKotlinType(shortName)
+                        ?: KoExternalDeclarationCore.getInstance(shortName, ktImportDirective)
+                )
+                    as? KoDeclarationCastProvider
+            }
 
     private fun getIdentifiers(node: ASTNode): List<String> =
         if (node.elementType == KtTokens.IDENTIFIER) {

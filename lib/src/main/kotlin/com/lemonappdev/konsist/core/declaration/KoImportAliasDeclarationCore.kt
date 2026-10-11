@@ -5,6 +5,7 @@ import com.lemonappdev.konsist.api.declaration.KoImportDeclaration
 import com.lemonappdev.konsist.api.declaration.KoPackageDeclaration
 import com.lemonappdev.konsist.api.provider.KoDeclarationCastProvider
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
+import com.lemonappdev.konsist.core.cache.KoPropertyCache
 import com.lemonappdev.konsist.core.declaration.type.KoBaseTypeDeclarationCore
 import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
 import com.lemonappdev.konsist.core.provider.KoContainingDeclarationProviderCore
@@ -41,19 +42,32 @@ internal class KoImportAliasDeclarationCore private constructor(
     override val ktTypeProjection: KtTypeProjection?
         get() = null
 
-    override val text: String by lazy { ktImportAlias.name ?: ktImportAlias.text }
+    @Volatile
+    private var cachedText: Any? = KoPropertyCache.NOT_COMPUTED
+
+    override val text: String
+        get() = KoPropertyCache.getOrCompute(cachedText, { cachedText = it }) { ktImportAlias.name ?: ktImportAlias.text }
 
     override val name: String
         get() = text
 
-    override val packagee: KoPackageDeclaration? by lazy { containingFile.packagee }
+    @Volatile
+    private var cachedPackagee: Any? = KoPropertyCache.NOT_COMPUTED
+
+    override val packagee: KoPackageDeclaration?
+        get() = KoPropertyCache.getOrCompute(cachedPackagee, { cachedPackagee = it }) { containingFile.packagee }
 
     override val importDirective: KoImportDeclaration
         get() = containingDeclaration
 
-    override val sourceDeclaration: KoDeclarationCastProvider? by lazy {
-        importDirective.sourceDeclaration
-    }
+    @Volatile
+    private var cachedSourceDeclaration: Any? = KoPropertyCache.NOT_COMPUTED
+
+    override val sourceDeclaration: KoDeclarationCastProvider?
+        get() =
+            KoPropertyCache.getOrCompute(cachedSourceDeclaration, { cachedSourceDeclaration = it }) {
+                importDirective.sourceDeclaration
+            }
 
     override fun toString(): String = text
 

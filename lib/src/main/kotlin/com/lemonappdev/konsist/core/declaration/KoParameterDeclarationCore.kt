@@ -4,6 +4,7 @@ import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoParameterDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoTypeDeclaration
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
+import com.lemonappdev.konsist.core.cache.KoPropertyCache
 import com.lemonappdev.konsist.core.declaration.type.KoTypeDeclarationCore
 import com.lemonappdev.konsist.core.exception.KoInternalException
 import com.lemonappdev.konsist.core.provider.KoAnnotationProviderCore
@@ -73,16 +74,21 @@ internal class KoParameterDeclarationCore private constructor(
     override val ktElement: KtElement
         get() = ktParameter
 
-    override val type: KoTypeDeclaration by lazy {
-        val type =
-            ktParameter
-                .children
-                .filterIsInstance<KtTypeReference>()
-                .firstOrNull()
+    @Volatile
+    private var cachedType: Any? = KoPropertyCache.NOT_COMPUTED
 
-        type?.let { KoTypeDeclarationCore.getInstance(it, this) }
-            ?: throw KoInternalException("Class type cannot be null")
-    }
+    override val type: KoTypeDeclaration
+        get() =
+            KoPropertyCache.getOrCompute(cachedType, { cachedType = it }) {
+                val type =
+                    ktParameter
+                        .children
+                        .filterIsInstance<KtTypeReference>()
+                        .firstOrNull()
+
+                type?.let { KoTypeDeclarationCore.getInstance(it, this) }
+                    ?: throw KoInternalException("Class type cannot be null")
+            }
 
     override fun representsType(
         name: String?,

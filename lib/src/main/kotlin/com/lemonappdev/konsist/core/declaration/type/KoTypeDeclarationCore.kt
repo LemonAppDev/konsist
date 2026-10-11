@@ -20,6 +20,7 @@ import com.lemonappdev.konsist.api.declaration.type.KoKotlinTypeDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoTypeDeclaration
 import com.lemonappdev.konsist.core.annotation.RemoveInVersion
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
+import com.lemonappdev.konsist.core.cache.KoPropertyCache
 import com.lemonappdev.konsist.core.provider.KoAnnotationProviderCore
 import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
 import com.lemonappdev.konsist.core.provider.KoContainingDeclarationProviderCore
@@ -125,32 +126,60 @@ internal class KoTypeDeclarationCore private constructor(
     override val ktAnnotationEntries: List<KtAnnotationEntry>?
         get() = ktTypeReference?.annotationEntries
 
-    override val koDeclarationCastProviderDeclaration: KoSourceDeclaration? by lazy { sourceDeclaration }
+    @Volatile
+    private var cachedKoDeclarationCastProviderDeclaration: Any? = KoPropertyCache.NOT_COMPUTED
 
-    override val name: String by lazy {
-        val typeReference =
-            ktTypeReference
-                ?.children
-                // The last item is chosen because when a type is preceded by an annotation or modifier,
-                // the type being searched for is the last item in the list.
-                ?.lastOrNull()
-                ?: ktNameReferenceExpression
-                ?: ktTypeProjection
+    override val koDeclarationCastProviderDeclaration: KoSourceDeclaration?
+        get() =
+            KoPropertyCache.getOrCompute(cachedKoDeclarationCastProviderDeclaration, {
+                cachedKoDeclarationCastProviderDeclaration = it
+            }) { sourceDeclaration }
 
-        if (typeReference is KtNullableType) {
-            typeReference.children.firstOrNull()?.text ?: ""
-        } else {
-            typeReference?.text ?: ""
-        }
-    }
+    @Volatile
+    private var cachedName: Any? = KoPropertyCache.NOT_COMPUTED
 
-    override val packagee: KoPackageDeclaration? by lazy { containingFile.packagee }
+    override val name: String
+        get() =
+            KoPropertyCache.getOrCompute(cachedName, { cachedName = it }) {
+                val typeReference =
+                    ktTypeReference
+                        ?.children
+                        // The last item is chosen because when a type is preceded by an annotation or modifier,
+                        // the type being searched for is the last item in the list.
+                        ?.lastOrNull()
+                        ?: ktNameReferenceExpression
+                        ?: ktTypeProjection
+
+                if (typeReference is KtNullableType) {
+                    typeReference.children.firstOrNull()?.text ?: ""
+                } else {
+                    typeReference?.text ?: ""
+                }
+            }
+
+    @Volatile
+    private var cachedPackagee: Any? = KoPropertyCache.NOT_COMPUTED
+
+    override val packagee: KoPackageDeclaration?
+        get() = KoPropertyCache.getOrCompute(cachedPackagee, { cachedPackagee = it }) { containingFile.packagee }
+
+    @Volatile
+    private var cachedSourceType: Any? = KoPropertyCache.NOT_COMPUTED
 
     @RemoveInVersion("0.19.0")
-    override val sourceType: String by lazy { super<KoSourceTypeProviderCore>.sourceType }
+    override val sourceType: String
+        get() = KoPropertyCache.getOrCompute(cachedSourceType, { cachedSourceType = it }) { super<KoSourceTypeProviderCore>.sourceType }
+
+    @Volatile
+    private var cachedBareSourceType: Any? = KoPropertyCache.NOT_COMPUTED
 
     @RemoveInVersion("0.19.0")
-    override val bareSourceType: String by lazy { super<KoSourceTypeProviderCore>.bareSourceType }
+    override val bareSourceType: String
+        get() =
+            KoPropertyCache.getOrCompute(
+                cachedBareSourceType,
+                { cachedBareSourceType = it },
+            ) { super<KoSourceTypeProviderCore>.bareSourceType }
 
     @Deprecated("Will be removed in version 0.19.0", ReplaceWith("sourceDeclaration?.isClass"))
     override val isClass: Boolean
