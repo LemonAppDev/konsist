@@ -19,7 +19,8 @@ internal class KoKotlinTypeDeclarationCore private constructor(
     KoBaseProviderCore,
     KoFullyQualifiedNameProviderCore,
     KoSourceTypeProviderCore {
-    override val psiElement: PsiElement by lazy { ktElement }
+    override val psiElement: PsiElement
+        get() = ktElement
 
     override val packagee: KoPackageDeclaration? by lazy {
         KoPackageDeclarationCore(

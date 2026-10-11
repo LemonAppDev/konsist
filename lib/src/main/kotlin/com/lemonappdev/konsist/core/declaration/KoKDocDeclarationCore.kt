@@ -54,7 +54,8 @@ internal class KoKDocDeclarationCore(
     KoKDocPropertySetterTagProviderCore,
     KoKDocConstructorTagProviderCore,
     KoKDocSinceTagProviderCore {
-    override val psiElement: PsiElement by lazy { kDocElement }
+    override val psiElement: PsiElement
+        get() = kDocElement
 
     override val kDocTags: List<KDocTag> by lazy {
         kDocElement

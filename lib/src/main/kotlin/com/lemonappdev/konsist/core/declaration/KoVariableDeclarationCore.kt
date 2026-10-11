@@ -57,13 +57,17 @@ internal class KoVariableDeclarationCore private constructor(
     KoTacitTypeProviderCore,
     KoIsValProviderCore,
     KoIsVarProviderCore {
-    override val ktAnnotationEntries: List<KtAnnotationEntry>? by lazy { ktProperty.annotationEntries }
+    override val ktAnnotationEntries: List<KtAnnotationEntry>?
+        get() = ktProperty.annotationEntries
 
-    override val ktCallableDeclaration: KtCallableDeclaration by lazy { ktProperty }
+    override val ktCallableDeclaration: KtCallableDeclaration
+        get() = ktProperty
 
-    override val psiElement: PsiElement by lazy { ktProperty }
+    override val psiElement: PsiElement
+        get() = ktProperty
 
-    override val ktElement: KtElement by lazy { ktProperty }
+    override val ktElement: KtElement
+        get() = ktProperty
 
     override val ktExpression: KtExpression? by lazy {
         ktProperty
@@ -74,14 +78,18 @@ internal class KoVariableDeclarationCore private constructor(
     }
 
     @Deprecated("Will be removed in version 0.19.0", ReplaceWith("isVal"))
-    override val hasValModifier: Boolean by lazy { !ktProperty.isVar }
+    override val hasValModifier: Boolean
+        get() = !ktProperty.isVar
 
     @Deprecated("Will be removed in version 0.19.0", ReplaceWith("isVar"))
-    override val hasVarModifier: Boolean by lazy { ktProperty.isVar }
+    override val hasVarModifier: Boolean
+        get() = ktProperty.isVar
 
-    override val isVal: Boolean by lazy { !ktProperty.isVar }
+    override val isVal: Boolean
+        get() = !ktProperty.isVar
 
-    override val isVar: Boolean by lazy { ktProperty.isVar }
+    override val isVar: Boolean
+        get() = ktProperty.isVar
 
     override fun toString(): String = name
 

@@ -36,9 +36,11 @@ internal class KoInitBlockDeclarationCore private constructor(
     KoModuleProviderCore,
     KoSourceSetProviderCore,
     KoTextProviderCore {
-    override val psiElement: PsiElement by lazy { ktAnonymousInitializer }
+    override val psiElement: PsiElement
+        get() = ktAnonymousInitializer
 
-    override val ktElement: KtElement by lazy { ktAnonymousInitializer }
+    override val ktElement: KtElement
+        get() = ktAnonymousInitializer
 
     override val localDeclarations: List<KoBaseDeclaration> by lazy {
         val psiElements =

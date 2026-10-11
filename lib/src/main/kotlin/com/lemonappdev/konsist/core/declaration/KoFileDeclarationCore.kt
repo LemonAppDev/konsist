@@ -61,11 +61,14 @@ internal class KoFileDeclarationCore(
     KoTextProviderCore,
     KoTypeAliasProviderCore,
     KoCompanionObjectProviderCore {
-    override val ktElement: KtElement by lazy { ktFile }
+    override val ktElement: KtElement
+        get() = ktFile
 
-    override val psiElement: PsiElement by lazy { ktFile }
+    override val psiElement: PsiElement
+        get() = ktFile
 
-    override val ktAnnotationEntries: List<KtAnnotationEntry>? by lazy { ktFile.annotationEntries }
+    override val ktAnnotationEntries: List<KtAnnotationEntry>?
+        get() = ktFile.annotationEntries
 
     override val name: String by lazy { nameWithExtension.substringBeforeLast('.') }
 

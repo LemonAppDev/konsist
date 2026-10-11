@@ -52,13 +52,17 @@ data class KoTypeArgumentDeclarationCore(
     KoIsFunctionTypeProviderCore,
     KoFunctionTypeDeclarationProviderCore,
     KoIsStarProjectionProviderCore {
-    override val ktElement: KtElement by lazy { ktTypeProjection }
+    override val ktElement: KtElement
+        get() = ktTypeProjection
 
-    override val ktUserType: KtUserType? by lazy { null }
+    override val ktUserType: KtUserType?
+        get() = null
 
-    override val psiElement: PsiElement by lazy { ktTypeProjection }
+    override val psiElement: PsiElement
+        get() = ktTypeProjection
 
-    override val ktModifierListOwner: KtModifierListOwner by lazy { ktTypeProjection }
+    override val ktModifierListOwner: KtModifierListOwner
+        get() = ktTypeProjection
 
     override val ktFunctionType: KtFunctionType? by lazy {
         val children =
@@ -78,9 +82,11 @@ data class KoTypeArgumentDeclarationCore(
             ?.firstOrNull()
     }
 
-    override val ktNameReferenceExpression: KtNameReferenceExpression? by lazy { null }
+    override val ktNameReferenceExpression: KtNameReferenceExpression?
+        get() = null
 
-    override val ktTypeReference: KtTypeReference? by lazy { null }
+    override val ktTypeReference: KtTypeReference?
+        get() = null
 
     override val text: String by lazy {
         when {

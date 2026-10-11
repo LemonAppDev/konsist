@@ -11,7 +11,8 @@ internal class KoPrimaryConstructorDeclarationCore private constructor(
     override val containingDeclaration: KoBaseDeclaration,
 ) : KoPrimaryConstructorDeclaration,
     KoConstructorDeclarationCore {
-    override val ktConstructor: KtConstructor<*> by lazy { ktPrimaryConstructor }
+    override val ktConstructor: KtConstructor<*>
+        get() = ktPrimaryConstructor
 
     override fun toString(): String = locationWithText
 

@@ -28,9 +28,11 @@ internal class KoFunctionTypeDeclarationCore private constructor(
     KoModuleProviderCore,
     KoSourceSetProviderCore,
     KoFunctionTypeDeclarationProviderCore {
-    override val psiElement: PsiElement by lazy { ktFunctionType }
+    override val psiElement: PsiElement
+        get() = ktFunctionType
 
-    override val ktElement: KtElement by lazy { ktFunctionType }
+    override val ktElement: KtElement
+        get() = ktFunctionType
 
     override val name: String by lazy { ktFunctionType.text }
 

@@ -59,17 +59,23 @@ internal class KoParentDeclarationCore(
     KoSourceSetProviderCore,
     KoArgumentProviderCore,
     KoInterfaceDelegateProviderCore {
-    override val psiElement: PsiElement by lazy { ktSuperTypeListEntry }
+    override val psiElement: PsiElement
+        get() = ktSuperTypeListEntry
 
-    override val ktElement: KtElement by lazy { ktSuperTypeListEntry }
+    override val ktElement: KtElement
+        get() = ktSuperTypeListEntry
 
-    override val ktTypeReference: KtTypeReference? by lazy { null }
+    override val ktTypeReference: KtTypeReference?
+        get() = null
 
-    override val ktNameReferenceExpression: KtNameReferenceExpression? by lazy { null }
+    override val ktNameReferenceExpression: KtNameReferenceExpression?
+        get() = null
 
-    override val ktTypeProjection: KtTypeProjection? by lazy { null }
+    override val ktTypeProjection: KtTypeProjection?
+        get() = null
 
-    override val ktUserType: KtUserType? by lazy { ktSuperTypeListEntry.typeAsUserType }
+    override val ktUserType: KtUserType?
+        get() = ktSuperTypeListEntry.typeAsUserType
 
     override val ktAnnotationEntries: List<KtAnnotationEntry>? by lazy {
         val children = ktSuperTypeListEntry.children

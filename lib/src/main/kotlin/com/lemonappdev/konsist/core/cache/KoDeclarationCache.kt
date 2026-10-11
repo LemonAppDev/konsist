@@ -6,23 +6,13 @@ import com.lemonappdev.konsist.api.provider.KoBaseProvider
 import org.jetbrains.kotlin.psi.KtElement
 import java.util.concurrent.ConcurrentHashMap
 
+/*
+Instances are created atomically, so all threads (tests can run in parallel) get the same instance for the given key.
+Declarations are compared by identity (e.g. when removing duplicated parents), so two instances of the same declaration
+would break the comparison.
+ */
 internal class KoDeclarationCache<T : KoBaseProvider> {
-    val elements = ConcurrentHashMap<Pair<KtElement, KoBaseProvider?>, T>()
-
-    private fun get(key: Pair<KtElement, KoBaseProvider?>): T {
-        var value = elements[key]
-        value = requireNotNull(value) { "Cache doesn't allow to null value of key: ${key.first.name}" }
-        return value
-    }
-
-    private fun set(
-        key: Pair<KtElement, KoBaseProvider?>,
-        value: T,
-    ) {
-        elements[key] = value
-    }
-
-    private fun hasKey(key: Pair<KtElement, KoBaseProvider?>) = elements.containsKey(key)
+    private val elements = ConcurrentHashMap<Pair<KtElement, KoBaseProvider?>, T>()
 
     fun getOrCreateInstance(
         ktElement: KtElement,
@@ -31,42 +21,16 @@ internal class KoDeclarationCache<T : KoBaseProvider> {
     ): T {
         val cacheKey = ktElement to containingDeclaration
 
-        return if (hasKey(cacheKey)) {
-            get(cacheKey)
-        } else {
-            set(cacheKey, value.invoke(ktElement))
-            get(cacheKey)
-        }
+        return elements[cacheKey] ?: value(ktElement).let { elements.putIfAbsent(cacheKey, it) ?: it }
     }
 }
 
 internal object KoExternalDeclarationCache {
-    val elements = ConcurrentHashMap<String, KoExternalDeclaration>()
-
-    private fun get(key: String): KoExternalDeclaration {
-        var value = elements[key]
-        value = requireNotNull(value) { "Cache doesn't allow to null value of key: $key" }
-        return value
-    }
-
-    private fun set(
-        key: String,
-        value: KoExternalDeclaration,
-    ) {
-        elements[key] = value
-    }
-
-    private fun hasKey(key: String) = elements.containsKey(key)
+    private val elements = ConcurrentHashMap<String, KoExternalDeclaration>()
 
     fun getOrCreateInstance(
         key: String,
         ktElement: KtElement,
         value: (ktElement: KtElement) -> KoExternalDeclaration,
-    ): KoExternalDeclaration =
-        if (hasKey(key)) {
-            get(key)
-        } else {
-            set(key, value.invoke(ktElement))
-            get(key)
-        }
+    ): KoExternalDeclaration = elements[key] ?: value(ktElement).let { elements.putIfAbsent(key, it) ?: it }
 }

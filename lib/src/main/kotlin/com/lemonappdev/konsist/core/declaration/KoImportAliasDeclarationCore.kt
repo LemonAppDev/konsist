@@ -32,19 +32,24 @@ internal class KoImportAliasDeclarationCore private constructor(
     KoModuleProviderCore,
     KoSourceSetProviderCore,
     KoSourceDeclarationProviderCore {
-    override val psiElement: PsiElement by lazy { ktImportAlias }
+    override val psiElement: PsiElement
+        get() = ktImportAlias
 
-    override val ktElement: KtElement by lazy { ktImportAlias }
+    override val ktElement: KtElement
+        get() = ktImportAlias
 
-    override val ktTypeProjection: KtTypeProjection? by lazy { null }
+    override val ktTypeProjection: KtTypeProjection?
+        get() = null
 
     override val text: String by lazy { ktImportAlias.name ?: ktImportAlias.text }
 
-    override val name: String by lazy { text }
+    override val name: String
+        get() = text
 
     override val packagee: KoPackageDeclaration? by lazy { containingFile.packagee }
 
-    override val importDirective: KoImportDeclaration by lazy { containingDeclaration }
+    override val importDirective: KoImportDeclaration
+        get() = containingDeclaration
 
     override val sourceDeclaration: KoDeclarationCastProvider? by lazy {
         importDirective.sourceDeclaration

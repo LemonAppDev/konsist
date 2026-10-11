@@ -61,13 +61,17 @@ internal class KoParameterDeclarationCore private constructor(
     KoCrossInlineModifierProviderCore,
     KoIsValProviderCore,
     KoIsVarProviderCore {
-    override val ktAnnotationEntries: List<KtAnnotationEntry>? by lazy { ktParameter.annotationEntries }
+    override val ktAnnotationEntries: List<KtAnnotationEntry>?
+        get() = ktParameter.annotationEntries
 
-    override val ktModifierListOwner: KtModifierListOwner by lazy { ktParameter }
+    override val ktModifierListOwner: KtModifierListOwner
+        get() = ktParameter
 
-    override val psiElement: PsiElement by lazy { ktParameter }
+    override val psiElement: PsiElement
+        get() = ktParameter
 
-    override val ktElement: KtElement by lazy { ktParameter }
+    override val ktElement: KtElement
+        get() = ktParameter
 
     override val type: KoTypeDeclaration by lazy {
         val type =
@@ -86,14 +90,18 @@ internal class KoParameterDeclarationCore private constructor(
     ): Boolean = name?.let { type.hasName(it, ignoreCase) } == true
 
     @Deprecated("Will be removed in version 0.19.0", ReplaceWith("isVal"))
-    override val hasValModifier: Boolean by lazy { ktParameter.valOrVarKeyword?.text == "val" }
+    override val hasValModifier: Boolean
+        get() = ktParameter.valOrVarKeyword?.text == "val"
 
     @Deprecated("Will be removed in version 0.19.0", ReplaceWith("isVar"))
-    override val hasVarModifier: Boolean by lazy { ktParameter.valOrVarKeyword?.text == "var" }
+    override val hasVarModifier: Boolean
+        get() = ktParameter.valOrVarKeyword?.text == "var"
 
-    override val isVal: Boolean by lazy { ktParameter.valOrVarKeyword?.text == "val" }
+    override val isVal: Boolean
+        get() = ktParameter.valOrVarKeyword?.text == "val"
 
-    override val isVar: Boolean by lazy { ktParameter.valOrVarKeyword?.text == "var" }
+    override val isVar: Boolean
+        get() = ktParameter.valOrVarKeyword?.text == "var"
 
     override fun toString(): String = name
 

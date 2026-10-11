@@ -36,11 +36,14 @@ internal class KoArgumentDeclarationCore private constructor(
     KoResideInPackageProviderCore,
     KoPackageDeclarationProviderCore,
     KoTextProviderCore {
-    override val psiElement: PsiElement by lazy { ktValueArgument }
+    override val psiElement: PsiElement
+        get() = ktValueArgument
 
-    override val ktElement: KtElement by lazy { ktValueArgument }
+    override val ktElement: KtElement
+        get() = ktValueArgument
 
-    override val ktExpression: KtExpression? by lazy { ktValueArgument.getArgumentExpression() }
+    override val ktExpression: KtExpression?
+        get() = ktValueArgument.getArgumentExpression()
 
     override val name: String by lazy {
         ktValueArgument

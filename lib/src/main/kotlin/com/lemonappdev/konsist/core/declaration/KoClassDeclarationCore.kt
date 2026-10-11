@@ -50,17 +50,23 @@ internal class KoClassDeclarationCore private constructor(
     KoSecondaryConstructorsProviderCore,
     KoTestClassProviderCore,
     KoValueModifierProviderCore {
-    override val ktModifierListOwner: KtModifierListOwner by lazy { ktClass }
+    override val ktModifierListOwner: KtModifierListOwner
+        get() = ktClass
 
-    override val ktTypeParameterListOwner: KtTypeParameterListOwner by lazy { ktClass }
+    override val ktTypeParameterListOwner: KtTypeParameterListOwner
+        get() = ktClass
 
-    override val ktAnnotationEntries: List<KtAnnotationEntry>? by lazy { ktClass.annotationEntries }
+    override val ktAnnotationEntries: List<KtAnnotationEntry>?
+        get() = ktClass.annotationEntries
 
-    override val psiElement: PsiElement by lazy { ktClass }
+    override val psiElement: PsiElement
+        get() = ktClass
 
-    override val ktElement: KtElement by lazy { ktClass }
+    override val ktElement: KtElement
+        get() = ktClass
 
-    override val ktClassOrObject: KtClassOrObject by lazy { ktClass }
+    override val ktClassOrObject: KtClassOrObject
+        get() = ktClass
 
     override fun declarations(
         includeNested: Boolean,

@@ -39,13 +39,16 @@ internal class KoTypeParameterDeclarationCore private constructor(
     KoOutModifierProviderCore,
     KoInModifierProviderCore,
     KoUpperBoundsProviderCore {
-    override val psiElement: PsiElement by lazy { ktTypeParameter }
+    override val psiElement: PsiElement
+        get() = ktTypeParameter
 
-    override val ktElement: KtElement by lazy { ktTypeParameter }
+    override val ktElement: KtElement
+        get() = ktTypeParameter
 
     override val packagee: KoPackageDeclaration? by lazy { containingFile.packagee }
 
-    override val ktModifierListOwner: KtModifierListOwner by lazy { ktTypeParameter }
+    override val ktModifierListOwner: KtModifierListOwner
+        get() = ktTypeParameter
 
     override val name: String by lazy { ktTypeParameter.text }
 

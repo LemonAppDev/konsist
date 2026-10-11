@@ -39,9 +39,11 @@ internal class KoAnnotationDeclarationCore private constructor(
     KoRepresentsTypeProviderCore,
     KoTextProviderCore,
     KoSourceDeclarationProviderCore {
-    override val psiElement: PsiElement by lazy { ktAnnotationEntry }
+    override val psiElement: PsiElement
+        get() = ktAnnotationEntry
 
-    override val ktElement: KtElement by lazy { ktAnnotationEntry }
+    override val ktElement: KtElement
+        get() = ktAnnotationEntry
 
     override val name: String by lazy { ktAnnotationEntry.shortName.toString() }
 

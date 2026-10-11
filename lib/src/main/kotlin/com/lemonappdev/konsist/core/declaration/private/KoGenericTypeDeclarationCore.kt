@@ -32,11 +32,14 @@ internal class KoGenericTypeDeclarationCore private constructor(
     KoSourceSetProviderCore,
     KoTypeArgumentProviderCore,
     KoSourceDeclarationProviderCore {
-    override val psiElement: PsiElement by lazy { ktUserType }
+    override val psiElement: PsiElement
+        get() = ktUserType
 
-    override val ktElement: KtElement by lazy { ktUserType }
+    override val ktElement: KtElement
+        get() = ktUserType
 
-    override val ktTypeProjection: KtTypeProjection? by lazy { null }
+    override val ktTypeProjection: KtTypeProjection?
+        get() = null
 
     override val name: String by lazy { ktUserType.text }
 

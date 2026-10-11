@@ -82,13 +82,18 @@ class DeclarationKonsistTest {
             }
     }
 
+    /*
+    Declarations are created for every element of the project and kept in memory, so property values are not computed
+    eagerly. Lazy delegate (caches the value) allocates objects for every declaration, even when the property is never
+    accessed, so cheap properties (e.g. returning a constructor parameter) are implemented using getter.
+     */
     @Test
-    fun `every property inside class body is implemented using lazy delegate`() {
+    fun `every property inside class body is implemented using lazy delegate or getter`() {
         declarationPackageScope
             .classes()
             .properties(includeNested = false)
             .withoutConstructorDefined()
             .withVal()
-            .assertTrue { it.hasDelegate("lazy") }
+            .assertTrue { it.hasDelegate("lazy") || it.hasGetter }
     }
 }

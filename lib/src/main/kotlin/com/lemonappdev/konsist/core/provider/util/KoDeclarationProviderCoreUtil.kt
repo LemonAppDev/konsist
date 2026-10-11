@@ -16,8 +16,10 @@ import com.lemonappdev.konsist.core.declaration.KoPackageDeclarationCore
 import com.lemonappdev.konsist.core.declaration.KoPropertyDeclarationCore
 import com.lemonappdev.konsist.core.declaration.KoSecondaryConstructorDeclarationCore
 import com.lemonappdev.konsist.core.declaration.KoTypeAliasDeclarationCore
+import com.lemonappdev.konsist.core.declaration.KoVariableDeclarationCore
 import org.jetbrains.kotlin.com.intellij.psi.PsiElement
 import org.jetbrains.kotlin.com.intellij.psi.PsiWhiteSpace
+import org.jetbrains.kotlin.lexer.KtTokens
 import org.jetbrains.kotlin.psi.KtAnnotationEntry
 import org.jetbrains.kotlin.psi.KtAnonymousInitializer
 import org.jetbrains.kotlin.psi.KtClass
@@ -119,11 +121,13 @@ internal object KoDeclarationProviderCoreUtil {
             }
 
         if (includeLocal) {
+            val localDeclarationKeywords = getLocalDeclarationKeywords<T>()
+
             result =
                 result
                     .flatMap {
-                        when (it) {
-                            is KoFunctionDeclarationCore -> {
+                        when {
+                            it is KoFunctionDeclarationCore && hasBodyContainingKeyword(it, localDeclarationKeywords) -> {
                                 val localDeclarations =
                                     listOf(it) + it.localDeclarations +
                                         localDeclarations(
@@ -147,6 +151,67 @@ internal object KoDeclarationProviderCoreUtil {
 
         return result.filterIsInstance<T>()
     }
+
+    /**
+     * Function body can contain local declarations of type [T] only when it contains one of the returned keywords.
+     * Local declarations are classes, functions and variables. Other declarations (e.g. properties) can be declared
+     * only inside a local class, so the 'class' keyword is always returned.
+     */
+    inline fun <reified T : KoBaseDeclaration> getLocalDeclarationKeywords(): List<String> =
+        buildList {
+            add(KtTokens.CLASS_KEYWORD.value)
+
+            if (T::class.java.isAssignableFrom(KoFunctionDeclarationCore::class.java)) {
+                add(KtTokens.FUN_KEYWORD.value)
+            }
+
+            if (T::class.java.isAssignableFrom(KoVariableDeclarationCore::class.java)) {
+                add(KtTokens.VAL_KEYWORD.value)
+                add(KtTokens.VAR_KEYWORD.value)
+            }
+        }
+
+    /**
+     * Function body is parsed when its content is accessed for the first time and the parsed body is kept in memory.
+     * Body text is available without parsing, so bodies not containing any of the [keywords] (and therefore not
+     * containing requested local declarations) are not parsed. This significantly reduces memory usage.
+     */
+    fun hasBodyContainingKeyword(
+        koFunction: KoFunctionDeclarationCore,
+        keywords: List<String>,
+    ): Boolean {
+        val bodyText =
+            koFunction
+                .ktFunction
+                .bodyBlockExpression
+                ?.node
+                ?.chars
+                ?: return false
+
+        return keywords.any { bodyText.containsKeyword(it) }
+    }
+
+    private fun CharSequence.containsKeyword(keyword: String): Boolean {
+        var index = indexOf(keyword)
+
+        while (index != -1) {
+            val previousChar = getOrNull(index - 1)
+            val nextChar = getOrNull(index + keyword.length)
+
+            // Class literal (e.g. 'Foo::class') is not a class declaration
+            val isClassLiteral = keyword == KtTokens.CLASS_KEYWORD.value && previousChar == ':'
+
+            if (!previousChar.isIdentifierPart() && !nextChar.isIdentifierPart() && !isClassLiteral) {
+                return true
+            }
+
+            index = indexOf(keyword, index + keyword.length)
+        }
+
+        return false
+    }
+
+    private fun Char?.isIdentifierPart(): Boolean = this != null && (isLetterOrDigit() || this == '_')
 
     fun nestedDeclarations(koNamedDeclarations: List<KoBaseDeclaration>): List<KoBaseDeclaration> =
         koNamedDeclarations.flatMap {

@@ -23,11 +23,14 @@ import com.lemonappdev.konsist.core.provider.KoSourceDeclarationProviderCore
 import com.lemonappdev.konsist.core.provider.KoSourceSetProviderCore
 import com.lemonappdev.konsist.core.provider.KoTextProviderCore
 import com.lemonappdev.konsist.core.util.TypeUtil
+import org.jetbrains.kotlin.com.intellij.lang.ASTNode
 import org.jetbrains.kotlin.com.intellij.psi.PsiElement
+import org.jetbrains.kotlin.lexer.KtTokens
 import org.jetbrains.kotlin.psi.KtDotQualifiedExpression
 import org.jetbrains.kotlin.psi.KtElement
 import org.jetbrains.kotlin.psi.KtImportDirective
 import org.jetbrains.kotlin.psi.KtNameReferenceExpression
+import org.jetbrains.kotlin.psi.KtPsiUtil
 
 internal class KoImportDeclarationCore private constructor(
     override val ktImportDirective: KtImportDirective,
@@ -44,11 +47,28 @@ internal class KoImportDeclarationCore private constructor(
     KoTextProviderCore,
     KoIsWildcardProviderCore,
     KoSourceDeclarationProviderCore {
-    override val psiElement: PsiElement by lazy { ktImportDirective }
+    override val psiElement: PsiElement
+        get() = ktImportDirective
 
-    override val ktElement: KtElement by lazy { ktImportDirective }
+    override val ktElement: KtElement
+        get() = ktImportDirective
 
-    override val name: String by lazy { ktImportDirective.importPath?.fqName.toString() }
+    /*
+    Name is built from identifiers of the import reference AST nodes. 'KtImportDirective.importPath' is not used,
+    because it creates PSI element for every name segment and caches FqName (with all its parents) in the import
+    directive, which significantly increases memory usage of the project with many imports.
+     */
+    override val name: String by lazy {
+        val identifiers =
+            ktImportDirective
+                .importedReference
+                ?.node
+                ?.let { getIdentifiers(it) }
+                .orEmpty()
+
+        // Import without reference has no import path, so its name is "null"
+        identifiers.joinToString(".").ifEmpty { null.toString() }
+    }
 
     override val alias: KoImportAliasDeclaration? by lazy {
         ktImportDirective
@@ -70,6 +90,13 @@ internal class KoImportDeclarationCore private constructor(
         )
             as? KoDeclarationCastProvider
     }
+
+    private fun getIdentifiers(node: ASTNode): List<String> =
+        if (node.elementType == KtTokens.IDENTIFIER) {
+            listOf(KtPsiUtil.unquoteIdentifierOrFieldReference(node.text))
+        } else {
+            node.getChildren(null).flatMap { getIdentifiers(it) }
+        }
 
     private fun getKotlinType(name: String): KoKotlinTypeDeclaration? =
         if (TypeUtil.isKotlinType(name)) {
