@@ -14,6 +14,7 @@ import com.lemonappdev.konsist.api.provider.KoFullyQualifiedNameProvider
 import com.lemonappdev.konsist.externalfixture.FixtureExternalClass
 import com.lemonappdev.konsist.testdata.FixtureInterface
 import com.lemonappdev.konsist.testdata.FixtureObject
+import com.lemonappdev.konsist.testdata.FixtureObjectWithInitializer
 import com.lemonappdev.konsist.testdata.FixtureType
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
@@ -294,6 +295,74 @@ class KoTypeDeclarationForKoSourceDeclarationProviderTest {
             it?.hasSourceDeclaration { declaration -> declaration.name == "*" } shouldBeEqualTo true
             it?.hasSourceDeclaration { declaration -> declaration.name == "OtherName" } shouldBeEqualTo false
             it?.hasSourceDeclarationOf(String::class) shouldBeEqualTo false
+        }
+    }
+
+    @Test
+    fun `type-with-name-being-suffix-of-other-declaration-name`() {
+        // given
+        val sut =
+            getSnippetFile("type-with-name-being-suffix-of-other-declaration-name")
+                .classes()
+                .first()
+                .primaryConstructor
+                ?.parameters
+                ?.first()
+                ?.type
+
+        // then
+        assertSoftly(sut?.sourceDeclaration) {
+            it shouldBeInstanceOf KoExternalDeclaration::class
+            (it as? KoFullyQualifiedNameProvider)?.fullyQualifiedName shouldBeEqualTo
+                "com.lemonappdev.konsist.externalfixture.FixtureExternalClass"
+        }
+    }
+
+    @Test
+    fun `external types with the same name imported from different packages`() {
+        // given
+        val first =
+            getSnippetFile("external-type-with-the-same-name-imported-from-first-package")
+                .classes()
+                .first()
+                .primaryConstructor
+                ?.parameters
+                ?.first()
+                ?.type
+
+        val second =
+            getSnippetFile("external-type-with-the-same-name-imported-from-second-package")
+                .classes()
+                .first()
+                .primaryConstructor
+                ?.parameters
+                ?.first()
+                ?.type
+
+        // then
+        assertSoftly {
+            (first?.sourceDeclaration as? KoFullyQualifiedNameProvider)?.fullyQualifiedName shouldBeEqualTo "java.util.Timer"
+            (second?.sourceDeclaration as? KoFullyQualifiedNameProvider)?.fullyQualifiedName shouldBeEqualTo "javax.swing.Timer"
+        }
+    }
+
+    @Test
+    fun `external-type-with-static-initializer-from-wildcard-import`() {
+        // given
+        val sut =
+            getSnippetFile("external-type-with-static-initializer-from-wildcard-import")
+                .classes()
+                .first()
+                .primaryConstructor
+                ?.parameters
+                ?.first()
+                ?.type
+
+        // then
+        assertSoftly {
+            (sut?.sourceDeclaration as? KoFullyQualifiedNameProvider)?.fullyQualifiedName shouldBeEqualTo
+                "com.lemonappdev.konsist.testdata.FixtureObjectWithInitializer"
+            System.getProperty(FixtureObjectWithInitializer.INITIALIZED_PROPERTY) shouldBeEqualTo null
         }
     }
 

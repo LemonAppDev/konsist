@@ -7,6 +7,7 @@ import com.lemonappdev.konsist.api.provider.KoDeclarationCastProvider
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
 import com.lemonappdev.konsist.core.cache.KoPropertyCache
 import com.lemonappdev.konsist.core.declaration.type.KoKotlinTypeDeclarationCore
+import com.lemonappdev.konsist.core.ext.endsWithName
 import com.lemonappdev.konsist.core.model.getClass
 import com.lemonappdev.konsist.core.model.getInterface
 import com.lemonappdev.konsist.core.model.getTypeAlias
@@ -124,7 +125,7 @@ internal class KoParentDeclarationCore(
                             if (import.alias != null) {
                                 import.alias?.name == outerName
                             } else {
-                                import.name.substringAfterLast(".") == outerName || import.name.endsWith(name)
+                                import.name.substringAfterLast(".") == outerName || import.name.endsWithName(name)
                             }
                         }
 

@@ -318,6 +318,13 @@ class KoParentDeclarationForKoSourceDeclarationProviderTest {
                     "com.fixturepackage.FixtureInterface.FixtureName",
                 ),
                 arguments(
+                    "class-with-parent-class-with-name-being-suffix-of-imported-class-name",
+                    KoClassDeclaration::class,
+                    KoInterfaceDeclaration::class,
+                    null,
+                    "com.fixturepackage.ParentClass",
+                ),
+                arguments(
                     "class-with-parent-interface-with-two-part-name-from-the-same-file",
                     KoInterfaceDeclaration::class,
                     KoClassDeclaration::class,

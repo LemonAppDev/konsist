@@ -17,13 +17,13 @@ import com.lemonappdev.konsist.core.declaration.private.KoFunctionTypeDeclaratio
 import com.lemonappdev.konsist.core.declaration.private.KoGenericTypeDeclarationCore
 import com.lemonappdev.konsist.core.declaration.type.KoKotlinTypeDeclarationCore
 import com.lemonappdev.konsist.core.declaration.type.KoStarProjectionDeclarationCore
+import com.lemonappdev.konsist.core.ext.endsWithName
 import com.lemonappdev.konsist.core.model.getClass
 import com.lemonappdev.konsist.core.model.getInterface
 import com.lemonappdev.konsist.core.model.getObject
 import com.lemonappdev.konsist.core.model.getTypeAlias
 import com.lemonappdev.konsist.core.provider.KoTypeParameterProviderCore
 import org.jetbrains.kotlin.com.intellij.psi.PsiElement
-import org.jetbrains.kotlin.org.jline.utils.Log
 import org.jetbrains.kotlin.psi.KtAnnotationEntry
 import org.jetbrains.kotlin.psi.KtConstructorCalleeExpression
 import org.jetbrains.kotlin.psi.KtElement
@@ -35,19 +35,22 @@ import org.jetbrains.kotlin.psi.KtTypeArgumentList
 import org.jetbrains.kotlin.psi.KtTypeProjection
 import org.jetbrains.kotlin.psi.KtTypeReference
 import org.jetbrains.kotlin.psi.KtUserType
+import java.util.concurrent.ConcurrentHashMap
 import kotlin.reflect.KClass
 import kotlin.reflect.KType
 import kotlin.reflect.KTypeProjection
 import kotlin.reflect.KVariance
 
 object TypeUtil {
+    private val availableTypes = ConcurrentHashMap<String, Boolean>()
+
+    /*
+     * Checks if the class is on the classpath. The class is loaded without initialization, so static initializers
+     * of the analyzed code are not executed.
+     */
     internal fun isTypeAvailable(fqn: String): Boolean =
-        try {
-            Class.forName(fqn)
-            true
-        } catch (e: ClassNotFoundException) {
-            Log.info(e)
-            false
+        availableTypes.computeIfAbsent(fqn) {
+            runCatching { Class.forName(fqn, false, TypeUtil::class.java.classLoader) }.isSuccess
         }
 
     internal fun getBasicType(
@@ -318,7 +321,7 @@ object TypeUtil {
 
         val declarations =
             filterIsInstance<KoFullyQualifiedNameProvider>()
-                .filter { it.fullyQualifiedName?.endsWith(typeText ?: "") == true }
+                .filter { typeText != null && it.fullyQualifiedName?.endsWithName(typeText) == true }
 
         val declaration =
             declarations.singleOrNull()

@@ -1,0 +1,5 @@
+package com.fixturepackage
+
+import com.lemonappdev.konsist.externalfixture.*
+
+class SampleFixtureExternalClass(val sampleParameter: FixtureExternalClass)

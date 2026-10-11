@@ -43,6 +43,15 @@ internal class KoExternalDeclarationCore(
             }
 
     @Volatile
+    private var cachedFullyQualifiedName: Any? = KoPropertyCache.NOT_COMPUTED
+
+    override val fullyQualifiedName: String?
+        get() =
+            KoPropertyCache.getOrCompute(cachedFullyQualifiedName, { cachedFullyQualifiedName = it }) {
+                super<KoFullyQualifiedNameProviderCore>.fullyQualifiedName
+            }
+
+    @Volatile
     private var cachedPackagee: Any? = KoPropertyCache.NOT_COMPUTED
 
     override val packagee: KoPackageDeclaration?
@@ -59,15 +68,17 @@ internal class KoExternalDeclarationCore(
     internal companion object {
         private val cache: KoExternalDeclarationCache = KoExternalDeclarationCache
 
+        /*
+         * Declarations are cached by fully qualified name, because the same name can refer to different types
+         * in different files (e.g. `Foo` imported from `aaa.Foo` and `bbb.Foo`).
+         */
         internal fun getInstance(
             name: String,
             ktElement: KtElement,
-        ): KoExternalDeclaration =
-            cache.getOrCreateInstance(name, ktElement) {
-                KoExternalDeclarationCore(
-                    name,
-                    ktElement,
-                )
-            }
+        ): KoExternalDeclaration {
+            val declaration = KoExternalDeclarationCore(name, ktElement)
+
+            return cache.getOrPut(declaration.fullyQualifiedName ?: declaration.name, declaration)
+        }
     }
 }

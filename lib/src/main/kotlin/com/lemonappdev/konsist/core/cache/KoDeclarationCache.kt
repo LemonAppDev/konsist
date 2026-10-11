@@ -62,9 +62,8 @@ internal class KoDeclarationCache<T : KoBaseProvider> {
 internal object KoExternalDeclarationCache {
     private val elements = ConcurrentHashMap<String, KoExternalDeclaration>()
 
-    fun getOrCreateInstance(
+    fun getOrPut(
         key: String,
-        ktElement: KtElement,
-        value: (ktElement: KtElement) -> KoExternalDeclaration,
-    ): KoExternalDeclaration = elements[key] ?: value(ktElement).let { elements.putIfAbsent(key, it) ?: it }
+        instance: KoExternalDeclaration,
+    ): KoExternalDeclaration = elements[key] ?: elements.putIfAbsent(key, instance) ?: instance
 }

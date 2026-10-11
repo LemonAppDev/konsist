@@ -8,6 +8,7 @@ import com.lemonappdev.konsist.api.declaration.KoInterfaceDeclaration
 import com.lemonappdev.konsist.api.declaration.KoObjectDeclaration
 import com.lemonappdev.konsist.api.declaration.KoTypeAliasDeclaration
 import com.lemonappdev.konsist.api.ext.koscope.declarationsOf
+import com.lemonappdev.konsist.core.ext.endsWithName
 
 object DataCore {
     val declarations: List<KoBaseDeclaration> by lazy {
@@ -48,7 +49,7 @@ fun getClass(
     containingFile: KoFileDeclaration,
 ): KoClassDeclaration? {
     val declarationQualifiedName =
-        if (fullyQualifiedName?.endsWith(name) == true || isAlias) {
+        if (fullyQualifiedName?.endsWithName(name) == true || isAlias) {
             fullyQualifiedName
         } else {
             "$fullyQualifiedName.$name"
@@ -69,7 +70,7 @@ fun getInterface(
     containingFile: KoFileDeclaration,
 ): KoInterfaceDeclaration? {
     val declarationQualifiedName =
-        if (fullyQualifiedName?.endsWith(name) == true || isAlias) {
+        if (fullyQualifiedName?.endsWithName(name) == true || isAlias) {
             fullyQualifiedName
         } else {
             "$fullyQualifiedName.$name"
@@ -90,7 +91,7 @@ fun getObject(
     containingFile: KoFileDeclaration,
 ): KoObjectDeclaration? {
     val declarationQualifiedName =
-        if (fullyQualifiedName?.endsWith(name) == true || isAlias) {
+        if (fullyQualifiedName?.endsWithName(name) == true || isAlias) {
             fullyQualifiedName
         } else {
             "$fullyQualifiedName.$name"
