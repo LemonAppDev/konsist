@@ -8,49 +8,53 @@ import com.lemonappdev.konsist.core.verify.assert
 
 class KoArchitectureAssertionCore : KoArchitectureAssertion {
     override fun KoScope.assertArchitecture(layerDependenciesFunc: LayerDependencies.() -> Unit) =
-        assertArchitecture(null, null, layerDependenciesFunc)
+        assertArchitecture(null, null, false, layerDependenciesFunc)
 
     override fun KoScope.assertArchitecture(
         additionalMessage: String?,
         testName: String?,
+        allowFilesOutsideLayers: Boolean,
         layerDependenciesFunc: LayerDependencies.() -> Unit,
     ) {
         val layerDependencies = instanceLayerDependencies(layerDependenciesFunc)
-        val architectureScope = KoArchitectureScope(layerDependencies, this)
+        val architectureScope = KoArchitectureScope(layerDependencies, this, allowFilesOutsideLayers)
         architectureScope.assert(additionalMessage, testName)
     }
 
-    override fun KoScope.assertArchitecture(layerDependencies: LayerDependencies) = assertArchitecture(null, null, layerDependencies)
+    override fun KoScope.assertArchitecture(layerDependencies: LayerDependencies) = assertArchitecture(null, null, false, layerDependencies)
 
     override fun KoScope.assertArchitecture(
         additionalMessage: String?,
         testName: String?,
+        allowFilesOutsideLayers: Boolean,
         layerDependenciesFunc: LayerDependencies,
     ) {
-        KoArchitectureScope(layerDependenciesFunc, this).assert(additionalMessage, testName)
+        KoArchitectureScope(layerDependenciesFunc, this, allowFilesOutsideLayers).assert(additionalMessage, testName)
     }
 
     override fun List<KoFileDeclaration>.assertArchitecture(layerDependenciesFunc: LayerDependencies.() -> Unit) =
-        assertArchitecture(null, null, layerDependenciesFunc)
+        assertArchitecture(null, null, false, layerDependenciesFunc)
 
     override fun List<KoFileDeclaration>.assertArchitecture(
         additionalMessage: String?,
         testName: String?,
+        allowFilesOutsideLayers: Boolean,
         layerDependenciesFunc: LayerDependencies.() -> Unit,
     ) {
         val layerDependencies = instanceLayerDependencies(layerDependenciesFunc)
-        KoArchitectureFiles(layerDependencies, this).assert(additionalMessage, testName)
+        KoArchitectureFiles(layerDependencies, this, allowFilesOutsideLayers).assert(additionalMessage, testName)
     }
 
     override fun List<KoFileDeclaration>.assertArchitecture(layerDependenciesFunc: LayerDependencies) =
-        assertArchitecture(null, null, layerDependenciesFunc)
+        assertArchitecture(null, null, false, layerDependenciesFunc)
 
     override fun List<KoFileDeclaration>.assertArchitecture(
         additionalMessage: String?,
         testName: String?,
+        allowFilesOutsideLayers: Boolean,
         layerDependenciesFunc: LayerDependencies,
     ) {
-        KoArchitectureFiles(layerDependenciesFunc, this).assert(additionalMessage, testName)
+        KoArchitectureFiles(layerDependenciesFunc, this, allowFilesOutsideLayers).assert(additionalMessage, testName)
     }
 
     override fun architecture(layerDependenciesFunc: LayerDependencies.() -> Unit): LayerDependencies =

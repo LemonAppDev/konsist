@@ -621,7 +621,7 @@ class Architecture2Test {
     @Test
     fun `passes when dependency is set that presentation layer depends on nothing and domain layer is not included (lambda scope)`() {
         // then
-        scope.assertArchitecture {
+        scope.assertArchitecture(allowFilesOutsideLayers = true) {
             presentation.dependsOnNothing()
         }
     }
@@ -629,7 +629,7 @@ class Architecture2Test {
     @Test
     fun `passes when dependency is set that presentation layer depends on nothing and domain layer is not included (lambda files)`() {
         // then
-        scope.files.assertArchitecture {
+        scope.files.assertArchitecture(allowFilesOutsideLayers = true) {
             presentation.dependsOnNothing()
         }
     }
@@ -643,7 +643,7 @@ class Architecture2Test {
             }
 
         // then
-        scope.assertArchitecture(layerDependencies)
+        scope.assertArchitecture(allowFilesOutsideLayers = true, layerDependenciesFunc = layerDependencies)
     }
 
     @Test
@@ -655,7 +655,7 @@ class Architecture2Test {
             }
 
         // then
-        scope.files.assertArchitecture(layerDependencies)
+        scope.files.assertArchitecture(allowFilesOutsideLayers = true, layerDependenciesFunc = layerDependencies)
     }
     // endregion
 }

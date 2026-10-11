@@ -114,7 +114,7 @@ class Architecture11Test {
     fun `non overlapping layers pass precondition`() {
         // then
         shouldNotThrowAny {
-            scope.assertArchitecture {
+            scope.assertArchitecture(allowFilesOutsideLayers = true) {
                 domain.dependsOnNothing()
                 data.dependsOnNothing()
             }
