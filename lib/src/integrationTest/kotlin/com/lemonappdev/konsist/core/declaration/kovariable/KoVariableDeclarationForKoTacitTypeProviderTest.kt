@@ -79,6 +79,40 @@ class KoVariableDeclarationForKoTacitTypeProviderTest {
         }
     }
 
+    @Test
+    fun `variable-has-implicit-generic-type`() {
+        // given
+        val sut =
+            getSnippetFile("variable-has-implicit-generic-type")
+                .functions()
+                .variables
+                .first()
+
+        // then
+        assertSoftly(sut) {
+            tacitType?.name shouldBeEqualTo "SampleGenericType<String>"
+            hasTacitType("SampleGenericType") shouldBeEqualTo true
+            hasTacitType("SampleGenericType<String>") shouldBeEqualTo true
+        }
+    }
+
+    @Test
+    fun `variable-has-type-call-in-function-argument`() {
+        // given
+        val sut =
+            getSnippetFile("variable-has-type-call-in-function-argument")
+                .functions()
+                .variables
+                .first()
+
+        // then
+        assertSoftly(sut) {
+            tacitType shouldBeEqualTo null
+            hasTacitType("FixtureClassWithParameter") shouldBeEqualTo false
+            hasTacitTypeOf(FixtureClassWithParameter::class) shouldBeEqualTo false
+        }
+    }
+
     private fun getSnippetFile(fileName: String) =
         TestSnippetProvider.getSnippetKoScope("core/declaration/kovariable/snippet/forkotacittypeprovider/", fileName)
 }

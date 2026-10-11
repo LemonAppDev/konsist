@@ -1,7 +1,14 @@
 package com.lemonappdev.konsist.api.ext.list
 
+import com.lemonappdev.konsist.api.declaration.type.KoTypeDeclaration
 import com.lemonappdev.konsist.api.provider.KoTacitTypeProvider
 import kotlin.reflect.KClass
+
+/**
+ * List containing tacit type declarations.
+ */
+val <T : KoTacitTypeProvider> List<T>.tacitTypes: List<KoTypeDeclaration>
+    get() = mapNotNull { it.tacitType }
 
 /**
  * List containing declarations with tacit type.

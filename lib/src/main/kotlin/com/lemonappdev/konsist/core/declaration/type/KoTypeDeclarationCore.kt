@@ -44,8 +44,10 @@ import com.lemonappdev.konsist.core.provider.KoSourceTypeProviderCore
 import com.lemonappdev.konsist.core.provider.KoTextProviderCore
 import com.lemonappdev.konsist.core.provider.KoTypeArgumentProviderCore
 import com.lemonappdev.konsist.core.provider.packagee.KoPackageProviderCore
+import com.lemonappdev.konsist.core.util.TypeUtil
 import org.jetbrains.kotlin.com.intellij.psi.PsiElement
 import org.jetbrains.kotlin.psi.KtAnnotationEntry
+import org.jetbrains.kotlin.psi.KtCallExpression
 import org.jetbrains.kotlin.psi.KtElement
 import org.jetbrains.kotlin.psi.KtFunctionType
 import org.jetbrains.kotlin.psi.KtNameReferenceExpression
@@ -126,6 +128,16 @@ internal class KoTypeDeclarationCore private constructor(
     override val ktAnnotationEntries: List<KtAnnotationEntry>?
         get() = ktTypeReference?.annotationEntries
 
+    // Constructor call the type is inferred from, e.g. `Foo<Bar>()` in `val foo = Foo<Bar>()`
+    private val ktCallExpression: KtCallExpression?
+        get() = ktNameReferenceExpression?.parent as? KtCallExpression
+
+    override val ktTypeProjections: List<KtTypeProjection>
+        get() = ktCallExpression?.typeArguments ?: super<KoTypeArgumentProviderCore>.ktTypeProjections
+
+    override val text: String
+        get() = if (ktCallExpression != null) name else super<KoTextProviderCore>.text
+
     @Volatile
     private var cachedKoDeclarationCastProviderDeclaration: Any? = KoPropertyCache.NOT_COMPUTED
 
@@ -150,10 +162,20 @@ internal class KoTypeDeclarationCore private constructor(
                         ?: ktNameReferenceExpression
                         ?: ktTypeProjection
 
-                if (typeReference is KtNullableType) {
-                    typeReference.children.firstOrNull()?.text ?: ""
-                } else {
-                    typeReference?.text ?: ""
+                val callExpression = ktCallExpression
+
+                when {
+                    callExpression != null -> {
+                        TypeUtil.getTypeName(typeReference) + callExpression.typeArgumentList?.text.orEmpty()
+                    }
+
+                    typeReference is KtNullableType -> {
+                        typeReference.children.firstOrNull()?.text ?: ""
+                    }
+
+                    else -> {
+                        typeReference?.text ?: ""
+                    }
                 }
             }
 

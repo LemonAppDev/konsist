@@ -1,0 +1,3 @@
+class SampleGenericType<T>
+
+val fixtureProperty = SampleGenericType<String>()

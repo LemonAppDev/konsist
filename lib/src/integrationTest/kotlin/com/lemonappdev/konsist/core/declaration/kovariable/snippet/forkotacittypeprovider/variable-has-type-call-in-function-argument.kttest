@@ -1,0 +1,6 @@
+import com.lemonappdev.konsist.testdata.FixtureClassWithParameter
+
+fun fixtureFunction() {
+
+    val fixtureVariable = listOf(FixtureClassWithParameter("some text"))
+}

@@ -18,7 +18,9 @@ import com.lemonappdev.konsist.core.declaration.type.KoStarProjectionDeclaration
 import com.lemonappdev.konsist.core.provider.KoTypeParameterProviderCore
 import org.jetbrains.kotlin.com.intellij.psi.PsiElement
 import org.jetbrains.kotlin.psi.KtAnnotationEntry
+import org.jetbrains.kotlin.psi.KtCallExpression
 import org.jetbrains.kotlin.psi.KtConstructorCalleeExpression
+import org.jetbrains.kotlin.psi.KtDotQualifiedExpression
 import org.jetbrains.kotlin.psi.KtElement
 import org.jetbrains.kotlin.psi.KtFunctionType
 import org.jetbrains.kotlin.psi.KtNameReferenceExpression
@@ -270,7 +272,7 @@ object TypeUtil {
 
     /*
      * Returns the name of the referenced type without type arguments.
-     * For `RecyclerView.ViewHolder<T>` value will be "RecyclerView.ViewHolder"
+     * For `RecyclerView.ViewHolder<T>` and constructor call `RecyclerView.ViewHolder<T>()` value will be "RecyclerView.ViewHolder"
      */
     internal fun getTypeName(element: PsiElement?): String? =
         when (element) {
@@ -279,7 +281,9 @@ object TypeUtil {
             }
 
             is KtNameReferenceExpression -> {
-                (element.parent as? KtUserType)?.getQualifiedName() ?: element.getReferencedName()
+                (element.parent as? KtUserType)?.getQualifiedName()
+                    ?: element.getCallQualifiedName()
+                    ?: element.getReferencedName()
             }
 
             is KtTypeReference -> {
@@ -302,6 +306,17 @@ object TypeUtil {
                 ?.let { "$it.$name" }
                 ?: name
         }
+
+    private fun KtNameReferenceExpression.getCallQualifiedName(): String? {
+        val callExpression = parent as? KtCallExpression ?: return null
+        val qualifiedExpression = callExpression.parent as? KtDotQualifiedExpression ?: return null
+
+        return if (qualifiedExpression.selectorExpression == callExpression) {
+            "${qualifiedExpression.receiverExpression.text}.${getReferencedName()}"
+        } else {
+            null
+        }
+    }
 
     internal fun isKotlinTypeFullyQualifiedName(fullyQualifiedName: String): Boolean = fullyQualifiedName in kotlinTypeNames
 
