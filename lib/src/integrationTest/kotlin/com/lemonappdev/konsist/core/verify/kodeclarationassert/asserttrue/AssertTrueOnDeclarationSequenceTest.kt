@@ -5,12 +5,16 @@ import com.lemonappdev.konsist.api.verify.assertFalse
 import com.lemonappdev.konsist.api.verify.assertTrue
 import com.lemonappdev.konsist.core.exception.KoAssertionFailedException
 import com.lemonappdev.konsist.core.exception.KoPreconditionFailedException
+import com.lemonappdev.konsist.core.filesystem.PathProvider
+import com.lemonappdev.konsist.core.util.HyperlinkUtil
 import org.amshove.kluent.shouldContain
 import org.amshove.kluent.shouldThrow
 import org.amshove.kluent.withMessage
 import org.junit.jupiter.api.Test
 
 class AssertTrueOnDeclarationSequenceTest {
+    private val rootPathUrl = HyperlinkUtil.toHyperlink(PathProvider.rootProjectPath)
+
     @Test
     fun `declaration-assert-test-method-name-derived-from-junit-method-name`() {
         // given
@@ -509,6 +513,32 @@ class AssertTrueOnDeclarationSequenceTest {
 
         // then
         func shouldThrow KoAssertionFailedException::class
+    }
+
+    @Test
+    fun `assert-on-sequence-fails-with-added-message`() {
+        // given
+        val sut =
+            getSnippetFile("assert-on-sequence-fails-with-added-message")
+                .classes()
+                .asSequence()
+        val filepath =
+            "$rootPathUrl/lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core/verify/kodeclarationassert/" +
+                "asserttrue/snippet/assert-on-sequence-fails-with-added-message.kt"
+
+        // when
+        val func = {
+            sut.assertTrue {
+                addMessage("${it.name} message")
+                it.name == "FixtureClass1"
+            }
+        }
+
+        // then
+        func shouldThrow KoAssertionFailedException::class withMessage
+            "Assert 'assert-on-sequence-fails-with-added-message' was violated (1 time). Invalid declarations:\n" +
+            "└── Class FixtureClass2 $filepath:3:1\n" +
+            "    └── FixtureClass2 message"
     }
 
     private fun getSnippetFile(fileName: String) =

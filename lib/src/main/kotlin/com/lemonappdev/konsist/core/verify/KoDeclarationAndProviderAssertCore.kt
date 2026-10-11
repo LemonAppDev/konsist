@@ -8,6 +8,7 @@ import com.lemonappdev.konsist.api.provider.KoBaseProvider
 import com.lemonappdev.konsist.api.provider.KoContainingDeclarationProvider
 import com.lemonappdev.konsist.api.provider.KoLocationProvider
 import com.lemonappdev.konsist.api.provider.KoNameProvider
+import com.lemonappdev.konsist.api.verify.KoAssertScope
 import com.lemonappdev.konsist.core.architecture.validator.ascii.AsciiTreeCreator
 import com.lemonappdev.konsist.core.architecture.validator.ascii.AsciiTreeNode
 import com.lemonappdev.konsist.core.exception.KoAssertionFailedException
@@ -20,7 +21,7 @@ internal fun <E : KoBaseProvider> List<E?>.assert(
     strict: Boolean,
     additionalMessage: String?,
     testName: String?,
-    function: (E) -> Boolean?,
+    function: KoAssertScope.(E) -> Boolean?,
     positiveCheck: Boolean,
 ) {
     var lastDeclaration: KoBaseProvider? = null
@@ -37,13 +38,16 @@ internal fun <E : KoBaseProvider> List<E?>.assert(
 
         val notSuppressedDeclarations = checkIfAnnotatedWithSuppress(this.filterNotNull(), testMethodName)
 
-        val result =
-            notSuppressedDeclarations.groupBy {
+        val failedItems =
+            notSuppressedDeclarations.mapNotNull {
                 lastDeclaration = it
-                function(it) ?: positiveCheck
+                val scope = KoAssertScopeCore()
+                val passed = (scope.function(it) ?: positiveCheck) == positiveCheck
+
+                if (passed) null else FailedItem(it, scope.messages)
             }
 
-        getResult(notSuppressedDeclarations, result, positiveCheck, testMethodName, additionalMessage)
+        getResult(failedItems, testMethodName, additionalMessage)
     } catch (e: KoException) {
         throw e
     } catch (
@@ -193,27 +197,27 @@ private fun checkIfSuppressed(
     return annotationParameter.any { it == testMethodName } || annotationParameter.any { it == "konsist.$testMethodName" }
 }
 
+private class FailedItem(
+    val item: Any,
+    val messages: List<String>,
+)
+
 private fun getResult(
-    items: List<*>,
-    result: Map<Boolean, List<Any>>,
-    positiveCheck: Boolean,
+    failedItems: List<FailedItem>,
     testName: String?,
     additionalMessage: String?,
 ): Unit {
-    val allChecksPassed = (result[positiveCheck]?.size ?: 0) == items.size
-
-    if (!allChecksPassed) {
-        val failedItems = result[!positiveCheck].orEmpty()
+    if (failedItems.isNotEmpty()) {
         throw KoAssertionFailedException(getCheckFailedMessage(failedItems, testName, additionalMessage))
     }
 }
 
 private fun getCheckFailedMessage(
-    failedItems: List<*>,
+    failedItems: List<FailedItem>,
     testName: String?,
     additionalMessage: String?,
 ): String {
-    val (types, failedDeclarationsMessage) = processFailedItems(failedItems)
+    val (types, failedDeclarationsMessage) = processFailedItems(failedItems.map { it.item })
 
     val customMessage = additionalMessage?.let { "\n$it\n" } ?: " "
     val times = if (failedItems.size == 1) "time" else "times"
@@ -222,7 +226,10 @@ private fun getCheckFailedMessage(
         "Assert${testName.toMessageName("'")} was violated (${failedItems.size} $times).$customMessage" +
             "Invalid $types:"
 
-    val failedDeclarationAsciiTreeNodes = failedDeclarationsMessage.map { AsciiTreeNode(it, emptyList()) }
+    val failedDeclarationAsciiTreeNodes =
+        failedDeclarationsMessage.zip(failedItems) { declarationMessage, failedItem ->
+            AsciiTreeNode(declarationMessage, failedItem.messages.map { AsciiTreeNode(it, emptyList()) })
+        }
 
     return AsciiTreeCreator().invoke(
         AsciiTreeNode(
