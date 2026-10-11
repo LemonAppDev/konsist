@@ -12,13 +12,7 @@ class AssertTrueKotestTestNameTest :
     FunSpec({
         test("assert-test-name-is-omitted-in-kotest-test") {
             // given
-            val sut =
-                TestSnippetProvider
-                    .getSnippetKoScope(
-                        "core/verify/kodeclarationassert/asserttrue/snippet/",
-                        "assert-test-name-derived-from-dynamic-test",
-                    ).classes()
-                    .first()
+            val sut = getSnippetFile("assert-test-name-derived-from-dynamic-test").classes().first()
 
             // when
             val result = shouldThrow<KoAssertionFailedException> { sut.assertTrue { false } }
@@ -30,13 +24,7 @@ class AssertTrueKotestTestNameTest :
 
         test("assert-test-name-is-omitted-in-kotest-test-when-called-from-lambda") {
             // given
-            val sut =
-                TestSnippetProvider
-                    .getSnippetKoScope(
-                        "core/verify/kodeclarationassert/asserttrue/snippet/",
-                        "assert-test-name-derived-from-dynamic-test",
-                    ).classes()
-                    .first()
+            val sut = getSnippetFile("assert-test-name-derived-from-dynamic-test").classes().first()
 
             val func = { sut.assertTrue { false } }
 
@@ -50,13 +38,7 @@ class AssertTrueKotestTestNameTest :
 
         test("assert-suppress-by-test-name-in-kotest-test") {
             // given
-            val sut =
-                TestSnippetProvider
-                    .getSnippetKoScope(
-                        "core/verify/kodeclarationassert/asserttrue/snippet/",
-                        "assert-suppress-by-test-name-in-kotest-test",
-                    ).classes()
-                    .first()
+            val sut = getSnippetFile("assert-suppress-by-test-name-in-kotest-test").classes().first()
 
             // then
             sut.assertTrue(testName = "suppress-by-test-name-in-kotest-test") { false }
@@ -64,13 +46,7 @@ class AssertTrueKotestTestNameTest :
 
         test("assert-suppress-by-konsist-and-test-name-in-kotest-test") {
             // given
-            val sut =
-                TestSnippetProvider
-                    .getSnippetKoScope(
-                        "core/verify/kodeclarationassert/asserttrue/snippet/",
-                        "assert-suppress-by-konsist-and-test-name-in-kotest-test",
-                    ).classes()
-                    .first()
+            val sut = getSnippetFile("assert-suppress-by-konsist-and-test-name-in-kotest-test").classes().first()
 
             // then
             sut.assertTrue(testName = "suppress-by-konsist-and-test-name-in-kotest-test") { false }
@@ -78,13 +54,7 @@ class AssertTrueKotestTestNameTest :
 
         test("assert-not-suppress-by-kotest-test-name-without-test-name") {
             // given
-            val sut =
-                TestSnippetProvider
-                    .getSnippetKoScope(
-                        "core/verify/kodeclarationassert/asserttrue/snippet/",
-                        "assert-not-suppress-by-kotest-test-name-without-test-name",
-                    ).classes()
-                    .first()
+            val sut = getSnippetFile("assert-not-suppress-by-kotest-test-name-without-test-name").classes().first()
 
             // when
             val result = shouldThrow<KoAssertionFailedException> { sut.assertTrue { false } }
@@ -95,13 +65,7 @@ class AssertTrueKotestTestNameTest :
 
         test("assert-not-suppress-by-konsist-and-kotest-test-name-without-test-name") {
             // given
-            val sut =
-                TestSnippetProvider
-                    .getSnippetKoScope(
-                        "core/verify/kodeclarationassert/asserttrue/snippet/",
-                        "assert-not-suppress-by-konsist-and-kotest-test-name-without-test-name",
-                    ).classes()
-                    .first()
+            val sut = getSnippetFile("assert-not-suppress-by-konsist-and-kotest-test-name-without-test-name").classes().first()
 
             // when
             val result = shouldThrow<KoAssertionFailedException> { sut.assertTrue { false } }
@@ -110,3 +74,6 @@ class AssertTrueKotestTestNameTest :
             result.message?.shouldStartWith("Assert was violated (1 time)")
         }
     })
+
+private fun getSnippetFile(fileName: String) =
+    TestSnippetProvider.getSnippetKoScope("core/verify/kodeclarationassert/asserttrue/snippet/", fileName)
