@@ -292,4 +292,38 @@ class KoScopeCreatorCoreTest {
         // then
         result shouldBeEqualTo true
     }
+
+    @Test
+    fun `should not match file from nested module when parent module has own source set`() {
+        // given
+        val regex =
+            KoScopeCreatorCore.getPathRegex(
+                projectRootPath = "/Users/user/project",
+                moduleName = "feature",
+                sourceSetName = null,
+            )
+
+        // when
+        val result = "/Users/user/project/feature/payment/src/main/kotlin/SampleClass.kt".matches(regex)
+
+        // then
+        result shouldBeEqualTo false
+    }
+
+    @Test
+    fun `should not match file from parent module source set when module name is nested module`() {
+        // given
+        val regex =
+            KoScopeCreatorCore.getPathRegex(
+                projectRootPath = "/Users/user/project",
+                moduleName = "feature/payment",
+                sourceSetName = null,
+            )
+
+        // when
+        val result = "/Users/user/project/feature/src/main/kotlin/SampleClass.kt".matches(regex)
+
+        // then
+        result shouldBeEqualTo false
+    }
 }
