@@ -16,7 +16,7 @@ multiprocessing.set_start_method('fork')
 # Variables ============================================================================================================
 error_occurred = False
 kt_temp_files_dir = tempfile.mkdtemp()
-dummy_classes_path = os.path.join(project_root, "lib/src/snippet/kotlin/dummyclasses")
+dummy_classes_path = os.path.join(project_root, "lib/src/testsnippet/kotlin/dummyclasses")
 dummy_classes_jar_path = os.path.join(kt_temp_files_dir, "all_dummy_classes.jar")
 konsist_version = get_konsist_snapshot_version()
 success = "SUCCESS"

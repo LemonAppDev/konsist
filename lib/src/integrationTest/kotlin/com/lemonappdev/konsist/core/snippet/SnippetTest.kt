@@ -17,7 +17,7 @@ class SnippetTest {
                 .walk()
                 .filter { it.isKotlinSnippetFile }
                 // Filter out snippets used to generate documentation
-                .filterNot { it.invariantSeparatorsPath.contains("lib/src/snippet/") }
+                .filterNot { it.invariantSeparatorsPath.contains("lib/src/testsnippet/") }
                 .toList()
 
         val snippetPaths: List<String> =

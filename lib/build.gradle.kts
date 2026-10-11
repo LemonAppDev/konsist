@@ -50,7 +50,7 @@ testing {
             }
         }
 
-        register("snippet", JvmTestSuite::class) {
+        register("testsnippet", JvmTestSuite::class) {
             dependencies {
                 implementation(project(":lib")) // Konsist
                 implementation(libs.kotest)

@@ -14,7 +14,7 @@ main_branch = "main"
 repository_address = "LemonAppDev/konsist-documentation"
 
 # Summary root
-destination_snippets_path = "inspiration/snippets"
+destination_snippets_path = "inspiration/starter-test-snippets"
 
 
 # Methods ==============================================================================================================
@@ -248,7 +248,7 @@ def add_blank_spaces(summary_dir):
     with open(summary_dir, "r") as file:
         file_content = file.read()
 
-    text = f"* [Snippets]({destination_snippets_path}/README.md)"
+    text = f"* [Starter Test Snippets]({destination_snippets_path}/README.md)"
 
     # Search for the search term substring
     match = re.search(re.escape(text), file_content)
@@ -300,7 +300,7 @@ def complete_summary_file(root, file_text, summary_dir):
     if not name_without_tab in file_content:
         sections = file_content.split("##")
 
-        text = f"* [Snippets]({destination_snippets_path}/README.md)"
+        text = f"* [Starter Test Snippets]({destination_snippets_path}/README.md)"
 
         index, found_section = find_section_containing_text(sections, text)
 
@@ -447,7 +447,7 @@ def main(branch):
     try:
         # Take a source directory
         project_root = get_project_root()
-        source_snippets_directory = os.path.expanduser(project_root + "/lib/src/snippet/kotlin/com/lemonappdev/konsist")
+        source_snippets_directory = os.path.expanduser(project_root + "/lib/src/testsnippet/kotlin/com/lemonappdev/konsist")
 
         # Create a temporary directory
         temp_dir = create_temp_directory()
@@ -461,7 +461,7 @@ def main(branch):
         if not create_or_checkout_git_branch(branch, temp_dir):
             return None
 
-        destination_snippets_directory = os.path.expanduser(temp_dir + "/inspiration/snippets")
+        destination_snippets_directory = os.path.expanduser(temp_dir + "/" + destination_snippets_path)
         summary_path = temp_dir + "/SUMMARY.md"
 
         os.chdir(destination_snippets_directory)

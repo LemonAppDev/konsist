@@ -11,7 +11,7 @@ import com.lemonappdev.konsist.api.verify.assertFalse
 import com.lemonappdev.konsist.api.verify.assertTrue
 import org.junit.jupiter.api.Test
 
-class GenericTypesSnippets {
+class GenericTypesTestSnippets {
     fun `all generic return types contain X in their name`() {
         Konsist
             .scopeFromProduction()

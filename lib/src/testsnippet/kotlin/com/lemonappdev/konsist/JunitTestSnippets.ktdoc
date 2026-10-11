@@ -12,7 +12,7 @@ import org.junit.jupiter.api.RepeatedTest
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 
-class JUnitSnippets {
+class JUnitTestSnippets {
     fun `classes with 'Test' annotation should have 'Test' suffix`() {
         Konsist
             .scopeFromSourceSet("test")

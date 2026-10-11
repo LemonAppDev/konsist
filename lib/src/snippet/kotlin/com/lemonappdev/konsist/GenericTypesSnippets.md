@@ -1,1 +1,0 @@
-# Generic Types Snippets
