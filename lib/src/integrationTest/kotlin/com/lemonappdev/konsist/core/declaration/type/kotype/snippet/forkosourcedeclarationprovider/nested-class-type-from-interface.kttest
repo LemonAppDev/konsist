@@ -1,0 +1,7 @@
+class SampleClass(val sampleParameter: SampleNestedClass) : SampleInterface
+
+interface SampleInterface {
+    class SampleNestedClass
+}
+
+class SampleNestedClass

@@ -1,0 +1,3 @@
+import java.util.AbstractMap
+
+abstract class SampleClass(val sampleParameter: SimpleEntry<String, String>) : AbstractMap<String, String>()

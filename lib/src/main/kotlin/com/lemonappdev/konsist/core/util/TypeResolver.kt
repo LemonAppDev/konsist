@@ -2,18 +2,23 @@ package com.lemonappdev.konsist.core.util
 
 import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoClassDeclaration
+import com.lemonappdev.konsist.api.declaration.KoExternalDeclaration
 import com.lemonappdev.konsist.api.declaration.KoFileDeclaration
 import com.lemonappdev.konsist.api.declaration.KoInterfaceDeclaration
 import com.lemonappdev.konsist.api.declaration.KoObjectDeclaration
 import com.lemonappdev.konsist.api.provider.KoContainingDeclarationProvider
 import com.lemonappdev.konsist.api.provider.KoFullyQualifiedNameProvider
+import com.lemonappdev.konsist.api.provider.KoParentProvider
+import com.lemonappdev.konsist.api.provider.modifier.KoVisibilityModifierProvider
 import com.lemonappdev.konsist.core.declaration.KoFileDeclarationCore
 import com.lemonappdev.konsist.core.model.DataCore
 import org.jetbrains.kotlin.com.intellij.openapi.util.Key
+import java.lang.reflect.Modifier
+import java.util.concurrent.ConcurrentHashMap
 
 /*
  * Resolves fully qualified names of the types referenced in the source code, in the order used by the Kotlin compiler:
- * 1. type nested in the containing declaration (or in its containing declarations)
+ * 1. type nested in the containing declaration (or in its containing declarations) or inherited from its superclasses
  * 2. explicit import (also with alias)
  * 3. type from the same package
  * 4. wildcard import
@@ -30,6 +35,9 @@ internal object TypeResolver {
     private const val JAVA_LANG_PACKAGE = "java.lang"
 
     private val fileTypesKey = Key.create<Map<String, KoBaseDeclaration>>("KoFileTypes")
+
+    // Nested types of the classpath class and its superclasses (simple name to fully qualified name) by class name
+    private val classpathNestedTypes = ConcurrentHashMap<String, Map<String, String>>()
 
     /*
      * Java classes mapped to Kotlin types are not imported by wildcard imports, e.g. `List` with `import java.util.*`
@@ -129,9 +137,84 @@ internal object TypeResolver {
         generateSequence(containingDeclaration) { (it as? KoContainingDeclarationProvider)?.containingDeclaration }
             .takeWhile { it !is KoFileDeclaration }
             .filter { it is KoClassDeclaration || it is KoInterfaceDeclaration || it is KoObjectDeclaration }
-            .mapNotNull { (it as? KoFullyQualifiedNameProvider)?.fullyQualifiedName }
-            .map { "$it.$name" }
-            .firstOrNull { it in getFileTypes(containingFile) }
+            .firstNotNullOfOrNull { declaration ->
+                (declaration as? KoFullyQualifiedNameProvider)
+                    ?.fullyQualifiedName
+                    ?.let { "$it.$name" }
+                    ?.takeIf { it in getFileTypes(containingFile) }
+                    ?: getInheritedNestedTypeName(name, declaration, mutableSetOf(declaration))
+            }
+
+    /*
+     * Types nested in superclasses are visible in the class body, e.g. `Inner` in `class Child : Base()` is
+     * `Base.Inner`. Types nested in interfaces and private types are not inherited.
+     */
+    private fun getInheritedNestedTypeName(
+        name: String,
+        declaration: KoBaseDeclaration,
+        visitedDeclarations: MutableSet<KoBaseDeclaration>,
+    ): String? =
+        (declaration as? KoParentProvider)
+            ?.parents()
+            ?.firstNotNullOfOrNull { parent ->
+                when (val superclass = parent.sourceDeclaration) {
+                    is KoClassDeclaration -> {
+                        superclass
+                            .fullyQualifiedName
+                            ?.let { "$it.$name" }
+                            ?.takeIf { isInheritedNestedType(getFileTypes(superclass.containingFile)[it]) }
+                            ?: superclass
+                                .takeIf { visitedDeclarations.add(it) }
+                                ?.let { getInheritedNestedTypeName(name, it, visitedDeclarations) }
+                    }
+
+                    is KoExternalDeclaration -> {
+                        superclass.fullyQualifiedName?.let { getClasspathNestedTypes(it)[name] }
+                    }
+
+                    else -> {
+                        null
+                    }
+                }
+            }
+
+    private fun isInheritedNestedType(declaration: KoBaseDeclaration?): Boolean =
+        declaration != null && (declaration as? KoVisibilityModifierProvider)?.hasPrivateModifier != true
+
+    /*
+     * Returns nested types of the classpath class and its superclasses. The closest declaration of the name is used.
+     * Classes are loaded without initialization.
+     */
+    private fun getClasspathNestedTypes(fullyQualifiedName: String): Map<String, String> =
+        classpathNestedTypes.computeIfAbsent(fullyQualifiedName) {
+            val clazz = getClasspathClass(fullyQualifiedName)
+
+            if (clazz == null || clazz.isInterface) {
+                emptyMap()
+            } else {
+                buildMap {
+                    generateSequence(clazz) { it.superclass }
+                        .flatMap { runCatching { it.declaredClasses.toList() }.getOrDefault(emptyList()) }
+                        .filterNot {
+                            it.isAnonymousClass || it.isLocalClass || it.isSynthetic || Modifier.isPrivate(it.modifiers)
+                        }.forEach { nestedClass ->
+                            nestedClass.canonicalName?.let { putIfAbsent(nestedClass.simpleName, it) }
+                        }
+                }
+            }
+        }
+
+    /*
+     * Nested class has the binary name with `$` (e.g. `a.B$C` for `a.B.C`), so the dots are replaced from the end until
+     * the class is found.
+     */
+    private fun getClasspathClass(fullyQualifiedName: String): Class<*>? =
+        generateSequence(fullyQualifiedName) { name ->
+            val dotIndex = name.lastIndexOf('.')
+            if (dotIndex == -1) null else name.substring(0, dotIndex) + "$" + name.substring(dotIndex + 1)
+        }.firstNotNullOfOrNull { name ->
+            runCatching { Class.forName(name, false, TypeUtil::class.java.classLoader) }.getOrNull()
+        }
 
     private fun getImportedTypeName(
         name: String,
