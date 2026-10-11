@@ -253,4 +253,22 @@ interface LayerDependencies {
      * @receiver The collection of [Layer]s to be included in architecture checks.
      */
     fun Collection<Layer>.include(): Unit
+
+    /**
+     * Requires every file in the checked scope to reside in at least one declared layer.
+     * Files that reside in no layer (including files without a package) are reported as a violation.
+     *
+     * By default, files outside every layer are ignored, so a newly added package escapes the layer rules.
+     * Packages that are intentionally outside the architecture can be declared as a layer and added
+     * with [include], or removed from the checked scope.
+     *
+     * Example:
+     * ```kotlin
+     * // Fail when any file resides outside the Domain and Data layers
+     * domainLayer.dependsOnNothing()
+     * dataLayer.dependsOn(domainLayer)
+     * requireAllFilesInLayers()
+     * ```
+     */
+    fun requireAllFilesInLayers(): Unit
 }
