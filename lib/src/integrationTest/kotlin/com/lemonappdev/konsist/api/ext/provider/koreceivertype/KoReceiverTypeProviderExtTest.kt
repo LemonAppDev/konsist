@@ -128,6 +128,21 @@ class KoReceiverTypeProviderExtTest {
         sut.hasValidKDocReceiverTag() shouldBeEqualTo true
     }
 
+    @Test
+    fun `declaration-has-receiver-with-generic-type`() {
+        // given
+        val sut =
+            getSnippetFile("declaration-has-receiver-with-generic-type")
+                .declarationsOf<KoReceiverTypeProvider>()
+                .first()
+
+        // then
+        assertSoftly(sut) {
+            hasReceiverTypeOf<List<String>>() shouldBeEqualTo true
+            hasReceiverTypeOf<List<Int>>() shouldBeEqualTo false
+        }
+    }
+
     private fun getSnippetFile(fileName: String) =
         TestSnippetProvider.getSnippetKoScope("api/ext/provider/koreceivertype/snippet/", fileName)
 }

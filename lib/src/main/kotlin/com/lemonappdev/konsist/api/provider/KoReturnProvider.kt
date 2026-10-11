@@ -2,6 +2,7 @@ package com.lemonappdev.konsist.api.provider
 
 import com.lemonappdev.konsist.api.declaration.type.KoTypeDeclaration
 import kotlin.reflect.KClass
+import kotlin.reflect.KType
 
 /**
  * An interface representing a Kotlin declaration that provides access to the return information.
@@ -49,8 +50,23 @@ interface KoReturnProvider : KoBaseProvider {
     /**
      * Determines whether the declaration has a return type of the specified Kotlin class.
      *
+     * Type arguments are not checked, e.g. `List<String>` matches `List::class`.
+     *
      * @param kClass The Kotlin class representing the return type to check for.
      * @return `true` if the declaration has a return type matching the specified KClass, `false` otherwise.
      */
     fun hasReturnTypeOf(kClass: KClass<*>): Boolean
+
+    /**
+     * Determines whether the declaration has a return type of the specified Kotlin type, including its type arguments.
+     * For example, `List<String>` matches `typeOf<List<String>>()`, but not `typeOf<List<Int>>()`.
+     * A star projection matches any type argument, e.g. `List<String>` matches `typeOf<List<*>>()`.
+     * A nullable [kType] matches only a nullable return type, e.g. `String` does not match `typeOf<String?>()`.
+     * A non-nullable [kType] matches both, e.g. `String?` matches `typeOf<String>()`.
+     * Nullability of type arguments must match exactly.
+     *
+     * @param kType The Kotlin type representing the return type to check for.
+     * @return `true` if the declaration has a return type matching the specified KType, `false` otherwise.
+     */
+    fun hasReturnTypeOf(kType: KType): Boolean
 }

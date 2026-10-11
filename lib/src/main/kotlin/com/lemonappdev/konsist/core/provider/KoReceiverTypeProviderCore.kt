@@ -9,6 +9,7 @@ import org.jetbrains.kotlin.psi.KtCallableDeclaration
 import org.jetbrains.kotlin.psi.KtTypeReference
 import org.jetbrains.kotlin.psi.psiUtil.isExtensionDeclaration
 import kotlin.reflect.KClass
+import kotlin.reflect.KType
 
 internal interface KoReceiverTypeProviderCore :
     KoReceiverTypeProvider,
@@ -40,6 +41,8 @@ internal interface KoReceiverTypeProviderCore :
         }
 
     override fun hasReceiverTypeOf(kClass: KClass<*>): Boolean = hasTypeOf(receiverType, kClass)
+
+    override fun hasReceiverTypeOf(kType: KType): Boolean = hasTypeOf(receiverType, kType)
 
     private fun getTypeReferences(): List<KtTypeReference> =
         ktCallableDeclaration

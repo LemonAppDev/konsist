@@ -4,12 +4,14 @@ import com.lemonappdev.konsist.api.Konsist
 import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoFileDeclaration
 import com.lemonappdev.konsist.api.declaration.KoSourceDeclaration
+import com.lemonappdev.konsist.api.declaration.KoTypeArgumentDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoTypeDeclaration
 import com.lemonappdev.konsist.api.provider.KoContainingDeclarationProvider
 import com.lemonappdev.konsist.api.provider.KoDeclarationCastProvider
 import com.lemonappdev.konsist.api.provider.KoDeclarationProvider
 import com.lemonappdev.konsist.api.provider.KoFullyQualifiedNameProvider
 import com.lemonappdev.konsist.core.declaration.KoExternalDeclarationCore
+import com.lemonappdev.konsist.core.declaration.KoTypeArgumentDeclarationCore
 import com.lemonappdev.konsist.core.declaration.KoTypeParameterDeclarationCore
 import com.lemonappdev.konsist.core.declaration.private.KoFunctionTypeDeclarationCore
 import com.lemonappdev.konsist.core.declaration.private.KoGenericTypeDeclarationCore
@@ -34,6 +36,9 @@ import org.jetbrains.kotlin.psi.KtTypeProjection
 import org.jetbrains.kotlin.psi.KtTypeReference
 import org.jetbrains.kotlin.psi.KtUserType
 import kotlin.reflect.KClass
+import kotlin.reflect.KType
+import kotlin.reflect.KTypeProjection
+import kotlin.reflect.KVariance
 
 object TypeUtil {
     internal fun isTypeAvailable(fqn: String): Boolean =
@@ -130,6 +135,50 @@ object TypeUtil {
         type: KoSourceDeclaration?,
         kClass: KClass<*>,
     ): Boolean = matchesKClass((type as? KoFullyQualifiedNameProvider)?.fullyQualifiedName, kClass)
+
+    internal fun hasTypeOf(
+        type: KoTypeDeclaration?,
+        kType: KType,
+    ): Boolean {
+        val kClass = kType.classifier as? KClass<*> ?: return false
+
+        return hasTypeOf(type, kClass) &&
+            (!kType.isMarkedNullable || type?.isNullable == true) &&
+            matchesTypeArguments(type?.typeArguments.orEmpty(), kType.arguments)
+    }
+
+    /*
+     * Checks if the type arguments match the given type projections, e.g. `List<Int>` and `typeOf<List<Int>>()`.
+     * Star projection (`typeOf<List<*>>()`) matches any type argument.
+     */
+    private fun matchesTypeArguments(
+        typeArguments: List<KoTypeArgumentDeclaration>,
+        kTypeProjections: List<KTypeProjection>,
+    ): Boolean =
+        typeArguments.size == kTypeProjections.size &&
+            typeArguments.zip(kTypeProjections).all { (typeArgument, kTypeProjection) ->
+                matchesTypeArgument(typeArgument, kTypeProjection)
+            }
+
+    private fun matchesTypeArgument(
+        typeArgument: KoTypeArgumentDeclaration,
+        kTypeProjection: KTypeProjection,
+    ): Boolean {
+        val kType = kTypeProjection.type ?: return true
+        val kClass = kType.classifier as? KClass<*> ?: return false
+        val isNullable =
+            (typeArgument as? KoTypeArgumentDeclarationCore)
+                ?.ktTypeProjection
+                ?.typeReference
+                ?.typeElement is KtNullableType
+
+        return !typeArgument.isStarProjection &&
+            typeArgument.hasInModifier == (kTypeProjection.variance == KVariance.IN) &&
+            typeArgument.hasOutModifier == (kTypeProjection.variance == KVariance.OUT) &&
+            isNullable == kType.isMarkedNullable &&
+            matchesKClass((typeArgument.sourceDeclaration as? KoFullyQualifiedNameProvider)?.fullyQualifiedName, kClass) &&
+            matchesTypeArguments(typeArgument.typeArguments.orEmpty(), kType.arguments)
+    }
 
     /*
      * Checks if the fully qualified name refers to the given class.
