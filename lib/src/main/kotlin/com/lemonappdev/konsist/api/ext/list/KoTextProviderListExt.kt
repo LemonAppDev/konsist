@@ -223,6 +223,8 @@ fun <T : KoTextProvider> List<T>.withoutTextContaining(texts: Collection<String>
 /**
  * List containing declarations with text matching any of the specified regular expressions.
  *
+ * The regex must match the entire text, see [KoTextProvider.hasTextMatching].
+ *
  * @param regex The regular expression to include.
  * @param regexes The regular expressions to include.
  * @return A list containing declarations with texts matching the specified regular expressions.
@@ -234,6 +236,8 @@ fun <T : KoTextProvider> List<T>.withTextMatching(
 
 /**
  * List containing declarations with text matching any of the specified regular expressions.
+ *
+ * The regex must match the entire text, see [KoTextProvider.hasTextMatching].
  *
  * @param regexes The regular expressions to include.
  * @return A list containing declarations with texts matching the specified regular expressions.
@@ -249,6 +253,8 @@ fun <T : KoTextProvider> List<T>.withTextMatching(regexes: Collection<Regex>): L
 /**
  * List containing declarations without text matching any of the specified regular expressions.
  *
+ * The regex must match the entire text, see [KoTextProvider.hasTextMatching].
+ *
  * @param regex The regular expression to exclude.
  * @param regexes The regular expressions to exclude.
  * @return A list containing declarations without texts matching the specified regular expressions.
@@ -260,6 +266,8 @@ fun <T : KoTextProvider> List<T>.withoutTextMatching(
 
 /**
  * List containing declarations without text matching any of the specified regular expressions.
+ *
+ * The regex must match the entire text, see [KoTextProvider.hasTextMatching].
  *
  * @param regexes The regular expressions to exclude.
  * @return A list containing declarations without texts matching the specified regular expressions.

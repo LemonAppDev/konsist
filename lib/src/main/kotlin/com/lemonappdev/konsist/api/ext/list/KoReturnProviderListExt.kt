@@ -27,6 +27,8 @@ fun <T : KoReturnProvider> List<T>.withoutReturnValue(): List<T> = filterNot { i
 /**
  * List containing declarations with the specified return type.
  *
+ * Only an explicitly declared return type counts, see [KoReturnProvider.hasReturnType].
+ *
  * @param predicate The predicate function to determine if a declaration return type satisfies a condition.
  * @return A list containing declarations with the specified return type (or any return type if [predicate] is null).
  */
@@ -40,6 +42,8 @@ fun <T : KoReturnProvider> List<T>.withReturnType(predicate: ((KoTypeDeclaration
 
 /**
  * List containing declarations without the specified return type.
+ *
+ * Only an explicitly declared return type counts, see [KoReturnProvider.hasReturnType].
  *
  * @param predicate The predicate function to determine if a declaration return type satisfies a condition.
  * @return A list containing declarations without the specified return type (or without a return type if [predicate] is null).

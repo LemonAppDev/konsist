@@ -34,10 +34,15 @@ interface KoTextProvider : KoBaseProvider {
     fun hasTextContaining(str: String): Boolean
 
     /**
-     * Determines whether the declaration's text matches the specified regex.
+     * Determines whether the entire declaration's text matches the specified regex.
+     *
+     * The regex must match the whole text (like [String.matches]), not just a part of it.
+     * Text usually spans multiple lines and `.` does not match line breaks by default,
+     * so `Regex(".*Flow.*")` does not match multi-line text. To find a match anywhere in the text use
+     * `regex.containsMatchIn(it.text)`.
      *
      * @param regex The regex to check against. It is a non-null regular expression.
-     * @return `true` if the declaration's text matches the regex, `false` otherwise.
+     * @return `true` if the entire declaration's text matches the regex, `false` otherwise.
      */
     fun hasTextMatching(regex: Regex): Boolean
 }

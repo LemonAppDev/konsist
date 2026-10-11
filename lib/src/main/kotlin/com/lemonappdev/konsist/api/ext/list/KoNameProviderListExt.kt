@@ -323,6 +323,8 @@ fun <T : KoNameProvider> List<T>.withoutNameContaining(
 /**
  * List containing declarations with a name matching any of the specified regular expressions.
  *
+ * The regex must match the entire name, see [KoNameProvider.hasNameMatching].
+ *
  * @param regex The regular expression to include.
  * @param regexes The regular expressions to include.
  * @return A list containing declarations with names matching the specified regular expressions.
@@ -334,6 +336,8 @@ fun <T : KoNameProvider> List<T>.withNameMatching(
 
 /**
  * List containing declarations with a name matching any of the specified regular expressions.
+ *
+ * The regex must match the entire name, see [KoNameProvider.hasNameMatching].
  *
  * @param regexes The regular expressions to include.
  * @return A list containing declarations with names matching the specified regular expressions.
@@ -349,6 +353,8 @@ fun <T : KoNameProvider> List<T>.withNameMatching(regexes: Collection<Regex>): L
 /**
  * List containing declarations without a name matching any of the specified regular expressions.
  *
+ * The regex must match the entire name, see [KoNameProvider.hasNameMatching].
+ *
  * @param regex The regular expression to exclude.
  * @param regexes The regular expressions to exclude.
  * @return A list containing declarations without names matching the specified regular expressions.
@@ -360,6 +366,8 @@ fun <T : KoNameProvider> List<T>.withoutNameMatching(
 
 /**
  * List containing declarations without a name matching any of the specified regular expressions.
+ *
+ * The regex must match the entire name, see [KoNameProvider.hasNameMatching].
  *
  * @param regexes The regular expressions to exclude.
  * @return A list containing declarations without names matching the specified regular expressions.

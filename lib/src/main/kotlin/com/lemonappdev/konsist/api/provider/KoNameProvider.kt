@@ -66,10 +66,13 @@ interface KoNameProvider : KoBaseProvider {
     ): Boolean
 
     /**
-     * Checks whether the declaration's name matches the specified regex.
+     * Checks whether the entire declaration's name matches the specified regex.
+     *
+     * The regex must match the whole name (like [String.matches]), not just a part of it,
+     * e.g. `Regex("View")` does not match `MainViewModel`, but `Regex(".*View.*")` does.
      *
      * @param regex The regex to check against.
-     * @return `true` if the declaration's name matches the regex, `false` otherwise.
+     * @return `true` if the entire declaration's name matches the regex, `false` otherwise.
      */
     fun hasNameMatching(regex: Regex): Boolean
 }
