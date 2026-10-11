@@ -4,13 +4,16 @@ package com.lemonappdev.konsist.api.architecture
  * Represents the dependency configuration for a layer within an architecture.
  *
  * This interface provides methods to define dependencies between layers in an architecture.
+ *
+ * A file depends on a layer when it imports a declaration from the layer package or references it by
+ * fully qualified name without an import, e.g. `com.app.data.Repository()`.
  */
 interface LayerDependencies {
     /**
      * Establishes dependency relationships between layers in the architecture.
      *
-     * The source layer must not import any other declared layer that is not listed as a dependency.
-     * Imports of packages that do not belong to any declared layer are ignored.
+     * The source layer must not depend on any other declared layer that is not listed as a dependency.
+     * Dependencies on packages that do not belong to any declared layer are ignored.
      *
      * Example:
      * ```kotlin
@@ -42,8 +45,8 @@ interface LayerDependencies {
      * This function allows defining dependencies from a single source layer to multiple target layers
      * simultaneously using a Set of layers.
      *
-     * The source layer must not import any other declared layer that is not listed as a dependency.
-     * Imports of packages that do not belong to any declared layer are ignored.
+     * The source layer must not depend on any other declared layer that is not listed as a dependency.
+     * Dependencies on packages that do not belong to any declared layer are ignored.
      *
      * Example:
      * ```kotlin
@@ -73,8 +76,8 @@ interface LayerDependencies {
      * This extension function allows defining dependencies for multiple layers at once, where each layer
      * in the collection will depend on all specified target layer(s).
      *
-     * Each source layer must not import any other declared layer that is not listed as a dependency.
-     * Imports of packages that do not belong to any declared layer are ignored.
+     * Each source layer must not depend on any other declared layer that is not listed as a dependency.
+     * Dependencies on packages that do not belong to any declared layer are ignored.
      *
      * Example:
      * ```kotlin
@@ -104,8 +107,8 @@ interface LayerDependencies {
      * This function creates dependency rules where each layer in the source collection will depend on
      * all layers in the target set. This allows for defining multiple dependencies in bulk.
      *
-     * Each source layer must not import any other declared layer that is not listed as a dependency.
-     * Imports of packages that do not belong to any declared layer are ignored.
+     * Each source layer must not depend on any other declared layer that is not listed as a dependency.
+     * Dependencies on packages that do not belong to any declared layer are ignored.
      *
      * Example:
      * ```kotlin
@@ -196,7 +199,7 @@ interface LayerDependencies {
 
     /**
      * Specifies that the current layer must not depend on any other declared layer.
-     * Imports of packages that do not belong to any declared layer are ignored.
+     * Dependencies on packages that do not belong to any declared layer are ignored.
      *
      * Example:
      * ```kotlin
@@ -211,7 +214,7 @@ interface LayerDependencies {
 
     /**
      * Specifies that none of the layers in the collection should depend on any other declared layer.
-     * Imports of packages that do not belong to any declared layer are ignored.
+     * Dependencies on packages that do not belong to any declared layer are ignored.
      *
      * Example:
      * ```kotlin

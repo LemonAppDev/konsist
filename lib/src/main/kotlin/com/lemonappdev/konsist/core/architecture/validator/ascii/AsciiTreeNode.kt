@@ -1,7 +1,7 @@
 package com.lemonappdev.konsist.core.architecture.validator.ascii
 
 import com.lemonappdev.konsist.api.declaration.KoFileDeclaration
-import com.lemonappdev.konsist.api.declaration.KoImportDeclaration
+import com.lemonappdev.konsist.core.architecture.FileDependency
 import com.lemonappdev.konsist.core.util.HyperlinkUtil
 
 data class AsciiTreeNode(
@@ -16,11 +16,11 @@ data class AsciiTreeNode(
         children,
     )
 
-    constructor(
-        koImportDeclaration: KoImportDeclaration,
+    internal constructor(
+        fileDependency: FileDependency,
         children: List<AsciiTreeNode>,
     ) : this(
-        "Import ${koImportDeclaration.name} (${HyperlinkUtil.toHyperlink(koImportDeclaration.location)})",
+        "${fileDependency.type.displayName} ${fileDependency.name} (${HyperlinkUtil.toHyperlink(fileDependency.location)})",
         children,
     )
 }

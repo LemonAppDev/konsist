@@ -2,9 +2,9 @@ package com.lemonappdev.konsist.core.verify.failure
 
 import com.lemonappdev.konsist.api.architecture.Layer
 import com.lemonappdev.konsist.api.declaration.KoFileDeclaration
-import com.lemonappdev.konsist.api.declaration.KoImportDeclaration
+import com.lemonappdev.konsist.core.architecture.FileDependency
 
-data class DependsOnNothingDependencyFailure(
+internal data class DependsOnNothingDependencyFailure(
     val layer: Layer,
-    val failedFiles: Map<KoFileDeclaration, List<KoImportDeclaration>>,
+    val failedFiles: Map<KoFileDeclaration, List<FileDependency>>,
 )
