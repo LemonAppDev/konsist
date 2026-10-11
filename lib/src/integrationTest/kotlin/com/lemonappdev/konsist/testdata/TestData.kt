@@ -82,6 +82,14 @@ interface FixtureGenericSuperInterface<T>
 
 object FixtureObject
 
+object FixtureObjectWithInitializer {
+    const val INITIALIZED_PROPERTY = "konsist.fixture.object.initialized"
+
+    init {
+        System.setProperty(INITIALIZED_PROPERTY, "true")
+    }
+}
+
 typealias FixtureTypeAlias = (FixtureClass) -> Unit
 
 typealias FixtureBasicTypeAlias = FixtureClass

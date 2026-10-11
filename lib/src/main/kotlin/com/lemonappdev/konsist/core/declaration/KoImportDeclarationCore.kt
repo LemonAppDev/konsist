@@ -10,6 +10,7 @@ import com.lemonappdev.konsist.core.cache.KoDeclarationCache
 import com.lemonappdev.konsist.core.cache.KoPropertyCache
 import com.lemonappdev.konsist.core.declaration.type.KoKotlinTypeDeclarationCore
 import com.lemonappdev.konsist.core.ext.castToKoBaseDeclaration
+import com.lemonappdev.konsist.core.ext.endsWithName
 import com.lemonappdev.konsist.core.model.DataCore
 import com.lemonappdev.konsist.core.provider.KoAliasProviderCore
 import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
@@ -93,16 +94,14 @@ internal class KoImportDeclarationCore private constructor(
     override val sourceDeclaration: KoDeclarationCastProvider?
         get() =
             KoPropertyCache.getOrCompute(cachedSourceDeclaration, { cachedSourceDeclaration = it }) {
-                val shortName = name.substringAfterLast(".")
-
                 (
-                    DataCore
-                        .declarations
-                        .filterIsInstance<KoFullyQualifiedNameProvider>()
-                        .firstOrNull { it.fullyQualifiedName == name }
-                        as? KoDeclarationCastProvider
-                        ?: getKotlinType(shortName)
-                        ?: KoExternalDeclarationCore.getInstance(shortName, ktImportDirective)
+                    DataCore.typesByFullyQualifiedName[name]
+                        ?: DataCore
+                            .declarations
+                            .filterIsInstance<KoFullyQualifiedNameProvider>()
+                            .firstOrNull { it.fullyQualifiedName == name }
+                        ?: getKotlinType(name)
+                        ?: KoExternalDeclarationCore.getInstance(name.substringAfterLast("."), name, ktImportDirective)
                 )
                     as? KoDeclarationCastProvider
             }
@@ -114,8 +113,8 @@ internal class KoImportDeclarationCore private constructor(
             node.getChildren(null).flatMap { getIdentifiers(it) }
         }
 
-    private fun getKotlinType(name: String): KoKotlinTypeDeclaration? =
-        if (TypeUtil.isKotlinType(name)) {
+    private fun getKotlinType(fullyQualifiedName: String): KoKotlinTypeDeclaration? =
+        if (TypeUtil.isKotlinTypeFullyQualifiedName(fullyQualifiedName)) {
             val ktNameReferenceExpression =
                 ktImportDirective
                     .children
@@ -136,7 +135,7 @@ internal class KoImportDeclarationCore private constructor(
     override fun representsType(
         name: String?,
         ignoreCase: Boolean,
-    ): Boolean = name?.let { this.name.endsWith(it, ignoreCase) } ?: false
+    ): Boolean = name?.let { this.name.endsWithName(it, ignoreCase) } ?: false
 
     override fun toString(): String = name
 

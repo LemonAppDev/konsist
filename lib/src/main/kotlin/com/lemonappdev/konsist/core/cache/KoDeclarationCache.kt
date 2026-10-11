@@ -64,7 +64,6 @@ internal object KoExternalDeclarationCache {
 
     fun getOrCreateInstance(
         key: String,
-        ktElement: KtElement,
-        value: (ktElement: KtElement) -> KoExternalDeclaration,
-    ): KoExternalDeclaration = elements[key] ?: value(ktElement).let { elements.putIfAbsent(key, it) ?: it }
+        value: () -> KoExternalDeclaration,
+    ): KoExternalDeclaration = elements[key] ?: value().let { elements.putIfAbsent(key, it) ?: it }
 }
