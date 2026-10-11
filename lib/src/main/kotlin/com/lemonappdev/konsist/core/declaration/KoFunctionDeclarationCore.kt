@@ -6,6 +6,7 @@ import com.lemonappdev.konsist.core.cache.KoDeclarationCache
 import com.lemonappdev.konsist.core.cache.KoPropertyCache
 import com.lemonappdev.konsist.core.provider.KoAnnotationProviderCore
 import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
+import com.lemonappdev.konsist.core.provider.KoBaseTestClassProviderCore
 import com.lemonappdev.konsist.core.provider.KoBodyProviderCore
 import com.lemonappdev.konsist.core.provider.KoContainingDeclarationProviderCore
 import com.lemonappdev.konsist.core.provider.KoContainingFileProviderCore
@@ -103,6 +104,7 @@ internal class KoFunctionDeclarationCore private constructor(
     KoTypeParameterProviderCore,
     KoIsExtensionProviderCore,
     KoIsGenericProviderCore,
+    KoBaseTestClassProviderCore,
     KoDeclarationCastProviderCore {
     override val ktCallableDeclaration: KtCallableDeclaration
         get() = ktFunction

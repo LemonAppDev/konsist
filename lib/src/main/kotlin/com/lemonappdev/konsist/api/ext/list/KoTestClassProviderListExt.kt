@@ -2,6 +2,7 @@ package com.lemonappdev.konsist.api.ext.list
 
 import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoClassDeclaration
+import com.lemonappdev.konsist.api.provider.KoBaseTestClassProvider
 import com.lemonappdev.konsist.api.provider.KoTestClassProvider
 
 /**
@@ -26,7 +27,7 @@ fun <T : KoTestClassProvider> List<T>.testClasses(
  * @param predicate A function that defines the condition to be met by a test class.
  * @return A list containing all test classes matching the predicate.
  */
-fun <T : KoTestClassProvider> List<T>.testClasses(
+fun <T : KoBaseTestClassProvider> List<T>.testClasses(
     moduleName: String? = null,
     sourceSetName: String? = null,
     predicate: (KoClassDeclaration) -> Boolean,
@@ -68,7 +69,7 @@ fun <T : KoTestClassProvider> List<T>.withoutTestClass(
  * @param predicate A function that defines the condition to be met by a test class.
  * @return A list containing declarations with a test matching the predicate.
  */
-fun <T : KoTestClassProvider> List<T>.withTestClass(
+fun <T : KoBaseTestClassProvider> List<T>.withTestClass(
     moduleName: String? = null,
     sourceSetName: String? = null,
     predicate: (KoClassDeclaration) -> Boolean,
@@ -82,7 +83,7 @@ fun <T : KoTestClassProvider> List<T>.withTestClass(
  * @param predicate A function that defines the condition to be met by a test class.
  * @return A list containing declarations without a test matching the predicate.
  */
-fun <T : KoTestClassProvider> List<T>.withoutTestClass(
+fun <T : KoBaseTestClassProvider> List<T>.withoutTestClass(
     moduleName: String? = null,
     sourceSetName: String? = null,
     predicate: (KoClassDeclaration) -> Boolean,
