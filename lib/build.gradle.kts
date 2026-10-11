@@ -8,6 +8,10 @@ dependencies {
     implementation(libs.kotlinCompilerEmbeddable)
     implementation(libs.kotlinx.coroutines.core)
 
+    // Test framework extensions (KoJUnitExtension, KoKotestExtension) are used only when the framework is on the classpath
+    compileOnly(libs.junitJupiterApi)
+    compileOnly(libs.kotestFrameworkEngine)
+
     testImplementation(libs.junitJupiterEngine)
     testImplementation(libs.junitJupiterParams)
     testImplementation(libs.mockk)

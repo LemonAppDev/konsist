@@ -4,6 +4,8 @@ import com.lemonappdev.konsist.TestSnippetProvider
 import com.lemonappdev.konsist.api.ext.list.initBlocks
 import com.lemonappdev.konsist.api.ext.list.localFunctions
 import com.lemonappdev.konsist.api.verify.assertTrue
+import com.lemonappdev.konsist.core.exception.KoAssertionFailedException
+import org.amshove.kluent.shouldThrow
 import org.junit.jupiter.api.Test
 
 class SuppressAssertTrueOnDeclarationListTest {
@@ -512,6 +514,102 @@ class SuppressAssertTrueOnDeclarationListTest {
         sut.assertTrue(testName = "konsist.assert-suppress-with-suppress-name-parameter") {
             it.name.endsWith("Kotest")
         }
+    }
+
+    @Test
+    fun `assert-suppress-by-name-containing-comma`() {
+        // given
+        val sut = getSnippetFile("assert-suppress-by-name-containing-comma").classes()
+
+        // then
+        sut.assertTrue(testName = "suppress, text") { it.name.endsWith("Text") }
+    }
+
+    @Test
+    fun `assert-suppress-by-konsist-and-name-containing-comma`() {
+        // given
+        val sut = getSnippetFile("assert-suppress-by-konsist-and-name-containing-comma").classes()
+
+        // then
+        sut.assertTrue(testName = "suppress, text") { it.name.endsWith("Text") }
+    }
+
+    @Test
+    fun `assert-suppress-by-name-in-named-array-argument`() {
+        // given
+        val sut = getSnippetFile("assert-suppress-by-name-in-named-array-argument").classes()
+
+        // then
+        sut.assertTrue(testName = "suppress-text") { it.name.endsWith("Text") }
+    }
+
+    @Test
+    fun `assert-suppress-by-konsist-and-name-in-named-array-argument`() {
+        // given
+        val sut = getSnippetFile("assert-suppress-by-konsist-and-name-in-named-array-argument").classes()
+
+        // then
+        sut.assertTrue(testName = "suppress-text") { it.name.endsWith("Text") }
+    }
+
+    @Test
+    fun `assert-suppress-by-name-in-spread-array-argument`() {
+        // given
+        val sut = getSnippetFile("assert-suppress-by-name-in-spread-array-argument").classes()
+
+        // then
+        sut.assertTrue(testName = "suppress-text") { it.name.endsWith("Text") }
+    }
+
+    @Test
+    fun `assert-suppress-by-konsist-and-name-in-spread-array-argument`() {
+        // given
+        val sut = getSnippetFile("assert-suppress-by-konsist-and-name-in-spread-array-argument").classes()
+
+        // then
+        sut.assertTrue(testName = "suppress-text") { it.name.endsWith("Text") }
+    }
+
+    @Test
+    fun `assert-suppress-by-name-in-fully-qualified-suppress-annotation`() {
+        // given
+        val sut = getSnippetFile("assert-suppress-by-name-in-fully-qualified-suppress-annotation").classes()
+
+        // then
+        sut.assertTrue(testName = "suppress-text") { it.name.endsWith("Text") }
+    }
+
+    @Test
+    fun `assert-suppress-by-konsist-and-name-in-fully-qualified-suppress-annotation`() {
+        // given
+        val sut = getSnippetFile("assert-suppress-by-konsist-and-name-in-fully-qualified-suppress-annotation").classes()
+
+        // then
+        sut.assertTrue(testName = "suppress-text") { it.name.endsWith("Text") }
+    }
+
+    @Test
+    fun `assert-not-suppress-by-part-of-name-containing-comma`() {
+        // given
+        val sut = getSnippetFile("assert-not-suppress-by-part-of-name-containing-comma").classes()
+
+        // when
+        val func = { sut.assertTrue(testName = "suppress") { it.name.endsWith("Text") } }
+
+        // then
+        func shouldThrow KoAssertionFailedException::class
+    }
+
+    @Test
+    fun `assert-not-suppress-by-konsist-and-part-of-name-containing-comma`() {
+        // given
+        val sut = getSnippetFile("assert-not-suppress-by-konsist-and-part-of-name-containing-comma").classes()
+
+        // when
+        val func = { sut.assertTrue(testName = "suppress") { it.name.endsWith("Text") } }
+
+        // then
+        func shouldThrow KoAssertionFailedException::class
     }
 
     private fun getSnippetFile(fileName: String) =

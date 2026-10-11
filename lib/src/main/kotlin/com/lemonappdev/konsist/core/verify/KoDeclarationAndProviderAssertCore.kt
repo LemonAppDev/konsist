@@ -15,7 +15,11 @@ import com.lemonappdev.konsist.core.exception.KoAssertionFailedException
 import com.lemonappdev.konsist.core.exception.KoException
 import com.lemonappdev.konsist.core.exception.KoInternalException
 import com.lemonappdev.konsist.core.exception.KoPreconditionFailedException
+import com.lemonappdev.konsist.core.provider.KoValueProviderCore
 import com.lemonappdev.konsist.core.util.HyperlinkUtil
+import org.jetbrains.kotlin.psi.KtEscapeStringTemplateEntry
+import org.jetbrains.kotlin.psi.KtStringTemplateExpression
+import org.jetbrains.kotlin.psi.psiUtil.collectDescendantsOfType
 
 internal fun <E : KoBaseProvider> List<E?>.assert(
     strict: Boolean,
@@ -27,7 +31,8 @@ internal fun <E : KoBaseProvider> List<E?>.assert(
     var lastDeclaration: KoBaseProvider? = null
 
     try {
-        val testMethodName = testName ?: getTestMethodNameFromFifthIndex()
+        val testNames = testName?.let { listOf(it) } ?: listOfNotNull(KoTestNameContext.current, getTestMethodNameFromFifthIndex())
+        val testMethodName = testNames.firstOrNull()
 
         val assertMethodName = getAssertMethodNameFromFourthIndex()
 
@@ -36,7 +41,7 @@ internal fun <E : KoBaseProvider> List<E?>.assert(
             checkIfLocalListHasOnlyNullElements(this, assertMethodName)
         }
 
-        val notSuppressedDeclarations = checkIfAnnotatedWithSuppress(this.filterNotNull(), testMethodName)
+        val notSuppressedDeclarations = checkIfAnnotatedWithSuppress(this.filterNotNull(), testNames)
 
         val failedItems =
             notSuppressedDeclarations.mapNotNull {
@@ -65,12 +70,13 @@ internal fun <E : KoBaseProvider> List<E?>.assert(
     onSingleElement: Boolean,
 ) {
     try {
-        val testMethodName = testName ?: getTestMethodNameFromFifthIndex()
+        val testNames = testName?.let { listOf(it) } ?: listOfNotNull(KoTestNameContext.current, getTestMethodNameFromFifthIndex())
+        val testMethodName = testNames.firstOrNull()
 
         val declarationWithoutNull = filterNotNull()
 
         val suppressedDeclarations =
-            declarationWithoutNull - checkIfAnnotatedWithSuppress(declarationWithoutNull, testMethodName).toSet()
+            declarationWithoutNull - checkIfAnnotatedWithSuppress(declarationWithoutNull, testNames).toSet()
 
         val notSuppressedDeclarations = this - suppressedDeclarations.toSet()
 
@@ -122,9 +128,9 @@ fun checkIfLocalListIsEmpty(
 
 private fun <E : KoBaseProvider> checkIfAnnotatedWithSuppress(
     localList: List<E>,
-    suppressName: String?,
+    suppressNames: List<String>,
 ): List<E> {
-    if (suppressName == null) {
+    if (suppressNames.isEmpty()) {
         return localList
     }
 
@@ -134,11 +140,11 @@ private fun <E : KoBaseProvider> checkIfAnnotatedWithSuppress(
     localList
         .filterNot {
             it is KoAnnotationDeclaration &&
-                (
+                suppressNames.any { suppressName ->
                     (it.name == "Suppress" && it.hasTextContaining("\"konsist.$suppressName\"")) ||
                         it.hasTextContaining("\"$suppressName\"")
-                )
-        }.forEach { declarations[it] = checkIfDeclarationIsAnnotatedWithSuppress(it as KoBaseDeclaration, suppressName) }
+                }
+        }.forEach { declarations[it] = checkIfDeclarationIsAnnotatedWithSuppress(it as KoBaseDeclaration, suppressNames) }
 
     val withoutSuppress = mutableListOf<E>()
 
@@ -149,53 +155,63 @@ private fun <E : KoBaseProvider> checkIfAnnotatedWithSuppress(
 
 private fun checkIfDeclarationIsAnnotatedWithSuppress(
     declaration: KoBaseDeclaration,
-    testMethodName: String,
+    testNames: List<String>,
 ): Boolean =
     when (declaration) {
         is KoFileDeclaration -> {
-            checkIfSuppressed(declaration, testMethodName)
+            checkIfSuppressed(declaration, testNames)
         }
 
         is KoAnnotationProvider -> {
-            checkIfSuppressed(declaration, testMethodName) ||
-                checkIfParentIsAnnotatedWithSuppress(declaration, testMethodName)
+            checkIfSuppressed(declaration, testNames) ||
+                checkIfParentIsAnnotatedWithSuppress(declaration, testNames)
         }
 
         else -> {
-            checkIfParentIsAnnotatedWithSuppress(declaration, testMethodName)
+            checkIfParentIsAnnotatedWithSuppress(declaration, testNames)
         }
     }
 
 private fun checkIfParentIsAnnotatedWithSuppress(
     declaration: KoBaseDeclaration,
-    testMethodName: String,
+    testNames: List<String>,
 ): Boolean =
     if (declaration is KoContainingDeclarationProvider) {
-        checkIfDeclarationIsAnnotatedWithSuppress(declaration.containingDeclaration, testMethodName)
+        checkIfDeclarationIsAnnotatedWithSuppress(declaration.containingDeclaration, testNames)
     } else {
         false
     }
 
 private fun checkIfSuppressed(
     item: KoAnnotationProvider,
-    testMethodName: String,
+    testNames: List<String>,
 ): Boolean {
-    val annotationParameter =
+    val suppressedNames =
         item
             .annotations
-            .firstOrNull { it.name == "Suppress" }
-            ?.text
-            ?.removePrefix("@file:Suppress(")
-            ?.removePrefix("@Suppress(")
-            ?.substringBeforeLast(")")
-            ?.split(",")
-            ?.map { it.trim() }
-            ?.map { it.removePrefix("\"") }
-            ?.map { it.removeSuffix("\"") }
-            .orEmpty()
+            .filter { it.name == "Suppress" }
+            .flatMap { it.getSuppressedNames() }
 
-    return annotationParameter.any { it == testMethodName } || annotationParameter.any { it == "konsist.$testMethodName" }
+    return testNames.any { it in suppressedNames || "konsist.$it" in suppressedNames }
 }
+
+/**
+ * Returns string values of all arguments, e.g. `@Suppress("a, b", "c")`, `@Suppress(names = ["a"])` or
+ * `@Suppress(*arrayOf("a"))`.
+ */
+private fun KoAnnotationDeclaration.getSuppressedNames(): List<String> =
+    arguments
+        .mapNotNull { (it as? KoValueProviderCore)?.ktExpression }
+        .flatMap { expression ->
+            if (expression is KtStringTemplateExpression) {
+                listOf(expression)
+            } else {
+                expression.collectDescendantsOfType<KtStringTemplateExpression>()
+            }
+        }.map { it.getContent() }
+
+private fun KtStringTemplateExpression.getContent(): String =
+    entries.joinToString("") { (it as? KtEscapeStringTemplateEntry)?.unescapedValue ?: it.text }
 
 private class FailedItem(
     val item: Any,

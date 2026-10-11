@@ -1,0 +1,3 @@
+@file:Suppress(names = ["konsist.suppress-text"])
+
+class FixtureClassWithIncorrectSuffix

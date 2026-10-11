@@ -2,6 +2,8 @@ package com.lemonappdev.konsist.api.architecture
 
 import com.lemonappdev.konsist.api.container.KoScope
 import com.lemonappdev.konsist.api.declaration.KoFileDeclaration
+import com.lemonappdev.konsist.api.verify.KoJUnitExtension
+import com.lemonappdev.konsist.api.verify.KoKotestExtension
 
 /**
  * An interface for asserting a KoArchitecture with its associated dependencies and configurations.
@@ -20,8 +22,9 @@ interface KoArchitectureAssertion {
      *
      * @param additionalMessage An optional message to provide additional context when the assertion fails.
      *                This message will be included in the assertion error if the assertion fails.
-     * @param testName An optional test name recommended for `Kotest` tests. By default, test name is derived from JUnit method name,
-     *                 however for Kotest framework it must be manually specified to be displayed in error messages.
+     * @param testName An optional test name displayed in error messages. By default, test name is derived from the JUnit
+     *                 method name. For Kotest and JUnit 5 dynamic tests register [KoKotestExtension] or [KoJUnitExtension],
+     *                 or pass the test name manually.
      *                 Architecture assertions do not support `@Suppress`; remove files from the scope instead.
      * @param layerDependenciesFunc The function literal with receiver [LayerDependencies] that allows configuring the dependencies
      * of the architecture.
@@ -44,8 +47,9 @@ interface KoArchitectureAssertion {
      *
      * @param additionalMessage An optional message to provide additional context when the assertion fails.
      *                This message will be included in the assertion error if the assertion fails.
-     * @param testName An optional test name recommended for `Kotest` tests. By default, test name is derived from JUnit method name,
-     *                 however for Kotest framework it must be manually specified to be displayed in error messages.
+     * @param testName An optional test name displayed in error messages. By default, test name is derived from the JUnit
+     *                 method name. For Kotest and JUnit 5 dynamic tests register [KoKotestExtension] or [KoJUnitExtension],
+     *                 or pass the test name manually.
      *                 Architecture assertions do not support `@Suppress`; remove files from the scope instead.
      * @param layerDependenciesFunc The [LayerDependencies] instance representing the configured dependencies of the architecture.
      */
@@ -68,8 +72,9 @@ interface KoArchitectureAssertion {
      *
      * @param additionalMessage An optional message to provide additional context when the assertion fails.
      *                This message will be included in the assertion error if the assertion fails.
-     * @param testName An optional test name recommended for `Kotest` tests. By default, test name is derived from JUnit method name,
-     *                 however for Kotest framework it must be manually specified to be displayed in error messages.
+     * @param testName An optional test name displayed in error messages. By default, test name is derived from the JUnit
+     *                 method name. For Kotest and JUnit 5 dynamic tests register [KoKotestExtension] or [KoJUnitExtension],
+     *                 or pass the test name manually.
      *                 Architecture assertions do not support `@Suppress`; remove files from the scope instead.
      * @param layerDependenciesFunc The function literal with receiver [LayerDependencies] that allows configuring the dependencies
      * of the architecture.
@@ -92,8 +97,9 @@ interface KoArchitectureAssertion {
      *
      * @param additionalMessage An optional message to provide additional context when the assertion fails.
      *                This message will be included in the assertion error if the assertion fails.
-     * @param testName An optional test name recommended for `Kotest` tests. By default, test name is derived from JUnit method name,
-     *                 however for Kotest framework it must be manually specified to be displayed in error messages.
+     * @param testName An optional test name displayed in error messages. By default, test name is derived from the JUnit
+     *                 method name. For Kotest and JUnit 5 dynamic tests register [KoKotestExtension] or [KoJUnitExtension],
+     *                 or pass the test name manually.
      *                 Architecture assertions do not support `@Suppress`; remove files from the scope instead.
      * @param layerDependenciesFunc The [LayerDependencies] instance representing the configured dependencies of the architecture.
      */

@@ -12,9 +12,9 @@ import com.lemonappdev.konsist.core.verify.assert
  *               By default, false.
  * @param additionalMessage An optional message to provide additional context when the assertion fails.
  *                This message will be included in the assertion error if the assertion fails.
- * @param testName An optional test name recommended for `Kotest` tests. By default, test name is derived from JUnit method name,
- *                 however for Kotest framework it must be manually specified to be displayed in error messages
- *                 and enable suppression.
+ * @param testName An optional test name, displayed in error messages and used for suppression. By default, test name is
+ *                 derived from the JUnit method name. For Kotest and JUnit 5 dynamic tests register [KoKotestExtension]
+ *                 or [KoJUnitExtension], or pass the test name manually.
  * @param function The predicate function that takes an element of type [E] and returns a [Boolean] value.
  *                If the function returns `true`, the element is considered valid; otherwise, it's considered invalid.
  *                Inside the function [KoAssertScope.addReason] can be used to add a reason displayed under the failed element.
@@ -37,9 +37,9 @@ fun <E : KoBaseProvider> E?.assertTrue(
  *               By default, false.
  * @param additionalMessage An optional message to provide additional context when the assertion fails.
  *                This message will be included in the assertion error if the assertion fails.
- * @param testName An optional test name recommended for `Kotest` tests. By default, test name is derived from JUnit method name,
- *                 however for Kotest framework it must be manually specified to be displayed in error messages
- *                 and enable suppression.
+ * @param testName An optional test name, displayed in error messages and used for suppression. By default, test name is
+ *                 derived from the JUnit method name. For Kotest and JUnit 5 dynamic tests register [KoKotestExtension]
+ *                 or [KoJUnitExtension], or pass the test name manually.
  * @param function The predicate function that takes an element of type [E] and returns a [Boolean] value.
  *                If the function returns `true`, the element is considered invalid; otherwise, it's considered valid.
  *                Inside the function [KoAssertScope.addReason] can be used to add a reason displayed under the failed element.
@@ -62,9 +62,9 @@ fun <E : KoBaseProvider> E?.assertFalse(
  *               By default, false.
  * @param additionalMessage An optional message to provide additional context when the assertion fails.
  *                This message will be included in the assertion error if the assertion fails.
- * @param testName An optional test name recommended for `Kotest` tests. By default, test name is derived from JUnit method name,
- *                 however for Kotest framework it must be manually specified to be displayed in error messages
- *                 and enable suppression.
+ * @param testName An optional test name, displayed in error messages and used for suppression. By default, test name is
+ *                 derived from the JUnit method name. For Kotest and JUnit 5 dynamic tests register [KoKotestExtension]
+ *                 or [KoJUnitExtension], or pass the test name manually.
  * @param function The predicate function that takes an element of type [E] and returns a [Boolean] value.
  *                If the function returns `true`, the element is considered valid; otherwise, it's considered invalid.
  *                Inside the function [KoAssertScope.addReason] can be used to add a reason displayed under the failed element.
@@ -87,9 +87,9 @@ fun <E : KoBaseProvider> List<E?>.assertTrue(
  *               By default, false.
  * @param additionalMessage An optional message to provide additional context when the assertion fails.
  *                This message will be included in the assertion error if the assertion fails.
- * @param testName An optional test name recommended for `Kotest` tests. By default, test name is derived from JUnit method name,
- *                 however for Kotest framework it must be manually specified to be displayed in error messages
- *                 and enable suppression.
+ * @param testName An optional test name, displayed in error messages and used for suppression. By default, test name is
+ *                 derived from the JUnit method name. For Kotest and JUnit 5 dynamic tests register [KoKotestExtension]
+ *                 or [KoJUnitExtension], or pass the test name manually.
  * @param function The predicate function that takes an element of type [E] and returns a [Boolean] value.
  *                If the function returns `true`, the element is considered invalid; otherwise, it's considered valid.
  *                Inside the function [KoAssertScope.addReason] can be used to add a reason displayed under the failed element.
@@ -112,9 +112,9 @@ fun <E : KoBaseProvider> List<E?>.assertFalse(
  *               By default, false.
  * @param additionalMessage An optional message to provide additional context when the assertion fails.
  *                This message will be included in the assertion error if the assertion fails.
- * @param testName An optional test name recommended for `Kotest` tests. By default, test name is derived from JUnit method name,
- *                 however for Kotest framework it must be manually specified to be displayed in error messages
- *                 and enable suppression.
+ * @param testName An optional test name, displayed in error messages and used for suppression. By default, test name is
+ *                 derived from the JUnit method name. For Kotest and JUnit 5 dynamic tests register [KoKotestExtension]
+ *                 or [KoJUnitExtension], or pass the test name manually.
  * @param function The predicate function that takes an element of type [E] and returns a [Boolean] value.
  *                If the function returns `true`, the element is considered valid; otherwise, it's considered invalid.
  *                Inside the function [KoAssertScope.addReason] can be used to add a reason displayed under the failed element.
@@ -137,9 +137,9 @@ fun <E : KoBaseProvider> Sequence<E?>.assertTrue(
  *               By default, false.
  * @param additionalMessage An optional message to provide additional context when the assertion fails.
  *                This message will be included in the assertion error if the assertion fails.
- * @param testName An optional test name recommended for `Kotest` tests. By default, test name is derived from JUnit method name,
- *                 however for Kotest framework it must be manually specified to be displayed in error messages
- *                 and enable suppression.
+ * @param testName An optional test name, displayed in error messages and used for suppression. By default, test name is
+ *                 derived from the JUnit method name. For Kotest and JUnit 5 dynamic tests register [KoKotestExtension]
+ *                 or [KoJUnitExtension], or pass the test name manually.
  * @param function The predicate function that takes an element of type [E] and returns a [Boolean] value.
  *                If the function returns `true`, the element is considered invalid; otherwise, it's considered valid.
  *                Inside the function [KoAssertScope.addReason] can be used to add a reason displayed under the failed element.
@@ -158,9 +158,9 @@ fun <E : KoBaseProvider> Sequence<E?>.assertFalse(
  *
  * @param additionalMessage An optional message to provide additional context when the assertion fails.
  *                          This message will be included in the assertion error if the assertion fails.
- * @param testName An optional test name recommended for `Kotest` tests. By default, test name is derived from JUnit method name,
- *                 however for Kotest framework it must be manually specified to be displayed in error messages
- *                 and enable suppression.
+ * @param testName An optional test name, displayed in error messages and used for suppression. By default, test name is
+ *                 derived from the JUnit method name. For Kotest and JUnit 5 dynamic tests register [KoKotestExtension]
+ *                 or [KoJUnitExtension], or pass the test name manually.
  */
 fun <E : KoBaseProvider> E?.assertNull(
     additionalMessage: String? = null,
@@ -174,9 +174,9 @@ fun <E : KoBaseProvider> E?.assertNull(
  *
  * @param additionalMessage An optional message to provide additional context when the assertion fails.
  *                          This message will be included in the assertion error if the assertion fails.
- * @param testName An optional test name recommended for `Kotest` tests. By default, test name is derived from JUnit method name,
- *                 however for Kotest framework it must be manually specified to be displayed in error messages
- *                 and enable suppression.
+ * @param testName An optional test name, displayed in error messages and used for suppression. By default, test name is
+ *                 derived from the JUnit method name. For Kotest and JUnit 5 dynamic tests register [KoKotestExtension]
+ *                 or [KoJUnitExtension], or pass the test name manually.
  */
 fun <E : KoBaseProvider> E?.assertNotNull(
     additionalMessage: String? = null,
@@ -195,9 +195,9 @@ fun <E : KoBaseProvider> E?.assertNotNull(
  *               By default, false.
  * @param additionalMessage An optional message to provide additional context when the assertion fails.
  *                         This message will be included in the assertion error if the assertion fails.
- * @param testName An optional test name recommended for `Kotest` tests. By default, test name is derived from JUnit method name,
- *                 however for Kotest framework it must be manually specified to be displayed in error messages
- *                 and enable suppression.
+ * @param testName An optional test name, displayed in error messages and used for suppression. By default, test name is
+ *                 derived from the JUnit method name. For Kotest and JUnit 5 dynamic tests register [KoKotestExtension]
+ *                 or [KoJUnitExtension], or pass the test name manually.
  */
 fun <E : KoBaseProvider> List<E?>.assertEmpty(
     strict: Boolean = false,
@@ -217,9 +217,9 @@ fun <E : KoBaseProvider> List<E?>.assertEmpty(
  *               By default, false.
  * @param additionalMessage An optional message to provide additional context when the assertion fails.
  *                         This message will be included in the assertion error if the assertion fails.
- * @param testName An optional test name recommended for `Kotest` tests. By default, test name is derived from JUnit method name,
- *                 however for Kotest framework it must be manually specified to be displayed in error messages
- *                 and enable suppression.
+ * @param testName An optional test name, displayed in error messages and used for suppression. By default, test name is
+ *                 derived from the JUnit method name. For Kotest and JUnit 5 dynamic tests register [KoKotestExtension]
+ *                 or [KoJUnitExtension], or pass the test name manually.
  */
 fun <E : KoBaseProvider> List<E?>.assertNotEmpty(
     strict: Boolean = false,
@@ -239,9 +239,9 @@ fun <E : KoBaseProvider> List<E?>.assertNotEmpty(
  *               By default, false.
  * @param additionalMessage An optional message to provide additional context when the assertion fails.
  *                         This message will be included in the assertion error if the assertion fails.
- * @param testName An optional test name recommended for `Kotest` tests. By default, test name is derived from JUnit method name,
- *                 however for Kotest framework it must be manually specified to be displayed in error messages
- *                 and enable suppression.
+ * @param testName An optional test name, displayed in error messages and used for suppression. By default, test name is
+ *                 derived from the JUnit method name. For Kotest and JUnit 5 dynamic tests register [KoKotestExtension]
+ *                 or [KoJUnitExtension], or pass the test name manually.
  */
 fun <E : KoBaseProvider> Sequence<E?>.assertEmpty(
     strict: Boolean = false,
@@ -261,9 +261,9 @@ fun <E : KoBaseProvider> Sequence<E?>.assertEmpty(
  *               By default, false.
  * @param additionalMessage An optional message to provide additional context when the assertion fails.
  *                         This message will be included in the assertion error if the assertion fails.
- * @param testName An optional test name recommended for `Kotest` tests. By default, test name is derived from JUnit method name,
- *                 however for Kotest framework it must be manually specified to be displayed in error messages
- *                 and enable suppression.
+ * @param testName An optional test name, displayed in error messages and used for suppression. By default, test name is
+ *                 derived from the JUnit method name. For Kotest and JUnit 5 dynamic tests register [KoKotestExtension]
+ *                 or [KoJUnitExtension], or pass the test name manually.
  */
 fun <E : KoBaseProvider> Sequence<E?>.assertNotEmpty(
     strict: Boolean = false,

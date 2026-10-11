@@ -1,0 +1,3 @@
+@file:Suppress(names = ["suppress-text"])
+
+class FixtureClassWithIncorrectSuffix
