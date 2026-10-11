@@ -21,8 +21,8 @@ interface KoArchitectureAssertion {
      * @param additionalMessage An optional message to provide additional context when the assertion fails.
      *                This message will be included in the assertion error if the assertion fails.
      * @param testName An optional test name recommended for `Kotest` tests. By default, test name is derived from JUnit method name,
-     *                 however for Kotest framework it must be manually specified to be displayed in error messages
-     *                 and enable suppression.
+     *                 however for Kotest framework it must be manually specified to be displayed in error messages.
+     *                 Architecture assertions do not support `@Suppress`; remove files from the scope instead.
      * @param layerDependenciesFunc The function literal with receiver [LayerDependencies] that allows configuring the dependencies
      * of the architecture.
      */
@@ -45,8 +45,8 @@ interface KoArchitectureAssertion {
      * @param additionalMessage An optional message to provide additional context when the assertion fails.
      *                This message will be included in the assertion error if the assertion fails.
      * @param testName An optional test name recommended for `Kotest` tests. By default, test name is derived from JUnit method name,
-     *                 however for Kotest framework it must be manually specified to be displayed in error messages
-     *                 and enable suppression.
+     *                 however for Kotest framework it must be manually specified to be displayed in error messages.
+     *                 Architecture assertions do not support `@Suppress`; remove files from the scope instead.
      * @param layerDependenciesFunc The [LayerDependencies] instance representing the configured dependencies of the architecture.
      */
     fun KoScope.assertArchitecture(
@@ -69,8 +69,8 @@ interface KoArchitectureAssertion {
      * @param additionalMessage An optional message to provide additional context when the assertion fails.
      *                This message will be included in the assertion error if the assertion fails.
      * @param testName An optional test name recommended for `Kotest` tests. By default, test name is derived from JUnit method name,
-     *                 however for Kotest framework it must be manually specified to be displayed in error messages
-     *                 and enable suppression.
+     *                 however for Kotest framework it must be manually specified to be displayed in error messages.
+     *                 Architecture assertions do not support `@Suppress`; remove files from the scope instead.
      * @param layerDependenciesFunc The function literal with receiver [LayerDependencies] that allows configuring the dependencies
      * of the architecture.
      */
@@ -93,8 +93,8 @@ interface KoArchitectureAssertion {
      * @param additionalMessage An optional message to provide additional context when the assertion fails.
      *                This message will be included in the assertion error if the assertion fails.
      * @param testName An optional test name recommended for `Kotest` tests. By default, test name is derived from JUnit method name,
-     *                 however for Kotest framework it must be manually specified to be displayed in error messages
-     *                 and enable suppression.
+     *                 however for Kotest framework it must be manually specified to be displayed in error messages.
+     *                 Architecture assertions do not support `@Suppress`; remove files from the scope instead.
      * @param layerDependenciesFunc The [LayerDependencies] instance representing the configured dependencies of the architecture.
      */
     fun List<KoFileDeclaration>.assertArchitecture(
