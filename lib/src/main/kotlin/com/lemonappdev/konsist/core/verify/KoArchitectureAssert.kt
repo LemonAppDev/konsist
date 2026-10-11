@@ -73,6 +73,7 @@ private fun assertCommon(
 ) {
     layerDependenciesCore.checkEmptyLayersDependencies()
     layerDependenciesCore.checkLayersWithoutFiles(files)
+    layerDependenciesCore.checkOverlappingLayers(files)
 
     val failedDependsOnLayers = getFailedDependsOnLayers(files, layerDependenciesCore)
     val failedDependsOnNotAllowedLayers = getFailedDependsOnNotAllowedLayers(files, layerDependenciesCore)

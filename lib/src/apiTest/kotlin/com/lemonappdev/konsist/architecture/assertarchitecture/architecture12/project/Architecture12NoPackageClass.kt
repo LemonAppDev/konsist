@@ -1,0 +1,1 @@
+class Architecture12NoPackageClass

@@ -1,11 +1,11 @@
 package com.lemonappdev.konsist.architecture.assertarchitecture.architecture11
 
 import com.lemonappdev.konsist.api.Konsist
-import com.lemonappdev.konsist.api.architecture.KoArchitectureCreator.architecture
 import com.lemonappdev.konsist.api.architecture.KoArchitectureCreator.assertArchitecture
 import com.lemonappdev.konsist.api.architecture.Layer
-import com.lemonappdev.konsist.core.exception.KoAssertionFailedException
+import com.lemonappdev.konsist.core.exception.KoPreconditionFailedException
 import com.lemonappdev.konsist.core.filesystem.PathProvider
+import io.kotest.assertions.throwables.shouldNotThrowAny
 import io.kotest.assertions.throwables.shouldThrow
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
@@ -18,11 +18,19 @@ class Architecture11Test {
             "lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/assertarchitecture/architecture11/project",
         )
 
+    private val app =
+        Layer(
+            "App",
+            "com.lemonappdev.konsist.architecture.assertarchitecture.architecture11.project..",
+        )
+
     private val domain =
         Layer(
             "Domain",
             "com.lemonappdev.konsist.architecture.assertarchitecture.architecture11.project.domain..",
         )
+
+    private val anyDomain = Layer("AnyDomain", "..domain..")
 
     private val data =
         Layer(
@@ -30,118 +38,86 @@ class Architecture11Test {
             "com.lemonappdev.konsist.architecture.assertarchitecture.architecture11.project.data..",
         )
 
-    private val util =
-        Layer(
-            "Util",
-            "com.lemonappdev.konsist.architecture.assertarchitecture.architecture11.project.util..",
-        )
-
     private val projectPath =
         "file://$rootPath/lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/assertarchitecture/architecture11/project"
 
-    private val noPackageFilePath = "$projectPath/Architecture11NoPackageClass.kt"
+    private val domainFile = "File $projectPath/domain/DomainClass.kt"
 
-    private val utilFilePath = "$projectPath/util/UtilClass.kt"
-
-    private val dataFilePath = "$projectPath/data/DataClass.kt"
+    private val dataFile = "File $projectPath/data/DataClass.kt"
 
     @Test
-    fun `passes when files reside outside layers and requireAllFilesInLayers is not set`() {
+    fun `nested layer fails precondition`() {
+        // when
+        val result =
+            shouldThrow<KoPreconditionFailedException> {
+                scope.assertArchitecture {
+                    app.dependsOnNothing()
+                    domain.include()
+                }
+            }
+
         // then
-        scope.assertArchitecture {
-            domain.dependsOnNothing()
-            data.dependsOn(domain)
+        result
+            .message
+            .shouldBeEqualTo(
+                "Layers overlap. Each file must belong to only one layer:\n" +
+                    "└── Layers 'App', 'Domain' share files:\n" +
+                    "    └── $domainFile",
+            )
+    }
+
+    @Test
+    fun `wildcard layer overlapping other layer fails precondition`() {
+        // when
+        val result =
+            shouldThrow<KoPreconditionFailedException> {
+                scope.assertArchitecture {
+                    domain.dependsOnNothing()
+                    anyDomain.include()
+                }
+            }
+
+        // then
+        result
+            .message
+            .shouldBeEqualTo(
+                "Layers overlap. Each file must belong to only one layer:\n" +
+                    "└── Layers 'Domain', 'AnyDomain' share files:\n" +
+                    "    └── $domainFile",
+            )
+    }
+
+    @Test
+    fun `overlap failure lists files grouped by overlapping layers`() {
+        // when
+        val result =
+            shouldThrow<KoPreconditionFailedException> {
+                scope.assertArchitecture {
+                    app.doesNotDependOn(domain, data)
+                    anyDomain.include()
+                }
+            }
+
+        // then
+        result
+            .message
+            .shouldBeEqualTo(
+                "Layers overlap. Each file must belong to only one layer:\n" +
+                    "├── Layers 'App', 'Data' share files:\n" +
+                    "│   └── $dataFile\n" +
+                    "└── Layers 'App', 'Domain', 'AnyDomain' share files:\n" +
+                    "    └── $domainFile",
+            )
+    }
+
+    @Test
+    fun `non overlapping layers pass precondition`() {
+        // then
+        shouldNotThrowAny {
+            scope.assertArchitecture {
+                domain.dependsOnNothing()
+                data.dependsOnNothing()
+            }
         }
-    }
-
-    @Test
-    fun `passes when all files reside in layers (lambda files)`() {
-        // then
-        scope
-            .files
-            .filter { it.packagee != null }
-            .assertArchitecture {
-                domain.dependsOnNothing()
-                data.dependsOn(domain)
-                util.include()
-                requireAllFilesInLayers()
-            }
-    }
-
-    @Test
-    fun `fails when files reside outside layers (lambda scope)`() {
-        // when
-        val result =
-            shouldThrow<KoAssertionFailedException> {
-                scope.assertArchitecture {
-                    domain.dependsOnNothing()
-                    data.dependsOn(domain)
-                    requireAllFilesInLayers()
-                }
-            }
-
-        // then
-        result
-            .message
-            .shouldBeEqualTo(
-                "'fails when files reside outside layers (lambda scope)' test has failed. \n" +
-                    "All files are required to reside in a layer, but these files reside in no layer:\n" +
-                    "├── File $noPackageFilePath\n" +
-                    "└── File $utilFilePath",
-            )
-    }
-
-    @Test
-    fun `fails when file without package resides outside layers (parameter files)`() {
-        // given
-        val layerDependencies =
-            architecture {
-                domain.dependsOnNothing()
-                data.dependsOn(domain)
-                util.include()
-                requireAllFilesInLayers()
-            }
-
-        // when
-        val result =
-            shouldThrow<KoAssertionFailedException> {
-                scope.files.assertArchitecture(layerDependencies)
-            }
-
-        // then
-        result
-            .message
-            .shouldBeEqualTo(
-                "'fails when file without package resides outside layers (parameter files)' test has failed. \n" +
-                    "All files are required to reside in a layer, but these files reside in no layer:\n" +
-                    "└── File $noPackageFilePath",
-            )
-    }
-
-    @Test
-    fun `fails with dependency and outside layer violations`() {
-        // when
-        val result =
-            shouldThrow<KoAssertionFailedException> {
-                scope.assertArchitecture {
-                    domain.dependsOnNothing()
-                    data.dependsOnNothing()
-                    requireAllFilesInLayers()
-                }
-            }
-
-        // then
-        result
-            .message
-            .shouldBeEqualTo(
-                "'fails with dependency and outside layer violations' test has failed. \n" +
-                    "'Data' layer should not depend on anything but has dependencies in files:\n" +
-                    "└── File $dataFilePath\n" +
-                    "    └── Import com.lemonappdev.konsist.architecture.assertarchitecture.architecture11.project.domain.DomainClass " +
-                    "($dataFilePath:3:1)\n" +
-                    "All files are required to reside in a layer, but these files reside in no layer:\n" +
-                    "├── File $noPackageFilePath\n" +
-                    "└── File $utilFilePath",
-            )
     }
 }
