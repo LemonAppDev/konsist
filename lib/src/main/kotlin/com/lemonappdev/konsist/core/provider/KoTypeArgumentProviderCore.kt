@@ -17,13 +17,11 @@ internal interface KoTypeArgumentProviderCore :
     KoBaseProviderCore {
     val ktUserType: KtUserType?
 
+    val ktTypeProjections: List<KtTypeProjection>
+        get() = ktUserType?.typeArguments.orEmpty()
+
     override val typeArguments: List<KoTypeArgumentDeclaration>?
         get() {
-            val ktTypeProjections: List<KtTypeProjection> =
-                ktUserType
-                    ?.typeArguments
-                    ?: emptyList()
-
             val typeArguments =
                 ktTypeProjections
                     .map {

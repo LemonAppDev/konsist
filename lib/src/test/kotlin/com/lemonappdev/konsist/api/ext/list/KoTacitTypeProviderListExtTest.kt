@@ -1,5 +1,6 @@
 package com.lemonappdev.konsist.api.ext.list
 
+import com.lemonappdev.konsist.api.declaration.type.KoTypeDeclaration
 import com.lemonappdev.konsist.api.provider.KoTacitTypeProvider
 import com.lemonappdev.konsist.testdata.FixtureClass1
 import com.lemonappdev.konsist.testdata.FixtureClass2
@@ -9,6 +10,32 @@ import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
 class KoTacitTypeProviderListExtTest {
+    @Test
+    fun `tacitTypes returns tacit types from all declarations`() {
+        // given
+        val tacitType1: KoTypeDeclaration = mockk()
+        val tacitType2: KoTypeDeclaration = mockk()
+        val declaration1: KoTacitTypeProvider =
+            mockk {
+                every { tacitType } returns tacitType1
+            }
+        val declaration2: KoTacitTypeProvider =
+            mockk {
+                every { tacitType } returns tacitType2
+            }
+        val declaration3: KoTacitTypeProvider =
+            mockk {
+                every { tacitType } returns null
+            }
+        val declarations = listOf(declaration1, declaration2, declaration3)
+
+        // when
+        val sut = declarations.tacitTypes
+
+        // then
+        sut shouldBeEqualTo listOf(tacitType1, tacitType2)
+    }
+
     @Test
     fun `withTacitType(empty list) returns all declarations`() {
         // given
