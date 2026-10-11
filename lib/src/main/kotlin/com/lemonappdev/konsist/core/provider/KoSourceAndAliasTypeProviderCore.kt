@@ -15,7 +15,7 @@ internal interface KoSourceAndAliasTypeProviderCore :
     val ktElement: KtElement
 
     private val file: KoFileDeclaration
-        get() = KoFileDeclarationCore(ktElement.containingKtFile)
+        get() = KoFileDeclarationCore.getInstance(ktElement.containingKtFile)
 
     @Deprecated("Will be removed in version 0.19.0", replaceWith = ReplaceWith("isImportAlias"))
     override val isAlias: Boolean

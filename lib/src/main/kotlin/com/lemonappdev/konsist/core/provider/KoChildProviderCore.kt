@@ -1,9 +1,7 @@
 package com.lemonappdev.konsist.core.provider
 
 import com.lemonappdev.konsist.api.declaration.KoChildDeclaration
-import com.lemonappdev.konsist.api.declaration.KoSourceDeclaration
 import com.lemonappdev.konsist.api.provider.KoChildProvider
-import com.lemonappdev.konsist.api.provider.KoParentProvider
 import com.lemonappdev.konsist.core.model.DataCore
 import com.lemonappdev.konsist.core.util.KClassUtil.checkIfKClassOf
 import kotlin.reflect.KClass
@@ -13,14 +11,7 @@ internal interface KoChildProviderCore :
     KoContainingDeclarationProviderCore,
     KoContainingFileProviderCore,
     KoBaseProviderCore {
-    override fun children(indirectChildren: Boolean): List<KoChildDeclaration> {
-        val items: List<KoChildDeclaration> = DataCore.classes + DataCore.interfaces + DataCore.objects
-
-        return items.filter {
-            (it as? KoParentProvider)?.hasParent(indirectChildren) { parent -> parent.sourceDeclaration == (this as? KoSourceDeclaration) }
-                ?: false
-        }
-    }
+    override fun children(indirectChildren: Boolean): List<KoChildDeclaration> = DataCore.getChildren(this, indirectChildren)
 
     override fun numChildren(indirectChildren: Boolean): Int = children(indirectChildren).size
 

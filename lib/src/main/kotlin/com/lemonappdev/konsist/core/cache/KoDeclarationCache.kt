@@ -6,7 +6,7 @@ import com.lemonappdev.konsist.api.provider.KoBaseProvider
 import org.jetbrains.kotlin.com.intellij.openapi.util.Key
 import org.jetbrains.kotlin.com.intellij.openapi.util.UserDataHolderEx
 import org.jetbrains.kotlin.psi.KtElement
-import java.util.concurrent.ConcurrentHashMap
+import java.lang.ref.WeakReference
 
 /*
 Declarations are stored in the user data of the PSI element, so the cache does not need a map entry (with a key object)
@@ -59,11 +59,16 @@ internal class KoDeclarationCache<T : KoBaseProvider> {
     }
 }
 
+/*
+External declaration references the element where it was found for the first time, so it would keep the PSI tree of
+that file in memory. Declarations are cached using weak references, so the same instance is returned as long as it is
+used (e.g. by the parent declarations of other files).
+ */
 internal object KoExternalDeclarationCache {
-    private val elements = ConcurrentHashMap<String, KoExternalDeclaration>()
+    private val elements = KoReferenceCache<KoExternalDeclaration> { WeakReference(it) }
 
     fun getOrCreateInstance(
         key: String,
         value: () -> KoExternalDeclaration,
-    ): KoExternalDeclaration = elements[key] ?: value().let { elements.putIfAbsent(key, it) ?: it }
+    ): KoExternalDeclaration = elements.getOrCreateInstance(key, value)
 }

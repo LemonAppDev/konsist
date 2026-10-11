@@ -30,6 +30,8 @@ import com.lemonappdev.konsist.core.provider.KoTextProviderCore
 import com.lemonappdev.konsist.core.provider.KoTypeAliasProviderCore
 import com.lemonappdev.konsist.core.provider.packagee.KoPackageProviderCore
 import com.lemonappdev.konsist.core.provider.util.KoDeclarationProviderCoreUtil
+import org.jetbrains.kotlin.com.intellij.openapi.util.Key
+import org.jetbrains.kotlin.com.intellij.openapi.util.UserDataHolderEx
 import org.jetbrains.kotlin.com.intellij.psi.PsiElement
 import org.jetbrains.kotlin.psi.KtAnnotationEntry
 import org.jetbrains.kotlin.psi.KtElement
@@ -116,4 +118,15 @@ internal class KoFileDeclarationCore(
     override fun equals(other: Any?): Boolean = other is KoFileDeclaration && path == other.path
 
     override fun hashCode(): Int = 31 * 7 + path.hashCode()
+
+    internal companion object {
+        private val key: Key<KoFileDeclarationCore> = Key.create("KoFileDeclarationCore")
+
+        /*
+         * File declaration is stored in the user data of the file, so the same instance (with computed property values)
+         * is returned for the file, e.g. as a containing file of every declaration, as long as the file is in memory.
+         */
+        internal fun getInstance(ktFile: KtFile): KoFileDeclarationCore =
+            ktFile.getUserData(key) ?: (ktFile as UserDataHolderEx).putUserDataIfAbsent(key, KoFileDeclarationCore(ktFile))
+    }
 }

@@ -1,69 +1,58 @@
 package com.lemonappdev.konsist.core.model
 
 import com.lemonappdev.konsist.api.Konsist
-import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
-import com.lemonappdev.konsist.api.declaration.KoClassDeclaration
-import com.lemonappdev.konsist.api.declaration.KoInterfaceDeclaration
-import com.lemonappdev.konsist.api.declaration.KoObjectDeclaration
-import com.lemonappdev.konsist.api.declaration.KoTypeAliasDeclaration
-import com.lemonappdev.konsist.api.ext.koscope.declarationsOf
-import com.lemonappdev.konsist.api.provider.KoFullyQualifiedNameProvider
+import com.lemonappdev.konsist.api.declaration.KoChildDeclaration
+import com.lemonappdev.konsist.api.declaration.KoSourceDeclaration
+import com.lemonappdev.konsist.api.provider.KoBaseProvider
+import com.lemonappdev.konsist.core.cache.KoFileDeclarationCache
+import com.lemonappdev.konsist.core.ext.toKoFile
+import com.lemonappdev.konsist.core.provider.util.KoFileDeclarationProvider
+import com.lemonappdev.konsist.core.util.PackageNameReader
+import kotlinx.coroutines.runBlocking
+import java.io.File
+import java.lang.ref.SoftReference
 
-object DataCore {
-    val declarations: List<KoBaseDeclaration> by lazy {
-        Konsist
-            .scopeFromProject()
-            .declarationsOf()
-    }
-
-    val classes: List<KoClassDeclaration> by lazy {
-        Konsist
-            .scopeFromProject()
-            .classes()
-    }
-
-    val interfaces: List<KoInterfaceDeclaration> by lazy {
-        Konsist
-            .scopeFromProject()
-            .interfaces()
-    }
-
-    val objects: List<KoObjectDeclaration> by lazy {
-        Konsist
-            .scopeFromProject()
-            .objects()
-    }
-
-    val typeAliases: List<KoTypeAliasDeclaration> by lazy {
-        Konsist
-            .scopeFromProject()
-            .typeAliases
-    }
-
-    /**
-     * Classes, interfaces, objects and type aliases of the project by fully qualified name.
-     */
-    val typesByFullyQualifiedName: Map<String, KoBaseDeclaration> by lazy {
-        val scope = Konsist.scopeFromProject()
-
-        associateByFullyQualifiedName(
-            scope.classes(includeNested = true, includeLocal = false) +
-                scope.interfaces(includeNested = true) +
-                scope.objects(includeNested = true) +
-                scope.typeAliases,
+/**
+ * Data of the whole project. Data is computed when needed and cached using soft references, so it can be released from
+ * memory (together with parsed files) when the memory is low.
+ */
+internal object DataCore {
+    val projectDeclarationIndex =
+        ProjectDeclarationIndex(
+            getFiles = {
+                runBlocking { KoFileDeclarationProvider.getProjectKotlinFiles() }
+                    .filterNot { KoFileDeclarationProvider.isBuildConfigFile(it.path) }
+            },
+            getPackageName = ::getPackageName,
+            getKoFile = { it.toKoFile() },
         )
-    }
+
+    @Volatile
+    private var childrenIndexReference: SoftReference<ChildrenIndex>? = null
+
+    private val childrenIndex: ChildrenIndex
+        get() =
+            childrenIndexReference?.get() ?: synchronized(this) {
+                childrenIndexReference?.get() ?: createChildrenIndex().also { childrenIndexReference = SoftReference(it) }
+            }
 
     /**
-     * Associates declarations by fully qualified name. When more declarations have the same fully qualified name
-     * (e.g. in different source sets), the first one is used.
+     * Returns classes, interfaces and objects of the project that have the given declaration as a parent.
      */
-    internal fun associateByFullyQualifiedName(declarations: List<KoBaseDeclaration>): Map<String, KoBaseDeclaration> =
-        buildMap {
-            declarations.forEach { declaration ->
-                (declaration as? KoFullyQualifiedNameProvider)
-                    ?.fullyQualifiedName
-                    ?.let { putIfAbsent(it, declaration) }
-            }
-        }
+    fun getChildren(
+        declaration: KoBaseProvider,
+        indirectChildren: Boolean,
+    ): List<KoChildDeclaration> = childrenIndex.getChildren(declaration as? KoSourceDeclaration, indirectChildren)
+
+    private fun createChildrenIndex(): ChildrenIndex {
+        val scope = Konsist.scopeFromProject()
+        return ChildrenIndex(scope.classes() + scope.interfaces() + scope.objects())
+    }
+
+    /*
+     * Package name of the parsed file is taken from its package directive, other files are not parsed.
+     */
+    private fun getPackageName(file: File): String? =
+        KoFileDeclarationCache.getInstanceOrNull(file)?.let { it.packagee?.name.orEmpty() }
+            ?: PackageNameReader.getPackageName(file)
 }
