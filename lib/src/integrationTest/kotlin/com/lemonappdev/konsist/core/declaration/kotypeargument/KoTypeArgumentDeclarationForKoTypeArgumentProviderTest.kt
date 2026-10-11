@@ -62,7 +62,7 @@ class KoTypeArgumentDeclarationForKoTypeArgumentProviderTest {
             it?.typeArguments?.firstOrNull()?.typeArguments shouldBeEqualTo null
             it?.numTypeArguments shouldBeEqualTo 1
             it?.countTypeArguments { type -> type.sourceDeclaration?.isKotlinType == true } shouldBeEqualTo 1
-            it?.countTypeArguments { type -> type.sourceDeclaration?.isClass == true } shouldBeEqualTo 0
+            it?.countTypeArguments { type -> type.sourceDeclaration?.isClass == true } shouldBeEqualTo 1
             it?.hasTypeArguments() shouldBeEqualTo true
             it?.hasTypeArgumentWithName("String", "Int") shouldBeEqualTo true
             it?.hasTypeArgumentWithName("OtherClass", "Int") shouldBeEqualTo false
@@ -113,7 +113,7 @@ class KoTypeArgumentDeclarationForKoTypeArgumentProviderTest {
             it?.typeArguments?.firstOrNull()?.typeArguments shouldBeEqualTo null
             it?.numTypeArguments shouldBeEqualTo 1
             it?.countTypeArguments { type -> type.sourceDeclaration?.isKotlinType == true } shouldBeEqualTo 1
-            it?.countTypeArguments { type -> type.sourceDeclaration?.isClass == true } shouldBeEqualTo 0
+            it?.countTypeArguments { type -> type.sourceDeclaration?.isClass == true } shouldBeEqualTo 1
             it?.hasTypeArguments() shouldBeEqualTo true
             it?.hasTypeArgumentWithName("String", "Int") shouldBeEqualTo true
             it?.hasTypeArgumentWithName("OtherClass", "Int") shouldBeEqualTo false
@@ -178,7 +178,7 @@ class KoTypeArgumentDeclarationForKoTypeArgumentProviderTest {
 
             it?.numTypeArguments shouldBeEqualTo 2
             it?.countTypeArguments { type -> type.sourceDeclaration?.isKotlinType == true } shouldBeEqualTo 2
-            it?.countTypeArguments { type -> type.sourceDeclaration?.isClass == true } shouldBeEqualTo 0
+            it?.countTypeArguments { type -> type.sourceDeclaration?.isClass == true } shouldBeEqualTo 1
             it?.hasTypeArguments() shouldBeEqualTo true
             it?.hasTypeArgumentWithName("Int", "String") shouldBeEqualTo true
             it?.hasTypeArgumentWithName("OtherClass", "String") shouldBeEqualTo false
@@ -243,7 +243,7 @@ class KoTypeArgumentDeclarationForKoTypeArgumentProviderTest {
 
             it?.numTypeArguments shouldBeEqualTo 2
             it?.countTypeArguments { type -> type.sourceDeclaration?.isKotlinType == true } shouldBeEqualTo 2
-            it?.countTypeArguments { type -> type.sourceDeclaration?.isClass == true } shouldBeEqualTo 0
+            it?.countTypeArguments { type -> type.sourceDeclaration?.isClass == true } shouldBeEqualTo 1
             it?.hasTypeArguments() shouldBeEqualTo true
             it?.hasTypeArgumentWithName("Int", "String") shouldBeEqualTo true
             it?.hasTypeArgumentWithName("OtherClass", "String") shouldBeEqualTo false
@@ -355,7 +355,7 @@ class KoTypeArgumentDeclarationForKoTypeArgumentProviderTest {
             it?.typeArguments?.firstOrNull()?.typeArguments shouldBeEqualTo null
             it?.numTypeArguments shouldBeEqualTo 1
             it?.countTypeArguments { type -> type.sourceDeclaration?.isKotlinType == true } shouldBeEqualTo 1
-            it?.countTypeArguments { type -> type.sourceDeclaration?.isClass == true } shouldBeEqualTo 0
+            it?.countTypeArguments { type -> type.sourceDeclaration?.isClass == true } shouldBeEqualTo 1
             it?.hasTypeArguments() shouldBeEqualTo true
             it?.hasTypeArgumentWithName("String", "Int") shouldBeEqualTo true
             it?.hasTypeArgumentWithName("OtherClass", "Int") shouldBeEqualTo false
@@ -437,7 +437,7 @@ class KoTypeArgumentDeclarationForKoTypeArgumentProviderTest {
             it?.typeArguments?.firstOrNull()?.typeArguments shouldBeEqualTo null
             it?.numTypeArguments shouldBeEqualTo 1
             it?.countTypeArguments { type -> type.sourceDeclaration?.isKotlinType == true } shouldBeEqualTo 1
-            it?.countTypeArguments { type -> type.sourceDeclaration?.isClass == true } shouldBeEqualTo 0
+            it?.countTypeArguments { type -> type.sourceDeclaration?.isClass == true } shouldBeEqualTo 1
             it?.hasTypeArguments() shouldBeEqualTo true
             it?.hasTypeArgumentWithName("String", "Int") shouldBeEqualTo true
             it?.hasTypeArgumentWithName("OtherClass", "Int") shouldBeEqualTo false

@@ -1,0 +1,3 @@
+class FixtureClass : Exception {
+    constructor() : super()
+}

@@ -87,7 +87,7 @@ class KoParentDeclarationForKoTypeArgumentProviderTest {
             typeArguments?.firstOrNull()?.name shouldBeEqualTo "Int"
             numTypeArguments shouldBeEqualTo 1
             countTypeArguments { type -> type.sourceDeclaration?.isKotlinType == true } shouldBeEqualTo 1
-            countTypeArguments { type -> type.sourceDeclaration?.isClass == true } shouldBeEqualTo 0
+            countTypeArguments { type -> type.sourceDeclaration?.isClass == true } shouldBeEqualTo 1
             hasTypeArgumentWithName("Int", "String") shouldBeEqualTo true
             hasTypeArgumentWithName("OtherClass", "String") shouldBeEqualTo false
             hasTypeArgumentWithName(listOf("Int", "String")) shouldBeEqualTo true
@@ -225,7 +225,7 @@ class KoParentDeclarationForKoTypeArgumentProviderTest {
             typeArguments?.firstOrNull()?.name shouldBeEqualTo "Int"
             numTypeArguments shouldBeEqualTo 1
             countTypeArguments { type -> type.sourceDeclaration?.isKotlinType == true } shouldBeEqualTo 1
-            countTypeArguments { type -> type.sourceDeclaration?.isClass == true } shouldBeEqualTo 0
+            countTypeArguments { type -> type.sourceDeclaration?.isClass == true } shouldBeEqualTo 1
             hasTypeArgumentWithName("Int", "String") shouldBeEqualTo true
             hasTypeArgumentWithName("OtherClass", "String") shouldBeEqualTo false
             hasTypeArgumentWithName(listOf("Int", "String")) shouldBeEqualTo true
@@ -363,7 +363,7 @@ class KoParentDeclarationForKoTypeArgumentProviderTest {
             typeArguments?.firstOrNull()?.name shouldBeEqualTo "Int"
             numTypeArguments shouldBeEqualTo 1
             countTypeArguments { type -> type.sourceDeclaration?.isKotlinType == true } shouldBeEqualTo 1
-            countTypeArguments { type -> type.sourceDeclaration?.isClass == true } shouldBeEqualTo 0
+            countTypeArguments { type -> type.sourceDeclaration?.isClass == true } shouldBeEqualTo 1
             hasTypeArgumentWithName("Int", "String") shouldBeEqualTo true
             hasTypeArgumentWithName("OtherClass", "String") shouldBeEqualTo false
             hasTypeArgumentWithName(listOf("Int", "String")) shouldBeEqualTo true

@@ -27,16 +27,28 @@ interface KoDeclarationCastProvider :
     KoIsStarProjectionProvider {
     /**
      * Determines whether the declaration is a class.
+     *
+     * For declarations from outside the project (external declarations and Kotlin types) the value is read from the class
+     * on the classpath, so it is `false` when the class is not on the classpath. These declarations are not cast to
+     * Konsist declarations, e.g. [asClassDeclaration] returns `null` for them.
      */
     val isClass: Boolean
 
     /**
      * Determines whether the declaration is an object.
+     *
+     * For declarations from outside the project (external declarations and Kotlin types) the value is read from the class
+     * on the classpath, so it is `false` when the class is not on the classpath. These declarations are not cast to
+     * Konsist declarations, e.g. [asObjectDeclaration] returns `null` for them.
      */
     val isObject: Boolean
 
     /**
      * Determines whether the declaration is an interface.
+     *
+     * For declarations from outside the project (external declarations and Kotlin types) the value is read from the class
+     * on the classpath, so it is `false` when the class is not on the classpath. These declarations are not cast to
+     * Konsist declarations, e.g. [asInterfaceDeclaration] returns `null` for them.
      */
     val isInterface: Boolean
 

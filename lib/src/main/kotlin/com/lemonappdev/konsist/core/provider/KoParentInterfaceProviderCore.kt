@@ -2,7 +2,9 @@ package com.lemonappdev.konsist.core.provider
 
 import com.lemonappdev.konsist.api.declaration.KoParentDeclaration
 import com.lemonappdev.konsist.api.provider.KoParentInterfaceProvider
+import com.lemonappdev.konsist.core.declaration.KoParentDeclarationCore
 import com.lemonappdev.konsist.core.util.ParentUtil.checkIfParentOf
+import com.lemonappdev.konsist.core.util.TypeKind
 import kotlin.reflect.KClass
 
 internal interface KoParentInterfaceProviderCore :
@@ -10,7 +12,7 @@ internal interface KoParentInterfaceProviderCore :
     KoBaseProviderCore,
     KoParentProviderCore {
     override fun parentInterfaces(indirectParents: Boolean): List<KoParentDeclaration> =
-        parents(indirectParents).filter { it.sourceDeclaration?.isInterface == true }
+        parents(indirectParents).filter { (it as KoParentDeclarationCore).kind == TypeKind.INTERFACE }
 
     override fun numParentInterfaces(indirectParents: Boolean): Int = parentInterfaces(indirectParents).size
 
