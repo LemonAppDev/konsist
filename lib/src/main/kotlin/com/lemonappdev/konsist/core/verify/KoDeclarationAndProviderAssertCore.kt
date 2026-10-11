@@ -44,7 +44,7 @@ internal fun <E : KoBaseProvider> List<E?>.assert(
                 val scope = KoAssertScopeCore()
                 val passed = (scope.function(it) ?: positiveCheck) == positiveCheck
 
-                if (passed) null else FailedItem(it, scope.messages)
+                if (passed) null else FailedItem(it, scope.reasons)
             }
 
         getResult(failedItems, testMethodName, additionalMessage)
@@ -199,7 +199,7 @@ private fun checkIfSuppressed(
 
 private class FailedItem(
     val item: Any,
-    val messages: List<String>,
+    val reasons: List<String>,
 )
 
 private fun getResult(
@@ -228,7 +228,7 @@ private fun getCheckFailedMessage(
 
     val failedDeclarationAsciiTreeNodes =
         failedDeclarationsMessage.zip(failedItems) { declarationMessage, failedItem ->
-            AsciiTreeNode(declarationMessage, failedItem.messages.map { AsciiTreeNode(it, emptyList()) })
+            AsciiTreeNode(declarationMessage, failedItem.reasons.map { AsciiTreeNode(it, emptyList()) })
         }
 
     return AsciiTreeCreator().invoke(

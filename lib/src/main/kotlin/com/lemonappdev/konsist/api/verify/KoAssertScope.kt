@@ -5,12 +5,12 @@ package com.lemonappdev.konsist.api.verify
  */
 interface KoAssertScope {
     /**
-     * Adds a message describing the currently checked element.
+     * Adds a reason explaining why the currently checked element violates the assertion.
      *
-     * The message is displayed under the element in the assertion error, but only when this element fails the assertion.
-     * Messages added for elements that pass the assertion are ignored.
+     * The reason is displayed under the element in the assertion error, but only when this element fails the assertion.
+     * Reasons added for elements that pass the assertion are ignored.
      *
-     * @param message The message to display under the failed element.
+     * @param reason The reason to display under the failed element.
      */
-    fun addMessage(message: String): Unit
+    fun addReason(reason: String): Unit
 }
