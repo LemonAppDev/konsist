@@ -9,6 +9,9 @@ interface LayerDependencies {
     /**
      * Establishes dependency relationships between layers in the architecture.
      *
+     * The source layer must not import any other declared layer that is not listed as a dependency.
+     * Imports of packages that do not belong to any declared layer are ignored.
+     *
      * Example:
      * ```kotlin
      * // Required dependency - Feature layer must depend on Domain layer
@@ -39,6 +42,9 @@ interface LayerDependencies {
      * This function allows defining dependencies from a single source layer to multiple target layers
      * simultaneously using a Set of layers.
      *
+     * The source layer must not import any other declared layer that is not listed as a dependency.
+     * Imports of packages that do not belong to any declared layer are ignored.
+     *
      * Example:
      * ```kotlin
      * // Makes Feature layer depend on both Domain and Data layers
@@ -67,6 +73,9 @@ interface LayerDependencies {
      * This extension function allows defining dependencies for multiple layers at once, where each layer
      * in the collection will depend on all specified target layer(s).
      *
+     * Each source layer must not import any other declared layer that is not listed as a dependency.
+     * Imports of packages that do not belong to any declared layer are ignored.
+     *
      * Example:
      * ```kotlin
      * // Makes both Feature and UI layers depend on Domain layer
@@ -94,6 +103,9 @@ interface LayerDependencies {
      *
      * This function creates dependency rules where each layer in the source collection will depend on
      * all layers in the target set. This allows for defining multiple dependencies in bulk.
+     *
+     * Each source layer must not import any other declared layer that is not listed as a dependency.
+     * Imports of packages that do not belong to any declared layer are ignored.
      *
      * Example:
      * ```kotlin
@@ -183,7 +195,8 @@ interface LayerDependencies {
     fun Collection<Layer>.doesNotDependOn(layers: Set<Layer>): Unit
 
     /**
-     * Specifies that the current layer must not have any dependencies.
+     * Specifies that the current layer must not depend on any other declared layer.
+     * Imports of packages that do not belong to any declared layer are ignored.
      *
      * Example:
      * ```kotlin
@@ -197,7 +210,8 @@ interface LayerDependencies {
     fun Layer.dependsOnNothing(): Unit
 
     /**
-     * Specifies that none of the layers in the collection should have any dependencies.
+     * Specifies that none of the layers in the collection should depend on any other declared layer.
+     * Imports of packages that do not belong to any declared layer are ignored.
      *
      * Example:
      * ```kotlin
