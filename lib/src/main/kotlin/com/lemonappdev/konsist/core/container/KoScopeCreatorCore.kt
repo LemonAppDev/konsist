@@ -13,7 +13,6 @@ import com.lemonappdev.konsist.core.filesystem.PathProvider
 import com.lemonappdev.konsist.core.provider.util.KoFileDeclarationProvider
 import com.lemonappdev.konsist.core.util.ModuleUtil
 import com.lemonappdev.konsist.core.util.ModuleUtil.ROOT_MODULE_NAME
-import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.runBlocking
 import java.io.File
 
@@ -69,32 +68,26 @@ internal class KoScopeCreatorCore : KoScopeCreator {
                 .let { KoScopeCore(it) }
         }
 
+    /*
+     * Files are filtered by path before parsing, so files of other modules and source sets are not parsed.
+     */
     private suspend fun getFiles(
         moduleName: String? = null,
         sourceSetName: String? = null,
         ignoreBuildConfig: Boolean = true,
-    ): List<KoFileDeclaration> =
-        coroutineScope {
-            val localProjectKotlinFiles =
-                KoFileDeclarationProvider
-                    .getKoFileDeclarations()
-                    .let {
-                        if (ignoreBuildConfig) {
-                            it.filterNot { file -> file.isBuildConfigFile() }
-                        } else {
-                            it
-                        }
-                    }
-
+    ): List<KoFileDeclaration> {
+        val pathRegex =
             if (moduleName == null && sourceSetName == null) {
-                return@coroutineScope localProjectKotlinFiles
+                null
+            } else {
+                getPathRegex(projectRootPath, moduleName, sourceSetName)
             }
 
-            val pathRegex = getPathRegex(projectRootPath, moduleName, sourceSetName)
-
-            return@coroutineScope localProjectKotlinFiles
-                .filter { it.path.toMacOsSeparator().matches(pathRegex) }
+        return KoFileDeclarationProvider.getKoFileDeclarations { file ->
+            (!ignoreBuildConfig || !KoFileDeclarationProvider.isBuildConfigFile(file.path)) &&
+                (pathRegex == null || file.path.toMacOsSeparator().matches(pathRegex))
         }
+    }
 
     override fun scopeFromProduction(
         moduleName: String?,
@@ -210,28 +203,22 @@ internal class KoScopeCreatorCore : KoScopeCreator {
         return lowercaseName.substringAfter(':').matches(Regex(".*$TEST_NAME_IN_PATH.*"))
     }
 
-    private fun KoFileDeclaration.isBuildConfigFile(): Boolean {
-        val lowercasePath = path.lowercase().toMacOsSeparator()
-        val gradleBuildConfigDirectoryName = "buildSrc".lowercase()
-        return lowercasePath.matches(Regex(".*/$gradleBuildConfigDirectoryName.*"))
-    }
-
     private fun File.toKoFiles(): List<KoFileDeclaration> =
         walk()
             .filter { it.isKotlinFile }
             .map { it.toKoFile() }
             .toList()
 
-    private fun getKoFiles(files: List<File>) =
-        runBlocking {
-            KoFileDeclarationProvider
-                .getKoFileDeclarations()
-                .filter {
-                    files.any { file ->
-                        file.path == it.path
-                    }
-                }
+    /*
+     * Returns project files with the given paths. Other project files are not parsed.
+     */
+    private fun getKoFiles(files: List<File>): List<KoFileDeclaration> {
+        val paths = files.map { it.path }.toSet()
+
+        return runBlocking {
+            KoFileDeclarationProvider.getKoFileDeclarations { it.path in paths }
         }
+    }
 
     companion object {
         private const val TEST_NAME_IN_PATH = "test"

@@ -59,7 +59,7 @@ object KotlinFileParser {
     }
 
     @Suppress("detekt.TooGenericExceptionCaught")
-    private fun getKtFile(file: File): KtFile {
+    internal fun getKtFile(file: File): KtFile {
         require(file.isKotlinFile || file.isKotlinSnippetFile) { "File must be a Kotlin file: ${file.path}" }
 
         try {
@@ -92,6 +92,6 @@ object KotlinFileParser {
 
     fun getKoFile(file: File): KoFileDeclaration {
         val ktFile = getKtFile(file)
-        return KoFileDeclarationCore(ktFile)
+        return KoFileDeclarationCore.getInstance(ktFile)
     }
 }

@@ -16,39 +16,45 @@ internal interface KoParentProviderCore :
     val ktClassOrObject: KtClassOrObject
 
     override fun parents(indirectParents: Boolean): List<KoParentDeclaration> {
-        val directParentDeclarations =
-            ktClassOrObject
-                .getSuperTypeList()
-                ?.children
-                ?.filterIsInstance<KtSuperTypeListEntry>()
-                ?.map { KoParentDeclarationCore.getInstance(it, this.castToKoBaseDeclaration()) }
-                .orEmpty()
+        val directParentDeclarations = getDirectParents()
 
-        val indirectParentDeclarations =
-            if (indirectParents) getIndirectParents(directParentDeclarations) else emptyList()
-
-        return (directParentDeclarations + indirectParentDeclarations).distinctBy { it.sourceDeclaration }
-    }
-
-    private fun getIndirectParents(parents: List<KoParentDeclaration>): List<KoParentDeclaration> {
-        val indirectParents = mutableListOf<KoParentDeclaration>()
-
-        parents
-            .forEach {
-                val nextParents =
-                    if (it.sourceDeclaration as? KoParentProvider != null) {
-                        (it.sourceDeclaration as? KoParentProvider)?.parents(indirectParents = true) ?: emptyList()
-                    } else {
-                        emptyList()
-                    }
-
-                if (nextParents.isNotEmpty()) {
-                    indirectParents += nextParents + getIndirectParents(nextParents)
-                }
+        val parentDeclarations =
+            if (indirectParents) {
+                directParentDeclarations + getIndirectParents(directParentDeclarations, mutableSetOf(this))
+            } else {
+                directParentDeclarations
             }
 
-        return indirectParents
+        return parentDeclarations.distinctBy { it.sourceDeclaration }
     }
+
+    private fun getDirectParents(): List<KoParentDeclaration> =
+        ktClassOrObject
+            .getSuperTypeList()
+            ?.children
+            ?.filterIsInstance<KtSuperTypeListEntry>()
+            ?.map { KoParentDeclarationCore.getInstance(it, this.castToKoBaseDeclaration()) }
+            .orEmpty()
+
+    /*
+     * Parents of every declaration are searched once, so the search time grows linearly with the size of the hierarchy
+     * (instead of exponentially with its depth) and the search ends for the cyclic hierarchy (invalid code, e.g.
+     * `class A : B()` and `class B : A()`). Parents found again would be removed as duplicates anyway.
+     */
+    private fun getIndirectParents(
+        parents: List<KoParentDeclaration>,
+        visitedDeclarations: MutableSet<KoParentProviderCore>,
+    ): List<KoParentDeclaration> =
+        parents.flatMap { parent ->
+            val sourceDeclaration = parent.sourceDeclaration as? KoParentProviderCore
+
+            if (sourceDeclaration == null || !visitedDeclarations.add(sourceDeclaration)) {
+                emptyList()
+            } else {
+                val nextParents = sourceDeclaration.getDirectParents()
+                nextParents + getIndirectParents(nextParents, visitedDeclarations)
+            }
+        }
 
     override fun numParents(indirectParents: Boolean): Int = parents(indirectParents).size
 

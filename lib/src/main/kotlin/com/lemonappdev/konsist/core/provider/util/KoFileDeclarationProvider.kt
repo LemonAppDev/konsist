@@ -1,10 +1,13 @@
 package com.lemonappdev.konsist.core.provider.util
 
 import com.lemonappdev.konsist.api.declaration.KoFileDeclaration
+import com.lemonappdev.konsist.core.cache.KoFileDeclarationCache
 import com.lemonappdev.konsist.core.ext.isKotlinFile
 import com.lemonappdev.konsist.core.ext.toKoFile
+import com.lemonappdev.konsist.core.ext.toMacOsSeparator
 import com.lemonappdev.konsist.core.filesystem.PathProvider
 import com.lemonappdev.konsist.core.filesystem.ProjectDirectoryFilter
+import kotlinx.coroutines.CompletableDeferred
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
@@ -15,6 +18,8 @@ import kotlinx.coroutines.sync.withLock
 import java.io.File
 
 internal object KoFileDeclarationProvider {
+    private const val GRADLE_BUILD_CONFIG_DIRECTORY_NAME = "buildsrc"
+
     private val projectRootDir: File = File(PathProvider.rootProjectPath)
 
     private val projectDirectoryFilter = ProjectDirectoryFilter(projectRootDir)
@@ -22,7 +27,7 @@ internal object KoFileDeclarationProvider {
     private val mutex: Mutex = Mutex()
 
     @Volatile
-    private var createKoFilesDeclarationDeferred: Deferred<List<KoFileDeclaration>>? = null
+    private var projectKotlinFilesDeferred: Deferred<List<File>>? = null
 
     init {
         check(projectRootDir.exists()) { "Directory does not exist: ${projectRootDir.absolutePath}" }
@@ -30,46 +35,70 @@ internal object KoFileDeclarationProvider {
     }
 
     /**
-     * Retrieves a list of [KoFileDeclaration]s asynchronously from the project's root directory.
-     * This function scans the directory for Kotlin files and parses them to obtain a list of KoFileDeclaration.
-     * Directories ignored by [ProjectDirectoryFilter] (build outputs, hidden directories, node_modules) are not scanned.
-     *
-     * The parsing operations are performed concurrently.
+     * Retrieves a list of Kotlin files from the project's root directory. The directory is scanned once, files are not
+     * parsed. Directories ignored by [ProjectDirectoryFilter] (build outputs, hidden directories, node_modules) are not
+     * scanned.
      *
      * Threading Strategy:
-     * Ensures thread-safe initialization of a single deferred operation to parse all Kotlin files, using a mutex to
-     * guard against concurrent initializations.
-     * File walking and parsing operations are performed concurrently across multiple threads to optimize
-     * I/O operations.
+     * Ensures thread-safe initialization of a single deferred operation to scan the directory, using a mutex to guard
+     * against concurrent initializations.
      *
      * e.g.
-     * 1. getKoFileDeclarations started at Thread 1 - start file parsing
-     * 2. getKoFileDeclarations started at Thread 2 - file parsing in progress, wait for it to complete
-     * 3. Parse Kotlin files in parallel
-     * 4. getKoFileDeclarations started at Thread 1 completes
-     * 5. getKoFileDeclarations started at Thread 2 completes
-     *
-     * @return A list of [KoFileDeclaration]s representing the parsed Kotlin files.
-     * @throws Exception if there's an issue accessing the file system or parsing the files.
+     * 1. getProjectKotlinFiles started at Thread 1 - start directory scanning
+     * 2. getProjectKotlinFiles started at Thread 2 - directory scanning in progress, wait for it to complete
+     * 3. getProjectKotlinFiles started at Thread 1 completes
+     * 4. getProjectKotlinFiles started at Thread 2 completes
      */
-    suspend fun getKoFileDeclarations(): List<KoFileDeclaration> =
+    suspend fun getProjectKotlinFiles(): List<File> =
         coroutineScope {
-            val currentDeferred: Deferred<List<KoFileDeclaration>> =
+            val currentDeferred: Deferred<List<File>> =
                 mutex.withLock {
-                    createKoFilesDeclarationDeferred ?: async(Dispatchers.IO) {
+                    projectKotlinFilesDeferred ?: async(Dispatchers.IO) {
                         projectRootDir
                             .walk()
                             .onEnter { !projectDirectoryFilter.isIgnored(it) }
                             .filter { it.isKotlinFile }
-                            .map { async { parseKotlinFile(it) } }
                             .toList()
-                            .awaitAll()
-                            .filterNotNull()
-                    }.also { createKoFilesDeclarationDeferred = it }
+                    }.also { projectKotlinFilesDeferred = it }
                 }
 
             currentDeferred.await()
         }
+
+    /**
+     * Retrieves a list of [KoFileDeclaration]s of the project's Kotlin files matching the [predicate].
+     * Files are filtered before parsing, so files not matching the [predicate] are not parsed.
+     *
+     * Parsed files are cached (see [KoFileDeclarationCache]), files that are not parsed yet are parsed concurrently.
+     *
+     * @return A list of [KoFileDeclaration]s representing the parsed Kotlin files.
+     * @throws Exception if there's an issue accessing the file system or parsing the files.
+     */
+    suspend fun getKoFileDeclarations(predicate: (File) -> Boolean = { true }): List<KoFileDeclaration> {
+        val files = getProjectKotlinFiles().filter(predicate)
+        val parsedFiles = files.map { KoFileDeclarationCache.getInstanceOrNull(it) }
+
+        if (parsedFiles.all { it != null }) {
+            return parsedFiles.filterNotNull()
+        }
+
+        return coroutineScope {
+            files
+                .zip(parsedFiles) { file, parsedFile ->
+                    parsedFile?.let { CompletableDeferred(it) } ?: async(Dispatchers.IO) { parseKotlinFile(file) }
+                }.awaitAll()
+                .filterNotNull()
+        }
+    }
+
+    /**
+     * Returns true if the file is located in the Gradle build configuration directory (buildSrc).
+     */
+    fun isBuildConfigFile(path: String): Boolean =
+        path
+            .lowercase()
+            .toMacOsSeparator()
+            .contains("/$GRADLE_BUILD_CONFIG_DIRECTORY_NAME")
 
     private fun parseKotlinFile(file: File): KoFileDeclaration? {
         /*

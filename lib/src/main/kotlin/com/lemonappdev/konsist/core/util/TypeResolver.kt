@@ -23,9 +23,10 @@ import org.jetbrains.kotlin.com.intellij.openapi.util.Key
  *
  * Types from the same package and wildcard imports are searched in the containing file and on the classpath first.
  * Project declarations are searched only when the type is not found there and it is not a default import type,
- * so resolving e.g. `String` or `Deprecated` does not parse the whole project. As a result, a project type which
+ * so resolving e.g. `String` or `Deprecated` does not parse project files. As a result, a project type which
  * has the name of a default import type (e.g. `Result`) is resolved only when it is declared in the same file or it is
- * available on the classpath.
+ * available on the classpath. Only project files of the packages that can contain the type are parsed (see
+ * `ProjectDeclarationIndex`).
  */
 internal object TypeResolver {
     private const val JAVA_LANG_PACKAGE = "java.lang"
@@ -92,7 +93,7 @@ internal object TypeResolver {
                 ?: getImportedTypeName(firstSegment, containingFile)
                 ?: candidates.firstOrNull { it in getFileTypes(containingFile) || TypeUtil.isTypeAvailable(it) }
                 ?: getDefaultImportedTypeName(firstSegment)
-                ?: candidates.firstOrNull { it in DataCore.typesByFullyQualifiedName }
+                ?: candidates.firstOrNull { DataCore.projectDeclarationIndex.getTypeDeclaration(it) != null }
 
         return when {
             fullyQualifiedName != null -> fullyQualifiedName + remainingSegments
@@ -116,7 +117,7 @@ internal object TypeResolver {
             ?: if (TypeUtil.isKotlinTypeFullyQualifiedName(fullyQualifiedName)) {
                 null
             } else {
-                DataCore.typesByFullyQualifiedName[fullyQualifiedName]
+                DataCore.projectDeclarationIndex.getTypeDeclaration(fullyQualifiedName)
             }
 
     private fun getNestedTypeName(
@@ -183,20 +184,34 @@ internal object TypeResolver {
             ?: "$JAVA_LANG_PACKAGE.$name".takeIf { TypeUtil.isTypeAvailable(it) }
     }
 
+    /**
+     * Returns classes, interfaces, objects and type aliases declared in the files by fully qualified name. When more
+     * types have the same fully qualified name (e.g. in different source sets), the first class is used, then the first
+     * interface, object and type alias.
+     */
+    internal fun getTypesByFullyQualifiedName(files: List<KoFileDeclaration>): Map<String, KoBaseDeclaration> =
+        buildMap {
+            val types =
+                files.flatMap { it.classes(includeNested = true, includeLocal = false) } +
+                    files.flatMap { it.interfaces(includeNested = true) } +
+                    files.flatMap { it.objects(includeNested = true) } +
+                    files.flatMap { it.typeAliases }
+
+            types.forEach { type ->
+                (type as? KoFullyQualifiedNameProvider)
+                    ?.fullyQualifiedName
+                    ?.let { putIfAbsent(it, type) }
+            }
+        }
+
     /*
-     * Types declared in the file. They are cached in the user data of the file, because the containing file
-     * declaration is created again for every declaration.
+     * Types declared in the file. They are cached in the user data of the file, so they are computed once for the file
+     * and released from memory together with the file.
      */
     private fun getFileTypes(containingFile: KoFileDeclaration): Map<String, KoBaseDeclaration> {
         val ktFile = (containingFile as KoFileDeclarationCore).ktFile
 
         return ktFile.getUserData(fileTypesKey)
-            ?: DataCore
-                .associateByFullyQualifiedName(
-                    containingFile.classes(includeNested = true, includeLocal = false) +
-                        containingFile.interfaces(includeNested = true) +
-                        containingFile.objects(includeNested = true) +
-                        containingFile.typeAliases,
-                ).also { ktFile.putUserData(fileTypesKey, it) }
+            ?: getTypesByFullyQualifiedName(listOf(containingFile)).also { ktFile.putUserData(fileTypesKey, it) }
     }
 }

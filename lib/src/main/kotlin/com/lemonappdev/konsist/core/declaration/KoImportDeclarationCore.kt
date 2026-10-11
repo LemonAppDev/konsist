@@ -5,7 +5,6 @@ import com.lemonappdev.konsist.api.declaration.KoImportAliasDeclaration
 import com.lemonappdev.konsist.api.declaration.KoImportDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoKotlinTypeDeclaration
 import com.lemonappdev.konsist.api.provider.KoDeclarationCastProvider
-import com.lemonappdev.konsist.api.provider.KoFullyQualifiedNameProvider
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
 import com.lemonappdev.konsist.core.cache.KoPropertyCache
 import com.lemonappdev.konsist.core.declaration.type.KoKotlinTypeDeclarationCore
@@ -95,11 +94,7 @@ internal class KoImportDeclarationCore private constructor(
         get() =
             KoPropertyCache.getOrCompute(cachedSourceDeclaration, { cachedSourceDeclaration = it }) {
                 (
-                    DataCore.typesByFullyQualifiedName[name]
-                        ?: DataCore
-                            .declarations
-                            .filterIsInstance<KoFullyQualifiedNameProvider>()
-                            .firstOrNull { it.fullyQualifiedName == name }
+                    DataCore.projectDeclarationIndex.getDeclaration(name)
                         ?: getKotlinType(name)
                         ?: KoExternalDeclarationCore.getInstance(name.substringAfterLast("."), name, ktImportDirective)
                 )

@@ -11,15 +11,21 @@ import com.lemonappdev.konsist.api.provider.KoNameProvider
 import com.lemonappdev.konsist.api.verify.KoAssertScope
 import com.lemonappdev.konsist.core.architecture.validator.ascii.AsciiTreeCreator
 import com.lemonappdev.konsist.core.architecture.validator.ascii.AsciiTreeNode
+import com.lemonappdev.konsist.core.declaration.KoFileDeclarationCore
 import com.lemonappdev.konsist.core.exception.KoAssertionFailedException
 import com.lemonappdev.konsist.core.exception.KoException
 import com.lemonappdev.konsist.core.exception.KoInternalException
 import com.lemonappdev.konsist.core.exception.KoPreconditionFailedException
 import com.lemonappdev.konsist.core.provider.KoValueProviderCore
 import com.lemonappdev.konsist.core.util.HyperlinkUtil
+import org.jetbrains.kotlin.com.intellij.openapi.util.Key
 import org.jetbrains.kotlin.psi.KtEscapeStringTemplateEntry
 import org.jetbrains.kotlin.psi.KtStringTemplateExpression
 import org.jetbrains.kotlin.psi.psiUtil.collectDescendantsOfType
+
+private const val SUPPRESS_ANNOTATION_NAME = "Suppress"
+
+private val containsSuppressKey: Key<Boolean> = Key.create("KoContainsSuppress")
 
 internal fun <E : KoBaseProvider> List<E?>.assert(
     strict: Boolean,
@@ -144,13 +150,38 @@ private fun <E : KoBaseProvider> checkIfAnnotatedWithSuppress(
                     (it.name == "Suppress" && it.hasTextContaining("\"konsist.$suppressName\"")) ||
                         it.hasTextContaining("\"$suppressName\"")
                 }
-        }.forEach { declarations[it] = checkIfDeclarationIsAnnotatedWithSuppress(it as KoBaseDeclaration, suppressNames) }
+        }.forEach {
+            declarations[it] =
+                isInFileContainingSuppress(it) && checkIfDeclarationIsAnnotatedWithSuppress(it as KoBaseDeclaration, suppressNames)
+        }
 
     val withoutSuppress = mutableListOf<E>()
 
     declarations.forEach { if (!it.value) withoutSuppress.add(it.key) }
 
     return withoutSuppress
+}
+
+/*
+ * Declaration can be suppressed only when its file contains the `Suppress` annotation, so annotations of declarations
+ * from other files (usually most of the files) are not checked. The result is stored in the user data of the file.
+ */
+private fun isInFileContainingSuppress(declaration: KoBaseProvider): Boolean {
+    var file = declaration
+
+    // File declaration is the last containing declaration (its containing declaration is the file itself)
+    while (file !is KoFileDeclaration) {
+        file = (file as? KoContainingDeclarationProvider)?.containingDeclaration ?: return true
+    }
+
+    val ktFile = (file as? KoFileDeclarationCore)?.ktFile ?: return true
+
+    // File content can be a rope (e.g. `ImmutableText`) with slow access to characters, so it is converted to string
+    return ktFile.getUserData(containsSuppressKey)
+        ?: ktFile.viewProvider.contents
+            .toString()
+            .contains(SUPPRESS_ANNOTATION_NAME)
+            .also { ktFile.putUserData(containsSuppressKey, it) }
 }
 
 private fun checkIfDeclarationIsAnnotatedWithSuppress(

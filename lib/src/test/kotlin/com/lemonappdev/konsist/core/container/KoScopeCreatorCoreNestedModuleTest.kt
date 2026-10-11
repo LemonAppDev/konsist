@@ -14,6 +14,7 @@ import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.parallel.Isolated
+import java.io.File
 
 /**
  * Project with parent module that has its own source sets ("feature") and nested child module ("feature/payment").
@@ -27,14 +28,19 @@ class KoScopeCreatorCoreNestedModuleTest {
     fun setUp() {
         // KoFileDeclarationProvider must be mocked before PathProvider, because its init block verifies project root path
         mockkObject(KoFileDeclarationProvider)
-        coEvery { KoFileDeclarationProvider.getKoFileDeclarations() } returns
+        // Provider filters files before parsing them
+        coEvery { KoFileDeclarationProvider.getKoFileDeclarations(any()) } answers {
+            val predicate = firstArg<(File) -> Boolean>()
+
             listOf(
                 FEATURE_MAIN,
                 FEATURE_TEST,
                 PAYMENT_MAIN,
                 PAYMENT_TEST,
                 APP_MAIN,
-            ).map { createKoFile(it) }
+            ).filter { predicate(File(it)) }
+                .map { createKoFile(it) }
+        }
 
         mockkObject(PathProvider)
         every { PathProvider.rootProjectPath } returns PROJECT_ROOT_PATH
