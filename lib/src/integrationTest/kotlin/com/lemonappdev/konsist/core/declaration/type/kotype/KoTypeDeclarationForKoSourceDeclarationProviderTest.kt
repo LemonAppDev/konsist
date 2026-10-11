@@ -18,6 +18,7 @@ import com.lemonappdev.konsist.testdata.FixtureObject
 import com.lemonappdev.konsist.testdata.FixtureObjectWithInitializer
 import com.lemonappdev.konsist.testdata.FixtureParentClassWithNestedDeclarations
 import com.lemonappdev.konsist.testdata.FixtureType
+import com.lemonappdev.konsist.testdata.testpackage.Type
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.amshove.kluent.shouldBeInstanceOf
@@ -411,6 +412,38 @@ class KoTypeDeclarationForKoSourceDeclarationProviderTest {
                     null,
                     Result::class,
                     "com.fixturepackage.Result",
+                ),
+                arguments(
+                    "class-type-with-kotlin-type-name-from-the-same-package",
+                    KoClassDeclaration::class,
+                    KoKotlinTypeDeclaration::class,
+                    null,
+                    Result::class,
+                    "com.lemonappdev.konsist.testdata.Result",
+                ),
+                arguments(
+                    "class-type-with-kotlin-type-name-from-wildcard-import",
+                    KoClassDeclaration::class,
+                    KoKotlinTypeDeclaration::class,
+                    null,
+                    Pair::class,
+                    "com.lemonappdev.konsist.testdata.Pair",
+                ),
+                arguments(
+                    "class-type-with-java-lang-type-name-from-the-same-package",
+                    KoClassDeclaration::class,
+                    KoExternalDeclaration::class,
+                    null,
+                    Module::class,
+                    "com.lemonappdev.konsist.testdata.Module",
+                ),
+                arguments(
+                    "class-type-from-the-same-package-and-wildcard-import",
+                    KoClassDeclaration::class,
+                    KoExternalDeclaration::class,
+                    null,
+                    Type::class,
+                    "com.lemonappdev.konsist.testdata.Type",
                 ),
                 arguments(
                     "kotlin-collection-type-with-java-util-wildcard-import",

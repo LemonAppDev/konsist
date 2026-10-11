@@ -68,8 +68,7 @@ internal interface KoDeclarationCastProviderCore :
 
     override val isKotlinType: Boolean
         get() =
-            koDeclarationCastProviderDeclaration is KoKotlinTypeDeclaration ||
-                koDeclarationCastProviderDeclaration?.name?.let { TypeUtil.isKotlinType(it) } == true
+            koDeclarationCastProviderDeclaration is KoKotlinTypeDeclaration
 
     override val isTypeParameter: Boolean
         get() = koDeclarationCastProviderDeclaration is KoTypeParameterDeclaration

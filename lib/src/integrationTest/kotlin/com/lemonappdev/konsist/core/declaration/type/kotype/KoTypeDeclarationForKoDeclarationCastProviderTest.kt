@@ -1504,6 +1504,26 @@ class KoTypeDeclarationForKoDeclarationCastProviderTest {
         }
     }
 
+    @Test
+    fun `class-type-with-kotlin-type-name`() {
+        // given
+        val sut =
+            getSnippetFile("class-type-with-kotlin-type-name")
+                .classes()
+                .first()
+                .primaryConstructor
+                ?.parameters
+                ?.first()
+                ?.type
+
+        // then
+        assertSoftly(sut) {
+            it?.isClass shouldBeEqualTo true
+            it?.isKotlinType shouldBeEqualTo false
+            it?.asKotlinTypeDeclaration() shouldBeEqualTo null
+        }
+    }
+
     private fun getSnippetFile(fileName: String) =
         TestSnippetProvider.getSnippetKoScope(
             "core/declaration/type/kotype/snippet/forkodeclarationcastprovider/",
