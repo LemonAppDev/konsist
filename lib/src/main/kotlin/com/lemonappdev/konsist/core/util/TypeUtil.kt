@@ -305,12 +305,6 @@ object TypeUtil {
 
     internal fun isKotlinTypeFullyQualifiedName(fullyQualifiedName: String): Boolean = fullyQualifiedName in kotlinTypeNames
 
-    internal fun isKotlinType(typeName: String): Boolean {
-        val bareTypeName = getBareType(typeName)
-
-        return kotlinTypes.any { it.endsWith(".$bareTypeName") }
-    }
-
     internal fun isKotlinBasicType(typeName: String): Boolean {
         val bareTypeName = getBareType(typeName)
 

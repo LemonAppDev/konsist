@@ -21,11 +21,9 @@ import org.jetbrains.kotlin.com.intellij.openapi.util.Key
  *
  * The qualified name (e.g. `RecyclerView.ViewHolder`) is resolved by its first segment (`RecyclerView`).
  *
- * Types from the same package and wildcard imports are searched in the containing file and on the classpath first.
- * Project declarations are searched only when the type is not found there and it is not a default import type,
- * so resolving e.g. `String` or `Deprecated` does not parse project files. As a result, a project type which
- * has the name of a default import type (e.g. `Result`) is resolved only when it is declared in the same file or it is
- * available on the classpath. Only project files of the packages that can contain the type are parsed (see
+ * Types from the same package and wildcard imports are searched in the containing file, on the classpath and in the
+ * project before default imports, so a project type which has the name of a default import type (e.g. `Result`) is
+ * resolved to the project type. Only project files of the packages that can contain the type are parsed (see
  * `ProjectDeclarationIndex`).
  */
 internal object TypeResolver {
@@ -91,9 +89,12 @@ internal object TypeResolver {
         val fullyQualifiedName =
             getNestedTypeName(firstSegment, containingFile, containingDeclaration)
                 ?: getImportedTypeName(firstSegment, containingFile)
-                ?: candidates.firstOrNull { it in getFileTypes(containingFile) || TypeUtil.isTypeAvailable(it) }
+                ?: candidates.firstOrNull {
+                    it in getFileTypes(containingFile) ||
+                        TypeUtil.isTypeAvailable(it) ||
+                        DataCore.projectDeclarationIndex.getTypeDeclaration(it) != null
+                }
                 ?: getDefaultImportedTypeName(firstSegment)
-                ?: candidates.firstOrNull { DataCore.projectDeclarationIndex.getTypeDeclaration(it) != null }
 
         return when {
             fullyQualifiedName != null -> fullyQualifiedName + remainingSegments
