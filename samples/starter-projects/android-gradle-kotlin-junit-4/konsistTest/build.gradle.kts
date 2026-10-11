@@ -1,3 +1,4 @@
+import org.gradle.api.tasks.testing.logging.TestExceptionFormat
 import org.gradle.kotlin.dsl.androidTestImplementation
 import org.gradle.kotlin.dsl.testImplementation
 
@@ -36,4 +37,14 @@ dependencies {
 
     // Add Konsist dependency
     testImplementation(libs.konsist)
+}
+
+// Optional block to show Konsist assertion messages (invalid declarations, file links, reasons) in the command line.
+// Gradle uses the SHORT exception format by default, which prints only the exception class name, so the message is
+// visible only in the HTML test report. Stack traces are hidden, because they point to Konsist internals.
+tasks.withType<Test>().configureEach {
+    testLogging {
+        exceptionFormat = TestExceptionFormat.FULL
+        showStackTraces = false
+    }
 }
