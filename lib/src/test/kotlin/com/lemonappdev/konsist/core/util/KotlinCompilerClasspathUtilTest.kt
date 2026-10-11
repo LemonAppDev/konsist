@@ -16,10 +16,13 @@ class KotlinCompilerClasspathUtilTest {
     ) {
         // given
         val compilerJar = createCompilerJar(tempDir, "kotlin-compiler-embeddable.jar")
-        val classLoader = URLClassLoader(arrayOf(compilerJar.toURI().toURL()), null)
 
         // when
-        val sut = KotlinCompilerClasspathUtil.getConflictMessage(classLoader)
+        // Class loader must be closed, otherwise opened jar can't be deleted on Windows
+        val sut =
+            URLClassLoader(arrayOf(compilerJar.toURI().toURL()), null).use {
+                KotlinCompilerClasspathUtil.getConflictMessage(it)
+            }
 
         // then
         sut.shouldBeNull()
@@ -47,10 +50,13 @@ class KotlinCompilerClasspathUtilTest {
             createNewFile()
         }
         val urls = listOf(compilerJar, compilerEmbeddableJar, compilerClassesDir).map { it.toURI().toURL() }
-        val classLoader = URLClassLoader(urls.toTypedArray(), null)
 
         // when
-        val sut = KotlinCompilerClasspathUtil.getConflictMessage(classLoader)
+        // Class loader must be closed, otherwise opened jars can't be deleted on Windows
+        val sut =
+            URLClassLoader(urls.toTypedArray(), null).use {
+                KotlinCompilerClasspathUtil.getConflictMessage(it)
+            }
 
         // then
         sut shouldBeEqualTo
