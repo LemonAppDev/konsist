@@ -8,7 +8,7 @@ import com.lemonappdev.konsist.api.verify.assertTrue
 class ArchitectureTestSnippets {
     fun `4 layer architecture has correct dependencies`() {
         Konsist
-            .scopeFromProject()
+            .scopeFromProduction()
             .assertArchitecture {
                 val presentation = Layer("Presentation", "com.myapp.presentation..")
                 val business = Layer("Business", "com.myapp.business..")
@@ -19,6 +19,22 @@ class ArchitectureTestSnippets {
                 business.dependsOn(persistence)
                 persistence.dependsOn(database)
                 database.dependsOnNothing()
+            }
+    }
+
+    fun `hexagonal architecture has correct dependencies`() {
+        Konsist
+            .scopeFromProduction()
+            .assertArchitecture {
+                val domain = Layer("Domain", "com.myapp.domain..")
+                val application = Layer("Application", "com.myapp.application..")
+                val inputAdapter = Layer("InputAdapter", "com.myapp.adapter.input..")
+                val outputAdapter = Layer("OutputAdapter", "com.myapp.adapter.output..")
+
+                domain.dependsOnNothing()
+                application.dependsOn(domain)
+                inputAdapter.dependsOn(application, domain)
+                outputAdapter.dependsOn(application, domain)
             }
     }
 
