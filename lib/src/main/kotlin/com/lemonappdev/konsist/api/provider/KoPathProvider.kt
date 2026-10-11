@@ -8,7 +8,7 @@ interface KoPathProvider : KoBaseProvider {
      * File path of the declaration or path of the file.
      * Uses OS-specific separators (`\` on Windows, `/` on other OSes),
      * e.g. `C:\project\app\src\main\kotlin\SampleClass.kt` on Windows.
-     * To check path portably, use [resideInPath] which accepts both `/` and `\` separators.
+     * To check path portably, use [residesInPath] which accepts both `/` and `\` separators.
      */
     val path: String
 
@@ -16,7 +16,7 @@ interface KoPathProvider : KoBaseProvider {
      * Project file path of the declaration or root project path of the file.
      * Uses OS-specific separators (`\` on Windows, `/` on other OSes),
      * e.g. `\app\src\main\kotlin\SampleClass.kt` on Windows.
-     * To check path portably, use [resideInPath] which accepts both `/` and `\` separators.
+     * To check path portably, use [residesInPath] which accepts both `/` and `\` separators.
      */
     val projectPath: String
 
@@ -29,6 +29,21 @@ interface KoPathProvider : KoBaseProvider {
      *                    If set to `false` (default), the `path` parameter represents a relative path.
      * @return `true` if the declaration resides in the specified (file) path, `false` otherwise.
      */
+    fun residesInPath(
+        path: String,
+        absolutePath: Boolean = false,
+    ): Boolean
+
+    /**
+     * Determines whether the declaration (or file) resides in the specified path.
+     *
+     * @param path the (file) path to check. Both `/` and `\` separators are accepted on all OSes.
+     * @param absolutePath Flag indicating whether the provided path is an absolute path.
+     *                    If set to `true`, the `path` parameter represents an absolute path.
+     *                    If set to `false` (default), the `path` parameter represents a relative path.
+     * @return `true` if the declaration resides in the specified (file) path, `false` otherwise.
+     */
+    @Deprecated("Will be removed in version 1.0.0-rc1", ReplaceWith("residesInPath(path, absolutePath)"))
     fun resideInPath(
         path: String,
         absolutePath: Boolean = false,

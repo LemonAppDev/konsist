@@ -57,10 +57,10 @@ class KoEnumConstantDeclarationForKoPathProviderTest {
 
         // then
         assertSoftly(sut) {
-            resideInPath("..snippet..", true) shouldBeEqualTo true
-            resideInPath("..koenumconstant/snippet..", true) shouldBeEqualTo true
-            resideInPath("..koenumconstant..enum-const-reside-in-file-path.kt", true) shouldBeEqualTo true
-            resideInPath("koenumconstant/snippet/", true) shouldBeEqualTo false
+            residesInPath("..snippet..", true) shouldBeEqualTo true
+            residesInPath("..koenumconstant/snippet..", true) shouldBeEqualTo true
+            residesInPath("..koenumconstant..enum-const-reside-in-file-path.kt", true) shouldBeEqualTo true
+            residesInPath("koenumconstant/snippet/", true) shouldBeEqualTo false
         }
     }
 
@@ -76,10 +76,10 @@ class KoEnumConstantDeclarationForKoPathProviderTest {
 
         // then
         assertSoftly(sut) {
-            resideInPath("..snippet..", false) shouldBeEqualTo true
-            resideInPath("..koenumconstant/snippet..", false) shouldBeEqualTo true
-            resideInPath("..koenumconstant..enum-const-reside-in-project-file-path.kt", false) shouldBeEqualTo true
-            resideInPath("koenumconstant/snippet/", false) shouldBeEqualTo false
+            residesInPath("..snippet..", false) shouldBeEqualTo true
+            residesInPath("..koenumconstant/snippet..", false) shouldBeEqualTo true
+            residesInPath("..koenumconstant..enum-const-reside-in-project-file-path.kt", false) shouldBeEqualTo true
+            residesInPath("koenumconstant/snippet/", false) shouldBeEqualTo false
         }
     }
 

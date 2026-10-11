@@ -13,11 +13,11 @@ class KoSourceSetProviderListExtTest {
         val sourceSetName = "sourceSetName"
         val declaration1: KoSourceSetProvider =
             mockk {
-                every { resideInSourceSet(sourceSetName) } returns true
+                every { residesInSourceSet(sourceSetName) } returns true
             }
         val declaration2: KoSourceSetProvider =
             mockk {
-                every { resideInSourceSet(sourceSetName) } returns false
+                every { residesInSourceSet(sourceSetName) } returns false
             }
         val declarations = listOf(declaration1, declaration2)
 
@@ -34,11 +34,11 @@ class KoSourceSetProviderListExtTest {
         val sourceSetName = "sourceSetName"
         val declaration1: KoSourceSetProvider =
             mockk {
-                every { resideInSourceSet(sourceSetName) } returns true
+                every { residesInSourceSet(sourceSetName) } returns true
             }
         val declaration2: KoSourceSetProvider =
             mockk {
-                every { resideInSourceSet(sourceSetName) } returns false
+                every { residesInSourceSet(sourceSetName) } returns false
             }
         val declarations = listOf(declaration1, declaration2)
 
@@ -55,11 +55,11 @@ class KoSourceSetProviderListExtTest {
         val sourceSetName = "sourceSetName"
         val declaration1: KoSourceSetProvider =
             mockk {
-                every { resideInSourceSet(sourceSetName) } returns true
+                every { residesInSourceSet(sourceSetName) } returns true
             }
         val declaration2: KoSourceSetProvider =
             mockk {
-                every { resideInSourceSet(sourceSetName) } returns false
+                every { residesInSourceSet(sourceSetName) } returns false
             }
         val declarations = listOf(declaration1, declaration2)
 
@@ -76,11 +76,11 @@ class KoSourceSetProviderListExtTest {
         val sourceSetName = "sourceSetName"
         val declaration1: KoSourceSetProvider =
             mockk {
-                every { resideInSourceSet(sourceSetName) } returns true
+                every { residesInSourceSet(sourceSetName) } returns true
             }
         val declaration2: KoSourceSetProvider =
             mockk {
-                every { resideInSourceSet(sourceSetName) } returns false
+                every { residesInSourceSet(sourceSetName) } returns false
             }
         val declarations = listOf(declaration1, declaration2)
 
@@ -97,11 +97,11 @@ class KoSourceSetProviderListExtTest {
         val sourceSetName = "sourceSetName"
         val declaration1: KoSourceSetProvider =
             mockk {
-                every { resideInSourceSet(sourceSetName) } returns true
+                every { residesInSourceSet(sourceSetName) } returns true
             }
         val declaration2: KoSourceSetProvider =
             mockk {
-                every { resideInSourceSet(sourceSetName) } returns false
+                every { residesInSourceSet(sourceSetName) } returns false
             }
         val declarations = listOf(declaration1, declaration2)
 
@@ -119,18 +119,18 @@ class KoSourceSetProviderListExtTest {
         val sourceSetName2 = "sourceSetName2"
         val declaration1: KoSourceSetProvider =
             mockk {
-                every { resideInSourceSet(sourceSetName1) } returns true
-                every { resideInSourceSet(sourceSetName2) } returns false
+                every { residesInSourceSet(sourceSetName1) } returns true
+                every { residesInSourceSet(sourceSetName2) } returns false
             }
         val declaration2: KoSourceSetProvider =
             mockk {
-                every { resideInSourceSet(sourceSetName1) } returns false
-                every { resideInSourceSet(sourceSetName2) } returns true
+                every { residesInSourceSet(sourceSetName1) } returns false
+                every { residesInSourceSet(sourceSetName2) } returns true
             }
         val declaration3: KoSourceSetProvider =
             mockk {
-                every { resideInSourceSet(sourceSetName1) } returns false
-                every { resideInSourceSet(sourceSetName2) } returns false
+                every { residesInSourceSet(sourceSetName1) } returns false
+                every { residesInSourceSet(sourceSetName2) } returns false
             }
         val declarations = listOf(declaration1, declaration2, declaration3)
 
@@ -148,18 +148,18 @@ class KoSourceSetProviderListExtTest {
         val sourceSetName2 = "sourceSetName2"
         val declaration1: KoSourceSetProvider =
             mockk {
-                every { resideInSourceSet(sourceSetName1) } returns true
-                every { resideInSourceSet(sourceSetName2) } returns false
+                every { residesInSourceSet(sourceSetName1) } returns true
+                every { residesInSourceSet(sourceSetName2) } returns false
             }
         val declaration2: KoSourceSetProvider =
             mockk {
-                every { resideInSourceSet(sourceSetName1) } returns false
-                every { resideInSourceSet(sourceSetName2) } returns true
+                every { residesInSourceSet(sourceSetName1) } returns false
+                every { residesInSourceSet(sourceSetName2) } returns true
             }
         val declaration3: KoSourceSetProvider =
             mockk {
-                every { resideInSourceSet(sourceSetName1) } returns false
-                every { resideInSourceSet(sourceSetName2) } returns false
+                every { residesInSourceSet(sourceSetName1) } returns false
+                every { residesInSourceSet(sourceSetName2) } returns false
             }
         val declarations = listOf(declaration1, declaration2, declaration3)
         val sourceSets = listOf(sourceSetName1, sourceSetName2)
@@ -178,18 +178,18 @@ class KoSourceSetProviderListExtTest {
         val sourceSetName2 = "sourceSetName2"
         val declaration1: KoSourceSetProvider =
             mockk {
-                every { resideInSourceSet(sourceSetName1) } returns true
-                every { resideInSourceSet(sourceSetName2) } returns false
+                every { residesInSourceSet(sourceSetName1) } returns true
+                every { residesInSourceSet(sourceSetName2) } returns false
             }
         val declaration2: KoSourceSetProvider =
             mockk {
-                every { resideInSourceSet(sourceSetName1) } returns false
-                every { resideInSourceSet(sourceSetName2) } returns true
+                every { residesInSourceSet(sourceSetName1) } returns false
+                every { residesInSourceSet(sourceSetName2) } returns true
             }
         val declaration3: KoSourceSetProvider =
             mockk {
-                every { resideInSourceSet(sourceSetName1) } returns false
-                every { resideInSourceSet(sourceSetName2) } returns false
+                every { residesInSourceSet(sourceSetName1) } returns false
+                every { residesInSourceSet(sourceSetName2) } returns false
             }
         val declarations = listOf(declaration1, declaration2, declaration3)
         val sourceSets = setOf(sourceSetName1, sourceSetName2)
@@ -207,11 +207,11 @@ class KoSourceSetProviderListExtTest {
         val sourceSetName = "sourceSetName"
         val declaration1: KoSourceSetProvider =
             mockk {
-                every { resideInSourceSet(sourceSetName) } returns true
+                every { residesInSourceSet(sourceSetName) } returns true
             }
         val declaration2: KoSourceSetProvider =
             mockk {
-                every { resideInSourceSet(sourceSetName) } returns false
+                every { residesInSourceSet(sourceSetName) } returns false
             }
         val declarations = listOf(declaration1, declaration2)
 
@@ -229,18 +229,18 @@ class KoSourceSetProviderListExtTest {
         val sourceSetName2 = "sourceSetName2"
         val declaration1: KoSourceSetProvider =
             mockk {
-                every { resideInSourceSet(sourceSetName1) } returns true
-                every { resideInSourceSet(sourceSetName2) } returns false
+                every { residesInSourceSet(sourceSetName1) } returns true
+                every { residesInSourceSet(sourceSetName2) } returns false
             }
         val declaration2: KoSourceSetProvider =
             mockk {
-                every { resideInSourceSet(sourceSetName1) } returns false
-                every { resideInSourceSet(sourceSetName2) } returns true
+                every { residesInSourceSet(sourceSetName1) } returns false
+                every { residesInSourceSet(sourceSetName2) } returns true
             }
         val declaration3: KoSourceSetProvider =
             mockk {
-                every { resideInSourceSet(sourceSetName1) } returns false
-                every { resideInSourceSet(sourceSetName2) } returns false
+                every { residesInSourceSet(sourceSetName1) } returns false
+                every { residesInSourceSet(sourceSetName2) } returns false
             }
         val declarations = listOf(declaration1, declaration2, declaration3)
 
@@ -258,18 +258,18 @@ class KoSourceSetProviderListExtTest {
         val sourceSetName2 = "sourceSetName2"
         val declaration1: KoSourceSetProvider =
             mockk {
-                every { resideInSourceSet(sourceSetName1) } returns true
-                every { resideInSourceSet(sourceSetName2) } returns false
+                every { residesInSourceSet(sourceSetName1) } returns true
+                every { residesInSourceSet(sourceSetName2) } returns false
             }
         val declaration2: KoSourceSetProvider =
             mockk {
-                every { resideInSourceSet(sourceSetName1) } returns false
-                every { resideInSourceSet(sourceSetName2) } returns true
+                every { residesInSourceSet(sourceSetName1) } returns false
+                every { residesInSourceSet(sourceSetName2) } returns true
             }
         val declaration3: KoSourceSetProvider =
             mockk {
-                every { resideInSourceSet(sourceSetName1) } returns false
-                every { resideInSourceSet(sourceSetName2) } returns false
+                every { residesInSourceSet(sourceSetName1) } returns false
+                every { residesInSourceSet(sourceSetName2) } returns false
             }
         val declarations = listOf(declaration1, declaration2, declaration3)
         val sourceSets = listOf(sourceSetName1, sourceSetName2)
@@ -288,18 +288,18 @@ class KoSourceSetProviderListExtTest {
         val sourceSetName2 = "sourceSetName2"
         val declaration1: KoSourceSetProvider =
             mockk {
-                every { resideInSourceSet(sourceSetName1) } returns true
-                every { resideInSourceSet(sourceSetName2) } returns false
+                every { residesInSourceSet(sourceSetName1) } returns true
+                every { residesInSourceSet(sourceSetName2) } returns false
             }
         val declaration2: KoSourceSetProvider =
             mockk {
-                every { resideInSourceSet(sourceSetName1) } returns false
-                every { resideInSourceSet(sourceSetName2) } returns true
+                every { residesInSourceSet(sourceSetName1) } returns false
+                every { residesInSourceSet(sourceSetName2) } returns true
             }
         val declaration3: KoSourceSetProvider =
             mockk {
-                every { resideInSourceSet(sourceSetName1) } returns false
-                every { resideInSourceSet(sourceSetName2) } returns false
+                every { residesInSourceSet(sourceSetName1) } returns false
+                every { residesInSourceSet(sourceSetName2) } returns false
             }
         val declarations = listOf(declaration1, declaration2, declaration3)
         val sourceSets = setOf(sourceSetName1, sourceSetName2)

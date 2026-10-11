@@ -295,7 +295,7 @@ private fun Layer.isDependentOn(
     val isDependentOn =
         layerFiles
             .flatMap { it.imports }
-            .any { import -> LocationUtil.resideInLocation(otherLayer.rootPackage, import.name) }
+            .any { import -> LocationUtil.residesInLocation(otherLayer.rootPackage, import.name) }
 
     return isDependentOn
 }
@@ -306,7 +306,7 @@ private fun Layer.getDependentOnFiles(
 ): Map<KoFileDeclaration, List<KoImportDeclaration>> =
     files
         .withPackage(rootPackage)
-        .getFailedImports { import -> LocationUtil.resideInLocation(otherLayer.rootPackage, import.name) }
+        .getFailedImports { import -> LocationUtil.residesInLocation(otherLayer.rootPackage, import.name) }
 
 private fun Layer.getDependentOnNotAllowedLayerFiles(
     notAllowedLayer: Layer,
@@ -317,10 +317,10 @@ private fun Layer.getDependentOnNotAllowedLayerFiles(
         .withPackage(rootPackage)
         .getFailedImports { import ->
             // Import is not part of layer
-            !LocationUtil.resideInLocation(rootPackage, import.name) &&
+            !LocationUtil.residesInLocation(rootPackage, import.name) &&
                 // Import is not part of allowed layer
-                allowedLayers.none { LocationUtil.resideInLocation(it.rootPackage, import.name) } &&
-                LocationUtil.resideInLocation(notAllowedLayer.rootPackage, import.name)
+                allowedLayers.none { LocationUtil.residesInLocation(it.rootPackage, import.name) } &&
+                LocationUtil.residesInLocation(notAllowedLayer.rootPackage, import.name)
         }
 
 private fun Layer.getDependentOnAnyLayerFiles(
@@ -331,9 +331,9 @@ private fun Layer.getDependentOnAnyLayerFiles(
         .withPackage(rootPackage)
         .getFailedImports { import ->
             // Import is not part of layer
-            !LocationUtil.resideInLocation(rootPackage, import.name) &&
+            !LocationUtil.residesInLocation(rootPackage, import.name) &&
                 // Import is part of other layer
-                layerDependencies.layers.any { LocationUtil.resideInLocation(it.rootPackage, import.name) }
+                layerDependencies.layers.any { LocationUtil.residesInLocation(it.rootPackage, import.name) }
         }
 
 /**

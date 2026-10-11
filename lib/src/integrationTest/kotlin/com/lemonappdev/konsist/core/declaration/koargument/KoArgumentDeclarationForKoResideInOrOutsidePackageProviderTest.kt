@@ -19,7 +19,7 @@ class KoArgumentDeclarationForKoResideInOrOutsidePackageProviderTest {
                 .first()
 
         // then
-        sut.resideInPackage("com") shouldBeEqualTo false
+        sut.residesInPackage("com") shouldBeEqualTo false
     }
 
     @Test
@@ -33,7 +33,7 @@ class KoArgumentDeclarationForKoResideInOrOutsidePackageProviderTest {
                 .first()
 
         // then
-        sut.resideInPackage("com..") shouldBeEqualTo true
+        sut.residesInPackage("com..") shouldBeEqualTo true
     }
 
     @Test
@@ -47,7 +47,7 @@ class KoArgumentDeclarationForKoResideInOrOutsidePackageProviderTest {
                 .first()
 
         // then
-        sut.resideOutsidePackage("com..") shouldBeEqualTo false
+        sut.residesOutsidePackage("com..") shouldBeEqualTo false
     }
 
     @Test
@@ -61,7 +61,7 @@ class KoArgumentDeclarationForKoResideInOrOutsidePackageProviderTest {
                 .first()
 
         // then
-        sut.resideOutsidePackage("com") shouldBeEqualTo true
+        sut.residesOutsidePackage("com") shouldBeEqualTo true
     }
 
     @Test
@@ -75,7 +75,7 @@ class KoArgumentDeclarationForKoResideInOrOutsidePackageProviderTest {
                 .first()
 
         // then
-        sut.resideInPackage("com") shouldBeEqualTo false
+        sut.residesInPackage("com") shouldBeEqualTo false
     }
 
     @Test
@@ -89,7 +89,7 @@ class KoArgumentDeclarationForKoResideInOrOutsidePackageProviderTest {
                 .first()
 
         // then
-        sut.resideInPackage("com..") shouldBeEqualTo true
+        sut.residesInPackage("com..") shouldBeEqualTo true
     }
 
     @Test
@@ -103,7 +103,7 @@ class KoArgumentDeclarationForKoResideInOrOutsidePackageProviderTest {
                 .first()
 
         // then
-        sut.resideOutsidePackage("com..") shouldBeEqualTo false
+        sut.residesOutsidePackage("com..") shouldBeEqualTo false
     }
 
     @Test
@@ -117,7 +117,7 @@ class KoArgumentDeclarationForKoResideInOrOutsidePackageProviderTest {
                 .first()
 
         // then
-        sut.resideOutsidePackage("com") shouldBeEqualTo true
+        sut.residesOutsidePackage("com") shouldBeEqualTo true
     }
 
     private fun getSnippetFile(fileName: String) =

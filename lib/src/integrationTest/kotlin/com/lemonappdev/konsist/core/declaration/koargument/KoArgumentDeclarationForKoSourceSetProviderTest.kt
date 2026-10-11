@@ -1,6 +1,6 @@
 package com.lemonappdev.konsist.core.declaration.koargument
 
 class KoArgumentDeclarationForKoSourceSetProviderTest {
-    // Konsist koArgument.sourceSetName and koArgument.resideInSourceSet() tests
+    // Konsist koArgument.sourceSetName and koArgument.residesInSourceSet() tests
     // are implemented in the test\konsist-declaration-tester project.
 }

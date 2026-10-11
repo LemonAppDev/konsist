@@ -24,7 +24,7 @@ fun <T : KoSourceSetProvider> List<T>.withSourceSet(names: Collection<String>): 
     filter {
         when {
             names.isEmpty() -> true
-            else -> names.any { sourceSet -> it.resideInSourceSet(sourceSet) }
+            else -> names.any { sourceSet -> it.residesInSourceSet(sourceSet) }
         }
     }
 
@@ -50,6 +50,6 @@ fun <T : KoSourceSetProvider> List<T>.withoutSourceSet(names: Collection<String>
     filterNot {
         when {
             names.isEmpty() -> true
-            else -> names.any { sourceSet -> it.resideInSourceSet(sourceSet) }
+            else -> names.any { sourceSet -> it.residesInSourceSet(sourceSet) }
         }
     }

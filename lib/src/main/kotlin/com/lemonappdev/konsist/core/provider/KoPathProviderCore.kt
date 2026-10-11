@@ -23,13 +23,19 @@ internal interface KoPathProviderCore :
     override val projectPath: String
         get() = PathUtil.getProjectPath(path, PathProvider.rootProjectPath)
 
-    override fun resideInPath(
+    override fun residesInPath(
         path: String,
         absolutePath: Boolean,
     ): Boolean =
         if (absolutePath) {
-            LocationUtil.resideInLocation(path, this.path)
+            LocationUtil.residesInLocation(path, this.path)
         } else {
-            LocationUtil.resideInLocation(path, projectPath)
+            LocationUtil.residesInLocation(path, projectPath)
         }
+
+    @Deprecated("Will be removed in version 1.0.0-rc1", ReplaceWith("residesInPath(path, absolutePath)"))
+    override fun resideInPath(
+        path: String,
+        absolutePath: Boolean,
+    ): Boolean = residesInPath(path, absolutePath)
 }

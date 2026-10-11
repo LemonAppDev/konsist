@@ -21,7 +21,7 @@ fun <T : KoResideInPackageProvider> List<T>.withPackage(names: Collection<String
     filter {
         when {
             names.isEmpty() -> (it as? KoPackageProvider)?.packagee != null
-            else -> names.any { packagee -> it.resideInPackage(packagee) }
+            else -> names.any { packagee -> it.residesInPackage(packagee) }
         }
     }
 
@@ -43,6 +43,6 @@ fun <T : KoResideInPackageProvider> List<T>.withoutPackage(names: Collection<Str
     filter {
         when {
             names.isEmpty() -> (it as? KoPackageProvider)?.packagee == null
-            else -> names.all { packagee -> it.resideOutsidePackage(packagee) }
+            else -> names.all { packagee -> it.residesOutsidePackage(packagee) }
         }
     }

@@ -74,7 +74,7 @@ interface KoTypeDeclaration :
     /**
      * Package of the file where the type is referenced (the use site), not the package where the type is declared,
      * e.g. for `fun Foo.bar()` declared in `com.app`, `receiverType.packagee` is `com.app` even if `Foo` is declared
-     * in `com.lib`. [resideInPackage] and [resideOutsidePackage] check this package too.
+     * in `com.lib`. [residesInPackage] and [residesOutsidePackage] check this package too.
      *
      * To get the package where the type is declared use [sourceDeclaration], e.g.
      * `type.sourceDeclaration?.asClassDeclaration()?.packagee`.

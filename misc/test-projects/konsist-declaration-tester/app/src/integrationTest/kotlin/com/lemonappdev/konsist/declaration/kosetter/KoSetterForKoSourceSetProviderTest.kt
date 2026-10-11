@@ -26,8 +26,8 @@ class KoSetterForKoSourceSetProviderTest {
         // then
         assertSoftly(sut) {
             it?.sourceSetName shouldBeEqualTo MAIN
-            it?.resideInSourceSet(MAIN) shouldBeEqualTo true
-            it?.resideInSourceSet(TEST) shouldBeEqualTo false
+            it?.residesInSourceSet(MAIN) shouldBeEqualTo true
+            it?.residesInSourceSet(TEST) shouldBeEqualTo false
         }
     }
 
@@ -44,8 +44,8 @@ class KoSetterForKoSourceSetProviderTest {
         // then
         assertSoftly(sut) {
             it?.sourceSetName shouldBeEqualTo INTEGRATION_TEST
-            it?.resideInSourceSet(INTEGRATION_TEST) shouldBeEqualTo true
-            it?.resideInSourceSet(TEST) shouldBeEqualTo false
+            it?.residesInSourceSet(INTEGRATION_TEST) shouldBeEqualTo true
+            it?.residesInSourceSet(TEST) shouldBeEqualTo false
         }
     }
 
@@ -62,8 +62,8 @@ class KoSetterForKoSourceSetProviderTest {
         // then
         assertSoftly(sut) {
             it?.sourceSetName shouldBeEqualTo MAIN
-            it?.resideInSourceSet(MAIN) shouldBeEqualTo true
-            it?.resideInSourceSet(TEST) shouldBeEqualTo false
+            it?.residesInSourceSet(MAIN) shouldBeEqualTo true
+            it?.residesInSourceSet(TEST) shouldBeEqualTo false
         }
     }
 
@@ -80,8 +80,8 @@ class KoSetterForKoSourceSetProviderTest {
         // then
         assertSoftly(sut) {
             it?.sourceSetName shouldBeEqualTo TEST
-            it?.resideInSourceSet(TEST) shouldBeEqualTo true
-            it?.resideInSourceSet(INTEGRATION_TEST) shouldBeEqualTo false
+            it?.residesInSourceSet(TEST) shouldBeEqualTo true
+            it?.residesInSourceSet(INTEGRATION_TEST) shouldBeEqualTo false
         }
     }
 
@@ -98,8 +98,8 @@ class KoSetterForKoSourceSetProviderTest {
         // then
         assertSoftly(sut) {
             it?.sourceSetName shouldBeEqualTo MAIN
-            it?.resideInSourceSet(MAIN) shouldBeEqualTo true
-            it?.resideInSourceSet(TEST) shouldBeEqualTo false
+            it?.residesInSourceSet(MAIN) shouldBeEqualTo true
+            it?.residesInSourceSet(TEST) shouldBeEqualTo false
         }
     }
 
@@ -116,8 +116,8 @@ class KoSetterForKoSourceSetProviderTest {
         // then
         assertSoftly(sut) {
             it?.sourceSetName shouldBeEqualTo MAIN
-            it?.resideInSourceSet(MAIN) shouldBeEqualTo true
-            it?.resideInSourceSet(TEST) shouldBeEqualTo false
+            it?.residesInSourceSet(MAIN) shouldBeEqualTo true
+            it?.residesInSourceSet(TEST) shouldBeEqualTo false
         }
     }
 

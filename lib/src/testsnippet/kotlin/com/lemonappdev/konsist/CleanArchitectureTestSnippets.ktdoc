@@ -31,7 +31,7 @@ class CleanArchitectureTestSnippets {
             .scopeFromProject()
             .classes()
             .withNameEndingWith("UseCase")
-            .assertTrue { it.resideInPackage("..domain..usecase..") }
+            .assertTrue { it.residesInPackage("..domain..usecase..") }
     }
 
     fun `classes with 'UseCase' suffix should have single 'public operator' method named 'invoke'`() {
@@ -86,7 +86,7 @@ class CleanArchitectureTestSnippets {
             .scopeFromProject()
             .interfaces()
             .withAnnotationOf(Repository::class)
-            .assertTrue { it.resideInPackage("..data..") }
+            .assertTrue { it.residesInPackage("..data..") }
     }
 
     fun `every UseCase class has test`() {

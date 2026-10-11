@@ -42,7 +42,7 @@ class AndroidTestSnippets {
             .scopeFromProject()
             .classes()
             .withNameEndingWith("Repository")
-            .assertTrue { it.resideInPackage("..repository..") }
+            .assertTrue { it.residesInPackage("..repository..") }
     }
 
     fun `no class should use Android util logging`() {

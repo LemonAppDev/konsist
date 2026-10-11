@@ -25,8 +25,8 @@ class KoVariableDeclarationForKoResideInPackageProviderTest {
 
         // then
         assertSoftly(sut) {
-            resideInPackage("com") shouldBeEqualTo false
-            resideOutsidePackage("com") shouldBeEqualTo true
+            residesInPackage("com") shouldBeEqualTo false
+            residesOutsidePackage("com") shouldBeEqualTo true
         }
     }
 
@@ -41,10 +41,10 @@ class KoVariableDeclarationForKoResideInPackageProviderTest {
 
         // then
         assertSoftly(sut) {
-            resideInPackage("com..") shouldBeEqualTo true
-            resideInPackage("com") shouldBeEqualTo false
-            resideOutsidePackage("com..") shouldBeEqualTo false
-            resideOutsidePackage("com") shouldBeEqualTo true
+            residesInPackage("com..") shouldBeEqualTo true
+            residesInPackage("com") shouldBeEqualTo false
+            residesOutsidePackage("com..") shouldBeEqualTo false
+            residesOutsidePackage("com") shouldBeEqualTo true
         }
     }
 

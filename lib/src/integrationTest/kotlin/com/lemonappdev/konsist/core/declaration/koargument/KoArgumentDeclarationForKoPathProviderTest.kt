@@ -60,10 +60,10 @@ class KoArgumentDeclarationForKoPathProviderTest {
 
         // then
         assertSoftly(sut) {
-            resideInPath("..snippet..", true) shouldBeEqualTo true
-            resideInPath("..koargument/snippet..", true) shouldBeEqualTo true
-            resideInPath("..koargument..argument-in-enum-const-reside-in-file-path.kt", true) shouldBeEqualTo true
-            resideInPath("koargument/snippet/", true) shouldBeEqualTo false
+            residesInPath("..snippet..", true) shouldBeEqualTo true
+            residesInPath("..koargument/snippet..", true) shouldBeEqualTo true
+            residesInPath("..koargument..argument-in-enum-const-reside-in-file-path.kt", true) shouldBeEqualTo true
+            residesInPath("koargument/snippet/", true) shouldBeEqualTo false
         }
     }
 
@@ -79,10 +79,10 @@ class KoArgumentDeclarationForKoPathProviderTest {
 
         // then
         assertSoftly(sut) {
-            resideInPath("..snippet..", false) shouldBeEqualTo true
-            resideInPath("..koargument/snippet..", false) shouldBeEqualTo true
-            resideInPath("..koargument..argument-in-enum-const-reside-in-project-file-path.kt", false) shouldBeEqualTo true
-            resideInPath("koargument/snippet/", false) shouldBeEqualTo false
+            residesInPath("..snippet..", false) shouldBeEqualTo true
+            residesInPath("..koargument/snippet..", false) shouldBeEqualTo true
+            residesInPath("..koargument..argument-in-enum-const-reside-in-project-file-path.kt", false) shouldBeEqualTo true
+            residesInPath("koargument/snippet/", false) shouldBeEqualTo false
         }
     }
 
@@ -136,10 +136,10 @@ class KoArgumentDeclarationForKoPathProviderTest {
 
         // then
         assertSoftly(sut) {
-            resideInPath("..snippet..", true) shouldBeEqualTo true
-            resideInPath("..koargument/snippet..", true) shouldBeEqualTo true
-            resideInPath("..koargument..argument-in-annotation-reside-in-file-path.kt", true) shouldBeEqualTo true
-            resideInPath("koargument/snippet/", true) shouldBeEqualTo false
+            residesInPath("..snippet..", true) shouldBeEqualTo true
+            residesInPath("..koargument/snippet..", true) shouldBeEqualTo true
+            residesInPath("..koargument..argument-in-annotation-reside-in-file-path.kt", true) shouldBeEqualTo true
+            residesInPath("koargument/snippet/", true) shouldBeEqualTo false
         }
     }
 
@@ -155,10 +155,10 @@ class KoArgumentDeclarationForKoPathProviderTest {
 
         // then
         assertSoftly(sut) {
-            resideInPath("..snippet..", false) shouldBeEqualTo true
-            resideInPath("..koargument/snippet..", false) shouldBeEqualTo true
-            resideInPath("..koargument..argument-in-annotation-reside-in-project-file-path.kt", false) shouldBeEqualTo true
-            resideInPath("koargument/snippet/", false) shouldBeEqualTo false
+            residesInPath("..snippet..", false) shouldBeEqualTo true
+            residesInPath("..koargument/snippet..", false) shouldBeEqualTo true
+            residesInPath("..koargument..argument-in-annotation-reside-in-project-file-path.kt", false) shouldBeEqualTo true
+            residesInPath("koargument/snippet/", false) shouldBeEqualTo false
         }
     }
 

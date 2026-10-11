@@ -51,10 +51,10 @@ class KoPropertyDeclarationForKoPathProviderTest {
 
         // then
         assertSoftly(sut) {
-            resideInPath("..snippet..", true) shouldBeEqualTo true
-            resideInPath("..koproperty/snippet..", true) shouldBeEqualTo true
-            resideInPath("..koproperty..property-reside-in-file-path.kt", true) shouldBeEqualTo true
-            resideInPath("koproperty/snippet/", true) shouldBeEqualTo false
+            residesInPath("..snippet..", true) shouldBeEqualTo true
+            residesInPath("..koproperty/snippet..", true) shouldBeEqualTo true
+            residesInPath("..koproperty..property-reside-in-file-path.kt", true) shouldBeEqualTo true
+            residesInPath("koproperty/snippet/", true) shouldBeEqualTo false
         }
     }
 
@@ -68,10 +68,10 @@ class KoPropertyDeclarationForKoPathProviderTest {
 
         // then
         assertSoftly(sut) {
-            resideInPath("..snippet..", false) shouldBeEqualTo true
-            resideInPath("..koproperty/snippet..", false) shouldBeEqualTo true
-            resideInPath("..koproperty..property-reside-in-project-file-path.kt", false) shouldBeEqualTo true
-            resideInPath("koproperty/snippet/", false) shouldBeEqualTo false
+            residesInPath("..snippet..", false) shouldBeEqualTo true
+            residesInPath("..koproperty/snippet..", false) shouldBeEqualTo true
+            residesInPath("..koproperty..property-reside-in-project-file-path.kt", false) shouldBeEqualTo true
+            residesInPath("koproperty/snippet/", false) shouldBeEqualTo false
         }
     }
 

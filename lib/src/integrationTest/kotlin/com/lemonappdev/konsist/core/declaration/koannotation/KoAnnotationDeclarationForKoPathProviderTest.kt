@@ -57,10 +57,10 @@ class KoAnnotationDeclarationForKoPathProviderTest {
 
         // then
         assertSoftly(sut) {
-            resideInPath("..snippet..", true) shouldBeEqualTo true
-            resideInPath("..koannotation/snippet..", true) shouldBeEqualTo true
-            resideInPath("..koannotation..annotation-reside-in-file-path.kt", true) shouldBeEqualTo true
-            resideInPath("koannotation/snippet/", true) shouldBeEqualTo false
+            residesInPath("..snippet..", true) shouldBeEqualTo true
+            residesInPath("..koannotation/snippet..", true) shouldBeEqualTo true
+            residesInPath("..koannotation..annotation-reside-in-file-path.kt", true) shouldBeEqualTo true
+            residesInPath("koannotation/snippet/", true) shouldBeEqualTo false
         }
     }
 
@@ -76,10 +76,10 @@ class KoAnnotationDeclarationForKoPathProviderTest {
 
         // then
         assertSoftly(sut) {
-            resideInPath("..snippet..", false) shouldBeEqualTo true
-            resideInPath("..koannotation/snippet..", false) shouldBeEqualTo true
-            resideInPath("..koannotation..annotation-reside-in-project-file-path.kt", false) shouldBeEqualTo true
-            resideInPath("koannotation/snippet/", false) shouldBeEqualTo false
+            residesInPath("..snippet..", false) shouldBeEqualTo true
+            residesInPath("..koannotation/snippet..", false) shouldBeEqualTo true
+            residesInPath("..koannotation..annotation-reside-in-project-file-path.kt", false) shouldBeEqualTo true
+            residesInPath("koannotation/snippet/", false) shouldBeEqualTo false
         }
     }
 

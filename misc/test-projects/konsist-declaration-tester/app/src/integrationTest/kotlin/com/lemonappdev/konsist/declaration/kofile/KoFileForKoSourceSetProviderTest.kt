@@ -23,8 +23,8 @@ class KoFileForKoSourceSetProviderTest {
         // then
         assertSoftly(sut) {
             sourceSetName shouldBeEqualTo MAIN
-            resideInSourceSet(MAIN) shouldBeEqualTo true
-            resideInSourceSet(TEST) shouldBeEqualTo false
+            residesInSourceSet(MAIN) shouldBeEqualTo true
+            residesInSourceSet(TEST) shouldBeEqualTo false
         }
     }
 
@@ -39,8 +39,8 @@ class KoFileForKoSourceSetProviderTest {
         // then
         assertSoftly(sut) {
             sourceSetName shouldBeEqualTo INTEGRATION_TEST
-            resideInSourceSet(INTEGRATION_TEST) shouldBeEqualTo true
-            resideInSourceSet(TEST) shouldBeEqualTo false
+            residesInSourceSet(INTEGRATION_TEST) shouldBeEqualTo true
+            residesInSourceSet(TEST) shouldBeEqualTo false
         }
     }
 
@@ -55,8 +55,8 @@ class KoFileForKoSourceSetProviderTest {
         // then
         assertSoftly(sut) {
             sourceSetName shouldBeEqualTo MAIN
-            resideInSourceSet(MAIN) shouldBeEqualTo true
-            resideInSourceSet(TEST) shouldBeEqualTo false
+            residesInSourceSet(MAIN) shouldBeEqualTo true
+            residesInSourceSet(TEST) shouldBeEqualTo false
         }
     }
 
@@ -71,8 +71,8 @@ class KoFileForKoSourceSetProviderTest {
         // then
         assertSoftly(sut) {
             sourceSetName shouldBeEqualTo TEST
-            resideInSourceSet(TEST) shouldBeEqualTo true
-            resideInSourceSet(INTEGRATION_TEST) shouldBeEqualTo false
+            residesInSourceSet(TEST) shouldBeEqualTo true
+            residesInSourceSet(INTEGRATION_TEST) shouldBeEqualTo false
         }
     }
 
@@ -87,8 +87,8 @@ class KoFileForKoSourceSetProviderTest {
         // then
         assertSoftly(sut) {
             sourceSetName shouldBeEqualTo MAIN
-            resideInSourceSet(MAIN) shouldBeEqualTo true
-            resideInSourceSet(TEST) shouldBeEqualTo false
+            residesInSourceSet(MAIN) shouldBeEqualTo true
+            residesInSourceSet(TEST) shouldBeEqualTo false
         }
     }
 
@@ -103,8 +103,8 @@ class KoFileForKoSourceSetProviderTest {
         // then
         assertSoftly(sut) {
             sourceSetName shouldBeEqualTo MAIN
-            resideInSourceSet(MAIN) shouldBeEqualTo true
-            resideInSourceSet(TEST) shouldBeEqualTo false
+            residesInSourceSet(MAIN) shouldBeEqualTo true
+            residesInSourceSet(TEST) shouldBeEqualTo false
         }
     }
 

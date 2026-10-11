@@ -15,5 +15,14 @@ interface KoSourceSetProvider : KoBaseProvider {
      * @param sourceSetName The name of the source set to check.
      * @return `true` if the declaration resides in the specified source set, `false` otherwise.
      */
+    fun residesInSourceSet(sourceSetName: String): Boolean
+
+    /**
+     * Determines whether the declaration resides in the specified source set.
+     *
+     * @param sourceSetName The name of the source set to check.
+     * @return `true` if the declaration resides in the specified source set, `false` otherwise.
+     */
+    @Deprecated("Will be removed in version 1.0.0-rc1", ReplaceWith("residesInSourceSet(sourceSetName)"))
     fun resideInSourceSet(sourceSetName: String): Boolean
 }

@@ -21,10 +21,10 @@ class KoParentDeclarationForKoResideInPackageProviderTest {
 
         // then
         assertSoftly(sut) {
-            sut.resideInPackage("com..") shouldBeEqualTo true
-            sut.resideInPackage("com") shouldBeEqualTo false
-            sut.resideOutsidePackage("com..") shouldBeEqualTo false
-            sut.resideOutsidePackage("com") shouldBeEqualTo true
+            sut.residesInPackage("com..") shouldBeEqualTo true
+            sut.residesInPackage("com") shouldBeEqualTo false
+            sut.residesOutsidePackage("com..") shouldBeEqualTo false
+            sut.residesOutsidePackage("com") shouldBeEqualTo true
         }
     }
 
@@ -40,10 +40,10 @@ class KoParentDeclarationForKoResideInPackageProviderTest {
 
         // then
         assertSoftly(sut) {
-            sut.resideInPackage("com..") shouldBeEqualTo false
-            sut.resideInPackage("com") shouldBeEqualTo false
-            sut.resideOutsidePackage("com..") shouldBeEqualTo true
-            sut.resideOutsidePackage("com") shouldBeEqualTo true
+            sut.residesInPackage("com..") shouldBeEqualTo false
+            sut.residesInPackage("com") shouldBeEqualTo false
+            sut.residesOutsidePackage("com..") shouldBeEqualTo true
+            sut.residesOutsidePackage("com") shouldBeEqualTo true
         }
     }
 
@@ -59,10 +59,10 @@ class KoParentDeclarationForKoResideInPackageProviderTest {
 
         // then
         assertSoftly(sut) {
-            sut.resideInPackage("com..") shouldBeEqualTo true
-            sut.resideInPackage("com") shouldBeEqualTo false
-            sut.resideOutsidePackage("com..") shouldBeEqualTo false
-            sut.resideOutsidePackage("com") shouldBeEqualTo true
+            sut.residesInPackage("com..") shouldBeEqualTo true
+            sut.residesInPackage("com") shouldBeEqualTo false
+            sut.residesOutsidePackage("com..") shouldBeEqualTo false
+            sut.residesOutsidePackage("com") shouldBeEqualTo true
         }
     }
 
@@ -78,10 +78,10 @@ class KoParentDeclarationForKoResideInPackageProviderTest {
 
         // then
         assertSoftly(sut) {
-            sut.resideInPackage("com..") shouldBeEqualTo false
-            sut.resideInPackage("com") shouldBeEqualTo false
-            sut.resideOutsidePackage("com..") shouldBeEqualTo true
-            sut.resideOutsidePackage("com") shouldBeEqualTo true
+            sut.residesInPackage("com..") shouldBeEqualTo false
+            sut.residesInPackage("com") shouldBeEqualTo false
+            sut.residesOutsidePackage("com..") shouldBeEqualTo true
+            sut.residesOutsidePackage("com") shouldBeEqualTo true
         }
     }
 
@@ -97,10 +97,10 @@ class KoParentDeclarationForKoResideInPackageProviderTest {
 
         // then
         assertSoftly(sut) {
-            sut.resideInPackage("com..") shouldBeEqualTo true
-            sut.resideInPackage("com") shouldBeEqualTo false
-            sut.resideOutsidePackage("com..") shouldBeEqualTo false
-            sut.resideOutsidePackage("com") shouldBeEqualTo true
+            sut.residesInPackage("com..") shouldBeEqualTo true
+            sut.residesInPackage("com") shouldBeEqualTo false
+            sut.residesOutsidePackage("com..") shouldBeEqualTo false
+            sut.residesOutsidePackage("com") shouldBeEqualTo true
         }
     }
 
@@ -116,10 +116,10 @@ class KoParentDeclarationForKoResideInPackageProviderTest {
 
         // then
         assertSoftly(sut) {
-            sut.resideInPackage("com..") shouldBeEqualTo false
-            sut.resideInPackage("com") shouldBeEqualTo false
-            sut.resideOutsidePackage("com..") shouldBeEqualTo true
-            sut.resideOutsidePackage("com") shouldBeEqualTo true
+            sut.residesInPackage("com..") shouldBeEqualTo false
+            sut.residesInPackage("com") shouldBeEqualTo false
+            sut.residesOutsidePackage("com..") shouldBeEqualTo true
+            sut.residesOutsidePackage("com") shouldBeEqualTo true
         }
     }
 
