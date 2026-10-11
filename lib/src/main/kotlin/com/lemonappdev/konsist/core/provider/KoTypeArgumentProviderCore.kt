@@ -6,6 +6,7 @@ import com.lemonappdev.konsist.api.provider.KoTypeArgumentProvider
 import com.lemonappdev.konsist.core.declaration.KoTypeArgumentDeclarationCore
 import com.lemonappdev.konsist.core.declaration.type.KoTypeDeclarationCore
 import com.lemonappdev.konsist.core.ext.castToKoBaseDeclaration
+import com.lemonappdev.konsist.core.util.TypeUtil
 import org.jetbrains.kotlin.psi.KtProjectionKind
 import org.jetbrains.kotlin.psi.KtTypeProjection
 import org.jetbrains.kotlin.psi.KtUserType
@@ -96,9 +97,10 @@ internal interface KoTypeArgumentProviderCore :
             else -> {
                 names.any { name ->
                     typeArguments?.any { typeArgument ->
-                        name.qualifiedName ==
-                            (typeArgument.sourceDeclaration as? KoFullyQualifiedNameProvider)
-                                ?.fullyQualifiedName
+                        TypeUtil.matchesKClass(
+                            (typeArgument.sourceDeclaration as? KoFullyQualifiedNameProvider)?.fullyQualifiedName,
+                            name,
+                        )
                     } == true
                 }
             }
@@ -118,9 +120,10 @@ internal interface KoTypeArgumentProviderCore :
             else -> {
                 names.all { name ->
                     typeArguments?.any { typeArgument ->
-                        name.qualifiedName ==
-                            (typeArgument.sourceDeclaration as? KoFullyQualifiedNameProvider)
-                                ?.fullyQualifiedName
+                        TypeUtil.matchesKClass(
+                            (typeArgument.sourceDeclaration as? KoFullyQualifiedNameProvider)?.fullyQualifiedName,
+                            name,
+                        )
                     } == true
                 }
             }

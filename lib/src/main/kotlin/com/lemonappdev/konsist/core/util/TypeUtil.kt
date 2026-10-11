@@ -124,12 +124,26 @@ object TypeUtil {
     internal fun hasTypeOf(
         type: KoTypeDeclaration?,
         kClass: KClass<*>,
-    ): Boolean = kClass.qualifiedName == (type?.sourceDeclaration as? KoFullyQualifiedNameProvider)?.fullyQualifiedName
+    ): Boolean = matchesKClass((type?.sourceDeclaration as? KoFullyQualifiedNameProvider)?.fullyQualifiedName, kClass)
 
     internal fun hasTypeOf(
         type: KoSourceDeclaration?,
         kClass: KClass<*>,
-    ): Boolean = kClass.qualifiedName == (type as? KoFullyQualifiedNameProvider)?.fullyQualifiedName
+    ): Boolean = matchesKClass((type as? KoFullyQualifiedNameProvider)?.fullyQualifiedName, kClass)
+
+    /*
+     * Checks if the fully qualified name refers to the given class.
+     * For `kotlin.RuntimeException` and `RuntimeException::class` value will be true,
+     * although `RuntimeException::class.qualifiedName` is `java.lang.RuntimeException`.
+     */
+    internal fun matchesKClass(
+        fullyQualifiedName: String?,
+        kClass: KClass<*>,
+    ): Boolean {
+        val qualifiedName = fullyQualifiedName?.let { kotlinTypeQualifiedNames[it] } ?: fullyQualifiedName
+
+        return kClass.qualifiedName == qualifiedName
+    }
 
     @Suppress("detekt.CyclomaticComplexMethod", "detekt.LongMethod")
     private fun transformPsiElementToKoTypeDeclaration(
@@ -384,6 +398,49 @@ object TypeUtil {
             Set::class,
         ).mapNotNull { it.simpleName }
             .toSet()
+
+    /*
+     * Kotlin types whose `KClass.qualifiedName` differs from the Kotlin name on the JVM:
+     * - type aliases, e.g. `RuntimeException::class.qualifiedName` is `java.lang.RuntimeException`
+     * - mutable collections, e.g. `MutableList::class.qualifiedName` is `kotlin.collections.List`
+     */
+    private val kotlinTypeQualifiedNames: Map<String, String> =
+        mapOf(
+            "kotlin.ArithmeticException" to ArithmeticException::class,
+            "kotlin.ArrayIndexOutOfBoundsException" to ArrayIndexOutOfBoundsException::class,
+            "kotlin.AssertionError" to AssertionError::class,
+            "kotlin.AutoCloseable" to AutoCloseable::class,
+            "kotlin.ClassCastException" to ClassCastException::class,
+            "kotlin.Comparator" to Comparator::class,
+            "kotlin.ConcurrentModificationException" to ConcurrentModificationException::class,
+            "kotlin.Error" to Error::class,
+            "kotlin.Exception" to Exception::class,
+            "kotlin.IllegalArgumentException" to IllegalArgumentException::class,
+            "kotlin.IllegalStateException" to IllegalStateException::class,
+            "kotlin.IndexOutOfBoundsException" to IndexOutOfBoundsException::class,
+            "kotlin.NoSuchElementException" to NoSuchElementException::class,
+            "kotlin.NullPointerException" to NullPointerException::class,
+            "kotlin.NumberFormatException" to NumberFormatException::class,
+            "kotlin.OutOfMemoryError" to OutOfMemoryError::class,
+            "kotlin.RuntimeException" to RuntimeException::class,
+            "kotlin.UnsupportedOperationException" to UnsupportedOperationException::class,
+            "kotlin.collections.ArrayList" to ArrayList::class,
+            "kotlin.collections.HashMap" to HashMap::class,
+            "kotlin.collections.HashSet" to HashSet::class,
+            "kotlin.collections.LinkedHashMap" to LinkedHashMap::class,
+            "kotlin.collections.LinkedHashSet" to LinkedHashSet::class,
+            "kotlin.collections.MutableCollection" to MutableCollection::class,
+            "kotlin.collections.MutableIterable" to MutableIterable::class,
+            "kotlin.collections.MutableIterator" to MutableIterator::class,
+            "kotlin.collections.MutableList" to MutableList::class,
+            "kotlin.collections.MutableListIterator" to MutableListIterator::class,
+            "kotlin.collections.MutableMap" to MutableMap::class,
+            "kotlin.collections.MutableSet" to MutableSet::class,
+            "kotlin.collections.RandomAccess" to RandomAccess::class,
+            "kotlin.text.Appendable" to Appendable::class,
+            "kotlin.text.CharacterCodingException" to CharacterCodingException::class,
+            "kotlin.text.StringBuilder" to StringBuilder::class,
+        ).mapValues { (_, kClass) -> kClass.qualifiedName.orEmpty() }
 
     /*
         List of Kotlin standard library class declarations

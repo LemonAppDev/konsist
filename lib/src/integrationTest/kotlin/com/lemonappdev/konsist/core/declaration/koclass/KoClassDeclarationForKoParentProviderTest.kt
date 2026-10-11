@@ -325,6 +325,47 @@ class KoClassDeclarationForKoParentProviderTest {
     }
 
     @Test
+    fun `class-has-kotlin-type-alias-parents`() {
+        // given
+        val sut =
+            getSnippetFile("class-has-kotlin-type-alias-parents")
+                .classes()
+                .first()
+
+        // then
+        assertSoftly(sut) {
+            hasParentOf(IllegalStateException::class) shouldBeEqualTo true
+            hasParentOf(IllegalStateException::class, indirectParents = true) shouldBeEqualTo true
+            hasParentOf(MutableList::class) shouldBeEqualTo true
+            hasParentOf(RuntimeException::class) shouldBeEqualTo false
+            hasAllParentsOf(IllegalStateException::class, MutableList::class) shouldBeEqualTo true
+            parents()
+                .first()
+                .sourceDeclaration
+                ?.hasKotlinTypeDeclarationOf(IllegalStateException::class) shouldBeEqualTo true
+        }
+    }
+
+    @Test
+    fun `class-has-kotlin-collection-type-alias-parent`() {
+        // given
+        val sut =
+            getSnippetFile("class-has-kotlin-collection-type-alias-parent")
+                .classes()
+                .first()
+
+        // then
+        assertSoftly(sut) {
+            hasParentOf(ArrayList::class) shouldBeEqualTo true
+            hasParentOf(HashSet::class) shouldBeEqualTo false
+            parents()
+                .first()
+                .sourceDeclaration
+                ?.hasKotlinCollectionTypeDeclarationOf(ArrayList::class) shouldBeEqualTo true
+        }
+    }
+
+    @Test
     fun `class-has-no-parents-ignore-case`() {
         // given
         val sut =
