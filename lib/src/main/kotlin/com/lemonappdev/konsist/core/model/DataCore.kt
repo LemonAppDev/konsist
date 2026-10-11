@@ -3,12 +3,11 @@ package com.lemonappdev.konsist.core.model
 import com.lemonappdev.konsist.api.Konsist
 import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoClassDeclaration
-import com.lemonappdev.konsist.api.declaration.KoFileDeclaration
 import com.lemonappdev.konsist.api.declaration.KoInterfaceDeclaration
 import com.lemonappdev.konsist.api.declaration.KoObjectDeclaration
 import com.lemonappdev.konsist.api.declaration.KoTypeAliasDeclaration
 import com.lemonappdev.konsist.api.ext.koscope.declarationsOf
-import com.lemonappdev.konsist.core.ext.endsWithName
+import com.lemonappdev.konsist.api.provider.KoFullyQualifiedNameProvider
 
 object DataCore {
     val declarations: List<KoBaseDeclaration> by lazy {
@@ -40,79 +39,31 @@ object DataCore {
             .scopeFromProject()
             .typeAliases
     }
-}
 
-fun getClass(
-    name: String,
-    fullyQualifiedName: String?,
-    isAlias: Boolean = false,
-    containingFile: KoFileDeclaration,
-): KoClassDeclaration? {
-    val declarationQualifiedName =
-        if (fullyQualifiedName?.endsWithName(name) == true || isAlias) {
-            fullyQualifiedName
-        } else {
-            "$fullyQualifiedName.$name"
+    /**
+     * Classes, interfaces, objects and type aliases of the project by fully qualified name.
+     */
+    val typesByFullyQualifiedName: Map<String, KoBaseDeclaration> by lazy {
+        val scope = Konsist.scopeFromProject()
+
+        associateByFullyQualifiedName(
+            scope.classes(includeNested = true, includeLocal = false) +
+                scope.interfaces(includeNested = true) +
+                scope.objects(includeNested = true) +
+                scope.typeAliases,
+        )
+    }
+
+    /**
+     * Associates declarations by fully qualified name. When more declarations have the same fully qualified name
+     * (e.g. in different source sets), the first one is used.
+     */
+    internal fun associateByFullyQualifiedName(declarations: List<KoBaseDeclaration>): Map<String, KoBaseDeclaration> =
+        buildMap {
+            declarations.forEach { declaration ->
+                (declaration as? KoFullyQualifiedNameProvider)
+                    ?.fullyQualifiedName
+                    ?.let { putIfAbsent(it, declaration) }
+            }
         }
-
-    return DataCore
-        .classes
-        .firstOrNull { decl -> decl.fullyQualifiedName == declarationQualifiedName }
-        ?: containingFile
-            .classes()
-            .firstOrNull { decl -> decl.fullyQualifiedName == declarationQualifiedName }
 }
-
-fun getInterface(
-    name: String,
-    fullyQualifiedName: String?,
-    isAlias: Boolean,
-    containingFile: KoFileDeclaration,
-): KoInterfaceDeclaration? {
-    val declarationQualifiedName =
-        if (fullyQualifiedName?.endsWithName(name) == true || isAlias) {
-            fullyQualifiedName
-        } else {
-            "$fullyQualifiedName.$name"
-        }
-
-    return DataCore
-        .interfaces
-        .firstOrNull { decl -> decl.fullyQualifiedName == declarationQualifiedName }
-        ?: containingFile
-            .interfaces()
-            .firstOrNull { decl -> decl.fullyQualifiedName == declarationQualifiedName }
-}
-
-fun getObject(
-    name: String,
-    fullyQualifiedName: String?,
-    isAlias: Boolean,
-    containingFile: KoFileDeclaration,
-): KoObjectDeclaration? {
-    val declarationQualifiedName =
-        if (fullyQualifiedName?.endsWithName(name) == true || isAlias) {
-            fullyQualifiedName
-        } else {
-            "$fullyQualifiedName.$name"
-        }
-
-    return DataCore
-        .objects
-        .firstOrNull { decl -> decl.fullyQualifiedName == declarationQualifiedName }
-        ?: containingFile
-            .objects()
-            .firstOrNull { decl -> decl.fullyQualifiedName == declarationQualifiedName }
-}
-
-fun getTypeAlias(
-    name: String,
-    fullyQualifiedName: String?,
-    containingFile: KoFileDeclaration,
-): KoTypeAliasDeclaration? =
-    DataCore
-        .typeAliases
-        .firstOrNull { decl -> (decl.packagee?.name + "." + decl.name) == fullyQualifiedName }
-        ?: containingFile
-            .typeAliases
-            .firstOrNull { decl -> decl.name == name }

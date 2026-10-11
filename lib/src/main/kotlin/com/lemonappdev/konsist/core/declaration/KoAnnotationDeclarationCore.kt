@@ -19,6 +19,7 @@ import com.lemonappdev.konsist.core.provider.KoRepresentsTypeProviderCore
 import com.lemonappdev.konsist.core.provider.KoSourceDeclarationProviderCore
 import com.lemonappdev.konsist.core.provider.KoSourceSetProviderCore
 import com.lemonappdev.konsist.core.provider.KoTextProviderCore
+import com.lemonappdev.konsist.core.util.TypeUtil
 import org.jetbrains.kotlin.com.intellij.psi.PsiElement
 import org.jetbrains.kotlin.psi.KtAnnotationEntry
 import org.jetbrains.kotlin.psi.KtElement
@@ -51,6 +52,10 @@ internal class KoAnnotationDeclarationCore private constructor(
 
     override val name: String
         get() = KoPropertyCache.getOrCompute(cachedName, { cachedName = it }) { ktAnnotationEntry.shortName.toString() }
+
+    // Qualified name is used to resolve the nested and fully qualified annotations (e.g. `@Outer.Annotation`)
+    override val stringUsedAsFullyQualifiedName: String
+        get() = TypeUtil.getTypeName(ktAnnotationEntry.typeReference) ?: name
 
     @Volatile
     private var cachedArguments: Any? = KoPropertyCache.NOT_COMPUTED
@@ -89,12 +94,7 @@ internal class KoAnnotationDeclarationCore private constructor(
     override val fullyQualifiedName: String?
         get() =
             KoPropertyCache.getOrCompute(cachedFullyQualifiedName, { cachedFullyQualifiedName = it }) {
-                val import =
-                    containingFile
-                        .imports
-                        .firstOrNull { it.alias?.name == name }
-
-                import?.name ?: super<KoFullyQualifiedNameProviderCore>.fullyQualifiedName
+                super<KoFullyQualifiedNameProviderCore>.fullyQualifiedName
             }
 
     override fun toString(): String = name

@@ -11,8 +11,9 @@ import com.lemonappdev.konsist.core.util.EndOfLine
 import org.jetbrains.kotlin.com.intellij.psi.PsiElement
 import org.jetbrains.kotlin.psi.KtElement
 
-internal class KoExternalDeclarationCore(
+internal class KoExternalDeclarationCore private constructor(
     private val rawName: String,
+    override val fullyQualifiedName: String,
     override val ktElement: KtElement,
 ) : KoExternalDeclaration,
     KoChildProviderCore,
@@ -35,20 +36,14 @@ internal class KoExternalDeclarationCore(
                      * Foo<UiState> -> Foo
                      * Foo<UiState, Action> -> Foo
                      * Foo<UiState, Action>(Loading) -> Foo
+                     *
+                     * Qualified name is replaced with the simple name, e.g. RecyclerView.ViewHolder -> ViewHolder
                      */
                     .replace("\n", "")
                     .replace(Regex("<.*|\\(.*"), "")
                     .replace(EndOfLine.UNIX.value, " ")
                     .substringBefore(" by")
-            }
-
-    @Volatile
-    private var cachedFullyQualifiedName: Any? = KoPropertyCache.NOT_COMPUTED
-
-    override val fullyQualifiedName: String?
-        get() =
-            KoPropertyCache.getOrCompute(cachedFullyQualifiedName, { cachedFullyQualifiedName = it }) {
-                super<KoFullyQualifiedNameProviderCore>.fullyQualifiedName
+                    .substringAfterLast(".")
             }
 
     @Volatile
@@ -58,7 +53,7 @@ internal class KoExternalDeclarationCore(
         get() =
             KoPropertyCache.getOrCompute(cachedPackagee, { cachedPackagee = it }) {
                 KoPackageDeclarationCore(
-                    fullyQualifiedName ?: "",
+                    fullyQualifiedName,
                     ktElement,
                 )
             }
@@ -74,11 +69,11 @@ internal class KoExternalDeclarationCore(
          */
         internal fun getInstance(
             name: String,
+            fullyQualifiedName: String,
             ktElement: KtElement,
-        ): KoExternalDeclaration {
-            val declaration = KoExternalDeclarationCore(name, ktElement)
-
-            return cache.getOrPut(declaration.fullyQualifiedName ?: declaration.name, declaration)
-        }
+        ): KoExternalDeclaration =
+            cache.getOrCreateInstance(fullyQualifiedName) {
+                KoExternalDeclarationCore(name, fullyQualifiedName, ktElement)
+            }
     }
 }

@@ -94,16 +94,14 @@ internal class KoImportDeclarationCore private constructor(
     override val sourceDeclaration: KoDeclarationCastProvider?
         get() =
             KoPropertyCache.getOrCompute(cachedSourceDeclaration, { cachedSourceDeclaration = it }) {
-                val shortName = name.substringAfterLast(".")
-
                 (
-                    DataCore
-                        .declarations
-                        .filterIsInstance<KoFullyQualifiedNameProvider>()
-                        .firstOrNull { it.fullyQualifiedName == name }
-                        as? KoDeclarationCastProvider
-                        ?: getKotlinType(shortName)
-                        ?: KoExternalDeclarationCore.getInstance(shortName, ktImportDirective)
+                    DataCore.typesByFullyQualifiedName[name]
+                        ?: DataCore
+                            .declarations
+                            .filterIsInstance<KoFullyQualifiedNameProvider>()
+                            .firstOrNull { it.fullyQualifiedName == name }
+                        ?: getKotlinType(name)
+                        ?: KoExternalDeclarationCore.getInstance(name.substringAfterLast("."), name, ktImportDirective)
                 )
                     as? KoDeclarationCastProvider
             }
@@ -115,8 +113,8 @@ internal class KoImportDeclarationCore private constructor(
             node.getChildren(null).flatMap { getIdentifiers(it) }
         }
 
-    private fun getKotlinType(name: String): KoKotlinTypeDeclaration? =
-        if (TypeUtil.isKotlinType(name)) {
+    private fun getKotlinType(fullyQualifiedName: String): KoKotlinTypeDeclaration? =
+        if (TypeUtil.isKotlinTypeFullyQualifiedName(fullyQualifiedName)) {
             val ktNameReferenceExpression =
                 ktImportDirective
                     .children
