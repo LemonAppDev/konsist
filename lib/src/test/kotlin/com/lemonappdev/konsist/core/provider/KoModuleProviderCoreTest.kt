@@ -105,4 +105,36 @@ class KoModuleProviderCoreTest {
         // then
         result shouldBeEqualTo listOf(sut)
     }
+
+    @Test
+    fun `resideInModule returns true for three level gradle project path`() {
+        // given
+        val sut =
+            object : KoModuleProviderCore {
+                override val psiElement: PsiElement = mockk()
+                override val moduleName: String = "feature/payment/api"
+            }
+
+        // when
+        val result = sut.resideInModule(":feature:payment:api")
+
+        // then
+        result shouldBeEqualTo true
+    }
+
+    @Test
+    fun `resideInModule returns false for parent of three level module`() {
+        // given
+        val sut =
+            object : KoModuleProviderCore {
+                override val psiElement: PsiElement = mockk()
+                override val moduleName: String = "feature/payment/api"
+            }
+
+        // when
+        val result = sut.resideInModule(":feature:payment")
+
+        // then
+        result shouldBeEqualTo false
+    }
 }

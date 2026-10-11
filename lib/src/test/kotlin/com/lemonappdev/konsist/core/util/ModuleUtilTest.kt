@@ -29,6 +29,30 @@ class ModuleUtilTest {
     }
 
     @Test
+    fun `should return three level nested module name for unix path`() {
+        // when
+        val result =
+            ModuleUtil.getModuleName(
+                projectPath = "/feature/payment/api/src/main/kotlin/com/app/SampleClass.kt",
+            )
+
+        // then
+        result shouldBeEqualTo "feature/payment/api"
+    }
+
+    @Test
+    fun `should return three level nested module name for windows path`() {
+        // when
+        val result =
+            ModuleUtil.getModuleName(
+                projectPath = """\feature\payment\api\src\main\kotlin\com\app\SampleClass.kt""",
+            )
+
+        // then
+        result shouldBeEqualTo "feature/payment/api"
+    }
+
+    @Test
     fun `should return single module name for windows path`() {
         // when
         val result =
@@ -116,6 +140,15 @@ class ModuleUtilTest {
 
         // then
         result shouldBeEqualTo "feature/auth"
+    }
+
+    @Test
+    fun `should normalize three level gradle project path`() {
+        // when
+        val result = ModuleUtil.normalizeModuleName(":feature:payment:api")
+
+        // then
+        result shouldBeEqualTo "feature/payment/api"
     }
 
     @Test
