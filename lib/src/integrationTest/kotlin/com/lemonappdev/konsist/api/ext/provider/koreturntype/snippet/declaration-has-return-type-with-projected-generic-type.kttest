@@ -1,0 +1,1 @@
+fun fixtureFunction(): MutableList<out Number> = mutableListOf()

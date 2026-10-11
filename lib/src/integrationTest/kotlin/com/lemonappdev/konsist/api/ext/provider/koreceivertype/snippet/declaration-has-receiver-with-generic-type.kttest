@@ -1,0 +1,2 @@
+fun List<String>.fixtureFunction() {
+}
