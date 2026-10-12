@@ -1,5 +1,6 @@
 plugins {
     `kotlin-dsl`
+    alias(libs.plugins.spotless)
 }
 
 group = "com.lemonappdev.konsist.buildlogic"
@@ -14,8 +15,22 @@ dependencies {
     implementation(files(libs.javaClass.superclass.protectionDomain.codeSource.location))
 }
 
-fun plugin(plugin: Provider<PluginDependency>) =
-    plugin.map { "${it.pluginId}:${it.pluginId}.gradle.plugin:${it.version}" }
+fun plugin(plugin: Provider<PluginDependency>) = plugin.map { "${it.pluginId}:${it.pluginId}.gradle.plugin:${it.version}" }
+
+spotless {
+    val ktlintCliVersion = libs.versions.ktlintCliVersion.get()
+
+    kotlin {
+        target("src/**/*.kt")
+        ktlint(ktlintCliVersion)
+        endWithNewline()
+    }
+
+    kotlinGradle {
+        target("*.gradle.kts")
+        ktlint(ktlintCliVersion)
+    }
+}
 
 tasks {
     validatePlugins {
