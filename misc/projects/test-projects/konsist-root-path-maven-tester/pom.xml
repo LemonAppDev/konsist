@@ -17,7 +17,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <kotlin.version>2.4.21</kotlin.version>
         <!-- Konsist artifact is retrieved from mavenLocal repository (CI overrides it with current snapshot version) -->
-        <konsist.version>0.18.1-SNAPSHOT</konsist.version>
+        <konsist.version>0.18.1</konsist.version>
     </properties>
 
     <dependencies>
