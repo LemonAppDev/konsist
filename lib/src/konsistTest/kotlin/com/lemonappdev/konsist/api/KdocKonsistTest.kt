@@ -3,7 +3,6 @@ package com.lemonappdev.konsist.api
 import com.lemonappdev.konsist.api.KoModifier.OVERRIDE
 import com.lemonappdev.konsist.api.KoModifier.PRIVATE
 import com.lemonappdev.konsist.api.ext.list.modifierprovider.withoutModifier
-import com.lemonappdev.konsist.api.ext.list.modifierprovider.withoutPrivateModifier
 import com.lemonappdev.konsist.api.ext.provider.hasValidKDocParamTags
 import com.lemonappdev.konsist.api.ext.provider.hasValidKDocReturnTag
 import com.lemonappdev.konsist.api.verify.assertTrue
@@ -18,7 +17,7 @@ class KdocKonsistTest {
             .functions()
             .withoutModifier(PRIVATE, OVERRIDE)
             .assertTrue {
-                it.hasValidKDocParamTags() && it.hasValidKDocReturnTag()
+                it.hasKDoc && it.hasValidKDocParamTags() && it.hasValidKDocReturnTag()
             }
     }
 
@@ -31,10 +30,19 @@ class KdocKonsistTest {
     }
 
     @Test
-    fun `every api declaration has KDoc`() {
+    fun `every api class, interface and object has KDoc`() {
         apiPackageScope
             .classesAndInterfacesAndObjects()
-            .withoutPrivateModifier()
+            .withoutModifier(PRIVATE)
+            .assertTrue { it.hasKDoc }
+    }
+
+    @Test
+    fun `every api enum constant has KDoc`() {
+        apiPackageScope
+            .classes()
+            .withoutModifier(PRIVATE)
+            .flatMap { it.enumConstants }
             .assertTrue { it.hasKDoc }
     }
 }

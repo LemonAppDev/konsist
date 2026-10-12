@@ -61,6 +61,42 @@ class KoPropertyDeclarationForKoNullableTypeProviderTest {
         }
     }
 
+    @Test
+    fun `extension-property-with-type`() {
+        // given
+        val sut =
+            getSnippetFile("extension-property-with-type")
+                .properties(includeNested = true)
+                .first()
+
+        // then
+        assertSoftly(sut) {
+            type?.name shouldBeEqualTo "String"
+            hasType() shouldBeEqualTo true
+            hasType { it.name == "String" } shouldBeEqualTo true
+            hasType { it.name == "Int" } shouldBeEqualTo false
+            hasTypeOf(String::class) shouldBeEqualTo true
+            hasTypeOf(Int::class) shouldBeEqualTo false
+        }
+    }
+
+    @Test
+    fun `extension-property-without-type`() {
+        // given
+        val sut =
+            getSnippetFile("extension-property-without-type")
+                .properties(includeNested = true)
+                .first()
+
+        // then
+        assertSoftly(sut) {
+            type shouldBeEqualTo null
+            hasType() shouldBeEqualTo false
+            hasType { it.name == "Int" } shouldBeEqualTo false
+            hasTypeOf(Int::class) shouldBeEqualTo false
+        }
+    }
+
     private fun getSnippetFile(fileName: String) =
         TestSnippetProvider.getSnippetKoScope("core/declaration/koproperty/snippet/forkonullabletypeprovider/", fileName)
 }
