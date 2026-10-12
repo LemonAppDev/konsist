@@ -5,6 +5,7 @@ import com.lemonappdev.konsist.api.Konsist
 import com.lemonappdev.konsist.api.declaration.KoFunctionDeclaration
 import com.lemonappdev.konsist.api.declaration.KoPropertyDeclaration
 import com.lemonappdev.konsist.api.ext.list.constructors
+import com.lemonappdev.konsist.api.ext.list.functions
 import com.lemonappdev.konsist.api.ext.list.indexOfFirstInstance
 import com.lemonappdev.konsist.api.ext.list.indexOfLastInstance
 import com.lemonappdev.konsist.api.ext.list.interfaceDeclarations
@@ -20,6 +21,7 @@ import com.lemonappdev.konsist.api.ext.list.properties
 import com.lemonappdev.konsist.api.ext.list.returnTypes
 import com.lemonappdev.konsist.api.ext.list.sourceDeclarations
 import com.lemonappdev.konsist.api.ext.list.types
+import com.lemonappdev.konsist.api.ext.list.withNameEndingWith
 import com.lemonappdev.konsist.api.ext.list.withPackage
 import com.lemonappdev.konsist.api.ext.provider.hasAnnotationOf
 import com.lemonappdev.konsist.api.verify.assertFalse
@@ -214,5 +216,14 @@ class GeneralTestSnippets {
             .functions()
             .returnTypes
             .assertFalse { it.isMutableType }
+    }
+
+    fun `every repository function has Logger context parameter`() {
+        Konsist
+            .scopeFromProject()
+            .interfaces()
+            .withNameEndingWith("Repository")
+            .functions()
+            .assertTrue { it.hasContextParameter { parameter -> parameter.hasType { type -> type.name == "Logger" } } }
     }
 }

@@ -1,0 +1,7 @@
+interface Logger
+
+interface Tracer
+
+context(fixtureParameter1: Logger, fixtureParameter2: Tracer)
+fun fixtureFunction() {
+}
