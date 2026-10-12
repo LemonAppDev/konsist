@@ -2,5 +2,5 @@ package com.lemonappdev.konsist.core.declaration.kofunction
 
 class KoFunctionDeclarationForKoModuleProviderTest {
     // Konsist koFunction.moduleName and koFunction.residesInModule() tests
-    // are implemented in the test\konsist-declaration-tester project.
+    // are implemented in the misc/projects/test-projects/konsist-declaration-tester project.
 }
