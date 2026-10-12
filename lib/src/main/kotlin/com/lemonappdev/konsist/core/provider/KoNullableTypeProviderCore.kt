@@ -6,7 +6,6 @@ import com.lemonappdev.konsist.core.declaration.type.KoTypeDeclarationCore
 import com.lemonappdev.konsist.core.ext.castToKoBaseDeclaration
 import com.lemonappdev.konsist.core.util.TypeUtil
 import org.jetbrains.kotlin.psi.KtCallableDeclaration
-import org.jetbrains.kotlin.psi.KtTypeReference
 import kotlin.reflect.KClass
 import kotlin.reflect.KType
 
@@ -16,18 +15,10 @@ internal interface KoNullableTypeProviderCore :
     KoBaseProviderCore {
     val ktCallableDeclaration: KtCallableDeclaration
     override val type: KoTypeDeclaration?
-        get() {
-            val type = getTypeReferences().firstOrNull()
-
-            return type?.let {
+        get() =
+            ktCallableDeclaration.typeReference?.let {
                 KoTypeDeclarationCore.getInstance(it, this.castToKoBaseDeclaration())
             }
-        }
-
-    private fun getTypeReferences(): List<KtTypeReference> =
-        ktCallableDeclaration
-            .children
-            .filterIsInstance<KtTypeReference>()
 
     override fun hasType(predicate: ((KoTypeDeclaration) -> Boolean)?): Boolean =
         when (predicate) {
