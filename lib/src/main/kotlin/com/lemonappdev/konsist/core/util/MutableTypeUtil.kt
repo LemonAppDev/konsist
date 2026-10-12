@@ -32,9 +32,12 @@ internal object MutableTypeUtil {
     /*
      * Checks if the class, interface or object declared in the project is mutable:
      * its name starts with "Mutable", it declares a `var` property (including `var` constructor parameters),
+     * it declares a `val` property whose type is mutable or has a mutable type argument (at any nesting level),
      * or any of its parents is mutable.
      * Properties of nested declarations (including companion objects) are not checked.
-     * Visited declarations are tracked to avoid infinite recursion when parents are resolved ambiguously.
+     * Properties with an inferred type are not checked.
+     * Visited declarations are tracked to avoid infinite recursion for self-referencing types and when parents are
+     * resolved ambiguously.
      */
     private fun isMutableProjectDeclaration(
         declaration: KoClassAndInterfaceAndObjectDeclaration,
@@ -43,7 +46,13 @@ internal object MutableTypeUtil {
         if (!visitedDeclarations.add(declaration)) return false
 
         return declaration.name.startsWith(MUTABLE_TYPE_PREFIX) ||
-            declaration.properties(includeNested = false).any { it.isVar } ||
+            declaration.properties(includeNested = false).any { property ->
+                property.isVar ||
+                    property.type?.let {
+                        isMutableType(it.sourceDeclaration, visitedDeclarations) ||
+                            hasMutableTypeArgument(it.sourceDeclaration, it.typeArguments, visitedDeclarations)
+                    } == true
+            } ||
             declaration.parents().any { isMutableType(it.sourceDeclaration, visitedDeclarations) }
     }
 
@@ -54,10 +63,19 @@ internal object MutableTypeUtil {
     internal fun hasMutableTypeArgument(
         sourceDeclaration: KoDeclarationCastProvider?,
         typeArguments: List<KoTypeArgumentDeclaration>?,
+    ): Boolean = hasMutableTypeArgument(sourceDeclaration, typeArguments, mutableSetOf())
+
+    private fun hasMutableTypeArgument(
+        sourceDeclaration: KoDeclarationCastProvider?,
+        typeArguments: List<KoTypeArgumentDeclaration>?,
+        visitedDeclarations: MutableSet<KoClassAndInterfaceAndObjectDeclaration>,
     ): Boolean =
-        (sourceDeclaration.resolveImportAlias() as? KoTypeAliasDeclaration)?.type?.hasMutableTypeArgument == true ||
+        (sourceDeclaration.resolveImportAlias() as? KoTypeAliasDeclaration)?.type?.let {
+            hasMutableTypeArgument(it.sourceDeclaration, it.typeArguments, visitedDeclarations)
+        } == true ||
             typeArguments.orEmpty().any {
-                isMutableType(it.sourceDeclaration) || hasMutableTypeArgument(it.sourceDeclaration, it.typeArguments)
+                isMutableType(it.sourceDeclaration, visitedDeclarations) ||
+                    hasMutableTypeArgument(it.sourceDeclaration, it.typeArguments, visitedDeclarations)
             }
 
     /*

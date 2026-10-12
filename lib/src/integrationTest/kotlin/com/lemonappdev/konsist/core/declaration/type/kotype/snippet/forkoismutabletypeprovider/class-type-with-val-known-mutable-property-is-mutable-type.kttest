@@ -1,0 +1,7 @@
+import java.util.concurrent.atomic.AtomicInteger
+
+class FixtureClass1(val fixtureProperty1: FixtureClass2?)
+
+class FixtureClass2 {
+    private val fixtureProperty2: AtomicInteger = AtomicInteger(0)
+}
