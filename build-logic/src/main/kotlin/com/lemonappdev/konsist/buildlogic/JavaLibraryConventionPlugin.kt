@@ -17,7 +17,7 @@ class JavaLibraryConventionPlugin : Plugin<Project> {
                 // Generated sources.jar for the library jar
                 withSourcesJar()
 
-                /// Generated javadoc.jar for the library jar
+                // Generated javadoc.jar for the library jar
                 withJavadocJar()
             }
 

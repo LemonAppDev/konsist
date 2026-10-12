@@ -9,8 +9,7 @@ import java.io.FileInputStream
 import java.io.InputStreamReader
 import java.util.Properties
 
-fun Project.getLocalPropertyOrGradleProperty(propertyName: String) =
-    gradleLocalProperty(propertyName) ?: getProjectProperty(propertyName)
+fun Project.getLocalPropertyOrGradleProperty(propertyName: String) = gradleLocalProperty(propertyName) ?: getProjectProperty(propertyName)
 
 fun Project.getFullKonsistVersion(releaseTarget: ReleaseTarget): String {
     val version = getLocalPropertyOrGradleProperty("konsist.version") ?: error("konsist.version is not provided.")
@@ -22,8 +21,7 @@ fun Project.getFullKonsistVersion(releaseTarget: ReleaseTarget): String {
     }
 }
 
-fun Project.getKonsistVersion() =
-    getLocalPropertyOrGradleProperty("konsist.version") ?: error("konsist.version is not provided.")
+fun Project.getKonsistVersion() = getLocalPropertyOrGradleProperty("konsist.version") ?: error("konsist.version is not provided.")
 
 private fun Project.getProjectProperty(propertyName: String): String? = properties[propertyName] as String?
 
