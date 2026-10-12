@@ -13,11 +13,12 @@ class KoClassForKoChildProviderTest {
     @Test
     fun `class without children`() {
         // given
-        val sut = Konsist
-            .scopeFromFile("$appMainSourceSetProjectDirectory/fixture/AppClass.kt".toOsSeparator())
-            .classes()
-            .withName("AppClass")
-            .first()
+        val sut =
+            Konsist
+                .scopeFromFile("$appMainSourceSetProjectDirectory/fixture/AppClass.kt".toOsSeparator())
+                .classes()
+                .withName("AppClass")
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -43,11 +44,12 @@ class KoClassForKoChildProviderTest {
     @Test
     fun `class with direct child`() {
         // given
-        val sut = Konsist
-            .scopeFromFile("$appMainSourceSetProjectDirectory/fixture/AppClass.kt".toOsSeparator())
-            .classes()
-            .withName("ParentSuperClass")
-            .first()
+        val sut =
+            Konsist
+                .scopeFromFile("$appMainSourceSetProjectDirectory/fixture/AppClass.kt".toOsSeparator())
+                .classes()
+                .withName("ParentSuperClass")
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -82,11 +84,12 @@ class KoClassForKoChildProviderTest {
     @Test
     fun `class with indirect children`() {
         // given
-        val sut = Konsist
-            .scopeFromFile("$appMainSourceSetProjectDirectory/fixture/AppClass.kt".toOsSeparator())
-            .classes()
-            .withName("ParentSuperClass")
-            .first()
+        val sut =
+            Konsist
+                .scopeFromFile("$appMainSourceSetProjectDirectory/fixture/AppClass.kt".toOsSeparator())
+                .classes()
+                .withName("ParentSuperClass")
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -125,11 +128,12 @@ class KoClassForKoChildProviderTest {
     @Test
     fun `class without children ignore case`() {
         // given
-        val sut = Konsist
-            .scopeFromFile("$appMainSourceSetProjectDirectory/fixture/AppClass.kt".toOsSeparator())
-            .classes()
-            .withName("AppClass")
-            .first()
+        val sut =
+            Konsist
+                .scopeFromFile("$appMainSourceSetProjectDirectory/fixture/AppClass.kt".toOsSeparator())
+                .classes()
+                .withName("AppClass")
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -151,11 +155,12 @@ class KoClassForKoChildProviderTest {
     @Test
     fun `class with child ignore case`() {
         // given
-        val sut = Konsist
-            .scopeFromFile("$appMainSourceSetProjectDirectory/fixture/AppClass.kt".toOsSeparator())
-            .classes()
-            .withName("ParentSuperClass")
-            .first()
+        val sut =
+            Konsist
+                .scopeFromFile("$appMainSourceSetProjectDirectory/fixture/AppClass.kt".toOsSeparator())
+                .classes()
+                .withName("ParentSuperClass")
+                .first()
 
         // then
         assertSoftly(sut) {

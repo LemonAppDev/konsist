@@ -9,14 +9,15 @@ import java.io.File
 class KonsistRootProjectPathFromGradleModuleTest {
     @Test
     fun `project root path resolved from Gradle module`() {
-        val projectRootPath = File("")
-            .absoluteFile
-            .path
-            .replace(File.separator, "/")
-            .dropLastWhile { it != '/' }
-            .dropLastWhile { it != '/' }
-            .dropLast(1)
-            .replace("/", File.separator)
+        val projectRootPath =
+            File("")
+                .absoluteFile
+                .path
+                .replace(File.separator, "/")
+                .dropLastWhile { it != '/' }
+                .dropLastWhile { it != '/' }
+                .dropLast(1)
+                .replace("/", File.separator)
 
         // then
         Konsist.projectRootPath shouldBeEqualTo projectRootPath

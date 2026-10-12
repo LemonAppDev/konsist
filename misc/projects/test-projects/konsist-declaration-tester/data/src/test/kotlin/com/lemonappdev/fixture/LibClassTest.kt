@@ -8,7 +8,9 @@ import com.lemonappdev.fixture.LibObject as ImportAlias
  * Lib KDoc Test
  */
 @Suppress("lib_argument_test")
-class LibClassTest(val libParameterTest: String) : LibInterfaceTest {
+class LibClassTest(
+    val libParameterTest: String,
+) : LibInterfaceTest {
     constructor(otherParameterTest: Int) : this(otherParameterTest.toString())
 
     init {
@@ -42,7 +44,7 @@ object LibObjectTest
 enum class LibEnumClassTest {
     APP_CONSTANT {
         val libVariableTest = ""
-    }
+    },
 }
 
 fun libFunctionTest(libTestParameter: String) {

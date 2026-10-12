@@ -15,12 +15,13 @@ class KoTypeParameterForKoSourceSetProviderTest {
     @Test
     fun `source set name is 'main' in app module`() {
         // given
-        val sut = Konsist
-            .scopeFromFile("$appMainSourceSetProjectDirectory/fixture/AppClass.kt".toOsSeparator())
-            .properties()
-            .first { it.name == "appPropertyWithTypeParameter" }
-            .type
-            ?.asTypeParameterDeclaration()
+        val sut =
+            Konsist
+                .scopeFromFile("$appMainSourceSetProjectDirectory/fixture/AppClass.kt".toOsSeparator())
+                .properties()
+                .first { it.name == "appPropertyWithTypeParameter" }
+                .type
+                ?.asTypeParameterDeclaration()
 
         // then
         assertSoftly(sut) {
@@ -33,12 +34,13 @@ class KoTypeParameterForKoSourceSetProviderTest {
     @Test
     fun `source set name is 'integrationTest' in app module`() {
         // given
-        val sut = Konsist
-            .scopeFromFile("$appIntegrationTestSourceSetProjectDirectory/fixture/AppClassTest.kt".toOsSeparator())
-            .properties()
-            .first { it.name == "appPropertyWithTypeParameterTest" }
-            .type
-            ?.asTypeParameterDeclaration()
+        val sut =
+            Konsist
+                .scopeFromFile("$appIntegrationTestSourceSetProjectDirectory/fixture/AppClassTest.kt".toOsSeparator())
+                .properties()
+                .first { it.name == "appPropertyWithTypeParameterTest" }
+                .type
+                ?.asTypeParameterDeclaration()
 
         // then
         assertSoftly(sut) {
@@ -51,12 +53,13 @@ class KoTypeParameterForKoSourceSetProviderTest {
     @Test
     fun `source set name is 'main' in data module`() {
         // given
-        val sut = Konsist
-            .scopeFromFile("$dataMainSourceSetProjectDirectory/fixture/LibClass.kt".toOsSeparator())
-            .properties()
-            .first { it.name == "libPropertyWithTypeParameter" }
-            .type
-            ?.asTypeParameterDeclaration()
+        val sut =
+            Konsist
+                .scopeFromFile("$dataMainSourceSetProjectDirectory/fixture/LibClass.kt".toOsSeparator())
+                .properties()
+                .first { it.name == "libPropertyWithTypeParameter" }
+                .type
+                ?.asTypeParameterDeclaration()
 
         // then
         assertSoftly(sut) {
@@ -69,12 +72,13 @@ class KoTypeParameterForKoSourceSetProviderTest {
     @Test
     fun `source set name is 'test' in data module`() {
         // given
-        val sut = Konsist
-            .scopeFromFile("$dataTestSourceSetProjectDirectory/fixture/LibClassTest.kt".toOsSeparator())
-            .properties()
-            .first { it.name == "libPropertyWithTypeParameterTest" }
-            .type
-            ?.asTypeParameterDeclaration()
+        val sut =
+            Konsist
+                .scopeFromFile("$dataTestSourceSetProjectDirectory/fixture/LibClassTest.kt".toOsSeparator())
+                .properties()
+                .first { it.name == "libPropertyWithTypeParameterTest" }
+                .type
+                ?.asTypeParameterDeclaration()
 
         // then
         assertSoftly(sut) {
@@ -87,12 +91,13 @@ class KoTypeParameterForKoSourceSetProviderTest {
     @Test
     fun `source set name is 'main' in root module`() {
         // given
-        val sut = Konsist
-            .scopeFromFile("$rootMainSourceSetProjectDirectory/fixture/RootClass.kt".toOsSeparator())
-            .properties()
-            .first { it.name == "rootPropertyWithTypeParameter" }
-            .type
-            ?.asTypeParameterDeclaration()
+        val sut =
+            Konsist
+                .scopeFromFile("$rootMainSourceSetProjectDirectory/fixture/RootClass.kt".toOsSeparator())
+                .properties()
+                .first { it.name == "rootPropertyWithTypeParameter" }
+                .type
+                ?.asTypeParameterDeclaration()
 
         // then
         assertSoftly(sut) {
@@ -105,12 +110,13 @@ class KoTypeParameterForKoSourceSetProviderTest {
     @Test
     fun `source set name is 'main' in root module with double src package`() {
         // given
-        val sut = Konsist
-            .scopeFromFile("$rootMainSourceSetProjectDirectory/fixture/src/RootSrcClass.kt".toOsSeparator())
-            .properties()
-            .first { it.name == "rootSrcPropertyWithTypeParameter" }
-            .type
-            ?.asTypeParameterDeclaration()
+        val sut =
+            Konsist
+                .scopeFromFile("$rootMainSourceSetProjectDirectory/fixture/src/RootSrcClass.kt".toOsSeparator())
+                .properties()
+                .first { it.name == "rootSrcPropertyWithTypeParameter" }
+                .type
+                ?.asTypeParameterDeclaration()
 
         // then
         assertSoftly(sut) {

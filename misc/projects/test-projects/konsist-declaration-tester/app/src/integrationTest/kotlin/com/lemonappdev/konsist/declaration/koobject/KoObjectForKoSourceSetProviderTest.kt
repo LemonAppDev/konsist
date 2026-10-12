@@ -15,10 +15,11 @@ class KoObjectForKoSourceSetProviderTest {
     @Test
     fun `source set name is 'main' in app module`() {
         // given
-        val sut = Konsist
-            .scopeFromFile("$appMainSourceSetProjectDirectory/fixture/AppClass.kt".toOsSeparator())
-            .objects()
-            .first()
+        val sut =
+            Konsist
+                .scopeFromFile("$appMainSourceSetProjectDirectory/fixture/AppClass.kt".toOsSeparator())
+                .objects()
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -31,10 +32,11 @@ class KoObjectForKoSourceSetProviderTest {
     @Test
     fun `source set name is 'integrationTest' in app module`() {
         // given
-        val sut = Konsist
-            .scopeFromFile("$appIntegrationTestSourceSetProjectDirectory/fixture/AppClassTest.kt".toOsSeparator())
-            .objects()
-            .first()
+        val sut =
+            Konsist
+                .scopeFromFile("$appIntegrationTestSourceSetProjectDirectory/fixture/AppClassTest.kt".toOsSeparator())
+                .objects()
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -47,10 +49,11 @@ class KoObjectForKoSourceSetProviderTest {
     @Test
     fun `source set name is 'main' in data module`() {
         // given
-        val sut = Konsist
-            .scopeFromFile("$dataMainSourceSetProjectDirectory/fixture/LibClass.kt".toOsSeparator())
-            .objects()
-            .first()
+        val sut =
+            Konsist
+                .scopeFromFile("$dataMainSourceSetProjectDirectory/fixture/LibClass.kt".toOsSeparator())
+                .objects()
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -63,10 +66,11 @@ class KoObjectForKoSourceSetProviderTest {
     @Test
     fun `source set name is 'test' in data module`() {
         // given
-        val sut = Konsist
-            .scopeFromFile("$dataTestSourceSetProjectDirectory/fixture/LibClassTest.kt".toOsSeparator())
-            .objects()
-            .first()
+        val sut =
+            Konsist
+                .scopeFromFile("$dataTestSourceSetProjectDirectory/fixture/LibClassTest.kt".toOsSeparator())
+                .objects()
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -79,10 +83,11 @@ class KoObjectForKoSourceSetProviderTest {
     @Test
     fun `source set name is 'main' in root module`() {
         // given
-        val sut = Konsist
-            .scopeFromFile("$rootMainSourceSetProjectDirectory/fixture/RootClass.kt".toOsSeparator())
-            .objects()
-            .first()
+        val sut =
+            Konsist
+                .scopeFromFile("$rootMainSourceSetProjectDirectory/fixture/RootClass.kt".toOsSeparator())
+                .objects()
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -95,10 +100,11 @@ class KoObjectForKoSourceSetProviderTest {
     @Test
     fun `source set name is 'main' in root module with double src package`() {
         // given
-        val sut = Konsist
-            .scopeFromFile("$rootMainSourceSetProjectDirectory/fixture/src/RootSrcClass.kt".toOsSeparator())
-            .objects()
-            .first()
+        val sut =
+            Konsist
+                .scopeFromFile("$rootMainSourceSetProjectDirectory/fixture/src/RootSrcClass.kt".toOsSeparator())
+                .objects()
+                .first()
 
         // then
         assertSoftly(sut) {

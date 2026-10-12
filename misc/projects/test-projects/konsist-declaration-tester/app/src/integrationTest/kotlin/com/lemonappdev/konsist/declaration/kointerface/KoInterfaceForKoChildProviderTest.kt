@@ -13,11 +13,12 @@ class KoInterfaceForKoChildProviderTest {
     @Test
     fun `interface without children`() {
         // given
-        val sut = Konsist
-            .scopeFromFile("$appMainSourceSetProjectDirectory/fixture/AppClass.kt".toOsSeparator())
-            .interfaces()
-            .withName("InterfaceWithoutChildren")
-            .first()
+        val sut =
+            Konsist
+                .scopeFromFile("$appMainSourceSetProjectDirectory/fixture/AppClass.kt".toOsSeparator())
+                .interfaces()
+                .withName("InterfaceWithoutChildren")
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -43,11 +44,12 @@ class KoInterfaceForKoChildProviderTest {
     @Test
     fun `interface with direct child`() {
         // given
-        val sut = Konsist
-            .scopeFromFile("$appMainSourceSetProjectDirectory/fixture/AppClass.kt".toOsSeparator())
-            .interfaces()
-            .withName("ParentSuperInterface")
-            .first()
+        val sut =
+            Konsist
+                .scopeFromFile("$appMainSourceSetProjectDirectory/fixture/AppClass.kt".toOsSeparator())
+                .interfaces()
+                .withName("ParentSuperInterface")
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -82,11 +84,12 @@ class KoInterfaceForKoChildProviderTest {
     @Test
     fun `interface with indirect children`() {
         // given
-        val sut = Konsist
-            .scopeFromFile("$appMainSourceSetProjectDirectory/fixture/AppClass.kt".toOsSeparator())
-            .interfaces()
-            .withName("ParentSuperInterface")
-            .first()
+        val sut =
+            Konsist
+                .scopeFromFile("$appMainSourceSetProjectDirectory/fixture/AppClass.kt".toOsSeparator())
+                .interfaces()
+                .withName("ParentSuperInterface")
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -125,11 +128,12 @@ class KoInterfaceForKoChildProviderTest {
     @Test
     fun `interface without children ignore case`() {
         // given
-        val sut = Konsist
-            .scopeFromFile("$appMainSourceSetProjectDirectory/fixture/AppClass.kt".toOsSeparator())
-            .interfaces()
-            .withName("InterfaceWithoutChildren")
-            .first()
+        val sut =
+            Konsist
+                .scopeFromFile("$appMainSourceSetProjectDirectory/fixture/AppClass.kt".toOsSeparator())
+                .interfaces()
+                .withName("InterfaceWithoutChildren")
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -151,11 +155,12 @@ class KoInterfaceForKoChildProviderTest {
     @Test
     fun `interface with direct child ignore case`() {
         // given
-        val sut = Konsist
-            .scopeFromFile("$appMainSourceSetProjectDirectory/fixture/AppClass.kt".toOsSeparator())
-            .interfaces()
-            .withName("ParentSuperInterface")
-            .first()
+        val sut =
+            Konsist
+                .scopeFromFile("$appMainSourceSetProjectDirectory/fixture/AppClass.kt".toOsSeparator())
+                .interfaces()
+                .withName("ParentSuperInterface")
+                .first()
 
         // then
         assertSoftly(sut) {

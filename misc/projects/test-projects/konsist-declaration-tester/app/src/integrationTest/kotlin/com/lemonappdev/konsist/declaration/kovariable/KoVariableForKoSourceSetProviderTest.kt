@@ -26,9 +26,10 @@ class KoVariableForKoSourceSetProviderTest {
     @MethodSource("provideValuesForAppMain")
     fun `source set name is 'main' in app module`(declarations: List<KoVariableProvider>) {
         // given
-        val sut = declarations
-            .variables
-            .first()
+        val sut =
+            declarations
+                .variables
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -42,9 +43,10 @@ class KoVariableForKoSourceSetProviderTest {
     @MethodSource("provideValuesForAppIntegrationTest")
     fun `source set name is 'integrationTest' in app module`(declarations: List<KoVariableProvider>) {
         // given
-        val sut = declarations
-            .variables
-            .first()
+        val sut =
+            declarations
+                .variables
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -58,9 +60,10 @@ class KoVariableForKoSourceSetProviderTest {
     @MethodSource("provideValuesForDataMain")
     fun `source set name is 'main' in data module`(declarations: List<KoVariableProvider>) {
         // given
-        val sut = declarations
-            .variables
-            .first()
+        val sut =
+            declarations
+                .variables
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -74,9 +77,10 @@ class KoVariableForKoSourceSetProviderTest {
     @MethodSource("provideValuesForDataTest")
     fun `source set name is 'test' in data module`(declarations: List<KoVariableProvider>) {
         // given
-        val sut = declarations
-            .variables
-            .first()
+        val sut =
+            declarations
+                .variables
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -90,9 +94,10 @@ class KoVariableForKoSourceSetProviderTest {
     @MethodSource("provideValuesForRootMain")
     fun `source set name is 'main' in root module`(declarations: List<KoVariableProvider>) {
         // given
-        val sut = declarations
-            .variables
-            .first()
+        val sut =
+            declarations
+                .variables
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -106,9 +111,10 @@ class KoVariableForKoSourceSetProviderTest {
     @MethodSource("provideValuesForRootMainWithDoubleSrcPackage")
     fun `source set name is 'main' in root module with double src package`(declarations: List<KoVariableProvider>) {
         // given
-        val sut = declarations
-            .variables
-            .first()
+        val sut =
+            declarations
+                .variables
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -132,62 +138,68 @@ class KoVariableForKoSourceSetProviderTest {
 
         @Suppress("unused")
         @JvmStatic
-        fun provideValuesForAppMain() = listOf(
-            arguments(Konsist.scopeFromFile(appMainPath).functions()),
-            arguments(Konsist.scopeFromFile(appMainPath).classes().initBlocks),
-            arguments(Konsist.scopeFromFile(appMainPath).classes().enumConstants),
-            arguments(Konsist.scopeFromFile(appMainPath).properties().getters),
-            arguments(Konsist.scopeFromFile(appMainPath).properties().setters),
-        )
+        fun provideValuesForAppMain() =
+            listOf(
+                arguments(Konsist.scopeFromFile(appMainPath).functions()),
+                arguments(Konsist.scopeFromFile(appMainPath).classes().initBlocks),
+                arguments(Konsist.scopeFromFile(appMainPath).classes().enumConstants),
+                arguments(Konsist.scopeFromFile(appMainPath).properties().getters),
+                arguments(Konsist.scopeFromFile(appMainPath).properties().setters),
+            )
 
         @Suppress("unused")
         @JvmStatic
-        fun provideValuesForAppIntegrationTest() = listOf(
-            arguments(Konsist.scopeFromFile(appIntegrationTestPath).functions()),
-            arguments(Konsist.scopeFromFile(appIntegrationTestPath).classes().initBlocks),
-            arguments(Konsist.scopeFromFile(appIntegrationTestPath).classes().enumConstants),
-            arguments(Konsist.scopeFromFile(appIntegrationTestPath).properties().getters),
-            arguments(Konsist.scopeFromFile(appIntegrationTestPath).properties().setters),
-        )
+        fun provideValuesForAppIntegrationTest() =
+            listOf(
+                arguments(Konsist.scopeFromFile(appIntegrationTestPath).functions()),
+                arguments(Konsist.scopeFromFile(appIntegrationTestPath).classes().initBlocks),
+                arguments(Konsist.scopeFromFile(appIntegrationTestPath).classes().enumConstants),
+                arguments(Konsist.scopeFromFile(appIntegrationTestPath).properties().getters),
+                arguments(Konsist.scopeFromFile(appIntegrationTestPath).properties().setters),
+            )
 
         @Suppress("unused")
         @JvmStatic
-        fun provideValuesForDataMain() = listOf(
-            arguments(Konsist.scopeFromFile(dataMainPath).functions()),
-            arguments(Konsist.scopeFromFile(dataMainPath).classes().initBlocks),
-            arguments(Konsist.scopeFromFile(dataMainPath).classes().enumConstants),
-            arguments(Konsist.scopeFromFile(dataMainPath).properties().getters),
-            arguments(Konsist.scopeFromFile(dataMainPath).properties().setters),
-        )
+        fun provideValuesForDataMain() =
+            listOf(
+                arguments(Konsist.scopeFromFile(dataMainPath).functions()),
+                arguments(Konsist.scopeFromFile(dataMainPath).classes().initBlocks),
+                arguments(Konsist.scopeFromFile(dataMainPath).classes().enumConstants),
+                arguments(Konsist.scopeFromFile(dataMainPath).properties().getters),
+                arguments(Konsist.scopeFromFile(dataMainPath).properties().setters),
+            )
 
         @Suppress("unused")
         @JvmStatic
-        fun provideValuesForDataTest() = listOf(
-            arguments(Konsist.scopeFromFile(dataTestPath).functions()),
-            arguments(Konsist.scopeFromFile(dataTestPath).classes().initBlocks),
-            arguments(Konsist.scopeFromFile(dataTestPath).classes().enumConstants),
-            arguments(Konsist.scopeFromFile(dataTestPath).properties().getters),
-            arguments(Konsist.scopeFromFile(dataTestPath).properties().setters),
-        )
+        fun provideValuesForDataTest() =
+            listOf(
+                arguments(Konsist.scopeFromFile(dataTestPath).functions()),
+                arguments(Konsist.scopeFromFile(dataTestPath).classes().initBlocks),
+                arguments(Konsist.scopeFromFile(dataTestPath).classes().enumConstants),
+                arguments(Konsist.scopeFromFile(dataTestPath).properties().getters),
+                arguments(Konsist.scopeFromFile(dataTestPath).properties().setters),
+            )
 
         @Suppress("unused")
         @JvmStatic
-        fun provideValuesForRootMain() = listOf(
-            arguments(Konsist.scopeFromFile(rootMainPath).functions()),
-            arguments(Konsist.scopeFromFile(rootMainPath).classes().initBlocks),
-            arguments(Konsist.scopeFromFile(rootMainPath).classes().enumConstants),
-            arguments(Konsist.scopeFromFile(rootMainPath).properties().getters),
-            arguments(Konsist.scopeFromFile(rootMainPath).properties().setters),
-        )
+        fun provideValuesForRootMain() =
+            listOf(
+                arguments(Konsist.scopeFromFile(rootMainPath).functions()),
+                arguments(Konsist.scopeFromFile(rootMainPath).classes().initBlocks),
+                arguments(Konsist.scopeFromFile(rootMainPath).classes().enumConstants),
+                arguments(Konsist.scopeFromFile(rootMainPath).properties().getters),
+                arguments(Konsist.scopeFromFile(rootMainPath).properties().setters),
+            )
 
         @Suppress("unused")
         @JvmStatic
-        fun provideValuesForRootMainWithDoubleSrcPackage() = listOf(
-            arguments(Konsist.scopeFromFile(rootMainPathWithDoubleSrcPackage).functions()),
-            arguments(Konsist.scopeFromFile(rootMainPathWithDoubleSrcPackage).classes().initBlocks),
-            arguments(Konsist.scopeFromFile(rootMainPathWithDoubleSrcPackage).classes().enumConstants),
-            arguments(Konsist.scopeFromFile(rootMainPathWithDoubleSrcPackage).properties().getters),
-            arguments(Konsist.scopeFromFile(rootMainPathWithDoubleSrcPackage).properties().setters),
-        )
+        fun provideValuesForRootMainWithDoubleSrcPackage() =
+            listOf(
+                arguments(Konsist.scopeFromFile(rootMainPathWithDoubleSrcPackage).functions()),
+                arguments(Konsist.scopeFromFile(rootMainPathWithDoubleSrcPackage).classes().initBlocks),
+                arguments(Konsist.scopeFromFile(rootMainPathWithDoubleSrcPackage).classes().enumConstants),
+                arguments(Konsist.scopeFromFile(rootMainPathWithDoubleSrcPackage).properties().getters),
+                arguments(Konsist.scopeFromFile(rootMainPathWithDoubleSrcPackage).properties().setters),
+            )
     }
 }

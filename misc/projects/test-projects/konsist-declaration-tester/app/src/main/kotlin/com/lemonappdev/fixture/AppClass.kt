@@ -8,7 +8,10 @@ import com.lemonappdev.fixture.FixtureObject as ImportAlias
  * App KDoc
  */
 @Suppress("app_argument")
- class AppClass(val appParameter: String) : ParentClass(), ParentInterface {
+class AppClass(
+    val appParameter: String,
+) : ParentClass(),
+    ParentInterface {
     constructor(otherParameter: Int) : this(otherParameter.toString())
 
     init {
@@ -24,9 +27,9 @@ interface ParentSuperInterface
 
 interface InterfaceWithoutChildren
 
-object FixtureObject: ParentClassForObject()
+object FixtureObject : ParentClassForObject()
 
-open class ParentClass: ParentSuperClass()
+open class ParentClass : ParentSuperClass()
 
 open class ParentSuperClass
 
@@ -54,7 +57,7 @@ object AppObject
 enum class AppEnumClass {
     APP_CONSTANT {
         val appVariable = ""
-    }
+    },
 }
 
 fun appFunction(appParameter: String) {

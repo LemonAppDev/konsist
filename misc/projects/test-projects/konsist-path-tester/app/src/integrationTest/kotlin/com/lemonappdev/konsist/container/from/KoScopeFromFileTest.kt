@@ -1,8 +1,8 @@
 package com.lemonappdev.konsist.container.from
 
 import com.lemonappdev.konsist.api.Konsist
-import com.lemonappdev.konsist.helper.ext.mapToFilePaths
 import com.lemonappdev.konsist.helper.ext.fileSeparator
+import com.lemonappdev.konsist.helper.ext.mapToFilePaths
 import com.lemonappdev.konsist.helper.ext.toOsSeparator
 import com.lemonappdev.konsist.helper.util.PathProvider.appMainSourceSetDirectory
 import org.amshove.kluent.shouldBeEqualTo
@@ -11,33 +11,32 @@ import org.amshove.kluent.withMessage
 import org.junit.jupiter.api.Test
 
 class KoScopeFromFileTest {
-
     @Test
     fun `scopeFromFile`() {
         // given
-        val sut = Konsist
-            .scopeFromFile(
-                "/app/src/main/kotlin/com/lemonappdev/fixture/AppClass.kt",
-                "/app/src/main/kotlin/com/lemonappdev/fixture/data/AppDataClass.kt"
-            )
-            .mapToFilePaths()
+        val sut =
+            Konsist
+                .scopeFromFile(
+                    "/app/src/main/kotlin/com/lemonappdev/fixture/AppClass.kt",
+                    "/app/src/main/kotlin/com/lemonappdev/fixture/data/AppDataClass.kt",
+                ).mapToFilePaths()
 
         // then
         sut.shouldBeEqualTo(
             listOf(
                 "$appMainSourceSetDirectory/fixture/AppClass.kt",
                 "$appMainSourceSetDirectory/fixture/data/AppDataClass.kt",
-
-                ).toOsSeparator(),
+            ).toOsSeparator(),
         )
     }
 
     @Test
     fun `scopeFromFile accepts unix separators`() {
         // given
-        val sut = Konsist
-            .scopeFromFile("app/src/main/kotlin/com/lemonappdev/fixture/AppClass.kt")
-            .mapToFilePaths()
+        val sut =
+            Konsist
+                .scopeFromFile("app/src/main/kotlin/com/lemonappdev/fixture/AppClass.kt")
+                .mapToFilePaths()
 
         // then
         sut shouldBeEqualTo listOf("$appMainSourceSetDirectory/fixture/AppClass.kt".toOsSeparator())
@@ -46,9 +45,10 @@ class KoScopeFromFileTest {
     @Test
     fun `scopeFromFile accepts windows separators`() {
         // given
-        val sut = Konsist
-            .scopeFromFile("""app\src\main\kotlin\com\lemonappdev\fixture\AppClass.kt""")
-            .mapToFilePaths()
+        val sut =
+            Konsist
+                .scopeFromFile("""app\src\main\kotlin\com\lemonappdev\fixture\AppClass.kt""")
+                .mapToFilePaths()
 
         // then
         sut shouldBeEqualTo listOf("$appMainSourceSetDirectory/fixture/AppClass.kt".toOsSeparator())

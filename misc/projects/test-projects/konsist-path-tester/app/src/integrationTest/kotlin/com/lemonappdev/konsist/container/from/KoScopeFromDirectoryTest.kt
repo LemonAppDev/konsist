@@ -11,13 +11,13 @@ import org.amshove.kluent.withMessage
 import org.junit.jupiter.api.Test
 
 class KoScopeFromDirectoryTest {
-
     @Test
     fun `scopeFromDirectory`() {
         // given
-        val sut = Konsist
-            .scopeFromDirectory("app/src/main/kotlin/com/lemonappdev/fixture/")
-            .mapToFilePaths()
+        val sut =
+            Konsist
+                .scopeFromDirectory("app/src/main/kotlin/com/lemonappdev/fixture/")
+                .mapToFilePaths()
 
         // then
         sut.shouldBeEqualTo(
@@ -31,9 +31,10 @@ class KoScopeFromDirectoryTest {
     @Test
     fun `scopeFromDirectory accepts windows separators`() {
         // given
-        val sut = Konsist
-            .scopeFromDirectory("""app\src\main\kotlin\com\lemonappdev\fixture\""")
-            .mapToFilePaths()
+        val sut =
+            Konsist
+                .scopeFromDirectory("""app\src\main\kotlin\com\lemonappdev\fixture\""")
+                .mapToFilePaths()
 
         // then
         sut.shouldBeEqualTo(

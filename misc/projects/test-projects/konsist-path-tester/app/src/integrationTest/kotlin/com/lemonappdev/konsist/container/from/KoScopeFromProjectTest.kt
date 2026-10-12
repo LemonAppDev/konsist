@@ -17,9 +17,10 @@ class KoScopeFromProjectTest {
     @Test
     fun `scopeFromProject ignoreBuildConfig true`() {
         // given
-        val sut = Konsist
-            .scopeFromProject(ignoreBuildConfig = true)
-            .mapToFilePaths()
+        val sut =
+            Konsist
+                .scopeFromProject(ignoreBuildConfig = true)
+                .mapToFilePaths()
 
         // then
         sut.shouldBeEqualTo(
@@ -60,9 +61,10 @@ class KoScopeFromProjectTest {
     @Test
     fun `scopeFromProject ignoreBuildConfig false`() {
         // given
-        val sut = Konsist
-            .scopeFromProject(ignoreBuildConfig = false)
-            .mapToFilePaths()
+        val sut =
+            Konsist
+                .scopeFromProject(ignoreBuildConfig = false)
+                .mapToFilePaths()
 
         // then
         sut.shouldBeEqualTo(
@@ -103,9 +105,10 @@ class KoScopeFromProjectTest {
     @Test
     fun `scopeFromProject for data module`() {
         // given
-        val sut = Konsist
-            .scopeFromProject(moduleName = "data")
-            .mapToFilePaths()
+        val sut =
+            Konsist
+                .scopeFromProject(moduleName = "data")
+                .mapToFilePaths()
 
         // then
         sut.shouldBeEqualTo(
@@ -121,9 +124,10 @@ class KoScopeFromProjectTest {
     @Test
     fun `scopeFromProject for root module`() {
         // given
-        val sut = Konsist
-            .scopeFromProject(moduleName = "root")
-            .mapToFilePaths()
+        val sut =
+            Konsist
+                .scopeFromProject(moduleName = "root")
+                .mapToFilePaths()
 
         // then
         sut.shouldBeEqualTo(
@@ -138,9 +142,10 @@ class KoScopeFromProjectTest {
     @Test
     fun `scopeFromProject for main source set`() {
         // given
-        val sut = Konsist
-            .scopeFromProject(sourceSetName = "main")
-            .mapToFilePaths()
+        val sut =
+            Konsist
+                .scopeFromProject(sourceSetName = "main")
+                .mapToFilePaths()
 
         // then
         sut.shouldBeEqualTo(
@@ -160,9 +165,10 @@ class KoScopeFromProjectTest {
     @Test
     fun `scopeFromProject for integrationTest source set`() {
         // given
-        val sut = Konsist
-            .scopeFromProject(sourceSetName = "integrationTest")
-            .mapToFilePaths()
+        val sut =
+            Konsist
+                .scopeFromProject(sourceSetName = "integrationTest")
+                .mapToFilePaths()
 
         // then
         sut.shouldBeEqualTo(
@@ -193,9 +199,10 @@ class KoScopeFromProjectTest {
     @Test
     fun `scopeFromProject for test source set`() {
         // given
-        val sut = Konsist
-            .scopeFromProject(sourceSetName = "test")
-            .mapToFilePaths()
+        val sut =
+            Konsist
+                .scopeFromProject(sourceSetName = "test")
+                .mapToFilePaths()
 
         // then
         sut.shouldBeEqualTo(
@@ -209,9 +216,10 @@ class KoScopeFromProjectTest {
     @Test
     fun `scopeFromProject for app module and main source set`() {
         // given
-        val sut = Konsist
-            .scopeFromProject(moduleName = "app", sourceSetName = "main")
-            .mapToFilePaths()
+        val sut =
+            Konsist
+                .scopeFromProject(moduleName = "app", sourceSetName = "main")
+                .mapToFilePaths()
 
         // then
         sut.shouldBeEqualTo(
@@ -226,9 +234,10 @@ class KoScopeFromProjectTest {
     @Test
     fun `scopeFromProject for app module and integrationTest source set`() {
         // given
-        val sut = Konsist
-            .scopeFromProject(moduleName = "app", sourceSetName = "integrationTest")
-            .mapToFilePaths()
+        val sut =
+            Konsist
+                .scopeFromProject(moduleName = "app", sourceSetName = "integrationTest")
+                .mapToFilePaths()
 
         // then
         sut.shouldBeEqualTo(
@@ -259,9 +268,10 @@ class KoScopeFromProjectTest {
     @Test
     fun `scopeFromProject for app module and test source set`() {
         // given
-        val sut = Konsist
-            .scopeFromProject(moduleName = "app", sourceSetName = "test")
-            .mapToFilePaths()
+        val sut =
+            Konsist
+                .scopeFromProject(moduleName = "app", sourceSetName = "test")
+                .mapToFilePaths()
 
         // then
         sut.shouldBeEqualTo(emptyList())
@@ -270,9 +280,10 @@ class KoScopeFromProjectTest {
     @Test
     fun `scopeFromProject for data module and main source set`() {
         // given
-        val sut = Konsist
-            .scopeFromProject(moduleName = "data", sourceSetName = "main")
-            .mapToFilePaths()
+        val sut =
+            Konsist
+                .scopeFromProject(moduleName = "data", sourceSetName = "main")
+                .mapToFilePaths()
 
         // then
         sut.shouldBeEqualTo(
@@ -286,9 +297,10 @@ class KoScopeFromProjectTest {
     @Test
     fun `scopeFromProject for data module and integrationTest source set`() {
         // given
-        val sut = Konsist
-            .scopeFromProject(moduleName = "data", sourceSetName = "integrationTest")
-            .mapToFilePaths()
+        val sut =
+            Konsist
+                .scopeFromProject(moduleName = "data", sourceSetName = "integrationTest")
+                .mapToFilePaths()
 
         // then
         sut.shouldBeEqualTo(emptyList())
@@ -297,9 +309,10 @@ class KoScopeFromProjectTest {
     @Test
     fun `scopeFromProject for data module and test source set`() {
         // given
-        val sut = Konsist
-            .scopeFromProject(moduleName = "data", sourceSetName = "test")
-            .mapToFilePaths()
+        val sut =
+            Konsist
+                .scopeFromProject(moduleName = "data", sourceSetName = "test")
+                .mapToFilePaths()
 
         // then
         sut.shouldBeEqualTo(
@@ -313,9 +326,10 @@ class KoScopeFromProjectTest {
     @Test
     fun `scopeFromProject for root module and main source set`() {
         // given
-        val sut = Konsist
-            .scopeFromProject(moduleName = "root", sourceSetName = "main")
-            .mapToFilePaths()
+        val sut =
+            Konsist
+                .scopeFromProject(moduleName = "root", sourceSetName = "main")
+                .mapToFilePaths()
 
         // then
         sut.shouldBeEqualTo(
@@ -330,9 +344,10 @@ class KoScopeFromProjectTest {
     @Test
     fun `scopeFromProject for data module with gradle project path and main source set`() {
         // given
-        val sut = Konsist
-            .scopeFromProject(moduleName = ":data", sourceSetName = "main")
-            .mapToFilePaths()
+        val sut =
+            Konsist
+                .scopeFromProject(moduleName = ":data", sourceSetName = "main")
+                .mapToFilePaths()
 
         // then
         sut.shouldBeEqualTo(

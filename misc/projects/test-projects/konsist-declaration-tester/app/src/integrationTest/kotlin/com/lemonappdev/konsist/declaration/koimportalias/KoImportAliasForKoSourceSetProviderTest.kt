@@ -16,12 +16,13 @@ class KoImportAliasForKoSourceSetProviderTest {
     @Test
     fun `source set name is 'main' in app module`() {
         // given
-        val sut = Konsist
-            .scopeFromFile("$appMainSourceSetProjectDirectory/fixture/AppClass.kt".toOsSeparator())
-            .properties()
-            .first { it.name == "appPropertyWithImportAliasType" }
-            .type
-            ?.asImportAliasDeclaration()
+        val sut =
+            Konsist
+                .scopeFromFile("$appMainSourceSetProjectDirectory/fixture/AppClass.kt".toOsSeparator())
+                .properties()
+                .first { it.name == "appPropertyWithImportAliasType" }
+                .type
+                ?.asImportAliasDeclaration()
 
         // then
         assertSoftly(sut) {
@@ -34,12 +35,13 @@ class KoImportAliasForKoSourceSetProviderTest {
     @Test
     fun `source set name is 'integrationTest' in app module`() {
         // given
-        val sut = Konsist
-            .scopeFromFile("$appIntegrationTestSourceSetProjectDirectory/fixture/AppClassTest.kt".toOsSeparator())
-            .properties()
-            .first { it.name == "appPropertyWithImportAliasTypeTest" }
-            .type
-            ?.asImportAliasDeclaration()
+        val sut =
+            Konsist
+                .scopeFromFile("$appIntegrationTestSourceSetProjectDirectory/fixture/AppClassTest.kt".toOsSeparator())
+                .properties()
+                .first { it.name == "appPropertyWithImportAliasTypeTest" }
+                .type
+                ?.asImportAliasDeclaration()
 
         // then
         assertSoftly(sut) {
@@ -52,12 +54,13 @@ class KoImportAliasForKoSourceSetProviderTest {
     @Test
     fun `source set name is 'main' in data module`() {
         // given
-        val sut = Konsist
-            .scopeFromFile("$dataMainSourceSetProjectDirectory/fixture/LibClass.kt".toOsSeparator())
-            .properties()
-            .first { it.name == "libPropertyWithImportAliasType" }
-            .type
-            ?.asImportAliasDeclaration()
+        val sut =
+            Konsist
+                .scopeFromFile("$dataMainSourceSetProjectDirectory/fixture/LibClass.kt".toOsSeparator())
+                .properties()
+                .first { it.name == "libPropertyWithImportAliasType" }
+                .type
+                ?.asImportAliasDeclaration()
 
         // then
         assertSoftly(sut) {
@@ -70,12 +73,13 @@ class KoImportAliasForKoSourceSetProviderTest {
     @Test
     fun `source set name is 'test' in data module`() {
         // given
-        val sut = Konsist
-            .scopeFromFile("$dataTestSourceSetProjectDirectory/fixture/LibClassTest.kt".toOsSeparator())
-            .properties()
-            .first { it.name == "libPropertyWithImportAliasTypeTest" }
-            .type
-            ?.asImportAliasDeclaration()
+        val sut =
+            Konsist
+                .scopeFromFile("$dataTestSourceSetProjectDirectory/fixture/LibClassTest.kt".toOsSeparator())
+                .properties()
+                .first { it.name == "libPropertyWithImportAliasTypeTest" }
+                .type
+                ?.asImportAliasDeclaration()
 
         // then
         assertSoftly(sut) {
@@ -88,12 +92,13 @@ class KoImportAliasForKoSourceSetProviderTest {
     @Test
     fun `source set name is 'main' in root module`() {
         // given
-        val sut = Konsist
-            .scopeFromFile("$rootMainSourceSetProjectDirectory/fixture/RootClass.kt".toOsSeparator())
-            .properties()
-            .first { it.name == "rootPropertyWithImportAliasType" }
-            .type
-            ?.asImportAliasDeclaration()
+        val sut =
+            Konsist
+                .scopeFromFile("$rootMainSourceSetProjectDirectory/fixture/RootClass.kt".toOsSeparator())
+                .properties()
+                .first { it.name == "rootPropertyWithImportAliasType" }
+                .type
+                ?.asImportAliasDeclaration()
 
         // then
         assertSoftly(sut) {
@@ -106,12 +111,13 @@ class KoImportAliasForKoSourceSetProviderTest {
     @Test
     fun `source set name is 'main' in root module with double src package`() {
         // given
-        val sut = Konsist
-            .scopeFromFile("$rootMainSourceSetProjectDirectory/fixture/src/RootSrcClass.kt".toOsSeparator())
-            .properties()
-            .first { it.name == "rootSrcPropertyWithImportAliasType" }
-            .type
-            ?.asImportAliasDeclaration()
+        val sut =
+            Konsist
+                .scopeFromFile("$rootMainSourceSetProjectDirectory/fixture/src/RootSrcClass.kt".toOsSeparator())
+                .properties()
+                .first { it.name == "rootSrcPropertyWithImportAliasType" }
+                .type
+                ?.asImportAliasDeclaration()
 
         // then
         assertSoftly(sut) {

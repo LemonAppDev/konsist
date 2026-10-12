@@ -18,9 +18,10 @@ class KoScopeFromModulesTest {
         // given
         val moduleNames = setOf("app")
 
-        val sut = Konsist
-            .scopeFromModules(moduleNames)
-            .mapToFilePaths()
+        val sut =
+            Konsist
+                .scopeFromModules(moduleNames)
+                .mapToFilePaths()
 
         // then
         sut.shouldBeEqualTo(
@@ -56,9 +57,10 @@ class KoScopeFromModulesTest {
         // given
         val moduleNames = listOf("app")
 
-        val sut = Konsist
-            .scopeFromModules(moduleNames)
-            .mapToFilePaths()
+        val sut =
+            Konsist
+                .scopeFromModules(moduleNames)
+                .mapToFilePaths()
 
         // then
         sut.shouldBeEqualTo(
@@ -93,9 +95,10 @@ class KoScopeFromModulesTest {
         // given
         val moduleNames = setOf("data")
 
-        val sut = Konsist
-            .scopeFromModules(moduleNames)
-            .mapToFilePaths()
+        val sut =
+            Konsist
+                .scopeFromModules(moduleNames)
+                .mapToFilePaths()
 
         // then
         sut.shouldBeEqualTo(
@@ -113,9 +116,10 @@ class KoScopeFromModulesTest {
         // given
         val moduleNames = listOf("data")
 
-        val sut = Konsist
-            .scopeFromModules(moduleNames)
-            .mapToFilePaths()
+        val sut =
+            Konsist
+                .scopeFromModules(moduleNames)
+                .mapToFilePaths()
 
         // then
         sut.shouldBeEqualTo(
@@ -128,15 +132,15 @@ class KoScopeFromModulesTest {
         )
     }
 
-
     @Test
     fun `scopeFromModules(set) for root module`() {
         // given
         val moduleNames = setOf("root")
 
-        val sut = Konsist
-            .scopeFromModules(moduleNames)
-            .mapToFilePaths()
+        val sut =
+            Konsist
+                .scopeFromModules(moduleNames)
+                .mapToFilePaths()
 
         // then
         sut.shouldBeEqualTo(
@@ -153,9 +157,10 @@ class KoScopeFromModulesTest {
         // given
         val moduleNames = listOf("root")
 
-        val sut = Konsist
-            .scopeFromModules(moduleNames)
-            .mapToFilePaths()
+        val sut =
+            Konsist
+                .scopeFromModules(moduleNames)
+                .mapToFilePaths()
 
         // then
         sut.shouldBeEqualTo(
@@ -173,9 +178,10 @@ class KoScopeFromModulesTest {
         // given
         val moduleNames = setOf("app", "data")
 
-        val sut = Konsist
-            .scopeFromModules(moduleNames)
-            .mapToFilePaths()
+        val sut =
+            Konsist
+                .scopeFromModules(moduleNames)
+                .mapToFilePaths()
 
         // then
         sut.shouldBeEqualTo(
@@ -215,9 +221,10 @@ class KoScopeFromModulesTest {
         // given
         val moduleNames = listOf("app", "data")
 
-        val sut = Konsist
-            .scopeFromModules(moduleNames)
-            .mapToFilePaths()
+        val sut =
+            Konsist
+                .scopeFromModules(moduleNames)
+                .mapToFilePaths()
 
         // then
         sut.shouldBeEqualTo(
@@ -256,9 +263,10 @@ class KoScopeFromModulesTest {
         // given
         val moduleNames = listOf(":data")
 
-        val sut = Konsist
-            .scopeFromModules(moduleNames)
-            .mapToFilePaths()
+        val sut =
+            Konsist
+                .scopeFromModules(moduleNames)
+                .mapToFilePaths()
 
         // then
         sut.shouldBeEqualTo(

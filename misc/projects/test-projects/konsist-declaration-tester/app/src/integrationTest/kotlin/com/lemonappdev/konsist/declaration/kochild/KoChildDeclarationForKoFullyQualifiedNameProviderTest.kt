@@ -14,12 +14,13 @@ class KoChildDeclarationForKoFullyQualifiedNameProviderTest {
     @Test
     fun `class child fully qualified name`() {
         // given
-        val sut = Konsist
-            .scopeFromFile("$appMainSourceSetProjectDirectory/fixture/AppClass.kt".toOsSeparator())
-            .classes()
-            .withName("ParentSuperClass")
-            .children()
-            .first()
+        val sut =
+            Konsist
+                .scopeFromFile("$appMainSourceSetProjectDirectory/fixture/AppClass.kt".toOsSeparator())
+                .classes()
+                .withName("ParentSuperClass")
+                .children()
+                .first()
 
         // then
         sut.fullyQualifiedName shouldBeEqualTo "com.lemonappdev.fixture.ParentClass"
@@ -28,12 +29,13 @@ class KoChildDeclarationForKoFullyQualifiedNameProviderTest {
     @Test
     fun `object child fully qualified name`() {
         // given
-        val sut = Konsist
-            .scopeFromFile("$appMainSourceSetProjectDirectory/fixture/AppClass.kt".toOsSeparator())
-            .classes()
-            .withName("ParentClassForObject")
-            .children()
-            .first()
+        val sut =
+            Konsist
+                .scopeFromFile("$appMainSourceSetProjectDirectory/fixture/AppClass.kt".toOsSeparator())
+                .classes()
+                .withName("ParentClassForObject")
+                .children()
+                .first()
 
         // then
         sut.fullyQualifiedName shouldBeEqualTo "com.lemonappdev.fixture.FixtureObject"
@@ -42,12 +44,13 @@ class KoChildDeclarationForKoFullyQualifiedNameProviderTest {
     @Test
     fun `interface child fully qualified name`() {
         // given
-        val sut = Konsist
-            .scopeFromFile("$appMainSourceSetProjectDirectory/fixture/AppClass.kt".toOsSeparator())
-            .interfaces()
-            .withName("ParentSuperInterface")
-            .children()
-            .first()
+        val sut =
+            Konsist
+                .scopeFromFile("$appMainSourceSetProjectDirectory/fixture/AppClass.kt".toOsSeparator())
+                .interfaces()
+                .withName("ParentSuperInterface")
+                .children()
+                .first()
 
         // then
         sut.fullyQualifiedName shouldBeEqualTo "com.lemonappdev.fixture.ParentInterface"

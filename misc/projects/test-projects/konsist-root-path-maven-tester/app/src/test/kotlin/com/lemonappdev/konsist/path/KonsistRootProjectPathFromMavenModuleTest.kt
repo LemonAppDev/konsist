@@ -9,13 +9,14 @@ import java.io.File
 class KonsistRootProjectPathFromMavenModuleTest {
     @Test
     fun `project root path resolved from Maven module`() {
-        val projectRootPath = File("")
-            .absoluteFile
-            .path
-            .replace(File.separator, "/")
-            .dropLastWhile { it != '/' }
-            .dropLast(1)
-            .replace("/", File.separator)
+        val projectRootPath =
+            File("")
+                .absoluteFile
+                .path
+                .replace(File.separator, "/")
+                .dropLastWhile { it != '/' }
+                .dropLast(1)
+                .replace("/", File.separator)
 
         // then
         Konsist.projectRootPath shouldBeEqualTo projectRootPath

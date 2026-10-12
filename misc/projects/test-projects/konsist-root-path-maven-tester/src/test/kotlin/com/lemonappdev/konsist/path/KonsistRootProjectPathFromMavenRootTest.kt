@@ -10,9 +10,10 @@ import java.io.File
 class KonsistRootProjectPathFromMavenRootTest {
     @Test
     fun `project root path resolved from Maven root`() {
-        val projectRootPath = File("")
-            .absoluteFile
-            .path
+        val projectRootPath =
+            File("")
+                .absoluteFile
+                .path
 
         // then
         Konsist.projectRootPath shouldBeEqualTo projectRootPath

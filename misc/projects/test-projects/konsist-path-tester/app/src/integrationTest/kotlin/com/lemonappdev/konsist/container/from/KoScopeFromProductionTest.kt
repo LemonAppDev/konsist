@@ -15,9 +15,10 @@ class KoScopeFromProductionTest {
     @Test
     fun `scopeFromProduction`() {
         // given
-        val sut = Konsist
-            .scopeFromProduction()
-            .mapToFilePaths()
+        val sut =
+            Konsist
+                .scopeFromProduction()
+                .mapToFilePaths()
 
         // then
         sut.shouldBeEqualTo(
@@ -36,9 +37,10 @@ class KoScopeFromProductionTest {
     @Test
     fun `scopeFromProduction, main source set`() {
         // given
-        val sut = Konsist
-            .scopeFromProduction(sourceSetName = "main")
-            .mapToFilePaths()
+        val sut =
+            Konsist
+                .scopeFromProduction(sourceSetName = "main")
+                .mapToFilePaths()
 
         // then
         sut.shouldBeEqualTo(
@@ -77,9 +79,10 @@ class KoScopeFromProductionTest {
     @Test
     fun `scopeFromProduction, app module`() {
         // given
-        val sut = Konsist
-            .scopeFromProduction(moduleName = "app")
-            .mapToFilePaths()
+        val sut =
+            Konsist
+                .scopeFromProduction(moduleName = "app")
+                .mapToFilePaths()
 
         // then
         sut.shouldBeEqualTo(
@@ -93,9 +96,10 @@ class KoScopeFromProductionTest {
     @Test
     fun `scopeFromProduction, app module, main source set`() {
         // given
-        val sut = Konsist
-            .scopeFromProduction(moduleName = "app", sourceSetName = "main")
-            .mapToFilePaths()
+        val sut =
+            Konsist
+                .scopeFromProduction(moduleName = "app", sourceSetName = "main")
+                .mapToFilePaths()
 
         // then
         sut.shouldBeEqualTo(
@@ -109,9 +113,10 @@ class KoScopeFromProductionTest {
     @Test
     fun `scopeFromProduction, root module`() {
         // given
-        val sut = Konsist
-            .scopeFromProduction(moduleName = "root")
-            .mapToFilePaths()
+        val sut =
+            Konsist
+                .scopeFromProduction(moduleName = "root")
+                .mapToFilePaths()
 
         // then
         sut.shouldBeEqualTo(
@@ -126,9 +131,10 @@ class KoScopeFromProductionTest {
     @Test
     fun `scopeFromProduction, root module, main source set`() {
         // given
-        val sut = Konsist
-            .scopeFromProduction(moduleName = "root", sourceSetName = "main")
-            .mapToFilePaths()
+        val sut =
+            Konsist
+                .scopeFromProduction(moduleName = "root", sourceSetName = "main")
+                .mapToFilePaths()
 
         // then
         sut.shouldBeEqualTo(
@@ -163,9 +169,10 @@ class KoScopeFromProductionTest {
     @Test
     fun `scopeFromProduction, data module`() {
         // given
-        val sut = Konsist
-            .scopeFromProduction(moduleName = "data")
-            .mapToFilePaths()
+        val sut =
+            Konsist
+                .scopeFromProduction(moduleName = "data")
+                .mapToFilePaths()
 
         // then
         sut.shouldBeEqualTo(
@@ -179,9 +186,10 @@ class KoScopeFromProductionTest {
     @Test
     fun `scopeFromProduction, data module, main source set`() {
         // given
-        val sut = Konsist
-            .scopeFromProduction(moduleName = "data", sourceSetName = "main")
-            .mapToFilePaths()
+        val sut =
+            Konsist
+                .scopeFromProduction(moduleName = "data", sourceSetName = "main")
+                .mapToFilePaths()
 
         // then
         sut.shouldBeEqualTo(

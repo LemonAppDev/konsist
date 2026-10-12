@@ -26,18 +26,19 @@ class KoScopeTest {
     @Test
     fun `toString method`() {
         // given
-        val sut = Konsist
-            .scopeFromDirectory("${PathProvider.appMainSourceSetProjectDirectory}/fixture/")
-            .toString()
+        val sut =
+            Konsist
+                .scopeFromDirectory("${PathProvider.APP_MAIN_SOURCE_SET_PROJECT_DIRECTORY}/fixture/")
+                .toString()
 
         // then
         // toString uses OS separators
-        sut shouldBeEqualTo """
+        sut shouldBeEqualTo
+            """
             ${PathProvider.projectRootDirectory}/app/src/main/kotlin/com/lemonappdev/fixture/AppClass.kt
             ${PathProvider.projectRootDirectory}/app/src/main/kotlin/com/lemonappdev/fixture/data/AppDataClass.kt
-        """
-            .trimIndent()
-            .toOsSeparator()
+            """.trimIndent()
+                .toOsSeparator()
     }
 
     @Test
@@ -47,8 +48,9 @@ class KoScopeTest {
         val scope2 = Konsist.scopeFromProject(moduleName = "data")
 
         // when
-        val sut = (scope1 + scope2)
-            .mapToFilePaths()
+        val sut =
+            (scope1 + scope2)
+                .mapToFilePaths()
 
         // then
         sut.shouldBeEqualTo(
@@ -69,8 +71,9 @@ class KoScopeTest {
         val scope2 = Konsist.scopeFromProject(moduleName = "data")
 
         // when
-        val sut = (scope1 - scope2)
-            .mapToFilePaths()
+        val sut =
+            (scope1 - scope2)
+                .mapToFilePaths()
 
         // then
         sut.shouldBeEqualTo(
@@ -85,8 +88,9 @@ class KoScopeTest {
         val scope2 = Konsist.scopeFromProject(sourceSetName = "integrationTest")
 
         // when
-        val sut = (scope1 - scope2)
-            .mapToFilePaths()
+        val sut =
+            (scope1 - scope2)
+                .mapToFilePaths()
 
         // then
         val expected = scope1.mapToFilePaths()

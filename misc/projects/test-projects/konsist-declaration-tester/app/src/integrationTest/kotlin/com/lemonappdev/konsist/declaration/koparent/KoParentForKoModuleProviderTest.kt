@@ -20,11 +20,12 @@ class KoParentForKoModuleProviderTest {
     @Test
     fun `module name for parameter in constructor is 'app'`() {
         // given
-        val sut = Konsist
-            .scopeFromFile("$appMainSourceSetProjectDirectory/fixture/AppClass.kt".toOsSeparator())
-            .classes()
-            .parents()
-            .first()
+        val sut =
+            Konsist
+                .scopeFromFile("$appMainSourceSetProjectDirectory/fixture/AppClass.kt".toOsSeparator())
+                .classes()
+                .parents()
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -37,11 +38,12 @@ class KoParentForKoModuleProviderTest {
     @Test
     fun `module name for parameter in constructor is 'data'`() {
         // given
-        val sut = Konsist
-            .scopeFromFile("$dataMainSourceSetProjectDirectory/fixture/LibClass.kt".toOsSeparator())
-            .classes()
-            .parents()
-            .first()
+        val sut =
+            Konsist
+                .scopeFromFile("$dataMainSourceSetProjectDirectory/fixture/LibClass.kt".toOsSeparator())
+                .classes()
+                .parents()
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -54,11 +56,12 @@ class KoParentForKoModuleProviderTest {
     @Test
     fun `module name for parameter in constructor is 'root'`() {
         // given
-        val sut = Konsist
-            .scopeFromFile("$rootMainSourceSetProjectDirectory/fixture/RootClass.kt".toOsSeparator())
-            .classes()
-            .parents()
-            .first()
+        val sut =
+            Konsist
+                .scopeFromFile("$rootMainSourceSetProjectDirectory/fixture/RootClass.kt".toOsSeparator())
+                .classes()
+                .parents()
+                .first()
 
         // then
         assertSoftly(sut) {

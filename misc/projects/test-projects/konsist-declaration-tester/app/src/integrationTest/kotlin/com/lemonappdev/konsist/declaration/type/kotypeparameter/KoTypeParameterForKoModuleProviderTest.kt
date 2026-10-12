@@ -17,12 +17,13 @@ class KoTypeParameterForKoModuleProviderTest {
     @Test
     fun `module name is 'app'`() {
         // given
-        val sut = Konsist
-            .scopeFromFile("$appMainSourceSetProjectDirectory/fixture/AppClass.kt".toOsSeparator())
-            .properties()
-            .first { it.name == "appPropertyWithTypeParameter" }
-            .type
-            ?.asTypeParameterDeclaration()
+        val sut =
+            Konsist
+                .scopeFromFile("$appMainSourceSetProjectDirectory/fixture/AppClass.kt".toOsSeparator())
+                .properties()
+                .first { it.name == "appPropertyWithTypeParameter" }
+                .type
+                ?.asTypeParameterDeclaration()
 
         // then
         assertSoftly(sut) {
@@ -35,12 +36,13 @@ class KoTypeParameterForKoModuleProviderTest {
     @Test
     fun `module name is 'data'`() {
         // given
-        val sut = Konsist
-            .scopeFromFile("$dataMainSourceSetProjectDirectory/fixture/LibClass.kt".toOsSeparator())
-            .properties()
-            .first { it.name == "libPropertyWithTypeParameter" }
-            .type
-            ?.asTypeParameterDeclaration()
+        val sut =
+            Konsist
+                .scopeFromFile("$dataMainSourceSetProjectDirectory/fixture/LibClass.kt".toOsSeparator())
+                .properties()
+                .first { it.name == "libPropertyWithTypeParameter" }
+                .type
+                ?.asTypeParameterDeclaration()
 
         // then
         assertSoftly(sut) {
@@ -53,12 +55,13 @@ class KoTypeParameterForKoModuleProviderTest {
     @Test
     fun `module name is 'root'`() {
         // given
-        val sut = Konsist
-            .scopeFromFile("$rootMainSourceSetProjectDirectory/fixture/RootClass.kt".toOsSeparator())
-            .properties()
-            .first { it.name == "rootPropertyWithTypeParameter" }
-            .type
-            ?.asTypeParameterDeclaration()
+        val sut =
+            Konsist
+                .scopeFromFile("$rootMainSourceSetProjectDirectory/fixture/RootClass.kt".toOsSeparator())
+                .properties()
+                .first { it.name == "rootPropertyWithTypeParameter" }
+                .type
+                ?.asTypeParameterDeclaration()
 
         // then
         assertSoftly(sut) {

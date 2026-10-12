@@ -15,9 +15,10 @@ class KoScopeFromPackageTest {
     @Test
     fun `scopeFromPackage for com_lemonappdev_fixture package`() {
         // given
-        val sut = Konsist
-            .scopeFromPackage("com.lemonappdev.fixture")
-            .mapToFilePaths()
+        val sut =
+            Konsist
+                .scopeFromPackage("com.lemonappdev.fixture")
+                .mapToFilePaths()
 
         // then
         sut.shouldBeEqualTo(
@@ -34,9 +35,10 @@ class KoScopeFromPackageTest {
     @Test
     fun `scopeFromPackage for com_lemonappdev_fixture package, main source set`() {
         // given
-        val sut = Konsist
-            .scopeFromPackage("com.lemonappdev.fixture", sourceSetName = "main")
-            .mapToFilePaths()
+        val sut =
+            Konsist
+                .scopeFromPackage("com.lemonappdev.fixture", sourceSetName = "main")
+                .mapToFilePaths()
 
         // then
         sut.shouldBeEqualTo(
@@ -51,9 +53,10 @@ class KoScopeFromPackageTest {
     @Test
     fun `scopeFromPackage for com_lemonappdev_fixture package, integrationTest source set`() {
         // given
-        val sut = Konsist
-            .scopeFromPackage("com.lemonappdev.fixture", sourceSetName = "integrationTest")
-            .mapToFilePaths()
+        val sut =
+            Konsist
+                .scopeFromPackage("com.lemonappdev.fixture", sourceSetName = "integrationTest")
+                .mapToFilePaths()
 
         // then
         sut.shouldBeEqualTo(
@@ -66,9 +69,10 @@ class KoScopeFromPackageTest {
     @Test
     fun `scopeFromPackage for com_lemonappdev_fixture package, test source set`() {
         // given
-        val sut = Konsist
-            .scopeFromPackage("com.lemonappdev.fixture", sourceSetName = "test")
-            .mapToFilePaths()
+        val sut =
+            Konsist
+                .scopeFromPackage("com.lemonappdev.fixture", sourceSetName = "test")
+                .mapToFilePaths()
 
         // then
         sut.shouldBeEqualTo(
@@ -81,9 +85,10 @@ class KoScopeFromPackageTest {
     @Test
     fun `scopeFromPackage for com_lemonappdev_fixture package, app module`() {
         // given
-        val sut = Konsist
-            .scopeFromPackage("com.lemonappdev.fixture", moduleName = "app")
-            .mapToFilePaths()
+        val sut =
+            Konsist
+                .scopeFromPackage("com.lemonappdev.fixture", moduleName = "app")
+                .mapToFilePaths()
 
         // then
         sut.shouldBeEqualTo(
@@ -97,9 +102,10 @@ class KoScopeFromPackageTest {
     @Test
     fun `scopeFromPackage for com_lemonappdev_fixture package, app module, main source set`() {
         // given
-        val sut = Konsist
-            .scopeFromPackage("com.lemonappdev.fixture", moduleName = "app", sourceSetName = "main")
-            .mapToFilePaths()
+        val sut =
+            Konsist
+                .scopeFromPackage("com.lemonappdev.fixture", moduleName = "app", sourceSetName = "main")
+                .mapToFilePaths()
 
         // then
         sut.shouldBeEqualTo(
@@ -112,9 +118,10 @@ class KoScopeFromPackageTest {
     @Test
     fun `scopeFromPackage for com_lemonappdev_fixture package, app module, integrationTest source set`() {
         // given
-        val sut = Konsist
-            .scopeFromPackage("com.lemonappdev.fixture", moduleName = "app", sourceSetName = "integrationTest")
-            .mapToFilePaths()
+        val sut =
+            Konsist
+                .scopeFromPackage("com.lemonappdev.fixture", moduleName = "app", sourceSetName = "integrationTest")
+                .mapToFilePaths()
 
         // then
         sut.shouldBeEqualTo(
@@ -127,9 +134,10 @@ class KoScopeFromPackageTest {
     @Test
     fun `scopeFromPackage for com_lemonappdev_fixture package, app module, test source set`() {
         // given
-        val sut = Konsist
-            .scopeFromPackage("com.lemonappdev.fixture", moduleName = "app", sourceSetName = "test")
-            .mapToFilePaths()
+        val sut =
+            Konsist
+                .scopeFromPackage("com.lemonappdev.fixture", moduleName = "app", sourceSetName = "test")
+                .mapToFilePaths()
 
         // then
         sut.shouldBeEqualTo(emptyList())
@@ -138,9 +146,10 @@ class KoScopeFromPackageTest {
     @Test
     fun `scopeFromPackage for com_lemonappdev_fixture package, data module`() {
         // given
-        val sut = Konsist
-            .scopeFromPackage("com.lemonappdev.fixture", moduleName = "data")
-            .mapToFilePaths()
+        val sut =
+            Konsist
+                .scopeFromPackage("com.lemonappdev.fixture", moduleName = "data")
+                .mapToFilePaths()
 
         // then
         sut.shouldBeEqualTo(
@@ -154,9 +163,10 @@ class KoScopeFromPackageTest {
     @Test
     fun `scopeFromPackage for com_lemonappdev_fixture package, data module, main source set`() {
         // given
-        val sut = Konsist
-            .scopeFromPackage("com.lemonappdev.fixture", moduleName = "data", sourceSetName = "main")
-            .mapToFilePaths()
+        val sut =
+            Konsist
+                .scopeFromPackage("com.lemonappdev.fixture", moduleName = "data", sourceSetName = "main")
+                .mapToFilePaths()
 
         // then
         sut.shouldBeEqualTo(
@@ -169,9 +179,10 @@ class KoScopeFromPackageTest {
     @Test
     fun `scopeFromPackage for com_lemonappdev_fixture package, data module, integrationTest source set`() {
         // given
-        val sut = Konsist
-            .scopeFromPackage("com.lemonappdev.fixture", moduleName = "data", sourceSetName = "integrationTest")
-            .mapToFilePaths()
+        val sut =
+            Konsist
+                .scopeFromPackage("com.lemonappdev.fixture", moduleName = "data", sourceSetName = "integrationTest")
+                .mapToFilePaths()
 
         // then
         sut.shouldBeEqualTo(emptyList())
@@ -180,9 +191,10 @@ class KoScopeFromPackageTest {
     @Test
     fun `scopeFromPackage for com_lemonappdev_fixture package, data module, test source set`() {
         // given
-        val sut = Konsist
-            .scopeFromPackage("com.lemonappdev.fixture", moduleName = "data", sourceSetName = "test")
-            .mapToFilePaths()
+        val sut =
+            Konsist
+                .scopeFromPackage("com.lemonappdev.fixture", moduleName = "data", sourceSetName = "test")
+                .mapToFilePaths()
 
         // then
         sut.shouldBeEqualTo(
@@ -195,9 +207,10 @@ class KoScopeFromPackageTest {
     @Test
     fun `scopeFromPackage for com_lemonappdev_fixture package, root module`() {
         // given
-        val sut = Konsist
-            .scopeFromPackage("com.lemonappdev.fixture", moduleName = "root")
-            .mapToFilePaths()
+        val sut =
+            Konsist
+                .scopeFromPackage("com.lemonappdev.fixture", moduleName = "root")
+                .mapToFilePaths()
 
         // then
         sut.shouldBeEqualTo(
@@ -210,9 +223,10 @@ class KoScopeFromPackageTest {
     @Test
     fun `scopeFromPackage for com_lemonappdev_fixture package, root module, main source set`() {
         // given
-        val sut = Konsist
-            .scopeFromPackage("com.lemonappdev.fixture", moduleName = "root", sourceSetName = "main")
-            .mapToFilePaths()
+        val sut =
+            Konsist
+                .scopeFromPackage("com.lemonappdev.fixture", moduleName = "root", sourceSetName = "main")
+                .mapToFilePaths()
 
         // then
         sut.shouldBeEqualTo(
@@ -225,9 +239,10 @@ class KoScopeFromPackageTest {
     @Test
     fun `scopeFromPackage for any__fixture__any package`() {
         // given
-        val sut = Konsist
-            .scopeFromPackage("..fixture..")
-            .mapToFilePaths()
+        val sut =
+            Konsist
+                .scopeFromPackage("..fixture..")
+                .mapToFilePaths()
 
         // then
         sut.shouldBeEqualTo(
@@ -250,9 +265,10 @@ class KoScopeFromPackageTest {
     @Test
     fun `scopeFromPackage for any__fixture__any package, main source set`() {
         // given
-        val sut = Konsist
-            .scopeFromPackage("..fixture..", sourceSetName = "main")
-            .mapToFilePaths()
+        val sut =
+            Konsist
+                .scopeFromPackage("..fixture..", sourceSetName = "main")
+                .mapToFilePaths()
 
         // then
         sut.shouldBeEqualTo(
@@ -271,9 +287,10 @@ class KoScopeFromPackageTest {
     @Test
     fun `scopeFromPackage for any__fixture__any package, integrationTest source set`() {
         // given
-        val sut = Konsist
-            .scopeFromPackage("..fixture..", sourceSetName = "integrationTest")
-            .mapToFilePaths()
+        val sut =
+            Konsist
+                .scopeFromPackage("..fixture..", sourceSetName = "integrationTest")
+                .mapToFilePaths()
 
         // then
         sut.shouldBeEqualTo(
@@ -287,9 +304,10 @@ class KoScopeFromPackageTest {
     @Test
     fun `scopeFromPackage for any__fixture__any package, test source set`() {
         // given
-        val sut = Konsist
-            .scopeFromPackage("..fixture..", sourceSetName = "test")
-            .mapToFilePaths()
+        val sut =
+            Konsist
+                .scopeFromPackage("..fixture..", sourceSetName = "test")
+                .mapToFilePaths()
 
         // then
         sut.shouldBeEqualTo(
@@ -303,9 +321,10 @@ class KoScopeFromPackageTest {
     @Test
     fun `scopeFromPackage for any__fixture__any package, app module`() {
         // given
-        val sut = Konsist
-            .scopeFromPackage("..fixture..", moduleName = "app")
-            .mapToFilePaths()
+        val sut =
+            Konsist
+                .scopeFromPackage("..fixture..", moduleName = "app")
+                .mapToFilePaths()
 
         // then
         sut.shouldBeEqualTo(
@@ -321,9 +340,10 @@ class KoScopeFromPackageTest {
     @Test
     fun `scopeFromPackage for any__fixture__any package, app module, main source set`() {
         // given
-        val sut = Konsist
-            .scopeFromPackage("..fixture..", moduleName = "app", sourceSetName = "main")
-            .mapToFilePaths()
+        val sut =
+            Konsist
+                .scopeFromPackage("..fixture..", moduleName = "app", sourceSetName = "main")
+                .mapToFilePaths()
 
         // then
         sut.shouldBeEqualTo(
@@ -337,9 +357,10 @@ class KoScopeFromPackageTest {
     @Test
     fun `scopeFromPackage for any__fixture__any package, app module, integrationTest source set`() {
         // given
-        val sut = Konsist
-            .scopeFromPackage("..fixture..", moduleName = "app", sourceSetName = "integrationTest")
-            .mapToFilePaths()
+        val sut =
+            Konsist
+                .scopeFromPackage("..fixture..", moduleName = "app", sourceSetName = "integrationTest")
+                .mapToFilePaths()
 
         // then
         sut.shouldBeEqualTo(
@@ -353,9 +374,10 @@ class KoScopeFromPackageTest {
     @Test
     fun `scopeFromPackage for any__fixture__any package, app module, test source set`() {
         // given
-        val sut = Konsist
-            .scopeFromPackage("..fixture..", moduleName = "app", sourceSetName = "test")
-            .mapToFilePaths()
+        val sut =
+            Konsist
+                .scopeFromPackage("..fixture..", moduleName = "app", sourceSetName = "test")
+                .mapToFilePaths()
 
         // then
         sut.shouldBeEqualTo(emptyList())
@@ -364,9 +386,10 @@ class KoScopeFromPackageTest {
     @Test
     fun `scopeFromPackage for any__fixture__any package, data module`() {
         // given
-        val sut = Konsist
-            .scopeFromPackage("..fixture..", moduleName = "data")
-            .mapToFilePaths()
+        val sut =
+            Konsist
+                .scopeFromPackage("..fixture..", moduleName = "data")
+                .mapToFilePaths()
 
         // then
         sut.shouldBeEqualTo(
@@ -382,9 +405,10 @@ class KoScopeFromPackageTest {
     @Test
     fun `scopeFromPackage for any__fixture__any package, data module, main source set`() {
         // given
-        val sut = Konsist
-            .scopeFromPackage("..fixture..", moduleName = "data", sourceSetName = "main")
-            .mapToFilePaths()
+        val sut =
+            Konsist
+                .scopeFromPackage("..fixture..", moduleName = "data", sourceSetName = "main")
+                .mapToFilePaths()
 
         // then
         sut.shouldBeEqualTo(
@@ -398,9 +422,10 @@ class KoScopeFromPackageTest {
     @Test
     fun `scopeFromPackage for any__fixture__any package, data module, integrationTest source set`() {
         // given
-        val sut = Konsist
-            .scopeFromPackage("..fixture..", moduleName = "data", sourceSetName = "integrationTest")
-            .mapToFilePaths()
+        val sut =
+            Konsist
+                .scopeFromPackage("..fixture..", moduleName = "data", sourceSetName = "integrationTest")
+                .mapToFilePaths()
 
         // then
         sut.shouldBeEqualTo(emptyList())
@@ -409,9 +434,10 @@ class KoScopeFromPackageTest {
     @Test
     fun `scopeFromPackage for any__fixture__any package, data module, test source set`() {
         // given
-        val sut = Konsist
-            .scopeFromPackage("..fixture..", moduleName = "data", sourceSetName = "test")
-            .mapToFilePaths()
+        val sut =
+            Konsist
+                .scopeFromPackage("..fixture..", moduleName = "data", sourceSetName = "test")
+                .mapToFilePaths()
 
         // then
         sut.shouldBeEqualTo(
@@ -425,9 +451,10 @@ class KoScopeFromPackageTest {
     @Test
     fun `scopeFromPackage for any__fixture__any package, root module`() {
         // given
-        val sut = Konsist
-            .scopeFromPackage("..fixture..", moduleName = "root")
-            .mapToFilePaths()
+        val sut =
+            Konsist
+                .scopeFromPackage("..fixture..", moduleName = "root")
+                .mapToFilePaths()
 
         // then
         sut.shouldBeEqualTo(
@@ -442,9 +469,10 @@ class KoScopeFromPackageTest {
     @Test
     fun `scopeFromPackage for any__fixture__any package, root module, main source set`() {
         // given
-        val sut = Konsist
-            .scopeFromPackage("..fixture..", moduleName = "root", sourceSetName = "main")
-            .mapToFilePaths()
+        val sut =
+            Konsist
+                .scopeFromPackage("..fixture..", moduleName = "root", sourceSetName = "main")
+                .mapToFilePaths()
 
         // then
         sut.shouldBeEqualTo(

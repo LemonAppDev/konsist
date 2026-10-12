@@ -2,7 +2,7 @@ package com.lemonappdev.fixture.fortypetest.importaliascase.declarations
 
 enum class ClassType {
     FIRST,
-    SECOND;
+    SECOND,
 }
 
 interface InterfaceType
