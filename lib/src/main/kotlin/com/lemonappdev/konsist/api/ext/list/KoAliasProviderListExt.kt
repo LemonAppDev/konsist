@@ -5,6 +5,8 @@ import com.lemonappdev.konsist.api.provider.KoAliasProvider
 
 /**
  * List containing import alias declarations.
+ *
+ * @see KoAliasProvider.alias
  */
 val <T : KoAliasProvider> List<T>.importAliases: List<KoImportAliasDeclaration>
     get() = mapNotNull { it.alias }
@@ -14,6 +16,7 @@ val <T : KoAliasProvider> List<T>.importAliases: List<KoImportAliasDeclaration>
  *
  * @param predicate The predicate function to determine if a declaration import alias satisfies a condition.
  * @return A list containing declarations with the specified import alias (or any import alias if [predicate] is null).
+ * @see KoAliasProvider.alias
  */
 fun <T : KoAliasProvider> List<T>.withAlias(predicate: ((KoImportAliasDeclaration) -> Boolean)? = null): List<T> =
     filter {
@@ -28,6 +31,7 @@ fun <T : KoAliasProvider> List<T>.withAlias(predicate: ((KoImportAliasDeclaratio
  *
  * @param predicate The predicate function to determine if a declaration import alias satisfies a condition.
  * @return A list containing declarations without the specified import alias (or no import alias if [predicate] is null).
+ * @see KoAliasProvider.alias
  */
 fun <T : KoAliasProvider> List<T>.withoutAlias(predicate: ((KoImportAliasDeclaration) -> Boolean)? = null): List<T> =
     filterNot {

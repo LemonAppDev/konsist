@@ -5,6 +5,8 @@ import com.lemonappdev.konsist.api.provider.KoImportProvider
 
 /**
  * List containing import declarations.
+ *
+ * @see KoImportProvider.imports
  */
 val <T : KoImportProvider> List<T>.imports: List<KoImportDeclaration>
     get() = flatMap { it.imports }
@@ -13,6 +15,7 @@ val <T : KoImportProvider> List<T>.imports: List<KoImportDeclaration>
  * List containing declarations with any import.
  *
  * @return A list containing declarations with any import.
+ * @see KoImportProvider.hasImports
  */
 fun <T : KoImportProvider> List<T>.withImports(): List<T> = filter { it.hasImports() }
 
@@ -20,6 +23,7 @@ fun <T : KoImportProvider> List<T>.withImports(): List<T> = filter { it.hasImpor
  * List containing declarations with no import.
  *
  * @return A list containing declarations with no import.
+ * @see KoImportProvider.hasImports
  */
 
 fun <T : KoImportProvider> List<T>.withoutImports(): List<T> = filterNot { it.hasImports() }
@@ -33,6 +37,7 @@ fun <T : KoImportProvider> List<T>.withoutImports(): List<T> = filterNot { it.ha
  *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations with at least one of the specified import(s).
+ * @see KoImportProvider.hasImportWithName
  */
 fun <T : KoImportProvider> List<T>.withImportNamed(
     name: String,
@@ -48,6 +53,7 @@ fun <T : KoImportProvider> List<T>.withImportNamed(
  *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations with at least one of the specified import(s).
+ * @see KoImportProvider.hasImportWithName
  */
 fun <T : KoImportProvider> List<T>.withImportNamed(
     names: Collection<String>,
@@ -69,6 +75,7 @@ fun <T : KoImportProvider> List<T>.withImportNamed(
  *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations without any of the specified imports.
+ * @see KoImportProvider.hasImportWithName
  */
 fun <T : KoImportProvider> List<T>.withoutImportNamed(
     name: String,
@@ -84,6 +91,7 @@ fun <T : KoImportProvider> List<T>.withoutImportNamed(
  *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations without any of the specified imports.
+ * @see KoImportProvider.hasImportWithName
  */
 fun <T : KoImportProvider> List<T>.withoutImportNamed(
     names: Collection<String>,
@@ -105,6 +113,7 @@ fun <T : KoImportProvider> List<T>.withoutImportNamed(
  *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations with all specified import(s).
+ * @see KoImportProvider.hasImportsWithAllNames
  */
 fun <T : KoImportProvider> List<T>.withAllImportsNamed(
     name: String,
@@ -120,6 +129,7 @@ fun <T : KoImportProvider> List<T>.withAllImportsNamed(
  *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations with all specified import(s).
+ * @see KoImportProvider.hasImportsWithAllNames
  */
 fun <T : KoImportProvider> List<T>.withAllImportsNamed(
     names: Collection<String>,
@@ -141,6 +151,7 @@ fun <T : KoImportProvider> List<T>.withAllImportsNamed(
  *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations without all specified import(s).
+ * @see KoImportProvider.hasImportsWithAllNames
  */
 fun <T : KoImportProvider> List<T>.withoutAllImportsNamed(
     name: String,
@@ -156,6 +167,7 @@ fun <T : KoImportProvider> List<T>.withoutAllImportsNamed(
  *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations without all specified import(s).
+ * @see KoImportProvider.hasImportsWithAllNames
  */
 fun <T : KoImportProvider> List<T>.withoutAllImportsNamed(
     names: Collection<String>,
@@ -173,6 +185,7 @@ fun <T : KoImportProvider> List<T>.withoutAllImportsNamed(
  *
  * @param predicate A function that defines the condition to be met by an import declaration.
  * @return A list containing declarations with at least one import satisfying the predicate.
+ * @see KoImportProvider.hasImport
  */
 fun <T : KoImportProvider> List<T>.withImport(predicate: (KoImportDeclaration) -> Boolean): List<T> = filter { it.hasImport(predicate) }
 
@@ -181,6 +194,7 @@ fun <T : KoImportProvider> List<T>.withImport(predicate: (KoImportDeclaration) -
  *
  * @param predicate A function that defines the condition to be met by an import declaration.
  * @return A list containing declarations without any import satisfying the provided predicate.
+ * @see KoImportProvider.hasImport
  */
 fun <T : KoImportProvider> List<T>.withoutImport(predicate: (KoImportDeclaration) -> Boolean): List<T> =
     filterNot { it.hasImport(predicate) }
@@ -190,6 +204,7 @@ fun <T : KoImportProvider> List<T>.withoutImport(predicate: (KoImportDeclaration
  *
  * @param predicate A function that defines the condition to be met by all import declarations.
  * @return A filtered list containing declarations with all imports satisfying the predicate.
+ * @see KoImportProvider.hasAllImports
  */
 fun <T : KoImportProvider> List<T>.withAllImports(predicate: (KoImportDeclaration) -> Boolean): List<T> =
     filter { it.hasAllImports(predicate) }
@@ -199,6 +214,7 @@ fun <T : KoImportProvider> List<T>.withAllImports(predicate: (KoImportDeclaratio
  *
  * @param predicate A function that defines the condition to be met by all import declarations.
  * @return A list containing declarations that have at least one import not satisfying the provided predicate.
+ * @see KoImportProvider.hasAllImports
  */
 fun <T : KoImportProvider> List<T>.withoutAllImports(predicate: (KoImportDeclaration) -> Boolean): List<T> =
     filterNot { it.hasAllImports(predicate) }
@@ -208,6 +224,7 @@ fun <T : KoImportProvider> List<T>.withoutAllImports(predicate: (KoImportDeclara
  *
  * @param predicate A function that defines the condition to be met by the list of import declarations.
  * @return A list containing declarations with import declarations satisfying the predicate.
+ * @see KoImportProvider.imports
  */
 fun <T : KoImportProvider> List<T>.withImports(predicate: (List<KoImportDeclaration>) -> Boolean): List<T> =
     filter { predicate(it.imports) }
@@ -217,6 +234,7 @@ fun <T : KoImportProvider> List<T>.withImports(predicate: (List<KoImportDeclarat
  *
  * @param predicate A function that defines the condition to be met by the list of import declarations.
  * @return A list containing declarations without import declarations satisfying the predicate.
+ * @see KoImportProvider.imports
  */
 fun <T : KoImportProvider> List<T>.withoutImports(predicate: (List<KoImportDeclaration>) -> Boolean): List<T> =
     filterNot { predicate(it.imports) }

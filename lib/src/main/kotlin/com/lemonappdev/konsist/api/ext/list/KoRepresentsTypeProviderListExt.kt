@@ -9,6 +9,7 @@ import kotlin.reflect.KClass
  * @param name The type name to include.
  * @param names The type name(s) to include.
  * @return A list containing declarations with the specified types.
+ * @see KoRepresentsTypeProvider.representsType
  */
 fun <T : KoRepresentsTypeProvider> List<T>.withRepresentedType(
     name: String?,
@@ -20,6 +21,7 @@ fun <T : KoRepresentsTypeProvider> List<T>.withRepresentedType(
  *
  * @param names The type name(s) to include.
  * @return A list containing declarations with the specified types.
+ * @see KoRepresentsTypeProvider.representsType
  */
 fun <T : KoRepresentsTypeProvider> List<T>.withRepresentedType(names: Collection<String?>): List<T> =
     filter {
@@ -35,6 +37,7 @@ fun <T : KoRepresentsTypeProvider> List<T>.withRepresentedType(names: Collection
  * @param name The type name to exclude.
  * @param names The type name(s) to exclude.
  * @return A list containing declarations without the specified types.
+ * @see KoRepresentsTypeProvider.representsType
  */
 fun <T : KoRepresentsTypeProvider> List<T>.withoutRepresentedType(
     name: String?,
@@ -46,6 +49,7 @@ fun <T : KoRepresentsTypeProvider> List<T>.withoutRepresentedType(
  *
  * @param names The type name(s) to exclude.
  * @return A list containing declarations without the specified types.
+ * @see KoRepresentsTypeProvider.representsType
  */
 fun <T : KoRepresentsTypeProvider> List<T>.withoutRepresentedType(names: Collection<String?>): List<T> =
     filter {
@@ -61,6 +65,7 @@ fun <T : KoRepresentsTypeProvider> List<T>.withoutRepresentedType(names: Collect
  * @param kClass The Kotlin class representing the type to include.
  * @param kClasses The Kotlin classes representing the types to include.
  * @return A list containing declarations with types matching the specified Kotlin classes.
+ * @see KoRepresentsTypeProvider.representsType
  */
 fun <T : KoRepresentsTypeProvider> List<T>.withRepresentedTypeOf(
     kClass: KClass<*>?,
@@ -72,6 +77,7 @@ fun <T : KoRepresentsTypeProvider> List<T>.withRepresentedTypeOf(
  *
  * @param kClasses The Kotlin classes representing the types to include.
  * @return A list containing declarations with types matching the specified Kotlin classes.
+ * @see KoRepresentsTypeProvider.representsType
  */
 fun <T : KoRepresentsTypeProvider> List<T>.withRepresentedTypeOf(kClasses: Collection<KClass<*>?>): List<T> =
     filter {
@@ -87,6 +93,7 @@ fun <T : KoRepresentsTypeProvider> List<T>.withRepresentedTypeOf(kClasses: Colle
  * @param kClass The Kotlin class representing the type to exclude.
  * @param kClasses The Kotlin classes representing the types to exclude.
  * @return A list containing declarations without types matching the specified Kotlin classes.
+ * @see KoRepresentsTypeProvider.representsType
  */
 fun <T : KoRepresentsTypeProvider> List<T>.withoutRepresentedTypeOf(
     kClass: KClass<*>?,
@@ -98,6 +105,7 @@ fun <T : KoRepresentsTypeProvider> List<T>.withoutRepresentedTypeOf(
  *
  * @param kClasses The Kotlin classes representing the types to exclude.
  * @return A list containing declarations without types matching the specified Kotlin classes.
+ * @see KoRepresentsTypeProvider.representsType
  */
 fun <T : KoRepresentsTypeProvider> List<T>.withoutRepresentedTypeOf(kClasses: Collection<KClass<*>?>): List<T> =
     filter {

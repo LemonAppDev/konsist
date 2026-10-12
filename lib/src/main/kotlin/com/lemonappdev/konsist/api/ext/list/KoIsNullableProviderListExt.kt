@@ -6,6 +6,7 @@ import com.lemonappdev.konsist.api.provider.KoIsNullableProvider
  * List containing declarations with nullable type.
  *
  * @return A list containing declarations that have nullable type.
+ * @see KoIsNullableProvider.isNullable
  */
 fun <T : KoIsNullableProvider> List<T>.withNullable(): List<T> = filter { it.isNullable }
 
@@ -13,5 +14,6 @@ fun <T : KoIsNullableProvider> List<T>.withNullable(): List<T> = filter { it.isN
  * List containing declarations without nullable type.
  *
  * @return A list containing declarations that don't have nullable type.
+ * @see KoIsNullableProvider.isNullable
  */
 fun <T : KoIsNullableProvider> List<T>.withoutNullable(): List<T> = filterNot { it.isNullable }

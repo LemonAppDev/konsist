@@ -6,6 +6,8 @@ import kotlin.reflect.KClass
 
 /**
  * List containing return type declarations.
+ *
+ * @see KoReturnProvider.returnType
  */
 val <T : KoReturnProvider> List<T>.returnTypes: List<KoTypeDeclaration>
     get() = mapNotNull { it.returnType }
@@ -14,6 +16,7 @@ val <T : KoReturnProvider> List<T>.returnTypes: List<KoTypeDeclaration>
  * List containing declarations with non-Unit return values, which may or may not have explicitly defined return types.
  *
  * @return A list containing declarations with the return value other than `Unit`.
+ * @see KoReturnProvider.hasReturnValue
  */
 fun <T : KoReturnProvider> List<T>.withReturnValue(): List<T> = filter { it.hasReturnValue }
 
@@ -21,6 +24,7 @@ fun <T : KoReturnProvider> List<T>.withReturnValue(): List<T> = filter { it.hasR
  * List containing declarations with the `Unit` return value, which may or may not have explicitly defined return types.
  *
  * @return A list containing declarations with the `Unit` return value.
+ * @see KoReturnProvider.hasReturnValue
  */
 fun <T : KoReturnProvider> List<T>.withoutReturnValue(): List<T> = filterNot { it.hasReturnValue }
 
@@ -31,6 +35,7 @@ fun <T : KoReturnProvider> List<T>.withoutReturnValue(): List<T> = filterNot { i
  *
  * @param predicate The predicate function to determine if a declaration return type satisfies a condition.
  * @return A list containing declarations with the specified return type (or any return type if [predicate] is null).
+ * @see KoReturnProvider.returnType
  */
 fun <T : KoReturnProvider> List<T>.withReturnType(predicate: ((KoTypeDeclaration) -> Boolean)? = null): List<T> =
     filter {
@@ -47,6 +52,7 @@ fun <T : KoReturnProvider> List<T>.withReturnType(predicate: ((KoTypeDeclaration
  *
  * @param predicate The predicate function to determine if a declaration return type satisfies a condition.
  * @return A list containing declarations without the specified return type (or without a return type if [predicate] is null).
+ * @see KoReturnProvider.returnType
  */
 fun <T : KoReturnProvider> List<T>.withoutReturnType(predicate: ((KoTypeDeclaration) -> Boolean)? = null): List<T> =
     filterNot {
@@ -62,6 +68,7 @@ fun <T : KoReturnProvider> List<T>.withoutReturnType(predicate: ((KoTypeDeclarat
  * @param kClass The Kotlin class representing the return type to include.
  * @param kClasses The Kotlin class(es) representing the return type(s) to include.
  * @return A list containing declarations with the return type of the specified Kotlin class(es).
+ * @see KoReturnProvider.hasReturnTypeOf
  */
 fun <T : KoReturnProvider> List<T>.withReturnTypeOf(
     kClass: KClass<*>,
@@ -73,6 +80,7 @@ fun <T : KoReturnProvider> List<T>.withReturnTypeOf(
  *
  * @param kClasses The Kotlin class(es) representing the return type(s) to include.
  * @return A list containing declarations with the return type of the specified Kotlin class(es).
+ * @see KoReturnProvider.hasReturnTypeOf
  */
 fun <T : KoReturnProvider> List<T>.withReturnTypeOf(kClasses: Collection<KClass<*>>): List<T> =
     filter {
@@ -88,6 +96,7 @@ fun <T : KoReturnProvider> List<T>.withReturnTypeOf(kClasses: Collection<KClass<
  * @param kClass The Kotlin class representing the return type to exclude.
  * @param kClasses The Kotlin class(es) representing the return type(s) to exclude.
  * @return A list containing declarations without the return type of the specified Kotlin class(es).
+ * @see KoReturnProvider.hasReturnTypeOf
  */
 fun <T : KoReturnProvider> List<T>.withoutReturnTypeOf(
     kClass: KClass<*>,
@@ -99,6 +108,7 @@ fun <T : KoReturnProvider> List<T>.withoutReturnTypeOf(
  *
  * @param kClasses The Kotlin class(es) representing the return type(s) to exclude.
  * @return A list containing declarations without the return type of the specified Kotlin class(es).
+ * @see KoReturnProvider.hasReturnTypeOf
  */
 fun <T : KoReturnProvider> List<T>.withoutReturnTypeOf(kClasses: Collection<KClass<*>>): List<T> =
     filterNot {

@@ -5,6 +5,8 @@ import com.lemonappdev.konsist.api.provider.KoParametersProvider
 
 /**
  * List containing parameter declarations.
+ *
+ * @see KoParametersProvider.parameters
  */
 val <T : KoParametersProvider> List<T>.parameters: List<KoParameterDeclaration>
     get() = flatMap { it.parameters }
@@ -13,6 +15,7 @@ val <T : KoParametersProvider> List<T>.parameters: List<KoParameterDeclaration>
  * List containing declarations with any parameter.
  *
  * @return A list containing declarations with any parameter.
+ * @see KoParametersProvider.hasParameters
  */
 fun <T : KoParametersProvider> List<T>.withParameters(): List<T> = filter { it.hasParameters() }
 
@@ -20,6 +23,7 @@ fun <T : KoParametersProvider> List<T>.withParameters(): List<T> = filter { it.h
  * List containing declarations with no parameters.
  *
  * @return A list containing declarations with no parameters.
+ * @see KoParametersProvider.hasParameters
  */
 fun <T : KoParametersProvider> List<T>.withoutParameters(): List<T> = filterNot { it.hasParameters() }
 
@@ -32,6 +36,7 @@ fun <T : KoParametersProvider> List<T>.withoutParameters(): List<T> = filterNot 
  *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations with at least one of the specified parameter(s).
+ * @see KoParametersProvider.hasParameterWithName
  */
 fun <T : KoParametersProvider> List<T>.withParameterNamed(
     name: String,
@@ -47,6 +52,7 @@ fun <T : KoParametersProvider> List<T>.withParameterNamed(
  *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations with at least one of the specified parameter(s).
+ * @see KoParametersProvider.hasParameterWithName
  */
 fun <T : KoParametersProvider> List<T>.withParameterNamed(
     names: Collection<String>,
@@ -68,6 +74,7 @@ fun <T : KoParametersProvider> List<T>.withParameterNamed(
  *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations without any of the specified parameters.
+ * @see KoParametersProvider.hasParameterWithName
  */
 fun <T : KoParametersProvider> List<T>.withoutParameterNamed(
     name: String,
@@ -83,6 +90,7 @@ fun <T : KoParametersProvider> List<T>.withoutParameterNamed(
  *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations without any of the specified parameters.
+ * @see KoParametersProvider.hasParameterWithName
  */
 fun <T : KoParametersProvider> List<T>.withoutParameterNamed(
     names: Collection<String>,
@@ -104,6 +112,7 @@ fun <T : KoParametersProvider> List<T>.withoutParameterNamed(
  *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations with all specified parameter(s).
+ * @see KoParametersProvider.hasParametersWithAllNames
  */
 fun <T : KoParametersProvider> List<T>.withAllParametersNamed(
     name: String,
@@ -119,6 +128,7 @@ fun <T : KoParametersProvider> List<T>.withAllParametersNamed(
  *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations with all specified parameter(s).
+ * @see KoParametersProvider.hasParametersWithAllNames
  */
 fun <T : KoParametersProvider> List<T>.withAllParametersNamed(
     names: Collection<String>,
@@ -140,6 +150,7 @@ fun <T : KoParametersProvider> List<T>.withAllParametersNamed(
  *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations without all specified parameter(s).
+ * @see KoParametersProvider.hasParametersWithAllNames
  */
 fun <T : KoParametersProvider> List<T>.withoutAllParametersNamed(
     name: String,
@@ -155,6 +166,7 @@ fun <T : KoParametersProvider> List<T>.withoutAllParametersNamed(
  *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations without all specified parameter(s).
+ * @see KoParametersProvider.hasParametersWithAllNames
  */
 fun <T : KoParametersProvider> List<T>.withoutAllParametersNamed(
     names: Collection<String>,
@@ -172,6 +184,7 @@ fun <T : KoParametersProvider> List<T>.withoutAllParametersNamed(
  *
  * @param predicate A function that defines the condition to be met by a parameter declaration.
  * @return A list containing declarations with at least one parameter satisfying the predicate.
+ * @see KoParametersProvider.hasParameter
  */
 fun <T : KoParametersProvider> List<T>.withParameter(predicate: (KoParameterDeclaration) -> Boolean): List<T> =
     filter {
@@ -183,6 +196,7 @@ fun <T : KoParametersProvider> List<T>.withParameter(predicate: (KoParameterDecl
  *
  * @param predicate A function that defines the condition to be met by a parameter declaration.
  * @return A list containing declarations without any parameter satisfying the provided predicate.
+ * @see KoParametersProvider.hasParameter
  */
 fun <T : KoParametersProvider> List<T>.withoutParameter(predicate: (KoParameterDeclaration) -> Boolean): List<T> =
     filterNot {
@@ -194,6 +208,7 @@ fun <T : KoParametersProvider> List<T>.withoutParameter(predicate: (KoParameterD
  *
  * @param predicate A function that defines the condition to be met by all parameter declarations.
  * @return A list containing declarations with all parameters satisfying the predicate.
+ * @see KoParametersProvider.hasAllParameters
  */
 fun <T : KoParametersProvider> List<T>.withAllParameters(predicate: (KoParameterDeclaration) -> Boolean): List<T> =
     filter {
@@ -205,6 +220,7 @@ fun <T : KoParametersProvider> List<T>.withAllParameters(predicate: (KoParameter
  *
  * @param predicate A function that defines the condition to be met by all parameter declarations.
  * @return A list containing declarations that have at least one parameter not satisfying the provided predicate.
+ * @see KoParametersProvider.hasAllParameters
  */
 fun <T : KoParametersProvider> List<T>.withoutAllParameters(predicate: (KoParameterDeclaration) -> Boolean): List<T> =
     filterNot {
@@ -216,6 +232,7 @@ fun <T : KoParametersProvider> List<T>.withoutAllParameters(predicate: (KoParame
  *
  * @param predicate A function that defines the condition to be met by the list of parameter declarations.
  * @return A list containing declarations with parameter declarations satisfying the predicate.
+ * @see KoParametersProvider.parameters
  */
 fun <T : KoParametersProvider> List<T>.withParameters(predicate: (List<KoParameterDeclaration>) -> Boolean): List<T> =
     filter {
@@ -227,6 +244,7 @@ fun <T : KoParametersProvider> List<T>.withParameters(predicate: (List<KoParamet
  *
  * @param predicate A function that defines the condition to be met by the list of parameter declarations.
  * @return A list containing declarations without parameter declarations satisfying the predicate.
+ * @see KoParametersProvider.parameters
  */
 fun <T : KoParametersProvider> List<T>.withoutParameters(predicate: (List<KoParameterDeclaration>) -> Boolean): List<T> =
     filterNot { predicate(it.parameters) }

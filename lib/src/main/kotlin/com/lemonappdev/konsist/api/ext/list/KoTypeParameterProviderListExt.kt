@@ -5,6 +5,8 @@ import com.lemonappdev.konsist.api.provider.KoTypeParameterProvider
 
 /**
  * List containing type parameter declarations.
+ *
+ * @see KoTypeParameterProvider.typeParameters
  */
 val <T : KoTypeParameterProvider> List<T>.typeParameters: List<KoTypeParameterDeclaration>
     get() = flatMap { it.typeParameters }
@@ -13,6 +15,7 @@ val <T : KoTypeParameterProvider> List<T>.typeParameters: List<KoTypeParameterDe
  * List containing declarations with any type parameter.
  *
  * @return A list containing declarations with any type parameter.
+ * @see KoTypeParameterProvider.hasTypeParameters
  */
 fun <T : KoTypeParameterProvider> List<T>.withTypeParameters(): List<T> = filter { it.hasTypeParameters() }
 
@@ -20,6 +23,7 @@ fun <T : KoTypeParameterProvider> List<T>.withTypeParameters(): List<T> = filter
  * List containing declarations with no type parameters.
  *
  * @return A list containing declarations with no type parameters.
+ * @see KoTypeParameterProvider.hasTypeParameters
  */
 fun <T : KoTypeParameterProvider> List<T>.withoutTypeParameters(): List<T> = filterNot { it.hasTypeParameters() }
 
@@ -32,6 +36,7 @@ fun <T : KoTypeParameterProvider> List<T>.withoutTypeParameters(): List<T> = fil
  *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations with at least one of the specified type parameter(s).
+ * @see KoTypeParameterProvider.hasTypeParameterWithName
  */
 fun <T : KoTypeParameterProvider> List<T>.withTypeParameterNamed(
     name: String,
@@ -47,6 +52,7 @@ fun <T : KoTypeParameterProvider> List<T>.withTypeParameterNamed(
  *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations with at least one of the specified type parameter(s).
+ * @see KoTypeParameterProvider.hasTypeParameterWithName
  */
 fun <T : KoTypeParameterProvider> List<T>.withTypeParameterNamed(
     names: Collection<String>,
@@ -68,6 +74,7 @@ fun <T : KoTypeParameterProvider> List<T>.withTypeParameterNamed(
  *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations without any of the specified type parameters.
+ * @see KoTypeParameterProvider.hasTypeParameterWithName
  */
 fun <T : KoTypeParameterProvider> List<T>.withoutTypeParameterNamed(
     name: String,
@@ -83,6 +90,7 @@ fun <T : KoTypeParameterProvider> List<T>.withoutTypeParameterNamed(
  *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations without any of the specified type parameters.
+ * @see KoTypeParameterProvider.hasTypeParameterWithName
  */
 fun <T : KoTypeParameterProvider> List<T>.withoutTypeParameterNamed(
     names: Collection<String>,
@@ -104,6 +112,7 @@ fun <T : KoTypeParameterProvider> List<T>.withoutTypeParameterNamed(
  *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations with all specified type parameter(s).
+ * @see KoTypeParameterProvider.hasTypeParametersWithAllNames
  */
 fun <T : KoTypeParameterProvider> List<T>.withAllTypeParametersNamed(
     name: String,
@@ -119,6 +128,7 @@ fun <T : KoTypeParameterProvider> List<T>.withAllTypeParametersNamed(
  *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations with all specified type parameter(s).
+ * @see KoTypeParameterProvider.hasTypeParametersWithAllNames
  */
 fun <T : KoTypeParameterProvider> List<T>.withAllTypeParametersNamed(
     names: Collection<String>,
@@ -140,6 +150,7 @@ fun <T : KoTypeParameterProvider> List<T>.withAllTypeParametersNamed(
  *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations without all specified type parameter(s).
+ * @see KoTypeParameterProvider.hasTypeParametersWithAllNames
  */
 fun <T : KoTypeParameterProvider> List<T>.withoutAllTypeParametersNamed(
     name: String,
@@ -155,6 +166,7 @@ fun <T : KoTypeParameterProvider> List<T>.withoutAllTypeParametersNamed(
  *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations without all specified type parameter(s).
+ * @see KoTypeParameterProvider.hasTypeParametersWithAllNames
  */
 fun <T : KoTypeParameterProvider> List<T>.withoutAllTypeParametersNamed(
     names: Collection<String>,
@@ -172,6 +184,7 @@ fun <T : KoTypeParameterProvider> List<T>.withoutAllTypeParametersNamed(
  *
  * @param predicate A function that defines the condition to be met by a type parameter declaration.
  * @return A list containing declarations with at least one type parameter satisfying the predicate.
+ * @see KoTypeParameterProvider.hasTypeParameter
  */
 fun <T : KoTypeParameterProvider> List<T>.withTypeParameter(predicate: (KoTypeParameterDeclaration) -> Boolean): List<T> =
     filter {
@@ -183,6 +196,7 @@ fun <T : KoTypeParameterProvider> List<T>.withTypeParameter(predicate: (KoTypePa
  *
  * @param predicate A function that defines the condition to be met by a type parameter declaration.
  * @return A list containing declarations without a type parameter satisfying the provided predicate.
+ * @see KoTypeParameterProvider.hasTypeParameter
  */
 fun <T : KoTypeParameterProvider> List<T>.withoutTypeParameter(predicate: (KoTypeParameterDeclaration) -> Boolean): List<T> =
     filterNot {
@@ -194,6 +208,7 @@ fun <T : KoTypeParameterProvider> List<T>.withoutTypeParameter(predicate: (KoTyp
  *
  * @param predicate A function that defines the condition to be met by all type parameter declarations.
  * @return A list containing declarations with all type parameters satisfying the predicate.
+ * @see KoTypeParameterProvider.hasAllTypeParameters
  */
 fun <T : KoTypeParameterProvider> List<T>.withAllTypeParameters(predicate: (KoTypeParameterDeclaration) -> Boolean): List<T> =
     filter {
@@ -205,6 +220,7 @@ fun <T : KoTypeParameterProvider> List<T>.withAllTypeParameters(predicate: (KoTy
  *
  * @param predicate A function that defines the condition to be met by all type parameter declarations.
  * @return A list containing declarations that have at least one type parameter not satisfying the provided predicate.
+ * @see KoTypeParameterProvider.hasAllTypeParameters
  */
 fun <T : KoTypeParameterProvider> List<T>.withoutAllTypeParameters(predicate: (KoTypeParameterDeclaration) -> Boolean): List<T> =
     filterNot {
@@ -216,6 +232,7 @@ fun <T : KoTypeParameterProvider> List<T>.withoutAllTypeParameters(predicate: (K
  *
  * @param predicate A function that defines the condition to be met by the list of type parameter declarations.
  * @return A list containing declarations with type parameter declarations satisfying the predicate.
+ * @see KoTypeParameterProvider.typeParameters
  */
 fun <T : KoTypeParameterProvider> List<T>.withTypeParameters(predicate: (List<KoTypeParameterDeclaration>) -> Boolean): List<T> =
     filter {
@@ -227,6 +244,7 @@ fun <T : KoTypeParameterProvider> List<T>.withTypeParameters(predicate: (List<Ko
  *
  * @param predicate A function that defines the condition to be met by the list of type parameter declarations.
  * @return A list containing declarations without type parameter declarations satisfying the predicate.
+ * @see KoTypeParameterProvider.typeParameters
  */
 fun <T : KoTypeParameterProvider> List<T>.withoutTypeParameters(predicate: (List<KoTypeParameterDeclaration>) -> Boolean): List<T> =
     filterNot { predicate(it.typeParameters) }

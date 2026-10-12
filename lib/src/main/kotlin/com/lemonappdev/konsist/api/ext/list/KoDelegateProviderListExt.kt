@@ -7,6 +7,7 @@ import com.lemonappdev.konsist.api.provider.KoDelegateProvider
  *
  * @param names The delegate names to include.
  * @return A list containing declarations with the specified delegate name(s) (or any delegate if [names] is empty).
+ * @see KoDelegateProvider.hasDelegate
  */
 fun <T : KoDelegateProvider> List<T>.withDelegate(vararg names: String): List<T> = withDelegate(listOf(*names))
 
@@ -15,6 +16,7 @@ fun <T : KoDelegateProvider> List<T>.withDelegate(vararg names: String): List<T>
  *
  * @param names The delegate names to include.
  * @return A list containing declarations with the specified delegate name(s) (or any delegate if [names] is empty).
+ * @see KoDelegateProvider.hasDelegate
  */
 fun <T : KoDelegateProvider> List<T>.withDelegate(names: Collection<String>): List<T> =
     filter {
@@ -29,6 +31,7 @@ fun <T : KoDelegateProvider> List<T>.withDelegate(names: Collection<String>): Li
  *
  * @param names The delegate names to exclude.
  * @return A list containing declarations without the specified delegate name(s) (or no delegate if [names] is empty).
+ * @see KoDelegateProvider.hasDelegate
  */
 fun <T : KoDelegateProvider> List<T>.withoutDelegate(vararg names: String): List<T> = withoutDelegate(listOf(*names))
 
@@ -37,6 +40,7 @@ fun <T : KoDelegateProvider> List<T>.withoutDelegate(vararg names: String): List
  *
  * @param names The delegate names to exclude.
  * @return A list containing declarations without the specified delegate name(s) (or no delegate if [names] is empty).
+ * @see KoDelegateProvider.hasDelegate
  */
 fun <T : KoDelegateProvider> List<T>.withoutDelegate(names: Collection<String>): List<T> =
     filter {

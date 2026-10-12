@@ -9,6 +9,7 @@ import com.lemonappdev.konsist.api.provider.KoClassAndInterfaceAndObjectProvider
  * @param includeNested Whether to include nested classes, interfaces and objects.
  * @param includeLocal Whether to include local classes.
  * @return A list containing class, interface or/and object declarations.
+ * @see KoClassAndInterfaceAndObjectProvider.classesAndInterfacesAndObjects
  */
 fun <T : KoClassAndInterfaceAndObjectProvider> List<T>.classesAndInterfacesAndObjects(
     includeNested: Boolean = true,
@@ -21,6 +22,7 @@ fun <T : KoClassAndInterfaceAndObjectProvider> List<T>.classesAndInterfacesAndOb
  * @param includeNested Whether to include nested classes, interfaces and objects.
  * @param includeLocal Whether to include local classes.
  * @return A list containing declarations with any class, interface or object.
+ * @see KoClassAndInterfaceAndObjectProvider.hasClassesOrInterfacesOrObjects
  */
 fun <T : KoClassAndInterfaceAndObjectProvider> List<T>.withClassesAndInterfacesAndObjects(
     includeNested: Boolean = true,
@@ -33,6 +35,7 @@ fun <T : KoClassAndInterfaceAndObjectProvider> List<T>.withClassesAndInterfacesA
  * @param includeNested Whether to include nested classes, interfaces and objects.
  * @param includeLocal Whether to include local classes.
  * @return A list containing declarations with no classes, interfaces and objects.
+ * @see KoClassAndInterfaceAndObjectProvider.hasClassesOrInterfacesOrObjects
  */
 fun <T : KoClassAndInterfaceAndObjectProvider> List<T>.withoutClassesAndInterfacesAndObjects(
     includeNested: Boolean = true,
@@ -50,6 +53,7 @@ fun <T : KoClassAndInterfaceAndObjectProvider> List<T>.withoutClassesAndInterfac
  *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations with at least one of the specified class(es), interface(s) or object(s).
+ * @see KoClassAndInterfaceAndObjectProvider.hasClassOrInterfaceOrObjectWithName
  */
 fun <T : KoClassAndInterfaceAndObjectProvider> List<T>.withClassOrInterfaceOrObjectNamed(
     name: String,
@@ -69,6 +73,7 @@ fun <T : KoClassAndInterfaceAndObjectProvider> List<T>.withClassOrInterfaceOrObj
  *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations with at least one of the specified class(es), interface(s) or object(s).
+ * @see KoClassAndInterfaceAndObjectProvider.hasClassOrInterfaceOrObjectWithName
  */
 fun <T : KoClassAndInterfaceAndObjectProvider> List<T>.withClassOrInterfaceOrObjectNamed(
     names: Collection<String>,
@@ -104,6 +109,7 @@ fun <T : KoClassAndInterfaceAndObjectProvider> List<T>.withClassOrInterfaceOrObj
  *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations without any of the specified classes, interfaces and objects.
+ * @see KoClassAndInterfaceAndObjectProvider.hasClassOrInterfaceOrObjectWithName
  */
 fun <T : KoClassAndInterfaceAndObjectProvider> List<T>.withoutClassOrInterfaceOrObjectNamed(
     name: String,
@@ -123,6 +129,7 @@ fun <T : KoClassAndInterfaceAndObjectProvider> List<T>.withoutClassOrInterfaceOr
  *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations without any of the specified classes, interfaces and objects.
+ * @see KoClassAndInterfaceAndObjectProvider.hasClassOrInterfaceOrObjectWithName
  */
 fun <T : KoClassAndInterfaceAndObjectProvider> List<T>.withoutClassOrInterfaceOrObjectNamed(
     names: Collection<String>,
@@ -158,6 +165,7 @@ fun <T : KoClassAndInterfaceAndObjectProvider> List<T>.withoutClassOrInterfaceOr
  *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations with all specified class(es), interface(s) and object(s).
+ * @see KoClassAndInterfaceAndObjectProvider.hasClassesAndInterfacesAndObjectsWithAllNames
  */
 fun <T : KoClassAndInterfaceAndObjectProvider> List<T>.withAllClassesAndInterfacesAndObjectsNamed(
     name: String,
@@ -177,6 +185,7 @@ fun <T : KoClassAndInterfaceAndObjectProvider> List<T>.withAllClassesAndInterfac
  *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations with all specified class(es), interface(s) and object(s).
+ * @see KoClassAndInterfaceAndObjectProvider.hasClassesAndInterfacesAndObjectsWithAllNames
  */
 fun <T : KoClassAndInterfaceAndObjectProvider> List<T>.withAllClassesAndInterfacesAndObjectsNamed(
     names: Collection<String>,
@@ -212,6 +221,7 @@ fun <T : KoClassAndInterfaceAndObjectProvider> List<T>.withAllClassesAndInterfac
  *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations without all specified class(es), interface(s) and object(s).
+ * @see KoClassAndInterfaceAndObjectProvider.hasClassesAndInterfacesAndObjectsWithAllNames
  */
 fun <T : KoClassAndInterfaceAndObjectProvider> List<T>.withoutAllClassesAndInterfacesAndObjectsNamed(
     name: String,
@@ -231,6 +241,7 @@ fun <T : KoClassAndInterfaceAndObjectProvider> List<T>.withoutAllClassesAndInter
  *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations without all specified class(es), interface(s) and object(s).
+ * @see KoClassAndInterfaceAndObjectProvider.hasClassesAndInterfacesAndObjectsWithAllNames
  */
 fun <T : KoClassAndInterfaceAndObjectProvider> List<T>.withoutAllClassesAndInterfacesAndObjectsNamed(
     names: Collection<String>,
@@ -262,6 +273,7 @@ fun <T : KoClassAndInterfaceAndObjectProvider> List<T>.withoutAllClassesAndInter
  * @param includeLocal Whether to include local classes.
  * @param predicate A function that defines the condition to be met by a class, interface or object declaration.
  * @return A list containing declarations with at least one class, interface or object satisfying the predicate.
+ * @see KoClassAndInterfaceAndObjectProvider.hasClassOrInterfaceOrObject
  */
 fun <T : KoClassAndInterfaceAndObjectProvider> List<T>.withClassOrInterfaceOrObject(
     includeNested: Boolean = true,
@@ -276,6 +288,7 @@ fun <T : KoClassAndInterfaceAndObjectProvider> List<T>.withClassOrInterfaceOrObj
  * @param includeLocal Whether to include local classes.
  * @param predicate A function that defines the condition to be met by a class, interface or object declaration.
  * @return A list containing declarations without any class, interface or object satisfying the provided predicate.
+ * @see KoClassAndInterfaceAndObjectProvider.hasClassOrInterfaceOrObject
  */
 fun <T : KoClassAndInterfaceAndObjectProvider> List<T>.withoutClassOrInterfaceOrObject(
     includeNested: Boolean = true,
@@ -290,6 +303,7 @@ fun <T : KoClassAndInterfaceAndObjectProvider> List<T>.withoutClassOrInterfaceOr
  * @param includeLocal Whether to include local classes.
  * @param predicate A function that defines the condition to be met by all class, interface and object declarations.
  * @return A filtered list containing declarations with all classes, interfaces and objects satisfying the predicate.
+ * @see KoClassAndInterfaceAndObjectProvider.hasAllClassesAndInterfacesAndObjects
  */
 fun <T : KoClassAndInterfaceAndObjectProvider> List<T>.withAllClassesAndInterfacesAndObjects(
     includeNested: Boolean = true,
@@ -307,6 +321,7 @@ fun <T : KoClassAndInterfaceAndObjectProvider> List<T>.withAllClassesAndInterfac
  * @param includeLocal Whether to include local classes.
  * @param predicate A function that defines the condition to be met by all class, interface and object declarations.
  * @return A list containing declarations that have at least one class, interface or object not satisfying the provided predicate.
+ * @see KoClassAndInterfaceAndObjectProvider.hasAllClassesAndInterfacesAndObjects
  */
 fun <T : KoClassAndInterfaceAndObjectProvider> List<T>.withoutAllClassesAndInterfacesAndObjects(
     includeNested: Boolean = true,
@@ -321,6 +336,7 @@ fun <T : KoClassAndInterfaceAndObjectProvider> List<T>.withoutAllClassesAndInter
  * @param includeLocal Whether to include local classes.
  * @param predicate A function that defines the condition to be met by the list of class, interface and object declarations.
  * @return A list containing declarations with class, interface and object declarations satisfying the predicate.
+ * @see KoClassAndInterfaceAndObjectProvider.classesAndInterfacesAndObjects
  */
 fun <T : KoClassAndInterfaceAndObjectProvider> List<T>.withClassesAndInterfacesAndObjects(
     includeNested: Boolean = true,
@@ -335,6 +351,7 @@ fun <T : KoClassAndInterfaceAndObjectProvider> List<T>.withClassesAndInterfacesA
  * @param includeLocal Whether to include local classes.
  * @param predicate A function that defines the condition to be met by the list of class, interface and object declarations.
  * @return A list containing declarations without class, interface and object declarations satisfying the predicate.
+ * @see KoClassAndInterfaceAndObjectProvider.classesAndInterfacesAndObjects
  */
 fun <T : KoClassAndInterfaceAndObjectProvider> List<T>.withoutClassesAndInterfacesAndObjects(
     includeNested: Boolean = true,

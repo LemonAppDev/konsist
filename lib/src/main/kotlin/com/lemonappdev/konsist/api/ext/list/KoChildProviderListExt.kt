@@ -11,6 +11,7 @@ import kotlin.reflect.KClass
  *
  * @param indirectChildren Whether to include indirect children.
  * @return A list containing child declarations.
+ * @see KoChildProvider.children
  */
 fun <T : KoChildProvider> List<T>.children(indirectChildren: Boolean = false): List<KoChildDeclaration> =
     flatMap { it.children(indirectChildren) }
@@ -20,6 +21,7 @@ fun <T : KoChildProvider> List<T>.children(indirectChildren: Boolean = false): L
  *
  * @param indirectChildren Whether to include indirect children.
  * @return A list containing declarations with any child.
+ * @see KoChildProvider.hasChildren
  */
 fun <T : KoChildProvider> List<T>.withChildren(indirectChildren: Boolean = false): List<T> = filter { it.hasChildren(indirectChildren) }
 
@@ -28,6 +30,7 @@ fun <T : KoChildProvider> List<T>.withChildren(indirectChildren: Boolean = false
  *
  * @param indirectChildren Whether to include indirect children.
  * @return A list containing declarations with no children.
+ * @see KoChildProvider.hasChildren
  */
 fun <T : KoChildProvider> List<T>.withoutChildren(indirectChildren: Boolean = false): List<T> =
     filterNot { it.hasChildren(indirectChildren) }
@@ -42,6 +45,7 @@ fun <T : KoChildProvider> List<T>.withoutChildren(indirectChildren: Boolean = fa
  *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations with at least one of the specified child(ren).
+ * @see KoChildProvider.hasChildWithName
  */
 fun <T : KoChildProvider> List<T>.withChildNamed(
     name: String,
@@ -59,6 +63,7 @@ fun <T : KoChildProvider> List<T>.withChildNamed(
  *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations with at least one of the specified child(ren).
+ * @see KoChildProvider.hasChildWithName
  */
 fun <T : KoChildProvider> List<T>.withChildNamed(
     names: Collection<String>,
@@ -82,6 +87,7 @@ fun <T : KoChildProvider> List<T>.withChildNamed(
  *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations without any of the specified children.
+ * @see KoChildProvider.hasChildWithName
  */
 fun <T : KoChildProvider> List<T>.withoutChildNamed(
     name: String,
@@ -99,6 +105,7 @@ fun <T : KoChildProvider> List<T>.withoutChildNamed(
  *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations without any of the specified children.
+ * @see KoChildProvider.hasChildWithName
  */
 fun <T : KoChildProvider> List<T>.withoutChildNamed(
     names: Collection<String>,
@@ -122,6 +129,7 @@ fun <T : KoChildProvider> List<T>.withoutChildNamed(
  *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations with all specified child(ren).
+ * @see KoChildProvider.hasChildrenWithAllNames
  */
 fun <T : KoChildProvider> List<T>.withAllChildrenNamed(
     name: String,
@@ -139,6 +147,7 @@ fun <T : KoChildProvider> List<T>.withAllChildrenNamed(
  *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations with all specified child(ren).
+ * @see KoChildProvider.hasChildrenWithAllNames
  */
 fun <T : KoChildProvider> List<T>.withAllChildrenNamed(
     names: Collection<String>,
@@ -162,6 +171,7 @@ fun <T : KoChildProvider> List<T>.withAllChildrenNamed(
  *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations without all specified child(ren).
+ * @see KoChildProvider.hasChildrenWithAllNames
  */
 fun <T : KoChildProvider> List<T>.withoutAllChildrenNamed(
     name: String,
@@ -179,6 +189,7 @@ fun <T : KoChildProvider> List<T>.withoutAllChildrenNamed(
  *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations without all specified child(ren).
+ * @see KoChildProvider.hasChildrenWithAllNames
  */
 fun <T : KoChildProvider> List<T>.withoutAllChildrenNamed(
     names: Collection<String>,
@@ -198,6 +209,7 @@ fun <T : KoChildProvider> List<T>.withoutAllChildrenNamed(
  * @param indirectChildren Whether to include indirect children.
  * @param predicate A function that defines the condition to be met by a child declaration.
  * @return A list containing declarations with at least one child satisfying the predicate.
+ * @see KoChildProvider.hasChild
  */
 fun <T : KoChildProvider> List<T>.withChild(
     indirectChildren: Boolean = false,
@@ -213,6 +225,7 @@ fun <T : KoChildProvider> List<T>.withChild(
  * @param indirectChildren Whether to include indirect children.
  * @param predicate A function that defines the condition to be met by a child declaration.
  * @return A list containing declarations without any child satisfying the provided predicate.
+ * @see KoChildProvider.hasChild
  */
 fun <T : KoChildProvider> List<T>.withoutChild(
     indirectChildren: Boolean = false,
@@ -228,6 +241,7 @@ fun <T : KoChildProvider> List<T>.withoutChild(
  * @param indirectChildren Whether to include indirect children.
  * @param predicate A function that defines the condition to be met by all child declarations.
  * @return A filtered list containing declarations with all children satisfying the predicate.
+ * @see KoChildProvider.hasAllChildren
  */
 fun <T : KoChildProvider> List<T>.withAllChildren(
     indirectChildren: Boolean = false,
@@ -243,6 +257,7 @@ fun <T : KoChildProvider> List<T>.withAllChildren(
  * @param indirectChildren Whether to include indirect children.
  * @param predicate A function that defines the condition to be met by all child declarations.
  * @return A list containing declarations that have at least one child not satisfying the provided predicate.
+ * @see KoChildProvider.hasAllChildren
  */
 fun <T : KoChildProvider> List<T>.withoutAllChildren(
     indirectChildren: Boolean = false,
@@ -258,6 +273,7 @@ fun <T : KoChildProvider> List<T>.withoutAllChildren(
  * @param indirectChildren Whether to include indirect children.
  * @param predicate A function that defines the condition to be met by the list of child declarations.
  * @return A list containing declarations with child declarations satisfying the predicate.
+ * @see KoChildProvider.children
  */
 fun <T : KoChildProvider> List<T>.withChildren(
     indirectChildren: Boolean = false,
@@ -273,6 +289,7 @@ fun <T : KoChildProvider> List<T>.withChildren(
  * @param indirectChildren Whether to include indirect children.
  * @param predicate A function that defines the condition to be met by the list of child declarations.
  * @return A list containing declarations without child declarations satisfying the predicate.
+ * @see KoChildProvider.children
  */
 fun <T : KoChildProvider> List<T>.withoutChildren(
     indirectChildren: Boolean = false,
@@ -286,6 +303,7 @@ fun <T : KoChildProvider> List<T>.withoutChildren(
  * @param kClasses The Kotlin classes representing children to include.
  * @param indirectChildren Whether to include indirect children.
  * @return A list containing declarations with at least one child of the specified `KClass` type.
+ * @see KoChildProvider.hasChildOf
  */
 fun <T : KoChildProvider> List<T>.withChildOf(
     kClass: KClass<*>,
@@ -299,6 +317,7 @@ fun <T : KoChildProvider> List<T>.withChildOf(
  * @param kClasses The Kotlin classes representing children to include.
  * @param indirectChildren Whether to include indirect children.
  * @return A list containing declarations with at least one child of the specified `KClass` type.
+ * @see KoChildProvider.hasChildOf
  */
 fun <T : KoChildProvider> List<T>.withChildOf(
     kClasses: Collection<KClass<*>>,
@@ -318,6 +337,7 @@ fun <T : KoChildProvider> List<T>.withChildOf(
  * @param kClasses The Kotlin classes representing children to exclude.
  * @param indirectChildren Whether to include indirect children.
  * @return A list containing declarations without any of the specified children.
+ * @see KoChildProvider.hasChildOf
  */
 fun <T : KoChildProvider> List<T>.withoutChildOf(
     kClass: KClass<*>,
@@ -331,6 +351,7 @@ fun <T : KoChildProvider> List<T>.withoutChildOf(
  * @param kClasses The Kotlin classes representing children to exclude.
  * @param indirectChildren Whether to include indirect children.
  * @return A list containing declarations without any of the specified children.
+ * @see KoChildProvider.hasChildOf
  */
 fun <T : KoChildProvider> List<T>.withoutChildOf(
     kClasses: Collection<KClass<*>>,
@@ -350,6 +371,7 @@ fun <T : KoChildProvider> List<T>.withoutChildOf(
  * @param kClasses The Kotlin classes representing children to include.
  * @param indirectChildren Whether to include indirect children.
  * @return A list containing declarations that have all children of the specified `KClass` type.
+ * @see KoChildProvider.hasAllChildrenOf
  */
 fun <T : KoChildProvider> List<T>.withAllChildrenOf(
     kClass: KClass<*>,
@@ -363,6 +385,7 @@ fun <T : KoChildProvider> List<T>.withAllChildrenOf(
  * @param kClasses The Kotlin classes representing children to include.
  * @param indirectChildren Whether to include indirect children.
  * @return A list containing declarations that have all children of the specified `KClass` type.
+ * @see KoChildProvider.hasAllChildrenOf
  */
 fun <T : KoChildProvider> List<T>.withAllChildrenOf(
     kClasses: Collection<KClass<*>>,
@@ -382,6 +405,7 @@ fun <T : KoChildProvider> List<T>.withAllChildrenOf(
  * @param kClasses The Kotlin classes representing children to exclude.
  * @param indirectChildren Whether to include indirect children.
  * @return A list containing declarations without all specified `KClass` type children.
+ * @see KoChildProvider.hasAllChildrenOf
  */
 fun <T : KoChildProvider> List<T>.withoutAllChildrenOf(
     kClass: KClass<*>,
@@ -395,6 +419,7 @@ fun <T : KoChildProvider> List<T>.withoutAllChildrenOf(
  * @param kClasses The Kotlin classes representing children to exclude.
  * @param indirectChildren Whether to include indirect children.
  * @return A list containing declarations without all specified `KClass` type children.
+ * @see KoChildProvider.hasAllChildrenOf
  */
 fun <T : KoChildProvider> List<T>.withoutAllChildrenOf(
     kClasses: Collection<KClass<*>>,

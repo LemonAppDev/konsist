@@ -5,6 +5,8 @@ import com.lemonappdev.konsist.api.provider.KoInitBlockProvider
 
 /**
  * List containing init block declarations.
+ *
+ * @see KoInitBlockProvider.initBlocks
  */
 val <T : KoInitBlockProvider> List<T>.initBlocks: List<KoInitBlockDeclaration>
     get() = flatMap { it.initBlocks }
@@ -13,6 +15,7 @@ val <T : KoInitBlockProvider> List<T>.initBlocks: List<KoInitBlockDeclaration>
  * List containing declarations that have init block(s).
  *
  * @return A list containing declarations with the init block(s).
+ * @see KoInitBlockProvider.hasInitBlocks
  */
 fun <T : KoInitBlockProvider> List<T>.withInitBlocks(): List<T> = filter { it.hasInitBlocks() }
 
@@ -20,6 +23,7 @@ fun <T : KoInitBlockProvider> List<T>.withInitBlocks(): List<T> = filter { it.ha
  * List containing declarations that don't have init block(s).
  *
  * @return A list containing declarations without the init block(s).
+ * @see KoInitBlockProvider.hasInitBlocks
  */
 fun <T : KoInitBlockProvider> List<T>.withoutInitBlocks(): List<T> = filterNot { it.hasInitBlocks() }
 
@@ -28,6 +32,7 @@ fun <T : KoInitBlockProvider> List<T>.withoutInitBlocks(): List<T> = filterNot {
  *
  * @param predicate A function that defines the condition to be met by an init block declaration.
  * @return A list containing declarations with at least one init block satisfying the predicate.
+ * @see KoInitBlockProvider.hasInitBlock
  */
 fun <T : KoInitBlockProvider> List<T>.withInitBlock(predicate: (KoInitBlockDeclaration) -> Boolean): List<T> =
     filter {
@@ -39,6 +44,7 @@ fun <T : KoInitBlockProvider> List<T>.withInitBlock(predicate: (KoInitBlockDecla
  *
  * @param predicate A function that defines the condition to be met by an init block declaration.
  * @return A list containing declarations without any init block satisfying the provided predicate.
+ * @see KoInitBlockProvider.hasInitBlock
  */
 fun <T : KoInitBlockProvider> List<T>.withoutInitBlock(predicate: (KoInitBlockDeclaration) -> Boolean): List<T> =
     filterNot {
@@ -50,6 +56,7 @@ fun <T : KoInitBlockProvider> List<T>.withoutInitBlock(predicate: (KoInitBlockDe
  *
  * @param predicate A function that defines the condition to be met by all init block declarations.
  * @return A filtered list containing declarations with all init blocks satisfying the predicate.
+ * @see KoInitBlockProvider.hasAllInitBlocks
  */
 fun <T : KoInitBlockProvider> List<T>.withAllInitBlocks(predicate: (KoInitBlockDeclaration) -> Boolean): List<T> =
     filter {
@@ -61,6 +68,7 @@ fun <T : KoInitBlockProvider> List<T>.withAllInitBlocks(predicate: (KoInitBlockD
  *
  * @param predicate A function that defines the condition to be met by all init block declarations.
  * @return A list containing declarations that have at least one init block not satisfying the provided predicate.
+ * @see KoInitBlockProvider.hasAllInitBlocks
  */
 fun <T : KoInitBlockProvider> List<T>.withoutAllInitBlocks(predicate: (KoInitBlockDeclaration) -> Boolean): List<T> =
     filterNot {
@@ -72,6 +80,7 @@ fun <T : KoInitBlockProvider> List<T>.withoutAllInitBlocks(predicate: (KoInitBlo
  *
  * @param predicate A function that defines the condition to be met by the list of init block declarations.
  * @return A list containing declarations with init block declarations satisfying the predicate.
+ * @see KoInitBlockProvider.initBlocks
  */
 fun <T : KoInitBlockProvider> List<T>.withInitBlocks(predicate: (List<KoInitBlockDeclaration>) -> Boolean): List<T> =
     filter {
@@ -83,6 +92,7 @@ fun <T : KoInitBlockProvider> List<T>.withInitBlocks(predicate: (List<KoInitBloc
  *
  * @param predicate A function that defines the condition to be met by the list of init block declarations.
  * @return A list containing declarations without init block declarations satisfying the predicate.
+ * @see KoInitBlockProvider.initBlocks
  */
 fun <T : KoInitBlockProvider> List<T>.withoutInitBlocks(predicate: (List<KoInitBlockDeclaration>) -> Boolean): List<T> =
     filterNot { predicate(it.initBlocks) }

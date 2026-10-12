@@ -16,6 +16,8 @@ import com.lemonappdev.konsist.api.provider.KoDeclarationCastProvider
  *
  * @return A flattened list of `KoDeclarationCastProvider` objects, representing the source types of all type arguments
  * and their nested types.
+ * @see KoTypeArgumentDeclaration.typeArguments
+ * @see KoTypeArgumentDeclaration.sourceDeclaration
  */
 fun <T : KoTypeArgumentDeclaration> List<T>.flatten(): List<KoDeclarationCastProvider> =
     mapNotNull { typeArg ->

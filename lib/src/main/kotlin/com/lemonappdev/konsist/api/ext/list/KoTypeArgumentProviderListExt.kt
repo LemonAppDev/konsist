@@ -5,6 +5,8 @@ import com.lemonappdev.konsist.api.provider.KoTypeArgumentProvider
 
 /**
  * List containing type argument declarations.
+ *
+ * @see KoTypeArgumentProvider.typeArguments
  */
 val <T : KoTypeArgumentProvider> List<T>.typeArguments: List<KoTypeArgumentDeclaration>
     get() =
@@ -15,6 +17,7 @@ val <T : KoTypeArgumentProvider> List<T>.typeArguments: List<KoTypeArgumentDecla
  * List containing declarations with any type argument.
  *
  * @return A list containing declarations with any type argument.
+ * @see KoTypeArgumentProvider.hasTypeArguments
  */
 fun <T : KoTypeArgumentProvider> List<T>.withTypeArguments(): List<T> = filter { it.hasTypeArguments() }
 
@@ -22,6 +25,7 @@ fun <T : KoTypeArgumentProvider> List<T>.withTypeArguments(): List<T> = filter {
  * List containing declarations with no type arguments.
  *
  * @return A list containing declarations with no type arguments.
+ * @see KoTypeArgumentProvider.hasTypeArguments
  */
 fun <T : KoTypeArgumentProvider> List<T>.withoutTypeArguments(): List<T> = filterNot { it.hasTypeArguments() }
 
@@ -34,6 +38,7 @@ fun <T : KoTypeArgumentProvider> List<T>.withoutTypeArguments(): List<T> = filte
  *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations with at least one of the specified type argument(s).
+ * @see KoTypeArgumentProvider.hasTypeArgumentWithName
  */
 fun <T : KoTypeArgumentProvider> List<T>.withTypeArgumentNamed(
     name: String,
@@ -49,6 +54,7 @@ fun <T : KoTypeArgumentProvider> List<T>.withTypeArgumentNamed(
  *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations with at least one of the specified type argument(s).
+ * @see KoTypeArgumentProvider.hasTypeArgumentWithName
  */
 fun <T : KoTypeArgumentProvider> List<T>.withTypeArgumentNamed(
     names: Collection<String>,
@@ -70,6 +76,7 @@ fun <T : KoTypeArgumentProvider> List<T>.withTypeArgumentNamed(
  *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations without any of the specified type arguments.
+ * @see KoTypeArgumentProvider.hasTypeArgumentWithName
  */
 fun <T : KoTypeArgumentProvider> List<T>.withoutTypeArgumentNamed(
     name: String,
@@ -85,6 +92,7 @@ fun <T : KoTypeArgumentProvider> List<T>.withoutTypeArgumentNamed(
  *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations without any of the specified type arguments.
+ * @see KoTypeArgumentProvider.hasTypeArgumentWithName
  */
 fun <T : KoTypeArgumentProvider> List<T>.withoutTypeArgumentNamed(
     names: Collection<String>,
@@ -106,6 +114,7 @@ fun <T : KoTypeArgumentProvider> List<T>.withoutTypeArgumentNamed(
  *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations with all specified type argument(s).
+ * @see KoTypeArgumentProvider.hasTypeArgumentsWithAllNames
  */
 fun <T : KoTypeArgumentProvider> List<T>.withAllTypeArgumentsNamed(
     name: String,
@@ -121,6 +130,7 @@ fun <T : KoTypeArgumentProvider> List<T>.withAllTypeArgumentsNamed(
  *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations with all specified type argument(s).
+ * @see KoTypeArgumentProvider.hasTypeArgumentsWithAllNames
  */
 fun <T : KoTypeArgumentProvider> List<T>.withAllTypeArgumentsNamed(
     names: Collection<String>,
@@ -142,6 +152,7 @@ fun <T : KoTypeArgumentProvider> List<T>.withAllTypeArgumentsNamed(
  *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations without all specified type argument(s).
+ * @see KoTypeArgumentProvider.hasTypeArgumentsWithAllNames
  */
 fun <T : KoTypeArgumentProvider> List<T>.withoutAllTypeArgumentsNamed(
     name: String,
@@ -157,6 +168,7 @@ fun <T : KoTypeArgumentProvider> List<T>.withoutAllTypeArgumentsNamed(
  *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations without all specified type argument(s).
+ * @see KoTypeArgumentProvider.hasTypeArgumentsWithAllNames
  */
 fun <T : KoTypeArgumentProvider> List<T>.withoutAllTypeArgumentsNamed(
     names: Collection<String>,
@@ -174,6 +186,7 @@ fun <T : KoTypeArgumentProvider> List<T>.withoutAllTypeArgumentsNamed(
  *
  * @param predicate A function that defines the condition to be met by a type argument declaration.
  * @return A list containing declarations with at least one type argument satisfying the predicate.
+ * @see KoTypeArgumentProvider.hasTypeArgument
  */
 fun <T : KoTypeArgumentProvider> List<T>.withTypeArgument(predicate: (KoTypeArgumentDeclaration) -> Boolean): List<T> =
     filter {
@@ -185,6 +198,7 @@ fun <T : KoTypeArgumentProvider> List<T>.withTypeArgument(predicate: (KoTypeArgu
  *
  * @param predicate A function that defines the condition to be met by a type argument declaration.
  * @return A list containing declarations without a type argument satisfying the provided predicate.
+ * @see KoTypeArgumentProvider.hasTypeArgument
  */
 fun <T : KoTypeArgumentProvider> List<T>.withoutTypeArgument(predicate: (KoTypeArgumentDeclaration) -> Boolean): List<T> =
     filterNot { it.hasTypeArgument(predicate) }
@@ -194,6 +208,7 @@ fun <T : KoTypeArgumentProvider> List<T>.withoutTypeArgument(predicate: (KoTypeA
  *
  * @param predicate A function that defines the condition to be met by all type argument declarations.
  * @return A list containing declarations with all type arguments satisfying the predicate.
+ * @see KoTypeArgumentProvider.hasAllTypeArguments
  */
 fun <T : KoTypeArgumentProvider> List<T>.withAllTypeArguments(predicate: (KoTypeArgumentDeclaration) -> Boolean): List<T> =
     filter {
@@ -205,6 +220,7 @@ fun <T : KoTypeArgumentProvider> List<T>.withAllTypeArguments(predicate: (KoType
  *
  * @param predicate A function that defines the condition to be met by all type argument declarations.
  * @return A list containing declarations that have at least one type argument not satisfying the provided predicate.
+ * @see KoTypeArgumentProvider.hasAllTypeArguments
  */
 fun <T : KoTypeArgumentProvider> List<T>.withoutAllTypeArguments(predicate: (KoTypeArgumentDeclaration) -> Boolean): List<T> =
     filterNot { it.hasAllTypeArguments(predicate) }
@@ -214,6 +230,7 @@ fun <T : KoTypeArgumentProvider> List<T>.withoutAllTypeArguments(predicate: (KoT
  *
  * @param predicate A function that defines the condition to be met by the list of type argument declarations.
  * @return A list containing declarations with type argument declarations satisfying the predicate.
+ * @see KoTypeArgumentProvider.typeArguments
  */
 fun <T : KoTypeArgumentProvider> List<T>.withTypeArguments(predicate: (List<KoTypeArgumentDeclaration>) -> Boolean): List<T> =
     filter { it.typeArguments?.let { typeArgument -> predicate(typeArgument) } == true }
@@ -223,6 +240,7 @@ fun <T : KoTypeArgumentProvider> List<T>.withTypeArguments(predicate: (List<KoTy
  *
  * @param predicate A function that defines the condition to be met by the list of type argument declarations.
  * @return A list containing declarations without type argument declarations satisfying the predicate.
+ * @see KoTypeArgumentProvider.typeArguments
  */
 fun <T : KoTypeArgumentProvider> List<T>.withoutTypeArguments(predicate: (List<KoTypeArgumentDeclaration>) -> Boolean): List<T> =
     filterNot { it.typeArguments?.let { typeArgument -> predicate(typeArgument) } == true }

@@ -5,6 +5,8 @@ import com.lemonappdev.konsist.api.provider.KoSetterProvider
 
 /**
  * List containing setter declarations.
+ *
+ * @see KoSetterProvider.setter
  */
 val <T : KoSetterProvider> List<T>.setters: List<KoSetterDeclaration>
     get() = mapNotNull { it.setter }
@@ -13,6 +15,7 @@ val <T : KoSetterProvider> List<T>.setters: List<KoSetterDeclaration>
  * List containing declarations with a setter.
  *
  * @return A list containing declarations with a setter.
+ * @see KoSetterProvider.hasSetter
  */
 fun <T : KoSetterProvider> List<T>.withSetter(): List<T> = filter { it.hasSetter }
 
@@ -20,5 +23,6 @@ fun <T : KoSetterProvider> List<T>.withSetter(): List<T> = filter { it.hasSetter
  * List containing declarations without a setter.
  *
  * @return A list containing declarations without a setter.
+ * @see KoSetterProvider.hasSetter
  */
 fun <T : KoSetterProvider> List<T>.withoutSetter(): List<T> = filterNot { it.hasSetter }

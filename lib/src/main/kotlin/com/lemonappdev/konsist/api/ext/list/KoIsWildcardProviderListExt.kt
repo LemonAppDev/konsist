@@ -6,6 +6,7 @@ import com.lemonappdev.konsist.api.provider.KoIsWildcardProvider
  * List containing declarations with a wildcard.
  *
  * @return A list containing declarations with a wildcard.
+ * @see KoIsWildcardProvider.isWildcard
  */
 fun <T : KoIsWildcardProvider> List<T>.withWildcard(): List<T> = filter { it.isWildcard }
 
@@ -13,5 +14,6 @@ fun <T : KoIsWildcardProvider> List<T>.withWildcard(): List<T> = filter { it.isW
  * List containing declarations without a wildcard.
  *
  * @return A list containing declarations without a wildcard.
+ * @see KoIsWildcardProvider.isWildcard
  */
 fun <T : KoIsWildcardProvider> List<T>.withoutWildcard(): List<T> = filterNot { it.isWildcard }

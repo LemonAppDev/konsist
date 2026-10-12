@@ -5,6 +5,8 @@ import com.lemonappdev.konsist.api.provider.KoConstructorProvider
 
 /**
  * List containing constructor declarations.
+ *
+ * @see KoConstructorProvider.constructors
  */
 val <T : KoConstructorProvider> List<T>.constructors: List<KoConstructorDeclaration>
     get() = flatMap { it.constructors }
@@ -13,6 +15,7 @@ val <T : KoConstructorProvider> List<T>.constructors: List<KoConstructorDeclarat
  * List containing declarations with any constructor.
  *
  * @return A list containing declarations with any constructor.
+ * @see KoConstructorProvider.hasConstructors
  */
 fun <T : KoConstructorProvider> List<T>.withConstructors(): List<T> = filter { it.hasConstructors() }
 
@@ -20,6 +23,7 @@ fun <T : KoConstructorProvider> List<T>.withConstructors(): List<T> = filter { i
  * List containing declarations with no constructors.
  *
  * @return A list containing declarations with no constructors.
+ * @see KoConstructorProvider.hasConstructors
  */
 fun <T : KoConstructorProvider> List<T>.withoutConstructors(): List<T> = filterNot { it.hasConstructors() }
 
@@ -28,6 +32,7 @@ fun <T : KoConstructorProvider> List<T>.withoutConstructors(): List<T> = filterN
  *
  * @param predicate A function that defines the condition to be met by a constructor declaration.
  * @return A list containing declarations with at least one constructor satisfying the predicate.
+ * @see KoConstructorProvider.hasConstructor
  */
 fun <T : KoConstructorProvider> List<T>.withConstructor(predicate: (KoConstructorDeclaration) -> Boolean): List<T> =
     filter { it.hasConstructor(predicate) }
@@ -37,6 +42,7 @@ fun <T : KoConstructorProvider> List<T>.withConstructor(predicate: (KoConstructo
  *
  * @param predicate A function that defines the condition to be met by a constructor declaration.
  * @return A list containing declarations without any constructor satisfying the provided predicate.
+ * @see KoConstructorProvider.hasConstructor
  */
 fun <T : KoConstructorProvider> List<T>.withoutConstructor(predicate: (KoConstructorDeclaration) -> Boolean): List<T> =
     filterNot { it.hasConstructor(predicate) }
@@ -46,6 +52,7 @@ fun <T : KoConstructorProvider> List<T>.withoutConstructor(predicate: (KoConstru
  *
  * @param predicate A function that defines the condition to be met by all constructor declarations.
  * @return A filtered list containing declarations with all constructors satisfying the predicate.
+ * @see KoConstructorProvider.hasAllConstructors
  */
 fun <T : KoConstructorProvider> List<T>.withAllConstructors(predicate: (KoConstructorDeclaration) -> Boolean): List<T> =
     filter { it.hasAllConstructors(predicate) }
@@ -55,6 +62,7 @@ fun <T : KoConstructorProvider> List<T>.withAllConstructors(predicate: (KoConstr
  *
  * @param predicate A function that defines the condition to be met by all constructor declarations.
  * @return A list containing declarations that have at least one constructor not satisfying the provided predicate.
+ * @see KoConstructorProvider.hasAllConstructors
  */
 fun <T : KoConstructorProvider> List<T>.withoutAllConstructors(predicate: (KoConstructorDeclaration) -> Boolean): List<T> =
     filterNot { it.hasAllConstructors(predicate) }
@@ -64,6 +72,7 @@ fun <T : KoConstructorProvider> List<T>.withoutAllConstructors(predicate: (KoCon
  *
  * @param predicate A function that defines the condition to be met by the list of constructor declarations.
  * @return A list containing declarations with constructor declarations satisfying the predicate.
+ * @see KoConstructorProvider.constructors
  */
 fun <T : KoConstructorProvider> List<T>.withConstructors(predicate: (List<KoConstructorDeclaration>) -> Boolean): List<T> =
     filter { predicate(it.constructors) }
@@ -73,6 +82,7 @@ fun <T : KoConstructorProvider> List<T>.withConstructors(predicate: (List<KoCons
  *
  * @param predicate A function that defines the condition to be met by the list of constructor declarations.
  * @return A list containing declarations without constructor declarations satisfying the predicate.
+ * @see KoConstructorProvider.constructors
  */
 fun <T : KoConstructorProvider> List<T>.withoutConstructors(predicate: (List<KoConstructorDeclaration>) -> Boolean): List<T> =
     filterNot { predicate(it.constructors) }

@@ -11,6 +11,7 @@ import com.lemonappdev.konsist.api.provider.KoFullyQualifiedNameProvider
  *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations with the specified fully qualified names.
+ * @see KoFullyQualifiedNameProvider.fullyQualifiedName
  */
 fun <T : KoFullyQualifiedNameProvider> List<T>.withFullyQualifiedName(
     name: String,
@@ -26,6 +27,7 @@ fun <T : KoFullyQualifiedNameProvider> List<T>.withFullyQualifiedName(
  *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations with the specified fully qualified names.
+ * @see KoFullyQualifiedNameProvider.fullyQualifiedName
  */
 fun <T : KoFullyQualifiedNameProvider> List<T>.withFullyQualifiedName(
     names: Collection<String>,
@@ -47,6 +49,7 @@ fun <T : KoFullyQualifiedNameProvider> List<T>.withFullyQualifiedName(
  *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations without the specified fully qualified names.
+ * @see KoFullyQualifiedNameProvider.fullyQualifiedName
  */
 fun <T : KoFullyQualifiedNameProvider> List<T>.withoutFullyQualifiedName(
     name: String,
@@ -62,6 +65,7 @@ fun <T : KoFullyQualifiedNameProvider> List<T>.withoutFullyQualifiedName(
  *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations without the specified fully qualified names.
+ * @see KoFullyQualifiedNameProvider.fullyQualifiedName
  */
 fun <T : KoFullyQualifiedNameProvider> List<T>.withoutFullyQualifiedName(
     names: Collection<String>,

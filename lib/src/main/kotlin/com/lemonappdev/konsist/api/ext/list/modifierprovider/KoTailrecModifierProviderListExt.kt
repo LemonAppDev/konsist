@@ -6,6 +6,7 @@ import com.lemonappdev.konsist.api.provider.modifier.KoTailrecModifierProvider
  * List containing declarations with `tailrec` modifier.
  *
  * @return A list containing declarations with the `tailrec` modifier.
+ * @see KoTailrecModifierProvider.hasTailrecModifier
  */
 fun <T : KoTailrecModifierProvider> List<T>.withTailrecModifier(): List<T> = filter { it.hasTailrecModifier }
 
@@ -13,5 +14,6 @@ fun <T : KoTailrecModifierProvider> List<T>.withTailrecModifier(): List<T> = fil
  * List containing declarations without `tailrec` modifier.
  *
  * @return A list containing declarations without the `tailrec` modifier.
+ * @see KoTailrecModifierProvider.hasTailrecModifier
  */
 fun <T : KoTailrecModifierProvider> List<T>.withoutTailrecModifier(): List<T> = filterNot { it.hasTailrecModifier }

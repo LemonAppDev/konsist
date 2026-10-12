@@ -6,6 +6,7 @@ import com.lemonappdev.konsist.api.provider.modifier.KoOverrideModifierProvider
  * List containing declarations with `override` modifier.
  *
  * @return A list containing declarations with the `override` modifier.
+ * @see KoOverrideModifierProvider.hasOverrideModifier
  */
 fun <T : KoOverrideModifierProvider> List<T>.withOverrideModifier(): List<T> = filter { it.hasOverrideModifier }
 
@@ -13,5 +14,6 @@ fun <T : KoOverrideModifierProvider> List<T>.withOverrideModifier(): List<T> = f
  * List containing declarations without `override` modifier.
  *
  * @return A list containing declarations without the `override` modifier.
+ * @see KoOverrideModifierProvider.hasOverrideModifier
  */
 fun <T : KoOverrideModifierProvider> List<T>.withoutOverrideModifier(): List<T> = filterNot { it.hasOverrideModifier }

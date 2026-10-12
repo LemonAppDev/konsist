@@ -7,6 +7,7 @@ import com.lemonappdev.konsist.api.provider.KoValueProvider
  *
  * @param values The value(s) to include.
  * @return A list containing elements with the specified values (or any value if [values] is empty).
+ * @see KoValueProvider.hasValue
  */
 fun <T : KoValueProvider> List<T>.withValue(vararg values: String): List<T> = withValue(listOf(*values))
 
@@ -15,6 +16,7 @@ fun <T : KoValueProvider> List<T>.withValue(vararg values: String): List<T> = wi
  *
  * @param values The value(s) to include.
  * @return A list containing elements with the specified values (or any value if [values] is empty).
+ * @see KoValueProvider.hasValue
  */
 fun <T : KoValueProvider> List<T>.withValue(values: Collection<String>): List<T> =
     filter {
@@ -29,6 +31,7 @@ fun <T : KoValueProvider> List<T>.withValue(values: Collection<String>): List<T>
  *
  * @param values The value(s) to exclude.
  * @return A list containing elements without the specified values (or without a value if [values] is empty).
+ * @see KoValueProvider.hasValue
  */
 fun <T : KoValueProvider> List<T>.withoutValue(vararg values: String): List<T> = withoutValue(listOf(*values))
 
@@ -37,6 +40,7 @@ fun <T : KoValueProvider> List<T>.withoutValue(vararg values: String): List<T> =
  *
  * @param values The value(s) to exclude.
  * @return A list containing elements without the specified values (or without a value if [values] is empty).
+ * @see KoValueProvider.hasValue
  */
 fun <T : KoValueProvider> List<T>.withoutValue(values: Collection<String>): List<T> =
     filter {
@@ -51,6 +55,7 @@ fun <T : KoValueProvider> List<T>.withoutValue(values: Collection<String>): List
  *
  * @param predicate A function that defines the condition to be met by a declaration value.
  * @return A list containing declarations with the value matching the provided predicate.
+ * @see KoValueProvider.value
  */
 fun <T : KoValueProvider> List<T>.withValue(predicate: (String) -> Boolean): List<T> =
     filter {
@@ -62,6 +67,7 @@ fun <T : KoValueProvider> List<T>.withValue(predicate: (String) -> Boolean): Lis
  *
  * @param predicate A function that defines the condition to be met by a declaration value.
  * @return A list containing declarations without the value matching the provided predicate.
+ * @see KoValueProvider.value
  */
 fun <T : KoValueProvider> List<T>.withoutValue(predicate: (String) -> Boolean): List<T> =
     filterNot {

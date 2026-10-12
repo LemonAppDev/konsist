@@ -8,6 +8,7 @@ import com.lemonappdev.konsist.api.provider.KoInterfaceProvider
  *
  * @param includeNested Whether to include nested interfaces.
  * @return A list containing interface declarations.
+ * @see KoInterfaceProvider.interfaces
  */
 fun <T : KoInterfaceProvider> List<T>.interfaces(includeNested: Boolean = true): List<KoInterfaceDeclaration> =
     flatMap { it.interfaces(includeNested) }
@@ -17,6 +18,7 @@ fun <T : KoInterfaceProvider> List<T>.interfaces(includeNested: Boolean = true):
  *
  * @param includeNested Whether to include nested interfaces.
  * @return A list containing declarations with any interface.
+ * @see KoInterfaceProvider.hasInterfaces
  */
 fun <T : KoInterfaceProvider> List<T>.withInterfaces(includeNested: Boolean = true): List<T> = filter { it.hasInterfaces(includeNested) }
 
@@ -25,6 +27,7 @@ fun <T : KoInterfaceProvider> List<T>.withInterfaces(includeNested: Boolean = tr
  *
  * @param includeNested Whether to include nested interfaces.
  * @return A list containing declarations with no interfaces.
+ * @see KoInterfaceProvider.hasInterfaces
  */
 fun <T : KoInterfaceProvider> List<T>.withoutInterfaces(includeNested: Boolean = true): List<T> =
     filterNot { it.hasInterfaces(includeNested) }
@@ -39,6 +42,7 @@ fun <T : KoInterfaceProvider> List<T>.withoutInterfaces(includeNested: Boolean =
  *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations with at least one of the specified interface(s).
+ * @see KoInterfaceProvider.hasInterfaceWithName
  */
 fun <T : KoInterfaceProvider> List<T>.withInterfaceNamed(
     name: String,
@@ -56,6 +60,7 @@ fun <T : KoInterfaceProvider> List<T>.withInterfaceNamed(
  *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations with at least one of the specified interface(s).
+ * @see KoInterfaceProvider.hasInterfaceWithName
  */
 fun <T : KoInterfaceProvider> List<T>.withInterfaceNamed(
     names: Collection<String>,
@@ -79,6 +84,7 @@ fun <T : KoInterfaceProvider> List<T>.withInterfaceNamed(
  *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations without any of the specified interfaces.
+ * @see KoInterfaceProvider.hasInterfaceWithName
  */
 fun <T : KoInterfaceProvider> List<T>.withoutInterfaceNamed(
     name: String,
@@ -96,6 +102,7 @@ fun <T : KoInterfaceProvider> List<T>.withoutInterfaceNamed(
  *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations without any of the specified interfaces.
+ * @see KoInterfaceProvider.hasInterfaceWithName
  */
 fun <T : KoInterfaceProvider> List<T>.withoutInterfaceNamed(
     names: Collection<String>,
@@ -119,6 +126,7 @@ fun <T : KoInterfaceProvider> List<T>.withoutInterfaceNamed(
  *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations with all specified interface(s).
+ * @see KoInterfaceProvider.hasInterfacesWithAllNames
  */
 fun <T : KoInterfaceProvider> List<T>.withAllInterfacesNamed(
     name: String,
@@ -136,6 +144,7 @@ fun <T : KoInterfaceProvider> List<T>.withAllInterfacesNamed(
  *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations with all specified interface(s).
+ * @see KoInterfaceProvider.hasInterfacesWithAllNames
  */
 fun <T : KoInterfaceProvider> List<T>.withAllInterfacesNamed(
     names: Collection<String>,
@@ -159,6 +168,7 @@ fun <T : KoInterfaceProvider> List<T>.withAllInterfacesNamed(
  *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations without all specified interface(s).
+ * @see KoInterfaceProvider.hasInterfacesWithAllNames
  */
 fun <T : KoInterfaceProvider> List<T>.withoutAllInterfacesNamed(
     name: String,
@@ -176,6 +186,7 @@ fun <T : KoInterfaceProvider> List<T>.withoutAllInterfacesNamed(
  *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations without all specified interface(s).
+ * @see KoInterfaceProvider.hasInterfacesWithAllNames
  */
 fun <T : KoInterfaceProvider> List<T>.withoutAllInterfacesNamed(
     names: Collection<String>,
@@ -200,6 +211,7 @@ fun <T : KoInterfaceProvider> List<T>.withoutAllInterfacesNamed(
  * @param includeNested Whether to include nested interfaces.
  * @param predicate A function that defines the condition to be met by an interface declaration.
  * @return A list containing declarations with at least one interface satisfying the predicate.
+ * @see KoInterfaceProvider.hasInterface
  */
 fun <T : KoInterfaceProvider> List<T>.withInterface(
     includeNested: Boolean = true,
@@ -215,6 +227,7 @@ fun <T : KoInterfaceProvider> List<T>.withInterface(
  * @param includeNested Whether to include nested interfaces.
  * @param predicate A function that defines the condition to be met by an interface declaration.
  * @return A list containing declarations without any interface satisfying the provided predicate.
+ * @see KoInterfaceProvider.hasInterface
  */
 fun <T : KoInterfaceProvider> List<T>.withoutInterface(
     includeNested: Boolean = true,
@@ -227,6 +240,7 @@ fun <T : KoInterfaceProvider> List<T>.withoutInterface(
  * @param includeNested Whether to include nested interfaces.
  * @param predicate A function that defines the condition to be met by all interface declarations.
  * @return A filtered list containing declarations with all interfaces satisfying the predicate.
+ * @see KoInterfaceProvider.hasAllInterfaces
  */
 fun <T : KoInterfaceProvider> List<T>.withAllInterfaces(
     includeNested: Boolean = true,
@@ -242,6 +256,7 @@ fun <T : KoInterfaceProvider> List<T>.withAllInterfaces(
  * @param includeNested Whether to include nested interfaces.
  * @param predicate A function that defines the condition to be met by all interface declarations.
  * @return A list containing declarations that have at least one interface not satisfying the provided predicate.
+ * @see KoInterfaceProvider.hasAllInterfaces
  */
 fun <T : KoInterfaceProvider> List<T>.withoutAllInterfaces(
     includeNested: Boolean = true,
@@ -254,6 +269,7 @@ fun <T : KoInterfaceProvider> List<T>.withoutAllInterfaces(
  * @param includeNested Whether to include nested interfaces.
  * @param predicate A function that defines the condition to be met by the list of interface declarations.
  * @return A list containing declarations with interface declarations satisfying the predicate.
+ * @see KoInterfaceProvider.interfaces
  */
 fun <T : KoInterfaceProvider> List<T>.withInterfaces(
     includeNested: Boolean = true,
@@ -266,6 +282,7 @@ fun <T : KoInterfaceProvider> List<T>.withInterfaces(
  * @param includeNested Whether to include nested interfaces.
  * @param predicate A function that defines the condition to be met by the list of interface declarations.
  * @return A list containing declarations without interface declarations satisfying the predicate.
+ * @see KoInterfaceProvider.interfaces
  */
 fun <T : KoInterfaceProvider> List<T>.withoutInterfaces(
     includeNested: Boolean = true,

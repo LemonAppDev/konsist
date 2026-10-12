@@ -5,6 +5,8 @@ import com.lemonappdev.konsist.api.provider.tag.KoKDocPropertyTagProvider
 
 /**
  * List containing property tags.
+ *
+ * @see KoKDocPropertyTagProvider.propertyTags
  */
 val <T : KoKDocPropertyTagProvider> List<T>.propertyTags: List<KoValuedKDocTagDeclaration>
     get() = flatMap { it.propertyTags }
@@ -13,6 +15,7 @@ val <T : KoKDocPropertyTagProvider> List<T>.propertyTags: List<KoValuedKDocTagDe
  * List containing declarations with property tag.
  *
  * @return A list containing declarations with property tag.
+ * @see KoKDocPropertyTagProvider.hasPropertyTags
  */
 fun <T : KoKDocPropertyTagProvider> List<T>.withPropertyTags(): List<T> = filter { it.hasPropertyTags }
 
@@ -20,5 +23,6 @@ fun <T : KoKDocPropertyTagProvider> List<T>.withPropertyTags(): List<T> = filter
  * List containing declarations with no property tag.
  *
  * @return A list containing declarations with no property tag.
+ * @see KoKDocPropertyTagProvider.hasPropertyTags
  */
 fun <T : KoKDocPropertyTagProvider> List<T>.withoutPropertyTags(): List<T> = filterNot { it.hasPropertyTags }

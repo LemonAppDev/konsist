@@ -6,6 +6,7 @@ import com.lemonappdev.konsist.api.provider.modifier.KoVarArgModifierProvider
  * List containing declarations with `vararg` modifier.
  *
  * @return A list containing declarations with the `vararg` modifier.
+ * @see KoVarArgModifierProvider.hasVarArgModifier
  */
 fun <T : KoVarArgModifierProvider> List<T>.withVarargModifier(): List<T> = filter { it.hasVarArgModifier }
 
@@ -13,5 +14,6 @@ fun <T : KoVarArgModifierProvider> List<T>.withVarargModifier(): List<T> = filte
  * List containing declarations without `vararg` modifier.
  *
  * @return A list containing declarations without the `vararg` modifier.
+ * @see KoVarArgModifierProvider.hasVarArgModifier
  */
 fun <T : KoVarArgModifierProvider> List<T>.withoutVarargModifier(): List<T> = filterNot { it.hasVarArgModifier }

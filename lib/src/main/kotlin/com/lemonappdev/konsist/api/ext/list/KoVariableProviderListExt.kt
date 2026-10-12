@@ -5,6 +5,8 @@ import com.lemonappdev.konsist.api.provider.KoVariableProvider
 
 /**
  * List containing variable declarations.
+ *
+ * @see KoVariableProvider.variables
  */
 val <T : KoVariableProvider> List<T>.variables: List<KoVariableDeclaration>
     get() = flatMap { it.variables }
@@ -13,6 +15,7 @@ val <T : KoVariableProvider> List<T>.variables: List<KoVariableDeclaration>
  * List containing declarations with any variable.
  *
  * @return A list containing declarations with any variable.
+ * @see KoVariableProvider.hasVariables
  */
 fun <T : KoVariableProvider> List<T>.withVariables(): List<T> = filter { it.hasVariables() }
 
@@ -20,6 +23,7 @@ fun <T : KoVariableProvider> List<T>.withVariables(): List<T> = filter { it.hasV
  * List containing declarations with no variables.
  *
  * @return A list containing declarations with no variables.
+ * @see KoVariableProvider.hasVariables
  */
 fun <T : KoVariableProvider> List<T>.withoutVariables(): List<T> = filterNot { it.hasVariables() }
 
@@ -32,6 +36,7 @@ fun <T : KoVariableProvider> List<T>.withoutVariables(): List<T> = filterNot { i
  *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations with at least one of the specified variable(s).
+ * @see KoVariableProvider.hasVariableWithName
  */
 fun <T : KoVariableProvider> List<T>.withVariableNamed(
     name: String,
@@ -47,6 +52,7 @@ fun <T : KoVariableProvider> List<T>.withVariableNamed(
  *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations with at least one of the specified variable(s).
+ * @see KoVariableProvider.hasVariableWithName
  */
 fun <T : KoVariableProvider> List<T>.withVariableNamed(
     names: Collection<String>,
@@ -68,6 +74,7 @@ fun <T : KoVariableProvider> List<T>.withVariableNamed(
  *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations without any of the specified variables.
+ * @see KoVariableProvider.hasVariableWithName
  */
 fun <T : KoVariableProvider> List<T>.withoutVariableNamed(
     name: String,
@@ -83,6 +90,7 @@ fun <T : KoVariableProvider> List<T>.withoutVariableNamed(
  *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations without any of the specified variables.
+ * @see KoVariableProvider.hasVariableWithName
  */
 fun <T : KoVariableProvider> List<T>.withoutVariableNamed(
     names: Collection<String>,
@@ -104,6 +112,7 @@ fun <T : KoVariableProvider> List<T>.withoutVariableNamed(
  *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations with all specified variables.
+ * @see KoVariableProvider.hasVariablesWithAllNames
  */
 fun <T : KoVariableProvider> List<T>.withAllVariablesNamed(
     name: String,
@@ -119,6 +128,7 @@ fun <T : KoVariableProvider> List<T>.withAllVariablesNamed(
  *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations with all specified variable(s).
+ * @see KoVariableProvider.hasVariablesWithAllNames
  */
 fun <T : KoVariableProvider> List<T>.withAllVariablesNamed(
     names: Collection<String>,
@@ -140,6 +150,7 @@ fun <T : KoVariableProvider> List<T>.withAllVariablesNamed(
  *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations without all specified variables.
+ * @see KoVariableProvider.hasVariablesWithAllNames
  */
 fun <T : KoVariableProvider> List<T>.withoutAllVariablesNamed(
     name: String,
@@ -155,6 +166,7 @@ fun <T : KoVariableProvider> List<T>.withoutAllVariablesNamed(
  *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations without all specified variable(s).
+ * @see KoVariableProvider.hasVariablesWithAllNames
  */
 fun <T : KoVariableProvider> List<T>.withoutAllVariablesNamed(
     names: Collection<String>,
@@ -172,6 +184,7 @@ fun <T : KoVariableProvider> List<T>.withoutAllVariablesNamed(
  *
  * @param predicate A function that defines the condition to be met by a variable declaration.
  * @return A list containing declarations with at least one variable satisfying the predicate.
+ * @see KoVariableProvider.hasVariable
  */
 fun <T : KoVariableProvider> List<T>.withVariable(predicate: (KoVariableDeclaration) -> Boolean): List<T> =
     filter { it.hasVariable(predicate) }
@@ -181,6 +194,7 @@ fun <T : KoVariableProvider> List<T>.withVariable(predicate: (KoVariableDeclarat
  *
  * @param predicate A function that defines the condition to be met by a variable declaration.
  * @return A list containing declarations without a variable satisfying the provided predicate.
+ * @see KoVariableProvider.hasVariable
  */
 fun <T : KoVariableProvider> List<T>.withoutVariable(predicate: (KoVariableDeclaration) -> Boolean): List<T> =
     filterNot { it.hasVariable(predicate) }
@@ -190,6 +204,7 @@ fun <T : KoVariableProvider> List<T>.withoutVariable(predicate: (KoVariableDecla
  *
  * @param predicate A function that defines the condition to be met by all variable declarations.
  * @return A list containing declarations with all variables satisfying the predicate.
+ * @see KoVariableProvider.hasAllVariables
  */
 fun <T : KoVariableProvider> List<T>.withAllVariables(predicate: (KoVariableDeclaration) -> Boolean): List<T> =
     filter { it.hasAllVariables(predicate) }
@@ -199,6 +214,7 @@ fun <T : KoVariableProvider> List<T>.withAllVariables(predicate: (KoVariableDecl
  *
  * @param predicate A function that defines the condition to be met by all variable declarations.
  * @return A list containing declarations that have at least one variable not satisfying the provided predicate.
+ * @see KoVariableProvider.hasAllVariables
  */
 fun <T : KoVariableProvider> List<T>.withoutAllVariables(predicate: (KoVariableDeclaration) -> Boolean): List<T> =
     filterNot { it.hasAllVariables(predicate) }
@@ -208,6 +224,7 @@ fun <T : KoVariableProvider> List<T>.withoutAllVariables(predicate: (KoVariableD
  *
  * @param predicate A function that defines the condition to be met by the list of variable declarations.
  * @return A list containing declarations with variable declarations satisfying the predicate.
+ * @see KoVariableProvider.variables
  */
 fun <T : KoVariableProvider> List<T>.withVariables(predicate: (List<KoVariableDeclaration>) -> Boolean): List<T> =
     filter { predicate(it.variables) }
@@ -217,6 +234,7 @@ fun <T : KoVariableProvider> List<T>.withVariables(predicate: (List<KoVariableDe
  *
  * @param predicate A function that defines the condition to be met by the list of variable declarations.
  * @return A list containing declarations without variable declarations satisfying the predicate.
+ * @see KoVariableProvider.variables
  */
 fun <T : KoVariableProvider> List<T>.withoutVariables(predicate: (List<KoVariableDeclaration>) -> Boolean): List<T> =
     filterNot { predicate(it.variables) }

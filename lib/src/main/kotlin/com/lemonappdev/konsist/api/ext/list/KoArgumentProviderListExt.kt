@@ -5,6 +5,8 @@ import com.lemonappdev.konsist.api.provider.KoArgumentProvider
 
 /**
  * List containing argument declarations.
+ *
+ * @see KoArgumentProvider.arguments
  */
 val <T : KoArgumentProvider> List<T>.arguments: List<KoArgumentDeclaration>
     get() = flatMap { it.arguments }
@@ -13,6 +15,7 @@ val <T : KoArgumentProvider> List<T>.arguments: List<KoArgumentDeclaration>
  * List containing declarations with any argument.
  *
  * @return A list containing declarations with any argument.
+ * @see KoArgumentProvider.hasArguments
  */
 fun <T : KoArgumentProvider> List<T>.withArguments(): List<T> = filter { it.hasArguments() }
 
@@ -20,6 +23,7 @@ fun <T : KoArgumentProvider> List<T>.withArguments(): List<T> = filter { it.hasA
  * List containing declarations with no arguments.
  *
  * @return A list containing declarations with no arguments.
+ * @see KoArgumentProvider.hasArguments
  */
 fun <T : KoArgumentProvider> List<T>.withoutArguments(): List<T> = filterNot { it.hasArguments() }
 
@@ -32,6 +36,7 @@ fun <T : KoArgumentProvider> List<T>.withoutArguments(): List<T> = filterNot { i
  *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations with at least one of the specified argument(s).
+ * @see KoArgumentProvider.hasArgumentWithName
  */
 fun <T : KoArgumentProvider> List<T>.withArgumentNamed(
     name: String,
@@ -47,6 +52,7 @@ fun <T : KoArgumentProvider> List<T>.withArgumentNamed(
  *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations with at least one of the specified argument(s).
+ * @see KoArgumentProvider.hasArgumentWithName
  */
 fun <T : KoArgumentProvider> List<T>.withArgumentNamed(
     names: Collection<String>,
@@ -68,6 +74,7 @@ fun <T : KoArgumentProvider> List<T>.withArgumentNamed(
  *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations without any of the specified arguments.
+ * @see KoArgumentProvider.hasArgumentWithName
  */
 fun <T : KoArgumentProvider> List<T>.withoutArgumentNamed(
     name: String,
@@ -83,6 +90,7 @@ fun <T : KoArgumentProvider> List<T>.withoutArgumentNamed(
  *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations without any of the specified arguments.
+ * @see KoArgumentProvider.hasArgumentWithName
  */
 fun <T : KoArgumentProvider> List<T>.withoutArgumentNamed(
     names: Collection<String>,
@@ -104,6 +112,7 @@ fun <T : KoArgumentProvider> List<T>.withoutArgumentNamed(
  *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations with all specified argument(s).
+ * @see KoArgumentProvider.hasArgumentsWithAllNames
  */
 fun <T : KoArgumentProvider> List<T>.withAllArgumentsNamed(
     name: String,
@@ -119,6 +128,7 @@ fun <T : KoArgumentProvider> List<T>.withAllArgumentsNamed(
  *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations with all specified argument(s).
+ * @see KoArgumentProvider.hasArgumentsWithAllNames
  */
 fun <T : KoArgumentProvider> List<T>.withAllArgumentsNamed(
     names: Collection<String>,
@@ -140,6 +150,7 @@ fun <T : KoArgumentProvider> List<T>.withAllArgumentsNamed(
  *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations without all specified argument(s).
+ * @see KoArgumentProvider.hasArgumentsWithAllNames
  */
 fun <T : KoArgumentProvider> List<T>.withoutAllArgumentsNamed(
     name: String,
@@ -155,6 +166,7 @@ fun <T : KoArgumentProvider> List<T>.withoutAllArgumentsNamed(
  *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations without all specified argument(s).
+ * @see KoArgumentProvider.hasArgumentsWithAllNames
  */
 fun <T : KoArgumentProvider> List<T>.withoutAllArgumentsNamed(
     names: Collection<String>,
@@ -172,6 +184,7 @@ fun <T : KoArgumentProvider> List<T>.withoutAllArgumentsNamed(
  *
  * @param predicate A function that defines the condition to be met by an argument declaration.
  * @return A list containing declarations with at least one argument satisfying the predicate.
+ * @see KoArgumentProvider.hasArgument
  */
 fun <T : KoArgumentProvider> List<T>.withArgument(predicate: (KoArgumentDeclaration) -> Boolean): List<T> =
     filter {
@@ -183,6 +196,7 @@ fun <T : KoArgumentProvider> List<T>.withArgument(predicate: (KoArgumentDeclarat
  *
  * @param predicate A function that defines the condition to be met by an argument declaration.
  * @return A list containing declarations without any argument satisfying the provided predicate.
+ * @see KoArgumentProvider.hasArgument
  */
 fun <T : KoArgumentProvider> List<T>.withoutArgument(predicate: (KoArgumentDeclaration) -> Boolean): List<T> =
     filterNot { it.hasArgument(predicate) }
@@ -192,6 +206,7 @@ fun <T : KoArgumentProvider> List<T>.withoutArgument(predicate: (KoArgumentDecla
  *
  * @param predicate A function that defines the condition to be met by all argument declarations.
  * @return A filtered list containing declarations with all arguments satisfying the predicate.
+ * @see KoArgumentProvider.hasAllArguments
  */
 fun <T : KoArgumentProvider> List<T>.withAllArguments(predicate: (KoArgumentDeclaration) -> Boolean): List<T> =
     filter {
@@ -203,6 +218,7 @@ fun <T : KoArgumentProvider> List<T>.withAllArguments(predicate: (KoArgumentDecl
  *
  * @param predicate A function that defines the condition to be met by all argument declarations.
  * @return A list containing declarations that have at least one argument not satisfying the provided predicate.
+ * @see KoArgumentProvider.hasAllArguments
  */
 fun <T : KoArgumentProvider> List<T>.withoutAllArguments(predicate: (KoArgumentDeclaration) -> Boolean): List<T> =
     filterNot { it.hasAllArguments(predicate) }
@@ -212,6 +228,7 @@ fun <T : KoArgumentProvider> List<T>.withoutAllArguments(predicate: (KoArgumentD
  *
  * @param predicate A function that defines the condition to be met by the list of argument declarations.
  * @return A list containing declarations with argument declarations satisfying the predicate.
+ * @see KoArgumentProvider.arguments
  */
 fun <T : KoArgumentProvider> List<T>.withArguments(predicate: (List<KoArgumentDeclaration>) -> Boolean): List<T> =
     filter { predicate(it.arguments) }
@@ -221,6 +238,7 @@ fun <T : KoArgumentProvider> List<T>.withArguments(predicate: (List<KoArgumentDe
  *
  * @param predicate A function that defines the condition to be met by the list of argument declarations.
  * @return A list containing declarations without argument declarations satisfying the predicate.
+ * @see KoArgumentProvider.arguments
  */
 fun <T : KoArgumentProvider> List<T>.withoutArguments(predicate: (List<KoArgumentDeclaration>) -> Boolean): List<T> =
     filterNot { predicate(it.arguments) }

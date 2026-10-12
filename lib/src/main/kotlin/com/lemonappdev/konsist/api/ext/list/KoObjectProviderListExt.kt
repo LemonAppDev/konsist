@@ -8,6 +8,7 @@ import com.lemonappdev.konsist.api.provider.KoObjectProvider
  *
  * @param includeNested Whether to include nested objects.
  * @return A list containing object declarations.
+ * @see KoObjectProvider.objects
  */
 fun <T : KoObjectProvider> List<T>.objects(includeNested: Boolean = true): List<KoObjectDeclaration> = flatMap { it.objects(includeNested) }
 
@@ -16,6 +17,7 @@ fun <T : KoObjectProvider> List<T>.objects(includeNested: Boolean = true): List<
  *
  * @param includeNested Whether to include nested objects.
  * @return A list containing declarations with any object.
+ * @see KoObjectProvider.hasObjects
  */
 fun <T : KoObjectProvider> List<T>.withObjects(includeNested: Boolean = true): List<T> = filter { it.hasObjects(includeNested) }
 
@@ -24,6 +26,7 @@ fun <T : KoObjectProvider> List<T>.withObjects(includeNested: Boolean = true): L
  *
  * @param includeNested Whether to include nested objects.
  * @return A list containing declarations with no objects.
+ * @see KoObjectProvider.hasObjects
  */
 fun <T : KoObjectProvider> List<T>.withoutObjects(includeNested: Boolean = true): List<T> = filterNot { it.hasObjects(includeNested) }
 
@@ -37,6 +40,7 @@ fun <T : KoObjectProvider> List<T>.withoutObjects(includeNested: Boolean = true)
  *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations with at least one of the specified object(s).
+ * @see KoObjectProvider.hasObjectWithName
  */
 fun <T : KoObjectProvider> List<T>.withObjectNamed(
     name: String,
@@ -54,6 +58,7 @@ fun <T : KoObjectProvider> List<T>.withObjectNamed(
  *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations with at least one of the specified object(s).
+ * @see KoObjectProvider.hasObjectWithName
  */
 fun <T : KoObjectProvider> List<T>.withObjectNamed(
     names: Collection<String>,
@@ -77,6 +82,7 @@ fun <T : KoObjectProvider> List<T>.withObjectNamed(
  *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations without any of the specified objects.
+ * @see KoObjectProvider.hasObjectWithName
  */
 fun <T : KoObjectProvider> List<T>.withoutObjectNamed(
     name: String,
@@ -94,6 +100,7 @@ fun <T : KoObjectProvider> List<T>.withoutObjectNamed(
  *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations without any of the specified objects.
+ * @see KoObjectProvider.hasObjectWithName
  */
 fun <T : KoObjectProvider> List<T>.withoutObjectNamed(
     names: Collection<String>,
@@ -117,6 +124,7 @@ fun <T : KoObjectProvider> List<T>.withoutObjectNamed(
  *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations with all specified object(s).
+ * @see KoObjectProvider.hasObjectsWithAllNames
  */
 fun <T : KoObjectProvider> List<T>.withAllObjectsNamed(
     name: String,
@@ -134,6 +142,7 @@ fun <T : KoObjectProvider> List<T>.withAllObjectsNamed(
  *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations with all specified object(s).
+ * @see KoObjectProvider.hasObjectsWithAllNames
  */
 fun <T : KoObjectProvider> List<T>.withAllObjectsNamed(
     names: Collection<String>,
@@ -157,6 +166,7 @@ fun <T : KoObjectProvider> List<T>.withAllObjectsNamed(
  *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations without all specified object(s).
+ * @see KoObjectProvider.hasObjectsWithAllNames
  */
 fun <T : KoObjectProvider> List<T>.withoutAllObjectsNamed(
     name: String,
@@ -174,6 +184,7 @@ fun <T : KoObjectProvider> List<T>.withoutAllObjectsNamed(
  *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations without all specified object(s).
+ * @see KoObjectProvider.hasObjectsWithAllNames
  */
 fun <T : KoObjectProvider> List<T>.withoutAllObjectsNamed(
     names: Collection<String>,
@@ -193,6 +204,7 @@ fun <T : KoObjectProvider> List<T>.withoutAllObjectsNamed(
  * @param includeNested Whether to include nested objects.
  * @param predicate A function that defines the condition to be met by an object declaration.
  * @return A list containing declarations with at least one object satisfying the predicate.
+ * @see KoObjectProvider.hasObject
  */
 fun <T : KoObjectProvider> List<T>.withObject(
     includeNested: Boolean = true,
@@ -208,6 +220,7 @@ fun <T : KoObjectProvider> List<T>.withObject(
  * @param includeNested Whether to include nested objects.
  * @param predicate A function that defines the condition to be met by an object declaration.
  * @return A list containing declarations without any object satisfying the provided predicate.
+ * @see KoObjectProvider.hasObject
  */
 fun <T : KoObjectProvider> List<T>.withoutObject(
     includeNested: Boolean = true,
@@ -220,6 +233,7 @@ fun <T : KoObjectProvider> List<T>.withoutObject(
  * @param includeNested Whether to include nested objects.
  * @param predicate A function that defines the condition to be met by all object declarations.
  * @return A list containing declarations with all objects satisfying the predicate.
+ * @see KoObjectProvider.hasAllObjects
  */
 fun <T : KoObjectProvider> List<T>.withAllObjects(
     includeNested: Boolean = true,
@@ -235,6 +249,7 @@ fun <T : KoObjectProvider> List<T>.withAllObjects(
  * @param includeNested Whether to include nested objects.
  * @param predicate A function that defines the condition to be met by all object declarations.
  * @return A list containing declarations that have at least one object not satisfying the provided predicate.
+ * @see KoObjectProvider.hasAllObjects
  */
 fun <T : KoObjectProvider> List<T>.withoutAllObjects(
     includeNested: Boolean = true,
@@ -247,6 +262,7 @@ fun <T : KoObjectProvider> List<T>.withoutAllObjects(
  * @param includeNested Whether to include nested objects.
  * @param predicate A function that defines the condition to be met by the list of object declarations.
  * @return A list containing declarations with object declarations satisfying the predicate.
+ * @see KoObjectProvider.objects
  */
 fun <T : KoObjectProvider> List<T>.withObjects(
     includeNested: Boolean = true,
@@ -259,6 +275,7 @@ fun <T : KoObjectProvider> List<T>.withObjects(
  * @param includeNested Whether to include nested objects.
  * @param predicate A function that defines the condition to be met by the list of object declarations.
  * @return A list containing declarations without object declarations satisfying the predicate.
+ * @see KoObjectProvider.objects
  */
 fun <T : KoObjectProvider> List<T>.withoutObjects(
     includeNested: Boolean = true,
