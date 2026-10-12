@@ -16,16 +16,16 @@ def replace_version(file_path):
     konsist_snapshot_version = get_konsist_snapshot_version()
     if file_path.endswith(".toml"):
         # pattern for gradle version catalog files
-        pattern = r"(?m)^(konsist\s*=\s*\")([\d\.]*(-SNAPSHOT)?)(\")"
-        replacement = r"\g<1>" + konsist_snapshot_version + r"\g<4>"
+        pattern = r"(?m)^(konsist\s*=\s*\")([\w.-]+)(\")"
+        replacement = r"\g<1>" + konsist_snapshot_version + r"\g<3>"
     elif file_path.endswith(".gradle") or file_path.endswith(".kts"):
         # pattern for gradle files
-        pattern = r"(com\.lemonappdev:konsist:)([\d\.]*(-SNAPSHOT)?)"
+        pattern = r"(com\.lemonappdev:konsist:)([\w.-]+)"
         replacement = r"\g<1>" + konsist_snapshot_version
     else:
         # pattern for pom.xml
-        pattern = r"(<groupId>com\.lemonappdev</groupId>\s*<artifactId>konsist</artifactId>\s*<version>)([\d\.]*(-SNAPSHOT)?)(</version>)"
-        replacement = r"\g<1>" + konsist_snapshot_version + r"\g<4>"
+        pattern = r"(<groupId>com\.lemonappdev</groupId>\s*<artifactId>konsist</artifactId>\s*<version>)([\w.-]+)(</version>)"
+        replacement = r"\g<1>" + konsist_snapshot_version + r"\g<3>"
 
     new_content = re.sub(pattern, replacement, content)
 
