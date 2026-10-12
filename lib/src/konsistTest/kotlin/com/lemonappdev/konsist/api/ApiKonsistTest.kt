@@ -28,6 +28,13 @@ class ApiKonsistTest {
     }
 
     @Test
+    fun `every api property has explicit type`() {
+        apiPackageScope
+            .properties()
+            .assertTrue { it.hasType() }
+    }
+
+    @Test
     fun `includeNested parameter is always before includeLocal parameter`() {
         apiPackageScope
             .functions()

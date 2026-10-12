@@ -130,6 +130,6 @@ data class Layer(
             "the definition must end with '..'. Current definition: $rootPackage"
 
     private companion object {
-        private val REGEX_VALID_PACKAGE_SEGMENT = Regex("^[a-z][a-zA-Z0-9_]*$")
+        private val REGEX_VALID_PACKAGE_SEGMENT: Regex = Regex("^[a-z][a-zA-Z0-9_]*$")
     }
 }
