@@ -12,10 +12,11 @@ class KoFunctionDeclarationForKoBaseTestClassProviderTest {
     @Test
     fun `function-has-not-test`() {
         // given
-        val sut = Konsist
-            .scopeFromProduction("app")
-            .functions()
-            .first { it.name == "appFunction" }
+        val sut =
+            Konsist
+                .scopeFromProduction("app")
+                .functions()
+                .first { it.name == "appFunction" }
 
         // then
         assertSoftly(sut) {
@@ -28,10 +29,11 @@ class KoFunctionDeclarationForKoBaseTestClassProviderTest {
     @Test
     fun `function-has-test`() {
         // given
-        val sut = Konsist
-            .scopeFromProduction("app")
-            .functions()
-            .first { it.name == "appFunction" }
+        val sut =
+            Konsist
+                .scopeFromProduction("app")
+                .functions()
+                .first { it.name == "appFunction" }
 
         // then
         assertSoftly(sut) {
@@ -49,10 +51,11 @@ class KoFunctionDeclarationForKoBaseTestClassProviderTest {
         value: Boolean,
     ) {
         // given
-        val sut = Konsist
-            .scopeFromProduction("app")
-            .functions()
-            .first { it.name == "appFunction" }
+        val sut =
+            Konsist
+                .scopeFromProduction("app")
+                .functions()
+                .first { it.name == "appFunction" }
 
         // then
         assertSoftly(sut) {
@@ -63,14 +66,15 @@ class KoFunctionDeclarationForKoBaseTestClassProviderTest {
     companion object {
         @Suppress("unused")
         @JvmStatic
-        fun provideValues() = listOf(
-            arguments("app", null, true),
-            arguments("data", null, false),
-            arguments(null, "integrationTest", true),
-            arguments(null, "test", false),
-            arguments("app", "integrationTest", true),
-            arguments("app", "test", false),
-            arguments("data", "integrationTest", false),
-        )
+        fun provideValues() =
+            listOf(
+                arguments("app", null, true),
+                arguments("data", null, false),
+                arguments(null, "integrationTest", true),
+                arguments(null, "test", false),
+                arguments("app", "integrationTest", true),
+                arguments("app", "test", false),
+                arguments("data", "integrationTest", false),
+            )
     }
 }

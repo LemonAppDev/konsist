@@ -17,10 +17,11 @@ class KoClassForKoModuleProviderTest {
     @Test
     fun `module name is 'app'`() {
         // given
-        val sut = Konsist
-            .scopeFromFile("$appMainSourceSetProjectDirectory/fixture/AppClass.kt".toOsSeparator())
-            .classes()
-            .first()
+        val sut =
+            Konsist
+                .scopeFromFile("$appMainSourceSetProjectDirectory/fixture/AppClass.kt".toOsSeparator())
+                .classes()
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -33,10 +34,11 @@ class KoClassForKoModuleProviderTest {
     @Test
     fun `module name is 'data'`() {
         // given
-        val sut = Konsist
-            .scopeFromFile("$dataMainSourceSetProjectDirectory/fixture/LibClass.kt".toOsSeparator())
-            .classes()
-            .first()
+        val sut =
+            Konsist
+                .scopeFromFile("$dataMainSourceSetProjectDirectory/fixture/LibClass.kt".toOsSeparator())
+                .classes()
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -49,10 +51,11 @@ class KoClassForKoModuleProviderTest {
     @Test
     fun `module name is 'root'`() {
         // given
-        val sut = Konsist
-            .scopeFromFile("$rootMainSourceSetProjectDirectory/fixture/RootClass.kt".toOsSeparator())
-            .classes()
-            .first()
+        val sut =
+            Konsist
+                .scopeFromFile("$rootMainSourceSetProjectDirectory/fixture/RootClass.kt".toOsSeparator())
+                .classes()
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -66,10 +69,11 @@ class KoClassForKoModuleProviderTest {
     @Test
     fun `deprecated resideInModule delegates to residesInModule`() {
         // given
-        val sut = Konsist
-            .scopeFromFile("$appMainSourceSetProjectDirectory/fixture/AppClass.kt".toOsSeparator())
-            .classes()
-            .first()
+        val sut =
+            Konsist
+                .scopeFromFile("$appMainSourceSetProjectDirectory/fixture/AppClass.kt".toOsSeparator())
+                .classes()
+                .first()
 
         // then
         assertSoftly(sut) {

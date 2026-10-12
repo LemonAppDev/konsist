@@ -4,13 +4,14 @@ import com.lemonappdev.konsist.helper.ext.toOsSeparator
 import java.io.File
 
 object PathProvider {
-    val projectRootDirectory = File("")
-        .absoluteFile
-        .path
-        .replace(File.separator, "/")
-        .dropLastWhile { it != '/' }
-        .dropLastWhile { it != '/' }
-        .dropLast(1)
+    val projectRootDirectory =
+        File("")
+            .absoluteFile
+            .path
+            .replace(File.separator, "/")
+            .dropLastWhile { it != '/' }
+            .dropLastWhile { it != '/' }
+            .dropLast(1)
 
     val rootMainSourceSetDirectory = "$projectRootDirectory/src/main/kotlin/com/lemonappdev".toOsSeparator()
 

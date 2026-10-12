@@ -17,12 +17,13 @@ class KoArgumentForKoSourceSetProviderTest {
     @Test
     fun `source set name is 'main' in app module`() {
         // given
-        val sut = Konsist
-            .scopeFromFile("$appMainSourceSetProjectDirectory/fixture/AppClass.kt".toOsSeparator())
-            .classes()
-            .annotations
-            .arguments
-            .first()
+        val sut =
+            Konsist
+                .scopeFromFile("$appMainSourceSetProjectDirectory/fixture/AppClass.kt".toOsSeparator())
+                .classes()
+                .annotations
+                .arguments
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -35,12 +36,13 @@ class KoArgumentForKoSourceSetProviderTest {
     @Test
     fun `source set name is 'integrationTest' in app module`() {
         // given
-        val sut = Konsist
-            .scopeFromFile("$appIntegrationTestSourceSetProjectDirectory/fixture/AppClassTest.kt".toOsSeparator())
-            .classes()
-            .annotations
-            .arguments
-            .first()
+        val sut =
+            Konsist
+                .scopeFromFile("$appIntegrationTestSourceSetProjectDirectory/fixture/AppClassTest.kt".toOsSeparator())
+                .classes()
+                .annotations
+                .arguments
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -53,12 +55,13 @@ class KoArgumentForKoSourceSetProviderTest {
     @Test
     fun `source set name is 'main' in data module`() {
         // given
-        val sut = Konsist
-            .scopeFromFile("$dataMainSourceSetProjectDirectory/fixture/LibClass.kt".toOsSeparator())
-            .classes()
-            .annotations
-            .arguments
-            .first()
+        val sut =
+            Konsist
+                .scopeFromFile("$dataMainSourceSetProjectDirectory/fixture/LibClass.kt".toOsSeparator())
+                .classes()
+                .annotations
+                .arguments
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -71,12 +74,13 @@ class KoArgumentForKoSourceSetProviderTest {
     @Test
     fun `source set name is 'test' in data module`() {
         // given
-        val sut = Konsist
-            .scopeFromFile("$dataTestSourceSetProjectDirectory/fixture/LibClassTest.kt".toOsSeparator())
-            .classes()
-            .annotations
-            .arguments
-            .first()
+        val sut =
+            Konsist
+                .scopeFromFile("$dataTestSourceSetProjectDirectory/fixture/LibClassTest.kt".toOsSeparator())
+                .classes()
+                .annotations
+                .arguments
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -89,12 +93,13 @@ class KoArgumentForKoSourceSetProviderTest {
     @Test
     fun `source set name is 'main' in root module`() {
         // given
-        val sut = Konsist
-            .scopeFromFile("$rootMainSourceSetProjectDirectory/fixture/RootClass.kt".toOsSeparator())
-            .classes()
-            .annotations
-            .arguments
-            .first()
+        val sut =
+            Konsist
+                .scopeFromFile("$rootMainSourceSetProjectDirectory/fixture/RootClass.kt".toOsSeparator())
+                .classes()
+                .annotations
+                .arguments
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -107,12 +112,13 @@ class KoArgumentForKoSourceSetProviderTest {
     @Test
     fun `source set name is 'main' in root module with double src package`() {
         // given
-        val sut = Konsist
-            .scopeFromFile("$rootMainSourceSetProjectDirectory/fixture/src/RootSrcClass.kt".toOsSeparator())
-            .classes()
-            .annotations
-            .arguments
-            .first()
+        val sut =
+            Konsist
+                .scopeFromFile("$rootMainSourceSetProjectDirectory/fixture/src/RootSrcClass.kt".toOsSeparator())
+                .classes()
+                .annotations
+                .arguments
+                .first()
 
         // then
         assertSoftly(sut) {

@@ -8,7 +8,9 @@ import com.lemonappdev.fixture.AppTestClass1 as ImportAlias
  * App KDoc Test
  */
 @Suppress("app_argument_test")
-class AppClassTest(val appParameterTest: String) : AppInterfaceTest {
+class AppClassTest(
+    val appParameterTest: String,
+) : AppInterfaceTest {
     constructor(otherParameterTest: Int) : this(otherParameterTest.toString())
 
     init {
@@ -42,7 +44,7 @@ object AppObjectTest
 enum class AppEnumClassTest {
     APP_CONSTANT {
         val appVariableTest = ""
-    }
+    },
 }
 
 fun appFunctionTest(appTestParameter: String) {

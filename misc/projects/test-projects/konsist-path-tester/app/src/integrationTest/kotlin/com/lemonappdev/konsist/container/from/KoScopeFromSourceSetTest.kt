@@ -15,9 +15,10 @@ class KoScopeFromSourceSetTest {
     @Test
     fun `scopeFromSourceSet for main source set`() {
         // given
-        val sut = Konsist
-            .scopeFromSourceSet("main")
-            .mapToFilePaths()
+        val sut =
+            Konsist
+                .scopeFromSourceSet("main")
+                .mapToFilePaths()
 
         // then
         sut.shouldBeEqualTo(
@@ -37,9 +38,10 @@ class KoScopeFromSourceSetTest {
     @Test
     fun `scopeFromSourceSet for integrationTest source set`() {
         // given
-        val sut = Konsist
-            .scopeFromSourceSet("integrationTest")
-            .mapToFilePaths()
+        val sut =
+            Konsist
+                .scopeFromSourceSet("integrationTest")
+                .mapToFilePaths()
 
         // then
         sut.shouldBeEqualTo(
@@ -70,9 +72,10 @@ class KoScopeFromSourceSetTest {
     @Test
     fun `scopeFromSourceSet for test source set`() {
         // given
-        val sut = Konsist
-            .scopeFromSourceSet("test")
-            .mapToFilePaths()
+        val sut =
+            Konsist
+                .scopeFromSourceSet("test")
+                .mapToFilePaths()
 
         // then
         sut.shouldBeEqualTo(
@@ -86,9 +89,10 @@ class KoScopeFromSourceSetTest {
     @Test
     fun `scopeFromSourceSet for main and test source sets`() {
         // given
-        val sut = Konsist
-            .scopeFromSourceSet("main", "test")
-            .mapToFilePaths()
+        val sut =
+            Konsist
+                .scopeFromSourceSet("main", "test")
+                .mapToFilePaths()
 
         // then
         sut.shouldBeEqualTo(

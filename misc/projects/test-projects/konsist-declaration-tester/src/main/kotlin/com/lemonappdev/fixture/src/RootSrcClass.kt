@@ -8,7 +8,9 @@ import com.lemonappdev.fixture.src.RootSrcObject as ImportAlias
  * Root Src KDoc
  */
 @Suppress("root_src_argument")
-class RootSrcClass(val rootParameter: String) : RootSrcInterface {
+class RootSrcClass(
+    val rootParameter: String,
+) : RootSrcInterface {
     constructor(otherParameter: Int) : this(otherParameter.toString())
 
     init {
@@ -42,7 +44,7 @@ object RootSrcObject
 enum class RootSrcEnumClass {
     APP_CONSTANT {
         val rootSrcVariable = ""
-    }
+    },
 }
 
 fun rootSrcFunction(rootSrcParameter: String) {

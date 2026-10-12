@@ -28,9 +28,10 @@ class KoVariableForKoModuleProviderTest {
     @MethodSource("provideValuesForApp")
     fun `module name is 'app'`(declarations: List<KoVariableProvider>) {
         // given
-        val sut = declarations
-            .variables
-            .first()
+        val sut =
+            declarations
+                .variables
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -44,9 +45,10 @@ class KoVariableForKoModuleProviderTest {
     @MethodSource("provideValuesForData")
     fun `module name is 'data'`(declarations: List<KoVariableProvider>) {
         // given
-        val sut = declarations
-            .variables
-            .first()
+        val sut =
+            declarations
+                .variables
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -60,9 +62,10 @@ class KoVariableForKoModuleProviderTest {
     @MethodSource("provideValuesForRoot")
     fun `module name is 'root'`(declarations: List<KoVariableProvider>) {
         // given
-        val sut = declarations
-            .variables
-            .first()
+        val sut =
+            declarations
+                .variables
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -79,32 +82,35 @@ class KoVariableForKoModuleProviderTest {
 
         @Suppress("unused")
         @JvmStatic
-        fun provideValuesForApp() = listOf(
-            arguments(Konsist.scopeFromFile(appPath).functions()),
-            arguments(Konsist.scopeFromFile(appPath).classes().initBlocks),
-            arguments(Konsist.scopeFromFile(appPath).classes().enumConstants),
-            arguments(Konsist.scopeFromFile(appPath).properties().getters),
-            arguments(Konsist.scopeFromFile(appPath).properties().setters),
-        )
+        fun provideValuesForApp() =
+            listOf(
+                arguments(Konsist.scopeFromFile(appPath).functions()),
+                arguments(Konsist.scopeFromFile(appPath).classes().initBlocks),
+                arguments(Konsist.scopeFromFile(appPath).classes().enumConstants),
+                arguments(Konsist.scopeFromFile(appPath).properties().getters),
+                arguments(Konsist.scopeFromFile(appPath).properties().setters),
+            )
 
         @Suppress("unused")
         @JvmStatic
-        fun provideValuesForData() = listOf(
-            arguments(Konsist.scopeFromFile(dataPath).functions()),
-            arguments(Konsist.scopeFromFile(dataPath).classes().initBlocks),
-            arguments(Konsist.scopeFromFile(dataPath).classes().enumConstants),
-            arguments(Konsist.scopeFromFile(dataPath).properties().getters),
-            arguments(Konsist.scopeFromFile(dataPath).properties().setters),
-        )
+        fun provideValuesForData() =
+            listOf(
+                arguments(Konsist.scopeFromFile(dataPath).functions()),
+                arguments(Konsist.scopeFromFile(dataPath).classes().initBlocks),
+                arguments(Konsist.scopeFromFile(dataPath).classes().enumConstants),
+                arguments(Konsist.scopeFromFile(dataPath).properties().getters),
+                arguments(Konsist.scopeFromFile(dataPath).properties().setters),
+            )
 
         @Suppress("unused")
         @JvmStatic
-        fun provideValuesForRoot() = listOf(
-            arguments(Konsist.scopeFromFile(rootPath).functions()),
-            arguments(Konsist.scopeFromFile(rootPath).classes().initBlocks),
-            arguments(Konsist.scopeFromFile(rootPath).classes().enumConstants),
-            arguments(Konsist.scopeFromFile(rootPath).properties().getters),
-            arguments(Konsist.scopeFromFile(rootPath).properties().setters),
-        )
+        fun provideValuesForRoot() =
+            listOf(
+                arguments(Konsist.scopeFromFile(rootPath).functions()),
+                arguments(Konsist.scopeFromFile(rootPath).classes().initBlocks),
+                arguments(Konsist.scopeFromFile(rootPath).classes().enumConstants),
+                arguments(Konsist.scopeFromFile(rootPath).properties().getters),
+                arguments(Konsist.scopeFromFile(rootPath).properties().setters),
+            )
     }
 }

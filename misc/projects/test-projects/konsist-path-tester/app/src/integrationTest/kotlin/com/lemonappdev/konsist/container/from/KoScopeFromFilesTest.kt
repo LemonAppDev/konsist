@@ -1,8 +1,8 @@
 package com.lemonappdev.konsist.container.from
 
 import com.lemonappdev.konsist.api.Konsist
-import com.lemonappdev.konsist.helper.ext.mapToFilePaths
 import com.lemonappdev.konsist.helper.ext.fileSeparator
+import com.lemonappdev.konsist.helper.ext.mapToFilePaths
 import com.lemonappdev.konsist.helper.ext.toOsSeparator
 import com.lemonappdev.konsist.helper.util.PathProvider.appMainSourceSetDirectory
 import org.amshove.kluent.shouldBeEqualTo
@@ -11,16 +11,18 @@ import org.amshove.kluent.withMessage
 import org.junit.jupiter.api.Test
 
 class KoScopeFromFilesTest {
-
     @Test
     fun `scopeFromFiles(set)`() {
         // given
-        val files = setOf(
-            "/app/src/main/kotlin/com/lemonappdev/fixture/AppClass.kt",
-            "/app/src/main/kotlin/com/lemonappdev/fixture/data/AppDataClass.kt"
-        )
-        val sut = Konsist.scopeFromFiles(files)
-            .mapToFilePaths()
+        val files =
+            setOf(
+                "/app/src/main/kotlin/com/lemonappdev/fixture/AppClass.kt",
+                "/app/src/main/kotlin/com/lemonappdev/fixture/data/AppDataClass.kt",
+            )
+        val sut =
+            Konsist
+                .scopeFromFiles(files)
+                .mapToFilePaths()
 
         // then
         sut.shouldBeEqualTo(
@@ -34,12 +36,15 @@ class KoScopeFromFilesTest {
     @Test
     fun `scopeFromFiles(list)`() {
         // given
-        val files = listOf(
-            "/app/src/main/kotlin/com/lemonappdev/fixture/AppClass.kt",
-            "/app/src/main/kotlin/com/lemonappdev/fixture/data/AppDataClass.kt"
-        )
-        val sut = Konsist.scopeFromFiles(files)
-            .mapToFilePaths()
+        val files =
+            listOf(
+                "/app/src/main/kotlin/com/lemonappdev/fixture/AppClass.kt",
+                "/app/src/main/kotlin/com/lemonappdev/fixture/data/AppDataClass.kt",
+            )
+        val sut =
+            Konsist
+                .scopeFromFiles(files)
+                .mapToFilePaths()
 
         // then
         sut.shouldBeEqualTo(
@@ -53,12 +58,15 @@ class KoScopeFromFilesTest {
     @Test
     fun `scopeFromFiles accepts windows separators`() {
         // given
-        val files = listOf(
-            """app\src\main\kotlin\com\lemonappdev\fixture\AppClass.kt""",
-            """app\src\main\kotlin\com\lemonappdev\fixture\data\AppDataClass.kt""",
-        )
-        val sut = Konsist.scopeFromFiles(files)
-            .mapToFilePaths()
+        val files =
+            listOf(
+                """app\src\main\kotlin\com\lemonappdev\fixture\AppClass.kt""",
+                """app\src\main\kotlin\com\lemonappdev\fixture\data\AppDataClass.kt""",
+            )
+        val sut =
+            Konsist
+                .scopeFromFiles(files)
+                .mapToFilePaths()
 
         // then
         sut.shouldBeEqualTo(
@@ -72,9 +80,10 @@ class KoScopeFromFilesTest {
     @Test
     fun `scopeFromFiles(set) throws exception if path does not exist`() {
         // given
-        val files = setOf(
-            "app/src/main/kotlin/com/lemonappdev/NonExistingTest.kt"
-        )
+        val files =
+            setOf(
+                "app/src/main/kotlin/com/lemonappdev/NonExistingTest.kt",
+            )
 
         val func = { Konsist.scopeFromFiles(files) }
 
@@ -86,9 +95,10 @@ class KoScopeFromFilesTest {
     @Test
     fun `scopeFromFiles(list) throws exception if path does not exist`() {
         // given
-        val files = listOf(
-            "app/src/main/kotlin/com/lemonappdev/NonExistingTest.kt"
-        )
+        val files =
+            listOf(
+                "app/src/main/kotlin/com/lemonappdev/NonExistingTest.kt",
+            )
 
         val func = { Konsist.scopeFromFiles(files) }
 
@@ -100,9 +110,10 @@ class KoScopeFromFilesTest {
     @Test
     fun `scopeFromFiles(set) throws exception if path points to directory`() {
         // given
-        val files = setOf(
-            "app/src/main/kotlin/com/lemonappdev/fixture"
-        )
+        val files =
+            setOf(
+                "app/src/main/kotlin/com/lemonappdev/fixture",
+            )
 
         val func = { Konsist.scopeFromFiles(files) }
 
@@ -114,9 +125,10 @@ class KoScopeFromFilesTest {
     @Test
     fun `scopeFromFiles(list) throws exception if path points to directory`() {
         // given
-        val files = listOf(
-            "app/src/main/kotlin/com/lemonappdev/fixture"
-        )
+        val files =
+            listOf(
+                "app/src/main/kotlin/com/lemonappdev/fixture",
+            )
 
         val func = { Konsist.scopeFromFiles(files) }
 

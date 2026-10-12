@@ -7,7 +7,9 @@ import com.lemonappdev.fixture.RootObject as ImportAlias
  * Root KDoc
  */
 @Suppress("root_argument")
-class RootClass(val rootParameter: String) : RootInterface {
+class RootClass(
+    val rootParameter: String,
+) : RootInterface {
     constructor(otherParameter: Int) : this(otherParameter.toString())
 
     init {
@@ -41,7 +43,7 @@ object RootObject
 enum class RootEnumClass {
     APP_CONSTANT {
         val rootVariable = ""
-    }
+    },
 }
 
 fun rootFunction(rootParameter: String) {

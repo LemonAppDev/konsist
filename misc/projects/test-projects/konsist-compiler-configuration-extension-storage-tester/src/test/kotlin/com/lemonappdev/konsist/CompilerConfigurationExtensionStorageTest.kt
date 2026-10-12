@@ -16,9 +16,10 @@ class CompilerConfigurationExtensionStorageTest {
     @Test
     fun `konsist parses kotlin file`() {
         // given
-        val sut = Konsist
-            .scopeFromProduction()
-            .classes()
+        val sut =
+            Konsist
+                .scopeFromProduction()
+                .classes()
 
         // then
         sut.map { it.name } shouldBeEqualTo listOf("FixtureClass")

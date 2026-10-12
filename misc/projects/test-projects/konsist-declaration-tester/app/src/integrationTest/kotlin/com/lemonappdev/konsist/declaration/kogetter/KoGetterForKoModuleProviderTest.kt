@@ -18,12 +18,13 @@ class KoGetterForKoModuleProviderTest {
     @Test
     fun `module name is 'app'`() {
         // given
-        val sut = Konsist
-            .scopeFromFile("$appMainSourceSetProjectDirectory/fixture/AppClass.kt".toOsSeparator())
-            .properties()
-            .withGetter()
-            .first()
-            .getter
+        val sut =
+            Konsist
+                .scopeFromFile("$appMainSourceSetProjectDirectory/fixture/AppClass.kt".toOsSeparator())
+                .properties()
+                .withGetter()
+                .first()
+                .getter
 
         // then
         assertSoftly(sut) {
@@ -36,12 +37,13 @@ class KoGetterForKoModuleProviderTest {
     @Test
     fun `module name is 'data'`() {
         // given
-        val sut = Konsist
-            .scopeFromFile("$dataMainSourceSetProjectDirectory/fixture/LibClass.kt".toOsSeparator())
-            .properties()
-            .withGetter()
-            .first()
-            .getter
+        val sut =
+            Konsist
+                .scopeFromFile("$dataMainSourceSetProjectDirectory/fixture/LibClass.kt".toOsSeparator())
+                .properties()
+                .withGetter()
+                .first()
+                .getter
 
         // then
         assertSoftly(sut) {
@@ -54,12 +56,13 @@ class KoGetterForKoModuleProviderTest {
     @Test
     fun `module name is 'root'`() {
         // given
-        val sut = Konsist
-            .scopeFromFile("$rootMainSourceSetProjectDirectory/fixture/RootClass.kt".toOsSeparator())
-            .properties()
-            .withGetter()
-            .first()
-            .getter
+        val sut =
+            Konsist
+                .scopeFromFile("$rootMainSourceSetProjectDirectory/fixture/RootClass.kt".toOsSeparator())
+                .properties()
+                .withGetter()
+                .first()
+                .getter
 
         // then
         assertSoftly(sut) {

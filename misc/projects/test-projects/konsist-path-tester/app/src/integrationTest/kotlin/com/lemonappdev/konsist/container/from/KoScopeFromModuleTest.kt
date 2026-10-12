@@ -16,9 +16,10 @@ class KoScopeFromModuleTest {
     @Test
     fun `scopeFromModule for app module`() {
         // given
-        val sut = Konsist
-            .scopeFromModule("app")
-            .mapToFilePaths()
+        val sut =
+            Konsist
+                .scopeFromModule("app")
+                .mapToFilePaths()
 
         // then
         sut.shouldBeEqualTo(
@@ -51,9 +52,10 @@ class KoScopeFromModuleTest {
     @Test
     fun `scopeFromModule for data module`() {
         // given
-        val sut = Konsist
-            .scopeFromModule("data")
-            .mapToFilePaths()
+        val sut =
+            Konsist
+                .scopeFromModule("data")
+                .mapToFilePaths()
 
         // then
         sut.shouldBeEqualTo(
@@ -69,9 +71,10 @@ class KoScopeFromModuleTest {
     @Test
     fun `scopeFromModule for root module`() {
         // given
-        val sut = Konsist
-            .scopeFromModule("root")
-            .mapToFilePaths()
+        val sut =
+            Konsist
+                .scopeFromModule("root")
+                .mapToFilePaths()
 
         // then
         sut.shouldBeEqualTo(
@@ -87,9 +90,10 @@ class KoScopeFromModuleTest {
     @Test
     fun `scopeFromModule for app and data modules`() {
         // given
-        val sut = Konsist
-            .scopeFromModule("app", "data")
-            .mapToFilePaths()
+        val sut =
+            Konsist
+                .scopeFromModule("app", "data")
+                .mapToFilePaths()
 
         // then
         sut.shouldBeEqualTo(
@@ -126,9 +130,10 @@ class KoScopeFromModuleTest {
     @Test
     fun `scopeFromModule for data module with gradle project path`() {
         // given
-        val sut = Konsist
-            .scopeFromModule(":data")
-            .mapToFilePaths()
+        val sut =
+            Konsist
+                .scopeFromModule(":data")
+                .mapToFilePaths()
 
         // then
         sut.shouldBeEqualTo(
@@ -144,9 +149,10 @@ class KoScopeFromModuleTest {
     @Test
     fun `scopeFromModule for root module with gradle root project path`() {
         // given
-        val sut = Konsist
-            .scopeFromModule(":")
-            .mapToFilePaths()
+        val sut =
+            Konsist
+                .scopeFromModule(":")
+                .mapToFilePaths()
 
         // then
         sut.shouldBeEqualTo(
@@ -161,9 +167,10 @@ class KoScopeFromModuleTest {
     @Test
     fun `scopeFromModule does not duplicate files when module is passed in different formats`() {
         // given
-        val sut = Konsist
-            .scopeFromModule(":data", "data", "/data/", """data\""")
-            .mapToFilePaths()
+        val sut =
+            Konsist
+                .scopeFromModule(":data", "data", "/data/", """data\""")
+                .mapToFilePaths()
 
         // then
         sut.shouldBeEqualTo(

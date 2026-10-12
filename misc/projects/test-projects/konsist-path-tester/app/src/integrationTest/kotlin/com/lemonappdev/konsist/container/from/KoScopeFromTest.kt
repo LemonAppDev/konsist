@@ -15,9 +15,10 @@ class KoScopeFromTest {
     @Test
     fun `scopeFromTest`() {
         // given
-        val sut = Konsist
-            .scopeFromTest()
-            .mapToFilePaths()
+        val sut =
+            Konsist
+                .scopeFromTest()
+                .mapToFilePaths()
 
         // then
         sut.shouldBeEqualTo(
@@ -61,9 +62,10 @@ class KoScopeFromTest {
     @Test
     fun `scopeFromTest, integrationTest source set`() {
         // given
-        val sut = Konsist
-            .scopeFromTest(sourceSetName = "integrationTest")
-            .mapToFilePaths()
+        val sut =
+            Konsist
+                .scopeFromTest(sourceSetName = "integrationTest")
+                .mapToFilePaths()
 
         // then
         sut.shouldBeEqualTo(
@@ -94,9 +96,10 @@ class KoScopeFromTest {
     @Test
     fun `scopeFromTest, test source set`() {
         // given
-        val sut = Konsist
-            .scopeFromTest(sourceSetName = "test")
-            .mapToFilePaths()
+        val sut =
+            Konsist
+                .scopeFromTest(sourceSetName = "test")
+                .mapToFilePaths()
 
         // then
         sut.shouldBeEqualTo(
@@ -111,9 +114,10 @@ class KoScopeFromTest {
     @Test
     fun `scopeFromTest, app module`() {
         // given
-        val sut = Konsist
-            .scopeFromTest(moduleName = "app")
-            .mapToFilePaths()
+        val sut =
+            Konsist
+                .scopeFromTest(moduleName = "app")
+                .mapToFilePaths()
 
         // then
         sut.shouldBeEqualTo(
@@ -155,9 +159,10 @@ class KoScopeFromTest {
     @Test
     fun `scopeFromTest, app module, integrationTest source set`() {
         // given
-        val sut = Konsist
-            .scopeFromTest(moduleName = "app", sourceSetName = "integrationTest")
-            .mapToFilePaths()
+        val sut =
+            Konsist
+                .scopeFromTest(moduleName = "app", sourceSetName = "integrationTest")
+                .mapToFilePaths()
 
         // then
         sut.shouldBeEqualTo(
@@ -188,9 +193,10 @@ class KoScopeFromTest {
     @Test
     fun `scopeFromTest, app module, test source set`() {
         // given
-        val sut = Konsist
-            .scopeFromTest(moduleName = "app", sourceSetName = "test")
-            .mapToFilePaths()
+        val sut =
+            Konsist
+                .scopeFromTest(moduleName = "app", sourceSetName = "test")
+                .mapToFilePaths()
 
         // then
         sut.shouldBeEqualTo(emptyList())
@@ -199,9 +205,10 @@ class KoScopeFromTest {
     @Test
     fun `scopeFromTest, data module`() {
         // given
-        val sut = Konsist
-            .scopeFromTest(moduleName = "data")
-            .mapToFilePaths()
+        val sut =
+            Konsist
+                .scopeFromTest(moduleName = "data")
+                .mapToFilePaths()
 
         // then
         sut.shouldBeEqualTo(
@@ -225,9 +232,10 @@ class KoScopeFromTest {
     @Test
     fun `scopeFromTest, data module, integrationTest source set`() {
         // given
-        val sut = Konsist
-            .scopeFromTest(moduleName = "data", sourceSetName = "integrationTest")
-            .mapToFilePaths()
+        val sut =
+            Konsist
+                .scopeFromTest(moduleName = "data", sourceSetName = "integrationTest")
+                .mapToFilePaths()
 
         // then
         sut.shouldBeEqualTo(emptyList())
@@ -236,9 +244,10 @@ class KoScopeFromTest {
     @Test
     fun `scopeFromTest, data module, test source set`() {
         // given
-        val sut = Konsist
-            .scopeFromTest(moduleName = "data", sourceSetName = "test")
-            .mapToFilePaths()
+        val sut =
+            Konsist
+                .scopeFromTest(moduleName = "data", sourceSetName = "test")
+                .mapToFilePaths()
 
         // then
         sut.shouldBeEqualTo(
@@ -252,9 +261,10 @@ class KoScopeFromTest {
     @Test
     fun `scopeFromTest, root module`() {
         // given
-        val sut = Konsist
-            .scopeFromTest(moduleName = "root")
-            .mapToFilePaths()
+        val sut =
+            Konsist
+                .scopeFromTest(moduleName = "root")
+                .mapToFilePaths()
 
         // then
         sut.shouldBeEqualTo(emptyList())

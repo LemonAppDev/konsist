@@ -1,3 +1,3 @@
 package com.lemonappdev.fixture
 
- class AppClass
+class AppClass

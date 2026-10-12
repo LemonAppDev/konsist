@@ -14,12 +14,13 @@ class KoChildDeclarationForKoNameProviderTest {
     @Test
     fun `class child name`() {
         // given
-        val sut = Konsist
-            .scopeFromFile("$appMainSourceSetProjectDirectory/fixture/AppClass.kt".toOsSeparator())
-            .classes()
-            .withName("ParentSuperClass")
-            .children()
-            .first()
+        val sut =
+            Konsist
+                .scopeFromFile("$appMainSourceSetProjectDirectory/fixture/AppClass.kt".toOsSeparator())
+                .classes()
+                .withName("ParentSuperClass")
+                .children()
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -34,12 +35,13 @@ class KoChildDeclarationForKoNameProviderTest {
     @Test
     fun `object child name`() {
         // given
-        val sut = Konsist
-            .scopeFromFile("$appMainSourceSetProjectDirectory/fixture/AppClass.kt".toOsSeparator())
-            .classes()
-            .withName("ParentClassForObject")
-            .children()
-            .first()
+        val sut =
+            Konsist
+                .scopeFromFile("$appMainSourceSetProjectDirectory/fixture/AppClass.kt".toOsSeparator())
+                .classes()
+                .withName("ParentClassForObject")
+                .children()
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -54,12 +56,13 @@ class KoChildDeclarationForKoNameProviderTest {
     @Test
     fun `interface child name`() {
         // given
-        val sut = Konsist
-            .scopeFromFile("$appMainSourceSetProjectDirectory/fixture/AppClass.kt".toOsSeparator())
-            .interfaces()
-            .withName("ParentSuperInterface")
-            .children()
-            .first()
+        val sut =
+            Konsist
+                .scopeFromFile("$appMainSourceSetProjectDirectory/fixture/AppClass.kt".toOsSeparator())
+                .interfaces()
+                .withName("ParentSuperInterface")
+                .children()
+                .first()
 
         // then
         assertSoftly(sut) {

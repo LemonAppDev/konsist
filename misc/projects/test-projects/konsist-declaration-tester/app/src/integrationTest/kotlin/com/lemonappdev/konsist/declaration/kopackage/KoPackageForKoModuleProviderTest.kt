@@ -17,10 +17,11 @@ class KoPackageForKoModuleProviderTest {
     @Test
     fun `module name is 'app'`() {
         // given
-        val sut = Konsist
-            .scopeFromFile("$appMainSourceSetProjectDirectory/fixture/AppClass.kt".toOsSeparator())
-            .packages
-            .first()
+        val sut =
+            Konsist
+                .scopeFromFile("$appMainSourceSetProjectDirectory/fixture/AppClass.kt".toOsSeparator())
+                .packages
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -33,10 +34,11 @@ class KoPackageForKoModuleProviderTest {
     @Test
     fun `module name is 'data'`() {
         // given
-        val sut = Konsist
-            .scopeFromFile("$dataMainSourceSetProjectDirectory/fixture/LibClass.kt".toOsSeparator())
-            .packages
-            .first()
+        val sut =
+            Konsist
+                .scopeFromFile("$dataMainSourceSetProjectDirectory/fixture/LibClass.kt".toOsSeparator())
+                .packages
+                .first()
 
         // then
         assertSoftly(sut) {
@@ -49,10 +51,11 @@ class KoPackageForKoModuleProviderTest {
     @Test
     fun `module name is 'root'`() {
         // given
-        val sut = Konsist
-            .scopeFromFile("$rootMainSourceSetProjectDirectory/fixture/RootClass.kt".toOsSeparator())
-            .packages
-            .first()
+        val sut =
+            Konsist
+                .scopeFromFile("$rootMainSourceSetProjectDirectory/fixture/RootClass.kt".toOsSeparator())
+                .packages
+                .first()
 
         // then
         assertSoftly(sut) {

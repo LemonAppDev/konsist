@@ -12,17 +12,18 @@ import org.amshove.kluent.withMessage
 import org.junit.jupiter.api.Test
 
 class KoScopeFromDirectoriesTest {
-
     @Test
     fun `scopeFromDirectories(set)`() {
         // given
-        val paths = setOf(
-            "app/src/main/kotlin/com/lemonappdev/fixture/",
-            "app/src/integrationTest/kotlin/com/lemonappdev/fixture/",
-        )
-        val sut = Konsist
-            .scopeFromDirectories(paths)
-            .mapToFilePaths()
+        val paths =
+            setOf(
+                "app/src/main/kotlin/com/lemonappdev/fixture/",
+                "app/src/integrationTest/kotlin/com/lemonappdev/fixture/",
+            )
+        val sut =
+            Konsist
+                .scopeFromDirectories(paths)
+                .mapToFilePaths()
 
         // then
         sut.shouldBeEqualTo(
@@ -38,13 +39,15 @@ class KoScopeFromDirectoriesTest {
     @Test
     fun `scopeFromDirectories(list)`() {
         // given
-        val paths = listOf(
-            "app/src/main/kotlin/com/lemonappdev/fixture/",
-            "app/src/integrationTest/kotlin/com/lemonappdev/fixture/",
-        )
-        val sut = Konsist
-            .scopeFromDirectories(paths)
-            .mapToFilePaths()
+        val paths =
+            listOf(
+                "app/src/main/kotlin/com/lemonappdev/fixture/",
+                "app/src/integrationTest/kotlin/com/lemonappdev/fixture/",
+            )
+        val sut =
+            Konsist
+                .scopeFromDirectories(paths)
+                .mapToFilePaths()
 
         // then
         sut.shouldBeEqualTo(
@@ -60,13 +63,15 @@ class KoScopeFromDirectoriesTest {
     @Test
     fun `scopeFromDirectories accepts windows separators`() {
         // given
-        val paths = listOf(
-            """app\src\main\kotlin\com\lemonappdev\fixture\""",
-            """app\src\integrationTest\kotlin\com\lemonappdev\fixture\""",
-        )
-        val sut = Konsist
-            .scopeFromDirectories(paths)
-            .mapToFilePaths()
+        val paths =
+            listOf(
+                """app\src\main\kotlin\com\lemonappdev\fixture\""",
+                """app\src\integrationTest\kotlin\com\lemonappdev\fixture\""",
+            )
+        val sut =
+            Konsist
+                .scopeFromDirectories(paths)
+                .mapToFilePaths()
 
         // then
         sut.shouldBeEqualTo(

@@ -16,8 +16,9 @@ class KoScopePathTest {
     private val featurePaymentClassPath =
         "$projectRootDirectory/feature/payment/src/main/kotlin/com/lemonappdev/fixture/FeaturePaymentClass.kt".toOsSeparator()
 
-    private val sut = Konsist
-        .scopeFromFile("$featurePaymentMainSourceSetProjectDirectory/fixture/FeaturePaymentClass.kt".toOsSeparator())
+    private val sut =
+        Konsist
+            .scopeFromFile("$featurePaymentMainSourceSetProjectDirectory/fixture/FeaturePaymentClass.kt".toOsSeparator())
 
     @Test
     fun `toString uses os separator`() {

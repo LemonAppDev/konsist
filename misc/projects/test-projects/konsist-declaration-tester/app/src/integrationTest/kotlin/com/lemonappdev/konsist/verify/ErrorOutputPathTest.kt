@@ -30,9 +30,10 @@ class ErrorOutputPathTest {
     @Test
     fun `file assert error output uses file url with unix separator`() {
         // given
-        val sut = Konsist
-            .scopeFromFile("$featurePaymentMainSourceSetProjectDirectory/fixture/FeaturePaymentClass.kt".toOsSeparator())
-            .files
+        val sut =
+            Konsist
+                .scopeFromFile("$featurePaymentMainSourceSetProjectDirectory/fixture/FeaturePaymentClass.kt".toOsSeparator())
+                .files
 
         // when
         val func = { sut.assertTrue { false } }
@@ -46,9 +47,10 @@ class ErrorOutputPathTest {
     @Test
     fun `declaration assert error output uses file url with unix separator`() {
         // given
-        val sut = Konsist
-            .scopeFromFile("$featurePaymentMainSourceSetProjectDirectory/fixture/FeaturePaymentClass.kt".toOsSeparator())
-            .classes()
+        val sut =
+            Konsist
+                .scopeFromFile("$featurePaymentMainSourceSetProjectDirectory/fixture/FeaturePaymentClass.kt".toOsSeparator())
+                .classes()
 
         // when
         val func = { sut.assertTrue { false } }
@@ -62,9 +64,10 @@ class ErrorOutputPathTest {
     @Test
     fun `assert empty error output uses file url with unix separator`() {
         // given
-        val sut = Konsist
-            .scopeFromFile("$featurePaymentMainSourceSetProjectDirectory/fixture/FeaturePaymentClass.kt".toOsSeparator())
-            .classes()
+        val sut =
+            Konsist
+                .scopeFromFile("$featurePaymentMainSourceSetProjectDirectory/fixture/FeaturePaymentClass.kt".toOsSeparator())
+                .classes()
 
         // when
         val func = { sut.assertEmpty() }

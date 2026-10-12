@@ -8,7 +8,9 @@ import com.lemonappdev.fixture.LibObject as ImportAlias
  * Lib KDoc
  */
 @Suppress("lib_argument")
-class LibClass(val libParameter: String) : LibInterface {
+class LibClass(
+    val libParameter: String,
+) : LibInterface {
     constructor(otherParameter: Int) : this(otherParameter.toString())
 
     init {
@@ -42,7 +44,7 @@ object LibObject
 enum class LibEnumClass {
     APP_CONSTANT {
         val libVariable = ""
-    }
+    },
 }
 
 fun libFunction(libParameter: String) {
