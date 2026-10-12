@@ -7,27 +7,38 @@ on:
   pull_request:
     types: [ opened, synchronize ]
 
-# Runs on develop are not cancelled, so each merge publishes its own snapshot
+# Runs on develop are not cancelled, so each merge is tested against its own snapshot
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 jobs:
-  # ======================================= Publish Snapshot =======================================
+  # ======================================= Published Snapshot =======================================
 
-  publish-snapshot:
-    name: Publish Snapshot To Maven Central
-    uses: ./.github/workflows/publish-snapshot.yml
-    secrets: inherit
+  # Test projects are tested against Konsist snapshot published by the Publish workflow
+  published-snapshot:
+    name: Get Published Snapshot
+    runs-on: ubuntu-latest
     permissions:
+      actions: read
       contents: read
-      pull-requests: write
+    outputs:
+      version: ${{ steps.published-snapshot.outputs.version }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Get Published Konsist Snapshot
+        id: published-snapshot
+        uses: ./.github/actions/get-published-konsist-snapshot
+        with:
+          github-token: ${{ github.token }}
 
   # ======================================= Check Declarations =======================================
 
   declaration-tester-project-ubuntu:
     name: Declaration Tester Project Ubuntu
-    needs: publish-snapshot
+    needs: published-snapshot
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -50,7 +61,7 @@ jobs:
           python-version: '3.15.0'
 
       - name: Use Konsist Snapshot From Maven Central
-        run: python misc/scripts/replace_konsist_version/use_konsist_snapshot_in_test_project.py misc/projects/test-projects/konsist-declaration-tester ${{ needs.publish-snapshot.outputs.version }}
+        run: python misc/scripts/replace_konsist_version/use_konsist_snapshot_in_test_project.py misc/projects/test-projects/konsist-declaration-tester ${{ needs.published-snapshot.outputs.version }}
 
       - name: Run Integration Test
         run: cd misc/projects/test-projects/konsist-declaration-tester/ && ./gradlew integrationTest
@@ -64,7 +75,7 @@ jobs:
 
   declaration-tester-project-macos:
     name: Declaration Tester Project MacOS
-    needs: publish-snapshot
+    needs: published-snapshot
     runs-on: macos-latest
     steps:
       - name: Checkout
@@ -87,7 +98,7 @@ jobs:
           python-version: '3.15.0'
 
       - name: Use Konsist Snapshot From Maven Central
-        run: python misc/scripts/replace_konsist_version/use_konsist_snapshot_in_test_project.py misc/projects/test-projects/konsist-declaration-tester ${{ needs.publish-snapshot.outputs.version }}
+        run: python misc/scripts/replace_konsist_version/use_konsist_snapshot_in_test_project.py misc/projects/test-projects/konsist-declaration-tester ${{ needs.published-snapshot.outputs.version }}
 
       - name: Run Integration Test
         run: cd misc/projects/test-projects/konsist-declaration-tester/ && ./gradlew integrationTest
@@ -101,7 +112,7 @@ jobs:
 
   declaration-tester-project-windows:
     name: Declaration Tester Project Windows
-    needs: publish-snapshot
+    needs: published-snapshot
     runs-on: windows-latest
     steps:
       - name: Checkout
@@ -124,7 +135,7 @@ jobs:
           python-version: '3.15.0'
 
       - name: Use Konsist Snapshot From Maven Central
-        run: python misc/scripts/replace_konsist_version/use_konsist_snapshot_in_test_project.py misc/projects/test-projects/konsist-declaration-tester ${{ needs.publish-snapshot.outputs.version }}
+        run: python misc/scripts/replace_konsist_version/use_konsist_snapshot_in_test_project.py misc/projects/test-projects/konsist-declaration-tester ${{ needs.published-snapshot.outputs.version }}
 
       - name: Run Integration Test
         run: cd misc/projects/test-projects/konsist-declaration-tester/ && ./gradlew integrationTest
@@ -140,7 +151,7 @@ jobs:
 
   compiler-configuration-extension-storage-tester-project:
     name: Compiler Configuration Extension Storage Tester Project
-    needs: publish-snapshot
+    needs: published-snapshot
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -163,7 +174,7 @@ jobs:
           python-version: '3.15.0'
 
       - name: Use Konsist Snapshot From Maven Central
-        run: python misc/scripts/replace_konsist_version/use_konsist_snapshot_in_test_project.py misc/projects/test-projects/konsist-compiler-configuration-extension-storage-tester ${{ needs.publish-snapshot.outputs.version }}
+        run: python misc/scripts/replace_konsist_version/use_konsist_snapshot_in_test_project.py misc/projects/test-projects/konsist-compiler-configuration-extension-storage-tester ${{ needs.published-snapshot.outputs.version }}
 
       - name: Run Test
         run: cd misc/projects/test-projects/konsist-compiler-configuration-extension-storage-tester/ && ./gradlew test
@@ -177,7 +188,7 @@ jobs:
 
   kotlin-compiler-classpath-conflict-tester-project:
     name: Kotlin Compiler Classpath Conflict Tester Project
-    needs: publish-snapshot
+    needs: published-snapshot
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -200,7 +211,7 @@ jobs:
           python-version: '3.15.0'
 
       - name: Use Konsist Snapshot From Maven Central
-        run: python misc/scripts/replace_konsist_version/use_konsist_snapshot_in_test_project.py misc/projects/test-projects/konsist-kotlin-compiler-classpath-conflict-tester ${{ needs.publish-snapshot.outputs.version }}
+        run: python misc/scripts/replace_konsist_version/use_konsist_snapshot_in_test_project.py misc/projects/test-projects/konsist-kotlin-compiler-classpath-conflict-tester ${{ needs.published-snapshot.outputs.version }}
 
       - name: Run Test
         run: cd misc/projects/test-projects/konsist-kotlin-compiler-classpath-conflict-tester/ && ./gradlew test
@@ -216,7 +227,7 @@ jobs:
 
   path-tester-project-ubuntu:
     name: Path Tester Project Ubuntu
-    needs: publish-snapshot
+    needs: published-snapshot
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -237,7 +248,7 @@ jobs:
           python-version: '3.15.0'
 
       - name: Use Konsist Snapshot From Maven Central
-        run: python misc/scripts/replace_konsist_version/use_konsist_snapshot_in_test_project.py misc/projects/test-projects/konsist-path-tester ${{ needs.publish-snapshot.outputs.version }}
+        run: python misc/scripts/replace_konsist_version/use_konsist_snapshot_in_test_project.py misc/projects/test-projects/konsist-path-tester ${{ needs.published-snapshot.outputs.version }}
 
       - name: Run Integration Test
         run: cd misc/projects/test-projects/konsist-path-tester/ && ./gradlew integrationTest
@@ -251,7 +262,7 @@ jobs:
 
   path-tester-project-macos:
     name: Path Tester Project MacOS
-    needs: publish-snapshot
+    needs: published-snapshot
     runs-on: macos-latest
     steps:
       - name: Checkout
@@ -278,7 +289,7 @@ jobs:
           python-version: '3.15.0'
 
       - name: Use Konsist Snapshot From Maven Central
-        run: python misc/scripts/replace_konsist_version/use_konsist_snapshot_in_test_project.py misc/projects/test-projects/konsist-path-tester ${{ needs.publish-snapshot.outputs.version }}
+        run: python misc/scripts/replace_konsist_version/use_konsist_snapshot_in_test_project.py misc/projects/test-projects/konsist-path-tester ${{ needs.published-snapshot.outputs.version }}
 
       - name: Run Integration Test
         run: cd misc/projects/test-projects/konsist-path-tester/ && ./gradlew integrationTest
@@ -292,7 +303,7 @@ jobs:
 
   path-tester-project-windows:
     name: Path Tester Project Windows
-    needs: publish-snapshot
+    needs: published-snapshot
     runs-on: windows-latest
     steps:
       - name: Checkout
@@ -315,7 +326,7 @@ jobs:
           python-version: '3.15.0'
 
       - name: Use Konsist Snapshot From Maven Central
-        run: python misc/scripts/replace_konsist_version/use_konsist_snapshot_in_test_project.py misc/projects/test-projects/konsist-path-tester ${{ needs.publish-snapshot.outputs.version }}
+        run: python misc/scripts/replace_konsist_version/use_konsist_snapshot_in_test_project.py misc/projects/test-projects/konsist-path-tester ${{ needs.published-snapshot.outputs.version }}
 
       - name: Run Integration Test
         run: cd misc/projects/test-projects/konsist-path-tester/ && ./gradlew integrationTest
@@ -329,7 +340,7 @@ jobs:
 
   root-path-gradle-tester-ubuntu:
     name: Root Path Tester Gradle Ubuntu
-    needs: publish-snapshot
+    needs: published-snapshot
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -350,7 +361,7 @@ jobs:
           python-version: '3.15.0'
 
       - name: Use Konsist Snapshot From Maven Central
-        run: python misc/scripts/replace_konsist_version/use_konsist_snapshot_in_test_project.py misc/projects/test-projects/konsist-root-path-gradle-tester ${{ needs.publish-snapshot.outputs.version }}
+        run: python misc/scripts/replace_konsist_version/use_konsist_snapshot_in_test_project.py misc/projects/test-projects/konsist-root-path-gradle-tester ${{ needs.published-snapshot.outputs.version }}
 
       - name: Run Root Integration Test
         run: cd misc/projects/test-projects/konsist-root-path-gradle-tester/ && ./gradlew integrationTest
@@ -368,7 +379,7 @@ jobs:
 
   root-path-gradle-tester-macos:
     name: Root Path Tester Gradle MacOS
-    needs: publish-snapshot
+    needs: published-snapshot
     runs-on: macos-latest
     steps:
       - name: Checkout
@@ -395,7 +406,7 @@ jobs:
           python-version: '3.15.0'
 
       - name: Use Konsist Snapshot From Maven Central
-        run: python misc/scripts/replace_konsist_version/use_konsist_snapshot_in_test_project.py misc/projects/test-projects/konsist-root-path-gradle-tester ${{ needs.publish-snapshot.outputs.version }}
+        run: python misc/scripts/replace_konsist_version/use_konsist_snapshot_in_test_project.py misc/projects/test-projects/konsist-root-path-gradle-tester ${{ needs.published-snapshot.outputs.version }}
 
       - name: Run Root Integration Test
         run: cd misc/projects/test-projects/konsist-root-path-gradle-tester/ && ./gradlew integrationTest
@@ -412,7 +423,7 @@ jobs:
 
   root-path-gradle-tester-windows:
     name: Root Path Tester Gradle Windows
-    needs: publish-snapshot
+    needs: published-snapshot
     runs-on: windows-latest
     steps:
       - name: Checkout
@@ -435,7 +446,7 @@ jobs:
           python-version: '3.15.0'
 
       - name: Use Konsist Snapshot From Maven Central
-        run: python misc/scripts/replace_konsist_version/use_konsist_snapshot_in_test_project.py misc/projects/test-projects/konsist-root-path-gradle-tester ${{ needs.publish-snapshot.outputs.version }}
+        run: python misc/scripts/replace_konsist_version/use_konsist_snapshot_in_test_project.py misc/projects/test-projects/konsist-root-path-gradle-tester ${{ needs.published-snapshot.outputs.version }}
 
       - name: Run Root Integration Test
         run: cd misc/projects/test-projects/konsist-root-path-gradle-tester/ && ./gradlew integrationTest
@@ -452,7 +463,7 @@ jobs:
 
   root-path-maven-tester-ubuntu:
     name: Root Path Tester Maven Ubuntu
-    needs: publish-snapshot
+    needs: published-snapshot
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -476,10 +487,10 @@ jobs:
         run: python misc/scripts/replace_konsist_version/add_konsist_snapshot_repository_to_config_file.py misc/projects/test-projects/konsist-root-path-maven-tester/pom.xml
 
       - name: Run Root Test
-        run: cd misc/projects/test-projects/konsist-root-path-maven-tester/ && ./mvnw -B test -N "-Dkonsist.version=${{ needs.publish-snapshot.outputs.version }}"
+        run: cd misc/projects/test-projects/konsist-root-path-maven-tester/ && ./mvnw -B test -N "-Dkonsist.version=${{ needs.published-snapshot.outputs.version }}"
 
       - name: Run App Test
-        run: cd misc/projects/test-projects/konsist-root-path-maven-tester/ && ./mvnw -B test -pl app "-Dkonsist.version=${{ needs.publish-snapshot.outputs.version }}"
+        run: cd misc/projects/test-projects/konsist-root-path-maven-tester/ && ./mvnw -B test -pl app "-Dkonsist.version=${{ needs.published-snapshot.outputs.version }}"
 
       - name: Upload Report
         if: always() # Ensure the step runs regardless of the outcome of previous steps (failed tests will be uploaded)
@@ -490,7 +501,7 @@ jobs:
 
   root-path-maven-tester-macos:
     name: Root Path Tester Maven MacOS
-    needs: publish-snapshot
+    needs: published-snapshot
     runs-on: macos-latest
     steps:
       - name: Checkout
@@ -520,10 +531,10 @@ jobs:
         run: python misc/scripts/replace_konsist_version/add_konsist_snapshot_repository_to_config_file.py misc/projects/test-projects/konsist-root-path-maven-tester/pom.xml
 
       - name: Run Root Test
-        run: cd misc/projects/test-projects/konsist-root-path-maven-tester/ && ./mvnw -B test -N "-Dkonsist.version=${{ needs.publish-snapshot.outputs.version }}"
+        run: cd misc/projects/test-projects/konsist-root-path-maven-tester/ && ./mvnw -B test -N "-Dkonsist.version=${{ needs.published-snapshot.outputs.version }}"
 
       - name: Run App Test
-        run: cd misc/projects/test-projects/konsist-root-path-maven-tester/ && ./mvnw -B test -pl app "-Dkonsist.version=${{ needs.publish-snapshot.outputs.version }}"
+        run: cd misc/projects/test-projects/konsist-root-path-maven-tester/ && ./mvnw -B test -pl app "-Dkonsist.version=${{ needs.published-snapshot.outputs.version }}"
 
       - name: Upload Report
         if: always() # Ensure the step runs regardless of the outcome of previous steps (failed tests will be uploaded)
@@ -534,7 +545,7 @@ jobs:
 
   root-path-maven-tester-windows:
     name: Root Path Tester Maven Windows
-    needs: publish-snapshot
+    needs: published-snapshot
     runs-on: windows-latest
     steps:
       - name: Checkout
@@ -560,10 +571,10 @@ jobs:
         run: python misc/scripts/replace_konsist_version/add_konsist_snapshot_repository_to_config_file.py misc/projects/test-projects/konsist-root-path-maven-tester/pom.xml
 
       - name: Run Root Test
-        run: cd misc/projects/test-projects/konsist-root-path-maven-tester/ && ./mvnw -B test -N "-Dkonsist.version=${{ needs.publish-snapshot.outputs.version }}"
+        run: cd misc/projects/test-projects/konsist-root-path-maven-tester/ && ./mvnw -B test -N "-Dkonsist.version=${{ needs.published-snapshot.outputs.version }}"
 
       - name: Run App Test
-        run: cd misc/projects/test-projects/konsist-root-path-maven-tester/ && ./mvnw -B test -pl app "-Dkonsist.version=${{ needs.publish-snapshot.outputs.version }}"
+        run: cd misc/projects/test-projects/konsist-root-path-maven-tester/ && ./mvnw -B test -pl app "-Dkonsist.version=${{ needs.published-snapshot.outputs.version }}"
 
       - name: Upload Report
         if: always() # Ensure the step runs regardless of the outcome of previous steps (failed tests will be uploaded)

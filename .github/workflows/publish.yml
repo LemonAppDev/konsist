@@ -1,22 +1,28 @@
-name: Publish Snapshot To Maven Central
+name: Publish
 
 # Publishes Konsist snapshot to the Central snapshots repository (https://central.sonatype.com/repository/maven-snapshots/)
-# and outputs its unique version, so test projects are tested against the published artifact.
+# and comments on the PR with the published version. Test project jobs (other workflows) wait for this workflow run
+# and test the published snapshot (see '.github/actions/get-published-konsist-snapshot').
 # Snapshot only: this workflow never runs the release publishing task.
 #
 # Snapshot version depends on the event:
-# - push to develop: 1.0.0-SNAPSHOT (comments on the merged PR with the published version)
+# - push to develop: 1.0.0-SNAPSHOT (comments on the merged PR)
 # - pull request: 1.0.0-pr<number>-SNAPSHOT
 # - other branches: 1.0.0-<branch>-SNAPSHOT
 
 on:
-  workflow_call:
-    outputs:
-      version:
-        description: "Unique version of the published snapshot (e.g. 1.0.0-20261013.101530-1)"
-        value: ${{ jobs.publish-snapshot.outputs.version }}
+  push:
+    branches: [ main, develop ]
+
+  pull_request:
+    types: [ opened, synchronize ]
 
   workflow_dispatch:
+
+# Runs on develop are not cancelled, so each merge publishes its own snapshot
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 permissions:
   contents: read
@@ -27,8 +33,6 @@ jobs:
     name: Publish Snapshot To Maven Central
     if: github.repository == 'LemonAppDev/konsist'
     runs-on: ubuntu-latest
-    outputs:
-      version: ${{ steps.published-snapshot.outputs.version }}
     steps:
       - name: Checkout
         uses: actions/checkout@v7
@@ -97,12 +101,22 @@ jobs:
           VERSION=$(python3 misc/scripts/get_published_konsist_snapshot_version.py --snapshot-qualifier "$SNAPSHOT_QUALIFIER")
           echo "Published snapshot version: $VERSION"
           echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+          echo "$VERSION" > konsist-snapshot-version.txt
+
+      # Read by test project jobs in other workflows
+      - name: Upload Published Snapshot Version
+        uses: actions/upload-artifact@v7
+        with:
+          name: konsist-snapshot-version
+          path: konsist-snapshot-version.txt
+          overwrite: true
 
       - name: Create Snapshot Details
         env:
           PUBLISHED_VERSION: ${{ steps.published-snapshot.outputs.version }}
           SNAPSHOT_QUALIFIER: ${{ steps.snapshot-qualifier.outputs.value }}
           RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          COMMIT_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
         run: |
           KONSIST_VERSION=$(grep '^konsist.version=' gradle.properties | cut -d= -f2 | tr -d '\r')
           SNAPSHOT_VERSION="$KONSIST_VERSION${SNAPSHOT_QUALIFIER:+-$SNAPSHOT_QUALIFIER}-SNAPSHOT"
@@ -110,13 +124,14 @@ jobs:
           ARTIFACT_URL="${SNAPSHOTS_URL}com/lemonappdev/konsist/$SNAPSHOT_VERSION/konsist-$PUBLISHED_VERSION"
 
           cat > snapshot-details.md <<EOF
+          <!-- konsist-snapshot-details -->
           ### 📦 Konsist snapshot published
 
           | | |
           |---|---|
           | Version | \`$PUBLISHED_VERSION\` |
           | Latest snapshot | \`$SNAPSHOT_VERSION\` |
-          | Commit | $GITHUB_SHA |
+          | Commit | $COMMIT_SHA |
           | Build | [$GITHUB_WORKFLOW #$GITHUB_RUN_NUMBER]($RUN_URL) |
           | Artifact | [konsist-$PUBLISHED_VERSION.jar]($ARTIFACT_URL.jar) ([pom]($ARTIFACT_URL.pom)) |
 
@@ -135,16 +150,28 @@ jobs:
 
           cat snapshot-details.md >> "$GITHUB_STEP_SUMMARY"
 
-      - name: Comment Snapshot Details On Merged PR
-        if: github.event_name == 'push' && github.ref == 'refs/heads/develop'
+      # Single comment per PR, updated on each publish (PR runs and merge to develop)
+      - name: Comment Snapshot Details On PR
+        if: github.event_name == 'pull_request' || (github.event_name == 'push' && github.ref == 'refs/heads/develop')
         env:
           GH_TOKEN: ${{ github.token }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
         run: |
-          PR_NUMBER=$(gh api "repos/$GITHUB_REPOSITORY/commits/$GITHUB_SHA/pulls" --jq '[.[] | select(.merged_at != null)][0].number // empty')
+          if [ -z "$PR_NUMBER" ]; then
+            PR_NUMBER=$(gh api "repos/$GITHUB_REPOSITORY/commits/$GITHUB_SHA/pulls" --jq '[.[] | select(.merged_at != null)][0].number // empty')
+          fi
 
           if [ -z "$PR_NUMBER" ]; then
-            echo "No merged PR associated with commit $GITHUB_SHA, skipping comment."
+            echo "No PR associated with commit $GITHUB_SHA, skipping comment."
             exit 0
           fi
 
-          gh pr comment "$PR_NUMBER" --repo "$GITHUB_REPOSITORY" --body-file snapshot-details.md
+          COMMENT_ID=$(gh api --paginate "repos/$GITHUB_REPOSITORY/issues/$PR_NUMBER/comments" \
+            --jq '.[] | select(.user.login == "github-actions[bot]" and (.body | contains("<!-- konsist-snapshot-details -->"))) | .id' | tail -n 1)
+
+          if [ -n "$COMMENT_ID" ]; then
+            gh api --method PATCH "repos/$GITHUB_REPOSITORY/issues/comments/$COMMENT_ID" -F body=@snapshot-details.md > /dev/null
+            echo "Updated comment $COMMENT_ID on PR #$PR_NUMBER"
+          else
+            gh pr comment "$PR_NUMBER" --repo "$GITHUB_REPOSITORY" --body-file snapshot-details.md
+          fi

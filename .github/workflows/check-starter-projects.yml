@@ -54,9 +54,9 @@ jobs:
       all_changed_files: ${{ steps.changed-files.outputs.all_changed_files }}
       head_commit_message: ${{ github.event.head_commit.message }}
 
-  # Published only when starter projects are checked (same condition as starter project jobs)
-  publish-snapshot:
-    name: Publish Snapshot To Maven Central
+  # Starter projects are tested against Konsist snapshot published by the Publish workflow
+  published-snapshot:
+    name: Get Published Snapshot
     needs: get-github-context
     if: |
       needs.get-github-context.outputs.base_ref_branch == 'main' ||
@@ -64,15 +64,25 @@ jobs:
       startsWith(needs.get-github-context.outputs.current_branch, 'renovate/') ||
       contains(needs.get-github-context.outputs.current_branch, 'starter-projects') ||
       contains(needs.get-github-context.outputs.all_changed_files, 'samples/starter-projects/')
-    uses: ./.github/workflows/publish-snapshot.yml
-    secrets: inherit
+    runs-on: ubuntu-latest
     permissions:
+      actions: read
       contents: read
-      pull-requests: write
+    outputs:
+      version: ${{ steps.published-snapshot.outputs.version }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Get Published Konsist Snapshot
+        id: published-snapshot
+        uses: ./.github/actions/get-published-konsist-snapshot
+        with:
+          github-token: ${{ github.token }}
 
   android-gradle-groovy-junit-4:
     name: Android Gradle Groovy Junit 4
-    needs: [ get-github-context, publish-snapshot ]
+    needs: [ get-github-context, published-snapshot ]
     runs-on: ubuntu-latest
     if: |
       needs.get-github-context.outputs.base_ref_branch == 'main' ||
@@ -103,14 +113,14 @@ jobs:
         run: python3 misc/scripts/replace_konsist_version/add_konsist_snapshot_repository_to_config_file.py samples/starter-projects/android-gradle-groovy-junit-4/settings.gradle
 
       - name: Replace Konsist Version
-        run: python3 misc/scripts/replace_konsist_version/replace_konsist_version_gradle_groovy.py samples/starter-projects/android-gradle-groovy-junit-4/gradle/libs.versions.toml ${{ needs.publish-snapshot.outputs.version }}
+        run: python3 misc/scripts/replace_konsist_version/replace_konsist_version_gradle_groovy.py samples/starter-projects/android-gradle-groovy-junit-4/gradle/libs.versions.toml ${{ needs.published-snapshot.outputs.version }}
 
       - name: Run Konsist Test
         run: cd samples/starter-projects/android-gradle-groovy-junit-4/ && ./gradlew konsistTest:test
 
   android-gradle-groovy-junit-5:
     name: Android Gradle Groovy Junit 5
-    needs: [ get-github-context, publish-snapshot ]
+    needs: [ get-github-context, published-snapshot ]
     runs-on: ubuntu-latest
     if: |
       needs.get-github-context.outputs.base_ref_branch == 'main' ||
@@ -141,14 +151,14 @@ jobs:
         run: python3 misc/scripts/replace_konsist_version/add_konsist_snapshot_repository_to_config_file.py samples/starter-projects/android-gradle-groovy-junit-5/settings.gradle
 
       - name: Replace Konsist Version
-        run: python3 misc/scripts/replace_konsist_version/replace_konsist_version_gradle_groovy.py samples/starter-projects/android-gradle-groovy-junit-5/gradle/libs.versions.toml ${{ needs.publish-snapshot.outputs.version }}
+        run: python3 misc/scripts/replace_konsist_version/replace_konsist_version_gradle_groovy.py samples/starter-projects/android-gradle-groovy-junit-5/gradle/libs.versions.toml ${{ needs.published-snapshot.outputs.version }}
 
       - name: Run Konsist Test
         run: cd samples/starter-projects/android-gradle-groovy-junit-5/ && ./gradlew konsistTest:test
 
   android-gradle-groovy-kotest:
     name: Android Gradle Groovy Kotest
-    needs: [ get-github-context, publish-snapshot ]
+    needs: [ get-github-context, published-snapshot ]
     runs-on: ubuntu-latest
     if: |
       needs.get-github-context.outputs.base_ref_branch == 'main' ||
@@ -179,14 +189,14 @@ jobs:
         run: python3 misc/scripts/replace_konsist_version/add_konsist_snapshot_repository_to_config_file.py samples/starter-projects/android-gradle-groovy-kotest/settings.gradle
 
       - name: Replace Konsist Version
-        run: python3 misc/scripts/replace_konsist_version/replace_konsist_version_gradle_groovy.py samples/starter-projects/android-gradle-groovy-kotest/gradle/libs.versions.toml ${{ needs.publish-snapshot.outputs.version }}
+        run: python3 misc/scripts/replace_konsist_version/replace_konsist_version_gradle_groovy.py samples/starter-projects/android-gradle-groovy-kotest/gradle/libs.versions.toml ${{ needs.published-snapshot.outputs.version }}
 
       - name: Run Konsist Test
         run: cd samples/starter-projects/android-gradle-groovy-kotest/ && ./gradlew konsistTest:test
 
   android-gradle-kotlin-junit-4:
     name: Android Gradle Kotlin Junit 4
-    needs: [ get-github-context, publish-snapshot ]
+    needs: [ get-github-context, published-snapshot ]
     runs-on: ubuntu-latest
     if: |
       needs.get-github-context.outputs.base_ref_branch == 'main' ||
@@ -217,14 +227,14 @@ jobs:
         run: python3 misc/scripts/replace_konsist_version/add_konsist_snapshot_repository_to_config_file.py samples/starter-projects/android-gradle-kotlin-junit-4/settings.gradle.kts
 
       - name: Replace Konsist Version
-        run: python3 misc/scripts/replace_konsist_version/replace_konsist_version_gradle_groovy.py samples/starter-projects/android-gradle-kotlin-junit-4/gradle/libs.versions.toml ${{ needs.publish-snapshot.outputs.version }}
+        run: python3 misc/scripts/replace_konsist_version/replace_konsist_version_gradle_groovy.py samples/starter-projects/android-gradle-kotlin-junit-4/gradle/libs.versions.toml ${{ needs.published-snapshot.outputs.version }}
 
       - name: Run Konsist Test
         run: cd samples/starter-projects/android-gradle-kotlin-junit-4/ && ./gradlew konsistTest:test
 
   android-gradle-kotlin-junit-5:
     name: Android Gradle Kotlin Junit 5
-    needs: [ get-github-context, publish-snapshot ]
+    needs: [ get-github-context, published-snapshot ]
     runs-on: ubuntu-latest
     if: |
       needs.get-github-context.outputs.base_ref_branch == 'main' ||
@@ -254,14 +264,14 @@ jobs:
         run: python3 misc/scripts/replace_konsist_version/add_konsist_snapshot_repository_to_config_file.py samples/starter-projects/android-gradle-kotlin-junit-5/settings.gradle.kts
 
       - name: Replace Konsist Version
-        run: python3 misc/scripts/replace_konsist_version/replace_konsist_version_gradle_groovy.py samples/starter-projects/android-gradle-kotlin-junit-5/gradle/libs.versions.toml ${{ needs.publish-snapshot.outputs.version }}
+        run: python3 misc/scripts/replace_konsist_version/replace_konsist_version_gradle_groovy.py samples/starter-projects/android-gradle-kotlin-junit-5/gradle/libs.versions.toml ${{ needs.published-snapshot.outputs.version }}
 
       - name: Run Konsist Test
         run: cd samples/starter-projects/android-gradle-kotlin-junit-5/ && ./gradlew konsistTest:test
 
   android-gradle-kotlin-kotest:
     name: Android Gradle Kotlin Kotest
-    needs: [ get-github-context, publish-snapshot ]
+    needs: [ get-github-context, published-snapshot ]
     runs-on: ubuntu-latest
     if: |
       needs.get-github-context.outputs.base_ref_branch == 'main' ||
@@ -291,14 +301,14 @@ jobs:
         run: python3 misc/scripts/replace_konsist_version/add_konsist_snapshot_repository_to_config_file.py samples/starter-projects/android-gradle-kotlin-kotest/settings.gradle.kts
 
       - name: Replace Konsist Version
-        run: python3 misc/scripts/replace_konsist_version/replace_konsist_version_gradle_groovy.py samples/starter-projects/android-gradle-kotlin-kotest/gradle/libs.versions.toml ${{ needs.publish-snapshot.outputs.version }}
+        run: python3 misc/scripts/replace_konsist_version/replace_konsist_version_gradle_groovy.py samples/starter-projects/android-gradle-kotlin-kotest/gradle/libs.versions.toml ${{ needs.published-snapshot.outputs.version }}
 
       - name: Run Konsist Test
         run: cd samples/starter-projects/android-gradle-kotlin-kotest/ && ./gradlew konsistTest:test
 
   spring-gradle-kotlin-junit-5:
     name: Spring Gradle Kotlin Junit 5
-    needs: [ get-github-context, publish-snapshot ]
+    needs: [ get-github-context, published-snapshot ]
     runs-on: ubuntu-latest
     if: |
       needs.get-github-context.outputs.base_ref_branch == 'main' ||
@@ -328,14 +338,14 @@ jobs:
         run: python3 misc/scripts/replace_konsist_version/add_konsist_snapshot_repository_to_config_file.py samples/starter-projects/spring-gradle-kotlin-junit-5/build.gradle.kts
 
       - name: Replace Konsist Version
-        run: python3 misc/scripts/replace_konsist_version/replace_konsist_version_gradle_groovy.py samples/starter-projects/spring-gradle-kotlin-junit-5/gradle/libs.versions.toml ${{ needs.publish-snapshot.outputs.version }}
+        run: python3 misc/scripts/replace_konsist_version/replace_konsist_version_gradle_groovy.py samples/starter-projects/spring-gradle-kotlin-junit-5/gradle/libs.versions.toml ${{ needs.published-snapshot.outputs.version }}
 
       - name: Run Konsist Test
         run: cd samples/starter-projects/spring-gradle-kotlin-junit-5/ && ./gradlew konsistTest
 
   spring-gradle-kotlin-kotest:
     name: Spring Gradle Kotlin Kotest
-    needs: [ get-github-context, publish-snapshot ]
+    needs: [ get-github-context, published-snapshot ]
     runs-on: ubuntu-latest
     if: |
       needs.get-github-context.outputs.base_ref_branch == 'main' ||
@@ -365,14 +375,14 @@ jobs:
         run: python3 misc/scripts/replace_konsist_version/add_konsist_snapshot_repository_to_config_file.py samples/starter-projects/spring-gradle-kotlin-kotest/build.gradle.kts
 
       - name: Replace Konsist Version
-        run: python3 misc/scripts/replace_konsist_version/replace_konsist_version_gradle_groovy.py samples/starter-projects/spring-gradle-kotlin-kotest/gradle/libs.versions.toml ${{ needs.publish-snapshot.outputs.version }}
+        run: python3 misc/scripts/replace_konsist_version/replace_konsist_version_gradle_groovy.py samples/starter-projects/spring-gradle-kotlin-kotest/gradle/libs.versions.toml ${{ needs.published-snapshot.outputs.version }}
 
       - name: Run Konsist Test
         run: cd samples/starter-projects/spring-gradle-kotlin-kotest/ && ./gradlew konsistTest
 
   spring-gradle-groovy-junit-5:
     name: Spring Gradle Groovy Junit 5
-    needs: [ get-github-context, publish-snapshot ]
+    needs: [ get-github-context, published-snapshot ]
     runs-on: ubuntu-latest
     if: |
       needs.get-github-context.outputs.base_ref_branch == 'main' ||
@@ -402,7 +412,7 @@ jobs:
         run: python3 misc/scripts/replace_konsist_version/add_konsist_snapshot_repository_to_config_file.py samples/starter-projects/spring-gradle-groovy-junit-5/build.gradle
 
       - name: Replace Konsist Version
-        run: python3 misc/scripts/replace_konsist_version/replace_konsist_version_gradle_groovy.py samples/starter-projects/spring-gradle-groovy-junit-5/gradle/libs.versions.toml ${{ needs.publish-snapshot.outputs.version }}
+        run: python3 misc/scripts/replace_konsist_version/replace_konsist_version_gradle_groovy.py samples/starter-projects/spring-gradle-groovy-junit-5/gradle/libs.versions.toml ${{ needs.published-snapshot.outputs.version }}
 
       - name: Run Konsist Test
         run: cd samples/starter-projects/spring-gradle-groovy-junit-5/ && ./gradlew konsistTest
@@ -410,7 +420,7 @@ jobs:
 
   spring-gradle-groovy-kotest:
     name: Spring Gradle Groovy Kotest
-    needs: [ get-github-context, publish-snapshot ]
+    needs: [ get-github-context, published-snapshot ]
     runs-on: ubuntu-latest
     if: |
       needs.get-github-context.outputs.base_ref_branch == 'main' ||
@@ -440,14 +450,14 @@ jobs:
         run: python3 misc/scripts/replace_konsist_version/add_konsist_snapshot_repository_to_config_file.py samples/starter-projects/spring-gradle-groovy-kotest/build.gradle
 
       - name: Replace Konsist Version
-        run: python3 misc/scripts/replace_konsist_version/replace_konsist_version_gradle_groovy.py samples/starter-projects/spring-gradle-groovy-kotest/gradle/libs.versions.toml ${{ needs.publish-snapshot.outputs.version }}
+        run: python3 misc/scripts/replace_konsist_version/replace_konsist_version_gradle_groovy.py samples/starter-projects/spring-gradle-groovy-kotest/gradle/libs.versions.toml ${{ needs.published-snapshot.outputs.version }}
 
       - name: Run Konsist Test
         run: cd samples/starter-projects/spring-gradle-groovy-kotest/ && ./gradlew konsistTest
 
   spring-maven-junit5:
     name: Spring Maven Junit 5
-    needs: [ get-github-context, publish-snapshot ]
+    needs: [ get-github-context, published-snapshot ]
     runs-on: ubuntu-latest
     if: |
       needs.get-github-context.outputs.base_ref_branch == 'main' ||
@@ -477,14 +487,14 @@ jobs:
         run: python3 misc/scripts/replace_konsist_version/add_konsist_snapshot_repository_to_config_file.py samples/starter-projects/spring-maven-junit5/pom.xml
 
       - name: Replace Konsist Version
-        run: python3 misc/scripts/replace_konsist_version/replace_konsist_version_gradle_groovy.py samples/starter-projects/spring-maven-junit5/pom.xml ${{ needs.publish-snapshot.outputs.version }}
+        run: python3 misc/scripts/replace_konsist_version/replace_konsist_version_gradle_groovy.py samples/starter-projects/spring-maven-junit5/pom.xml ${{ needs.published-snapshot.outputs.version }}
 
       - name: Run Konsist Test
         run: cd samples/starter-projects/spring-maven-junit5/ && mvn test
 
   spring-maven-kotest:
     name: Spring Maven Kotest
-    needs: [ get-github-context, publish-snapshot ]
+    needs: [ get-github-context, published-snapshot ]
     runs-on: ubuntu-latest
     if: |
       needs.get-github-context.outputs.base_ref_branch == 'main' ||
@@ -514,14 +524,14 @@ jobs:
         run: python3 misc/scripts/replace_konsist_version/add_konsist_snapshot_repository_to_config_file.py samples/starter-projects/spring-maven-kotest/pom.xml
 
       - name: Replace Konsist Version
-        run: python3 misc/scripts/replace_konsist_version/replace_konsist_version_gradle_groovy.py samples/starter-projects/spring-maven-kotest/pom.xml ${{ needs.publish-snapshot.outputs.version }}
+        run: python3 misc/scripts/replace_konsist_version/replace_konsist_version_gradle_groovy.py samples/starter-projects/spring-maven-kotest/pom.xml ${{ needs.published-snapshot.outputs.version }}
 
       - name: Run Konsist Test
         run: cd samples/starter-projects/spring-maven-kotest/ && mvn test
 
 #  kmp-gradle-kotlin-junit5:
 #    name: KMP Gradle Kotlin Junit 5
-#    needs: [ get-github-context, publish-snapshot ]
+#    needs: [ get-github-context, published-snapshot ]
 #    runs-on: ubuntu-latest
 #    if: |
 #      needs.get-github-context.outputs.base_ref_branch == 'main' ||
@@ -549,7 +559,7 @@ jobs:
 #        run: python3 misc/scripts/replace_konsist_version/add_konsist_snapshot_repository_to_config_file.py samples/starter-projects/kmp-gradle-kotlin-junit5/build.gradle.kts
 #
 #      - name: Replace Konsist Version
-#        run: python3 misc/scripts/replace_konsist_version/replace_konsist_version_gradle_groovy.py samples/starter-projects/kmp-gradle-kotlin-junit5/gradle/libs.versions.toml ${{ needs.publish-snapshot.outputs.version }}
+#        run: python3 misc/scripts/replace_konsist_version/replace_konsist_version_gradle_groovy.py samples/starter-projects/kmp-gradle-kotlin-junit5/gradle/libs.versions.toml ${{ needs.published-snapshot.outputs.version }}
 ##
 #      - name: Run Konsist Test
 #        run: cd samples/starter-projects/kmp-gradle-kotlin-junit5/ && ./gradlew test
@@ -557,7 +567,7 @@ jobs:
 
 #  kmp-gradle-kotlin-kotest:
 #    name: KMP Gradle Kotlin Kotest
-#    needs: [ get-github-context, publish-snapshot ]
+#    needs: [ get-github-context, published-snapshot ]
 #    runs-on: ubuntu-latest
 #    if: |
 #      needs.get-github-context.outputs.base_ref_branch == 'main' ||
@@ -585,7 +595,7 @@ jobs:
 #        run: python3 misc/scripts/replace_konsist_version/add_konsist_snapshot_repository_to_config_file.py samples/starter-projects/kmp-gradle-kotlin-kotest/build.gradle.kts
 #
 #      - name: Replace Konsist Version
-#        run: python3 misc/scripts/replace_konsist_version/replace_konsist_version_gradle_groovy.py samples/starter-projects/kmp-gradle-kotlin-kotest/gradle/libs.versions.toml ${{ needs.publish-snapshot.outputs.version }}
+#        run: python3 misc/scripts/replace_konsist_version/replace_konsist_version_gradle_groovy.py samples/starter-projects/kmp-gradle-kotlin-kotest/gradle/libs.versions.toml ${{ needs.published-snapshot.outputs.version }}
 ##
 #      - name: Run Konsist Test
 #        run: cd samples/starter-projects/kmp-gradle-kotlin-kotest/ && ./gradlew test

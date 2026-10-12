@@ -1,0 +1,63 @@
+name: Get Published Konsist Snapshot
+description: >
+  Waits for the Publish workflow run of the current commit (and event) to complete and outputs the unique version of
+  the Konsist snapshot it published to the Central snapshots repository. Requires 'actions: read' permission.
+
+inputs:
+  github-token:
+    description: Token used to read workflow runs and artifacts
+    required: true
+  timeout-minutes:
+    description: How long to wait for the Publish workflow run to complete
+    default: '30'
+
+outputs:
+  version:
+    description: Unique version of the published snapshot (e.g. 1.0.0-20261013.101530-1)
+    value: ${{ steps.published-snapshot.outputs.version }}
+
+runs:
+  using: composite
+  steps:
+    - name: Wait For Publish Workflow Run
+      id: published-snapshot
+      shell: bash
+      env:
+        GH_TOKEN: ${{ inputs.github-token }}
+        TIMEOUT_MINUTES: ${{ inputs.timeout-minutes }}
+        HEAD_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+        EVENT_NAME: ${{ github.event_name }}
+      run: |
+        RUNS_URL="repos/$GITHUB_REPOSITORY/actions/runs?head_sha=$HEAD_SHA&event=$EVENT_NAME&per_page=100"
+        # Latest run of the Publish workflow (runs are sorted from newest)
+        RUN_FILTER='[.workflow_runs[] | select(.path | startswith(".github/workflows/publish.yml"))][0] // {} | "\(.id) \(.status) \(.conclusion)"'
+        DEADLINE=$(( $(date +%s) + TIMEOUT_MINUTES * 60 ))
+
+        while true; do
+          read -r RUN_ID STATUS CONCLUSION < <(gh api "$RUNS_URL" --jq "$RUN_FILTER")
+
+          if [ "$STATUS" = "completed" ]; then
+            break
+          fi
+
+          if [ "$(date +%s)" -ge "$DEADLINE" ]; then
+            echo "::error::Publish workflow run for $HEAD_SHA ($EVENT_NAME) did not complete in $TIMEOUT_MINUTES minutes."
+            exit 1
+          fi
+
+          echo "Waiting for Publish workflow run (run: $RUN_ID, status: $STATUS)..."
+          sleep 20
+        done
+
+        RUN_URL="$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$RUN_ID"
+
+        if [ "$CONCLUSION" != "success" ]; then
+          echo "::error::Publish workflow run $RUN_URL concluded with '$CONCLUSION'."
+          exit 1
+        fi
+
+        gh run download "$RUN_ID" --repo "$GITHUB_REPOSITORY" --name konsist-snapshot-version --dir "$RUNNER_TEMP/konsist-snapshot-version"
+        VERSION=$(tr -d '\r\n' < "$RUNNER_TEMP/konsist-snapshot-version/konsist-snapshot-version.txt")
+
+        echo "Konsist snapshot $VERSION published by $RUN_URL"
+        echo "version=$VERSION" >> "$GITHUB_OUTPUT"
