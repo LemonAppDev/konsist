@@ -60,6 +60,36 @@ internal object MutableTypeUtil {
                 isMutableType(it.sourceDeclaration) || hasMutableTypeArgument(it.sourceDeclaration, it.typeArguments)
             }
 
+    /*
+     * Checks if the source declaration is an immutable type: it resolves to a Kotlin type, external type or project
+     * declaration that is not mutable.
+     * Declarations whose mutability is unknown (type parameters, function types, unresolved types) are not immutable.
+     */
+    internal fun isImmutableType(sourceDeclaration: KoDeclarationCastProvider?): Boolean =
+        when (val declaration = sourceDeclaration.resolveImportAlias()) {
+            is KoTypeAliasDeclaration -> isImmutableType(declaration.type.sourceDeclaration)
+
+            is KoKotlinTypeDeclaration,
+            is KoExternalDeclaration,
+            is KoClassAndInterfaceAndObjectDeclaration,
+            -> !isMutableType(declaration)
+
+            else -> false
+        }
+
+    /*
+     * Checks if any type argument (at any nesting level) is an immutable type.
+     * For a type alias, type arguments of the aliased type are checked as well.
+     */
+    internal fun hasImmutableTypeArgument(
+        sourceDeclaration: KoDeclarationCastProvider?,
+        typeArguments: List<KoTypeArgumentDeclaration>?,
+    ): Boolean =
+        (sourceDeclaration.resolveImportAlias() as? KoTypeAliasDeclaration)?.type?.hasImmutableTypeArgument == true ||
+            typeArguments.orEmpty().any {
+                isImmutableType(it.sourceDeclaration) || hasImmutableTypeArgument(it.sourceDeclaration, it.typeArguments)
+            }
+
     private fun KoDeclarationCastProvider?.resolveImportAlias(): KoDeclarationCastProvider? =
         if (this is KoImportAliasDeclaration) sourceDeclaration else this
 

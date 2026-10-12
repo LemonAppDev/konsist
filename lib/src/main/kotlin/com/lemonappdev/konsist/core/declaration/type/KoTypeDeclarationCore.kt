@@ -198,6 +198,24 @@ internal class KoTypeDeclarationCore private constructor(
             }
 
     @Volatile
+    private var cachedIsImmutableType: Any? = KoPropertyCache.NOT_COMPUTED
+
+    override val isImmutableType: Boolean
+        get() =
+            KoPropertyCache.getOrCompute(cachedIsImmutableType, { cachedIsImmutableType = it }) {
+                super<KoIsMutableTypeProviderCore>.isImmutableType
+            }
+
+    @Volatile
+    private var cachedHasImmutableTypeArgument: Any? = KoPropertyCache.NOT_COMPUTED
+
+    override val hasImmutableTypeArgument: Boolean
+        get() =
+            KoPropertyCache.getOrCompute(cachedHasImmutableTypeArgument, { cachedHasImmutableTypeArgument = it }) {
+                super<KoIsMutableTypeProviderCore>.hasImmutableTypeArgument
+            }
+
+    @Volatile
     private var cachedPackagee: Any? = KoPropertyCache.NOT_COMPUTED
 
     override val packagee: KoPackageDeclaration?

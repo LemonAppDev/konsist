@@ -86,4 +86,84 @@ class KoIsMutableTypeProviderListExtTest {
         // then
         sut shouldBeEqualTo listOf(type2)
     }
+
+    @Test
+    fun `withImmutableType() returns type with immutable type`() {
+        // given
+        val type1: KoIsMutableTypeProvider =
+            mockk {
+                every { isImmutableType } returns true
+            }
+        val type2: KoIsMutableTypeProvider =
+            mockk {
+                every { isImmutableType } returns false
+            }
+        val types = listOf(type1, type2)
+
+        // when
+        val sut = types.withImmutableType()
+
+        // then
+        sut shouldBeEqualTo listOf(type1)
+    }
+
+    @Test
+    fun `withoutImmutableType() returns type without immutable type`() {
+        // given
+        val type1: KoIsMutableTypeProvider =
+            mockk {
+                every { isImmutableType } returns true
+            }
+        val type2: KoIsMutableTypeProvider =
+            mockk {
+                every { isImmutableType } returns false
+            }
+        val types = listOf(type1, type2)
+
+        // when
+        val sut = types.withoutImmutableType()
+
+        // then
+        sut shouldBeEqualTo listOf(type2)
+    }
+
+    @Test
+    fun `withImmutableTypeArgument() returns type with immutable type argument`() {
+        // given
+        val type1: KoIsMutableTypeProvider =
+            mockk {
+                every { hasImmutableTypeArgument } returns true
+            }
+        val type2: KoIsMutableTypeProvider =
+            mockk {
+                every { hasImmutableTypeArgument } returns false
+            }
+        val types = listOf(type1, type2)
+
+        // when
+        val sut = types.withImmutableTypeArgument()
+
+        // then
+        sut shouldBeEqualTo listOf(type1)
+    }
+
+    @Test
+    fun `withoutImmutableTypeArgument() returns type without immutable type argument`() {
+        // given
+        val type1: KoIsMutableTypeProvider =
+            mockk {
+                every { hasImmutableTypeArgument } returns true
+            }
+        val type2: KoIsMutableTypeProvider =
+            mockk {
+                every { hasImmutableTypeArgument } returns false
+            }
+        val types = listOf(type1, type2)
+
+        // when
+        val sut = types.withoutImmutableTypeArgument()
+
+        // then
+        sut shouldBeEqualTo listOf(type2)
+    }
 }
