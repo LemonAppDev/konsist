@@ -1,5 +1,6 @@
 package com.lemonappdev.konsist.api
 
+import com.lemonappdev.konsist.api.declaration.KoPropertyDeclaration
 import com.lemonappdev.konsist.api.ext.list.withNameContaining
 import com.lemonappdev.konsist.api.ext.list.withNameEndingWith
 import com.lemonappdev.konsist.api.ext.list.withParameter
@@ -15,7 +16,6 @@ import com.lemonappdev.konsist.api.provider.KoPropertyProvider
 import com.lemonappdev.konsist.api.verify.assertFalse
 import com.lemonappdev.konsist.api.verify.assertTrue
 import org.junit.jupiter.api.Test
-import java.util.Locale
 
 class ApiKonsistTest {
     private val apiPackageScope = Konsist.scopeFromPackage("com.lemonappdev.konsist.api..", sourceSetName = "main")
@@ -80,12 +80,7 @@ class ApiKonsistTest {
     @Test
     fun `every provider has correct hasX methods`() {
         providersWithDeclarationLists
-            // Exclude the providers below because the declarations from their properties with list return types implement
-            // KoNameProvider, but all of these methods are not relevant.
-            .filterNot { it.name == "KoFunctionTypeDeclarationProvider" || it.name == "KoUpperBoundsProvider" }
-            .assertTrue {
-                it.hasCorrectMethods(false)
-            }
+            .assertTrue { it.hasCorrectMethods(false) }
     }
 
     @Test
@@ -100,14 +95,16 @@ class ApiKonsistTest {
 
     @Test
     fun `every provider containing property with list of declarations type has correct extensions`() {
-        val providers = providersWithDeclarationLists.map { it.name }
+        val extensionFiles =
+            Konsist
+                .scopeFromPackage("com.lemonappdev.konsist.api.ext.list..", sourceSetName = "main")
+                .files
 
-        Konsist
-            .scopeFromPackage("com.lemonappdev.konsist.api.ext.list..", sourceSetName = "main")
-            .files
-            .filter {
-                providers.any { providerName -> it.hasNameContaining(providerName) }
-            }.assertTrue { it.hasCorrectMethods(true) }
+        providersWithDeclarationLists.assertTrue { provider ->
+            extensionFiles
+                .firstOrNull { it.name == "${provider.name}ListExt" }
+                ?.hasCorrectMethods(true) ?: false
+        }
     }
 
     private val providersWithDeclarationLists =
@@ -115,50 +112,50 @@ class ApiKonsistTest {
             .scopeFromPackage("com.lemonappdev.konsist.api.provider..", sourceSetName = "main")
             .interfaces()
             .withoutNameMatching(Regex("\\bKoKDoc[A-Za-z]+TagProvider\\b")) // exclude providers like KoKDocXTagProvider
-            .withProperty { property ->
-                !property.hasAnnotationOf<Deprecated>() &&
-                    property.hasType { type ->
-                        type.hasNameStartingWith("List<Ko")
-                    }
-            }
+            // Exclude the providers below because the declarations from their properties with list return types implement
+            // KoNameProvider, but all of these methods are not relevant.
+            .withoutName("KoFunctionTypeDeclarationProvider", "KoUpperBoundsProvider")
+            .withProperty { it.isDeclarationListProperty() }
 
     private val declarations =
         Konsist
             .scopeFromPackage("com.lemonappdev.konsist.api.declaration..", sourceSetName = "main")
             .interfaces()
 
+    private fun KoPropertyDeclaration.isDeclarationListProperty(): Boolean =
+        !hasAnnotationOf<Deprecated>() && hasType { type -> type.hasNameStartingWith("List<Ko") }
+
     private fun <T> T.hasCorrectMethods(
         isExtension: Boolean,
     ): Boolean
             where T : KoPropertyProvider,
                   T : KoFunctionProvider {
-        val property =
-            properties()
-                .firstOrNull { property ->
-                    property.hasType { type ->
-                        type.hasNameStartingWith("List<Ko")
-                    }
-                }
+        val listProperties = properties().filter { it.isDeclarationListProperty() }
 
+        return listProperties.isNotEmpty() && listProperties.all { hasCorrectMethods(it, isExtension) }
+    }
+
+    private fun KoFunctionProvider.hasCorrectMethods(
+        property: KoPropertyDeclaration,
+        isExtension: Boolean,
+    ): Boolean {
         val declarationName =
             property
-                ?.type
+                .type
                 ?.name
+                ?.removeSuffix("?")
                 ?.removePrefix("List<")
                 ?.removeSuffix(">")
+                ?: return false
 
         // We distinguish singularName and pluralName due to different variations of words,
         // e.g. import -> imports (suffix - "s") , but class -> classes (suffix - "es")
         val singularName =
             declarationName
-                ?.removePrefix("Ko")
-                ?.removeSuffix("Declaration")
-                ?: ""
+                .removePrefix("Ko")
+                .removeSuffix("Declaration")
 
-        val pluralName =
-            property
-                ?.name
-                ?.replaceFirstChar { char -> if (char.isLowerCase()) char.titlecase(Locale.getDefault()) else char.toString() }
+        val pluralName = property.name.replaceFirstChar { char -> char.uppercaseChar() }
 
         val hasKoNameProvider =
             declarations
@@ -166,9 +163,9 @@ class ApiKonsistTest {
                 ?.hasParentInterfaceWithName("KoNameProvider", indirectParents = true) ?: false
 
         return if (isExtension) {
-            pluralName?.let { checkForExtensions(declarationName, singularName, it, hasKoNameProvider) } ?: true
+            checkForExtensions(declarationName, singularName, pluralName, hasKoNameProvider)
         } else {
-            pluralName?.let { checkForProviders(declarationName, singularName, it, hasKoNameProvider) } ?: true
+            checkForProviders(declarationName, singularName, pluralName, hasKoNameProvider)
         }
     }
 

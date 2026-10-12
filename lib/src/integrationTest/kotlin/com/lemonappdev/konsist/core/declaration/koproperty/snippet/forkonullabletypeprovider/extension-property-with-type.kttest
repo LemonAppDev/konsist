@@ -1,0 +1,2 @@
+val Int.fixtureProperty: String
+    get() = ""
