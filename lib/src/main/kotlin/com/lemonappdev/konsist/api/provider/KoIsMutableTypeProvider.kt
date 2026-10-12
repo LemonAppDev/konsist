@@ -24,6 +24,7 @@ interface KoIsMutableTypeProvider : KoBaseProvider {
      * Only the type itself is checked, so for `List<MutableList<String>>` value will be `false`.
      *
      * @see hasMutableTypeArgument
+     * @see isImmutableType
      */
     val isMutableType: Boolean
 
@@ -34,6 +35,38 @@ interface KoIsMutableTypeProvider : KoBaseProvider {
      * For `MutableList<String>` value will be `false`.
      *
      * @see isMutableType
+     * @see hasImmutableTypeArgument
      */
     val hasMutableTypeArgument: Boolean
+
+    /**
+     * Determines whether the declaration is an immutable type.
+     *
+     * A type is considered immutable when it resolves to a Kotlin type, external type, or a class, interface or object
+     * declared in the project, and it is not a mutable type (see [isMutableType]). Read-only types, such as `List`
+     * or `Map`, are considered immutable.
+     *
+     * Type aliases and import aliases are resolved to the type they point to, so for `typealias Items = List<String>`
+     * value will be `true` and for `typealias Items = MutableList<String>` value will be `false`.
+     *
+     * Mutability of types that cannot be determined, such as type parameters (`T`) and function types (`() -> Unit`),
+     * is unknown, so for them both `isMutableType` and `isImmutableType` are `false`.
+     *
+     * Only the type itself is checked, so for `List<MutableList<String>>` value will be `true`.
+     *
+     * @see hasImmutableTypeArgument
+     * @see isMutableType
+     */
+    val isImmutableType: Boolean
+
+    /**
+     * Determines whether any type argument of the declaration, at any nesting level, is an immutable type.
+     *
+     * For `MutableList<String>` and `MutableList<MutableSet<String>>` value will be `true`.
+     * For `MutableList<MutableSet<T>>`, `List<() -> Unit>` and `String` value will be `false`.
+     *
+     * @see isImmutableType
+     * @see hasMutableTypeArgument
+     */
+    val hasImmutableTypeArgument: Boolean
 }

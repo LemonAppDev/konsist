@@ -13,4 +13,10 @@ internal interface KoIsMutableTypeProviderCore :
 
     override val hasMutableTypeArgument: Boolean
         get() = MutableTypeUtil.hasMutableTypeArgument(sourceDeclaration, typeArguments)
+
+    override val isImmutableType: Boolean
+        get() = MutableTypeUtil.isImmutableType(sourceDeclaration)
+
+    override val hasImmutableTypeArgument: Boolean
+        get() = MutableTypeUtil.hasImmutableTypeArgument(sourceDeclaration, typeArguments)
 }
