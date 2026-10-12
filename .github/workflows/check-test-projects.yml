@@ -394,3 +394,125 @@ jobs:
         with:
           name: root-path-gradle-tester-windows-test-report
           path: misc/projects/test-projects/konsist-root-path-gradle-tester/**/build/reports
+
+  root-path-maven-tester-ubuntu:
+    name: Root Path Tester Maven Ubuntu
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Set up JDK
+        uses: actions/setup-java@v6
+        with:
+          java-version: 25
+          distribution: 'corretto'
+
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v6
+
+      - name: Publish Konsist Artifact To Local Maven Repository
+        run: >
+          ./gradlew publishToMavenLocal
+          -P konsist.releaseTarget=local
+
+      - name: Get Konsist Snapshot Version
+        shell: bash
+        run: echo "KONSIST_VERSION=$(grep '^konsist.version=' gradle.properties | cut -d= -f2 | tr -d '\r')-SNAPSHOT" >> "$GITHUB_ENV"
+
+      - name: Run Root Test
+        run: cd misc/projects/test-projects/konsist-root-path-maven-tester/ && ./mvnw -B test -N "-Dkonsist.version=${{ env.KONSIST_VERSION }}"
+
+      - name: Run App Test
+        run: cd misc/projects/test-projects/konsist-root-path-maven-tester/ && ./mvnw -B test -pl app "-Dkonsist.version=${{ env.KONSIST_VERSION }}"
+
+      - name: Upload Report
+        if: always() # Ensure the step runs regardless of the outcome of previous steps (failed tests will be uploaded)
+        uses: actions/upload-artifact@v7
+        with:
+          name: root-path-maven-tester-ubuntu-test-report
+          path: misc/projects/test-projects/konsist-root-path-maven-tester/**/target/surefire-reports
+
+  root-path-maven-tester-macos:
+    name: Root Path Tester Maven MacOS
+    runs-on: macos-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Set up JDK
+        uses: actions/setup-java@v6
+        with:
+          java-version: 11
+          distribution: 'corretto'
+
+      - name: Set up JDK
+        uses: actions/setup-java@v6
+        with:
+          java-version: 25
+          distribution: 'corretto'
+
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v6
+
+      - name: Publish Konsist Artifact To Local Maven Repository
+        run: >
+          ./gradlew publishToMavenLocal
+          -P konsist.releaseTarget=local
+
+      - name: Get Konsist Snapshot Version
+        shell: bash
+        run: echo "KONSIST_VERSION=$(grep '^konsist.version=' gradle.properties | cut -d= -f2 | tr -d '\r')-SNAPSHOT" >> "$GITHUB_ENV"
+
+      - name: Run Root Test
+        run: cd misc/projects/test-projects/konsist-root-path-maven-tester/ && ./mvnw -B test -N "-Dkonsist.version=${{ env.KONSIST_VERSION }}"
+
+      - name: Run App Test
+        run: cd misc/projects/test-projects/konsist-root-path-maven-tester/ && ./mvnw -B test -pl app "-Dkonsist.version=${{ env.KONSIST_VERSION }}"
+
+      - name: Upload Report
+        if: always() # Ensure the step runs regardless of the outcome of previous steps (failed tests will be uploaded)
+        uses: actions/upload-artifact@v7
+        with:
+          name: root-path-maven-tester-macos-test-report
+          path: misc/projects/test-projects/konsist-root-path-maven-tester/**/target/surefire-reports
+
+  root-path-maven-tester-windows:
+    name: Root Path Tester Maven Windows
+    runs-on: windows-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Set up JDK
+        uses: actions/setup-java@v6
+        with:
+          java-version: |
+            11
+            25
+          distribution: 'corretto'
+
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v6
+
+      - name: Publish Konsist Artifact To Local Maven Repository
+        run: >
+          ./gradlew publishToMavenLocal
+          -P konsist.releaseTarget=local
+
+      - name: Get Konsist Snapshot Version
+        shell: bash
+        run: echo "KONSIST_VERSION=$(grep '^konsist.version=' gradle.properties | cut -d= -f2 | tr -d '\r')-SNAPSHOT" >> "$GITHUB_ENV"
+
+      - name: Run Root Test
+        run: cd misc/projects/test-projects/konsist-root-path-maven-tester/ && ./mvnw -B test -N "-Dkonsist.version=${{ env.KONSIST_VERSION }}"
+
+      - name: Run App Test
+        run: cd misc/projects/test-projects/konsist-root-path-maven-tester/ && ./mvnw -B test -pl app "-Dkonsist.version=${{ env.KONSIST_VERSION }}"
+
+      - name: Upload Report
+        if: always() # Ensure the step runs regardless of the outcome of previous steps (failed tests will be uploaded)
+        uses: actions/upload-artifact@v7
+        with:
+          name: root-path-maven-tester-windows-test-report
+          path: misc/projects/test-projects/konsist-root-path-maven-tester/**/target/surefire-reports
