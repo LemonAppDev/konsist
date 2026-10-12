@@ -117,6 +117,24 @@ class KoFunctionDeclarationForKoContextParametersProviderTest {
     }
 
     @Test
+    fun `extension-function-has-context-parameter`() {
+        // given
+        val sut =
+            getSnippetFile("extension-function-has-context-parameter")
+                .functions()
+                .first()
+
+        // then
+        assertSoftly(sut) {
+            contextParameters.map { it.name } shouldBeEqualTo listOf("fixtureParameter")
+            contextParameters.map { it.type.name } shouldBeEqualTo listOf("Logger")
+            hasContextParameterWithName("fixtureParameter") shouldBeEqualTo true
+            isExtension shouldBeEqualTo true
+            receiverType?.name shouldBeEqualTo "SampleClass"
+        }
+    }
+
+    @Test
     fun `function-in-interface-has-context-parameter`() {
         // given
         val sut =

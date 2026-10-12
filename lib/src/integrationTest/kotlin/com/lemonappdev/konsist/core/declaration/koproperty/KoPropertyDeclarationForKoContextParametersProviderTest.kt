@@ -61,6 +61,24 @@ class KoPropertyDeclarationForKoContextParametersProviderTest {
         }
     }
 
+    @Test
+    fun `extension-property-has-context-parameter`() {
+        // given
+        val sut =
+            getSnippetFile("extension-property-has-context-parameter")
+                .properties()
+                .first()
+
+        // then
+        assertSoftly(sut) {
+            contextParameters.map { it.name } shouldBeEqualTo listOf("fixtureParameter")
+            contextParameters.map { it.type.name } shouldBeEqualTo listOf("Logger")
+            hasContextParameterWithName("fixtureParameter") shouldBeEqualTo true
+            isExtension shouldBeEqualTo true
+            receiverType?.name shouldBeEqualTo "SampleClass"
+        }
+    }
+
     private fun getSnippetFile(fileName: String) =
         TestSnippetProvider.getSnippetKoScope("core/declaration/koproperty/snippet/forkocontextparametersprovider/", fileName)
 }
