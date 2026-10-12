@@ -16,7 +16,7 @@ java.lang.NoSuchMethodError: 'void org.jetbrains.kotlin.cli.FrontendConfiguratio
     org.jetbrains.kotlin.compiler.plugin.CompilerPluginRegistrar$ExtensionStorage)'
 ```
 
-To support both versions [KotlinFileParser](../../../lib/src/main/kotlin/com/lemonappdev/konsist/core/util/KotlinFileParser.kt)
+To support both versions [KotlinFileParser](../../../../lib/src/main/kotlin/com/lemonappdev/konsist/core/util/KotlinFileParser.kt)
 resolves the setter via reflection and sets the extension storage only when the API is available (Kotlin 2.4+).
 
 ## Test
@@ -27,8 +27,8 @@ runs with `kotlin-compiler-embeddable` 2.3. Tests verify that:
 - Konsist parses Kotlin files
 
 This project covers only legacy Kotlin versions (prior to Kotlin 2.4). Kotlin 2.4+ is tested with the current
-[starter projects](../../../samples/starter-projects). Kotlin version in this project is locked (Renovate updates are
-disabled in [renovate.json](../../../renovate.json)).
+[starter projects](../../../../samples/starter-projects). Kotlin version in this project is locked (Renovate updates are
+disabled in [renovate.json](../../../../renovate.json)).
 
 ## Run
 
@@ -36,6 +36,6 @@ disabled in [renovate.json](../../../renovate.json)).
 # Konsist root directory
 ./gradlew publishToMavenLocal -P konsist.releaseTarget=local
 
-cd misc/test-projects/konsist-compiler-configuration-extension-storage-tester
+cd misc/projects/test-projects/konsist-compiler-configuration-extension-storage-tester
 ./gradlew test
 ```

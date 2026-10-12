@@ -16,7 +16,7 @@ java.lang.ClassCastException: class org.jetbrains.kotlin.idea.KotlinFileType can
 ```
 
 The failure depends on the classpath order, so it may appear only in some environments.
-[KotlinFileParser](../../../lib/src/main/kotlin/com/lemonappdev/konsist/core/util/KotlinFileParser.kt) detects
+[KotlinFileParser](../../../../lib/src/main/kotlin/com/lemonappdev/konsist/core/util/KotlinFileParser.kt) detects
 multiple Kotlin compilers on the classpath and lists them in the error message.
 
 ## Test
@@ -30,6 +30,6 @@ verify that Konsist throws an exception listing both Kotlin compilers.
 # Konsist root directory
 ./gradlew publishToMavenLocal -P konsist.releaseTarget=local
 
-cd misc/test-projects/konsist-kotlin-compiler-classpath-conflict-tester
+cd misc/projects/test-projects/konsist-kotlin-compiler-classpath-conflict-tester
 ./gradlew test
 ```
