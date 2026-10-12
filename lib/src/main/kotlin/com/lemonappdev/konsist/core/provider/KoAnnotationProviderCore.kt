@@ -25,13 +25,7 @@ internal interface KoAnnotationProviderCore :
     override fun countAnnotations(predicate: (KoAnnotationDeclaration) -> Boolean): Int = annotations.count { predicate(it) }
 
     private fun checkIfAnnotated(kClass: KClass<*>): Boolean =
-        annotations.any { annotation ->
-            if (kClass.qualifiedName?.startsWith("kotlin.") == true) {
-                annotation.name == kClass.simpleName
-            } else {
-                annotation.fullyQualifiedName == kClass.qualifiedName
-            }
-        }
+        annotations.any { annotation -> annotation.fullyQualifiedName == kClass.qualifiedName }
 
     override fun hasAnnotations(): Boolean = annotations.isNotEmpty()
 
