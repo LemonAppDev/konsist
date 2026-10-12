@@ -20,6 +20,21 @@ import org.junit.jupiter.api.Test
 class ApiKonsistTest {
     private val apiPackageScope = Konsist.scopeFromPackage("com.lemonappdev.konsist.api..", sourceSetName = "main")
 
+    private val providersWithDeclarationLists =
+        Konsist
+            .scopeFromPackage("com.lemonappdev.konsist.api.provider..", sourceSetName = "main")
+            .interfaces()
+            .withoutNameMatching(Regex("\\bKoKDoc[A-Za-z]+TagProvider\\b")) // exclude providers like KoKDocXTagProvider
+            // Exclude the providers below because the declarations from their properties with list return types implement
+            // KoNameProvider, but all of these methods are not relevant.
+            .withoutName("KoFunctionTypeDeclarationProvider", "KoUpperBoundsProvider")
+            .withProperty { it.isDeclarationListProperty() }
+
+    private val declarations =
+        Konsist
+            .scopeFromPackage("com.lemonappdev.konsist.api.declaration..", sourceSetName = "main")
+            .interfaces()
+
     @Test
     fun `every api declaration has explicit return type`() {
         apiPackageScope
@@ -67,7 +82,7 @@ class ApiKonsistTest {
     }
 
     @Test
-    fun `none method has name containing 'Some'`() {
+    fun `no api function has name containing 'Some'`() {
         apiPackageScope
             .functions()
             .assertFalse { it.hasNameContaining("Some") }
@@ -113,21 +128,6 @@ class ApiKonsistTest {
                 ?.hasCorrectMethods(true) ?: false
         }
     }
-
-    private val providersWithDeclarationLists =
-        Konsist
-            .scopeFromPackage("com.lemonappdev.konsist.api.provider..", sourceSetName = "main")
-            .interfaces()
-            .withoutNameMatching(Regex("\\bKoKDoc[A-Za-z]+TagProvider\\b")) // exclude providers like KoKDocXTagProvider
-            // Exclude the providers below because the declarations from their properties with list return types implement
-            // KoNameProvider, but all of these methods are not relevant.
-            .withoutName("KoFunctionTypeDeclarationProvider", "KoUpperBoundsProvider")
-            .withProperty { it.isDeclarationListProperty() }
-
-    private val declarations =
-        Konsist
-            .scopeFromPackage("com.lemonappdev.konsist.api.declaration..", sourceSetName = "main")
-            .interfaces()
 
     private fun KoPropertyDeclaration.isDeclarationListProperty(): Boolean =
         !hasAnnotationOf<Deprecated>() && hasType { type -> type.hasNameStartingWith("List<Ko") }
