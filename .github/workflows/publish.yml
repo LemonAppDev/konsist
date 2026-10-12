@@ -1,0 +1,177 @@
+name: Publish
+
+# Publishes Konsist snapshot to the Central snapshots repository (https://central.sonatype.com/repository/maven-snapshots/)
+# and comments on the PR with the published version. Test project jobs (other workflows) wait for this workflow run
+# and test the published snapshot (see '.github/actions/get-published-konsist-snapshot').
+# Snapshot only: this workflow never runs the release publishing task.
+#
+# Snapshot version depends on the event:
+# - push to develop: 1.0.0-SNAPSHOT (comments on the merged PR)
+# - pull request: 1.0.0-pr<number>-SNAPSHOT
+# - other branches: 1.0.0-<branch>-SNAPSHOT
+
+on:
+  push:
+    branches: [ main, develop ]
+
+  pull_request:
+    types: [ opened, synchronize ]
+
+  workflow_dispatch:
+
+# Runs on develop are not cancelled, so each merge publishes its own snapshot
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  publish-snapshot:
+    name: Publish Snapshot To Maven Central
+    if: github.repository == 'LemonAppDev/konsist'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Set up JDK
+        uses: actions/setup-java@v6
+        with:
+          java-version: 25
+          distribution: 'corretto'
+
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v6
+
+      - name: Set up Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: '3.15.0'
+
+      - name: Check Snapshot Version Is Higher Than Released Version
+        run: python3 misc/scripts/check_konsist_snapshot_version.py
+
+      - name: Get Snapshot Qualifier
+        id: snapshot-qualifier
+        env:
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+        run: |
+          if [ "$GITHUB_EVENT_NAME" = "pull_request" ]; then
+            QUALIFIER="pr$PR_NUMBER"
+          elif [ "$GITHUB_REF" = "refs/heads/develop" ]; then
+            QUALIFIER=""
+          else
+            QUALIFIER=$(echo -n "$GITHUB_REF_NAME" | tr -c 'A-Za-z0-9-' '-')
+          fi
+
+          echo "Snapshot qualifier: '$QUALIFIER'"
+          echo "value=$QUALIFIER" >> "$GITHUB_OUTPUT"
+
+      # Configuration cache is disabled, so credentials passed as Gradle properties are not stored on disk
+      - name: Publish Snapshot To Central Snapshots Repository
+        env:
+          MAVEN_CENTRAL_USERNAME: ${{ secrets.MAVEN_CENTRAL_USERNAME }}
+          MAVEN_CENTRAL_PASSWORD: ${{ secrets.MAVEN_CENTRAL_PASSWORD }}
+          GPG_SIGNING_KEY_BASE_64: ${{ secrets.GPG_SIGNING_KEY_BASE_64 }}
+          GPG_SIGNING_PASSWORD_BASE_64: ${{ secrets.GPG_SIGNING_PASSWORD_BASE_64 }}
+          SNAPSHOT_QUALIFIER: ${{ steps.snapshot-qualifier.outputs.value }}
+        run: |
+          if [ -z "$MAVEN_CENTRAL_USERNAME" ] || [ -z "$MAVEN_CENTRAL_PASSWORD" ]; then
+            echo "::error::Maven Central secrets are not available (e.g. PR opened from a fork), snapshot can't be published."
+            exit 1
+          fi
+
+          ./gradlew publishAggregationToCentralSnapshots \
+            --no-configuration-cache \
+            -P konsist.releaseTarget=snapshot \
+            ${SNAPSHOT_QUALIFIER:+-P konsist.snapshotQualifier="$SNAPSHOT_QUALIFIER"} \
+            -P konsist.mavenCentralUsername="$MAVEN_CENTRAL_USERNAME" \
+            -P konsist.mavenCentralPassword="$MAVEN_CENTRAL_PASSWORD" \
+            -P konsist.signingKey="$GPG_SIGNING_KEY_BASE_64" \
+            -P konsist.signingPassword="$GPG_SIGNING_PASSWORD_BASE_64"
+
+      - name: Get Published Snapshot Version
+        id: published-snapshot
+        env:
+          SNAPSHOT_QUALIFIER: ${{ steps.snapshot-qualifier.outputs.value }}
+        run: |
+          VERSION=$(python3 misc/scripts/get_published_konsist_snapshot_version.py --snapshot-qualifier "$SNAPSHOT_QUALIFIER")
+          echo "Published snapshot version: $VERSION"
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+          echo "$VERSION" > konsist-snapshot-version.txt
+
+      # Read by test project jobs in other workflows
+      - name: Upload Published Snapshot Version
+        uses: actions/upload-artifact@v7
+        with:
+          name: konsist-snapshot-version
+          path: konsist-snapshot-version.txt
+          overwrite: true
+
+      - name: Create Snapshot Details
+        env:
+          PUBLISHED_VERSION: ${{ steps.published-snapshot.outputs.version }}
+          SNAPSHOT_QUALIFIER: ${{ steps.snapshot-qualifier.outputs.value }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          COMMIT_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+        run: |
+          KONSIST_VERSION=$(grep '^konsist.version=' gradle.properties | cut -d= -f2 | tr -d '\r')
+          SNAPSHOT_VERSION="$KONSIST_VERSION${SNAPSHOT_QUALIFIER:+-$SNAPSHOT_QUALIFIER}-SNAPSHOT"
+          SNAPSHOTS_URL="https://central.sonatype.com/repository/maven-snapshots/"
+          ARTIFACT_URL="${SNAPSHOTS_URL}com/lemonappdev/konsist/$SNAPSHOT_VERSION/konsist-$PUBLISHED_VERSION"
+
+          cat > snapshot-details.md <<EOF
+          <!-- konsist-snapshot-details -->
+          ### 📦 Konsist snapshot published
+
+          | | |
+          |---|---|
+          | Version | \`$PUBLISHED_VERSION\` |
+          | Latest snapshot | \`$SNAPSHOT_VERSION\` |
+          | Commit | $COMMIT_SHA |
+          | Build | [$GITHUB_WORKFLOW #$GITHUB_RUN_NUMBER]($RUN_URL) |
+          | Artifact | [konsist-$PUBLISHED_VERSION.jar]($ARTIFACT_URL.jar) ([pom]($ARTIFACT_URL.pom)) |
+
+          \`\`\`kotlin
+          repositories {
+              maven("$SNAPSHOTS_URL")
+          }
+
+          dependencies {
+              testImplementation("com.lemonappdev:konsist:$PUBLISHED_VERSION")
+          }
+          \`\`\`
+
+          Snapshots are removed from the Central snapshots repository after 90 days.
+          EOF
+
+          cat snapshot-details.md >> "$GITHUB_STEP_SUMMARY"
+
+      # Single comment per PR, updated on each publish (PR runs and merge to develop)
+      - name: Comment Snapshot Details On PR
+        if: github.event_name == 'pull_request' || (github.event_name == 'push' && github.ref == 'refs/heads/develop')
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+        run: |
+          if [ -z "$PR_NUMBER" ]; then
+            PR_NUMBER=$(gh api "repos/$GITHUB_REPOSITORY/commits/$GITHUB_SHA/pulls" --jq '[.[] | select(.merged_at != null)][0].number // empty')
+          fi
+
+          if [ -z "$PR_NUMBER" ]; then
+            echo "No PR associated with commit $GITHUB_SHA, skipping comment."
+            exit 0
+          fi
+
+          COMMENT_ID=$(gh api --paginate "repos/$GITHUB_REPOSITORY/issues/$PR_NUMBER/comments" \
+            --jq '.[] | select(.user.login == "github-actions[bot]" and (.body | contains("<!-- konsist-snapshot-details -->"))) | .id' | tail -n 1)
+
+          if [ -n "$COMMENT_ID" ]; then
+            gh api --method PATCH "repos/$GITHUB_REPOSITORY/issues/comments/$COMMENT_ID" -F body=@snapshot-details.md > /dev/null
+            echo "Updated comment $COMMENT_ID on PR #$PR_NUMBER"
+          else
+            gh pr comment "$PR_NUMBER" --repo "$GITHUB_REPOSITORY" --body-file snapshot-details.md
+          fi

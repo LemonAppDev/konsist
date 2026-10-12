@@ -3,6 +3,7 @@ package com.lemonappdev.konsist.buildlogic
 import com.lemonappdev.konsist.buildlogic.config.ReleaseTarget
 import com.lemonappdev.konsist.buildlogic.ext.getLocalPropertyOrGradleProperty
 import com.lemonappdev.konsist.buildlogic.ext.getReleaseTarget
+import com.lemonappdev.konsist.buildlogic.ext.requireReleaseTargetForNmcpPublishTasks
 import nmcp.NmcpAggregationExtension
 import org.gradle.api.Plugin
 import org.gradle.api.Project
@@ -28,6 +29,8 @@ class PublishAggregationConventionPlugin : Plugin<Project> {
                     publishingType.set("AUTOMATIC")
                 }
             }
+
+            requireReleaseTargetForNmcpPublishTasks("Aggregation")
 
             tasks.register("publish") {
                 group = "publishing"
