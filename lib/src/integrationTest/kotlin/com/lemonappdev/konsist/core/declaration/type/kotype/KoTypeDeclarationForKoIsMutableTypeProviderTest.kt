@@ -125,6 +125,11 @@ class KoTypeDeclarationForKoIsMutableTypeProviderTest {
                 arguments("external-type-is-not-mutable-type", false),
                 arguments("type-parameter-type-is-not-immutable-type", false),
                 arguments("typealias-type-is-immutable-type", false),
+                arguments("known-immutable-java-time-type-is-immutable-type", false),
+                arguments("known-immutable-java-type-is-immutable-type", false),
+                arguments("known-immutable-java-lang-type-is-immutable-type", false),
+                arguments("known-immutable-kotlin-external-type-is-immutable-type", false),
+                arguments("unknown-external-type-is-not-immutable-type", false),
             )
 
         @Suppress("unused")
@@ -141,6 +146,8 @@ class KoTypeDeclarationForKoIsMutableTypeProviderTest {
                 arguments("type-with-type-parameter-type-argument-has-not-immutable-type-argument", true),
                 arguments("type-with-star-projection-type-argument-has-not-immutable-type-argument", false),
                 arguments("type-with-function-type-argument-has-not-immutable-type-argument", false),
+                arguments("type-with-unknown-external-type-argument-has-not-immutable-type-argument", false),
+                arguments("type-with-known-immutable-external-type-argument-has-immutable-type-argument", false),
             )
 
         @Suppress("unused")
@@ -193,9 +200,14 @@ class KoTypeDeclarationForKoIsMutableTypeProviderTest {
                 arguments("typealias-type-with-mutable-name-is-not-mutable-type", false),
                 arguments("typealias-to-class-type-with-var-property-is-mutable-type", false),
                 arguments("external-type-is-mutable-type", false),
-                arguments("external-type-is-not-mutable-type", true),
+                arguments("external-type-is-not-mutable-type", false),
                 arguments("type-parameter-type-is-not-immutable-type", false),
                 arguments("typealias-type-is-immutable-type", true),
+                arguments("known-immutable-java-time-type-is-immutable-type", true),
+                arguments("known-immutable-java-type-is-immutable-type", true),
+                arguments("known-immutable-java-lang-type-is-immutable-type", true),
+                arguments("known-immutable-kotlin-external-type-is-immutable-type", true),
+                arguments("unknown-external-type-is-not-immutable-type", false),
             )
 
         @Suppress("unused")
@@ -214,6 +226,8 @@ class KoTypeDeclarationForKoIsMutableTypeProviderTest {
                 arguments("type-with-type-parameter-type-argument-has-not-immutable-type-argument", false),
                 arguments("type-with-star-projection-type-argument-has-not-immutable-type-argument", false),
                 arguments("type-with-function-type-argument-has-not-immutable-type-argument", false),
+                arguments("type-with-unknown-external-type-argument-has-not-immutable-type-argument", false),
+                arguments("type-with-known-immutable-external-type-argument-has-immutable-type-argument", true),
             )
     }
 }

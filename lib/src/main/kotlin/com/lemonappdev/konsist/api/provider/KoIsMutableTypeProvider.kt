@@ -44,15 +44,19 @@ interface KoIsMutableTypeProvider : KoBaseProvider {
     /**
      * Determines whether the declaration is an immutable type.
      *
-     * A type is considered immutable when it resolves to a Kotlin type, external type, or a class, interface or object
-     * declared in the project, and it is not a mutable type (see [isMutableType]). Read-only types, such as `List`
-     * or `Map`, are considered immutable.
+     * A type is considered immutable when it is:
+     * - a Kotlin type, or a class, interface or object declared in the project, that is not a mutable type
+     * (see [isMutableType]). Read-only types, such as `List` or `Map`, are considered immutable.
+     * - a known immutable external type, such as `java.lang.Integer`, `java.math.BigDecimal`, `java.util.UUID`,
+     * `java.time.LocalDate` (any type from `java.time` or `kotlinx.datetime` package), `kotlin.time.Duration`,
+     * `kotlinx.collections.immutable.ImmutableList`, etc.
      *
      * Type aliases and import aliases are resolved to the type they point to, so for `typealias Items = List<String>`
      * value will be `true` and for `typealias Items = MutableList<String>` value will be `false`.
      *
-     * Mutability of types that cannot be determined, such as type parameters (`T`) and function types (`() -> Unit`),
-     * is unknown, so for them both `isMutableType` and `isImmutableType` are `false`.
+     * Mutability of types that cannot be determined, such as type parameters (`T`), function types (`() -> Unit`),
+     * unresolved types and external types not known to be immutable (e.g. `java.util.Date`), is unknown, so for them
+     * both `isMutableType` and `isImmutableType` are `false`.
      *
      * Only the type itself is checked, so for `List<MutableList<String>>` value will be `true`.
      *
