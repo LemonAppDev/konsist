@@ -79,19 +79,11 @@ class ApiKonsistTest {
 
     @Test
     fun `every provider has correct hasX methods`() {
-        Konsist
-            .scopeFromPackage("com.lemonappdev.konsist.api.provider..", sourceSetName = "main")
-            .interfaces()
+        providersWithDeclarationLists
             // Exclude the providers below because the declarations from their properties with list return types implement
             // KoNameProvider, but all of these methods are not relevant.
             .filterNot { it.name == "KoFunctionTypeDeclarationProvider" || it.name == "KoUpperBoundsProvider" }
-            .withoutNameMatching(Regex("\\bKoKDoc[A-Za-z]+TagProvider\\b")) // exclude providers like KoKDocXTagProvider
-            .withProperty { property ->
-                !property.hasAnnotationOf<Deprecated>() &&
-                    property.hasType { type ->
-                        type.hasNameStartingWith("List<Ko")
-                    }
-            }.assertTrue {
+            .assertTrue {
                 it.hasCorrectMethods(false)
             }
     }
@@ -108,17 +100,7 @@ class ApiKonsistTest {
 
     @Test
     fun `every provider containing property with list of declarations type has correct extensions`() {
-        val providers =
-            Konsist
-                .scopeFromPackage("com.lemonappdev.konsist.api.provider..", sourceSetName = "main")
-                .interfaces()
-                .withoutNameMatching(Regex("\\bKoKDoc[A-Za-z]+TagProvider\\b")) // exclude providers like KoKDocXTagProvider
-                .withProperty { property ->
-                    !property.hasAnnotationOf<Deprecated>() &&
-                        property.hasType { type ->
-                            type.hasNameStartingWith("List<Ko")
-                        }
-                }.map { it.name }
+        val providers = providersWithDeclarationLists.map { it.name }
 
         Konsist
             .scopeFromPackage("com.lemonappdev.konsist.api.ext.list..", sourceSetName = "main")
@@ -127,6 +109,18 @@ class ApiKonsistTest {
                 providers.any { providerName -> it.hasNameContaining(providerName) }
             }.assertTrue { it.hasCorrectMethods(true) }
     }
+
+    private val providersWithDeclarationLists =
+        Konsist
+            .scopeFromPackage("com.lemonappdev.konsist.api.provider..", sourceSetName = "main")
+            .interfaces()
+            .withoutNameMatching(Regex("\\bKoKDoc[A-Za-z]+TagProvider\\b")) // exclude providers like KoKDocXTagProvider
+            .withProperty { property ->
+                !property.hasAnnotationOf<Deprecated>() &&
+                    property.hasType { type ->
+                        type.hasNameStartingWith("List<Ko")
+                    }
+            }
 
     private val declarations =
         Konsist
