@@ -377,6 +377,51 @@ class KoFunctionDeclarationForKoAnnotationProviderTest {
         }
     }
 
+    @Test
+    fun `function-has-annotation-with-import-alias`() {
+        // given
+        val sut =
+            getSnippetFile("function-has-annotation-with-import-alias")
+                .functions()
+                .first()
+
+        // then
+        assertSoftly(sut) {
+            hasAnnotationOf(FixtureAnnotation::class) shouldBeEqualTo true
+            hasAllAnnotationsOf(FixtureAnnotation::class) shouldBeEqualTo true
+        }
+    }
+
+    @Test
+    fun `function-has-kotlin-annotation-with-import-alias`() {
+        // given
+        val sut =
+            getSnippetFile("function-has-kotlin-annotation-with-import-alias")
+                .functions()
+                .first()
+
+        // then
+        assertSoftly(sut) {
+            hasAnnotationOf(Deprecated::class) shouldBeEqualTo true
+            hasAllAnnotationsOf(Deprecated::class) shouldBeEqualTo true
+        }
+    }
+
+    @Test
+    fun `function-has-annotation-with-name-of-kotlin-annotation`() {
+        // given
+        val sut =
+            getSnippetFile("function-has-annotation-with-name-of-kotlin-annotation")
+                .functions()
+                .first()
+
+        // then
+        assertSoftly(sut) {
+            hasAnnotationOf(Deprecated::class) shouldBeEqualTo false
+            hasAllAnnotationsOf(Deprecated::class) shouldBeEqualTo false
+        }
+    }
+
     private fun getSnippetFile(fileName: String) =
         getSnippetKoScope("core/declaration/kofunction/snippet/forkoannotationprovider/", fileName)
 }
