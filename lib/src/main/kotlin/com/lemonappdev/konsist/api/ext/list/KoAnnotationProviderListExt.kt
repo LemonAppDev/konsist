@@ -8,6 +8,8 @@ import kotlin.reflect.KClass
 
 /**
  * List containing annotation declarations.
+ *
+ * @see KoAnnotationProvider.annotations
  */
 val <T : KoAnnotationProvider> List<T>.annotations: List<KoAnnotationDeclaration>
     get() = flatMap { it.annotations }
@@ -16,6 +18,7 @@ val <T : KoAnnotationProvider> List<T>.annotations: List<KoAnnotationDeclaration
  * List containing declarations with any annotation.
  *
  * @return A list containing declarations with any annotation.
+ * @see KoAnnotationProvider.hasAnnotations
  */
 fun <T : KoAnnotationProvider> List<T>.withAnnotations(): List<T> = filter { it.hasAnnotations() }
 
@@ -23,6 +26,7 @@ fun <T : KoAnnotationProvider> List<T>.withAnnotations(): List<T> = filter { it.
  * List containing declarations with no annotation.
  *
  * @return A list containing declarations with no annotation.
+ * @see KoAnnotationProvider.hasAnnotations
  */
 fun <T : KoAnnotationProvider> List<T>.withoutAnnotations(): List<T> = filterNot { it.hasAnnotations() }
 
@@ -35,6 +39,7 @@ fun <T : KoAnnotationProvider> List<T>.withoutAnnotations(): List<T> = filterNot
  *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations with at least one of the specified annotation(s).
+ * @see KoAnnotationProvider.hasAnnotationWithName
  */
 fun <T : KoAnnotationProvider> List<T>.withAnnotationNamed(
     name: String,
@@ -50,6 +55,7 @@ fun <T : KoAnnotationProvider> List<T>.withAnnotationNamed(
  *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations with at least one of the specified annotation(s).
+ * @see KoAnnotationProvider.hasAnnotationWithName
  */
 fun <T : KoAnnotationProvider> List<T>.withAnnotationNamed(
     names: Collection<String>,
@@ -71,6 +77,7 @@ fun <T : KoAnnotationProvider> List<T>.withAnnotationNamed(
  *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations without any of the specified annotations.
+ * @see KoAnnotationProvider.hasAnnotationWithName
  */
 fun <T : KoAnnotationProvider> List<T>.withoutAnnotationNamed(
     name: String,
@@ -86,6 +93,7 @@ fun <T : KoAnnotationProvider> List<T>.withoutAnnotationNamed(
  *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations without any of the specified annotations.
+ * @see KoAnnotationProvider.hasAnnotationWithName
  */
 fun <T : KoAnnotationProvider> List<T>.withoutAnnotationNamed(
     names: Collection<String>,
@@ -107,6 +115,7 @@ fun <T : KoAnnotationProvider> List<T>.withoutAnnotationNamed(
  *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations with all specified annotation(s).
+ * @see KoAnnotationProvider.hasAnnotationsWithAllNames
  */
 fun <T : KoAnnotationProvider> List<T>.withAllAnnotationsNamed(
     name: String,
@@ -122,6 +131,7 @@ fun <T : KoAnnotationProvider> List<T>.withAllAnnotationsNamed(
  *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations with all specified annotation(s).
+ * @see KoAnnotationProvider.hasAnnotationsWithAllNames
  */
 fun <T : KoAnnotationProvider> List<T>.withAllAnnotationsNamed(
     names: Collection<String>,
@@ -143,6 +153,7 @@ fun <T : KoAnnotationProvider> List<T>.withAllAnnotationsNamed(
  *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations without all specified annotation(s).
+ * @see KoAnnotationProvider.hasAnnotationsWithAllNames
  */
 fun <T : KoAnnotationProvider> List<T>.withoutAllAnnotationsNamed(
     name: String,
@@ -158,6 +169,7 @@ fun <T : KoAnnotationProvider> List<T>.withoutAllAnnotationsNamed(
  *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations without all specified annotation(s).
+ * @see KoAnnotationProvider.hasAnnotationsWithAllNames
  */
 fun <T : KoAnnotationProvider> List<T>.withoutAllAnnotationsNamed(
     names: Collection<String>,
@@ -175,6 +187,7 @@ fun <T : KoAnnotationProvider> List<T>.withoutAllAnnotationsNamed(
  *
  * @param predicate A function that defines the condition to be met by an annotation declaration.
  * @return A list containing declarations with at least one annotation satisfying the predicate.
+ * @see KoAnnotationProvider.hasAnnotation
  */
 fun <T : KoAnnotationProvider> List<T>.withAnnotation(predicate: (KoAnnotationDeclaration) -> Boolean): List<T> =
     filter { it.hasAnnotation(predicate) }
@@ -184,6 +197,7 @@ fun <T : KoAnnotationProvider> List<T>.withAnnotation(predicate: (KoAnnotationDe
  *
  * @param predicate A function that defines the condition to be met by an annotation declaration.
  * @return A list containing declarations without any annotation satisfying the provided predicate.
+ * @see KoAnnotationProvider.hasAnnotation
  */
 fun <T : KoAnnotationProvider> List<T>.withoutAnnotation(predicate: (KoAnnotationDeclaration) -> Boolean): List<T> =
     filterNot { it.hasAnnotation(predicate) }
@@ -193,6 +207,7 @@ fun <T : KoAnnotationProvider> List<T>.withoutAnnotation(predicate: (KoAnnotatio
  *
  * @param predicate A function that defines the condition to be met by all annotation declarations.
  * @return A filtered list containing declarations with all annotations satisfying the predicate.
+ * @see KoAnnotationProvider.hasAllAnnotations
  */
 fun <T : KoAnnotationProvider> List<T>.withAllAnnotations(predicate: (KoAnnotationDeclaration) -> Boolean): List<T> =
     filter { it.hasAllAnnotations(predicate) }
@@ -202,6 +217,7 @@ fun <T : KoAnnotationProvider> List<T>.withAllAnnotations(predicate: (KoAnnotati
  *
  * @param predicate A function that defines the condition to be met by all annotation declarations.
  * @return A list containing declarations that have at least one annotation not satisfying the provided predicate.
+ * @see KoAnnotationProvider.hasAllAnnotations
  */
 fun <T : KoAnnotationProvider> List<T>.withoutAllAnnotations(predicate: (KoAnnotationDeclaration) -> Boolean): List<T> =
     filterNot { it.hasAllAnnotations(predicate) }
@@ -211,6 +227,7 @@ fun <T : KoAnnotationProvider> List<T>.withoutAllAnnotations(predicate: (KoAnnot
  *
  * @param predicate A function that defines the condition to be met by the list of annotation declarations.
  * @return A list containing declarations with annotation declarations satisfying the predicate.
+ * @see KoAnnotationProvider.annotations
  */
 fun <T : KoAnnotationProvider> List<T>.withAnnotations(predicate: (List<KoAnnotationDeclaration>) -> Boolean): List<T> =
     filter { predicate(it.annotations) }
@@ -220,6 +237,7 @@ fun <T : KoAnnotationProvider> List<T>.withAnnotations(predicate: (List<KoAnnota
  *
  * @param predicate A function that defines the condition to be met by the list of annotation declarations.
  * @return A list containing declarations without annotation declarations satisfying the predicate.
+ * @see KoAnnotationProvider.annotations
  */
 fun <T : KoAnnotationProvider> List<T>.withoutAnnotations(predicate: (List<KoAnnotationDeclaration>) -> Boolean): List<T> =
     filterNot { predicate(it.annotations) }
@@ -230,6 +248,7 @@ fun <T : KoAnnotationProvider> List<T>.withoutAnnotations(predicate: (List<KoAnn
  * @param kClass The Kotlin class representing annotation to include.
  * @param kClasses The Kotlin classes representing annotations to include.
  * @return A list containing declarations with at least one annotation of the specified `KClass` type.
+ * @see KoAnnotationProvider.hasAnnotationOf
  */
 fun <T : KoAnnotationProvider> List<T>.withAnnotationOf(
     kClass: KClass<*>,
@@ -241,6 +260,7 @@ fun <T : KoAnnotationProvider> List<T>.withAnnotationOf(
  *
  * @param kClasses The Kotlin classes representing annotations to include.
  * @return A list containing declarations with at least one annotation of the specified `KClass` type.
+ * @see KoAnnotationProvider.hasAnnotationOf
  */
 fun <T : KoAnnotationProvider> List<T>.withAnnotationOf(kClasses: Collection<KClass<*>>): List<T> =
     filter {
@@ -256,6 +276,7 @@ fun <T : KoAnnotationProvider> List<T>.withAnnotationOf(kClasses: Collection<KCl
  * @param kClass The Kotlin class representing annotation to exclude.
  * @param kClasses The Kotlin classes representing annotations to exclude.
  * @return A list containing declarations without any of the specified annotations.
+ * @see KoAnnotationProvider.hasAnnotationOf
  */
 fun <T : KoAnnotationProvider> List<T>.withoutAnnotationOf(
     kClass: KClass<*>,
@@ -267,6 +288,7 @@ fun <T : KoAnnotationProvider> List<T>.withoutAnnotationOf(
  *
  * @param kClasses The Kotlin classes representing annotations to exclude.
  * @return A list containing declarations without any of the specified annotations.
+ * @see KoAnnotationProvider.hasAnnotationOf
  */
 fun <T : KoAnnotationProvider> List<T>.withoutAnnotationOf(kClasses: Collection<KClass<*>>): List<T> =
     filterNot {
@@ -282,6 +304,7 @@ fun <T : KoAnnotationProvider> List<T>.withoutAnnotationOf(kClasses: Collection<
  * @param kClass The Kotlin class representing annotation to include.
  * @param kClasses The Kotlin classes representing annotations to include.
  * @return A list containing declarations that have all annotations of the specified `KClass` type.
+ * @see KoAnnotationProvider.hasAllAnnotationsOf
  */
 fun <T : KoAnnotationProvider> List<T>.withAllAnnotationsOf(
     kClass: KClass<*>,
@@ -293,6 +316,7 @@ fun <T : KoAnnotationProvider> List<T>.withAllAnnotationsOf(
  *
  * @param kClasses The Kotlin classes representing annotations to include.
  * @return A list containing declarations that have all annotations of the specified `KClass` type.
+ * @see KoAnnotationProvider.hasAllAnnotationsOf
  */
 fun <T : KoAnnotationProvider> List<T>.withAllAnnotationsOf(kClasses: Collection<KClass<*>>): List<T> =
     filter {
@@ -308,6 +332,7 @@ fun <T : KoAnnotationProvider> List<T>.withAllAnnotationsOf(kClasses: Collection
  * @param kClass The Kotlin class representing annotation to exclude.
  * @param kClasses The Kotlin classes representing annotations to exclude.
  * @return A list containing declarations without all specified `KClass` type annotations.
+ * @see KoAnnotationProvider.hasAllAnnotationsOf
  */
 fun <T : KoAnnotationProvider> List<T>.withoutAllAnnotationsOf(
     kClass: KClass<*>,
@@ -319,6 +344,7 @@ fun <T : KoAnnotationProvider> List<T>.withoutAllAnnotationsOf(
  *
  * @param kClasses The Kotlin classes representing annotations to exclude.
  * @return A list containing declarations without all specified `KClass` type annotations.
+ * @see KoAnnotationProvider.hasAllAnnotationsOf
  */
 fun <T : KoAnnotationProvider> List<T>.withoutAllAnnotationsOf(kClasses: Collection<KClass<*>>): List<T> =
     filterNot {

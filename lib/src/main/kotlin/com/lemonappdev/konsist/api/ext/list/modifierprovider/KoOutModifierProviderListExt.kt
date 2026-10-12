@@ -6,6 +6,7 @@ import com.lemonappdev.konsist.api.provider.modifier.KoOutModifierProvider
  * List containing declarations with `out` modifier.
  *
  * @return A list containing declarations with the `out` modifier.
+ * @see KoOutModifierProvider.hasOutModifier
  */
 fun <T : KoOutModifierProvider> List<T>.withOutModifier(): List<T> = filter { it.hasOutModifier }
 
@@ -13,5 +14,6 @@ fun <T : KoOutModifierProvider> List<T>.withOutModifier(): List<T> = filter { it
  * List containing declarations without `out` modifier.
  *
  * @return A list containing declarations without the `out` modifier.
+ * @see KoOutModifierProvider.hasOutModifier
  */
 fun <T : KoOutModifierProvider> List<T>.withoutOutModifier(): List<T> = filterNot { it.hasOutModifier }

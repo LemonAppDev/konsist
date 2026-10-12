@@ -6,6 +6,7 @@ import com.lemonappdev.konsist.api.provider.tag.KoKDocReceiverTagProvider
  * List containing declarations with receiver tag.
  *
  * @return A list containing declarations with receiver tag.
+ * @see KoKDocReceiverTagProvider.hasReceiverTag
  */
 fun <T : KoKDocReceiverTagProvider> List<T>.withReceiverTag(): List<T> = filter { it.hasReceiverTag }
 
@@ -13,5 +14,6 @@ fun <T : KoKDocReceiverTagProvider> List<T>.withReceiverTag(): List<T> = filter 
  * List containing declarations with no receiver tag.
  *
  * @return A list containing declarations with no receiver tag.
+ * @see KoKDocReceiverTagProvider.hasReceiverTag
  */
 fun <T : KoKDocReceiverTagProvider> List<T>.withoutReceiverTag(): List<T> = filterNot { it.hasReceiverTag }

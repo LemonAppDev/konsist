@@ -6,6 +6,7 @@ import com.lemonappdev.konsist.api.provider.KoIsGenericProvider
  * List containing declarations that are generic.
  *
  * @return A list containing declarations that are generic.
+ * @see KoIsGenericProvider.isGeneric
  */
 fun <T : KoIsGenericProvider> List<T>.withGeneric(): List<T> = filter { it.isGeneric }
 
@@ -13,5 +14,6 @@ fun <T : KoIsGenericProvider> List<T>.withGeneric(): List<T> = filter { it.isGen
  * List containing declarations that are not generic.
  *
  * @return A list containing declarations that are not generic.
+ * @see KoIsGenericProvider.isGeneric
  */
 fun <T : KoIsGenericProvider> List<T>.withoutGeneric(): List<T> = filterNot { it.isGeneric }

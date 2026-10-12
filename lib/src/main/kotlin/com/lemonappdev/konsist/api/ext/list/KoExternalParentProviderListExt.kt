@@ -12,6 +12,7 @@ import kotlin.reflect.KClass
  *
  * @param indirectParents Whether to include indirect external parents.
  * @return A list containing external parent declarations.
+ * @see KoExternalParentProvider.externalParents
  */
 fun <T : KoExternalParentProvider> List<T>.externalParents(indirectParents: Boolean = false): List<KoParentDeclaration> =
     flatMap { it.externalParents(indirectParents) }
@@ -22,6 +23,7 @@ fun <T : KoExternalParentProvider> List<T>.externalParents(indirectParents: Bool
  *
  * @param indirectParents Whether to include indirect external parents.
  * @return A list containing declarations with any external parent.
+ * @see KoExternalParentProvider.hasExternalParents
  */
 fun <T : KoExternalParentProvider> List<T>.withExternalParents(indirectParents: Boolean = false): List<T> =
     filter { it.hasExternalParents(indirectParents) }
@@ -32,6 +34,7 @@ fun <T : KoExternalParentProvider> List<T>.withExternalParents(indirectParents: 
  *
  * @param indirectParents Whether to include indirect external parents.
  * @return A list containing declarations with no external parent.
+ * @see KoExternalParentProvider.hasExternalParents
  */
 fun <T : KoExternalParentProvider> List<T>.withoutExternalParents(indirectParents: Boolean = false): List<T> =
     filterNot { it.hasExternalParents(indirectParents) }
@@ -47,6 +50,7 @@ fun <T : KoExternalParentProvider> List<T>.withoutExternalParents(indirectParent
  *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations with at least one of the specified external parent(s).
+ * @see KoExternalParentProvider.hasExternalParentWithName
  */
 fun <T : KoExternalParentProvider> List<T>.withExternalParentNamed(
     name: String,
@@ -65,6 +69,7 @@ fun <T : KoExternalParentProvider> List<T>.withExternalParentNamed(
  *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations with at least one of the specified external parent(s).
+ * @see KoExternalParentProvider.hasExternalParentWithName
  */
 fun <T : KoExternalParentProvider> List<T>.withExternalParentNamed(
     names: Collection<String>,
@@ -89,6 +94,7 @@ fun <T : KoExternalParentProvider> List<T>.withExternalParentNamed(
  *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations without any of the specified external parents.
+ * @see KoExternalParentProvider.hasExternalParentWithName
  */
 fun <T : KoExternalParentProvider> List<T>.withoutExternalParentNamed(
     name: String,
@@ -107,6 +113,7 @@ fun <T : KoExternalParentProvider> List<T>.withoutExternalParentNamed(
  *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations without any of the specified external parents.
+ * @see KoExternalParentProvider.hasExternalParentWithName
  */
 fun <T : KoExternalParentProvider> List<T>.withoutExternalParentNamed(
     names: Collection<String>,
@@ -131,6 +138,7 @@ fun <T : KoExternalParentProvider> List<T>.withoutExternalParentNamed(
  *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations with all specified external parent(s).
+ * @see KoExternalParentProvider.hasExternalParentsWithAllNames
  */
 fun <T : KoExternalParentProvider> List<T>.withAllExternalParentsNamed(
     name: String,
@@ -149,6 +157,7 @@ fun <T : KoExternalParentProvider> List<T>.withAllExternalParentsNamed(
  *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations with all specified external parent(s).
+ * @see KoExternalParentProvider.hasExternalParentsWithAllNames
  */
 fun <T : KoExternalParentProvider> List<T>.withAllExternalParentsNamed(
     names: Collection<String>,
@@ -173,6 +182,7 @@ fun <T : KoExternalParentProvider> List<T>.withAllExternalParentsNamed(
  *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations without all specified external parent(s).
+ * @see KoExternalParentProvider.hasExternalParentsWithAllNames
  */
 fun <T : KoExternalParentProvider> List<T>.withoutAllExternalParentsNamed(
     name: String,
@@ -191,6 +201,7 @@ fun <T : KoExternalParentProvider> List<T>.withoutAllExternalParentsNamed(
  *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations without all specified external parent(s).
+ * @see KoExternalParentProvider.hasExternalParentsWithAllNames
  */
 fun <T : KoExternalParentProvider> List<T>.withoutAllExternalParentsNamed(
     names: Collection<String>,
@@ -211,6 +222,7 @@ fun <T : KoExternalParentProvider> List<T>.withoutAllExternalParentsNamed(
  * @param indirectParents Whether to include indirect external parents.
  * @param predicate A function that defines the condition to be met by an external parent declaration.
  * @return A list containing declarations with at least one external parent satisfying the predicate.
+ * @see KoExternalParentProvider.hasExternalParent
  */
 fun <T : KoExternalParentProvider> List<T>.withExternalParent(
     indirectParents: Boolean = false,
@@ -224,6 +236,7 @@ fun <T : KoExternalParentProvider> List<T>.withExternalParent(
  * @param indirectParents Whether to include indirect external parents.
  * @param predicate A function that defines the condition to be met by an external parent declaration.
  * @return A list containing declarations without any external parent satisfying the provided predicate.
+ * @see KoExternalParentProvider.hasExternalParent
  */
 fun <T : KoExternalParentProvider> List<T>.withoutExternalParent(
     indirectParents: Boolean = false,
@@ -237,6 +250,7 @@ fun <T : KoExternalParentProvider> List<T>.withoutExternalParent(
  * @param indirectParents Whether to include indirect external parents.
  * @param predicate A function that defines the condition to be met by all external parent declarations.
  * @return A filtered list containing declarations with all external parents satisfying the predicate.
+ * @see KoExternalParentProvider.hasAllExternalParents
  */
 fun <T : KoExternalParentProvider> List<T>.withAllExternalParents(
     indirectParents: Boolean = false,
@@ -250,6 +264,7 @@ fun <T : KoExternalParentProvider> List<T>.withAllExternalParents(
  * @param indirectParents Whether to include indirect external parents.
  * @param predicate A function that defines the condition to be met by all external parent declarations.
  * @return A list containing declarations that have at least one external parent not satisfying the provided predicate.
+ * @see KoExternalParentProvider.hasAllExternalParents
  */
 fun <T : KoExternalParentProvider> List<T>.withoutAllExternalParents(
     indirectParents: Boolean = false,
@@ -263,6 +278,7 @@ fun <T : KoExternalParentProvider> List<T>.withoutAllExternalParents(
  * @param indirectParents Whether to include indirect external parents.
  * @param predicate A function that defines the condition to be met by the list of external parent declarations.
  * @return A list containing declarations with external parent declarations satisfying the predicate.
+ * @see KoExternalParentProvider.externalParents
  */
 fun <T : KoExternalParentProvider> List<T>.withExternalParents(
     indirectParents: Boolean = false,
@@ -276,6 +292,7 @@ fun <T : KoExternalParentProvider> List<T>.withExternalParents(
  * @param indirectParents Whether to include indirect external parents.
  * @param predicate A function that defines the condition to be met by the list of external parent declarations.
  * @return A list containing declarations without external parent declarations satisfying the predicate.
+ * @see KoExternalParentProvider.externalParents
  */
 fun <T : KoExternalParentProvider> List<T>.withoutExternalParents(
     indirectParents: Boolean = false,
@@ -290,6 +307,7 @@ fun <T : KoExternalParentProvider> List<T>.withoutExternalParents(
  * @param kClasses The Kotlin classes representing external parents to include.
  * @param indirectParents Whether to include indirect external parents.
  * @return A list containing declarations with at least one external parent of the specified `KClass` type.
+ * @see KoExternalParentProvider.hasExternalParentOf
  */
 fun <T : KoExternalParentProvider> List<T>.withExternalParentOf(
     kClass: KClass<*>,
@@ -304,6 +322,7 @@ fun <T : KoExternalParentProvider> List<T>.withExternalParentOf(
  * @param kClasses The Kotlin classes representing external parents to include.
  * @param indirectParents Whether to include indirect external parents.
  * @return A list containing declarations with at least one external parent of the specified `KClass` type.
+ * @see KoExternalParentProvider.hasExternalParentOf
  */
 fun <T : KoExternalParentProvider> List<T>.withExternalParentOf(
     kClasses: Collection<KClass<*>>,
@@ -324,6 +343,7 @@ fun <T : KoExternalParentProvider> List<T>.withExternalParentOf(
  * @param kClasses The Kotlin classes representing external parents to exclude.
  * @param indirectParents Whether to include indirect external parents.
  * @return A list containing declarations without any of the specified external parents.
+ * @see KoExternalParentProvider.hasExternalParentOf
  */
 fun <T : KoExternalParentProvider> List<T>.withoutExternalParentOf(
     kClass: KClass<*>,
@@ -338,6 +358,7 @@ fun <T : KoExternalParentProvider> List<T>.withoutExternalParentOf(
  * @param kClasses The Kotlin classes representing external parents to exclude.
  * @param indirectParents Whether to include indirect external parents.
  * @return A list containing declarations without any of the specified external parents.
+ * @see KoExternalParentProvider.hasExternalParentOf
  */
 fun <T : KoExternalParentProvider> List<T>.withoutExternalParentOf(
     kClasses: Collection<KClass<*>>,
@@ -358,6 +379,7 @@ fun <T : KoExternalParentProvider> List<T>.withoutExternalParentOf(
  * @param kClasses The Kotlin classes representing external parents to include.
  * @param indirectParents Whether to include indirect external parents.
  * @return A list containing declarations that have all external parents of the specified `KClass` type.
+ * @see KoExternalParentProvider.hasAllExternalParentsOf
  */
 fun <T : KoExternalParentProvider> List<T>.withAllExternalParentsOf(
     kClass: KClass<*>,
@@ -372,6 +394,7 @@ fun <T : KoExternalParentProvider> List<T>.withAllExternalParentsOf(
  * @param kClasses The Kotlin classes representing external parents to include.
  * @param indirectParents Whether to include indirect external parents.
  * @return A list containing declarations that have all external parents of the specified `KClass` type.
+ * @see KoExternalParentProvider.hasAllExternalParentsOf
  */
 fun <T : KoExternalParentProvider> List<T>.withAllExternalParentsOf(
     kClasses: Collection<KClass<*>>,
@@ -392,6 +415,7 @@ fun <T : KoExternalParentProvider> List<T>.withAllExternalParentsOf(
  * @param kClasses The Kotlin classes representing external parents to exclude.
  * @param indirectParents Whether to include indirect external parents.
  * @return A list containing declarations without all specified `KClass` type external parents.
+ * @see KoExternalParentProvider.hasAllExternalParentsOf
  */
 fun <T : KoExternalParentProvider> List<T>.withoutAllExternalParentsOf(
     kClass: KClass<*>,
@@ -406,6 +430,7 @@ fun <T : KoExternalParentProvider> List<T>.withoutAllExternalParentsOf(
  * @param kClasses The Kotlin classes representing external parents to exclude.
  * @param indirectParents Whether to include indirect external parents.
  * @return A list containing declarations without all specified `KClass` type external parents.
+ * @see KoExternalParentProvider.hasAllExternalParentsOf
  */
 fun <T : KoExternalParentProvider> List<T>.withoutAllExternalParentsOf(
     kClasses: Collection<KClass<*>>,

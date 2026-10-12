@@ -5,6 +5,8 @@ import com.lemonappdev.konsist.api.provider.modifier.KoModifierProvider
 
 /**
  * List containing modifiers.
+ *
+ * @see KoModifierProvider.modifiers
  */
 val <T : KoModifierProvider> List<T>.modifiers: List<KoModifier>
     get() = flatMap { it.modifiers }
@@ -13,6 +15,7 @@ val <T : KoModifierProvider> List<T>.modifiers: List<KoModifier>
  * List containing declarations with any modifier.
  *
  * @return A list containing declarations with any modifier.
+ * @see KoModifierProvider.hasModifiers
  */
 fun <T : KoModifierProvider> List<T>.withModifiers(): List<T> = filter { it.hasModifiers() }
 
@@ -20,6 +23,7 @@ fun <T : KoModifierProvider> List<T>.withModifiers(): List<T> = filter { it.hasM
  * List containing declarations with no modifiers.
  *
  * @return A list containing declarations with no modifiers.
+ * @see KoModifierProvider.hasModifiers
  */
 fun <T : KoModifierProvider> List<T>.withoutModifiers(): List<T> = filterNot { it.hasModifiers() }
 
@@ -29,6 +33,7 @@ fun <T : KoModifierProvider> List<T>.withoutModifiers(): List<T> = filterNot { i
  * @param modifier The modifier to include.
  * @param modifiers The modifiers to include.
  * @return A list containing declarations with at least one of the specified modifier(s).
+ * @see KoModifierProvider.hasModifier
  */
 fun <T : KoModifierProvider> List<T>.withModifier(
     modifier: KoModifier,
@@ -40,6 +45,7 @@ fun <T : KoModifierProvider> List<T>.withModifier(
  *
  * @param modifiers The modifiers to include.
  * @return A list containing declarations with at least one of the specified modifier(s).
+ * @see KoModifierProvider.hasModifier
  */
 fun <T : KoModifierProvider> List<T>.withModifier(modifiers: Collection<KoModifier>): List<T> =
     filter {
@@ -55,6 +61,7 @@ fun <T : KoModifierProvider> List<T>.withModifier(modifiers: Collection<KoModifi
  * @param modifier The modifier to exclude.
  * @param modifiers The modifiers to exclude.
  * @return A list containing declarations without any of the specified modifiers.
+ * @see KoModifierProvider.hasModifier
  */
 fun <T : KoModifierProvider> List<T>.withoutModifier(
     modifier: KoModifier,
@@ -66,6 +73,7 @@ fun <T : KoModifierProvider> List<T>.withoutModifier(
  *
  * @param modifiers The modifiers to exclude.
  * @return A list containing declarations without any of the specified modifiers.
+ * @see KoModifierProvider.hasModifier
  */
 fun <T : KoModifierProvider> List<T>.withoutModifier(modifiers: Collection<KoModifier>): List<T> =
     filterNot {
@@ -81,6 +89,7 @@ fun <T : KoModifierProvider> List<T>.withoutModifier(modifiers: Collection<KoMod
  * @param modifier The modifier to include.
  * @param modifiers The modifiers to include.
  * @return A list containing declarations with all the specified modifiers.
+ * @see KoModifierProvider.hasAllModifiers
  */
 fun <T : KoModifierProvider> List<T>.withAllModifiers(
     modifier: KoModifier,
@@ -92,6 +101,7 @@ fun <T : KoModifierProvider> List<T>.withAllModifiers(
  *
  * @param modifiers The modifiers to include.
  * @return A list containing declarations with all the specified modifiers.
+ * @see KoModifierProvider.hasAllModifiers
  */
 fun <T : KoModifierProvider> List<T>.withAllModifiers(modifiers: Collection<KoModifier>): List<T> =
     filter {
@@ -107,6 +117,7 @@ fun <T : KoModifierProvider> List<T>.withAllModifiers(modifiers: Collection<KoMo
  * @param modifier The modifier to exclude.
  * @param modifiers The modifiers to exclude.
  * @return A list containing declarations without all the specified modifiers.
+ * @see KoModifierProvider.hasAllModifiers
  */
 fun <T : KoModifierProvider> List<T>.withoutAllModifiers(
     modifier: KoModifier,
@@ -118,6 +129,7 @@ fun <T : KoModifierProvider> List<T>.withoutAllModifiers(
  *
  * @param modifiers The modifiers to exclude.
  * @return A list containing declarations without all the specified modifiers.
+ * @see KoModifierProvider.hasAllModifiers
  */
 fun <T : KoModifierProvider> List<T>.withoutAllModifiers(modifiers: Collection<KoModifier>): List<T> =
     filterNot {

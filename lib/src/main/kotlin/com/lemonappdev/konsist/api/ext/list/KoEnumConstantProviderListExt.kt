@@ -5,6 +5,8 @@ import com.lemonappdev.konsist.api.provider.KoEnumConstantProvider
 
 /**
  * List containing enum constant declarations.
+ *
+ * @see KoEnumConstantProvider.enumConstants
  */
 val <T : KoEnumConstantProvider> List<T>.enumConstants: List<KoEnumConstantDeclaration>
     get() = flatMap { it.enumConstants }
@@ -13,6 +15,7 @@ val <T : KoEnumConstantProvider> List<T>.enumConstants: List<KoEnumConstantDecla
  * List containing declarations with any enum constant.
  *
  * @return A list containing declarations with any enum constant.
+ * @see KoEnumConstantProvider.hasEnumConstants
  */
 fun <T : KoEnumConstantProvider> List<T>.withEnumConstants(): List<T> = filter { it.hasEnumConstants() }
 
@@ -20,6 +23,7 @@ fun <T : KoEnumConstantProvider> List<T>.withEnumConstants(): List<T> = filter {
  * List containing declarations with no enum constant.
  *
  * @return A list containing declarations with no enum constant.
+ * @see KoEnumConstantProvider.hasEnumConstants
  */
 fun <T : KoEnumConstantProvider> List<T>.withoutEnumConstants(): List<T> = filterNot { it.hasEnumConstants() }
 
@@ -32,6 +36,7 @@ fun <T : KoEnumConstantProvider> List<T>.withoutEnumConstants(): List<T> = filte
  *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations with at least one of the specified enum constant(s).
+ * @see KoEnumConstantProvider.hasEnumConstantWithName
  */
 fun <T : KoEnumConstantProvider> List<T>.withEnumConstantNamed(
     name: String,
@@ -47,6 +52,7 @@ fun <T : KoEnumConstantProvider> List<T>.withEnumConstantNamed(
  *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations with at least one of the specified enum constant(s).
+ * @see KoEnumConstantProvider.hasEnumConstantWithName
  */
 fun <T : KoEnumConstantProvider> List<T>.withEnumConstantNamed(
     names: Collection<String>,
@@ -68,6 +74,7 @@ fun <T : KoEnumConstantProvider> List<T>.withEnumConstantNamed(
  *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations without any of the specified enum constants.
+ * @see KoEnumConstantProvider.hasEnumConstantWithName
  */
 fun <T : KoEnumConstantProvider> List<T>.withoutEnumConstantNamed(
     name: String,
@@ -83,6 +90,7 @@ fun <T : KoEnumConstantProvider> List<T>.withoutEnumConstantNamed(
  *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations without any of the specified enum constants.
+ * @see KoEnumConstantProvider.hasEnumConstantWithName
  */
 fun <T : KoEnumConstantProvider> List<T>.withoutEnumConstantNamed(
     names: Collection<String>,
@@ -104,6 +112,7 @@ fun <T : KoEnumConstantProvider> List<T>.withoutEnumConstantNamed(
  *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations with all specified enum constant(s).
+ * @see KoEnumConstantProvider.hasEnumConstantsWithAllNames
  */
 fun <T : KoEnumConstantProvider> List<T>.withAllEnumConstantsNamed(
     name: String,
@@ -119,6 +128,7 @@ fun <T : KoEnumConstantProvider> List<T>.withAllEnumConstantsNamed(
  *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations with all specified enum constant(s).
+ * @see KoEnumConstantProvider.hasEnumConstantsWithAllNames
  */
 fun <T : KoEnumConstantProvider> List<T>.withAllEnumConstantsNamed(
     names: Collection<String>,
@@ -140,6 +150,7 @@ fun <T : KoEnumConstantProvider> List<T>.withAllEnumConstantsNamed(
  *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations without all specified enum constant(s).
+ * @see KoEnumConstantProvider.hasEnumConstantsWithAllNames
  */
 fun <T : KoEnumConstantProvider> List<T>.withoutAllEnumConstantsNamed(
     name: String,
@@ -155,6 +166,7 @@ fun <T : KoEnumConstantProvider> List<T>.withoutAllEnumConstantsNamed(
  *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations without all specified enum constant(s).
+ * @see KoEnumConstantProvider.hasEnumConstantsWithAllNames
  */
 fun <T : KoEnumConstantProvider> List<T>.withoutAllEnumConstantsNamed(
     names: Collection<String>,
@@ -172,6 +184,7 @@ fun <T : KoEnumConstantProvider> List<T>.withoutAllEnumConstantsNamed(
  *
  * @param predicate A function that defines the condition to be met by an enum constant declaration.
  * @return A list containing declarations with at least one enum constant satisfying the predicate.
+ * @see KoEnumConstantProvider.hasEnumConstant
  */
 fun <T : KoEnumConstantProvider> List<T>.withEnumConstant(predicate: (KoEnumConstantDeclaration) -> Boolean): List<T> =
     filter { it.hasEnumConstant(predicate) }
@@ -181,6 +194,7 @@ fun <T : KoEnumConstantProvider> List<T>.withEnumConstant(predicate: (KoEnumCons
  *
  * @param predicate A function that defines the condition to be met by an enum constant declaration.
  * @return A list containing declarations without any enum constant satisfying the provided predicate.
+ * @see KoEnumConstantProvider.hasEnumConstant
  */
 fun <T : KoEnumConstantProvider> List<T>.withoutEnumConstant(predicate: (KoEnumConstantDeclaration) -> Boolean): List<T> =
     filterNot { it.hasEnumConstant(predicate) }
@@ -190,6 +204,7 @@ fun <T : KoEnumConstantProvider> List<T>.withoutEnumConstant(predicate: (KoEnumC
  *
  * @param predicate A function that defines the condition to be met by all enum constant declarations.
  * @return A filtered list containing declarations with all enum constants satisfying the predicate.
+ * @see KoEnumConstantProvider.hasAllEnumConstants
  */
 fun <T : KoEnumConstantProvider> List<T>.withAllEnumConstants(predicate: (KoEnumConstantDeclaration) -> Boolean): List<T> =
     filter { it.hasAllEnumConstants(predicate) }
@@ -199,6 +214,7 @@ fun <T : KoEnumConstantProvider> List<T>.withAllEnumConstants(predicate: (KoEnum
  *
  * @param predicate A function that defines the condition to be met by all enum constant declarations.
  * @return A list containing declarations that have at least one enum constant not satisfying the provided predicate.
+ * @see KoEnumConstantProvider.hasAllEnumConstants
  */
 fun <T : KoEnumConstantProvider> List<T>.withoutAllEnumConstants(predicate: (KoEnumConstantDeclaration) -> Boolean): List<T> =
     filterNot { it.hasAllEnumConstants(predicate) }
@@ -208,6 +224,7 @@ fun <T : KoEnumConstantProvider> List<T>.withoutAllEnumConstants(predicate: (KoE
  *
  * @param predicate A function that defines the condition to be met by the list of enum constant declarations.
  * @return A list containing declarations with enum constant declarations satisfying the predicate.
+ * @see KoEnumConstantProvider.enumConstants
  */
 fun <T : KoEnumConstantProvider> List<T>.withEnumConstants(predicate: (List<KoEnumConstantDeclaration>) -> Boolean): List<T> =
     filter { predicate(it.enumConstants) }
@@ -217,6 +234,7 @@ fun <T : KoEnumConstantProvider> List<T>.withEnumConstants(predicate: (List<KoEn
  *
  * @param predicate A function that defines the condition to be met by the list of enum constant declarations.
  * @return A list containing declarations without enum constant declarations satisfying the predicate.
+ * @see KoEnumConstantProvider.enumConstants
  */
 fun <T : KoEnumConstantProvider> List<T>.withoutEnumConstants(predicate: (List<KoEnumConstantDeclaration>) -> Boolean): List<T> =
     filterNot { predicate(it.enumConstants) }

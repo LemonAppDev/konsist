@@ -5,6 +5,8 @@ import com.lemonappdev.konsist.api.provider.tag.KoKDocSeeTagProvider
 
 /**
  * List containing see tags.
+ *
+ * @see KoKDocSeeTagProvider.seeTags
  */
 val <T : KoKDocSeeTagProvider> List<T>.seeTags: List<KoValuedKDocTagDeclaration>
     get() = flatMap { it.seeTags }
@@ -13,6 +15,7 @@ val <T : KoKDocSeeTagProvider> List<T>.seeTags: List<KoValuedKDocTagDeclaration>
  * List containing declarations with see tag.
  *
  * @return A list containing declarations with see tag.
+ * @see KoKDocSeeTagProvider.hasSeeTags
  */
 fun <T : KoKDocSeeTagProvider> List<T>.withSeeTags(): List<T> = filter { it.hasSeeTags }
 
@@ -20,5 +23,6 @@ fun <T : KoKDocSeeTagProvider> List<T>.withSeeTags(): List<T> = filter { it.hasS
  * List containing declarations with no see tag.
  *
  * @return A list containing declarations with no see tag.
+ * @see KoKDocSeeTagProvider.hasSeeTags
  */
 fun <T : KoKDocSeeTagProvider> List<T>.withoutSeeTags(): List<T> = filterNot { it.hasSeeTags }

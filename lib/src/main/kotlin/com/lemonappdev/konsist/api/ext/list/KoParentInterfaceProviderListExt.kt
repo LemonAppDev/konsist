@@ -11,6 +11,7 @@ import kotlin.reflect.KClass
  *
  * @param indirectParents Whether to include indirect parent interfaces.
  * @return A list containing parent interface declarations.
+ * @see KoParentInterfaceProvider.parentInterfaces
  */
 fun <T : KoParentInterfaceProvider> List<T>.parentInterfaces(indirectParents: Boolean = false): List<KoParentDeclaration> =
     flatMap { it.parentInterfaces(indirectParents) }
@@ -20,6 +21,7 @@ fun <T : KoParentInterfaceProvider> List<T>.parentInterfaces(indirectParents: Bo
  *
  * @param indirectParents Whether to include indirect parent interfaces.
  * @return A list containing declarations with any parent interface.
+ * @see KoParentInterfaceProvider.hasParentInterfaces
  */
 fun <T : KoParentInterfaceProvider> List<T>.withParentInterfaces(indirectParents: Boolean = false): List<T> =
     filter { it.hasParentInterfaces(indirectParents) }
@@ -29,6 +31,7 @@ fun <T : KoParentInterfaceProvider> List<T>.withParentInterfaces(indirectParents
  *
  * @param indirectParents Whether to include indirect parent interfaces.
  * @return A list containing declarations with no parent interface.
+ * @see KoParentInterfaceProvider.hasParentInterfaces
  */
 fun <T : KoParentInterfaceProvider> List<T>.withoutParentInterfaces(indirectParents: Boolean = false): List<T> =
     filterNot { it.hasParentInterfaces(indirectParents) }
@@ -43,6 +46,7 @@ fun <T : KoParentInterfaceProvider> List<T>.withoutParentInterfaces(indirectPare
  *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations with at least one of the specified parent interface(s).
+ * @see KoParentInterfaceProvider.hasParentInterfaceWithName
  */
 fun <T : KoParentInterfaceProvider> List<T>.withParentInterfaceNamed(
     name: String,
@@ -60,6 +64,7 @@ fun <T : KoParentInterfaceProvider> List<T>.withParentInterfaceNamed(
  *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations with at least one of the specified parent interface(s).
+ * @see KoParentInterfaceProvider.hasParentInterfaceWithName
  */
 fun <T : KoParentInterfaceProvider> List<T>.withParentInterfaceNamed(
     names: Collection<String>,
@@ -83,6 +88,7 @@ fun <T : KoParentInterfaceProvider> List<T>.withParentInterfaceNamed(
  *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations without any of the specified parent interfaces.
+ * @see KoParentInterfaceProvider.hasParentInterfaceWithName
  */
 fun <T : KoParentInterfaceProvider> List<T>.withoutParentInterfaceNamed(
     name: String,
@@ -100,6 +106,7 @@ fun <T : KoParentInterfaceProvider> List<T>.withoutParentInterfaceNamed(
  *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations without any of the specified parent interfaces.
+ * @see KoParentInterfaceProvider.hasParentInterfaceWithName
  */
 fun <T : KoParentInterfaceProvider> List<T>.withoutParentInterfaceNamed(
     names: Collection<String>,
@@ -123,6 +130,7 @@ fun <T : KoParentInterfaceProvider> List<T>.withoutParentInterfaceNamed(
  *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations with all specified parent interface(s).
+ * @see KoParentInterfaceProvider.hasParentInterfacesWithAllNames
  */
 fun <T : KoParentInterfaceProvider> List<T>.withAllParentInterfacesNamed(
     name: String,
@@ -140,6 +148,7 @@ fun <T : KoParentInterfaceProvider> List<T>.withAllParentInterfacesNamed(
  *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations with all specified parent interface(s).
+ * @see KoParentInterfaceProvider.hasParentInterfacesWithAllNames
  */
 fun <T : KoParentInterfaceProvider> List<T>.withAllParentInterfacesNamed(
     names: Collection<String>,
@@ -172,6 +181,7 @@ fun <T : KoParentInterfaceProvider> List<T>.withAllParentInterfacesNamed(
  *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations without all specified parent interface(s).
+ * @see KoParentInterfaceProvider.hasParentInterfacesWithAllNames
  */
 fun <T : KoParentInterfaceProvider> List<T>.withoutAllParentInterfacesNamed(
     name: String,
@@ -189,6 +199,7 @@ fun <T : KoParentInterfaceProvider> List<T>.withoutAllParentInterfacesNamed(
  *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations without all specified parent interface(s).
+ * @see KoParentInterfaceProvider.hasParentInterfacesWithAllNames
  */
 fun <T : KoParentInterfaceProvider> List<T>.withoutAllParentInterfacesNamed(
     names: Collection<String>,
@@ -217,6 +228,7 @@ fun <T : KoParentInterfaceProvider> List<T>.withoutAllParentInterfacesNamed(
  * @param indirectParents Whether to include indirect parent interfaces.
  * @param predicate A function that defines the condition to be met by a parent interface declaration.
  * @return A list containing declarations with at least one parent interface satisfying the predicate.
+ * @see KoParentInterfaceProvider.hasParentInterface
  */
 fun <T : KoParentInterfaceProvider> List<T>.withParentInterface(
     indirectParents: Boolean = false,
@@ -229,6 +241,7 @@ fun <T : KoParentInterfaceProvider> List<T>.withParentInterface(
  * @param indirectParents Whether to include indirect parent interfaces.
  * @param predicate A function that defines the condition to be met by a parent interface declaration.
  * @return A list containing declarations without any parent interface satisfying the provided predicate.
+ * @see KoParentInterfaceProvider.hasParentInterface
  */
 fun <T : KoParentInterfaceProvider> List<T>.withoutParentInterface(
     indirectParents: Boolean = false,
@@ -241,6 +254,7 @@ fun <T : KoParentInterfaceProvider> List<T>.withoutParentInterface(
  * @param indirectParents Whether to include indirect parent interfaces.
  * @param predicate A function that defines the condition to be met by all parent interface declarations.
  * @return A list containing declarations with all parent interfaces satisfying the predicate.
+ * @see KoParentInterfaceProvider.hasAllParentInterfaces
  */
 fun <T : KoParentInterfaceProvider> List<T>.withAllParentInterfaces(
     indirectParents: Boolean = false,
@@ -253,6 +267,7 @@ fun <T : KoParentInterfaceProvider> List<T>.withAllParentInterfaces(
  * @param indirectParents Whether to include indirect parent interfaces.
  * @param predicate A function that defines the condition to be met by all parent interface declarations.
  * @return A list containing declarations that have at least one parent interface not satisfying the provided predicate.
+ * @see KoParentInterfaceProvider.hasAllParentInterfaces
  */
 fun <T : KoParentInterfaceProvider> List<T>.withoutAllParentInterfaces(
     indirectParents: Boolean = false,
@@ -265,6 +280,7 @@ fun <T : KoParentInterfaceProvider> List<T>.withoutAllParentInterfaces(
  * @param indirectParents Whether to include indirect parent interfaces.
  * @param predicate A function that defines the condition to be met by the list of parent interface declarations.
  * @return A list containing declarations with parent interface declarations satisfying the predicate.
+ * @see KoParentInterfaceProvider.parentInterfaces
  */
 fun <T : KoParentInterfaceProvider> List<T>.withParentInterfaces(
     indirectParents: Boolean = false,
@@ -277,6 +293,7 @@ fun <T : KoParentInterfaceProvider> List<T>.withParentInterfaces(
  * @param indirectParents Whether to include indirect parent interfaces.
  * @param predicate A function that defines the condition to be met by the list of parent interface declarations.
  * @return A list containing declarations without parent interface declarations satisfying the predicate.
+ * @see KoParentInterfaceProvider.parentInterfaces
  */
 fun <T : KoParentInterfaceProvider> List<T>.withoutParentInterfaces(
     indirectParents: Boolean = false,
@@ -290,6 +307,7 @@ fun <T : KoParentInterfaceProvider> List<T>.withoutParentInterfaces(
  * @param kClasses The Kotlin classes representing parent interfaces to include.
  * @param indirectParents Whether to include indirect parent interfaces.
  * @return A list containing declarations with at least one parent interface of the specified `KClass` type.
+ * @see KoParentInterfaceProvider.hasParentInterfaceOf
  */
 fun <T : KoParentInterfaceProvider> List<T>.withParentInterfaceOf(
     kClass: KClass<*>,
@@ -303,6 +321,7 @@ fun <T : KoParentInterfaceProvider> List<T>.withParentInterfaceOf(
  * @param kClasses The Kotlin classes representing parent interfaces to include.
  * @param indirectParents Whether to include indirect parent interfaces.
  * @return A list containing declarations with at least one parent interface of the specified `KClass` type.
+ * @see KoParentInterfaceProvider.hasParentInterfaceOf
  */
 fun <T : KoParentInterfaceProvider> List<T>.withParentInterfaceOf(
     kClasses: Collection<KClass<*>>,
@@ -322,6 +341,7 @@ fun <T : KoParentInterfaceProvider> List<T>.withParentInterfaceOf(
  * @param kClasses The Kotlin classes representing parent interfaces to exclude.
  * @param indirectParents Whether to include indirect parent interfaces.
  * @return A list containing declarations without any of the specified parent interfaces.
+ * @see KoParentInterfaceProvider.hasParentInterfaceOf
  */
 fun <T : KoParentInterfaceProvider> List<T>.withoutParentInterfaceOf(
     kClass: KClass<*>,
@@ -335,6 +355,7 @@ fun <T : KoParentInterfaceProvider> List<T>.withoutParentInterfaceOf(
  * @param kClasses The Kotlin classes representing parent interfaces to exclude.
  * @param indirectParents Whether to include indirect parent interfaces.
  * @return A list containing declarations without any of the specified parent interfaces.
+ * @see KoParentInterfaceProvider.hasParentInterfaceOf
  */
 fun <T : KoParentInterfaceProvider> List<T>.withoutParentInterfaceOf(
     kClasses: Collection<KClass<*>>,
@@ -354,6 +375,7 @@ fun <T : KoParentInterfaceProvider> List<T>.withoutParentInterfaceOf(
  * @param kClasses The Kotlin classes representing parent interfaces to include.
  * @param indirectParents Whether to include indirect parent interfaces.
  * @return A list containing declarations that have all parent interfaces of the specified `KClass` type.
+ * @see KoParentInterfaceProvider.hasAllParentInterfacesOf
  */
 fun <T : KoParentInterfaceProvider> List<T>.withAllParentInterfacesOf(
     kClass: KClass<*>,
@@ -367,6 +389,7 @@ fun <T : KoParentInterfaceProvider> List<T>.withAllParentInterfacesOf(
  * @param kClasses The Kotlin classes representing parent interfaces to include.
  * @param indirectParents Whether to include indirect parent interfaces.
  * @return A list containing declarations that have all parent interfaces of the specified `KClass` type.
+ * @see KoParentInterfaceProvider.hasAllParentInterfacesOf
  */
 fun <T : KoParentInterfaceProvider> List<T>.withAllParentInterfacesOf(
     kClasses: Collection<KClass<*>>,
@@ -386,6 +409,7 @@ fun <T : KoParentInterfaceProvider> List<T>.withAllParentInterfacesOf(
  * @param kClasses The Kotlin classes representing parent interfaces to exclude.
  * @param indirectParents Whether to include indirect parent interfaces.
  * @return A list containing declarations without all specified `KClass` type parent interfaces.
+ * @see KoParentInterfaceProvider.hasAllParentInterfacesOf
  */
 fun <T : KoParentInterfaceProvider> List<T>.withoutAllParentInterfacesOf(
     kClass: KClass<*>,
@@ -399,6 +423,7 @@ fun <T : KoParentInterfaceProvider> List<T>.withoutAllParentInterfacesOf(
  * @param kClasses The Kotlin classes representing parent interfaces to exclude.
  * @param indirectParents Whether to include indirect parent interfaces.
  * @return A list containing declarations without all specified `KClass` type parent interfaces.
+ * @see KoParentInterfaceProvider.hasAllParentInterfacesOf
  */
 fun <T : KoParentInterfaceProvider> List<T>.withoutAllParentInterfacesOf(
     kClasses: Collection<KClass<*>>,

@@ -5,6 +5,8 @@ import com.lemonappdev.konsist.api.provider.KoContextParametersProvider
 
 /**
  * List containing context parameter declarations.
+ *
+ * @see KoContextParametersProvider.contextParameters
  */
 val <T : KoContextParametersProvider> List<T>.contextParameters: List<KoContextParameterDeclaration>
     get() = flatMap { it.contextParameters }
@@ -13,6 +15,7 @@ val <T : KoContextParametersProvider> List<T>.contextParameters: List<KoContextP
  * List containing declarations with any context parameter.
  *
  * @return A list containing declarations with any context parameter.
+ * @see KoContextParametersProvider.hasContextParameters
  */
 fun <T : KoContextParametersProvider> List<T>.withContextParameters(): List<T> = filter { it.hasContextParameters() }
 
@@ -20,6 +23,7 @@ fun <T : KoContextParametersProvider> List<T>.withContextParameters(): List<T> =
  * List containing declarations with no context parameters.
  *
  * @return A list containing declarations with no context parameters.
+ * @see KoContextParametersProvider.hasContextParameters
  */
 fun <T : KoContextParametersProvider> List<T>.withoutContextParameters(): List<T> = filterNot { it.hasContextParameters() }
 
@@ -32,6 +36,7 @@ fun <T : KoContextParametersProvider> List<T>.withoutContextParameters(): List<T
  *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations with at least one of the specified context parameter(s).
+ * @see KoContextParametersProvider.hasContextParameterWithName
  */
 fun <T : KoContextParametersProvider> List<T>.withContextParameterNamed(
     name: String,
@@ -47,6 +52,7 @@ fun <T : KoContextParametersProvider> List<T>.withContextParameterNamed(
  *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations with at least one of the specified context parameter(s).
+ * @see KoContextParametersProvider.hasContextParameterWithName
  */
 fun <T : KoContextParametersProvider> List<T>.withContextParameterNamed(
     names: Collection<String>,
@@ -68,6 +74,7 @@ fun <T : KoContextParametersProvider> List<T>.withContextParameterNamed(
  *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations without any of the specified context parameters.
+ * @see KoContextParametersProvider.hasContextParameterWithName
  */
 fun <T : KoContextParametersProvider> List<T>.withoutContextParameterNamed(
     name: String,
@@ -83,6 +90,7 @@ fun <T : KoContextParametersProvider> List<T>.withoutContextParameterNamed(
  *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations without any of the specified context parameters.
+ * @see KoContextParametersProvider.hasContextParameterWithName
  */
 fun <T : KoContextParametersProvider> List<T>.withoutContextParameterNamed(
     names: Collection<String>,
@@ -104,6 +112,7 @@ fun <T : KoContextParametersProvider> List<T>.withoutContextParameterNamed(
  *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations with all specified context parameter(s).
+ * @see KoContextParametersProvider.hasContextParametersWithAllNames
  */
 fun <T : KoContextParametersProvider> List<T>.withAllContextParametersNamed(
     name: String,
@@ -119,6 +128,7 @@ fun <T : KoContextParametersProvider> List<T>.withAllContextParametersNamed(
  *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations with all specified context parameter(s).
+ * @see KoContextParametersProvider.hasContextParametersWithAllNames
  */
 fun <T : KoContextParametersProvider> List<T>.withAllContextParametersNamed(
     names: Collection<String>,
@@ -140,6 +150,7 @@ fun <T : KoContextParametersProvider> List<T>.withAllContextParametersNamed(
  *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations without all specified context parameter(s).
+ * @see KoContextParametersProvider.hasContextParametersWithAllNames
  */
 fun <T : KoContextParametersProvider> List<T>.withoutAllContextParametersNamed(
     name: String,
@@ -155,6 +166,7 @@ fun <T : KoContextParametersProvider> List<T>.withoutAllContextParametersNamed(
  *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations without all specified context parameter(s).
+ * @see KoContextParametersProvider.hasContextParametersWithAllNames
  */
 fun <T : KoContextParametersProvider> List<T>.withoutAllContextParametersNamed(
     names: Collection<String>,
@@ -172,6 +184,7 @@ fun <T : KoContextParametersProvider> List<T>.withoutAllContextParametersNamed(
  *
  * @param predicate A function that defines the condition to be met by a context parameter declaration.
  * @return A list containing declarations with at least one context parameter satisfying the predicate.
+ * @see KoContextParametersProvider.hasContextParameter
  */
 fun <T : KoContextParametersProvider> List<T>.withContextParameter(predicate: (KoContextParameterDeclaration) -> Boolean): List<T> =
     filter {
@@ -183,6 +196,7 @@ fun <T : KoContextParametersProvider> List<T>.withContextParameter(predicate: (K
  *
  * @param predicate A function that defines the condition to be met by a context parameter declaration.
  * @return A list containing declarations without any context parameter satisfying the provided predicate.
+ * @see KoContextParametersProvider.hasContextParameter
  */
 fun <T : KoContextParametersProvider> List<T>.withoutContextParameter(predicate: (KoContextParameterDeclaration) -> Boolean): List<T> =
     filterNot {
@@ -194,6 +208,7 @@ fun <T : KoContextParametersProvider> List<T>.withoutContextParameter(predicate:
  *
  * @param predicate A function that defines the condition to be met by all context parameter declarations.
  * @return A list containing declarations with all context parameters satisfying the predicate.
+ * @see KoContextParametersProvider.hasAllContextParameters
  */
 fun <T : KoContextParametersProvider> List<T>.withAllContextParameters(predicate: (KoContextParameterDeclaration) -> Boolean): List<T> =
     filter {
@@ -205,6 +220,7 @@ fun <T : KoContextParametersProvider> List<T>.withAllContextParameters(predicate
  *
  * @param predicate A function that defines the condition to be met by all context parameter declarations.
  * @return A list containing declarations that have at least one context parameter not satisfying the provided predicate.
+ * @see KoContextParametersProvider.hasAllContextParameters
  */
 fun <T : KoContextParametersProvider> List<T>.withoutAllContextParameters(predicate: (KoContextParameterDeclaration) -> Boolean): List<T> =
     filterNot {
@@ -216,6 +232,7 @@ fun <T : KoContextParametersProvider> List<T>.withoutAllContextParameters(predic
  *
  * @param predicate A function that defines the condition to be met by the list of context parameter declarations.
  * @return A list containing declarations with context parameter declarations satisfying the predicate.
+ * @see KoContextParametersProvider.contextParameters
  */
 fun <T : KoContextParametersProvider> List<T>.withContextParameters(predicate: (List<KoContextParameterDeclaration>) -> Boolean): List<T> =
     filter {
@@ -227,6 +244,7 @@ fun <T : KoContextParametersProvider> List<T>.withContextParameters(predicate: (
  *
  * @param predicate A function that defines the condition to be met by the list of context parameter declarations.
  * @return A list containing declarations without context parameter declarations satisfying the predicate.
+ * @see KoContextParametersProvider.contextParameters
  */
 fun <T : KoContextParametersProvider> List<T>.withoutContextParameters(
     predicate: (List<KoContextParameterDeclaration>) -> Boolean,

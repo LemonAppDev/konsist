@@ -6,6 +6,7 @@ import com.lemonappdev.konsist.api.provider.modifier.KoExternalModifierProvider
  * List containing declarations with `external` modifier.
  *
  * @return A list containing declarations with the `external` modifier.
+ * @see KoExternalModifierProvider.hasExternalModifier
  */
 fun <T : KoExternalModifierProvider> List<T>.withExternalModifier(): List<T> = filter { it.hasExternalModifier }
 
@@ -13,5 +14,6 @@ fun <T : KoExternalModifierProvider> List<T>.withExternalModifier(): List<T> = f
  * List containing declarations without `external` modifier.
  *
  * @return A list containing declarations without the `external` modifier.
+ * @see KoExternalModifierProvider.hasExternalModifier
  */
 fun <T : KoExternalModifierProvider> List<T>.withoutExternalModifier(): List<T> = filterNot { it.hasExternalModifier }

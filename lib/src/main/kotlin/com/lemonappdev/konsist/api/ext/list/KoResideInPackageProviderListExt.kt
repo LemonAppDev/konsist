@@ -8,6 +8,7 @@ import com.lemonappdev.konsist.api.provider.KoResideInPackageProvider
  *
  * @param names The package names to include.
  * @return A list containing elements that reside in any of the specified packages (or any package if [names] is empty).
+ * @see KoResideInPackageProvider.residesInPackage
  */
 fun <T : KoResideInPackageProvider> List<T>.withPackage(vararg names: String): List<T> = withPackage(listOf(*names))
 
@@ -16,6 +17,7 @@ fun <T : KoResideInPackageProvider> List<T>.withPackage(vararg names: String): L
  *
  * @param names The package names to include.
  * @return A list containing elements that reside in any of the specified packages (or any package if [names] is empty).
+ * @see KoResideInPackageProvider.residesInPackage
  */
 fun <T : KoResideInPackageProvider> List<T>.withPackage(names: Collection<String>): List<T> =
     filter {
@@ -30,6 +32,7 @@ fun <T : KoResideInPackageProvider> List<T>.withPackage(names: Collection<String
  *
  * @param names The package names to exclude.
  * @return A list containing elements that don't reside in any of the specified packages (or without a package if [names] is empty).
+ * @see KoResideInPackageProvider.residesOutsidePackage
  */
 fun <T : KoResideInPackageProvider> List<T>.withoutPackage(vararg names: String): List<T> = withoutPackage(listOf(*names))
 
@@ -38,6 +41,7 @@ fun <T : KoResideInPackageProvider> List<T>.withoutPackage(vararg names: String)
  *
  * @param names The package names to exclude.
  * @return A list containing elements that don't reside in any of the specified packages (or without a package if [names] is empty).
+ * @see KoResideInPackageProvider.residesOutsidePackage
  */
 fun <T : KoResideInPackageProvider> List<T>.withoutPackage(names: Collection<String>): List<T> =
     filter {

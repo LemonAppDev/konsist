@@ -4,6 +4,7 @@ import com.lemonappdev.konsist.api.provider.modifier.KoSuspendModifierProvider
  * List containing declarations with `suspend` modifier.
  *
  * @return A list containing declarations with the `suspend` modifier.
+ * @see KoSuspendModifierProvider.hasSuspendModifier
  */
 fun <T : KoSuspendModifierProvider> List<T>.withSuspendModifier(): List<T> = filter { it.hasSuspendModifier }
 
@@ -11,5 +12,6 @@ fun <T : KoSuspendModifierProvider> List<T>.withSuspendModifier(): List<T> = fil
  * List containing declarations without `suspend` modifier.
  *
  * @return A list containing declarations without the `suspend` modifier.
+ * @see KoSuspendModifierProvider.hasSuspendModifier
  */
 fun <T : KoSuspendModifierProvider> List<T>.withoutSuspendModifier(): List<T> = filterNot { it.hasSuspendModifier }

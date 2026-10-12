@@ -24,6 +24,8 @@ import kotlin.reflect.KClass
  *                  If null, all class declarations are included.
  * @return A list of class declarations that match the provided predicate, or all class declarations if no predicate
  * is provided.
+ * @see KoTypeDeclaration.hasClassDeclaration
+ * @see KoTypeDeclaration.asClassDeclaration
  */
 @Deprecated("Will be removed in version 0.19.0", ReplaceWith("sourceDeclarations().classDeclarations()"))
 fun <T : KoTypeDeclaration> List<T>.classDeclarations(predicate: ((KoClassDeclaration) -> Boolean)? = null): List<KoClassDeclaration> =
@@ -37,6 +39,8 @@ fun <T : KoTypeDeclaration> List<T>.classDeclarations(predicate: ((KoClassDeclar
  *                  If null, all object declarations are included.
  * @return A list of object declarations that match the provided predicate, or all object declarations if no predicate
  * is provided.
+ * @see KoTypeDeclaration.hasObjectDeclaration
+ * @see KoTypeDeclaration.asObjectDeclaration
  */
 @Deprecated("Will be removed in version 0.19.0", ReplaceWith("sourceDeclarations().objectDeclarations()"))
 fun <T : KoTypeDeclaration> List<T>.objectDeclarations(predicate: ((KoObjectDeclaration) -> Boolean)? = null): List<KoObjectDeclaration> =
@@ -50,6 +54,8 @@ fun <T : KoTypeDeclaration> List<T>.objectDeclarations(predicate: ((KoObjectDecl
  *                  If null, all interface declarations are included.
  * @return A list of interface declarations that match the provided predicate, or all interface declarations if no
  * predicate is provided.
+ * @see KoTypeDeclaration.hasInterfaceDeclaration
+ * @see KoTypeDeclaration.asInterfaceDeclaration
  */
 @Deprecated("Will be removed in version 0.19.0", ReplaceWith("sourceDeclarations().interfaceDeclarations()"))
 fun <T : KoTypeDeclaration> List<T>.interfaceDeclarations(
@@ -65,6 +71,8 @@ fun <T : KoTypeDeclaration> List<T>.interfaceDeclarations(
  *                  If null, all class and object declarations are included.
  * @return A list of class and object declarations that match the provided predicate, or all class and object
  * declarations if no predicate is provided.
+ * @see KoTypeDeclaration.hasClassOrObjectDeclaration
+ * @see KoTypeDeclaration.asClassOrObjectDeclaration
  */
 @Deprecated("Will be removed in version 0.19.0", ReplaceWith("sourceDeclarations().classAndObjectDeclarations()"))
 fun <T : KoTypeDeclaration> List<T>.classAndObjectDeclarations(
@@ -80,6 +88,8 @@ fun <T : KoTypeDeclaration> List<T>.classAndObjectDeclarations(
  *                  If null, all class and interface declarations are included.
  * @return A list of class and interface declarations that match the provided predicate, or all class and interface
  * declarations if no predicate is provided.
+ * @see KoTypeDeclaration.hasClassOrInterfaceDeclaration
+ * @see KoTypeDeclaration.asClassOrInterfaceDeclaration
  */
 @Deprecated("Will be removed in version 0.19.0", ReplaceWith("sourceDeclarations().classAndInterfaceDeclarations()"))
 fun <T : KoTypeDeclaration> List<T>.classAndInterfaceDeclarations(
@@ -95,6 +105,8 @@ fun <T : KoTypeDeclaration> List<T>.classAndInterfaceDeclarations(
  *                  If null, all interface and object declarations are included.
  * @return A list of interface and object declarations that match the provided predicate, or all interface and object
  * declarations if no predicate is provided.
+ * @see KoTypeDeclaration.hasInterfaceOrObjectDeclaration
+ * @see KoTypeDeclaration.asInterfaceOrObjectDeclaration
  */
 @Deprecated("Will be removed in version 0.19.0", ReplaceWith("sourceDeclarations().interfaceAndObjectDeclarations()"))
 fun <T : KoTypeDeclaration> List<T>.interfaceAndObjectDeclarations(
@@ -111,6 +123,8 @@ fun <T : KoTypeDeclaration> List<T>.interfaceAndObjectDeclarations(
  * @return A list of class, interface and object declarations that match the provided predicate, or all class,
  * interface and object declarations if no predicate
  * is provided.
+ * @see KoTypeDeclaration.hasClassOrInterfaceOrObjectDeclaration
+ * @see KoTypeDeclaration.asClassOrInterfaceOrObjectDeclaration
  */
 @Deprecated(
     "Will be removed in version 0.19.0",
@@ -129,6 +143,8 @@ fun <T : KoTypeDeclaration> List<T>.classAndInterfaceAndObjectDeclarations(
  *                  If null, all type alias declarations are included.
  * @return A list of type alias declarations that match the provided predicate, or all type alias declarations if no
  * predicate is provided.
+ * @see KoTypeDeclaration.hasTypeAliasDeclaration
+ * @see KoTypeDeclaration.asTypeAliasDeclaration
  */
 @Deprecated("Will be removed in version 0.19.0", ReplaceWith("sourceDeclarations().typeAliasDeclarations()"))
 fun <T : KoTypeDeclaration> List<T>.typeAliasDeclarations(
@@ -144,6 +160,8 @@ fun <T : KoTypeDeclaration> List<T>.typeAliasDeclarations(
  *                  If null, all import alias declarations are included.
  * @return A list of import alias declarations that match the provided predicate, or all import alias declarations if
  * no predicate is provided.
+ * @see KoTypeDeclaration.hasImportAliasDeclaration
+ * @see KoTypeDeclaration.asImportAliasDeclaration
  */
 @Deprecated("Will be removed in version 0.19.0", ReplaceWith("sourceDeclarations().importAliasDeclarations()"))
 fun <T : KoTypeDeclaration> List<T>.importAliasDeclarations(
@@ -159,6 +177,8 @@ fun <T : KoTypeDeclaration> List<T>.importAliasDeclarations(
  *                  If null, all Kotlin type declarations are included.
  * @return A list of Kotlin type declarations that match the provided predicate, or all Kotlin type declarations if
  * no predicate is provided.
+ * @see KoTypeDeclaration.hasKotlinTypeDeclaration
+ * @see KoTypeDeclaration.asKotlinTypeDeclaration
  */
 @Deprecated("Will be removed in version 0.19.0", ReplaceWith("sourceDeclarations().kotlinTypeDeclarations()"))
 fun <T : KoTypeDeclaration> List<T>.kotlinTypeDeclarations(
@@ -174,6 +194,8 @@ fun <T : KoTypeDeclaration> List<T>.kotlinTypeDeclarations(
  *                  If null, all Kotlin basic type declarations are included.
  * @return A list of Kotlin basic type declarations that match the provided predicate, or all Kotlin basic type
  * declarations if no predicate is provided.
+ * @see KoTypeDeclaration.hasKotlinBasicTypeDeclaration
+ * @see KoTypeDeclaration.asKotlinBasicTypeDeclaration
  */
 @Deprecated("Will be removed in version 0.19.0", ReplaceWith("sourceDeclarations().kotlinBasicTypeDeclarations()"))
 fun <T : KoTypeDeclaration> List<T>.kotlinBasicTypeDeclarations(
@@ -189,6 +211,8 @@ fun <T : KoTypeDeclaration> List<T>.kotlinBasicTypeDeclarations(
  *                  If null, all Kotlin collection type declarations are included.
  * @return A list of Kotlin collection type declarations that match the provided predicate, or all Kotlin collection type
  * declarations if no predicate is provided.
+ * @see KoTypeDeclaration.hasKotlinCollectionTypeDeclaration
+ * @see KoTypeDeclaration.asKotlinCollectionTypeDeclaration
  */
 @Deprecated("Will be removed in version 0.19.0", ReplaceWith("sourceDeclarations().kotlinCollectionTypeDeclarations()"))
 fun <T : KoTypeDeclaration> List<T>.kotlinCollectionTypeDeclarations(
@@ -204,6 +228,8 @@ fun <T : KoTypeDeclaration> List<T>.kotlinCollectionTypeDeclarations(
  *                  If null, all type parameter declarations are included.
  * @return A list of type parameter declarations that match the provided predicate, or all type parameter declarations
  * if no predicate is provided.
+ * @see KoTypeDeclaration.hasTypeParameterDeclaration
+ * @see KoTypeDeclaration.asTypeParameterDeclaration
  */
 @Deprecated("Will be removed in version 0.19.0", ReplaceWith("sourceDeclarations().typeParameterDeclarations()"))
 fun <T : KoTypeDeclaration> List<T>.typeParameterDeclarations(
@@ -219,6 +245,8 @@ fun <T : KoTypeDeclaration> List<T>.typeParameterDeclarations(
  *                  If null, all external declarations are included.
  * @return A list of external declarations that match the provided predicate, or all external declarations
  * if no predicate is provided.
+ * @see KoTypeDeclaration.hasExternalDeclaration
+ * @see KoTypeDeclaration.asExternalDeclaration
  */
 @Deprecated("Will be removed in version 0.19.0", ReplaceWith("sourceDeclarations().externalDeclarations()"))
 fun <T : KoTypeDeclaration> List<T>.externalDeclarations(
@@ -232,6 +260,7 @@ fun <T : KoTypeDeclaration> List<T>.externalDeclarations(
  *
  * @param predicate The predicate function to determine if a class declaration satisfies a condition.
  * @return A list containing declarations with the specified class declaration.
+ * @see KoTypeDeclaration.asClassDeclaration
  */
 @Deprecated("Will be removed in version 0.19.0", ReplaceWith("sourceDeclarations().withClassDeclaration()"))
 fun <T : KoTypeDeclaration> List<T>.withClassDeclaration(predicate: ((KoClassDeclaration) -> Boolean)? = null): List<T> =
@@ -247,6 +276,7 @@ fun <T : KoTypeDeclaration> List<T>.withClassDeclaration(predicate: ((KoClassDec
  *
  * @param predicate The predicate function to determine if a class declaration satisfies a condition.
  * @return A list containing declarations without the specified class declaration.
+ * @see KoTypeDeclaration.asClassDeclaration
  */
 @Deprecated("Will be removed in version 0.19.0", ReplaceWith("sourceDeclarations().withoutClassDeclaration()"))
 fun <T : KoTypeDeclaration> List<T>.withoutClassDeclaration(predicate: ((KoClassDeclaration) -> Boolean)? = null): List<T> =
@@ -263,6 +293,7 @@ fun <T : KoTypeDeclaration> List<T>.withoutClassDeclaration(predicate: ((KoClass
  * @param kClass The Kotlin class representing the class declaration to include.
  * @param kClasses The Kotlin class(es) representing the class declaration(s) to include.
  * @return A list containing declarations with the class declaration of the specified Kotlin class(es).
+ * @see KoTypeDeclaration.hasClassDeclarationOf
  */
 @Deprecated("Will be removed in version 0.19.0", ReplaceWith("sourceDeclarations().withClassDeclarationOf()"))
 fun <T : KoTypeDeclaration> List<T>.withClassDeclarationOf(
@@ -275,6 +306,7 @@ fun <T : KoTypeDeclaration> List<T>.withClassDeclarationOf(
  *
  * @param kClasses The Kotlin class(es) representing the class declaration(s) to include.
  * @return A list containing declarations with the class declaration of the specified Kotlin class(es).
+ * @see KoTypeDeclaration.hasClassDeclarationOf
  */
 @Deprecated("Will be removed in version 0.19.0", ReplaceWith("sourceDeclarations().withClassDeclarationOf()"))
 fun <T : KoTypeDeclaration> List<T>.withClassDeclarationOf(kClasses: Collection<KClass<*>>): List<T> =
@@ -291,6 +323,7 @@ fun <T : KoTypeDeclaration> List<T>.withClassDeclarationOf(kClasses: Collection<
  * @param kClass The Kotlin class representing the class declaration to exclude.
  * @param kClasses The Kotlin class(es) representing the class declaration(s) to exclude.
  * @return A list containing declarations without class declaration of the specified Kotlin class(es).
+ * @see KoTypeDeclaration.hasClassDeclarationOf
  */
 @Deprecated("Will be removed in version 0.19.0", ReplaceWith("sourceDeclarations().withoutClassDeclarationOf()"))
 fun <T : KoTypeDeclaration> List<T>.withoutClassDeclarationOf(
@@ -303,6 +336,7 @@ fun <T : KoTypeDeclaration> List<T>.withoutClassDeclarationOf(
  *
  * @param kClasses The Kotlin class(es) representing the class declaration(s) to exclude.
  * @return A list containing declarations without class declaration of the specified Kotlin class(es).
+ * @see KoTypeDeclaration.hasClassDeclarationOf
  */
 @Deprecated("Will be removed in version 0.19.0", ReplaceWith("sourceDeclarations().withoutClassDeclarationOf()"))
 fun <T : KoTypeDeclaration> List<T>.withoutClassDeclarationOf(kClasses: Collection<KClass<*>>): List<T> =
@@ -318,6 +352,7 @@ fun <T : KoTypeDeclaration> List<T>.withoutClassDeclarationOf(kClasses: Collecti
  *
  * @param predicate The predicate function to determine if an object declaration satisfies a condition.
  * @return A list containing declarations with the specified object declaration.
+ * @see KoTypeDeclaration.asObjectDeclaration
  */
 @Deprecated("Will be removed in version 0.19.0", ReplaceWith("sourceDeclarations().withObjectDeclaration()"))
 fun <T : KoTypeDeclaration> List<T>.withObjectDeclaration(predicate: ((KoObjectDeclaration) -> Boolean)? = null): List<T> =
@@ -333,6 +368,7 @@ fun <T : KoTypeDeclaration> List<T>.withObjectDeclaration(predicate: ((KoObjectD
  *
  * @param predicate The predicate function to determine if an object declaration satisfies a condition.
  * @return A list containing declarations without the specified object declaration.
+ * @see KoTypeDeclaration.asObjectDeclaration
  */
 @Deprecated("Will be removed in version 0.19.0", ReplaceWith("sourceDeclarations().withoutObjectDeclaration()"))
 fun <T : KoTypeDeclaration> List<T>.withoutObjectDeclaration(predicate: ((KoObjectDeclaration) -> Boolean)? = null): List<T> =
@@ -349,6 +385,7 @@ fun <T : KoTypeDeclaration> List<T>.withoutObjectDeclaration(predicate: ((KoObje
  * @param kClass The Kotlin class representing the object declaration to include.
  * @param kClasses The Kotlin class(es) representing the object declaration(s) to include.
  * @return A list containing declarations with the object declaration of the specified Kotlin class(es).
+ * @see KoTypeDeclaration.hasObjectDeclarationOf
  */
 @Deprecated("Will be removed in version 0.19.0", ReplaceWith("sourceDeclarations().withObjectDeclarationOf()"))
 fun <T : KoTypeDeclaration> List<T>.withObjectDeclarationOf(
@@ -361,6 +398,7 @@ fun <T : KoTypeDeclaration> List<T>.withObjectDeclarationOf(
  *
  * @param kClasses The Kotlin class(es) representing the object declaration(s) to include.
  * @return A list containing declarations with the object declaration of the specified Kotlin class(es).
+ * @see KoTypeDeclaration.hasObjectDeclarationOf
  */
 @Deprecated("Will be removed in version 0.19.0", ReplaceWith("sourceDeclarations().withObjectDeclarationOf()"))
 fun <T : KoTypeDeclaration> List<T>.withObjectDeclarationOf(kClasses: Collection<KClass<*>>): List<T> =
@@ -377,6 +415,7 @@ fun <T : KoTypeDeclaration> List<T>.withObjectDeclarationOf(kClasses: Collection
  * @param kClass The Kotlin class representing the object declaration to exclude.
  * @param kClasses The Kotlin class(es) representing the object declaration(s) to exclude.
  * @return A list containing declarations without object declaration of the specified Kotlin class(es).
+ * @see KoTypeDeclaration.hasObjectDeclarationOf
  */
 @Deprecated("Will be removed in version 0.19.0", ReplaceWith("sourceDeclarations().withoutObjectDeclarationOf()"))
 fun <T : KoTypeDeclaration> List<T>.withoutObjectDeclarationOf(
@@ -389,6 +428,7 @@ fun <T : KoTypeDeclaration> List<T>.withoutObjectDeclarationOf(
  *
  * @param kClasses The Kotlin class(es) representing the object declaration(s) to exclude.
  * @return A list containing declarations without object declaration of the specified Kotlin class(es).
+ * @see KoTypeDeclaration.hasObjectDeclarationOf
  */
 @Deprecated("Will be removed in version 0.19.0", ReplaceWith("sourceDeclarations().withoutObjectDeclarationOf()"))
 fun <T : KoTypeDeclaration> List<T>.withoutObjectDeclarationOf(kClasses: Collection<KClass<*>>): List<T> =
@@ -404,6 +444,7 @@ fun <T : KoTypeDeclaration> List<T>.withoutObjectDeclarationOf(kClasses: Collect
  *
  * @param predicate The predicate function to determine if an interface declaration satisfies a condition.
  * @return A list containing declarations with the specified interface declaration.
+ * @see KoTypeDeclaration.asInterfaceDeclaration
  */
 @Deprecated("Will be removed in version 0.19.0", ReplaceWith("sourceDeclarations().withInterfaceDeclaration()"))
 fun <T : KoTypeDeclaration> List<T>.withInterfaceDeclaration(predicate: ((KoInterfaceDeclaration) -> Boolean)? = null): List<T> =
@@ -424,6 +465,7 @@ fun <T : KoTypeDeclaration> List<T>.withInterfaceDeclaration(predicate: ((KoInte
  *
  * @param predicate The predicate function to determine if an interface declaration satisfies a condition.
  * @return A list containing declarations without the specified interface declaration.
+ * @see KoTypeDeclaration.asInterfaceDeclaration
  */
 @Deprecated("Will be removed in version 0.19.0", ReplaceWith("sourceDeclarations().withoutInterfaceDeclaration()"))
 fun <T : KoTypeDeclaration> List<T>.withoutInterfaceDeclaration(predicate: ((KoInterfaceDeclaration) -> Boolean)? = null): List<T> =
@@ -445,6 +487,7 @@ fun <T : KoTypeDeclaration> List<T>.withoutInterfaceDeclaration(predicate: ((KoI
  * @param kClass The Kotlin class representing the interface declaration to include.
  * @param kClasses The Kotlin class(es) representing the interface declaration(s) to include.
  * @return A list containing declarations with the interface declaration of the specified Kotlin class(es).
+ * @see KoTypeDeclaration.hasInterfaceDeclarationOf
  */
 @Deprecated("Will be removed in version 0.19.0", ReplaceWith("sourceDeclarations().withInterfaceDeclarationOf()"))
 fun <T : KoTypeDeclaration> List<T>.withInterfaceDeclarationOf(
@@ -457,6 +500,7 @@ fun <T : KoTypeDeclaration> List<T>.withInterfaceDeclarationOf(
  *
  * @param kClasses The Kotlin class(es) representing the interface declaration(s) to include.
  * @return A list containing declarations with the interface declaration of the specified Kotlin class(es).
+ * @see KoTypeDeclaration.hasInterfaceDeclarationOf
  */
 @Deprecated("Will be removed in version 0.19.0", ReplaceWith("sourceDeclarations().withInterfaceDeclarationOf()"))
 fun <T : KoTypeDeclaration> List<T>.withInterfaceDeclarationOf(kClasses: Collection<KClass<*>>): List<T> =
@@ -473,6 +517,7 @@ fun <T : KoTypeDeclaration> List<T>.withInterfaceDeclarationOf(kClasses: Collect
  * @param kClass The Kotlin class representing the interface declaration to exclude.
  * @param kClasses The Kotlin class(es) representing the interface declaration(s) to exclude.
  * @return A list containing declarations without interface declaration of the specified Kotlin class(es).
+ * @see KoTypeDeclaration.hasInterfaceDeclarationOf
  */
 @Deprecated("Will be removed in version 0.19.0", ReplaceWith("sourceDeclarations().withoutInterfaceDeclarationOf()"))
 fun <T : KoTypeDeclaration> List<T>.withoutInterfaceDeclarationOf(
@@ -485,6 +530,7 @@ fun <T : KoTypeDeclaration> List<T>.withoutInterfaceDeclarationOf(
  *
  * @param kClasses The Kotlin class(es) representing the interface declaration(s) to exclude.
  * @return A list containing declarations without interface declaration of the specified Kotlin class(es).
+ * @see KoTypeDeclaration.hasInterfaceDeclarationOf
  */
 @Deprecated("Will be removed in version 0.19.0", ReplaceWith("sourceDeclarations().withoutInterfaceDeclarationOf()"))
 fun <T : KoTypeDeclaration> List<T>.withoutInterfaceDeclarationOf(kClasses: Collection<KClass<*>>): List<T> =
@@ -500,6 +546,7 @@ fun <T : KoTypeDeclaration> List<T>.withoutInterfaceDeclarationOf(kClasses: Coll
  *
  * @param predicate The predicate function to determine if a class or object declaration satisfies a condition.
  * @return A list containing declarations with the specified class or object declaration.
+ * @see KoTypeDeclaration.asClassOrObjectDeclaration
  */
 @Deprecated("Will be removed in version 0.19.0", ReplaceWith("sourceDeclarations().withClassOrObjectDeclaration()"))
 fun <T : KoTypeDeclaration> List<T>.withClassOrObjectDeclaration(predicate: ((KoClassAndObjectDeclaration) -> Boolean)? = null): List<T> =
@@ -515,6 +562,7 @@ fun <T : KoTypeDeclaration> List<T>.withClassOrObjectDeclaration(predicate: ((Ko
  *
  * @param predicate The predicate function to determine if a class or object declaration satisfies a condition.
  * @return A list containing declarations without the specified class or object declaration.
+ * @see KoTypeDeclaration.asClassOrObjectDeclaration
  */
 @Deprecated("Will be removed in version 0.19.0", ReplaceWith("sourceDeclarations().withoutClassOrObjectDeclaration()"))
 fun <T : KoTypeDeclaration> List<T>.withoutClassOrObjectDeclaration(
@@ -533,6 +581,7 @@ fun <T : KoTypeDeclaration> List<T>.withoutClassOrObjectDeclaration(
  * @param kClass The Kotlin class representing the class or object declaration to include.
  * @param kClasses The Kotlin class(es) representing the class or object declaration(s) to include.
  * @return A list containing declarations with the class or object declaration of the specified Kotlin class(es).
+ * @see KoTypeDeclaration.hasClassOrObjectDeclarationOf
  */
 
 @Deprecated("Will be removed in version 0.19.0", ReplaceWith("sourceDeclarations().withClassOrObjectDeclarationOf()"))
@@ -546,6 +595,7 @@ fun <T : KoTypeDeclaration> List<T>.withClassOrObjectDeclarationOf(
  *
  * @param kClasses The Kotlin class(es) representing the class or object declaration(s) to include.
  * @return A list containing declarations with the class or object declaration of the specified Kotlin class(es).
+ * @see KoTypeDeclaration.hasClassOrObjectDeclarationOf
  */
 @Deprecated("Will be removed in version 0.19.0", ReplaceWith("sourceDeclarations().withClassOrObjectDeclarationOf()"))
 fun <T : KoTypeDeclaration> List<T>.withClassOrObjectDeclarationOf(kClasses: Collection<KClass<*>>): List<T> =
@@ -562,6 +612,7 @@ fun <T : KoTypeDeclaration> List<T>.withClassOrObjectDeclarationOf(kClasses: Col
  * @param kClass The Kotlin class representing the class or object declaration to exclude.
  * @param kClasses The Kotlin class(es) representing the class or object declaration(s) to exclude.
  * @return A list containing declarations without class or object declaration of the specified Kotlin class(es).
+ * @see KoTypeDeclaration.hasClassOrObjectDeclarationOf
  */
 @Deprecated(
     "Will be removed in version 0.19.0",
@@ -577,6 +628,7 @@ fun <T : KoTypeDeclaration> List<T>.withoutClassOrObjectDeclarationOf(
  *
  * @param kClasses The Kotlin class(es) representing the class or object declaration(s) to exclude.
  * @return A list containing declarations without class or object declaration of the specified Kotlin class(es).
+ * @see KoTypeDeclaration.hasClassOrObjectDeclarationOf
  */
 @Deprecated(
     "Will be removed in version 0.19.0",
@@ -595,6 +647,7 @@ fun <T : KoTypeDeclaration> List<T>.withoutClassOrObjectDeclarationOf(kClasses: 
  *
  * @param predicate The predicate function to determine if a class or interface declaration satisfies a condition.
  * @return A list containing declarations with the specified class or interface declaration.
+ * @see KoTypeDeclaration.asClassOrInterfaceDeclaration
  */
 @Deprecated("Will be removed in version 0.19.0", ReplaceWith("sourceDeclarations().withClassOrInterfaceDeclaration()"))
 fun <T : KoTypeDeclaration> List<T>.withClassOrInterfaceDeclaration(
@@ -612,6 +665,7 @@ fun <T : KoTypeDeclaration> List<T>.withClassOrInterfaceDeclaration(
  *
  * @param predicate The predicate function to determine if a class or interface declaration satisfies a condition.
  * @return A list containing declarations without the specified class or interface declaration.
+ * @see KoTypeDeclaration.asClassOrInterfaceDeclaration
  */
 @Deprecated(
     "Will be removed in version 0.19.0",
@@ -633,6 +687,7 @@ fun <T : KoTypeDeclaration> List<T>.withoutClassOrInterfaceDeclaration(
  * @param kClass The Kotlin class representing the class or interface declaration to include.
  * @param kClasses The Kotlin class(es) representing the class or interface declaration(s) to include.
  * @return A list containing declarations with the class or interface declaration of the specified Kotlin class(es).
+ * @see KoTypeDeclaration.hasClassOrInterfaceDeclarationOf
  */
 
 @Deprecated(
@@ -649,6 +704,7 @@ fun <T : KoTypeDeclaration> List<T>.withClassOrInterfaceDeclarationOf(
  *
  * @param kClasses The Kotlin class(es) representing the class or interface declaration(s) to include.
  * @return A list containing declarations with the class or interface declaration of the specified Kotlin class(es).
+ * @see KoTypeDeclaration.hasClassOrInterfaceDeclarationOf
  */
 @Deprecated(
     "Will be removed in version 0.19.0",
@@ -668,6 +724,7 @@ fun <T : KoTypeDeclaration> List<T>.withClassOrInterfaceDeclarationOf(kClasses: 
  * @param kClass The Kotlin class representing the class or interface declaration to exclude.
  * @param kClasses The Kotlin class(es) representing the class or interface declaration(s) to exclude.
  * @return A list containing declarations without class or interface declaration of the specified Kotlin class(es).
+ * @see KoTypeDeclaration.hasClassOrInterfaceDeclarationOf
  */
 @Deprecated(
     "Will be removed in version 0.19.0",
@@ -683,6 +740,7 @@ fun <T : KoTypeDeclaration> List<T>.withoutClassOrInterfaceDeclarationOf(
  *
  * @param kClasses The Kotlin class(es) representing the class or interface declaration(s) to exclude.
  * @return A list containing declarations without class or interface declaration of the specified Kotlin class(es).
+ * @see KoTypeDeclaration.hasClassOrInterfaceDeclarationOf
  */
 @Deprecated(
     "Will be removed in version 0.19.0",
@@ -701,6 +759,7 @@ fun <T : KoTypeDeclaration> List<T>.withoutClassOrInterfaceDeclarationOf(kClasse
  *
  * @param predicate The predicate function to determine if an interface or object declaration satisfies a condition.
  * @return A list containing declarations with the specified interface or object declaration.
+ * @see KoTypeDeclaration.asInterfaceOrObjectDeclaration
  */
 @Deprecated("Will be removed in version 0.19.0", ReplaceWith("sourceDeclarations().withInterfaceOrObjectDeclaration()"))
 fun <T : KoTypeDeclaration> List<T>.withInterfaceOrObjectDeclaration(
@@ -718,6 +777,7 @@ fun <T : KoTypeDeclaration> List<T>.withInterfaceOrObjectDeclaration(
  *
  * @param predicate The predicate function to determine if an interface or object declaration satisfies a condition.
  * @return A list containing declarations without the specified interface or object declaration.
+ * @see KoTypeDeclaration.asInterfaceOrObjectDeclaration
  */
 @Deprecated(
     "Will be removed in version 0.19.0",
@@ -739,6 +799,7 @@ fun <T : KoTypeDeclaration> List<T>.withoutInterfaceOrObjectDeclaration(
  * @param kClass The Kotlin class representing the interface or object declaration to include.
  * @param kClasses The Kotlin class(es) representing the interface or object declaration(s) to include.
  * @return A list containing declarations with the interface or object declaration of the specified Kotlin class(es).
+ * @see KoTypeDeclaration.hasInterfaceOrObjectDeclarationOf
  */
 
 @Deprecated(
@@ -755,6 +816,7 @@ fun <T : KoTypeDeclaration> List<T>.withInterfaceOrObjectDeclarationOf(
  *
  * @param kClasses The Kotlin class(es) representing the interface or object declaration(s) to include.
  * @return A list containing declarations with the interface or object declaration of the specified Kotlin class(es).
+ * @see KoTypeDeclaration.hasInterfaceOrObjectDeclarationOf
  */
 @Deprecated(
     "Will be removed in version 0.19.0",
@@ -774,6 +836,7 @@ fun <T : KoTypeDeclaration> List<T>.withInterfaceOrObjectDeclarationOf(kClasses:
  * @param kClass The Kotlin class representing the interface or object declaration to exclude.
  * @param kClasses The Kotlin class(es) representing the interface or object declaration(s) to exclude.
  * @return A list containing declarations without interface or object declaration of the specified Kotlin class(es).
+ * @see KoTypeDeclaration.hasInterfaceOrObjectDeclarationOf
  */
 @Deprecated(
     "Will be removed in version 0.19.0",
@@ -789,6 +852,7 @@ fun <T : KoTypeDeclaration> List<T>.withoutInterfaceOrObjectDeclarationOf(
  *
  * @param kClasses The Kotlin class(es) representing the interface or object declaration(s) to exclude.
  * @return A list containing declarations without interface or object declaration of the specified Kotlin class(es).
+ * @see KoTypeDeclaration.hasInterfaceOrObjectDeclarationOf
  */
 @Deprecated(
     "Will be removed in version 0.19.0",
@@ -807,6 +871,7 @@ fun <T : KoTypeDeclaration> List<T>.withoutInterfaceOrObjectDeclarationOf(kClass
  *
  * @param predicate The predicate function to determine if a class, interface or object declaration satisfies a condition.
  * @return A list containing declarations with the specified class, interface or object declaration.
+ * @see KoTypeDeclaration.asClassOrInterfaceOrObjectDeclaration
  */
 @Deprecated(
     "Will be removed in version 0.19.0",
@@ -827,6 +892,7 @@ fun <T : KoTypeDeclaration> List<T>.withClassOrInterfaceOrObjectDeclaration(
  *
  * @param predicate The predicate function to determine if a class, interface or object declaration satisfies a condition.
  * @return A list containing declarations without the specified class, interface or object declaration.
+ * @see KoTypeDeclaration.asClassOrInterfaceOrObjectDeclaration
  */
 @Deprecated(
     "Will be removed in version 0.19.0",
@@ -848,6 +914,7 @@ fun <T : KoTypeDeclaration> List<T>.withoutClassOrInterfaceOrObjectDeclaration(
  * @param kClass The Kotlin class representing the class, interface or object declaration to include.
  * @param kClasses The Kotlin class(es) representing the class, interface or object declaration(s) to include.
  * @return A list containing declarations with the class, interface or object declaration of the specified Kotlin class(es).
+ * @see KoTypeDeclaration.hasClassOrInterfaceOrObjectDeclarationOf
  */
 
 @Deprecated(
@@ -864,6 +931,7 @@ fun <T : KoTypeDeclaration> List<T>.withClassOrInterfaceOrObjectDeclarationOf(
  *
  * @param kClasses The Kotlin class(es) representing the class, interface or object declaration(s) to include.
  * @return A list containing declarations with the class, interface or object declaration of the specified Kotlin class(es).
+ * @see KoTypeDeclaration.hasClassOrInterfaceOrObjectDeclarationOf
  */
 @Deprecated(
     "Will be removed in version 0.19.0",
@@ -883,6 +951,7 @@ fun <T : KoTypeDeclaration> List<T>.withClassOrInterfaceOrObjectDeclarationOf(kC
  * @param kClass The Kotlin class representing the class, interface or object declaration to exclude.
  * @param kClasses The Kotlin class(es) representing the class, interface or object declaration(s) to exclude.
  * @return A list containing declarations without class, interface or object declaration of the specified Kotlin class(es).
+ * @see KoTypeDeclaration.hasClassOrInterfaceOrObjectDeclarationOf
  */
 @Deprecated(
     "Will be removed in version 0.19.0",
@@ -898,6 +967,7 @@ fun <T : KoTypeDeclaration> List<T>.withoutClassOrInterfaceOrObjectDeclarationOf
  *
  * @param kClasses The Kotlin class(es) representing the class, interface or object declaration(s) to exclude.
  * @return A list containing declarations without class, interface or object declaration of the specified Kotlin class(es).
+ * @see KoTypeDeclaration.hasClassOrInterfaceOrObjectDeclarationOf
  */
 @Deprecated(
     "Will be removed in version 0.19.0",
@@ -916,6 +986,7 @@ fun <T : KoTypeDeclaration> List<T>.withoutClassOrInterfaceOrObjectDeclarationOf
  *
  * @param predicate The predicate function to determine if a type alias declaration satisfies a condition.
  * @return A list containing declarations with the specified type alias declaration.
+ * @see KoTypeDeclaration.asTypeAliasDeclaration
  */
 @Deprecated("Will be removed in version 0.19.0", ReplaceWith("sourceDeclarations().withTypeAliasDeclaration()"))
 fun <T : KoTypeDeclaration> List<T>.withTypeAliasDeclaration(predicate: ((KoTypeAliasDeclaration) -> Boolean)? = null): List<T> =
@@ -936,6 +1007,7 @@ fun <T : KoTypeDeclaration> List<T>.withTypeAliasDeclaration(predicate: ((KoType
  *
  * @param predicate The predicate function to determine if a type alias declaration satisfies a condition.
  * @return A list containing declarations without the specified type alias declaration.
+ * @see KoTypeDeclaration.asTypeAliasDeclaration
  */
 @Deprecated("Will be removed in version 0.19.0", ReplaceWith("sourceDeclarations().withoutTypeAliasDeclaration()"))
 fun <T : KoTypeDeclaration> List<T>.withoutTypeAliasDeclaration(predicate: ((KoTypeAliasDeclaration) -> Boolean)? = null): List<T> =
@@ -956,6 +1028,7 @@ fun <T : KoTypeDeclaration> List<T>.withoutTypeAliasDeclaration(predicate: ((KoT
  *
  * @param predicate The predicate function to determine if an import alias declaration satisfies a condition.
  * @return A list containing declarations with the specified import alias declaration.
+ * @see KoTypeDeclaration.isImportAlias
  */
 @Deprecated("Will be removed in version 0.19.0", ReplaceWith("sourceDeclarations().withImportAliasDeclaration()"))
 fun <T : KoTypeDeclaration> List<T>.withImportAliasDeclaration(predicate: ((KoImportAliasDeclaration) -> Boolean)? = null): List<T> =
@@ -978,6 +1051,7 @@ fun <T : KoTypeDeclaration> List<T>.withImportAliasDeclaration(predicate: ((KoIm
  *
  * @param predicate The predicate function to determine if an import alias declaration satisfies a condition.
  * @return A list containing declarations without the specified import alias declaration.
+ * @see KoTypeDeclaration.isImportAlias
  */
 @Deprecated("Will be removed in version 0.19.0", ReplaceWith("sourceDeclarations().withoutImportAliasDeclaration()"))
 fun <T : KoTypeDeclaration> List<T>.withoutImportAliasDeclaration(predicate: ((KoImportAliasDeclaration) -> Boolean)? = null): List<T> =
@@ -1000,6 +1074,7 @@ fun <T : KoTypeDeclaration> List<T>.withoutImportAliasDeclaration(predicate: ((K
  *
  * @param predicate The predicate function to determine if a Kotlin type declaration satisfies a condition.
  * @return A list containing declarations with the specified Kotlin type declaration.
+ * @see KoTypeDeclaration.asKotlinTypeDeclaration
  */
 @Deprecated("Will be removed in version 0.19.0", ReplaceWith("sourceDeclarations().withKotlinTypeDeclaration()"))
 fun <T : KoTypeDeclaration> List<T>.withKotlinTypeDeclaration(predicate: ((KoKotlinTypeDeclaration) -> Boolean)? = null): List<T> =
@@ -1020,6 +1095,7 @@ fun <T : KoTypeDeclaration> List<T>.withKotlinTypeDeclaration(predicate: ((KoKot
  *
  * @param predicate The predicate function to determine if a Kotlin type declaration satisfies a condition.
  * @return A list containing declarations without the specified Kotlin type declaration.
+ * @see KoTypeDeclaration.asKotlinTypeDeclaration
  */
 @Deprecated("Will be removed in version 0.19.0", ReplaceWith("sourceDeclarations().withoutKotlinTypeDeclaration()"))
 fun <T : KoTypeDeclaration> List<T>.withoutKotlinTypeDeclaration(predicate: ((KoKotlinTypeDeclaration) -> Boolean)? = null): List<T> =
@@ -1041,6 +1117,7 @@ fun <T : KoTypeDeclaration> List<T>.withoutKotlinTypeDeclaration(predicate: ((Ko
  * @param kClass The Kotlin class representing the Kotlin type declaration to include.
  * @param kClasses The Kotlin class(es) representing the Kotlin type declaration(s) to include.
  * @return A list containing declarations with the Kotlin type declaration of the specified Kotlin class(es).
+ * @see KoTypeDeclaration.hasKotlinTypeDeclarationOf
  */
 @Deprecated("Will be removed in version 0.19.0", ReplaceWith("sourceDeclarations().withKotlinTypeDeclarationOf()"))
 fun <T : KoTypeDeclaration> List<T>.withKotlinTypeDeclarationOf(
@@ -1053,6 +1130,7 @@ fun <T : KoTypeDeclaration> List<T>.withKotlinTypeDeclarationOf(
  *
  * @param kClasses The Kotlin class(es) representing the Kotlin type declaration(s) to include.
  * @return A list containing declarations with the Kotlin type declaration of the specified Kotlin class(es).
+ * @see KoTypeDeclaration.hasKotlinTypeDeclarationOf
  */
 @Deprecated("Will be removed in version 0.19.0", ReplaceWith("sourceDeclarations().withKotlinTypeDeclarationOf()"))
 fun <T : KoTypeDeclaration> List<T>.withKotlinTypeDeclarationOf(kClasses: Collection<KClass<*>>): List<T> =
@@ -1069,6 +1147,7 @@ fun <T : KoTypeDeclaration> List<T>.withKotlinTypeDeclarationOf(kClasses: Collec
  * @param kClass The Kotlin class representing the Kotlin type declaration to exclude.
  * @param kClasses The Kotlin class(es) representing the Kotlin type declaration(s) to exclude.
  * @return A list containing declarations without Kotlin type declaration of the specified Kotlin class(es).
+ * @see KoTypeDeclaration.hasKotlinTypeDeclarationOf
  */
 @Deprecated("Will be removed in version 0.19.0", ReplaceWith("sourceDeclarations().withoutKotlinTypeDeclarationOf()"))
 fun <T : KoTypeDeclaration> List<T>.withoutKotlinTypeDeclarationOf(
@@ -1081,6 +1160,7 @@ fun <T : KoTypeDeclaration> List<T>.withoutKotlinTypeDeclarationOf(
  *
  * @param kClasses The Kotlin class(es) representing the Kotlin type declaration(s) to exclude.
  * @return A list containing declarations without Kotlin type declaration of the specified Kotlin class(es).
+ * @see KoTypeDeclaration.hasKotlinTypeDeclarationOf
  */
 @Deprecated("Will be removed in version 0.19.0", ReplaceWith("sourceDeclarations().withoutKotlinTypeDeclarationOf()"))
 fun <T : KoTypeDeclaration> List<T>.withoutKotlinTypeDeclarationOf(kClasses: Collection<KClass<*>>): List<T> =
@@ -1096,6 +1176,7 @@ fun <T : KoTypeDeclaration> List<T>.withoutKotlinTypeDeclarationOf(kClasses: Col
  *
  * @param predicate The predicate function to determine if a Kotlin basic type declaration satisfies a condition.
  * @return A list containing declarations with the specified Kotlin basic type declaration.
+ * @see KoTypeDeclaration.isKotlinBasicType
  */
 @Deprecated("Will be removed in version 0.19.0", ReplaceWith("sourceDeclarations().withKotlinBasicTypeDeclaration()"))
 fun <T : KoTypeDeclaration> List<T>.withKotlinBasicTypeDeclaration(predicate: ((KoKotlinTypeDeclaration) -> Boolean)? = null): List<T> =
@@ -1118,6 +1199,7 @@ fun <T : KoTypeDeclaration> List<T>.withKotlinBasicTypeDeclaration(predicate: ((
  *
  * @param predicate The predicate function to determine if a Kotlin basic type declaration satisfies a condition.
  * @return A list containing declarations without the specified Kotlin basic type declaration.
+ * @see KoTypeDeclaration.isKotlinBasicType
  */
 @Deprecated(
     "Will be removed in version 0.19.0",
@@ -1144,6 +1226,7 @@ fun <T : KoTypeDeclaration> List<T>.withoutKotlinBasicTypeDeclaration(predicate:
  * @param kClass The Kotlin class representing the Kotlin basic type declaration to include.
  * @param kClasses The Kotlin class(es) representing the Kotlin basic type declaration(s) to include.
  * @return A list containing declarations with the Kotlin basic type declaration of the specified Kotlin class(es).
+ * @see KoTypeDeclaration.hasKotlinBasicTypeDeclarationOf
  */
 @Deprecated("Will be removed in version 0.19.0", ReplaceWith("sourceDeclarations().withKotlinBasicTypeDeclarationOf()"))
 fun <T : KoTypeDeclaration> List<T>.withKotlinBasicTypeDeclarationOf(
@@ -1156,6 +1239,7 @@ fun <T : KoTypeDeclaration> List<T>.withKotlinBasicTypeDeclarationOf(
  *
  * @param kClasses The Kotlin class(es) representing the Kotlin basic type declaration(s) to include.
  * @return A list containing declarations with the Kotlin basic type declaration of the specified Kotlin class(es).
+ * @see KoTypeDeclaration.hasKotlinBasicTypeDeclarationOf
  */
 @Deprecated("Will be removed in version 0.19.0", ReplaceWith("sourceDeclarations().withKotlinBasicTypeDeclarationOf()"))
 fun <T : KoTypeDeclaration> List<T>.withKotlinBasicTypeDeclarationOf(kClasses: Collection<KClass<*>>): List<T> =
@@ -1172,6 +1256,7 @@ fun <T : KoTypeDeclaration> List<T>.withKotlinBasicTypeDeclarationOf(kClasses: C
  * @param kClass The Kotlin class representing the Kotlin basic type declaration to exclude.
  * @param kClasses The Kotlin class(es) representing the Kotlin basic type declaration(s) to exclude.
  * @return A list containing declarations without Kotlin basic type declaration of the specified Kotlin class(es).
+ * @see KoTypeDeclaration.hasKotlinBasicTypeDeclarationOf
  */
 @Deprecated(
     "Will be removed in version 0.19.0",
@@ -1187,6 +1272,7 @@ fun <T : KoTypeDeclaration> List<T>.withoutKotlinBasicTypeDeclarationOf(
  *
  * @param kClasses The Kotlin class(es) representing the Kotlin basic type declaration(s) to exclude.
  * @return A list containing declarations without Kotlin basic type declaration of the specified Kotlin class(es).
+ * @see KoTypeDeclaration.hasKotlinBasicTypeDeclarationOf
  */
 @Deprecated(
     "Will be removed in version 0.19.0",
@@ -1205,6 +1291,7 @@ fun <T : KoTypeDeclaration> List<T>.withoutKotlinBasicTypeDeclarationOf(kClasses
  *
  * @param predicate The predicate function to determine if a Kotlin collection type declaration satisfies a condition.
  * @return A list containing declarations with the specified Kotlin collection type declaration.
+ * @see KoTypeDeclaration.isKotlinCollectionType
  */
 @Deprecated(
     "Will be removed in version 0.19.0",
@@ -1232,6 +1319,7 @@ fun <T : KoTypeDeclaration> List<T>.withKotlinCollectionTypeDeclaration(
  *
  * @param predicate The predicate function to determine if a Kotlin collection type declaration satisfies a condition.
  * @return A list containing declarations without the specified Kotlin collection type declaration.
+ * @see KoTypeDeclaration.isKotlinCollectionType
  */
 @Deprecated(
     "Will be removed in version 0.19.0",
@@ -1260,6 +1348,7 @@ fun <T : KoTypeDeclaration> List<T>.withoutKotlinCollectionTypeDeclaration(
  * @param kClass The Kotlin class representing the Kotlin collection type declaration to include.
  * @param kClasses The Kotlin class(es) representing the Kotlin collection type declaration(s) to include.
  * @return A list containing declarations with the Kotlin collection type declaration of the specified Kotlin class(es).
+ * @see KoTypeDeclaration.hasKotlinCollectionTypeDeclarationOf
  */
 @Deprecated(
     "Will be removed in version 0.19.0",
@@ -1275,6 +1364,7 @@ fun <T : KoTypeDeclaration> List<T>.withKotlinCollectionTypeDeclarationOf(
  *
  * @param kClasses The Kotlin class(es) representing the Kotlin collection type declaration(s) to include.
  * @return A list containing declarations with the Kotlin collection type declaration of the specified Kotlin class(es).
+ * @see KoTypeDeclaration.hasKotlinCollectionTypeDeclarationOf
  */
 @Deprecated(
     "Will be removed in version 0.19.0",
@@ -1294,6 +1384,7 @@ fun <T : KoTypeDeclaration> List<T>.withKotlinCollectionTypeDeclarationOf(kClass
  * @param kClass The Kotlin class representing the Kotlin collection type declaration to exclude.
  * @param kClasses The Kotlin class(es) representing the Kotlin collection type declaration(s) to exclude.
  * @return A list containing declarations without Kotlin collection type declaration of the specified Kotlin class(es).
+ * @see KoTypeDeclaration.hasKotlinCollectionTypeDeclarationOf
  */
 @Deprecated(
     "Will be removed in version 0.19.0",
@@ -1309,6 +1400,7 @@ fun <T : KoTypeDeclaration> List<T>.withoutKotlinCollectionTypeDeclarationOf(
  *
  * @param kClasses The Kotlin class(es) representing the Kotlin collection type declaration(s) to exclude.
  * @return A list containing declarations without Kotlin collection type declaration of the specified Kotlin class(es).
+ * @see KoTypeDeclaration.hasKotlinCollectionTypeDeclarationOf
  */
 @Deprecated(
     "Will be removed in version 0.19.0",
@@ -1327,6 +1419,7 @@ fun <T : KoTypeDeclaration> List<T>.withoutKotlinCollectionTypeDeclarationOf(kCl
  *
  * @param predicate The predicate function to determine if a type parameter declaration satisfies a condition.
  * @return A list containing declarations with the specified type parameter declaration.
+ * @see KoTypeDeclaration.isTypeParameter
  */
 @Deprecated("Will be removed in version 0.19.0", ReplaceWith("sourceDeclarations().withTypeParameterDeclaration()"))
 fun <T : KoTypeDeclaration> List<T>.withTypeParameterDeclaration(predicate: ((KoTypeParameterDeclaration) -> Boolean)? = null): List<T> =
@@ -1349,6 +1442,7 @@ fun <T : KoTypeDeclaration> List<T>.withTypeParameterDeclaration(predicate: ((Ko
  *
  * @param predicate The predicate function to determine if a type parameter declaration satisfies a condition.
  * @return A list containing declarations without the specified type parameter declaration.
+ * @see KoTypeDeclaration.isTypeParameter
  */
 @Deprecated("Will be removed in version 0.19.0", ReplaceWith("sourceDeclarations().withoutTypeParameterDeclaration()"))
 fun <T : KoTypeDeclaration> List<T>.withoutTypeParameterDeclaration(
@@ -1373,6 +1467,7 @@ fun <T : KoTypeDeclaration> List<T>.withoutTypeParameterDeclaration(
  *
  * @param predicate The predicate function to determine if an external declaration satisfies a condition.
  * @return A list containing declarations with the specified external declaration.
+ * @see KoTypeDeclaration.isExternal
  */
 @Deprecated("Will be removed in version 0.19.0", ReplaceWith("sourceDeclarations().withExternalDeclaration()"))
 fun <T : KoTypeDeclaration> List<T>.withExternalDeclaration(predicate: ((KoExternalDeclaration) -> Boolean)? = null): List<T> =
@@ -1395,6 +1490,7 @@ fun <T : KoTypeDeclaration> List<T>.withExternalDeclaration(predicate: ((KoExter
  *
  * @param predicate The predicate function to determine if an external declaration satisfies a condition.
  * @return A list containing declarations without the specified external declaration.
+ * @see KoTypeDeclaration.isExternal
  */
 @Deprecated("Will be removed in version 0.19.0", ReplaceWith("sourceDeclarations().withoutExternalDeclaration()"))
 fun <T : KoTypeDeclaration> List<T>.withoutExternalDeclaration(predicate: ((KoExternalDeclaration) -> Boolean)? = null): List<T> =
@@ -1418,6 +1514,7 @@ fun <T : KoTypeDeclaration> List<T>.withoutExternalDeclaration(predicate: ((KoEx
  * @param kClass The Kotlin class representing the external declaration to include.
  * @param kClasses The Kotlin class(es) representing the external declaration(s) to include.
  * @return A list containing declarations with the external declaration of the specified Kotlin class(es).
+ * @see KoTypeDeclaration.hasExternalDeclarationOf
  */
 @Deprecated("Will be removed in version 0.19.0", ReplaceWith("sourceDeclarations().withExternalDeclarationOf()"))
 fun <T : KoTypeDeclaration> List<T>.withExternalDeclarationOf(
@@ -1430,6 +1527,7 @@ fun <T : KoTypeDeclaration> List<T>.withExternalDeclarationOf(
  *
  * @param kClasses The Kotlin class(es) representing the external declaration(s) to include.
  * @return A list containing declarations with the external declaration of the specified Kotlin class(es).
+ * @see KoTypeDeclaration.hasExternalDeclarationOf
  */
 @Deprecated("Will be removed in version 0.19.0", ReplaceWith("sourceDeclarations().withExternalDeclarationOf()"))
 fun <T : KoTypeDeclaration> List<T>.withExternalDeclarationOf(kClasses: Collection<KClass<*>>): List<T> =
@@ -1446,6 +1544,7 @@ fun <T : KoTypeDeclaration> List<T>.withExternalDeclarationOf(kClasses: Collecti
  * @param kClass The Kotlin class representing the external declaration to exclude.
  * @param kClasses The Kotlin class(es) representing the external declaration(s) to exclude.
  * @return A list containing declarations without external declaration of the specified Kotlin class(es).
+ * @see KoTypeDeclaration.hasExternalDeclarationOf
  */
 @Deprecated("Will be removed in version 0.19.0", ReplaceWith("sourceDeclarations().withoutExternalDeclarationOf()"))
 fun <T : KoTypeDeclaration> List<T>.withoutExternalDeclarationOf(
@@ -1458,6 +1557,7 @@ fun <T : KoTypeDeclaration> List<T>.withoutExternalDeclarationOf(
  *
  * @param kClasses The Kotlin class(es) representing the external declaration(s) to exclude.
  * @return A list containing declarations without external declaration of the specified Kotlin class(es).
+ * @see KoTypeDeclaration.hasExternalDeclarationOf
  */
 @Deprecated("Will be removed in version 0.19.0", ReplaceWith("sourceDeclarations().withoutExternalDeclarationOf()"))
 fun <T : KoTypeDeclaration> List<T>.withoutExternalDeclarationOf(kClasses: Collection<KClass<*>>): List<T> =

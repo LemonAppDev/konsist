@@ -10,6 +10,8 @@ import kotlin.reflect.KClass
  * @param predicate A function that defines the condition to be met by the type source declaration.
  *                  If null, all source declarations are included.
  * @return A list of source declarations that match the provided predicate, or all source declarations if no predicate is provided.
+ * @see KoSourceDeclarationProvider.hasSourceDeclaration
+ * @see KoSourceDeclarationProvider.sourceDeclaration
  */
 fun <T : KoSourceDeclarationProvider> List<T>.sourceDeclarations(
     predicate: ((KoDeclarationCastProvider) -> Boolean)? = null,
@@ -26,6 +28,7 @@ fun <T : KoSourceDeclarationProvider> List<T>.sourceDeclarations(
  *
  * @param predicate The predicate function to determine if a source declaration satisfies a condition.
  * @return A list containing declarations with a source declaration satisfying the predicate.
+ * @see KoSourceDeclarationProvider.sourceDeclaration
  */
 fun <T : KoSourceDeclarationProvider> List<T>.withSourceDeclaration(predicate: (KoDeclarationCastProvider) -> Boolean): List<T> =
     filter { it.sourceDeclaration?.let { declaration -> predicate(declaration) } == true }
@@ -35,6 +38,7 @@ fun <T : KoSourceDeclarationProvider> List<T>.withSourceDeclaration(predicate: (
  *
  * @param predicate The predicate function to determine if a source declaration satisfies a condition.
  * @return A list containing declarations without a source declaration satisfying the predicate.
+ * @see KoSourceDeclarationProvider.sourceDeclaration
  */
 fun <T : KoSourceDeclarationProvider> List<T>.withoutSourceDeclaration(predicate: (KoDeclarationCastProvider) -> Boolean): List<T> =
     filterNot { it.sourceDeclaration?.let { declaration -> predicate(declaration) } == true }
@@ -45,6 +49,7 @@ fun <T : KoSourceDeclarationProvider> List<T>.withoutSourceDeclaration(predicate
  * @param kClass The Kotlin class representing the source declaration to include.
  * @param kClasses The Kotlin class(es) representing the source declaration(s) to include.
  * @return A list containing declarations with the source declaration of the specified Kotlin class(es).
+ * @see KoSourceDeclarationProvider.hasSourceDeclarationOf
  */
 fun <T : KoSourceDeclarationProvider> List<T>.withSourceDeclarationOf(
     kClass: KClass<*>,
@@ -56,6 +61,7 @@ fun <T : KoSourceDeclarationProvider> List<T>.withSourceDeclarationOf(
  *
  * @param kClasses The Kotlin class(es) representing the source declaration(s) to include.
  * @return A list containing declarations with the source declaration of the specified Kotlin class(es).
+ * @see KoSourceDeclarationProvider.hasSourceDeclarationOf
  */
 fun <T : KoSourceDeclarationProvider> List<T>.withSourceDeclarationOf(kClasses: Collection<KClass<*>>): List<T> =
     filter {
@@ -71,6 +77,7 @@ fun <T : KoSourceDeclarationProvider> List<T>.withSourceDeclarationOf(kClasses: 
  * @param kClass The Kotlin class representing the source declaration to exclude.
  * @param kClasses The Kotlin class(es) representing the source declaration(s) to exclude.
  * @return A list containing declarations without the source declaration of the specified Kotlin class(es).
+ * @see KoSourceDeclarationProvider.hasSourceDeclarationOf
  */
 fun <T : KoSourceDeclarationProvider> List<T>.withoutSourceDeclarationOf(
     kClass: KClass<*>,
@@ -82,6 +89,7 @@ fun <T : KoSourceDeclarationProvider> List<T>.withoutSourceDeclarationOf(
  *
  * @param kClasses The Kotlin class(es) representing the source declaration(s) to exclude.
  * @return A list containing declarations without the source declaration of the specified Kotlin class(es).
+ * @see KoSourceDeclarationProvider.hasSourceDeclarationOf
  */
 fun <T : KoSourceDeclarationProvider> List<T>.withoutSourceDeclarationOf(kClasses: Collection<KClass<*>>): List<T> =
     filterNot {

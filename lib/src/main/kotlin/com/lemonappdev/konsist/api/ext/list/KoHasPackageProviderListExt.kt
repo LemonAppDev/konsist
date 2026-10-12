@@ -7,6 +7,7 @@ import com.lemonappdev.konsist.api.provider.KoPackageProvider
  * List containing declarations with a matching package.
  *
  * @return A list containing declarations with a matching package.
+ * @see KoHasPackageProvider.hasMatchingPackage
  */
 fun <T : KoHasPackageProvider> List<T>.withMatchingPackage(): List<T> = filter { it.hasMatchingPackage }
 
@@ -14,6 +15,7 @@ fun <T : KoHasPackageProvider> List<T>.withMatchingPackage(): List<T> = filter {
  * List containing declarations without a matching package.
  *
  * @return A list containing declarations without a matching package.
+ * @see KoHasPackageProvider.hasMatchingPackage
  */
 fun <T : KoHasPackageProvider> List<T>.withoutMatchingPackage(): List<T> = filterNot { it.hasMatchingPackage }
 
@@ -23,6 +25,7 @@ fun <T : KoHasPackageProvider> List<T>.withoutMatchingPackage(): List<T> = filte
  * @param names The package names to include.
  * @return A list containing declarations with a package matching any of the specified package names
  * (or any package if [names] is empty).
+ * @see KoHasPackageProvider.hasPackage
  */
 fun <T : KoHasPackageProvider> List<T>.withPackage(vararg names: String): List<T> = withPackage(listOf(*names))
 
@@ -32,6 +35,7 @@ fun <T : KoHasPackageProvider> List<T>.withPackage(vararg names: String): List<T
  * @param names The package names to include.
  * @return A list containing declarations with a package matching any of the specified package names
  * (or any package if [names] is empty).
+ * @see KoHasPackageProvider.hasPackage
  */
 fun <T : KoHasPackageProvider> List<T>.withPackage(names: Collection<String>): List<T> =
     filter {
@@ -47,6 +51,7 @@ fun <T : KoHasPackageProvider> List<T>.withPackage(names: Collection<String>): L
  * @param names The package names to exclude.
  * @return A list containing declarations without a package matching any of the specified package names
  * (or without any package if [names] is empty).
+ * @see KoHasPackageProvider.hasPackage
  */
 fun <T : KoHasPackageProvider> List<T>.withoutPackage(vararg names: String): List<T> = withoutPackage(listOf(*names))
 
@@ -56,6 +61,7 @@ fun <T : KoHasPackageProvider> List<T>.withoutPackage(vararg names: String): Lis
  * @param names The package names to exclude.
  * @return A list containing declarations without a package matching any of the specified package names
  * (or without any package if [names] is empty).
+ * @see KoHasPackageProvider.hasPackage
  */
 fun <T : KoHasPackageProvider> List<T>.withoutPackage(names: Collection<String>): List<T> =
     filter {

@@ -6,6 +6,7 @@ import com.lemonappdev.konsist.api.provider.modifier.KoInfixModifierProvider
  * List containing declarations with `infix` modifier.
  *
  * @return A list containing declarations with the `infix` modifier.
+ * @see KoInfixModifierProvider.hasInfixModifier
  */
 fun <T : KoInfixModifierProvider> List<T>.withInfixModifier(): List<T> = filter { it.hasInfixModifier }
 
@@ -13,5 +14,6 @@ fun <T : KoInfixModifierProvider> List<T>.withInfixModifier(): List<T> = filter 
  * List containing declarations without `infix` modifier.
  *
  * @return A list containing declarations without the `infix` modifier.
+ * @see KoInfixModifierProvider.hasInfixModifier
  */
 fun <T : KoInfixModifierProvider> List<T>.withoutInfixModifier(): List<T> = filterNot { it.hasInfixModifier }

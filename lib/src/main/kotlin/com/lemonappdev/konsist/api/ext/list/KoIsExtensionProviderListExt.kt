@@ -6,6 +6,7 @@ import com.lemonappdev.konsist.api.provider.KoIsExtensionProvider
  * List containing declarations that are extensions.
  *
  * @return A list containing declarations that are extensions.
+ * @see KoIsExtensionProvider.isExtension
  */
 fun <T : KoIsExtensionProvider> List<T>.withExtension(): List<T> = filter { it.isExtension }
 
@@ -13,5 +14,6 @@ fun <T : KoIsExtensionProvider> List<T>.withExtension(): List<T> = filter { it.i
  * List containing declarations that are not extensions.
  *
  * @return A list containing declarations that are not extensions.
+ * @see KoIsExtensionProvider.isExtension
  */
 fun <T : KoIsExtensionProvider> List<T>.withoutExtension(): List<T> = filterNot { it.isExtension }

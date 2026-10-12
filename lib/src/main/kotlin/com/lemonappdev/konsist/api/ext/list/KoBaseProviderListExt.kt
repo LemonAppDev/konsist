@@ -11,6 +11,7 @@ import com.lemonappdev.konsist.api.provider.KoBaseProvider
  *                  If predicate is not provided (default is `null`), the function uses the declaration's
  *                  name (if available) or `toString` method otherwise.
  * @return The original list of declarations.
+ * @see com.lemonappdev.konsist.api.ext.provider.print
  */
 fun <T : KoBaseProvider> List<T>.print(
     prefix: String? = null,

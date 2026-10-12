@@ -6,6 +6,7 @@ import com.lemonappdev.konsist.api.provider.KoPackageMatchingPathProvider
  * List containing declarations with a matching path.
  *
  * @return A list containing declarations with a matching path.
+ * @see KoPackageMatchingPathProvider.hasMatchingPath
  */
 fun <T : KoPackageMatchingPathProvider> List<T>.withMatchingPath(): List<T> = filter { it.hasMatchingPath }
 
@@ -13,5 +14,6 @@ fun <T : KoPackageMatchingPathProvider> List<T>.withMatchingPath(): List<T> = fi
  * List containing declarations without a matching path.
  *
  * @return A list containing declarations without a matching path.
+ * @see KoPackageMatchingPathProvider.hasMatchingPath
  */
 fun <T : KoPackageMatchingPathProvider> List<T>.withoutMatchingPath(): List<T> = filterNot { it.hasMatchingPath }

@@ -5,6 +5,8 @@ import com.lemonappdev.konsist.api.provider.KoKDocProvider
 
 /**
  * List containing KDoc declarations.
+ *
+ * @see KoKDocProvider.kDoc
  */
 val <T : KoKDocProvider> List<T>.kDocs: List<KoKDocDeclaration>
     get() = mapNotNull { it.kDoc }
@@ -13,6 +15,7 @@ val <T : KoKDocProvider> List<T>.kDocs: List<KoKDocDeclaration>
  * List containing declarations with KDoc.
  *
  * @return A list containing declarations with KDoc.
+ * @see KoKDocProvider.hasKDoc
  */
 fun <T : KoKDocProvider> List<T>.withKDoc(): List<T> = filter { it.hasKDoc }
 
@@ -20,5 +23,6 @@ fun <T : KoKDocProvider> List<T>.withKDoc(): List<T> = filter { it.hasKDoc }
  * List containing declarations without KDoc.
  *
  * @return A list containing declarations without KDoc.
+ * @see KoKDocProvider.hasKDoc
  */
 fun <T : KoKDocProvider> List<T>.withoutKDoc(): List<T> = filterNot { it.hasKDoc }

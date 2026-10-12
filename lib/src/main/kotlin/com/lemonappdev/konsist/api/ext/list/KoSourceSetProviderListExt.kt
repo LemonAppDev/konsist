@@ -8,6 +8,7 @@ import com.lemonappdev.konsist.api.provider.KoSourceSetProvider
  * @param name The source set name to include.
  * @param names The source set name(s) to include.
  * @return A list containing declarations that reside in any of the specified source sets.
+ * @see KoSourceSetProvider.residesInSourceSet
  */
 fun <T : KoSourceSetProvider> List<T>.withSourceSet(
     name: String,
@@ -19,6 +20,7 @@ fun <T : KoSourceSetProvider> List<T>.withSourceSet(
  *
  * @param names The source set name(s) to include.
  * @return A list containing declarations that reside in any of the specified source sets.
+ * @see KoSourceSetProvider.residesInSourceSet
  */
 fun <T : KoSourceSetProvider> List<T>.withSourceSet(names: Collection<String>): List<T> =
     filter {
@@ -34,6 +36,7 @@ fun <T : KoSourceSetProvider> List<T>.withSourceSet(names: Collection<String>): 
  * @param name The source set name to exclude.
  * @param names The source set name(s) to exclude.
  * @return A list containing declarations that don't reside in any of the specified source sets.
+ * @see KoSourceSetProvider.residesInSourceSet
  */
 fun <T : KoSourceSetProvider> List<T>.withoutSourceSet(
     name: String,
@@ -45,6 +48,7 @@ fun <T : KoSourceSetProvider> List<T>.withoutSourceSet(
  *
  * @param names The source set name(s) to exclude.
  * @return A list containing declarations that don't reside in any of the specified source sets.
+ * @see KoSourceSetProvider.residesInSourceSet
  */
 fun <T : KoSourceSetProvider> List<T>.withoutSourceSet(names: Collection<String>): List<T> =
     filterNot {

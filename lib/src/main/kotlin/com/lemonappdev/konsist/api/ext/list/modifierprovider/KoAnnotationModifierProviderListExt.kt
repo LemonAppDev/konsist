@@ -6,6 +6,7 @@ import com.lemonappdev.konsist.api.provider.modifier.KoAnnotationModifierProvide
  * List containing declarations that have `annotation` modifier.
  *
  * @return A list containing declarations with the `annotation` modifier.
+ * @see KoAnnotationModifierProvider.hasAnnotationModifier
  */
 fun <T : KoAnnotationModifierProvider> List<T>.withAnnotationModifier(): List<T> = filter { it.hasAnnotationModifier }
 
@@ -13,5 +14,6 @@ fun <T : KoAnnotationModifierProvider> List<T>.withAnnotationModifier(): List<T>
  * List containing declarations that don't have `annotation` modifier.
  *
  * @return A list containing declarations without the `annotation` modifier.
+ * @see KoAnnotationModifierProvider.hasAnnotationModifier
  */
 fun <T : KoAnnotationModifierProvider> List<T>.withoutAnnotationModifier(): List<T> = filterNot { it.hasAnnotationModifier }

@@ -9,6 +9,7 @@ import kotlin.reflect.KClass
  * @param kClass The Kotlin class representing the source type to include.
  * @param kClasses The Kotlin classes representing the source types to include.
  * @return A list containing declarations with the source type matching any of the specified types.
+ * @see KoSourceTypeProvider.sourceType
  */
 fun <T : KoSourceTypeProvider> List<T>.withSourceTypeOf(
     kClass: KClass<*>,
@@ -20,6 +21,7 @@ fun <T : KoSourceTypeProvider> List<T>.withSourceTypeOf(
  *
  * @param kClasses The Kotlin classes representing the source types to include.
  * @return A list containing declarations with the source type matching any of the specified types.
+ * @see KoSourceTypeProvider.sourceType
  */
 fun <T : KoSourceTypeProvider> List<T>.withSourceTypeOf(kClasses: Collection<KClass<*>>): List<T> =
     filter {
@@ -35,6 +37,7 @@ fun <T : KoSourceTypeProvider> List<T>.withSourceTypeOf(kClasses: Collection<KCl
  * @param kClass The Kotlin class representing the source type to exclude.
  * @param kClasses The Kotlin classes representing the source types to exclude.
  * @return A list containing declarations without the source type matching any of the specified types.
+ * @see KoSourceTypeProvider.sourceType
  */
 fun <T : KoSourceTypeProvider> List<T>.withoutSourceTypeOf(
     kClass: KClass<*>,
@@ -46,6 +49,7 @@ fun <T : KoSourceTypeProvider> List<T>.withoutSourceTypeOf(
  *
  * @param kClasses The Kotlin classes representing the source types to exclude.
  * @return A list containing declarations without the source type matching any of the specified types.
+ * @see KoSourceTypeProvider.sourceType
  */
 fun <T : KoSourceTypeProvider> List<T>.withoutSourceTypeOf(kClasses: Collection<KClass<*>>): List<T> =
     filterNot {
@@ -61,6 +65,7 @@ fun <T : KoSourceTypeProvider> List<T>.withoutSourceTypeOf(kClasses: Collection<
  * @param name The source type name to include.
  * @param names The source type name(s) to include.
  * @return A list containing declarations with the specified source types.
+ * @see KoSourceTypeProvider.sourceType
  */
 fun <T : KoSourceTypeProvider> List<T>.withSourceType(
     name: String,
@@ -72,6 +77,7 @@ fun <T : KoSourceTypeProvider> List<T>.withSourceType(
  *
  * @param names The source type name(s) to include.
  * @return A list containing declarations with the specified source types.
+ * @see KoSourceTypeProvider.sourceType
  */
 fun <T : KoSourceTypeProvider> List<T>.withSourceType(names: Collection<String>): List<T> =
     filter {
@@ -87,6 +93,7 @@ fun <T : KoSourceTypeProvider> List<T>.withSourceType(names: Collection<String>)
  * @param name The source type name to exclude.
  * @param names The source type name(s) to exclude.
  * @return A list containing declarations without the specified source types.
+ * @see KoSourceTypeProvider.sourceType
  */
 fun <T : KoSourceTypeProvider> List<T>.withoutSourceType(
     name: String,
@@ -98,6 +105,7 @@ fun <T : KoSourceTypeProvider> List<T>.withoutSourceType(
  *
  * @param names The source type name(s) to exclude.
  * @return A list containing declarations without the specified source types.
+ * @see KoSourceTypeProvider.sourceType
  */
 fun <T : KoSourceTypeProvider> List<T>.withoutSourceType(names: Collection<String>): List<T> =
     filterNot {
@@ -113,6 +121,7 @@ fun <T : KoSourceTypeProvider> List<T>.withoutSourceType(names: Collection<Strin
  * @param kClass The Kotlin class representing the bare source type to include.
  * @param kClasses The Kotlin classes representing the bare source types to include.
  * @return A list containing declarations with the bare source type matching any of the specified types.
+ * @see KoSourceTypeProvider.bareSourceType
  */
 fun <T : KoSourceTypeProvider> List<T>.withBareSourceTypeOf(
     kClass: KClass<*>,
@@ -124,6 +133,7 @@ fun <T : KoSourceTypeProvider> List<T>.withBareSourceTypeOf(
  *
  * @param kClasses The Kotlin classes representing the bare source types to include.
  * @return A list containing declarations with the bare source type matching any of the specified types.
+ * @see KoSourceTypeProvider.bareSourceType
  */
 fun <T : KoSourceTypeProvider> List<T>.withBareSourceTypeOf(kClasses: Collection<KClass<*>>): List<T> =
     filter {
@@ -139,6 +149,7 @@ fun <T : KoSourceTypeProvider> List<T>.withBareSourceTypeOf(kClasses: Collection
  * @param kClass The Kotlin class representing the bare source type to exclude.
  * @param kClasses The Kotlin classes representing the bare source types to exclude.
  * @return A list containing declarations without the bare source type matching any of the specified types.
+ * @see KoSourceTypeProvider.bareSourceType
  */
 fun <T : KoSourceTypeProvider> List<T>.withoutBareSourceTypeOf(
     kClass: KClass<*>,
@@ -150,6 +161,7 @@ fun <T : KoSourceTypeProvider> List<T>.withoutBareSourceTypeOf(
  *
  * @param kClasses The Kotlin classes representing the bare source types to exclude.
  * @return A list containing declarations without the bare source type matching any of the specified types.
+ * @see KoSourceTypeProvider.bareSourceType
  */
 fun <T : KoSourceTypeProvider> List<T>.withoutBareSourceTypeOf(kClasses: Collection<KClass<*>>): List<T> =
     filterNot {
@@ -165,6 +177,7 @@ fun <T : KoSourceTypeProvider> List<T>.withoutBareSourceTypeOf(kClasses: Collect
  * @param name The bare source type name to include.
  * @param names The bare source type name(s) to include.
  * @return A list containing declarations with the specified bare source types.
+ * @see KoSourceTypeProvider.bareSourceType
  */
 fun <T : KoSourceTypeProvider> List<T>.withBareSourceType(
     name: String,
@@ -176,6 +189,7 @@ fun <T : KoSourceTypeProvider> List<T>.withBareSourceType(
  *
  * @param names The bare source type name(s) to include.
  * @return A list containing declarations with the specified bare source types.
+ * @see KoSourceTypeProvider.bareSourceType
  */
 fun <T : KoSourceTypeProvider> List<T>.withBareSourceType(names: Collection<String>): List<T> =
     filter {
@@ -191,6 +205,7 @@ fun <T : KoSourceTypeProvider> List<T>.withBareSourceType(names: Collection<Stri
  * @param name The bare source type name to exclude.
  * @param names The bare source type name(s) to exclude.
  * @return A list containing declarations without the specified bare source types.
+ * @see KoSourceTypeProvider.bareSourceType
  */
 fun <T : KoSourceTypeProvider> List<T>.withoutBareSourceType(
     name: String,
@@ -202,6 +217,7 @@ fun <T : KoSourceTypeProvider> List<T>.withoutBareSourceType(
  *
  * @param names The bare source type name(s) to exclude.
  * @return A list containing declarations without the specified bare source types.
+ * @see KoSourceTypeProvider.bareSourceType
  */
 fun <T : KoSourceTypeProvider> List<T>.withoutBareSourceType(names: Collection<String>): List<T> =
     filterNot {

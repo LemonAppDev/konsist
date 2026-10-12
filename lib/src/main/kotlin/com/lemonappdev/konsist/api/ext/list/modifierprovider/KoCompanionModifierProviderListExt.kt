@@ -4,6 +4,7 @@ import com.lemonappdev.konsist.api.provider.modifier.KoCompanionModifierProvider
  * List containing declarations with `companion` modifier.
  *
  * @return A list containing declarations with the `companion` modifier.
+ * @see KoCompanionModifierProvider.hasCompanionModifier
  */
 fun <T : KoCompanionModifierProvider> List<T>.withCompanionModifier(): List<T> = filter { it.hasCompanionModifier }
 
@@ -11,5 +12,6 @@ fun <T : KoCompanionModifierProvider> List<T>.withCompanionModifier(): List<T> =
  * List containing declarations without `companion` modifier.
  *
  * @return A list containing declarations without the `companion` modifier.
+ * @see KoCompanionModifierProvider.hasCompanionModifier
  */
 fun <T : KoCompanionModifierProvider> List<T>.withoutCompanionModifier(): List<T> = filterNot { it.hasCompanionModifier }
