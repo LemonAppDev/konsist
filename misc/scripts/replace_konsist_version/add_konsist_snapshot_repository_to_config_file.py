@@ -1,11 +1,22 @@
 import os
+import sys
 import xml.etree.ElementTree as ET
 import argparse
 
-def insert_maven_local(file_path):
+# Get the absolute path to the parent directory
+parent_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+sys.path.append(parent_dir)
+from get_published_konsist_snapshot_version import SNAPSHOTS_REPOSITORY_URL
+
+def insert_snapshot_repository(file_path):
     _, extension = os.path.splitext(file_path)
 
     if extension in ['.gradle', '.kts']:
+        if extension == '.kts':
+            repository = f'maven("{SNAPSHOTS_REPOSITORY_URL}")'
+        else:
+            repository = f"maven {{ url = '{SNAPSHOTS_REPOSITORY_URL}' }}"
+
         with open(file_path, 'r') as file:
             lines = file.readlines()
 
@@ -15,9 +26,9 @@ def insert_maven_local(file_path):
             new_lines.append(line)
             if 'mavenCentral()' in line:
                 found = True
-                # make sure the indentation of 'mavenLocal()' matches with 'mavenCentral()'
+                # make sure the indentation of snapshot repository matches with 'mavenCentral()'
                 indentation = len(line) - len(line.lstrip(' '))
-                new_lines.append(' ' * indentation + 'mavenLocal()\n')
+                new_lines.append(' ' * indentation + repository + '\n')
 
         if not found:
             print("No line found containing 'mavenCentral()'")
@@ -41,19 +52,19 @@ def insert_maven_local(file_path):
         repository = ET.SubElement(repositories, 'repository')
 
         id_ = ET.SubElement(repository, 'id')
-        id_.text = 'maven-local'
+        id_.text = 'central-snapshots'
         url = ET.SubElement(repository, 'url')
-        url.text = 'file://${user.home}/.m2/repository'
+        url.text = SNAPSHOTS_REPOSITORY_URL
 
         tree.write(file_path)
     else:
         print(f"Unsupported file extension: {extension}")
 
-    print(f"Konsist repository added to {file_path}")
+    print(f"Konsist snapshot repository added to {file_path}")
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("file_path", help="The path to the file to be modified.")
     args = parser.parse_args()
 
-    insert_maven_local(args.file_path)
+    insert_snapshot_repository(args.file_path)
