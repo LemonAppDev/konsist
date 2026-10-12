@@ -1,7 +1,9 @@
 package com.lemonappdev.konsist.core.util
 
+import com.lemonappdev.konsist.api.declaration.KoClassDeclaration
 import com.lemonappdev.konsist.api.declaration.KoExternalDeclaration
 import com.lemonappdev.konsist.api.declaration.KoImportAliasDeclaration
+import com.lemonappdev.konsist.api.declaration.KoInterfaceDeclaration
 import com.lemonappdev.konsist.api.declaration.KoTypeAliasDeclaration
 import com.lemonappdev.konsist.api.declaration.KoTypeArgumentDeclaration
 import com.lemonappdev.konsist.api.declaration.combined.KoClassAndInterfaceAndObjectDeclaration
@@ -79,23 +81,30 @@ internal object MutableTypeUtil {
             }
 
     /*
-     * Checks if the source declaration is an immutable type: it resolves to a Kotlin type or project declaration
+     * Checks if the source declaration is an immutable type: it resolves to a Kotlin type or final project declaration
      * that is not mutable, or to a known immutable external type.
      * Declarations whose mutability is unknown (type parameters, function types, external types not known to be
-     * immutable, unresolved types) are not immutable.
+     * immutable, unresolved types, open Kotlin types such as `Any`, project interfaces and open, abstract or sealed
+     * project classes) are not immutable.
      */
     internal fun isImmutableType(sourceDeclaration: KoDeclarationCastProvider?): Boolean =
         when (val declaration = sourceDeclaration.resolveImportAlias()) {
             is KoTypeAliasDeclaration -> isImmutableType(declaration.type.sourceDeclaration)
-
             is KoExternalDeclaration -> declaration.fullyQualifiedName?.let { isKnownImmutableTypeName(it) } == true
-
-            is KoKotlinTypeDeclaration,
-            is KoClassAndInterfaceAndObjectDeclaration,
-            -> !isMutableType(declaration)
-
+            is KoKotlinTypeDeclaration -> declaration.fullyQualifiedName !in openKotlinTypeNames && !isMutableType(declaration)
+            is KoClassAndInterfaceAndObjectDeclaration -> !isOpenProjectDeclaration(declaration) && !isMutableType(declaration)
             else -> false
         }
+
+    /*
+     * Checks if the project declaration can be extended by a declaration that is mutable.
+     */
+    private fun isOpenProjectDeclaration(declaration: KoClassAndInterfaceAndObjectDeclaration): Boolean =
+        declaration is KoInterfaceDeclaration ||
+            (
+                declaration is KoClassDeclaration &&
+                    (declaration.hasOpenModifier || declaration.hasAbstractModifier || declaration.hasSealedModifier)
+            )
 
     /*
      * Checks if any type argument (at any nesting level) is an immutable type.
@@ -122,6 +131,25 @@ internal object MutableTypeUtil {
     private fun isKnownImmutableTypeName(fullyQualifiedName: String): Boolean =
         fullyQualifiedName in knownImmutableTypeNames ||
             fullyQualifiedName.substringBeforeLast(".") in knownImmutableTypePackages
+
+    // Kotlin types that are not mutable themselves, but are commonly implemented by mutable types
+    // (e.g. `StringBuilder` is a `CharSequence`, `AtomicInteger` is a `Number`)
+    private val openKotlinTypeNames: Set<String> =
+        setOf(
+            "kotlin.Any",
+            "kotlin.AutoCloseable",
+            "kotlin.CharSequence",
+            "kotlin.Comparable",
+            "kotlin.Comparator",
+            "kotlin.Function",
+            "kotlin.Number",
+            "kotlin.collections.AbstractCollection",
+            "kotlin.collections.AbstractIterator",
+            "kotlin.collections.AbstractList",
+            "kotlin.collections.AbstractMap",
+            "kotlin.collections.AbstractSet",
+            "kotlin.text.Appendable",
+        )
 
     // Packages whose types are all immutable
     private val knownImmutableTypePackages: Set<String> =

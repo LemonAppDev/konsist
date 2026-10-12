@@ -130,6 +130,14 @@ class KoTypeDeclarationForKoIsMutableTypeProviderTest {
                 arguments("known-immutable-java-lang-type-is-immutable-type", false),
                 arguments("known-immutable-kotlin-external-type-is-immutable-type", false),
                 arguments("unknown-external-type-is-not-immutable-type", false),
+                arguments("any-type-is-not-immutable-type", false),
+                arguments("open-kotlin-type-is-not-immutable-type", false),
+                arguments("read-only-kotlin-collection-type-is-immutable-type", false),
+                arguments("interface-type-with-val-property-is-not-immutable-type", false),
+                arguments("open-class-type-is-not-immutable-type", false),
+                arguments("abstract-class-type-is-not-immutable-type", false),
+                arguments("sealed-class-type-is-not-immutable-type", false),
+                arguments("class-type-with-interface-parent-is-immutable-type", false),
             )
 
         @Suppress("unused")
@@ -148,6 +156,7 @@ class KoTypeDeclarationForKoIsMutableTypeProviderTest {
                 arguments("type-with-function-type-argument-has-not-immutable-type-argument", false),
                 arguments("type-with-unknown-external-type-argument-has-not-immutable-type-argument", false),
                 arguments("type-with-known-immutable-external-type-argument-has-immutable-type-argument", false),
+                arguments("type-with-any-type-argument-has-not-immutable-type-argument", false),
             )
 
         @Suppress("unused")
@@ -186,7 +195,7 @@ class KoTypeDeclarationForKoIsMutableTypeProviderTest {
                 arguments("class-type-with-mutable-kotlin-parent-interface-is-mutable-type", false),
                 arguments("class-type-with-mutable-external-parent-is-mutable-type", false),
                 arguments("interface-type-is-mutable-type", false),
-                arguments("interface-type-is-not-mutable-type", true),
+                arguments("interface-type-is-not-mutable-type", false),
                 arguments("interface-type-with-var-property-is-mutable-type", false),
                 arguments("object-type-is-mutable-type", false),
                 arguments("object-type-is-not-mutable-type", true),
@@ -208,6 +217,14 @@ class KoTypeDeclarationForKoIsMutableTypeProviderTest {
                 arguments("known-immutable-java-lang-type-is-immutable-type", true),
                 arguments("known-immutable-kotlin-external-type-is-immutable-type", true),
                 arguments("unknown-external-type-is-not-immutable-type", false),
+                arguments("any-type-is-not-immutable-type", false),
+                arguments("open-kotlin-type-is-not-immutable-type", false),
+                arguments("read-only-kotlin-collection-type-is-immutable-type", true),
+                arguments("interface-type-with-val-property-is-not-immutable-type", false),
+                arguments("open-class-type-is-not-immutable-type", false),
+                arguments("abstract-class-type-is-not-immutable-type", false),
+                arguments("sealed-class-type-is-not-immutable-type", false),
+                arguments("class-type-with-interface-parent-is-immutable-type", true),
             )
 
         @Suppress("unused")
@@ -228,6 +245,7 @@ class KoTypeDeclarationForKoIsMutableTypeProviderTest {
                 arguments("type-with-function-type-argument-has-not-immutable-type-argument", false),
                 arguments("type-with-unknown-external-type-argument-has-not-immutable-type-argument", false),
                 arguments("type-with-known-immutable-external-type-argument-has-immutable-type-argument", true),
+                arguments("type-with-any-type-argument-has-not-immutable-type-argument", false),
             )
     }
 }
