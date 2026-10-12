@@ -62,153 +62,153 @@ interface KoEnumConstantDeclaration :
     KoSourceSetProvider,
     KoResideInPackageProvider,
     KoTextProvider {
-    @Deprecated("Will be removed in version 0.20.0", ReplaceWith("properties()"))
+    @Deprecated("Will be removed in version 1.0.0-beta.1", ReplaceWith("properties()"))
     override val variables: List<KoVariableDeclaration>
 
-    @Deprecated("Will be removed in version 0.20.0", ReplaceWith("numProperties()"))
+    @Deprecated("Will be removed in version 1.0.0-beta.1", ReplaceWith("numProperties()"))
     override val numVariables: Int
 
-    @Deprecated("Will be removed in version 0.20.0", ReplaceWith("classes()"))
+    @Deprecated("Will be removed in version 1.0.0-beta.1", ReplaceWith("classes()"))
     override val localClasses: List<KoClassDeclaration>
 
-    @Deprecated("Will be removed in version 0.20.0", ReplaceWith("numClasses()"))
+    @Deprecated("Will be removed in version 1.0.0-beta.1", ReplaceWith("numClasses()"))
     override val numLocalClasses: Int
 
-    @Deprecated("Will be removed in version 0.20.0", ReplaceWith("declarations()"))
+    @Deprecated("Will be removed in version 1.0.0-beta.1", ReplaceWith("declarations()"))
     override val localDeclarations: List<KoBaseDeclaration>
 
-    @Deprecated("Will be removed in version 0.20.0", ReplaceWith("numDeclarations()"))
+    @Deprecated("Will be removed in version 1.0.0-beta.1", ReplaceWith("numDeclarations()"))
     override val numLocalDeclarations: Int
 
-    @Deprecated("Will be removed in version 0.20.0", ReplaceWith("functions()"))
+    @Deprecated("Will be removed in version 1.0.0-beta.1", ReplaceWith("functions()"))
     override val localFunctions: List<KoFunctionDeclaration>
 
-    @Deprecated("Will be removed in version 0.20.0", ReplaceWith("numFunctions()"))
+    @Deprecated("Will be removed in version 1.0.0-beta.1", ReplaceWith("numFunctions()"))
     override val numLocalFunctions: Int
 
-    @Deprecated("Will be removed in version 0.20.0", ReplaceWith("countProperties()"))
+    @Deprecated("Will be removed in version 1.0.0-beta.1", ReplaceWith("countProperties()"))
     override fun countVariables(predicate: (KoVariableDeclaration) -> Boolean): Int
 
-    @Deprecated("Will be removed in version 0.20.0", ReplaceWith("hasProperties()"))
+    @Deprecated("Will be removed in version 1.0.0-beta.1", ReplaceWith("hasProperties()"))
     override fun hasVariables(): Boolean
 
-    @Deprecated("Will be removed in version 0.20.0", ReplaceWith("hasPropertyWithName()"))
+    @Deprecated("Will be removed in version 1.0.0-beta.1", ReplaceWith("hasPropertyWithName()"))
     override fun hasVariableWithName(
         name: String,
         vararg names: String,
         ignoreCase: Boolean,
     ): Boolean
 
-    @Deprecated("Will be removed in version 0.20.0", ReplaceWith("hasPropertyWithName()"))
+    @Deprecated("Will be removed in version 1.0.0-beta.1", ReplaceWith("hasPropertyWithName()"))
     override fun hasVariableWithName(
         names: Collection<String>,
         ignoreCase: Boolean,
     ): Boolean
 
-    @Deprecated("Will be removed in version 0.20.0", ReplaceWith("hasPropertiesWithAllNames()"))
+    @Deprecated("Will be removed in version 1.0.0-beta.1", ReplaceWith("hasPropertiesWithAllNames()"))
     override fun hasVariablesWithAllNames(
         name: String,
         vararg names: String,
         ignoreCase: Boolean,
     ): Boolean
 
-    @Deprecated("Will be removed in version 0.20.0", ReplaceWith("hasPropertiesWithAllNames()"))
+    @Deprecated("Will be removed in version 1.0.0-beta.1", ReplaceWith("hasPropertiesWithAllNames()"))
     override fun hasVariablesWithAllNames(
         names: Collection<String>,
         ignoreCase: Boolean,
     ): Boolean
 
-    @Deprecated("Will be removed in version 0.20.0", ReplaceWith("hasProperty()"))
+    @Deprecated("Will be removed in version 1.0.0-beta.1", ReplaceWith("hasProperty()"))
     override fun hasVariable(predicate: (KoVariableDeclaration) -> Boolean): Boolean
 
-    @Deprecated("Will be removed in version 0.20.0", ReplaceWith("hasAllProperties()"))
+    @Deprecated("Will be removed in version 1.0.0-beta.1", ReplaceWith("hasAllProperties()"))
     override fun hasAllVariables(predicate: (KoVariableDeclaration) -> Boolean): Boolean
 
-    @Deprecated("Will be removed in version 0.20.0", ReplaceWith("countClasses()"))
+    @Deprecated("Will be removed in version 1.0.0-beta.1", ReplaceWith("countClasses()"))
     override fun countLocalClasses(predicate: (KoClassDeclaration) -> Boolean): Int
 
-    @Deprecated("Will be removed in version 0.20.0", ReplaceWith("hasClasses()"))
+    @Deprecated("Will be removed in version 1.0.0-beta.1", ReplaceWith("hasClasses()"))
     override fun hasLocalClasses(): Boolean
 
-    @Deprecated("Will be removed in version 0.20.0", ReplaceWith("hasClassWithName()"))
+    @Deprecated("Will be removed in version 1.0.0-beta.1", ReplaceWith("hasClassWithName()"))
     override fun hasLocalClassWithName(
         name: String,
         vararg names: String,
         ignoreCase: Boolean,
     ): Boolean
 
-    @Deprecated("Will be removed in version 0.20.0", ReplaceWith("hasClassWithName()"))
+    @Deprecated("Will be removed in version 1.0.0-beta.1", ReplaceWith("hasClassWithName()"))
     override fun hasLocalClassWithName(
         names: Collection<String>,
         ignoreCase: Boolean,
     ): Boolean
 
-    @Deprecated("Will be removed in version 0.20.0", ReplaceWith("hasClassesWithAllNames()"))
+    @Deprecated("Will be removed in version 1.0.0-beta.1", ReplaceWith("hasClassesWithAllNames()"))
     override fun hasLocalClassesWithAllNames(
         name: String,
         vararg names: String,
         ignoreCase: Boolean,
     ): Boolean
 
-    @Deprecated("Will be removed in version 0.20.0", ReplaceWith("hasClassesWithAllNames()"))
+    @Deprecated("Will be removed in version 1.0.0-beta.1", ReplaceWith("hasClassesWithAllNames()"))
     override fun hasLocalClassesWithAllNames(
         names: Collection<String>,
         ignoreCase: Boolean,
     ): Boolean
 
-    @Deprecated("Will be removed in version 0.20.0", ReplaceWith("hasClass()"))
+    @Deprecated("Will be removed in version 1.0.0-beta.1", ReplaceWith("hasClass()"))
     override fun hasLocalClass(predicate: (KoClassDeclaration) -> Boolean): Boolean
 
-    @Deprecated("Will be removed in version 0.20.0", ReplaceWith("hasAllClasses()"))
+    @Deprecated("Will be removed in version 1.0.0-beta.1", ReplaceWith("hasAllClasses()"))
     override fun hasAllLocalClasses(predicate: (KoClassDeclaration) -> Boolean): Boolean
 
-    @Deprecated("Will be removed in version 0.20.0", ReplaceWith("countDeclarations()"))
+    @Deprecated("Will be removed in version 1.0.0-beta.1", ReplaceWith("countDeclarations()"))
     override fun countLocalDeclarations(predicate: (KoBaseDeclaration) -> Boolean): Int
 
-    @Deprecated("Will be removed in version 0.20.0", ReplaceWith("hasDeclarations()"))
+    @Deprecated("Will be removed in version 1.0.0-beta.1", ReplaceWith("hasDeclarations()"))
     override fun hasLocalDeclarations(): Boolean
 
-    @Deprecated("Will be removed in version 0.20.0", ReplaceWith("hasDeclaration()"))
+    @Deprecated("Will be removed in version 1.0.0-beta.1", ReplaceWith("hasDeclaration()"))
     override fun hasLocalDeclaration(predicate: (KoBaseDeclaration) -> Boolean): Boolean
 
-    @Deprecated("Will be removed in version 0.20.0", ReplaceWith("hasAllDeclarations()"))
+    @Deprecated("Will be removed in version 1.0.0-beta.1", ReplaceWith("hasAllDeclarations()"))
     override fun hasAllLocalDeclarations(predicate: (KoBaseDeclaration) -> Boolean): Boolean
 
-    @Deprecated("Will be removed in version 0.20.0", ReplaceWith("countFunctions()"))
+    @Deprecated("Will be removed in version 1.0.0-beta.1", ReplaceWith("countFunctions()"))
     override fun countLocalFunctions(predicate: (KoFunctionDeclaration) -> Boolean): Int
 
-    @Deprecated("Will be removed in version 0.20.0", ReplaceWith("hasFunctions()"))
+    @Deprecated("Will be removed in version 1.0.0-beta.1", ReplaceWith("hasFunctions()"))
     override fun hasLocalFunctions(): Boolean
 
-    @Deprecated("Will be removed in version 0.20.0", ReplaceWith("hasFunctionWithName()"))
+    @Deprecated("Will be removed in version 1.0.0-beta.1", ReplaceWith("hasFunctionWithName()"))
     override fun hasLocalFunctionWithName(
         name: String,
         vararg names: String,
         ignoreCase: Boolean,
     ): Boolean
 
-    @Deprecated("Will be removed in version 0.20.0", ReplaceWith("hasFunctionWithName()"))
+    @Deprecated("Will be removed in version 1.0.0-beta.1", ReplaceWith("hasFunctionWithName()"))
     override fun hasLocalFunctionWithName(
         names: Collection<String>,
         ignoreCase: Boolean,
     ): Boolean
 
-    @Deprecated("Will be removed in version 0.20.0", ReplaceWith("hasFunctionsWithAllNames()"))
+    @Deprecated("Will be removed in version 1.0.0-beta.1", ReplaceWith("hasFunctionsWithAllNames()"))
     override fun hasLocalFunctionsWithAllNames(
         name: String,
         vararg names: String,
         ignoreCase: Boolean,
     ): Boolean
 
-    @Deprecated("Will be removed in version 0.20.0", ReplaceWith("hasFunctionsWithAllNames()"))
+    @Deprecated("Will be removed in version 1.0.0-beta.1", ReplaceWith("hasFunctionsWithAllNames()"))
     override fun hasLocalFunctionsWithAllNames(
         names: Collection<String>,
         ignoreCase: Boolean,
     ): Boolean
 
-    @Deprecated("Will be removed in version 0.20.0", ReplaceWith("hasFunction()"))
+    @Deprecated("Will be removed in version 1.0.0-beta.1", ReplaceWith("hasFunction()"))
     override fun hasLocalFunction(predicate: (KoFunctionDeclaration) -> Boolean): Boolean
 
-    @Deprecated("Will be removed in version 0.20.0", ReplaceWith("hasAllFunctions()"))
+    @Deprecated("Will be removed in version 1.0.0-beta.1", ReplaceWith("hasAllFunctions()"))
     override fun hasAllLocalFunctions(predicate: (KoFunctionDeclaration) -> Boolean): Boolean
 }
