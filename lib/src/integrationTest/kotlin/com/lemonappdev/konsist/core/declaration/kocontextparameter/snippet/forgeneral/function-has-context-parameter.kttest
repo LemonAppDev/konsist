@@ -1,0 +1,8 @@
+package com.samplepackage
+
+import com.lemonappdev.konsist.testdata.FixtureAnnotation
+import com.lemonappdev.konsist.testdata.FixtureClass
+
+context(@FixtureAnnotation fixtureParameter: FixtureClass)
+fun fixtureFunction() {
+}
