@@ -72,7 +72,7 @@ class KoTypeDeclarationForKoIsMutableTypeProviderTest {
         TestSnippetProvider.getSnippetKoScope("core/declaration/type/kotype/snippet/forkoismutabletypeprovider/", fileName)
 
     companion object {
-        @Suppress("unused")
+        @Suppress("unused", "detekt.LongMethod")
         @JvmStatic
         fun provideValuesForIsMutableType() =
             listOf(
@@ -159,7 +159,7 @@ class KoTypeDeclarationForKoIsMutableTypeProviderTest {
                 arguments("type-with-any-type-argument-has-not-immutable-type-argument", false),
             )
 
-        @Suppress("unused")
+        @Suppress("unused", "detekt.LongMethod")
         @JvmStatic
         fun provideValuesForIsImmutableType() =
             listOf(
