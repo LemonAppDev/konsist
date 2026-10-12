@@ -1,0 +1,1 @@
+fun fixtureFunction(): Int { return 0 }
