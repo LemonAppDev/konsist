@@ -79,16 +79,18 @@ internal object MutableTypeUtil {
             }
 
     /*
-     * Checks if the source declaration is an immutable type: it resolves to a Kotlin type, external type or project
-     * declaration that is not mutable.
-     * Declarations whose mutability is unknown (type parameters, function types, unresolved types) are not immutable.
+     * Checks if the source declaration is an immutable type: it resolves to a Kotlin type or project declaration
+     * that is not mutable, or to a known immutable external type.
+     * Declarations whose mutability is unknown (type parameters, function types, external types not known to be
+     * immutable, unresolved types) are not immutable.
      */
     internal fun isImmutableType(sourceDeclaration: KoDeclarationCastProvider?): Boolean =
         when (val declaration = sourceDeclaration.resolveImportAlias()) {
             is KoTypeAliasDeclaration -> isImmutableType(declaration.type.sourceDeclaration)
 
+            is KoExternalDeclaration -> declaration.fullyQualifiedName?.let { isKnownImmutableTypeName(it) } == true
+
             is KoKotlinTypeDeclaration,
-            is KoExternalDeclaration,
             is KoClassAndInterfaceAndObjectDeclaration,
             -> !isMutableType(declaration)
 
@@ -116,6 +118,63 @@ internal object MutableTypeUtil {
 
         return bareName.startsWith(MUTABLE_TYPE_PREFIX) || bareName in knownMutableTypeNames
     }
+
+    private fun isKnownImmutableTypeName(fullyQualifiedName: String): Boolean =
+        fullyQualifiedName in knownImmutableTypeNames ||
+            fullyQualifiedName.substringBeforeLast(".") in knownImmutableTypePackages
+
+    // Packages whose types are all immutable
+    private val knownImmutableTypePackages: Set<String> =
+        setOf(
+            "java.time",
+            "kotlinx.datetime",
+        )
+
+    // Immutable external types (types that are not Kotlin types)
+    private val knownImmutableTypeNames: Set<String> =
+        setOf(
+            // Java boxed primitives and strings
+            "java.lang.Boolean",
+            "java.lang.Byte",
+            "java.lang.Character",
+            "java.lang.Double",
+            "java.lang.Float",
+            "java.lang.Integer",
+            "java.lang.Long",
+            "java.lang.Short",
+            "java.lang.String",
+            // Java numbers
+            "java.math.BigDecimal",
+            "java.math.BigInteger",
+            // Java values
+            "java.io.File",
+            "java.net.URI",
+            "java.net.URL",
+            "java.nio.charset.Charset",
+            "java.nio.file.Path",
+            "java.time.format.DateTimeFormatter",
+            "java.util.Currency",
+            "java.util.Locale",
+            "java.util.Optional",
+            "java.util.OptionalDouble",
+            "java.util.OptionalInt",
+            "java.util.OptionalLong",
+            "java.util.UUID",
+            "java.util.regex.Pattern",
+            // Kotlin values
+            "kotlin.time.Duration",
+            "kotlin.time.Instant",
+            "kotlin.uuid.Uuid",
+            // Kotlin immutable collections
+            "kotlinx.collections.immutable.ImmutableCollection",
+            "kotlinx.collections.immutable.ImmutableList",
+            "kotlinx.collections.immutable.ImmutableMap",
+            "kotlinx.collections.immutable.ImmutableSet",
+            "kotlinx.collections.immutable.PersistentCollection",
+            "kotlinx.collections.immutable.PersistentList",
+            "kotlinx.collections.immutable.PersistentMap",
+            "kotlinx.collections.immutable.PersistentSet",
+        )
 
     // Mutable Kotlin and Java types whose names do not start with "Mutable"
     private val knownMutableTypeNames: Set<String> =
