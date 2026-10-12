@@ -13,4 +13,10 @@ interface KoBodyProvider : KoBaseProvider {
      * Determines whether the declaration has a block body.
      */
     val hasBlockBody: Boolean
+
+    /**
+     * The body of the declaration without the enclosing braces, or `null` if the declaration has no body.
+     * For an expression body, the expression is returned.
+     */
+    val body: String?
 }

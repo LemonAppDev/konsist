@@ -13,4 +13,15 @@ internal interface KoBodyProviderCore :
 
     override val hasExpressionBody: Boolean
         get() = ktDeclarationWithBody.hasBody() && !ktDeclarationWithBody.hasBlockBody()
+
+    override val body: String?
+        get() =
+            ktDeclarationWithBody
+                .bodyBlockExpression
+                ?.text
+                ?.removePrefix("{")
+                ?.removeSuffix("}")
+                ?.trimIndent()
+                ?.trim()
+                ?: ktDeclarationWithBody.bodyExpression?.text
 }

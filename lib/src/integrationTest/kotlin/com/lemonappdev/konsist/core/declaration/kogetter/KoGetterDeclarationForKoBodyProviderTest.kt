@@ -19,6 +19,7 @@ class KoGetterDeclarationForKoBodyProviderTest {
         assertSoftly(sut) {
             it?.hasExpressionBody shouldBeEqualTo false
             it?.hasBlockBody shouldBeEqualTo false
+            it?.body shouldBeEqualTo null
         }
     }
 
@@ -35,6 +36,7 @@ class KoGetterDeclarationForKoBodyProviderTest {
         assertSoftly(sut) {
             it?.hasExpressionBody shouldBeEqualTo true
             it?.hasBlockBody shouldBeEqualTo false
+            it?.body shouldBeEqualTo "\"\""
         }
     }
 
@@ -51,6 +53,7 @@ class KoGetterDeclarationForKoBodyProviderTest {
         assertSoftly(sut) {
             it?.hasExpressionBody shouldBeEqualTo false
             it?.hasBlockBody shouldBeEqualTo true
+            it?.body shouldBeEqualTo "return \"\""
         }
     }
 
