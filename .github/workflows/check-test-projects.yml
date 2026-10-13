@@ -461,6 +461,129 @@ jobs:
           name: root-path-gradle-tester-windows-test-report
           path: misc/projects/test-projects/konsist-root-path-gradle-tester/**/build/reports
 
+  root-path-nested-gradle-wrapper-tester-ubuntu:
+    name: Root Path Tester Nested Gradle Wrapper Ubuntu
+    needs: published-snapshot
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Set up JDK
+        uses: actions/setup-java@v6
+        with:
+          java-version: 25
+          distribution: 'corretto'
+
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v6
+
+      - name: Set up Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: '3.15.0'
+
+      - name: Use Konsist Snapshot From Maven Central
+        run: python misc/scripts/replace_konsist_version/use_konsist_snapshot_in_test_project.py misc/projects/test-projects/konsist-root-path-nested-gradle-wrapper-tester ${{ needs.published-snapshot.outputs.version }}
+
+      - name: Run Root Integration Test
+        run: cd misc/projects/test-projects/konsist-root-path-nested-gradle-wrapper-tester/ && ./gradlew integrationTest
+
+      - name: Run App Integration Test
+        run: cd misc/projects/test-projects/konsist-root-path-nested-gradle-wrapper-tester/ && ./gradlew app:integrationTest
+
+      - name: Upload Report
+        if: always() # Ensure the step runs regardless of the outcome of previous steps (failed tests will be uploaded)
+        uses: actions/upload-artifact@v7
+        with:
+          name: root-path-nested-gradle-wrapper-tester-ubuntu-test-report
+          path: misc/projects/test-projects/konsist-root-path-nested-gradle-wrapper-tester/**/build/reports
+
+
+  root-path-nested-gradle-wrapper-tester-macos:
+    name: Root Path Tester Nested Gradle Wrapper MacOS
+    needs: published-snapshot
+    runs-on: macos-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Set up JDK
+        uses: actions/setup-java@v6
+        with:
+          java-version: 11
+          distribution: 'corretto'
+
+      - name: Set up JDK
+        uses: actions/setup-java@v6
+        with:
+          java-version: 25
+          distribution: 'corretto'
+
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v6
+
+      - name: Set up Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: '3.15.0'
+
+      - name: Use Konsist Snapshot From Maven Central
+        run: python misc/scripts/replace_konsist_version/use_konsist_snapshot_in_test_project.py misc/projects/test-projects/konsist-root-path-nested-gradle-wrapper-tester ${{ needs.published-snapshot.outputs.version }}
+
+      - name: Run Root Integration Test
+        run: cd misc/projects/test-projects/konsist-root-path-nested-gradle-wrapper-tester/ && ./gradlew integrationTest
+
+      - name: Run App Integration Test
+        run: cd misc/projects/test-projects/konsist-root-path-nested-gradle-wrapper-tester/ && ./gradlew app:integrationTest
+
+      - name: Upload Report
+        if: always() # Ensure the step runs regardless of the outcome of previous steps (failed tests will be uploaded)
+        uses: actions/upload-artifact@v7
+        with:
+          name: root-path-nested-gradle-wrapper-tester-macos-test-report
+          path: misc/projects/test-projects/konsist-root-path-nested-gradle-wrapper-tester/**/build/reports
+
+  root-path-nested-gradle-wrapper-tester-windows:
+    name: Root Path Tester Nested Gradle Wrapper Windows
+    needs: published-snapshot
+    runs-on: windows-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Set up JDK
+        uses: actions/setup-java@v6
+        with:
+          java-version: |
+            11
+            25
+          distribution: 'corretto'
+
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v6
+
+      - name: Set up Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: '3.15.0'
+
+      - name: Use Konsist Snapshot From Maven Central
+        run: python misc/scripts/replace_konsist_version/use_konsist_snapshot_in_test_project.py misc/projects/test-projects/konsist-root-path-nested-gradle-wrapper-tester ${{ needs.published-snapshot.outputs.version }}
+
+      - name: Run Root Integration Test
+        run: cd misc/projects/test-projects/konsist-root-path-nested-gradle-wrapper-tester/ && ./gradlew integrationTest
+
+      - name: Run App Integration Test
+        run: cd misc/projects/test-projects/konsist-root-path-nested-gradle-wrapper-tester/ && ./gradlew app:integrationTest
+
+      - name: Upload Report
+        if: always() # Ensure the step runs regardless of the outcome of previous steps (failed tests will be uploaded)
+        uses: actions/upload-artifact@v7
+        with:
+          name: root-path-nested-gradle-wrapper-tester-windows-test-report
+          path: misc/projects/test-projects/konsist-root-path-nested-gradle-wrapper-tester/**/build/reports
+
   root-path-maven-tester-ubuntu:
     name: Root Path Tester Maven Ubuntu
     needs: published-snapshot
