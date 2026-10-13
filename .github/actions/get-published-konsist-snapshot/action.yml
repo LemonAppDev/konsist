@@ -1,15 +1,21 @@
 name: Get Published Konsist Snapshot
 description: >
-  Waits for the Publish workflow run of the current commit (and event) to complete and outputs the unique version of
-  the Konsist snapshot it published to the Central snapshots repository. Requires 'actions: read' permission.
+  Waits for the Publish workflow run of the current commit (and event) to upload the 'konsist-snapshot-version' artifact
+  and outputs the unique version of the Konsist snapshot it published to the Central snapshots repository.
+  Requires 'actions: read' permission.
 
 inputs:
   github-token:
     description: Token used to read workflow runs and artifacts
     required: true
   timeout-minutes:
-    description: How long to wait for the Publish workflow run to complete
+    description: How long to wait for the Publish workflow run to publish the snapshot
     default: '30'
+  initial-delay-seconds:
+    description: >
+      How long after the Publish workflow run start to begin polling for the artifact. Publish runs upload it
+      after 81-113s (October 2026), so polling earlier only uses up the GITHUB_TOKEN rate limit.
+    default: '75'
 
 outputs:
   version:
@@ -19,45 +25,66 @@ outputs:
 runs:
   using: composite
   steps:
-    - name: Wait For Publish Workflow Run
+    - name: Wait For Published Snapshot Version
       id: published-snapshot
       shell: bash
       env:
         GH_TOKEN: ${{ inputs.github-token }}
         TIMEOUT_MINUTES: ${{ inputs.timeout-minutes }}
+        INITIAL_DELAY_SECONDS: ${{ inputs.initial-delay-seconds }}
         HEAD_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
         EVENT_NAME: ${{ github.event_name }}
       run: |
         RUNS_URL="repos/$GITHUB_REPOSITORY/actions/runs?head_sha=$HEAD_SHA&event=$EVENT_NAME&per_page=100"
         # Latest run of the Publish workflow (runs are sorted from newest)
-        RUN_FILTER='[.workflow_runs[] | select(.path | startswith(".github/workflows/publish.yml"))][0] // {} | "\(.id) \(.status) \(.conclusion)"'
+        RUN_FILTER='[.workflow_runs[] | select(.path | startswith(".github/workflows/publish.yml"))][0] // {} | "\(.id) \(.status) \(.conclusion) \(.run_started_at)"'
         DEADLINE=$(( $(date +%s) + TIMEOUT_MINUTES * 60 ))
+        INITIAL_DELAY_DONE=false
 
+        # The artifact is available as soon as it is uploaded, about a minute before the run is marked as completed
         while true; do
-          read -r RUN_ID STATUS CONCLUSION < <(gh api "$RUNS_URL" --jq "$RUN_FILTER")
+          read -r RUN_ID STATUS CONCLUSION RUN_STARTED_AT < <(gh api "$RUNS_URL" --jq "$RUN_FILTER")
+          RUN_URL="$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$RUN_ID"
+
+          if [ "$RUN_ID" != "null" ]; then
+            # Skip polling while the snapshot is being published (counted from the Publish workflow run start)
+            if [ "$INITIAL_DELAY_DONE" = false ] && [ "$RUN_STARTED_AT" != "null" ]; then
+              INITIAL_DELAY_DONE=true
+              DELAY=$(( $(date -d "$RUN_STARTED_AT" +%s) + INITIAL_DELAY_SECONDS - $(date +%s) ))
+
+              if [ "$STATUS" != "completed" ] && [ "$DELAY" -gt 0 ]; then
+                echo "Waiting ${DELAY}s before polling Publish workflow run $RUN_URL..."
+                sleep "$DELAY"
+                continue
+              fi
+            fi
+
+            ARTIFACT_ID=$(gh api "repos/$GITHUB_REPOSITORY/actions/runs/$RUN_ID/artifacts?name=konsist-snapshot-version" --jq '.artifacts[0].id // empty')
+
+            if [ -n "$ARTIFACT_ID" ]; then
+              break
+            fi
+          fi
 
           if [ "$STATUS" = "completed" ]; then
-            break
+            echo "::error::Publish workflow run $RUN_URL concluded with '$CONCLUSION' without publishing the snapshot."
+            exit 1
           fi
 
           if [ "$(date +%s)" -ge "$DEADLINE" ]; then
-            echo "::error::Publish workflow run for $HEAD_SHA ($EVENT_NAME) did not complete in $TIMEOUT_MINUTES minutes."
+            echo "::error::Publish workflow run for $HEAD_SHA ($EVENT_NAME) did not publish the snapshot in $TIMEOUT_MINUTES minutes."
             exit 1
           fi
 
           echo "Waiting for Publish workflow run (run: $RUN_ID, status: $STATUS)..."
-          sleep 20
+          sleep 5
         done
 
-        RUN_URL="$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$RUN_ID"
-
-        if [ "$CONCLUSION" != "success" ]; then
-          echo "::error::Publish workflow run $RUN_URL concluded with '$CONCLUSION'."
-          exit 1
-        fi
-
-        gh run download "$RUN_ID" --repo "$GITHUB_REPOSITORY" --name konsist-snapshot-version --dir "$RUNNER_TEMP/konsist-snapshot-version"
-        VERSION=$(tr -d '\r\n' < "$RUNNER_TEMP/konsist-snapshot-version/konsist-snapshot-version.txt")
+        ARTIFACT_DIR="$RUNNER_TEMP/konsist-snapshot-version"
+        mkdir -p "$ARTIFACT_DIR"
+        gh api "repos/$GITHUB_REPOSITORY/actions/artifacts/$ARTIFACT_ID/zip" > "$ARTIFACT_DIR/artifact.zip"
+        unzip -o -q "$ARTIFACT_DIR/artifact.zip" -d "$ARTIFACT_DIR"
+        VERSION=$(tr -d '\r\n' < "$ARTIFACT_DIR/konsist-snapshot-version.txt")
 
         echo "Konsist snapshot $VERSION published by $RUN_URL"
         echo "version=$VERSION" >> "$GITHUB_OUTPUT"
