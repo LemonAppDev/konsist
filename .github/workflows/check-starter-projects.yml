@@ -107,7 +107,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v7
         with:
-          python-version: '3.15.0'
+          python-version: '3.x'
 
       - name: Add Konsist Snapshot Repository
         run: python3 misc/scripts/replace_konsist_version/add_konsist_snapshot_repository_to_config_file.py samples/starter-projects/android-gradle-groovy-junit-4/settings.gradle
@@ -145,7 +145,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v7
         with:
-          python-version: '3.15.0'
+          python-version: '3.x'
 
       - name: Add Konsist Snapshot Repository
         run: python3 misc/scripts/replace_konsist_version/add_konsist_snapshot_repository_to_config_file.py samples/starter-projects/android-gradle-groovy-junit-5/settings.gradle
@@ -183,7 +183,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v7
         with:
-          python-version: '3.15.0'
+          python-version: '3.x'
 
       - name: Add Konsist Snapshot Repository
         run: python3 misc/scripts/replace_konsist_version/add_konsist_snapshot_repository_to_config_file.py samples/starter-projects/android-gradle-groovy-kotest/settings.gradle
@@ -221,7 +221,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v7
         with:
-          python-version: '3.15.0'
+          python-version: '3.x'
 
       - name: Add Konsist Snapshot Repository
         run: python3 misc/scripts/replace_konsist_version/add_konsist_snapshot_repository_to_config_file.py samples/starter-projects/android-gradle-kotlin-junit-4/settings.gradle.kts
@@ -258,7 +258,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v7
         with:
-          python-version: '3.15.0'
+          python-version: '3.x'
 
       - name: Add Konsist Snapshot Repository
         run: python3 misc/scripts/replace_konsist_version/add_konsist_snapshot_repository_to_config_file.py samples/starter-projects/android-gradle-kotlin-junit-5/settings.gradle.kts
@@ -295,7 +295,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v7
         with:
-          python-version: '3.15.0'
+          python-version: '3.x'
 
       - name: Add Konsist Snapshot Repository
         run: python3 misc/scripts/replace_konsist_version/add_konsist_snapshot_repository_to_config_file.py samples/starter-projects/android-gradle-kotlin-kotest/settings.gradle.kts
@@ -332,7 +332,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v7
         with:
-          python-version: '3.15.0'
+          python-version: '3.x'
 
       - name: Add Konsist Snapshot Repository
         run: python3 misc/scripts/replace_konsist_version/add_konsist_snapshot_repository_to_config_file.py samples/starter-projects/spring-gradle-kotlin-junit-5/build.gradle.kts
@@ -369,7 +369,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v7
         with:
-          python-version: '3.15.0'
+          python-version: '3.x'
 
       - name: Add Konsist Snapshot Repository
         run: python3 misc/scripts/replace_konsist_version/add_konsist_snapshot_repository_to_config_file.py samples/starter-projects/spring-gradle-kotlin-kotest/build.gradle.kts
@@ -406,7 +406,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v7
         with:
-          python-version: '3.15.0'
+          python-version: '3.x'
 
       - name: Add Konsist Snapshot Repository
         run: python3 misc/scripts/replace_konsist_version/add_konsist_snapshot_repository_to_config_file.py samples/starter-projects/spring-gradle-groovy-junit-5/build.gradle
@@ -444,7 +444,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v7
         with:
-          python-version: '3.15.0'
+          python-version: '3.x'
 
       - name: Add Konsist Snapshot Repository
         run: python3 misc/scripts/replace_konsist_version/add_konsist_snapshot_repository_to_config_file.py samples/starter-projects/spring-gradle-groovy-kotest/build.gradle
@@ -481,7 +481,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v7
         with:
-          python-version: '3.15.0'
+          python-version: '3.x'
 
       - name: Add Konsist Snapshot Repository
         run: python3 misc/scripts/replace_konsist_version/add_konsist_snapshot_repository_to_config_file.py samples/starter-projects/spring-maven-junit5/pom.xml
@@ -518,7 +518,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v7
         with:
-          python-version: '3.15.0'
+          python-version: '3.x'
 
       - name: Add Konsist Snapshot Repository
         run: python3 misc/scripts/replace_konsist_version/add_konsist_snapshot_repository_to_config_file.py samples/starter-projects/spring-maven-kotest/pom.xml

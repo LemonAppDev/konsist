@@ -51,6 +51,8 @@ jobs:
 
       - name: Set up Gradle
         uses: gradle/actions/setup-gradle@v6
+        with:
+          cache-encryption-key: ${{ secrets.GRADLE_ENCRYPTION_KEY }}
 
       - name: Run Python Script for All Files
         run: python3 misc/scripts/check_ktdoc_snippets.py -all
