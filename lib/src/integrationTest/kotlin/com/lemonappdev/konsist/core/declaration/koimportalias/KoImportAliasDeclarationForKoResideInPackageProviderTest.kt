@@ -17,6 +17,7 @@ class KoImportAliasDeclarationForKoResideInPackageProviderTest {
                 ?.parameters
                 ?.first()
                 ?.type
+                ?.sourceDeclaration
                 ?.asImportAliasDeclaration()
 
         // then

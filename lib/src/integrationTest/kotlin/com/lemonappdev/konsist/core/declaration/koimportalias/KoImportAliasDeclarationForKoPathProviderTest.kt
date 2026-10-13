@@ -21,6 +21,7 @@ class KoImportAliasDeclarationForKoPathProviderTest {
                 ?.parameters
                 ?.first()
                 ?.type
+                ?.sourceDeclaration
                 ?.asImportAliasDeclaration()
 
         // then
@@ -42,6 +43,7 @@ class KoImportAliasDeclarationForKoPathProviderTest {
                 ?.parameters
                 ?.first()
                 ?.type
+                ?.sourceDeclaration
                 ?.asImportAliasDeclaration()
 
         // then
@@ -67,6 +69,7 @@ class KoImportAliasDeclarationForKoPathProviderTest {
                 ?.parameters
                 ?.first()
                 ?.type
+                ?.sourceDeclaration
                 ?.asImportAliasDeclaration()
 
         // then
@@ -90,6 +93,7 @@ class KoImportAliasDeclarationForKoPathProviderTest {
                 ?.parameters
                 ?.first()
                 ?.type
+                ?.sourceDeclaration
                 ?.asImportAliasDeclaration()
 
         // then

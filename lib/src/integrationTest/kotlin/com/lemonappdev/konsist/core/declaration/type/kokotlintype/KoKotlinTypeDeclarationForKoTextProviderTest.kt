@@ -14,6 +14,7 @@ class KoKotlinTypeDeclarationForKoTextProviderTest {
                 .properties()
                 .first()
                 .type
+                ?.sourceDeclaration
                 ?.asKotlinTypeDeclaration()
 
         // then
@@ -38,6 +39,7 @@ class KoKotlinTypeDeclarationForKoTextProviderTest {
                 .properties()
                 .first()
                 .type
+                ?.sourceDeclaration
                 ?.asKotlinTypeDeclaration()
 
         // then

@@ -13,6 +13,7 @@ class KoKotlinTypeDeclarationTest {
                 .properties()
                 .first()
                 .type
+                ?.sourceDeclaration
                 ?.asKotlinTypeDeclaration()
 
         // then
@@ -27,6 +28,7 @@ class KoKotlinTypeDeclarationTest {
                 .properties()
                 .first()
                 .type
+                ?.sourceDeclaration
                 ?.asKotlinTypeDeclaration()
 
         // then

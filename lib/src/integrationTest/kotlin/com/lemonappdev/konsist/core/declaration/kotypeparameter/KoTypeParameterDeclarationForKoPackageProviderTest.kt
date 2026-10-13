@@ -17,6 +17,7 @@ class KoTypeParameterDeclarationForKoPackageProviderTest {
                 .functions()
                 .returnTypes
                 .firstOrNull()
+                ?.sourceDeclaration
                 ?.asTypeParameterDeclaration()
 
         // then
@@ -31,6 +32,7 @@ class KoTypeParameterDeclarationForKoPackageProviderTest {
                 .functions()
                 .returnTypes
                 .firstOrNull()
+                ?.sourceDeclaration
                 ?.asTypeParameterDeclaration()
 
         // then
@@ -47,7 +49,8 @@ class KoTypeParameterDeclarationForKoPackageProviderTest {
                 .parameters
                 .first()
                 .type
-                .asTypeParameterDeclaration()
+                .sourceDeclaration
+                ?.asTypeParameterDeclaration()
 
         // then
         sut?.packagee shouldBeEqualTo null
@@ -63,7 +66,8 @@ class KoTypeParameterDeclarationForKoPackageProviderTest {
                 .parameters
                 .first()
                 .type
-                .asTypeParameterDeclaration()
+                .sourceDeclaration
+                ?.asTypeParameterDeclaration()
 
         // then
         sut?.packagee?.name shouldBeEqualTo "com.fixturepackage"
@@ -78,6 +82,7 @@ class KoTypeParameterDeclarationForKoPackageProviderTest {
                 .properties()
                 .first()
                 .type
+                ?.sourceDeclaration
                 ?.asTypeParameterDeclaration()
 
         // then
@@ -93,6 +98,7 @@ class KoTypeParameterDeclarationForKoPackageProviderTest {
                 .properties()
                 .first()
                 .type
+                ?.sourceDeclaration
                 ?.asTypeParameterDeclaration()
 
         // then
@@ -107,6 +113,7 @@ class KoTypeParameterDeclarationForKoPackageProviderTest {
                 .properties()
                 .first()
                 .type
+                ?.sourceDeclaration
                 ?.asTypeParameterDeclaration()
 
         // then
@@ -121,6 +128,7 @@ class KoTypeParameterDeclarationForKoPackageProviderTest {
                 .properties()
                 .first()
                 .type
+                ?.sourceDeclaration
                 ?.asTypeParameterDeclaration()
 
         // then

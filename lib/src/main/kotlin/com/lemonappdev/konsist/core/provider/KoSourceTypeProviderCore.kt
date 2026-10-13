@@ -2,7 +2,6 @@ package com.lemonappdev.konsist.core.provider
 
 import com.lemonappdev.konsist.api.declaration.KoFileDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoTypeDeclaration
-import com.lemonappdev.konsist.api.provider.KoDeclarationCastProvider
 import com.lemonappdev.konsist.api.provider.KoSourceTypeProvider
 import com.lemonappdev.konsist.core.declaration.KoFileDeclarationCore
 import com.lemonappdev.konsist.core.util.TypeUtil
@@ -19,7 +18,7 @@ internal interface KoSourceTypeProviderCore :
 
     override val sourceType: String
         get() =
-            if ((this as? KoDeclarationCastProvider)?.isImportAlias == true) {
+            if ((this as? KoTypeDeclaration)?.sourceDeclaration?.isImportAlias == true) {
                 file
                     .imports
                     .firstOrNull { it.alias?.name == ktElement.text.removeSuffix("?") }

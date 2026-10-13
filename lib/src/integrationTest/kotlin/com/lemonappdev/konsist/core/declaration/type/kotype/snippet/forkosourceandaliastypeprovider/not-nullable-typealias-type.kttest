@@ -1,3 +1,0 @@
-val fixtureProperty1: FixtureTypeAlias = {}
-
-typealias FixtureTypeAlias = () -> Unit

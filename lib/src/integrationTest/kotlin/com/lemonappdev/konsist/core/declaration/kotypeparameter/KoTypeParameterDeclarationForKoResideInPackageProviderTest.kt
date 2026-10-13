@@ -18,6 +18,7 @@ class KoTypeParameterDeclarationForKoResideInPackageProviderTest {
                 .functions()
                 .returnTypes
                 .firstOrNull()
+                ?.sourceDeclaration
                 ?.asTypeParameterDeclaration()
 
         // then
@@ -39,7 +40,8 @@ class KoTypeParameterDeclarationForKoResideInPackageProviderTest {
                 .parameters
                 .first()
                 .type
-                .asTypeParameterDeclaration()
+                .sourceDeclaration
+                ?.asTypeParameterDeclaration()
 
         // then
         assertSoftly(sut) {
@@ -59,6 +61,7 @@ class KoTypeParameterDeclarationForKoResideInPackageProviderTest {
                 .properties()
                 .first()
                 .type
+                ?.sourceDeclaration
                 ?.asTypeParameterDeclaration()
 
         // then
@@ -78,6 +81,7 @@ class KoTypeParameterDeclarationForKoResideInPackageProviderTest {
                 .properties()
                 .first()
                 .type
+                ?.sourceDeclaration
                 ?.asTypeParameterDeclaration()
 
         // then

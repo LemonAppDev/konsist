@@ -19,6 +19,7 @@ class KoImportAliasDeclarationForKoContainingFileProviderTest {
                 ?.parameters
                 ?.first()
                 ?.type
+                ?.sourceDeclaration
                 ?.asImportAliasDeclaration()
 
         // then

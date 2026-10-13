@@ -18,6 +18,7 @@ class KoTypeParameterDeclarationForKoContainingDeclarationProviderTest {
                 .functions()
                 .returnTypes
                 .firstOrNull()
+                ?.sourceDeclaration
                 ?.asTypeParameterDeclaration()
 
         // then
@@ -34,7 +35,8 @@ class KoTypeParameterDeclarationForKoContainingDeclarationProviderTest {
                 .parameters
                 .first()
                 .type
-                .asTypeParameterDeclaration()
+                .sourceDeclaration
+                ?.asTypeParameterDeclaration()
 
         // then
         (sut?.containingDeclaration as? KoNameProvider)?.name shouldBeEqualTo "class-type-parameter-containing-declaration"
@@ -49,6 +51,7 @@ class KoTypeParameterDeclarationForKoContainingDeclarationProviderTest {
                 .properties()
                 .first()
                 .type
+                ?.sourceDeclaration
                 ?.asTypeParameterDeclaration()
 
         // then
@@ -63,6 +66,7 @@ class KoTypeParameterDeclarationForKoContainingDeclarationProviderTest {
                 .properties()
                 .first()
                 .type
+                ?.sourceDeclaration
                 ?.asTypeParameterDeclaration()
 
         // then
