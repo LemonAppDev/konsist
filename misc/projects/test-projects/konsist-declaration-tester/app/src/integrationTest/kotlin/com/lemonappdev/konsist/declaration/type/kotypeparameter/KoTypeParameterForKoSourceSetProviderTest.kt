@@ -21,6 +21,7 @@ class KoTypeParameterForKoSourceSetProviderTest {
                 .properties()
                 .first { it.name == "appPropertyWithTypeParameter" }
                 .type
+                ?.sourceDeclaration
                 ?.asTypeParameterDeclaration()
 
         // then
@@ -40,6 +41,7 @@ class KoTypeParameterForKoSourceSetProviderTest {
                 .properties()
                 .first { it.name == "appPropertyWithTypeParameterTest" }
                 .type
+                ?.sourceDeclaration
                 ?.asTypeParameterDeclaration()
 
         // then
@@ -59,6 +61,7 @@ class KoTypeParameterForKoSourceSetProviderTest {
                 .properties()
                 .first { it.name == "libPropertyWithTypeParameter" }
                 .type
+                ?.sourceDeclaration
                 ?.asTypeParameterDeclaration()
 
         // then
@@ -78,6 +81,7 @@ class KoTypeParameterForKoSourceSetProviderTest {
                 .properties()
                 .first { it.name == "libPropertyWithTypeParameterTest" }
                 .type
+                ?.sourceDeclaration
                 ?.asTypeParameterDeclaration()
 
         // then
@@ -97,6 +101,7 @@ class KoTypeParameterForKoSourceSetProviderTest {
                 .properties()
                 .first { it.name == "rootPropertyWithTypeParameter" }
                 .type
+                ?.sourceDeclaration
                 ?.asTypeParameterDeclaration()
 
         // then
@@ -116,6 +121,7 @@ class KoTypeParameterForKoSourceSetProviderTest {
                 .properties()
                 .first { it.name == "rootSrcPropertyWithTypeParameter" }
                 .type
+                ?.sourceDeclaration
                 ?.asTypeParameterDeclaration()
 
         // then

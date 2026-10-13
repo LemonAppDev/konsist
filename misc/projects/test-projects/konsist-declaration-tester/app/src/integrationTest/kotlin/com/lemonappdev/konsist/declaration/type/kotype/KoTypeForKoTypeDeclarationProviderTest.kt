@@ -216,7 +216,8 @@ class KoTypeForKoTypeDeclarationProviderTest {
         // then
         assertSoftly(sut) {
             sourceDeclaration shouldBeInstanceOf KoImportAliasDeclaration::class
-            asImportAliasDeclaration()
+            sourceDeclaration
+                ?.asImportAliasDeclaration()
                 ?.importDirective
                 ?.name
                 .shouldBeEqualTo("com.lemonappdev.fixture.fortypetest.importaliascase.declarations.ClassType")
@@ -240,7 +241,8 @@ class KoTypeForKoTypeDeclarationProviderTest {
         // then
         assertSoftly(sut) {
             sourceDeclaration shouldBeInstanceOf KoImportAliasDeclaration::class
-            asImportAliasDeclaration()
+            sourceDeclaration
+                ?.asImportAliasDeclaration()
                 ?.importDirective
                 ?.name
                 .shouldBeEqualTo("com.lemonappdev.fixture.fortypetest.importaliascase.declarations.ClassType")
@@ -265,7 +267,8 @@ class KoTypeForKoTypeDeclarationProviderTest {
         // then
         assertSoftly(sut) {
             sourceDeclaration shouldBeInstanceOf KoImportAliasDeclaration::class
-            asImportAliasDeclaration()
+            sourceDeclaration
+                ?.asImportAliasDeclaration()
                 ?.importDirective
                 ?.name
                 .shouldBeEqualTo("com.lemonappdev.fixture.fortypetest.importaliascase.declarations.InterfaceType")
@@ -289,7 +292,8 @@ class KoTypeForKoTypeDeclarationProviderTest {
         // then
         assertSoftly(sut) {
             sourceDeclaration shouldBeInstanceOf KoImportAliasDeclaration::class
-            asImportAliasDeclaration()
+            sourceDeclaration
+                ?.asImportAliasDeclaration()
                 ?.importDirective
                 ?.name
                 .shouldBeEqualTo("com.lemonappdev.fixture.fortypetest.importaliascase.declarations.InterfaceType")
@@ -314,7 +318,8 @@ class KoTypeForKoTypeDeclarationProviderTest {
         // then
         assertSoftly(sut) {
             sourceDeclaration shouldBeInstanceOf KoImportAliasDeclaration::class
-            asImportAliasDeclaration()
+            sourceDeclaration
+                ?.asImportAliasDeclaration()
                 ?.importDirective
                 ?.name
                 .shouldBeEqualTo("com.lemonappdev.fixture.fortypetest.importaliascase.declarations.ObjectType")
@@ -338,7 +343,8 @@ class KoTypeForKoTypeDeclarationProviderTest {
         // then
         assertSoftly(sut) {
             sourceDeclaration shouldBeInstanceOf KoImportAliasDeclaration::class
-            asImportAliasDeclaration()
+            sourceDeclaration
+                ?.asImportAliasDeclaration()
                 ?.importDirective
                 ?.name
                 .shouldBeEqualTo("com.lemonappdev.fixture.fortypetest.importaliascase.declarations.ObjectType")
@@ -363,7 +369,8 @@ class KoTypeForKoTypeDeclarationProviderTest {
         // then
         assertSoftly(sut) {
             sourceDeclaration shouldBeInstanceOf KoImportAliasDeclaration::class
-            asImportAliasDeclaration()
+            sourceDeclaration
+                ?.asImportAliasDeclaration()
                 ?.importDirective
                 ?.name
                 .shouldBeEqualTo("com.lemonappdev.fixture.fortypetest.importaliascase.declarations.TypeAliasType")
@@ -387,7 +394,8 @@ class KoTypeForKoTypeDeclarationProviderTest {
         // then
         assertSoftly(sut) {
             sourceDeclaration shouldBeInstanceOf KoImportAliasDeclaration::class
-            asImportAliasDeclaration()
+            sourceDeclaration
+                ?.asImportAliasDeclaration()
                 ?.importDirective
                 ?.name
                 .shouldBeEqualTo("com.lemonappdev.fixture.fortypetest.importaliascase.declarations.TypeAliasType")

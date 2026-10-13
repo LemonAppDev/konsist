@@ -23,6 +23,7 @@ class KoTypeParameterForKoModuleProviderTest {
                 .properties()
                 .first { it.name == "appPropertyWithTypeParameter" }
                 .type
+                ?.sourceDeclaration
                 ?.asTypeParameterDeclaration()
 
         // then
@@ -42,6 +43,7 @@ class KoTypeParameterForKoModuleProviderTest {
                 .properties()
                 .first { it.name == "libPropertyWithTypeParameter" }
                 .type
+                ?.sourceDeclaration
                 ?.asTypeParameterDeclaration()
 
         // then
@@ -61,6 +63,7 @@ class KoTypeParameterForKoModuleProviderTest {
                 .properties()
                 .first { it.name == "rootPropertyWithTypeParameter" }
                 .type
+                ?.sourceDeclaration
                 ?.asTypeParameterDeclaration()
 
         // then
