@@ -1,13 +1,16 @@
 [versions]
 kotlinVersion = "2.4.21"
+# Lowest kotlin-stdlib published as Konsist dependency, keep aligned with "apiVersion" (see DeveloperReadme.md "Kotlin Compatibility")
+kotlinStdlibVersion = "2.0.21"
 jUnitVersion = "5.14.4"
 ktlintCliVersion = "1.8.0"
+# Raises minimum consumer Kotlin version when upgraded (see DeveloperReadme.md "Kotlin Compatibility")
 coroutinesVersion = "1.9.0"
 kotestVersion = "6.2.5"
 junitPlatformLauncher = "6.1.3"
 
 [libraries]
-kotlinStdlibJdk8 = { module = "org.jetbrains.kotlin:kotlin-stdlib-jdk8", version.ref = "kotlinVersion" }
+kotlinStdlib = { module = "org.jetbrains.kotlin:kotlin-stdlib", version.ref = "kotlinStdlibVersion" }
 junitJupiterApi =  { module = "org.junit.jupiter:junit-jupiter-api", version.ref = "jUnitVersion" }
 junitJupiterEngine =  { module = "org.junit.jupiter:junit-jupiter-engine", version.ref = "jUnitVersion" }
 junitJupiterParams =  { module = "org.junit.jupiter:junit-jupiter-params", version.ref = "jUnitVersion" }
@@ -16,7 +19,9 @@ kotestFrameworkEngine =  { module = "io.kotest:kotest-framework-engine", version
 kluent = "org.amshove.kluent:kluent:1.73"
 mockk = "io.mockk:mockk:1.14.11"
 kotlinCompilerEmbeddable = { module = "org.jetbrains.kotlin:kotlin-compiler-embeddable", version.ref = "kotlinVersion" }
-kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "coroutinesVersion" }
+# JVM artifact is used, because Gradle publishes the resolved version of multiplatform "kotlinx-coroutines-core" in POM
+# (compileOnly Kotest upgrades it on compile classpath), see DeveloperReadme.md "Kotlin Compatibility"
+kotlinx-coroutines-core-jvm = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm", version.ref = "coroutinesVersion" }
 junitPlatformLauncher = { module = "org.junit.platform:junit-platform-launcher", version.ref = "junitPlatformLauncher" }
 
 # This dependency is included as it's internally utilized by Spotless.

@@ -19,6 +19,7 @@ class KotlinConventionPlugin : Plugin<Project> {
                 @Suppress("detekt.MagicNumber")
                 jvmToolchain(25)
 
+                // Keep aligned with "kotlinStdlibVersion" (see DeveloperReadme.md "Kotlin Compatibility")
                 compilerOptions {
                     apiVersion.set(KotlinVersion.KOTLIN_2_0)
                     languageVersion.set(KotlinVersion.KOTLIN_2_0)

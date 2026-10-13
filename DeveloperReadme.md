@@ -86,6 +86,50 @@ Snapshot and release publishing require these properties in `local.properties`:
 - [Deployments](https://central.sonatype.com/publishing/deployments) (private)
 - [Namespaces](https://central.sonatype.com/publishing/namespaces) (private)
 
+## Kotlin Compatibility
+
+Gradle projects using Kotlin 1.9+ can use Konsist, regardless of the Kotlin version used to build Konsist (Maven projects - see below).
+These versions are decoupled:
+
+| Version                                      | Where                                                     | Value   | Purpose                                                    |
+|----------------------------------------------|-----------------------------------------------------------|---------|------------------------------------------------------------|
+| `kotlinVersion`                              | `gradle/libs.versions.toml`                               | latest  | Kotlin Gradle Plugin and `kotlin-compiler-embeddable`      |
+| `apiVersion` / `languageVersion`             | `build-logic/.../KotlinConventionPlugin.kt`               | `2.0`   | Metadata version of Konsist classes, allowed stdlib API    |
+| `kotlinStdlibVersion`                        | `gradle/libs.versions.toml`                               | `2.0.x` | `kotlin-stdlib` version published as Konsist dependency    |
+| `coroutinesVersion`                          | `gradle/libs.versions.toml`                               | `1.9.0` | Built with Kotlin 2.0, depends on `kotlin-stdlib` 2.0      |
+
+### Why
+
+- Kotlin compiler can read metadata only up to one version newer than itself (e.g. Kotlin 2.2 reads up to 2.3
+  metadata, but fails on 2.4 with `metadata 2.4.0, compiler can read up to 2.3.0`).
+- `apiVersion` / `languageVersion` set the metadata version of Konsist classes (`2.0` is readable by Kotlin 1.9+) and
+  prevent Konsist from using `kotlin-stdlib` API newer than `kotlinStdlibVersion`.
+- `kotlin-compiler-embeddable` depends on `kotlin-stdlib` of the same version. Konsist excludes it
+  (`lib/build.gradle.kts`) and publishes `kotlinStdlibVersion` instead. Without this, the consumer `kotlin-stdlib` is
+  upgraded at runtime to `kotlinVersion`, and Android Gradle Plugin 8 (and AGP 9 with
+  `android.dependency.useConstraints=true`) copies this version into the test compile classpath. As a result Android
+  projects using Kotlin older than `kotlinVersion - 1` fail to compile tests.
+- `kotlinx-coroutines` versions are built with newer Kotlin and depend on newer `kotlin-stdlib`
+  (e.g. 1.10 depends on `kotlin-stdlib` 2.1), so upgrading it raises the minimum consumer Kotlin version.
+- `kotlinx-coroutines-core-jvm` is used instead of multiplatform `kotlinx-coroutines-core`, because Gradle publishes
+  the resolved version of multiplatform dependencies in POM, and `compileOnly` Kotest upgrades it on the compile
+  classpath (POM would contain a different version than Gradle module metadata).
+- Maven adds `runtime` scope dependencies to the test compile classpath, so `kotlin-compiler-embeddable` metadata is
+  checked by the consumer compiler. Maven projects require Kotlin `kotlinVersion - 1` (or
+  `-Xskip-metadata-version-check` compiler argument). Gradle projects are not affected.
+
+### Rules
+
+- Keep `apiVersion`, `languageVersion` and `kotlinStdlibVersion` aligned (same minor version).
+- `kotlinVersion` can be upgraded freely (Kotlin dependencies are excluded from Renovate updates - see `renovate.json`).
+- Do not upgrade `kotlinStdlibVersion`, `apiVersion`, `languageVersion` or `coroutinesVersion` unless the minimum
+  supported consumer Kotlin version is intentionally raised (breaking change - document it in release notes).
+- After upgrading `kotlinVersion`, verify `kotlin-compiler-embeddable` runs with `kotlinStdlibVersion` (the compiler may
+  start using newer `kotlin-stdlib` API, causing `NoSuchMethodError` or `NoClassDefFoundError` at runtime).
+- When `kotlinVersion`, `kotlinStdlibVersion`, `apiVersion`, `languageVersion` or `coroutinesVersion` changes, update
+  the [Compatibility](https://docs.konsist.lemonappdev.com/help/compatibility) documentation page (Kotlin
+  compatibility tables and dependency versions).
+
 ## Naming Conventions
 
 ### Naming Conventions For Providers With Property With `List<KoXDeclaration>` Type

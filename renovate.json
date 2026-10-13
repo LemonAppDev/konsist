@@ -19,6 +19,12 @@
       "enabled": false
     },
     {
+      "description": "Minimum consumer Kotlin version - kotlin-stdlib and kotlinx-coroutines are locked, see DeveloperReadme.md 'Kotlin Compatibility'",
+      "matchPackageNames": ["org.jetbrains.kotlin:kotlin-stdlib", "org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm"],
+      "matchFileNames": ["gradle/libs.versions.toml"],
+      "enabled": false
+    },
+    {
       "matchPackagePatterns": ["org.junit.jupiter*"],
       "matchUpdateTypes": ["major"],
       "enabled": false
