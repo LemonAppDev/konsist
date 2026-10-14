@@ -6,6 +6,7 @@ import com.lemonappdev.konsist.helper.util.PathProvider.appMainSourceSetProjectD
 import com.lemonappdev.konsist.helper.util.PathProvider.dataMainSourceSetProjectDirectory
 import com.lemonappdev.konsist.helper.util.PathProvider.featureMainSourceSetProjectDirectory
 import com.lemonappdev.konsist.helper.util.PathProvider.featurePaymentMainSourceSetProjectDirectory
+import com.lemonappdev.konsist.helper.util.PathProvider.featureProjectDirectory
 import com.lemonappdev.konsist.helper.util.PathProvider.rootMainSourceSetProjectDirectory
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
@@ -106,6 +107,43 @@ class KoFileForKoModuleProviderTest {
             residesInModule(":feature") shouldBeEqualTo true
             residesInModule(featurePayment) shouldBeEqualTo false
             residesInModule(":feature:payment") shouldBeEqualTo false
+        }
+    }
+
+    @Test
+    fun `module name of file located outside src directory in module directory is module directory`() {
+        // given
+        val sut =
+            Konsist
+                .scopeFromFile("$featureProjectDirectory/FeatureScript.kt".toOsSeparator())
+                .files
+                .first()
+
+        // then
+        assertSoftly(sut) {
+            moduleName shouldBeEqualTo feature
+            residesInModule(feature) shouldBeEqualTo true
+            residesInModule(":feature") shouldBeEqualTo true
+            residesInModule(featurePayment) shouldBeEqualTo false
+        }
+    }
+
+    @Test
+    fun `module name of file located outside src directory in non-module directory is closest module directory`() {
+        // given
+        val sut =
+            Konsist
+                .scopeFromFile("$featureProjectDirectory/config/FeatureConfig.kt".toOsSeparator())
+                .files
+                .first()
+
+        // then
+        assertSoftly(sut) {
+            moduleName shouldBeEqualTo feature
+            residesInModule(feature) shouldBeEqualTo true
+            residesInModule(":feature") shouldBeEqualTo true
+            residesInModule("feature/config") shouldBeEqualTo false
+            residesInModule(featurePayment) shouldBeEqualTo false
         }
     }
 }
