@@ -1,6 +1,7 @@
 package com.lemonappdev.konsist.api.ext.list.kosourcetype
 
 import com.lemonappdev.konsist.TestSnippetProvider
+import com.lemonappdev.konsist.api.container.KoScope
 import com.lemonappdev.konsist.api.declaration.type.KoTypeDeclaration
 import com.lemonappdev.konsist.api.ext.list.withBareSourceTypeOf
 import com.lemonappdev.konsist.api.ext.list.withSourceTypeOf
@@ -17,7 +18,7 @@ class KoSourceTypeProviderListExtTest {
     @Test
     fun `class-type`() {
         // given
-        val sut = getSnippetTypes("class-type")
+        val sut = getSnippetFile("class-type").propertyTypes()
 
         // then
         assertMatches(sut, FixtureType::class)
@@ -26,7 +27,7 @@ class KoSourceTypeProviderListExtTest {
     @Test
     fun `nullable-class-type`() {
         // given
-        val sut = getSnippetTypes("nullable-class-type")
+        val sut = getSnippetFile("nullable-class-type").propertyTypes()
 
         // then
         assertMatches(sut, FixtureType::class)
@@ -35,7 +36,7 @@ class KoSourceTypeProviderListExtTest {
     @Test
     fun `generic-type`() {
         // given
-        val sut = getSnippetTypes("generic-type")
+        val sut = getSnippetFile("generic-type").propertyTypes()
 
         // then
         assertMatches(sut, List::class)
@@ -45,7 +46,7 @@ class KoSourceTypeProviderListExtTest {
     @Test
     fun `class-type-with-same-name-in-different-package`() {
         // given
-        val sut = getSnippetTypes("class-type-with-same-name-in-different-package")
+        val sut = getSnippetFile("class-type-with-same-name-in-different-package").propertyTypes()
 
         // then
         assertDoesNotMatch(sut, FixtureType::class)
@@ -54,7 +55,7 @@ class KoSourceTypeProviderListExtTest {
     @Test
     fun `import-alias-type`() {
         // given
-        val sut = getSnippetTypes("import-alias-type")
+        val sut = getSnippetFile("import-alias-type").propertyTypes()
 
         // then
         assertMatches(sut, FixtureType::class)
@@ -63,7 +64,7 @@ class KoSourceTypeProviderListExtTest {
     @Test
     fun `typealias-type`() {
         // given
-        val sut = getSnippetTypes("typealias-type")
+        val sut = getSnippetFile("typealias-type").propertyTypes()
 
         // then
         assertMatches(sut, FixtureType::class)
@@ -72,7 +73,7 @@ class KoSourceTypeProviderListExtTest {
     @Test
     fun `kotlin-type`() {
         // given
-        val sut = getSnippetTypes("kotlin-type")
+        val sut = getSnippetFile("kotlin-type").propertyTypes()
 
         // then
         assertMatches(sut, String::class)
@@ -82,7 +83,7 @@ class KoSourceTypeProviderListExtTest {
     @Test
     fun `external-type`() {
         // given
-        val sut = getSnippetTypes("external-type")
+        val sut = getSnippetFile("external-type").propertyTypes()
 
         // then
         assertMatches(sut, FixtureExternalClass::class)
@@ -113,10 +114,14 @@ class KoSourceTypeProviderListExtTest {
         }
     }
 
-    private fun getSnippetTypes(fileName: String): List<KoTypeDeclaration> =
-        TestSnippetProvider
-            .getSnippetKoScope("api/ext/list/kosourcetype/snippet/", fileName)
-            .properties()
+    private fun KoScope.propertyTypes(): List<KoTypeDeclaration> =
+        properties()
             .mapNotNull { it.type }
             .also { it.size shouldBeEqualTo 1 }
+
+    private fun getSnippetFile(fileName: String) =
+        TestSnippetProvider.getSnippetKoScope(
+            "api/ext/list/kosourcetype/snippet/",
+            fileName,
+        )
 }
