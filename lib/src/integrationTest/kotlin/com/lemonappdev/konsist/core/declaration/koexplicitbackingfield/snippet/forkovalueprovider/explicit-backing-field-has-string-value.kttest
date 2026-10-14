@@ -1,0 +1,2 @@
+val fixtureProperty: CharSequence
+    field = "text"
