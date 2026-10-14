@@ -125,11 +125,12 @@ class ModuleUtilTest {
     }
 
     @Test
-    fun `should return file directory for file outside src directory for unix path`() {
+    fun `should return file directory for file outside src directory without module directory for unix path`() {
         // when
         val result =
             ModuleUtil.getModuleName(
                 projectPath = "/samples/SampleClass.kt",
+                getModuleDirectory = { null },
             )
 
         // then
@@ -137,11 +138,12 @@ class ModuleUtilTest {
     }
 
     @Test
-    fun `should return file directory for file outside src directory for windows path`() {
+    fun `should return file directory for file outside src directory without module directory for windows path`() {
         // when
         val result =
             ModuleUtil.getModuleName(
                 projectPath = """\samples\SampleClass.kt""",
+                getModuleDirectory = { null },
             )
 
         // then
@@ -149,15 +151,81 @@ class ModuleUtilTest {
     }
 
     @Test
-    fun `should return nested file directory for file outside src directory`() {
+    fun `should return nested file directory for file outside src directory without module directory`() {
         // when
         val result =
             ModuleUtil.getModuleName(
                 projectPath = "/feature/samples/SampleClass.kt",
+                getModuleDirectory = { null },
             )
 
         // then
         result shouldBeEqualTo "feature/samples"
+    }
+
+    @Test
+    fun `should return closest module for file outside src directory in module subdirectory for unix path`() {
+        // when
+        val result =
+            ModuleUtil.getModuleName(
+                projectPath = "/feature/config/SampleClass.kt",
+                getModuleDirectory = mapOf("/feature/config" to "/feature")::get,
+            )
+
+        // then
+        result shouldBeEqualTo "feature"
+    }
+
+    @Test
+    fun `should return closest module for file outside src directory in module subdirectory for windows path`() {
+        // when
+        val result =
+            ModuleUtil.getModuleName(
+                projectPath = """\feature\config\SampleClass.kt""",
+                getModuleDirectory = mapOf("/feature/config" to "/feature")::get,
+            )
+
+        // then
+        result shouldBeEqualTo "feature"
+    }
+
+    @Test
+    fun `should return nested module for file outside src directory in nested module directory`() {
+        // when
+        val result =
+            ModuleUtil.getModuleName(
+                projectPath = "/feature/payment/SampleClass.kt",
+                getModuleDirectory = mapOf("/feature/payment" to "/feature/payment")::get,
+            )
+
+        // then
+        result shouldBeEqualTo "feature/payment"
+    }
+
+    @Test
+    fun `should return root for file outside src directory in root module subdirectory`() {
+        // when
+        val result =
+            ModuleUtil.getModuleName(
+                projectPath = "/samples/SampleClass.kt",
+                getModuleDirectory = mapOf("/samples" to "")::get,
+            )
+
+        // then
+        result shouldBeEqualTo "root"
+    }
+
+    @Test
+    fun `should not look for module directory for file in src directory`() {
+        // when
+        val result =
+            ModuleUtil.getModuleName(
+                projectPath = "/feature/payment/src/main/kotlin/SampleClass.kt",
+                getModuleDirectory = { error("Module directory should not be looked up") },
+            )
+
+        // then
+        result shouldBeEqualTo "feature/payment"
     }
 
     @Test
@@ -166,6 +234,7 @@ class ModuleUtilTest {
         val result =
             ModuleUtil.getModuleName(
                 projectPath = "/SampleClass.kt",
+                getModuleDirectory = { null },
             )
 
         // then
@@ -178,6 +247,7 @@ class ModuleUtilTest {
         val result =
             ModuleUtil.getModuleName(
                 projectPath = """\SampleClass.kt""",
+                getModuleDirectory = { null },
             )
 
         // then

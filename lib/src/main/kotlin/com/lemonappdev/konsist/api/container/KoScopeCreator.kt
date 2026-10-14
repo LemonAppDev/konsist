@@ -29,7 +29,8 @@ interface KoScopeCreator {
      * `feature` and its nested modules (`feature/payment`), `..data` matches `data` and `feature/data`,
      * and `..` matches all modules.
      * Module contains the same files as [KoModuleProvider.moduleName] reports, including Kotlin files located in the
-     * module directory outside the "src" directory (e.g. `feature/Script.kt` resides in the `feature` module).
+     * module directory outside the "src" directory (e.g. `feature/Script.kt` and `feature/config/Script.kt` reside in
+     * the `feature` module, when `feature/config` is not a module directory).
      * @param sourceSetName The name of the source set. If null, all source sets will be included.
      * @param ignoreBuildConfig If true, build config files and directories such as Gradle buildSrc directory will be ignored.
      * @return a [KoScope] containing all Kotlin files in the project.
@@ -54,7 +55,8 @@ interface KoScopeCreator {
      * `feature` and its nested modules (`feature/payment`), `..data` matches `data` and `feature/data`,
      * and `..` matches all modules.
      * Module contains the same files as [KoModuleProvider.moduleName] reports, including Kotlin files located in the
-     * module directory outside the "src" directory (e.g. `feature/Script.kt` resides in the `feature` module).
+     * module directory outside the "src" directory (e.g. `feature/Script.kt` and `feature/config/Script.kt` reside in
+     * the `feature` module, when `feature/config` is not a module directory).
      * @param moduleNames The name(s) of the module(s), in the same format as [moduleName].
      * @return a [KoScope] containing all Kotlin files in the module.
      */
@@ -77,7 +79,8 @@ interface KoScopeCreator {
      * `feature` and its nested modules (`feature/payment`), `..data` matches `data` and `feature/data`,
      * and `..` matches all modules.
      * Module contains the same files as [KoModuleProvider.moduleName] reports, including Kotlin files located in the
-     * module directory outside the "src" directory (e.g. `feature/Script.kt` resides in the `feature` module).
+     * module directory outside the "src" directory (e.g. `feature/Script.kt` and `feature/config/Script.kt` reside in
+     * the `feature` module, when `feature/config` is not a module directory).
      * @return a [KoScope] containing all Kotlin files in the module.
      */
     fun scopeFromModules(moduleNames: Collection<String>): KoScope
@@ -97,7 +100,8 @@ interface KoScopeCreator {
      * `feature` and its nested modules (`feature/payment`), `..data` matches `data` and `feature/data`,
      * and `..` matches all modules.
      * Module contains the same files as [KoModuleProvider.moduleName] reports, including Kotlin files located in the
-     * module directory outside the "src" directory (e.g. `feature/Script.kt` resides in the `feature` module).
+     * module directory outside the "src" directory (e.g. `feature/Script.kt` and `feature/config/Script.kt` reside in
+     * the `feature` module, when `feature/config` is not a module directory).
      * @param sourceSetName The name of the source set. If null, all source sets will be included.
      * @return a [KoScope] containing all Kotlin files in the given package.
      */
@@ -148,7 +152,8 @@ interface KoScopeCreator {
      * `feature` and its nested modules (`feature/payment`), `..data` matches `data` and `feature/data`,
      * and `..` matches all modules.
      * Module contains the same files as [KoModuleProvider.moduleName] reports, including Kotlin files located in the
-     * module directory outside the "src" directory (e.g. `feature/Script.kt` resides in the `feature` module).
+     * module directory outside the "src" directory (e.g. `feature/Script.kt` and `feature/config/Script.kt` reside in
+     * the `feature` module, when `feature/config` is not a module directory).
      * @param sourceSetName The name of the source set. If null, all source sets will be included.
      * @return a [KoScope] containing all Kotlin files in the production source sets.
      * @throws IllegalArgumentException if [sourceSetName] is a test source set.
@@ -175,7 +180,8 @@ interface KoScopeCreator {
      * `feature` and its nested modules (`feature/payment`), `..data` matches `data` and `feature/data`,
      * and `..` matches all modules.
      * Module contains the same files as [KoModuleProvider.moduleName] reports, including Kotlin files located in the
-     * module directory outside the "src" directory (e.g. `feature/Script.kt` resides in the `feature` module).
+     * module directory outside the "src" directory (e.g. `feature/Script.kt` and `feature/config/Script.kt` reside in
+     * the `feature` module, when `feature/config` is not a module directory).
      * @param sourceSetName The name of the source set. If null, all source sets will be included.
      * @return a [KoScope] containing all Kotlin files in the test source sets.
      * @throws IllegalArgumentException if [sourceSetName] is a production source set.
