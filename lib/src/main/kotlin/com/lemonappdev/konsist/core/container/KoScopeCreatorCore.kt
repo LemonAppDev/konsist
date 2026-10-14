@@ -3,7 +3,6 @@ package com.lemonappdev.konsist.core.container
 import com.lemonappdev.konsist.api.container.KoScope
 import com.lemonappdev.konsist.api.container.KoScopeCreator
 import com.lemonappdev.konsist.api.declaration.KoFileDeclaration
-import com.lemonappdev.konsist.api.ext.list.withPackage
 import com.lemonappdev.konsist.core.ext.isKotlinFile
 import com.lemonappdev.konsist.core.ext.sep
 import com.lemonappdev.konsist.core.ext.toKoFile
@@ -11,6 +10,7 @@ import com.lemonappdev.konsist.core.ext.toMacOsSeparator
 import com.lemonappdev.konsist.core.ext.toOsSeparator
 import com.lemonappdev.konsist.core.filesystem.PathProvider
 import com.lemonappdev.konsist.core.provider.util.KoFileDeclarationProvider
+import com.lemonappdev.konsist.core.util.LocationUtil
 import com.lemonappdev.konsist.core.util.ModuleUtil
 import com.lemonappdev.konsist.core.util.ModuleUtil.ROOT_MODULE_NAME
 import com.lemonappdev.konsist.core.util.PathUtil
@@ -50,9 +50,7 @@ internal class KoScopeCreatorCore : KoScopeCreator {
         sourceSetName: String?,
     ): KoScope =
         runBlocking {
-            val koFiles =
-                getFiles(moduleName, sourceSetName)
-                    .withPackage(packagee)
+            val koFiles = getFiles(moduleName, sourceSetName) { residesInPackage(it, packagee) }
 
             KoScopeCore(koFiles)
         }
@@ -76,7 +74,7 @@ internal class KoScopeCreatorCore : KoScopeCreator {
         moduleName: String? = null,
         sourceSetName: String? = null,
         ignoreBuildConfig: Boolean = true,
-        sourceSetNamePredicate: ((String) -> Boolean)? = null,
+        predicate: (File) -> Boolean = { true },
     ): List<KoFileDeclaration> {
         val pathRegex =
             if (moduleName == null && sourceSetName == null) {
@@ -88,7 +86,7 @@ internal class KoScopeCreatorCore : KoScopeCreator {
         return KoFileDeclarationProvider.getKoFileDeclarations { file ->
             (!ignoreBuildConfig || !KoFileDeclarationProvider.isBuildConfigFile(file.path)) &&
                 (pathRegex == null || file.path.toMacOsSeparator().matches(pathRegex)) &&
-                (sourceSetNamePredicate == null || sourceSetNamePredicate(getSourceSetName(file.path)))
+                predicate(file)
         }
     }
 
@@ -101,7 +99,7 @@ internal class KoScopeCreatorCore : KoScopeCreator {
                 require(!isTestSourceSet(it)) { "Source set '$it' is a test source set, but it should be production source set." }
             }
 
-            val koFiles = getFiles(moduleName, sourceSetName) { !isTestSourceSet(it) }
+            val koFiles = getFiles(moduleName, sourceSetName) { !isTestSourceSet(getSourceSetName(it.path)) }
 
             KoScopeCore(koFiles)
         }
@@ -115,7 +113,7 @@ internal class KoScopeCreatorCore : KoScopeCreator {
                 require(isTestSourceSet(it)) { "Source set '$it' is a production source set, but it should be test source set." }
             }
 
-            val koFiles = getFiles(moduleName, sourceSetName) { isTestSourceSet(it) }
+            val koFiles = getFiles(moduleName, sourceSetName) { isTestSourceSet(getSourceSetName(it.path)) }
 
             KoScopeCore(koFiles)
         }
@@ -193,6 +191,17 @@ internal class KoScopeCreatorCore : KoScopeCreator {
         val koFiles = getKoFiles(files)
 
         return KoScopeCore(koFiles + notKotlinFiles)
+    }
+
+    /*
+     * Package name is read without parsing the file (see [KoFileDeclarationProvider.getPackageName]).
+     */
+    private fun residesInPackage(
+        file: File,
+        packagee: String,
+    ): Boolean {
+        val packageName = KoFileDeclarationProvider.getPackageName(file)
+        return !packageName.isNullOrEmpty() && LocationUtil.residesInLocation(packagee, packageName)
     }
 
     private fun getSourceSetName(path: String): String = PathUtil.getSourceSetName(PathUtil.getProjectPath(path, projectRootPath))

@@ -4,12 +4,9 @@ import com.lemonappdev.konsist.api.Konsist
 import com.lemonappdev.konsist.api.declaration.KoChildDeclaration
 import com.lemonappdev.konsist.api.declaration.KoSourceDeclaration
 import com.lemonappdev.konsist.api.provider.KoBaseProvider
-import com.lemonappdev.konsist.core.cache.KoFileDeclarationCache
 import com.lemonappdev.konsist.core.ext.toKoFile
 import com.lemonappdev.konsist.core.provider.util.KoFileDeclarationProvider
-import com.lemonappdev.konsist.core.util.PackageNameReader
 import kotlinx.coroutines.runBlocking
-import java.io.File
 import java.lang.ref.SoftReference
 
 /**
@@ -23,7 +20,7 @@ internal object DataCore {
                 runBlocking { KoFileDeclarationProvider.getProjectKotlinFiles() }
                     .filterNot { KoFileDeclarationProvider.isBuildConfigFile(it.path) }
             },
-            getPackageName = ::getPackageName,
+            getPackageName = KoFileDeclarationProvider::getPackageName,
             getKoFile = { it.toKoFile() },
         )
 
@@ -48,11 +45,4 @@ internal object DataCore {
         val scope = Konsist.scopeFromProject()
         return ChildrenIndex(scope.classes() + scope.interfaces() + scope.objects())
     }
-
-    /*
-     * Package name of the parsed file is taken from its package directive, other files are not parsed.
-     */
-    private fun getPackageName(file: File): String? =
-        KoFileDeclarationCache.getInstanceOrNull(file)?.let { it.packagee?.name.orEmpty() }
-            ?: PackageNameReader.getPackageName(file)
 }
