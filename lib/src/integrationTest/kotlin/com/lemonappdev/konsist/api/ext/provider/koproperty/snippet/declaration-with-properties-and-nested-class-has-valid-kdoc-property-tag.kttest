@@ -1,0 +1,16 @@
+/**
+ * Fixture description
+ *
+ * @property fixtureConstructorProperty
+ * @property fixtureBodyProperty
+ */
+class FixtureClass(val fixtureConstructorProperty: Int) {
+    val fixtureBodyProperty = ""
+
+    /**
+     * Fixture nested description
+     *
+     * @property fixtureNestedProperty
+     */
+    class FixtureNestedClass(val fixtureNestedProperty: Int)
+}

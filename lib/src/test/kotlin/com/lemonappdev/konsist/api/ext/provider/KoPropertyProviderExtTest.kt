@@ -23,7 +23,7 @@ class KoPropertyProviderExtTest {
             }
         val declaration: KoPropertyProvider =
             mockk {
-                every { properties() } returns listOf(property1, property2)
+                every { properties(includeNested = false) } returns listOf(property1, property2)
             }
 
         // when
