@@ -328,6 +328,47 @@ class KoScopeCreatorCoreNestedModuleTest {
     }
 
     @Test
+    fun `scopeFromSourceSet for module name located in src directory returns empty scope`() {
+        // when
+        val result = sut.scopeFromSourceSet("tools").filePaths()
+
+        // then
+        result shouldBeEqualTo emptyList()
+    }
+
+    @Test
+    fun `scopeFromProduction for module located in src directory`() {
+        // when
+        val result = sut.scopeFromProduction(moduleName = ":src:tools").filePaths()
+
+        // then
+        result shouldBeEqualTo listOf(SRC_TOOLS_SCRIPT, SRC_TOOLS_MAIN)
+    }
+
+    @Test
+    fun `scopeFromTest for module located in src directory contains file located outside source root`() {
+        // when
+        val result = sut.scopeFromTest(moduleName = ":src:tools").filePaths()
+
+        // then
+        result shouldBeEqualTo listOf(SRC_TOOLS_FIXTURE)
+    }
+
+    @Test
+    fun `scopeFromSourceSet contains the same files as project scope files with given source set name`() {
+        // given
+        val projectFiles = sut.scopeFromProject().files
+
+        listOf("main", "test", "tools").forEach { sourceSetName ->
+            // when
+            val result = sut.scopeFromSourceSet(sourceSetName).filePaths()
+
+            // then
+            result shouldBeEqualTo projectFiles.filter { it.sourceSetName == sourceSetName }.map { it.path }
+        }
+    }
+
+    @Test
     fun `scopeFromModule for parent module contains files from its subdirectory that is not a module directory`() {
         // when
         val result = sut.scopeFromModule(":feature").filePaths()

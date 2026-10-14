@@ -27,25 +27,33 @@ object ModuleUtil {
      */
     fun getModuleName(
         projectPath: String,
-        getModuleDirectory: (String) -> String? = {
-            ModuleDirectoryDetector.getModuleDirectory(PathProvider.rootProjectPath, it)
-        },
+        getModuleDirectory: (String) -> String? = ::getProjectModuleDirectory,
+    ): String =
+        getModuleDirectoryPath(projectPath, getModuleDirectory)
+            .substringAfter("/")
+            .ifEmpty { ROOT_MODULE_NAME }
+
+    /**
+     * Returns path of the module directory (see [getModuleName]) relative to the project root with "/" separators,
+     * e.g. "/feature/data", or "" for the top-level module.
+     */
+    internal fun getModuleDirectoryPath(
+        projectPath: String,
+        getModuleDirectory: (String) -> String? = ::getProjectModuleDirectory,
     ): String {
         val path = toMacOsSeparator(projectPath)
         val sourceRootIndex = PathUtil.getSourceRootIndex(path)
 
-        val moduleDirectory =
-            if (sourceRootIndex == -1) {
-                val fileDirectory = path.substringBeforeLast("/", "")
-                getModuleDirectory(fileDirectory) ?: getDefaultModuleDirectory(path, fileDirectory)
-            } else {
-                path.substring(0, sourceRootIndex)
-            }
+        if (sourceRootIndex != -1) {
+            return path.substring(0, sourceRootIndex)
+        }
 
-        return moduleDirectory
-            .substringAfter("/")
-            .ifEmpty { ROOT_MODULE_NAME }
+        val fileDirectory = path.substringBeforeLast("/", "")
+        return getModuleDirectory(fileDirectory) ?: getDefaultModuleDirectory(path, fileDirectory)
     }
+
+    private fun getProjectModuleDirectory(directoryPath: String): String? =
+        ModuleDirectoryDetector.getModuleDirectory(PathProvider.rootProjectPath, directoryPath)
 
     /*
      * Directory containing the first "src" directory, or the file directory for the file located outside the "src"
