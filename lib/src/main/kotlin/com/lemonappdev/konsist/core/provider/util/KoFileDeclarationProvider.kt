@@ -8,6 +8,7 @@ import com.lemonappdev.konsist.core.ext.toMacOsSeparator
 import com.lemonappdev.konsist.core.filesystem.PathProvider
 import com.lemonappdev.konsist.core.filesystem.ProjectDirectoryFilter
 import com.lemonappdev.konsist.core.filesystem.ProjectKotlinFileScanner
+import com.lemonappdev.konsist.core.util.PackageNameReader
 import kotlinx.coroutines.CompletableDeferred
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.Dispatchers
@@ -86,6 +87,15 @@ internal object KoFileDeclarationProvider {
                 .filterNotNull()
         }
     }
+
+    /**
+     * Returns the package name of the file (empty for the file without package) or `null` when the file can't be read.
+     * Package name of the parsed file is taken from its package directive, other files are not parsed
+     * (see [PackageNameReader]).
+     */
+    fun getPackageName(file: File): String? =
+        KoFileDeclarationCache.getInstanceOrNull(file)?.let { it.packagee?.name.orEmpty() }
+            ?: PackageNameReader.getPackageName(file)
 
     /**
      * Returns true if the file is located in the Gradle build configuration directory (buildSrc).
