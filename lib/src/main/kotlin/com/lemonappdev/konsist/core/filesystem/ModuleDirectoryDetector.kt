@@ -13,6 +13,7 @@ import java.util.concurrent.ConcurrentHashMap
 internal object ModuleDirectoryDetector {
     private val moduleDirectories = ConcurrentHashMap<File, Optional<String>>()
     private val sourceSetDirectories = ConcurrentHashMap<File, Boolean>()
+    private val moduleDirectoryFlags = ConcurrentHashMap<File, Boolean>()
 
     private val moduleDirectoryMarkers =
         listOf(
@@ -52,6 +53,12 @@ internal object ModuleDirectoryDetector {
             sourceSetDirectoryMarkers.any { File(rootProjectPath, "$projectPath/$it").isDirectory }
         }
 
+    /**
+     * Returns true if the [directory] contains a Gradle or Maven build file or the "src" directory.
+     */
+    fun isModuleDirectory(directory: File): Boolean =
+        moduleDirectoryFlags.getOrPut(directory) { moduleDirectoryMarkers.any { File(directory, it).exists() } }
+
     private fun findModuleDirectory(
         rootProjectPath: String,
         projectPath: String,
@@ -72,6 +79,4 @@ internal object ModuleDirectoryDetector {
 
         return directory
     }
-
-    private fun isModuleDirectory(directory: File): Boolean = moduleDirectoryMarkers.any { File(directory, it).exists() }
 }

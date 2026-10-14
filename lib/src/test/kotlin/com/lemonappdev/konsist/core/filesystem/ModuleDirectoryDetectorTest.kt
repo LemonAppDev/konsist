@@ -292,6 +292,58 @@ class ModuleDirectoryDetectorTest {
         result shouldBeEqualTo false
     }
 
+    @Test
+    fun `should return true for module directory`(
+        @TempDir projectRootDir: File,
+    ) {
+        // given
+        createFiles(
+            projectRootDir,
+            "src/app/build.gradle.kts",
+        )
+
+        // when
+        val result = ModuleDirectoryDetector.isModuleDirectory(File(projectRootDir, "src/app"))
+
+        // then
+        result shouldBeEqualTo true
+    }
+
+    @Test
+    fun `should return true for directory containing src directory`(
+        @TempDir projectRootDir: File,
+    ) {
+        // given
+        createFiles(
+            projectRootDir,
+            "app/src/main/kotlin/App.kt",
+        )
+
+        // when
+        val result = ModuleDirectoryDetector.isModuleDirectory(File(projectRootDir, "app"))
+
+        // then
+        result shouldBeEqualTo true
+    }
+
+    @Test
+    fun `should return false for package directory`(
+        @TempDir projectRootDir: File,
+    ) {
+        // given
+        createFiles(
+            projectRootDir,
+            "app/build.gradle.kts",
+            "app/src/main/kotlin/com/sample/build/Build.kt",
+        )
+
+        // when
+        val result = ModuleDirectoryDetector.isModuleDirectory(File(projectRootDir, "app/src/main/kotlin/com/sample"))
+
+        // then
+        result shouldBeEqualTo false
+    }
+
     private fun createFiles(
         projectRootDir: File,
         vararg paths: String,
