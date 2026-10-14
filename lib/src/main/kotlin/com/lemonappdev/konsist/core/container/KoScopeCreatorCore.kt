@@ -12,7 +12,6 @@ import com.lemonappdev.konsist.core.filesystem.PathProvider
 import com.lemonappdev.konsist.core.provider.util.KoFileDeclarationProvider
 import com.lemonappdev.konsist.core.util.LocationUtil
 import com.lemonappdev.konsist.core.util.ModuleUtil
-import com.lemonappdev.konsist.core.util.ModuleUtil.ROOT_MODULE_NAME
 import com.lemonappdev.konsist.core.util.PathUtil
 import kotlinx.coroutines.runBlocking
 import java.io.File
@@ -69,6 +68,8 @@ internal class KoScopeCreatorCore : KoScopeCreator {
 
     /*
      * Files are filtered by path before parsing, so files of other modules and source sets are not parsed.
+     * Module is computed the same way as [KoFileDeclaration.moduleName], so module scope contains exactly the files
+     * residing in the module (including files located outside the "src" directory).
      */
     private suspend fun getFiles(
         moduleName: String? = null,
@@ -76,16 +77,12 @@ internal class KoScopeCreatorCore : KoScopeCreator {
         ignoreBuildConfig: Boolean = true,
         predicate: (File) -> Boolean = { true },
     ): List<KoFileDeclaration> {
-        val pathRegex =
-            if (moduleName == null && sourceSetName == null) {
-                null
-            } else {
-                getPathRegex(projectRootPath, moduleName, sourceSetName)
-            }
+        val sourceSetPathRegex = sourceSetName?.let { getSourceSetPathRegex(projectRootPath, it) }
 
         return KoFileDeclarationProvider.getKoFileDeclarations { file ->
             (!ignoreBuildConfig || !KoFileDeclarationProvider.isBuildConfigFile(file.path)) &&
-                (pathRegex == null || file.path.toMacOsSeparator().matches(pathRegex)) &&
+                (moduleName == null || residesInModule(file.path, projectRootPath, moduleName)) &&
+                (sourceSetPathRegex == null || file.path.toMacOsSeparator().matches(sourceSetPathRegex)) &&
                 predicate(file)
         }
     }
@@ -234,34 +231,38 @@ internal class KoScopeCreatorCore : KoScopeCreator {
         private const val TEST_NAME_IN_PATH = "test"
 
         /**
-         * Builds regex matching file paths of given module and source set. Path parts are escaped, so folder names
-         * containing regex characters (e.g. `C:\Projects (1)\app`) are matched literally. Leading and trailing
-         * separators of module and source set names are ignored (e.g. `feature/auth/` is treated as `feature/auth`).
-         * Module name can be a Gradle project path (e.g. `:feature:auth` is treated as `feature/auth`).
+         * Returns true if the file with given absolute [filePath] resides in the module with given [moduleName].
+         * Module name is normalized (see [ModuleUtil.normalizeModuleName]) and compared with the module name of the file
+         * (see [ModuleUtil.getModuleName]). Paths with "/" and "\\" separators are supported on all OSes.
          * Trailing separator of the project root path is ignored, so drive roots (e.g. `X:\`) and `/` are supported.
          */
-        internal fun getPathRegex(
+        internal fun residesInModule(
+            filePath: String,
             projectRootPath: String,
-            moduleName: String?,
-            sourceSetName: String?,
+            moduleName: String,
+        ): Boolean {
+            val projectPath =
+                filePath
+                    .toMacOsSeparator()
+                    .removePrefix(projectRootPath.toMacOsSeparator().trimEnd('/'))
+
+            return ModuleUtil.getModuleName(projectPath) == ModuleUtil.normalizeModuleName(moduleName)
+        }
+
+        /**
+         * Builds regex matching file paths of given source set. Path parts are escaped, so folder names
+         * containing regex characters (e.g. `C:\Projects (1)\app`) are matched literally. Leading and trailing
+         * separators of source set name are ignored (e.g. `main/` is treated as `main`).
+         * Trailing separator of the project root path is ignored, so drive roots (e.g. `X:\`) and `/` are supported.
+         */
+        internal fun getSourceSetPathRegex(
+            projectRootPath: String,
+            sourceSetName: String,
         ): Regex {
             val rootPathPattern = Regex.escape(projectRootPath.toMacOsSeparator().trimEnd('/'))
+            val sourceSetPattern = Regex.escape(sourceSetName.toMacOsSeparator().trim('/'))
 
-            val modulePattern =
-                when (val normalizedModuleName = moduleName?.let { ModuleUtil.normalizeModuleName(it) }) {
-                    ROOT_MODULE_NAME -> rootPathPattern
-                    null -> "$rootPathPattern.*"
-                    else -> "$rootPathPattern/${Regex.escape(normalizedModuleName)}"
-                }
-
-            val sourceSetPattern =
-                if (sourceSetName != null) {
-                    "/src/${Regex.escape(sourceSetName.toMacOsSeparator().trim('/'))}/.*"
-                } else {
-                    "/src/.*"
-                }
-
-            return Regex("$modulePattern$sourceSetPattern")
+            return Regex("$rootPathPattern.*/src/$sourceSetPattern/.*")
         }
     }
 }
