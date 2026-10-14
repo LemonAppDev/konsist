@@ -56,7 +56,7 @@ jobs:
 
   # Starter projects are tested against Konsist snapshot published by the Publish workflow
   published-snapshot:
-    name: Get Published Snapshot
+    name: Get Published Snapshot For Starter Projects
     needs: get-github-context
     if: |
       needs.get-github-context.outputs.base_ref_branch == 'main' ||
