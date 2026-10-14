@@ -8,6 +8,7 @@ object ModuleUtil {
     internal const val ROOT_MODULE_NAME = "root"
     private const val GRADLE_ROOT_PROJECT_PATH = ":"
     private const val WILDCARD = ".."
+    private const val INVALID_WILDCARD = "..."
 
     /**
      * Returns module name with "/" separators (regardless of OS), e.g. "feature/data", or "root" for the top-level module.
@@ -90,6 +91,8 @@ object ModuleUtil {
     /**
      * Returns true if module with given [moduleName] (format returned by [getModuleName]) matches module name [name]
      * provided by the user (any format accepted by [normalizeModuleName]).
+     *
+     * @throws IllegalArgumentException if [name] is invalid (see [getModuleNameMatcher]).
      */
     internal fun residesInModule(
         moduleName: String,
@@ -104,9 +107,17 @@ object ModuleUtil {
      * "feature", "feature/payment" and "feature/payment/api", "..data" matches "data" and "feature/data",
      * and ".." matches all modules. Module name without wildcard must match exactly.
      * Predicate is built once, so it can be used to check many files.
+     *
+     * @throws IllegalArgumentException if [name] contains more than two consecutive dots (e.g. ":feature..."),
+     * because such name is ambiguous and would not match any module.
      */
     internal fun getModuleNameMatcher(name: String): (String) -> Boolean {
         val normalizedName = normalizeModuleName(name)
+
+        require(!normalizedName.contains(INVALID_WILDCARD)) {
+            "Module name '$name' contains more than two consecutive dots. Use '$WILDCARD' as a wildcard " +
+                "for any number of module directories, e.g. ':feature$WILDCARD' or ':feature$WILDCARD:data'."
+        }
 
         if (!normalizedName.contains(WILDCARD)) {
             return { it == normalizedName }

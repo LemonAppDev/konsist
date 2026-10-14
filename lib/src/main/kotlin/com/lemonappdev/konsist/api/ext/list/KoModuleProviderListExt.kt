@@ -11,11 +11,12 @@ import com.lemonappdev.konsist.api.provider.KoModuleProvider
  * (Gradle `projectDir` overrides in settings.gradle(.kts) are not supported).
  * Use `..` as a wildcard for any number of module directories, including none, e.g. `:feature..` matches
  * `feature` and its nested modules (`feature/payment`), `..data` matches `data` and `feature/data`,
- * and `..` matches all modules.
+ * and `..` matches all modules. More than two consecutive dots (e.g. `:feature...`) are not allowed.
  *
  * @param name The module name to include.
  * @param names The module name(s) to include.
  * @return A list containing declarations that reside in any of the specified modules.
+ * @throws IllegalArgumentException if module name contains more than two consecutive dots.
  * @see KoModuleProvider.residesInModule
  */
 fun <T : KoModuleProvider> List<T>.withModule(
@@ -32,10 +33,11 @@ fun <T : KoModuleProvider> List<T>.withModule(
  * (Gradle `projectDir` overrides in settings.gradle(.kts) are not supported).
  * Use `..` as a wildcard for any number of module directories, including none, e.g. `:feature..` matches
  * `feature` and its nested modules (`feature/payment`), `..data` matches `data` and `feature/data`,
- * and `..` matches all modules.
+ * and `..` matches all modules. More than two consecutive dots (e.g. `:feature...`) are not allowed.
  *
  * @param names The module name(s) to include.
  * @return A list containing declarations that reside in any of the specified modules.
+ * @throws IllegalArgumentException if module name contains more than two consecutive dots.
  * @see KoModuleProvider.residesInModule
  */
 fun <T : KoModuleProvider> List<T>.withModule(names: Collection<String>): List<T> =
@@ -55,11 +57,12 @@ fun <T : KoModuleProvider> List<T>.withModule(names: Collection<String>): List<T
  * (Gradle `projectDir` overrides in settings.gradle(.kts) are not supported).
  * Use `..` as a wildcard for any number of module directories, including none, e.g. `:feature..` matches
  * `feature` and its nested modules (`feature/payment`), `..data` matches `data` and `feature/data`,
- * and `..` matches all modules.
+ * and `..` matches all modules. More than two consecutive dots (e.g. `:feature...`) are not allowed.
  *
  * @param name The module name to exclude.
  * @param names The module name(s) to exclude.
  * @return A list containing declarations that don't reside in any of the specified modules.
+ * @throws IllegalArgumentException if module name contains more than two consecutive dots.
  * @see KoModuleProvider.residesInModule
  */
 fun <T : KoModuleProvider> List<T>.withoutModule(
@@ -76,10 +79,11 @@ fun <T : KoModuleProvider> List<T>.withoutModule(
  * (Gradle `projectDir` overrides in settings.gradle(.kts) are not supported).
  * Use `..` as a wildcard for any number of module directories, including none, e.g. `:feature..` matches
  * `feature` and its nested modules (`feature/payment`), `..data` matches `data` and `feature/data`,
- * and `..` matches all modules.
+ * and `..` matches all modules. More than two consecutive dots (e.g. `:feature...`) are not allowed.
  *
  * @param names The module name(s) to exclude.
  * @return A list containing declarations that don't reside in any of the specified modules.
+ * @throws IllegalArgumentException if module name contains more than two consecutive dots.
  * @see KoModuleProvider.residesInModule
  */
 fun <T : KoModuleProvider> List<T>.withoutModule(names: Collection<String>): List<T> =
