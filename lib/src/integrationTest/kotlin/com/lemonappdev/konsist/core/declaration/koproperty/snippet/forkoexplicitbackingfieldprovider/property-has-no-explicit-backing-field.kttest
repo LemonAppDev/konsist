@@ -1,0 +1,1 @@
+val fixtureProperty: List<Int> = mutableListOf(0)
