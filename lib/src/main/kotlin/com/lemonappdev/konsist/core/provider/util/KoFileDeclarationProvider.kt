@@ -7,6 +7,7 @@ import com.lemonappdev.konsist.core.ext.toKoFile
 import com.lemonappdev.konsist.core.ext.toMacOsSeparator
 import com.lemonappdev.konsist.core.filesystem.PathProvider
 import com.lemonappdev.konsist.core.filesystem.ProjectDirectoryFilter
+import com.lemonappdev.konsist.core.filesystem.ProjectKotlinFileScanner
 import kotlinx.coroutines.CompletableDeferred
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.Dispatchers
@@ -22,7 +23,7 @@ internal object KoFileDeclarationProvider {
 
     private val projectRootDir: File = File(PathProvider.rootProjectPath)
 
-    private val projectDirectoryFilter = ProjectDirectoryFilter(projectRootDir)
+    private val projectKotlinFileScanner = ProjectKotlinFileScanner(projectRootDir)
 
     private val mutex: Mutex = Mutex()
 
@@ -37,7 +38,7 @@ internal object KoFileDeclarationProvider {
     /**
      * Retrieves a list of Kotlin files from the project's root directory. The directory is scanned once, files are not
      * parsed. Directories ignored by [ProjectDirectoryFilter] (build outputs, hidden directories, node_modules) are not
-     * scanned.
+     * scanned. Directories are scanned in parallel (see [ProjectKotlinFileScanner]).
      *
      * Threading Strategy:
      * Ensures thread-safe initialization of a single deferred operation to scan the directory, using a mutex to guard
@@ -53,13 +54,8 @@ internal object KoFileDeclarationProvider {
         coroutineScope {
             val currentDeferred: Deferred<List<File>> =
                 mutex.withLock {
-                    projectKotlinFilesDeferred ?: async(Dispatchers.IO) {
-                        projectRootDir
-                            .walk()
-                            .onEnter { !projectDirectoryFilter.isIgnored(it) }
-                            .filter { it.isKotlinFile }
-                            .toList()
-                    }.also { projectKotlinFilesDeferred = it }
+                    projectKotlinFilesDeferred ?: async(Dispatchers.IO) { projectKotlinFileScanner.scan() }
+                        .also { projectKotlinFilesDeferred = it }
                 }
 
             currentDeferred.await()
