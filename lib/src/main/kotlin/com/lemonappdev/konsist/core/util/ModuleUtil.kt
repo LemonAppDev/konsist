@@ -3,12 +3,19 @@ package com.lemonappdev.konsist.core.util
 import com.lemonappdev.konsist.core.filesystem.ModuleDirectoryDetector
 import com.lemonappdev.konsist.core.filesystem.PathProvider
 import com.lemonappdev.konsist.core.util.PathUtil.toMacOsSeparator
+import java.util.concurrent.ConcurrentHashMap
 
 object ModuleUtil {
     internal const val ROOT_MODULE_NAME = "root"
     private const val GRADLE_ROOT_PROJECT_PATH = ":"
     private const val WILDCARD = ".."
     private const val INVALID_WILDCARD = "..."
+
+    /*
+     * Matchers are cached, because the same module name is usually checked for many declarations
+     * (e.g. `withModule(":feature..")` or `residesInModule(":feature..")` in assertion), so its regex is compiled once.
+     */
+    private val moduleNameMatchers = ConcurrentHashMap<String, (String) -> Boolean>()
 
     /**
      * Returns module name with "/" separators (regardless of OS), e.g. "feature/data", or "root" for the top-level module.
@@ -106,12 +113,15 @@ object ModuleUtil {
      * Use '..' as a wildcard for any number of module directories, including none, e.g. ":feature.." matches
      * "feature", "feature/payment" and "feature/payment/api", "..data" matches "data" and "feature/data",
      * and ".." matches all modules. Module name without wildcard must match exactly.
-     * Predicate is built once, so it can be used to check many files.
+     * Predicate is built once per module name and cached, so it can be used to check many files and declarations.
      *
      * @throws IllegalArgumentException if [name] contains more than two consecutive dots (e.g. ":feature..."),
      * because such name is ambiguous and would not match any module.
      */
-    internal fun getModuleNameMatcher(name: String): (String) -> Boolean {
+    internal fun getModuleNameMatcher(name: String): (String) -> Boolean =
+        moduleNameMatchers.getOrPut(name) { createModuleNameMatcher(name) }
+
+    private fun createModuleNameMatcher(name: String): (String) -> Boolean {
         val normalizedName = normalizeModuleName(name)
 
         require(!normalizedName.contains(INVALID_WILDCARD)) {

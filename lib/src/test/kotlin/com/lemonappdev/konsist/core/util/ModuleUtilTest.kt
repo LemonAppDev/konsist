@@ -1,5 +1,6 @@
 package com.lemonappdev.konsist.core.util
 
+import org.amshove.kluent.shouldBe
 import org.amshove.kluent.shouldBeEqualTo
 import org.amshove.kluent.shouldThrow
 import org.amshove.kluent.withMessage
@@ -713,5 +714,37 @@ class ModuleUtilTest {
         func shouldThrow IllegalArgumentException::class withMessage
             "Module name 'feature....data' contains more than two consecutive dots. Use '..' as a wildcard " +
             "for any number of module directories, e.g. ':feature..' or ':feature..:data'."
+    }
+
+    @Test
+    fun `should return the same matcher for the same module name`() {
+        // when
+        val result1 = ModuleUtil.getModuleNameMatcher(":feature..")
+        val result2 = ModuleUtil.getModuleNameMatcher(":feature..")
+
+        // then
+        result1 shouldBe result2
+    }
+
+    @Test
+    fun `should match module for cached matcher`() {
+        // given
+        ModuleUtil.residesInModule(moduleName = "feature", name = "feature..data")
+
+        // when
+        val result = ModuleUtil.residesInModule(moduleName = "feature/payment/data", name = "feature..data")
+
+        // then
+        result shouldBeEqualTo true
+    }
+
+    @Test
+    fun `should throw for invalid module name on every call`() {
+        // given
+        val func = { ModuleUtil.getModuleNameMatcher(":invalid...") }
+        func shouldThrow IllegalArgumentException::class
+
+        // then
+        func shouldThrow IllegalArgumentException::class
     }
 }
