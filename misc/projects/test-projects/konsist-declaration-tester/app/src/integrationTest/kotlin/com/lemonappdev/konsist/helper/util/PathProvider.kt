@@ -37,6 +37,10 @@ object PathProvider {
 
     val dataTestSourceSetProjectDirectory = "data/src/test/kotlin/com/lemonappdev".toOsSeparator()
 
+    val featureDirectory = "$projectRootDirectory/feature".toOsSeparator()
+
+    val featureProjectDirectory = "feature".toOsSeparator()
+
     val featureMainSourceSetDirectory = "$projectRootDirectory/feature/src/main/kotlin/com/lemonappdev".toOsSeparator()
 
     val featureMainSourceSetProjectDirectory = "feature/src/main/kotlin/com/lemonappdev".toOsSeparator()
