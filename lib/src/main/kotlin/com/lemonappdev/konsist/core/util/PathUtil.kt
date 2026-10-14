@@ -30,20 +30,27 @@ object PathUtil {
     ): String = path.removePrefix(toOsSeparator(rootProjectPath).trimEnd(File.separatorChar))
 
     /**
-     * Returns name of the source set containing the file with given [projectPath], e.g. "main" for
-     * "/app/src/main/kotlin/A.kt" and "/src/app/src/main/kotlin/A.kt" (see [getSourceDirectoryIndex]).
+     * Returns name of the source set containing the file with given [projectPath] - the directory located in the "src"
+     * directory of the module directory with given [moduleDirectoryPath] (see [ModuleUtil.getModuleDirectoryPath]),
+     * e.g. "main" for "/app/src/main/kotlin/A.kt" and "/src/app/src/main/kotlin/A.kt", and "test" for
+     * "/app/src/test/resources/A.kt". Returns an empty string for the file located outside the module "src" directory
+     * (e.g. "/app/A.kt") and the file located directly in the module "src" directory (e.g. "/app/src/A.kt").
      */
-    internal fun getSourceSetName(projectPath: String): String {
+    internal fun getSourceSetName(
+        projectPath: String,
+        moduleDirectoryPath: String = ModuleUtil.getModuleDirectoryPath(projectPath),
+    ): String {
         val path = toMacOsSeparator(projectPath)
-        val sourceDirectoryIndex = getSourceDirectoryIndex(path)
+        val moduleSourceDirectoryPath = "$moduleDirectoryPath$SOURCE_DIRECTORY_PATH"
 
-        if (sourceDirectoryIndex == -1) {
-            return path.substringBefore('/')
+        if (!path.startsWith(moduleSourceDirectoryPath)) {
+            return ""
         }
 
-        return path
-            .substring(sourceDirectoryIndex + SOURCE_DIRECTORY_PATH.length)
-            .substringBefore('/')
+        val sourceSetPath = path.removePrefix(moduleSourceDirectoryPath)
+
+        // Source set is a directory, so the file located directly in the "src" directory has no source set
+        return if (sourceSetPath.contains('/')) sourceSetPath.substringBefore('/') else ""
     }
 
     /**

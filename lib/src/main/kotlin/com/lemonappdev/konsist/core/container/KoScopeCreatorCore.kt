@@ -77,8 +77,10 @@ internal class KoScopeCreatorCore : KoScopeCreator {
 
     /*
      * Files are filtered by path before parsing, so files of other modules and source sets are not parsed.
-     * Module is computed the same way as [KoFileDeclaration.moduleName], so module scope contains exactly the files
-     * residing in the module (including files located outside the "src" directory).
+     * Module and source set are computed the same way as [KoFileDeclaration.moduleName] and
+     * [KoFileDeclaration.sourceSetName], so module scope contains exactly the files residing in the module (including
+     * files located outside the "src" directory) and source set scope contains exactly the files residing in
+     * the source set.
      */
     private suspend fun getFiles(
         moduleName: String? = null,
@@ -86,13 +88,12 @@ internal class KoScopeCreatorCore : KoScopeCreator {
         ignoreBuildConfig: Boolean = true,
         predicate: (File) -> Boolean = { true },
     ): List<KoFileDeclaration> {
-        val sourceSetPathRegex = sourceSetName?.let { getSourceSetPathRegex(projectRootPath, it) }
         val moduleNameMatcher = moduleName?.let { ModuleUtil.getModuleNameMatcher(it) }
 
         return KoFileDeclarationProvider.getKoFileDeclarations { file ->
             (!ignoreBuildConfig || !KoFileDeclarationProvider.isBuildConfigFile(file.path)) &&
                 (moduleNameMatcher == null || moduleNameMatcher(getModuleName(file.path, projectRootPath))) &&
-                (sourceSetPathRegex == null || file.path.toMacOsSeparator().matches(sourceSetPathRegex)) &&
+                (sourceSetName == null || residesInSourceSet(file.path, projectRootPath, sourceSetName)) &&
                 predicate(file)
         }
     }
@@ -106,7 +107,7 @@ internal class KoScopeCreatorCore : KoScopeCreator {
                 require(!isTestSourceSet(it)) { "Source set '$it' is a test source set, but it should be production source set." }
             }
 
-            val koFiles = getFiles(moduleName, sourceSetName) { !isTestSourceSet(getSourceSetName(it.path)) }
+            val koFiles = getFiles(moduleName, sourceSetName) { !isTestSourceSet(getSourceSetName(it.path, projectRootPath)) }
 
             KoScopeCore(koFiles)
         }
@@ -120,7 +121,7 @@ internal class KoScopeCreatorCore : KoScopeCreator {
                 require(isTestSourceSet(it)) { "Source set '$it' is a production source set, but it should be test source set." }
             }
 
-            val koFiles = getFiles(moduleName, sourceSetName) { isTestSourceSet(getSourceSetName(it.path)) }
+            val koFiles = getFiles(moduleName, sourceSetName) { isTestSourceSet(getSourceSetName(it.path, projectRootPath)) }
 
             KoScopeCore(koFiles)
         }
@@ -211,8 +212,6 @@ internal class KoScopeCreatorCore : KoScopeCreator {
         return !packageName.isNullOrEmpty() && LocationUtil.residesInLocation(packagee, packageName)
     }
 
-    private fun getSourceSetName(path: String): String = PathUtil.getSourceSetName(PathUtil.getProjectPath(path, projectRootPath))
-
     private fun getAbsolutePath(projectPath: String): String = "$projectRootPath$sep${projectPath.toOsSeparator()}"
 
     private fun isTestSourceSet(name: String): Boolean {
@@ -251,36 +250,57 @@ internal class KoScopeCreatorCore : KoScopeCreator {
         ): Boolean = ModuleUtil.residesInModule(getModuleName(filePath, projectRootPath), moduleName)
 
         /**
+         * Returns true if the file with given absolute [filePath] resides in the source set with given [sourceSetName]
+         * (see [PathUtil.getSourceSetName]). Leading and trailing separators of source set name are ignored
+         * (e.g. `main/` is treated as `main`). Blank source set name does not match any file.
+         */
+        internal fun residesInSourceSet(
+            filePath: String,
+            projectRootPath: String,
+            sourceSetName: String,
+        ): Boolean {
+            val normalizedSourceSetName = sourceSetName.toMacOsSeparator().trim().trim('/')
+
+            return normalizedSourceSetName.isNotEmpty() && getSourceSetName(filePath, projectRootPath) == normalizedSourceSetName
+        }
+
+        /**
          * Returns module name (see [ModuleUtil.getModuleName]) of the file with given absolute [filePath].
-         * Paths with "/" and "\\" separators are supported on all OSes.
-         * Trailing separator of the project root path is ignored, so drive roots (e.g. `X:\`) and `/` are supported.
          */
         private fun getModuleName(
             filePath: String,
             projectRootPath: String,
-        ): String {
-            val projectPath =
-                filePath
-                    .toMacOsSeparator()
-                    .removePrefix(projectRootPath.toMacOsSeparator().trimEnd('/'))
+        ): String = ModuleUtil.getModuleName(getProjectPath(filePath, projectRootPath)) { getModuleDirectory(projectRootPath, it) }
 
-            return ModuleUtil.getModuleName(projectPath) { ModuleDirectoryDetector.getModuleDirectory(projectRootPath, it) }
+        /**
+         * Returns source set name (see [PathUtil.getSourceSetName]) of the file with given absolute [filePath].
+         */
+        private fun getSourceSetName(
+            filePath: String,
+            projectRootPath: String,
+        ): String {
+            val projectPath = getProjectPath(filePath, projectRootPath)
+            val moduleDirectoryPath = ModuleUtil.getModuleDirectoryPath(projectPath) { getModuleDirectory(projectRootPath, it) }
+
+            return PathUtil.getSourceSetName(projectPath, moduleDirectoryPath)
         }
 
         /**
-         * Builds regex matching file paths of given source set. Path parts are escaped, so folder names
-         * containing regex characters (e.g. `C:\Projects (1)\app`) are matched literally. Leading and trailing
-         * separators of source set name are ignored (e.g. `main/` is treated as `main`).
+         * Returns path of the file with given absolute [filePath] relative to the project root with "/" separators.
+         * Paths with "/" and "\\" separators are supported on all OSes.
          * Trailing separator of the project root path is ignored, so drive roots (e.g. `X:\`) and `/` are supported.
          */
-        internal fun getSourceSetPathRegex(
+        private fun getProjectPath(
+            filePath: String,
             projectRootPath: String,
-            sourceSetName: String,
-        ): Regex {
-            val rootPathPattern = Regex.escape(projectRootPath.toMacOsSeparator().trimEnd('/'))
-            val sourceSetPattern = Regex.escape(sourceSetName.toMacOsSeparator().trim('/'))
+        ): String =
+            filePath
+                .toMacOsSeparator()
+                .removePrefix(projectRootPath.toMacOsSeparator().trimEnd('/'))
 
-            return Regex("$rootPathPattern.*/src/$sourceSetPattern/.*")
-        }
+        private fun getModuleDirectory(
+            projectRootPath: String,
+            directoryPath: String,
+        ): String? = ModuleDirectoryDetector.getModuleDirectory(projectRootPath, directoryPath)
     }
 }

@@ -20,15 +20,13 @@ class KoScopeCreatorCoreTest {
 
     @Test
     fun `should match file from source set when root path contains regex characters`() {
-        // given
-        val regex =
-            KoScopeCreatorCore.getSourceSetPathRegex(
+        // when
+        val result =
+            KoScopeCreatorCore.residesInSourceSet(
+                filePath = "/Users/user/c++ [new] project/app/src/main/kotlin/SampleClass.kt",
                 projectRootPath = "/Users/user/c++ [new] project",
                 sourceSetName = "main",
             )
-
-        // when
-        val result = "/Users/user/c++ [new] project/app/src/main/kotlin/SampleClass.kt".matches(regex)
 
         // then
         result shouldBeEqualTo true
@@ -46,8 +44,10 @@ class KoScopeCreatorCoreTest {
                 projectRootPath = "/Users/user/project (1)",
                 moduleName = "root",
             ) &&
-                filePath.matches(
-                    KoScopeCreatorCore.getSourceSetPathRegex(projectRootPath = "/Users/user/project (1)", sourceSetName = "test"),
+                KoScopeCreatorCore.residesInSourceSet(
+                    filePath = filePath,
+                    projectRootPath = "/Users/user/project (1)",
+                    sourceSetName = "test",
                 )
 
         // then
@@ -66,28 +66,14 @@ class KoScopeCreatorCoreTest {
                 projectRootPath = """C:\Users\user\project""",
                 moduleName = """feature\data""",
             ) &&
-                filePath.matches(
-                    KoScopeCreatorCore.getSourceSetPathRegex(projectRootPath = """C:\Users\user\project""", sourceSetName = "main"),
+                KoScopeCreatorCore.residesInSourceSet(
+                    filePath = filePath,
+                    projectRootPath = """C:\Users\user\project""",
+                    sourceSetName = "main",
                 )
 
         // then
         result shouldBeEqualTo true
-    }
-
-    @Test
-    fun `should not treat root path regex characters as wildcards`() {
-        // given
-        val regex =
-            KoScopeCreatorCore.getSourceSetPathRegex(
-                projectRootPath = "/Users/user/my.project",
-                sourceSetName = "main",
-            )
-
-        // when
-        val result = "/Users/user/myXproject/app/src/main/kotlin/SampleClass.kt".matches(regex)
-
-        // then
-        result shouldBeEqualTo false
     }
 
     @Test
@@ -158,8 +144,10 @@ class KoScopeCreatorCoreTest {
                 projectRootPath = "/Users/user/project",
                 moduleName = "app",
             ) &&
-                filePath.matches(
-                    KoScopeCreatorCore.getSourceSetPathRegex(projectRootPath = "/Users/user/project", sourceSetName = "main/"),
+                KoScopeCreatorCore.residesInSourceSet(
+                    filePath = filePath,
+                    projectRootPath = "/Users/user/project",
+                    sourceSetName = "main/",
                 )
 
         // then
@@ -248,8 +236,10 @@ class KoScopeCreatorCoreTest {
                 projectRootPath = """X:\""",
                 moduleName = "feature",
             ) &&
-                filePath.matches(
-                    KoScopeCreatorCore.getSourceSetPathRegex(projectRootPath = """X:\""", sourceSetName = "main"),
+                KoScopeCreatorCore.residesInSourceSet(
+                    filePath = filePath,
+                    projectRootPath = """X:\""",
+                    sourceSetName = "main",
                 )
 
         // then
@@ -268,8 +258,10 @@ class KoScopeCreatorCoreTest {
                 projectRootPath = "/",
                 moduleName = "root",
             ) &&
-                filePath.matches(
-                    KoScopeCreatorCore.getSourceSetPathRegex(projectRootPath = "/", sourceSetName = "test"),
+                KoScopeCreatorCore.residesInSourceSet(
+                    filePath = filePath,
+                    projectRootPath = "/",
+                    sourceSetName = "test",
                 )
 
         // then
@@ -390,15 +382,83 @@ class KoScopeCreatorCoreTest {
 
     @Test
     fun `should not match file located outside src directory when source set name is given`() {
-        // given
-        val regex =
-            KoScopeCreatorCore.getSourceSetPathRegex(
+        // when
+        val result =
+            KoScopeCreatorCore.residesInSourceSet(
+                filePath = "/Users/user/project/feature/SampleClass.kt",
                 projectRootPath = "/Users/user/project",
                 sourceSetName = "main",
             )
 
+        // then
+        result shouldBeEqualTo false
+    }
+
+    @Test
+    fun `should not match file from source set when module located in src directory has the same name as source set`() {
         // when
-        val result = "/Users/user/project/feature/SampleClass.kt".matches(regex)
+        val result =
+            KoScopeCreatorCore.residesInSourceSet(
+                filePath = "/Users/user/project/src/tools/src/main/kotlin/SampleClass.kt",
+                projectRootPath = "/Users/user/project",
+                sourceSetName = "tools",
+            )
+
+        // then
+        result shouldBeEqualTo false
+    }
+
+    @Test
+    fun `should match file from source set of module located in src directory`() {
+        // when
+        val result =
+            KoScopeCreatorCore.residesInSourceSet(
+                filePath = "/Users/user/project/src/tools/src/main/kotlin/SampleClass.kt",
+                projectRootPath = "/Users/user/project",
+                sourceSetName = "main",
+            )
+
+        // then
+        result shouldBeEqualTo true
+    }
+
+    @Test
+    fun `should not match file from other source set when package contains source set path`() {
+        // when
+        val result =
+            KoScopeCreatorCore.residesInSourceSet(
+                filePath = "/Users/user/project/app/src/test/kotlin/com/src/main/SampleClass.kt",
+                projectRootPath = "/Users/user/project",
+                sourceSetName = "main",
+            )
+
+        // then
+        result shouldBeEqualTo false
+    }
+
+    @Test
+    fun `should match file located in source set outside source root`() {
+        // when
+        val result =
+            KoScopeCreatorCore.residesInSourceSet(
+                filePath = "/Users/user/project/app/src/test/resources/SampleClass.kt",
+                projectRootPath = "/Users/user/project",
+                sourceSetName = "test",
+            )
+
+        // then
+        result shouldBeEqualTo true
+    }
+
+    @Test
+    fun `should not match any file when source set name is blank`() {
+        // when
+        val result =
+            KoScopeCreatorCore.residesInSourceSet(
+                filePath = "/Users/user/project/app/SampleClass.kt",
+                projectRootPath = "/Users/user/project",
+                sourceSetName = " ",
+            )
 
         // then
         result shouldBeEqualTo false

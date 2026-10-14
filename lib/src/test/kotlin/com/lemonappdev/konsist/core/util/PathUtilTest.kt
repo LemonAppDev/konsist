@@ -114,6 +114,51 @@ class PathUtilTest {
     }
 
     @Test
+    fun `getSourceSetName returns source set name for file in source set outside source root`() {
+        // when
+        val result = PathUtil.getSourceSetName("/app/src/test/resources/SampleClass.kt", moduleDirectoryPath = "/app")
+
+        // then
+        result shouldBeEqualTo "test"
+    }
+
+    @Test
+    fun `getSourceSetName returns source set name for file outside source root of module located in src directory`() {
+        // when
+        val result = PathUtil.getSourceSetName("/src/tools/src/test/resources/SampleClass.kt", moduleDirectoryPath = "/src/tools")
+
+        // then
+        result shouldBeEqualTo "test"
+    }
+
+    @Test
+    fun `getSourceSetName returns empty string for file outside src directory of module located in src directory`() {
+        // when
+        val result = PathUtil.getSourceSetName("/src/tools/SampleClass.kt", moduleDirectoryPath = "/src/tools")
+
+        // then
+        result shouldBeEqualTo ""
+    }
+
+    @Test
+    fun `getSourceSetName returns empty string for file located directly in src directory`() {
+        // when
+        val result = PathUtil.getSourceSetName("/src/SampleClass.kt", moduleDirectoryPath = "")
+
+        // then
+        result shouldBeEqualTo ""
+    }
+
+    @Test
+    fun `getSourceSetName returns source set name for windows path`() {
+        // when
+        val result = PathUtil.getSourceSetName("""\src\tools\src\test\resources\SampleClass.kt""", moduleDirectoryPath = "/src/tools")
+
+        // then
+        result shouldBeEqualTo "test"
+    }
+
+    @Test
     fun `getSourceRootIndex returns index of src directory of source root`() {
         // when
         val result = PathUtil.getSourceRootIndex("/src/tools/src/main/kotlin/SampleClass.kt")
