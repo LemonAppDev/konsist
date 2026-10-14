@@ -219,6 +219,71 @@ class KoScopeCreatorCoreNestedModuleTest {
         result shouldBeEqualTo listOf(FEATURE_MAIN)
     }
 
+    @Test
+    fun `scopeFromModule for parent module name with wildcard contains files from parent and nested modules`() {
+        // when
+        val result = sut.scopeFromModule(":feature..").filePaths()
+
+        // then
+        result shouldBeEqualTo
+            listOf(
+                FEATURE_SCRIPT,
+                AUTHENTICATION_DATA_MAIN,
+                AUTHENTICATION_DATA_TEST,
+                MAIN_DATA_MAIN,
+                PAYMENT_SCRIPT,
+                PAYMENT_MAIN,
+                PAYMENT_TEST,
+                FEATURE_MAIN,
+                FEATURE_TEST,
+            )
+    }
+
+    @Test
+    fun `scopeFromModule for overlapping module names with wildcard contains each file once`() {
+        // when
+        val result = sut.scopeFromModule(":feature:payment..", ":feature:payment").filePaths()
+
+        // then
+        result shouldBeEqualTo listOf(PAYMENT_SCRIPT, PAYMENT_MAIN, PAYMENT_TEST)
+    }
+
+    @Test
+    fun `scopeFromModule for module name with leading wildcard contains files from sibling nested modules`() {
+        // when
+        val result = sut.scopeFromModule("..data").filePaths()
+
+        // then
+        result shouldBeEqualTo listOf(AUTHENTICATION_DATA_MAIN, AUTHENTICATION_DATA_TEST, MAIN_DATA_MAIN)
+    }
+
+    @Test
+    fun `scopeFromModule for wildcard contains files from all modules`() {
+        // when
+        val result = sut.scopeFromModule("..").filePaths()
+
+        // then
+        result shouldBeEqualTo sut.scopeFromProject().filePaths()
+    }
+
+    @Test
+    fun `scopeFromProduction for parent module name with wildcard and source set`() {
+        // when
+        val result = sut.scopeFromProduction(moduleName = ":feature..", sourceSetName = "main").filePaths()
+
+        // then
+        result shouldBeEqualTo listOf(AUTHENTICATION_DATA_MAIN, MAIN_DATA_MAIN, PAYMENT_MAIN, FEATURE_MAIN)
+    }
+
+    @Test
+    fun `scopeFromTest for parent module name with wildcard`() {
+        // when
+        val result = sut.scopeFromTest(moduleName = ":feature..").filePaths()
+
+        // then
+        result shouldBeEqualTo listOf(AUTHENTICATION_DATA_TEST, PAYMENT_TEST, FEATURE_TEST)
+    }
+
     private fun KoScope.filePaths() = files.map { it.path }
 
     private fun createKoFile(filePath: String): KoFileDeclaration {

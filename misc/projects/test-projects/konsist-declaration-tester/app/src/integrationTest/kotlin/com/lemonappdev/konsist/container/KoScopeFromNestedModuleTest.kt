@@ -86,6 +86,24 @@ class KoScopeFromNestedModuleTest {
     }
 
     @Test
+    fun `scopeFromModule for parent module with wildcard contains files from parent and nested module`() {
+        // given
+        val sut = Konsist.scopeFromModule(":feature..")
+
+        // then
+        sut.mapToFilePaths().sorted() shouldBeEqualTo (featurePaymentFilePaths + featureClassPath).sorted()
+    }
+
+    @Test
+    fun `scopeFromModule for nested module with wildcard does not contain files from parent module`() {
+        // given
+        val sut = Konsist.scopeFromModule("feature/payment/..")
+
+        // then
+        sut.mapToFilePaths() shouldBeEqualTo featurePaymentFilePaths
+    }
+
+    @Test
     fun `scopeFromProject for parent module does not contain files from nested module`() {
         // given
         val sut = Konsist.scopeFromProject(moduleName = ":feature")

@@ -35,12 +35,20 @@ internal class KoScopeCreatorCore : KoScopeCreator {
         vararg moduleNames: String,
     ): KoScope = scopeFromModules(setOf(moduleName) + moduleNames)
 
+    /*
+     * Files are collected in a single pass, so a file matching many module names (e.g. ":feature.." and
+     * ":feature:payment") is added once.
+     */
     override fun scopeFromModules(moduleNames: Collection<String>): KoScopeCore =
         runBlocking {
-            moduleNames
-                .distinctBy { ModuleUtil.normalizeModuleName(it) }
-                .flatMap { getFiles(it) }
-                .let { KoScopeCore(it) }
+            val moduleNameMatchers = moduleNames.map { ModuleUtil.getModuleNameMatcher(it) }
+            val koFiles =
+                getFiles { file ->
+                    val fileModuleName = getModuleName(file.path, projectRootPath)
+                    moduleNameMatchers.any { it(fileModuleName) }
+                }
+
+            KoScopeCore(koFiles)
         }
 
     override fun scopeFromPackage(
@@ -78,10 +86,11 @@ internal class KoScopeCreatorCore : KoScopeCreator {
         predicate: (File) -> Boolean = { true },
     ): List<KoFileDeclaration> {
         val sourceSetPathRegex = sourceSetName?.let { getSourceSetPathRegex(projectRootPath, it) }
+        val moduleNameMatcher = moduleName?.let { ModuleUtil.getModuleNameMatcher(it) }
 
         return KoFileDeclarationProvider.getKoFileDeclarations { file ->
             (!ignoreBuildConfig || !KoFileDeclarationProvider.isBuildConfigFile(file.path)) &&
-                (moduleName == null || residesInModule(file.path, projectRootPath, moduleName)) &&
+                (moduleNameMatcher == null || moduleNameMatcher(getModuleName(file.path, projectRootPath))) &&
                 (sourceSetPathRegex == null || file.path.toMacOsSeparator().matches(sourceSetPathRegex)) &&
                 predicate(file)
         }
@@ -231,22 +240,30 @@ internal class KoScopeCreatorCore : KoScopeCreator {
         private const val TEST_NAME_IN_PATH = "test"
 
         /**
-         * Returns true if the file with given absolute [filePath] resides in the module with given [moduleName].
-         * Module name is normalized (see [ModuleUtil.normalizeModuleName]) and compared with the module name of the file
-         * (see [ModuleUtil.getModuleName]). Paths with "/" and "\\" separators are supported on all OSes.
-         * Trailing separator of the project root path is ignored, so drive roots (e.g. `X:\`) and `/` are supported.
+         * Returns true if the file with given absolute [filePath] resides in the module with given [moduleName]
+         * (see [ModuleUtil.residesInModule]).
          */
         internal fun residesInModule(
             filePath: String,
             projectRootPath: String,
             moduleName: String,
-        ): Boolean {
+        ): Boolean = ModuleUtil.residesInModule(getModuleName(filePath, projectRootPath), moduleName)
+
+        /**
+         * Returns module name (see [ModuleUtil.getModuleName]) of the file with given absolute [filePath].
+         * Paths with "/" and "\\" separators are supported on all OSes.
+         * Trailing separator of the project root path is ignored, so drive roots (e.g. `X:\`) and `/` are supported.
+         */
+        private fun getModuleName(
+            filePath: String,
+            projectRootPath: String,
+        ): String {
             val projectPath =
                 filePath
                     .toMacOsSeparator()
                     .removePrefix(projectRootPath.toMacOsSeparator().trimEnd('/'))
 
-            return ModuleUtil.getModuleName(projectPath) == ModuleUtil.normalizeModuleName(moduleName)
+            return ModuleUtil.getModuleName(projectPath)
         }
 
         /**

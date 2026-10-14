@@ -19,6 +19,9 @@ interface KoModuleProvider : KoBaseProvider {
      * are also accepted on all OSes.
      * Module name is the module directory path, so Gradle project path works only when it matches the directory
      * (Gradle `projectDir` overrides in settings.gradle(.kts) are not supported).
+     * Use `..` as a wildcard for any number of module directories, including none, e.g. `:feature..` matches
+     * `feature` and its nested modules (`feature/payment`), `..data` matches `data` and `feature/data`,
+     * and `..` matches all modules.
      * @return `true` if the declaration resides in the specified module, `false` otherwise.
      */
     fun residesInModule(name: String): Boolean
