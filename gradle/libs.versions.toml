@@ -6,7 +6,7 @@ jUnitVersion = "5.14.4"
 ktlintCliVersion = "1.8.0"
 # Raises minimum consumer Kotlin version when upgraded (see DeveloperReadme.md "Kotlin Compatibility")
 coroutinesVersion = "1.9.0"
-kotestVersion = "6.2.5"
+kotestVersion = "6.2.6"
 junitPlatformLauncher = "6.1.3"
 
 [libraries]
