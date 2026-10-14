@@ -12,8 +12,15 @@ import com.lemonappdev.konsist.api.ext.list.withPackage
 import com.lemonappdev.konsist.api.verify.assertFalse
 import com.lemonappdev.konsist.api.verify.assertTrue
 import dummyclasses.org.springframework.security.access.prepost.PreAuthorize
+import org.springframework.http.ResponseEntity
 import org.springframework.stereotype.Repository
 import org.springframework.stereotype.Service
+import org.springframework.web.bind.annotation.DeleteMapping
+import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.PatchMapping
+import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.PutMapping
+import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 import jakarta.persistence.Entity
 import jakarta.persistence.Id
@@ -157,5 +164,37 @@ class SpringTestSnippets {
                         controller.functions()
                             .all { it.hasAnnotationOf(PreAuthorize::class) }
             }
+    }
+
+    fun `classes in 'domain' package should be internal`() {
+        Konsist
+            .scopeFromProduction()
+            .classes()
+            .withPackage("..domain..")
+            .assertTrue { it.hasInternalModifier }
+    }
+
+    fun `classes with 'Service' or 'Repository' annotation should not be public`() {
+        Konsist
+            .scopeFromProduction()
+            .classes()
+            .withAnnotationOf(Service::class, Repository::class)
+            .assertFalse { it.hasPublicOrDefaultModifier }
+    }
+
+    fun `endpoints in classes with 'RestController' annotation should return 'ResponseEntity'`() {
+        Konsist
+            .scopeFromProduction()
+            .classes()
+            .withAnnotationOf(RestController::class)
+            .functions()
+            .withAnnotationOf(
+                GetMapping::class,
+                PostMapping::class,
+                PutMapping::class,
+                PatchMapping::class,
+                DeleteMapping::class,
+                RequestMapping::class,
+            ).assertTrue { it.hasReturnTypeOf(ResponseEntity::class) }
     }
 }
