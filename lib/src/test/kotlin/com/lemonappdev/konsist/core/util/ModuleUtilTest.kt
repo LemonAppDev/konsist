@@ -185,6 +185,78 @@ class ModuleUtilTest {
     }
 
     @Test
+    fun `should return module name for module located in src directory for unix path`() {
+        // when
+        val result =
+            ModuleUtil.getModuleName(
+                projectPath = "/src/app/src/main/kotlin/com/app/SampleClass.kt",
+            )
+
+        // then
+        result shouldBeEqualTo "src/app"
+    }
+
+    @Test
+    fun `should return module name for module located in src directory for windows path`() {
+        // when
+        val result =
+            ModuleUtil.getModuleName(
+                projectPath = """\src\app\src\main\kotlin\com\app\SampleClass.kt""",
+            )
+
+        // then
+        result shouldBeEqualTo "src/app"
+    }
+
+    @Test
+    fun `should return module name for module named src`() {
+        // when
+        val result =
+            ModuleUtil.getModuleName(
+                projectPath = "/src/src/main/kotlin/com/app/SampleClass.kt",
+            )
+
+        // then
+        result shouldBeEqualTo "src"
+    }
+
+    @Test
+    fun `should return nested module name for module located in src directory`() {
+        // when
+        val result =
+            ModuleUtil.getModuleName(
+                projectPath = "/src/feature/payment/src/test/java/com/app/SampleClass.kt",
+            )
+
+        // then
+        result shouldBeEqualTo "src/feature/payment"
+    }
+
+    @Test
+    fun `should return module name for file in package named src`() {
+        // when
+        val result =
+            ModuleUtil.getModuleName(
+                projectPath = "/app/src/main/kotlin/com/src/main/kotlin/SampleClass.kt",
+            )
+
+        // then
+        result shouldBeEqualTo "app"
+    }
+
+    @Test
+    fun `should return root for root module file in source set without kotlin directory`() {
+        // when
+        val result =
+            ModuleUtil.getModuleName(
+                projectPath = "/src/app/SampleClass.kt",
+            )
+
+        // then
+        result shouldBeEqualTo "root"
+    }
+
+    @Test
     fun `should normalize gradle project path`() {
         // when
         val result = ModuleUtil.normalizeModuleName(":feature:auth")

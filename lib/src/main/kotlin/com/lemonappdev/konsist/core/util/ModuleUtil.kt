@@ -10,15 +10,18 @@ object ModuleUtil {
     /**
      * Returns module name with "/" separators (regardless of OS), e.g. "feature/data", or "root" for the top-level module.
      * Module of the file located outside the "src" directory is the file directory, e.g. "samples" for "/samples/A.kt".
+     * Module may reside in a directory named "src", e.g. "src/app" for "/src/app/src/main/kotlin/A.kt"
+     * (see [PathUtil.getSourceDirectoryIndex]).
      */
     fun getModuleName(projectPath: String): String {
         val path = toMacOsSeparator(projectPath)
+        val sourceDirectoryIndex = PathUtil.getSourceDirectoryIndex(path)
 
         val moduleDirectory =
-            if (path.contains("/src/")) {
-                path.substringBefore("/src/")
-            } else {
+            if (sourceDirectoryIndex == -1) {
                 path.substringBeforeLast("/", "")
+            } else {
+                path.substring(0, sourceDirectoryIndex)
             }
 
         return moduleDirectory

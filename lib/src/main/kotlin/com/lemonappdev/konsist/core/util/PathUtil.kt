@@ -31,12 +31,29 @@ object PathUtil {
 
     /**
      * Returns name of the source set containing the file with given [projectPath], e.g. "main" for
-     * "/app/src/main/kotlin/A.kt".
+     * "/app/src/main/kotlin/A.kt" and "/src/app/src/main/kotlin/A.kt" (see [getSourceDirectoryIndex]).
      */
-    internal fun getSourceSetName(projectPath: String): String =
-        projectPath
-            .substringAfter("${File.separator}src${File.separator}")
-            .substringBefore(File.separator)
+    internal fun getSourceSetName(projectPath: String): String {
+        val path = toMacOsSeparator(projectPath)
+        val sourceDirectoryIndex = getSourceDirectoryIndex(path)
+
+        if (sourceDirectoryIndex == -1) {
+            return path.substringBefore('/')
+        }
+
+        return path
+            .substring(sourceDirectoryIndex + SOURCE_DIRECTORY_PATH.length)
+            .substringBefore('/')
+    }
+
+    /**
+     * Returns index of the module "/src/" directory in [path] ("/" separators), or -1 if the path has no "src" directory.
+     * Module may reside in a directory named "src" (e.g. "/src/app/src/main/kotlin/A.kt"), so the first "src" directory
+     * followed by the source set directory and the "kotlin" or "java" directory is used. If there is no such directory,
+     * the first "src" directory is used.
+     */
+    internal fun getSourceDirectoryIndex(path: String): Int =
+        SOURCE_ROOT_REGEX.find(path)?.range?.first ?: path.indexOf(SOURCE_DIRECTORY_PATH)
 
     /**
      * Returns true if the file with given [projectPath] is located in the Gradle build configuration directory
@@ -45,18 +62,22 @@ object PathUtil {
      * directory.
      */
     internal fun isBuildConfigPath(projectPath: String): Boolean {
-        val directories =
-            toMacOsSeparator(projectPath)
-                .split('/')
-                .dropLast(1)
+        val path = toMacOsSeparator(projectPath)
+        val sourceDirectoryIndex = getSourceDirectoryIndex(path)
 
-        val sourceDirIndex = directories.indexOf(SOURCE_DIR).takeIf { it != -1 } ?: directories.size
+        val directoryPath =
+            if (sourceDirectoryIndex == -1) {
+                path.substringBeforeLast('/', "")
+            } else {
+                path.substring(0, sourceDirectoryIndex)
+            }
 
-        return directories
-            .take(sourceDirIndex)
+        return directoryPath
+            .split('/')
             .any { it.equals(GRADLE_BUILD_CONFIG_DIRECTORY_NAME, ignoreCase = true) }
     }
 
-    private const val SOURCE_DIR = "src"
+    private const val SOURCE_DIRECTORY_PATH = "/src/"
+    private val SOURCE_ROOT_REGEX = Regex("/src/[^/]+/(?:kotlin|java)/")
     private const val GRADLE_BUILD_CONFIG_DIRECTORY_NAME = "buildSrc"
 }
