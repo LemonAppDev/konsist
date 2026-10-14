@@ -140,6 +140,9 @@ interface KoScopeCreator {
     /**
      * Creates a [KoScope] containing all Kotlin files in the production source sets.
      * The production source set is the source set whose name neither starts nor ends with "test".
+     * Kotlin files located in the module directory outside the source set directory (e.g. `feature/Script.kt`) are
+     * production files, unless the first directory in the module directory is named like a test source set
+     * (e.g. `feature/test/Script.kt` and `feature/testData/Script.kt` are test files).
      * Method does not return Kotlin files present in build directories ("build" and "target" outside "src" directory),
      * hidden directories (e.g. ".git", ".gradle", ".idea") and "node_modules" directories.
      *
@@ -168,6 +171,9 @@ interface KoScopeCreator {
     /**
      * Creates a [KoScope] containing all Kotlin files in the test source sets.
      * The test source set is the source set whose name starts or ends with "test".
+     * Kotlin files located in the module directory outside the source set directory are test files when the first
+     * directory in the module directory is named like a test source set (e.g. `feature/test/Script.kt` and
+     * `feature/testData/Script.kt` are test files, and `feature/Script.kt` is a production file).
      * Method does not return Kotlin files present in build directories ("build" and "target" outside "src" directory),
      * hidden directories (e.g. ".git", ".gradle", ".idea") and "node_modules" directories.
      *

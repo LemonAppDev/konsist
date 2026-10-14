@@ -107,7 +107,7 @@ internal class KoScopeCreatorCore : KoScopeCreator {
                 require(!isTestSourceSet(it)) { "Source set '$it' is a test source set, but it should be production source set." }
             }
 
-            val koFiles = getFiles(moduleName, sourceSetName) { !isTestSourceSet(getSourceSetName(it.path, projectRootPath)) }
+            val koFiles = getFiles(moduleName, sourceSetName) { !isTestFile(it.path) }
 
             KoScopeCore(koFiles)
         }
@@ -121,7 +121,7 @@ internal class KoScopeCreatorCore : KoScopeCreator {
                 require(isTestSourceSet(it)) { "Source set '$it' is a production source set, but it should be test source set." }
             }
 
-            val koFiles = getFiles(moduleName, sourceSetName) { isTestSourceSet(getSourceSetName(it.path, projectRootPath)) }
+            val koFiles = getFiles(moduleName, sourceSetName) { isTestFile(it.path) }
 
             KoScopeCore(koFiles)
         }
@@ -213,6 +213,26 @@ internal class KoScopeCreatorCore : KoScopeCreator {
     }
 
     private fun getAbsolutePath(projectPath: String): String = "$projectRootPath$sep${projectPath.toOsSeparator()}"
+
+    /*
+     * File located in the source set is a test file when the source set is a test source set. File located outside
+     * the source set is a test file when the first directory in the module directory is named like a test source set,
+     * e.g. "/app/test/A.kt" and "/app/testData/A.kt" are test files, and "/app/A.kt" and "/app/config/test/A.kt" are
+     * production files.
+     */
+    private fun isTestFile(filePath: String): Boolean {
+        val projectPath = getProjectPath(filePath, projectRootPath)
+        val moduleDirectoryPath = ModuleUtil.getModuleDirectoryPath(projectPath) { getModuleDirectory(projectRootPath, it) }
+        val sourceSetName = PathUtil.getSourceSetName(projectPath, moduleDirectoryPath)
+
+        if (sourceSetName.isNotEmpty()) {
+            return isTestSourceSet(sourceSetName)
+        }
+
+        // Path relative to the module directory, e.g. "testData/A.kt" for "/app/testData/A.kt"
+        val modulePath = projectPath.removePrefix("$moduleDirectoryPath/")
+        return modulePath.contains('/') && isTestSourceSet(modulePath.substringBefore('/'))
+    }
 
     private fun isTestSourceSet(name: String): Boolean {
         val lowercaseName = name.lowercase()
