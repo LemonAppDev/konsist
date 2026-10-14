@@ -1,0 +1,3 @@
+import com.lemonappdev.konsist.externalfixture.FixtureExternalClass
+
+val fixtureProperty: FixtureExternalClass = FixtureExternalClass()

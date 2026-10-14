@@ -1,0 +1,3 @@
+import com.lemonappdev.konsist.testdata.FixtureType as ImportAlias
+
+val fixtureProperty: ImportAlias = ImportAlias()
