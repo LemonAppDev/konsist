@@ -463,4 +463,56 @@ class KoScopeCreatorCoreTest {
         // then
         result shouldBeEqualTo false
     }
+
+    @Test
+    fun `should match file located in module src directory`() {
+        // when
+        val result =
+            KoScopeCreatorCore.residesInSourceDirectory(
+                filePath = "/Users/user/project/feature/src/main/kotlin/SampleClass.kt",
+                projectRootPath = "/Users/user/project",
+            )
+
+        // then
+        result shouldBeEqualTo true
+    }
+
+    @Test
+    fun `should not match file located outside src directory in module directory`() {
+        // when
+        val result =
+            KoScopeCreatorCore.residesInSourceDirectory(
+                filePath = "/Users/user/project/feature/SampleClass.kt",
+                projectRootPath = "/Users/user/project",
+            )
+
+        // then
+        result shouldBeEqualTo false
+    }
+
+    @Test
+    fun `should not match file located in test directory outside src directory`() {
+        // when
+        val result =
+            KoScopeCreatorCore.residesInSourceDirectory(
+                filePath = "/Users/user/project/feature/testData/SampleClass.kt",
+                projectRootPath = "/Users/user/project",
+            )
+
+        // then
+        result shouldBeEqualTo false
+    }
+
+    @Test
+    fun `should match file located in module src directory with windows separators`() {
+        // when
+        val result =
+            KoScopeCreatorCore.residesInSourceDirectory(
+                filePath = """C:\Users\user\project\feature\src\main\kotlin\SampleClass.kt""",
+                projectRootPath = """C:\Users\user\project""",
+            )
+
+        // then
+        result shouldBeEqualTo true
+    }
 }

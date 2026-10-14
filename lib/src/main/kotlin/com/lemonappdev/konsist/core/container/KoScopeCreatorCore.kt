@@ -77,10 +77,10 @@ internal class KoScopeCreatorCore : KoScopeCreator {
 
     /*
      * Files are filtered by path before parsing, so files of other modules and source sets are not parsed.
+     * Files located outside the module "src" directory (e.g. "/app/A.kt" and "/app/testData/A.kt") are ignored.
      * Module and source set are computed the same way as [KoFileDeclaration.moduleName] and
-     * [KoFileDeclaration.sourceSetName], so module scope contains exactly the files residing in the module (including
-     * files located outside the "src" directory) and source set scope contains exactly the files residing in
-     * the source set.
+     * [KoFileDeclaration.sourceSetName], so module scope contains exactly the module files located in the "src"
+     * directory and source set scope contains exactly the files residing in the source set.
      */
     private suspend fun getFiles(
         moduleName: String? = null,
@@ -91,7 +91,8 @@ internal class KoScopeCreatorCore : KoScopeCreator {
         val moduleNameMatcher = moduleName?.let { ModuleUtil.getModuleNameMatcher(it) }
 
         return KoFileDeclarationProvider.getKoFileDeclarations { file ->
-            (!ignoreBuildConfig || !KoFileDeclarationProvider.isBuildConfigFile(file.path)) &&
+            residesInSourceDirectory(file.path, projectRootPath) &&
+                (!ignoreBuildConfig || !KoFileDeclarationProvider.isBuildConfigFile(file.path)) &&
                 (moduleNameMatcher == null || moduleNameMatcher(getModuleName(file.path, projectRootPath))) &&
                 (sourceSetName == null || residesInSourceSet(file.path, projectRootPath, sourceSetName)) &&
                 predicate(file)
@@ -107,7 +108,7 @@ internal class KoScopeCreatorCore : KoScopeCreator {
                 require(!isTestSourceSet(it)) { "Source set '$it' is a test source set, but it should be production source set." }
             }
 
-            val koFiles = getFiles(moduleName, sourceSetName) { !isTestFile(it.path) }
+            val koFiles = getFiles(moduleName, sourceSetName) { !isTestSourceSet(getSourceSetName(it.path, projectRootPath)) }
 
             KoScopeCore(koFiles)
         }
@@ -121,7 +122,7 @@ internal class KoScopeCreatorCore : KoScopeCreator {
                 require(isTestSourceSet(it)) { "Source set '$it' is a production source set, but it should be test source set." }
             }
 
-            val koFiles = getFiles(moduleName, sourceSetName) { isTestFile(it.path) }
+            val koFiles = getFiles(moduleName, sourceSetName) { isTestSourceSet(getSourceSetName(it.path, projectRootPath)) }
 
             KoScopeCore(koFiles)
         }
@@ -214,26 +215,6 @@ internal class KoScopeCreatorCore : KoScopeCreator {
 
     private fun getAbsolutePath(projectPath: String): String = "$projectRootPath$sep${projectPath.toOsSeparator()}"
 
-    /*
-     * File located in the source set is a test file when the source set is a test source set. File located outside
-     * the source set is a test file when the first directory in the module directory is named like a test source set,
-     * e.g. "/app/test/A.kt" and "/app/testData/A.kt" are test files, and "/app/A.kt" and "/app/config/test/A.kt" are
-     * production files.
-     */
-    private fun isTestFile(filePath: String): Boolean {
-        val projectPath = getProjectPath(filePath, projectRootPath)
-        val moduleDirectoryPath = ModuleUtil.getModuleDirectoryPath(projectPath) { getModuleDirectory(projectRootPath, it) }
-        val sourceSetName = PathUtil.getSourceSetName(projectPath, moduleDirectoryPath)
-
-        if (sourceSetName.isNotEmpty()) {
-            return isTestSourceSet(sourceSetName)
-        }
-
-        // Path relative to the module directory, e.g. "testData/A.kt" for "/app/testData/A.kt"
-        val modulePath = projectPath.removePrefix("$moduleDirectoryPath/")
-        return modulePath.contains('/') && isTestSourceSet(modulePath.substringBefore('/'))
-    }
-
     private fun isTestSourceSet(name: String): Boolean {
         val lowercaseName = name.lowercase()
         return lowercaseName.substringAfter(':').matches(Regex(".*$TEST_NAME_IN_PATH.*"))
@@ -282,6 +263,25 @@ internal class KoScopeCreatorCore : KoScopeCreator {
             val normalizedSourceSetName = sourceSetName.toMacOsSeparator().trim().trim('/')
 
             return normalizedSourceSetName.isNotEmpty() && getSourceSetName(filePath, projectRootPath) == normalizedSourceSetName
+        }
+
+        /**
+         * Returns true if the file with given absolute [filePath] is located in the module "src" directory
+         * (see [PathUtil.residesInSourceDirectory]). Module directory is not computed for the file without "src"
+         * directory in its path.
+         */
+        internal fun residesInSourceDirectory(
+            filePath: String,
+            projectRootPath: String,
+        ): Boolean {
+            val projectPath = getProjectPath(filePath, projectRootPath)
+
+            if (PathUtil.getSourceDirectoryIndex(projectPath) == -1) {
+                return false
+            }
+
+            val moduleDirectoryPath = ModuleUtil.getModuleDirectoryPath(projectPath) { getModuleDirectory(projectRootPath, it) }
+            return PathUtil.residesInSourceDirectory(projectPath, moduleDirectoryPath)
         }
 
         /**

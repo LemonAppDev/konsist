@@ -168,6 +168,78 @@ class PathUtilTest {
     }
 
     @Test
+    fun `residesInSourceDirectory returns true for file in source set`() {
+        // when
+        val result = PathUtil.residesInSourceDirectory("/app/src/main/kotlin/SampleClass.kt", moduleDirectoryPath = "/app")
+
+        // then
+        result shouldBeEqualTo true
+    }
+
+    @Test
+    fun `residesInSourceDirectory returns true for file located directly in src directory`() {
+        // when
+        val result = PathUtil.residesInSourceDirectory("/app/src/SampleClass.kt", moduleDirectoryPath = "/app")
+
+        // then
+        result shouldBeEqualTo true
+    }
+
+    @Test
+    fun `residesInSourceDirectory returns true for file in source set outside source root`() {
+        // when
+        val result = PathUtil.residesInSourceDirectory("/app/src/test/testData/SampleClass.kt", moduleDirectoryPath = "/app")
+
+        // then
+        result shouldBeEqualTo true
+    }
+
+    @Test
+    fun `residesInSourceDirectory returns true for file in root module source set`() {
+        // when
+        val result = PathUtil.residesInSourceDirectory("/src/main/kotlin/SampleClass.kt", moduleDirectoryPath = "")
+
+        // then
+        result shouldBeEqualTo true
+    }
+
+    @Test
+    fun `residesInSourceDirectory returns false for file located directly in module directory`() {
+        // when
+        val result = PathUtil.residesInSourceDirectory("/app/SampleClass.kt", moduleDirectoryPath = "/app")
+
+        // then
+        result shouldBeEqualTo false
+    }
+
+    @Test
+    fun `residesInSourceDirectory returns false for file located in test directory outside src directory`() {
+        // when
+        val result = PathUtil.residesInSourceDirectory("/app/testData/SampleClass.kt", moduleDirectoryPath = "/app")
+
+        // then
+        result shouldBeEqualTo false
+    }
+
+    @Test
+    fun `residesInSourceDirectory returns false for file outside src directory of module located in src directory`() {
+        // when
+        val result = PathUtil.residesInSourceDirectory("/src/tools/SampleClass.kt", moduleDirectoryPath = "/src/tools")
+
+        // then
+        result shouldBeEqualTo false
+    }
+
+    @Test
+    fun `residesInSourceDirectory returns true for windows path`() {
+        // when
+        val result = PathUtil.residesInSourceDirectory("""\src\tools\src\main\kotlin\SampleClass.kt""", moduleDirectoryPath = "/src/tools")
+
+        // then
+        result shouldBeEqualTo true
+    }
+
+    @Test
     fun `getSourceRootIndex returns index of src directory of source root`() {
         // when
         val result = PathUtil.getSourceRootIndex("/src/tools/src/main/kotlin/SampleClass.kt")

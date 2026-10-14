@@ -17,6 +17,9 @@ interface KoModuleProvider : KoBaseProvider {
      * (the first `src` directory followed by the source set directory and the `kotlin`, `java` or `resources` directory
      * is used). Projects located in resources (e.g. Gradle test fixture project `app/src/test/resources/project`) are
      * not modules, so their files reside in the module containing the resources, e.g. "app".
+     * Files located outside the module `src` directory (e.g. `feature/config/A.kt`) are not returned by project scopes
+     * (e.g. `Konsist.scopeFromProject()` and `Konsist.scopeFromModule()`), only by directory and file scopes
+     * (e.g. `Konsist.scopeFromDirectory()` and `Konsist.scopeFromFile()`).
      */
     val moduleName: String
 
