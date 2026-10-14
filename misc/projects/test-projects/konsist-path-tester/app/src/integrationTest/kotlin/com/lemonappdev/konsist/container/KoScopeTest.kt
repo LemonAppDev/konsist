@@ -136,4 +136,46 @@ class KoScopeTest {
                 emptyList(),
             )
     }
+
+    @Test
+    fun `plusAssign operator updates files read before`() {
+        // given
+        val scope1 = Konsist.scopeFromPackage("com.lemonappdev.fixture", sourceSetName = "test")
+        val scope2 = Konsist.scopeFromProject(moduleName = "data")
+        scope1.files
+
+        // when
+        scope1 += scope2
+
+        // then
+        scope1
+            .mapToFilePaths()
+            .shouldBeEqualTo(
+                listOf(
+                    "$dataMainSourceSetDirectory/fixture/LibClass.kt",
+                    "$dataMainSourceSetDirectory/fixture/data/LibDataClass.kt",
+                    "$dataTestSourceSetDirectory/fixture/LibClassSpec.kt",
+                    "$dataTestSourceSetDirectory/fixture/LibClassSpec.kt",
+                    "$dataTestSourceSetDirectory/fixture/data/LibDataClassTest.kt",
+                ).toOsSeparator(),
+            )
+    }
+
+    @Test
+    fun `minusAssign operator updates files read before`() {
+        // given
+        val scope1 = Konsist.scopeFromPackage("com.lemonappdev.fixture", sourceSetName = "test")
+        val scope2 = Konsist.scopeFromProject(moduleName = "data")
+        scope1.files
+
+        // when
+        scope1 -= scope2
+
+        // then
+        scope1
+            .mapToFilePaths()
+            .shouldBeEqualTo(
+                emptyList(),
+            )
+    }
 }
