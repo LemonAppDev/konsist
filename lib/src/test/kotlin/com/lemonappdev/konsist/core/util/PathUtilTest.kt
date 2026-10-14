@@ -58,4 +58,31 @@ class PathUtilTest {
         // then
         result shouldBeEqualTo "root"
     }
+
+    @Test
+    fun `getSourceSetName returns source set name for file in module`() {
+        // when
+        val result = PathUtil.getSourceSetName(PathUtil.toOsSeparator("/app/src/test/kotlin/SampleClass.kt"))
+
+        // then
+        result shouldBeEqualTo "test"
+    }
+
+    @Test
+    fun `getSourceSetName returns source set name for file in root module`() {
+        // when
+        val result = PathUtil.getSourceSetName(PathUtil.toOsSeparator("/src/main/kotlin/SampleClass.kt"))
+
+        // then
+        result shouldBeEqualTo "main"
+    }
+
+    @Test
+    fun `getSourceSetName returns first source set name for file in nested src directory`() {
+        // when
+        val result = PathUtil.getSourceSetName(PathUtil.toOsSeparator("/app/src/main/kotlin/src/test/SampleClass.kt"))
+
+        // then
+        result shouldBeEqualTo "main"
+    }
 }
