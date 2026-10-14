@@ -8,6 +8,7 @@ import com.lemonappdev.konsist.core.ext.sep
 import com.lemonappdev.konsist.core.ext.toKoFile
 import com.lemonappdev.konsist.core.ext.toMacOsSeparator
 import com.lemonappdev.konsist.core.ext.toOsSeparator
+import com.lemonappdev.konsist.core.filesystem.ModuleDirectoryDetector
 import com.lemonappdev.konsist.core.filesystem.PathProvider
 import com.lemonappdev.konsist.core.provider.util.KoFileDeclarationProvider
 import com.lemonappdev.konsist.core.util.LocationUtil
@@ -263,7 +264,7 @@ internal class KoScopeCreatorCore : KoScopeCreator {
                     .toMacOsSeparator()
                     .removePrefix(projectRootPath.toMacOsSeparator().trimEnd('/'))
 
-            return ModuleUtil.getModuleName(projectPath)
+            return ModuleUtil.getModuleName(projectPath) { ModuleDirectoryDetector.getModuleDirectory(projectRootPath, it) }
         }
 
         /**

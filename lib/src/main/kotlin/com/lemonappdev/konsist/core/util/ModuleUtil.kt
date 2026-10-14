@@ -1,5 +1,7 @@
 package com.lemonappdev.konsist.core.util
 
+import com.lemonappdev.konsist.core.filesystem.ModuleDirectoryDetector
+import com.lemonappdev.konsist.core.filesystem.PathProvider
 import com.lemonappdev.konsist.core.util.PathUtil.toMacOsSeparator
 
 object ModuleUtil {
@@ -9,17 +11,31 @@ object ModuleUtil {
 
     /**
      * Returns module name with "/" separators (regardless of OS), e.g. "feature/data", or "root" for the top-level module.
-     * Module of the file located outside the "src" directory is the file directory, e.g. "samples" for "/samples/A.kt".
      * Module may reside in a directory named "src", e.g. "src/app" for "/src/app/src/main/kotlin/A.kt"
      * (see [PathUtil.getSourceDirectoryIndex]).
+     *
+     * Module of the file located outside the "src" directory is the closest module directory containing the file
+     * (see [ModuleDirectoryDetector]), e.g. "feature" for "/feature/config/A.kt" and "root" for "/samples/A.kt"
+     * (when "feature/config" and "samples" are not module directories). If there is no such directory, module is
+     * the file directory.
+     *
+     * [getModuleDirectory] returns module directory (see [ModuleDirectoryDetector.getModuleDirectory]) containing
+     * the directory with given path (relative to the project root, e.g. "/feature/config", or "" for the project root
+     * directory), or null if there is no such directory.
      */
-    fun getModuleName(projectPath: String): String {
+    fun getModuleName(
+        projectPath: String,
+        getModuleDirectory: (String) -> String? = {
+            ModuleDirectoryDetector.getModuleDirectory(PathProvider.rootProjectPath, it)
+        },
+    ): String {
         val path = toMacOsSeparator(projectPath)
         val sourceDirectoryIndex = PathUtil.getSourceDirectoryIndex(path)
 
         val moduleDirectory =
             if (sourceDirectoryIndex == -1) {
-                path.substringBeforeLast("/", "")
+                val fileDirectory = path.substringBeforeLast("/", "")
+                getModuleDirectory(fileDirectory) ?: fileDirectory
             } else {
                 path.substring(0, sourceDirectoryIndex)
             }
