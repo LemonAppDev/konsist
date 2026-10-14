@@ -30,13 +30,14 @@ internal class ProjectKotlinFileScanner(
                 .listFiles()
                 .orEmpty()
                 .map { file ->
+                    // Kotlin file check goes first, so each Kotlin file is checked on the file system once
                     when {
-                        file.isDirectory && !projectDirectoryFilter.isIgnored(file) -> {
-                            async(Dispatchers.IO) { scanDirectory(file) }
-                        }
-
                         file.isKotlinFile -> {
                             CompletableDeferred(listOf(file))
+                        }
+
+                        file.isDirectory && !projectDirectoryFilter.isIgnored(file) -> {
+                            async(Dispatchers.IO) { scanDirectory(file) }
                         }
 
                         else -> {
