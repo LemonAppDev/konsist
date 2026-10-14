@@ -17,7 +17,7 @@ jobs:
 
   # Test projects are tested against Konsist snapshot published by the Publish workflow
   published-snapshot:
-    name: Get Published Snapshot
+    name: Get Published Snapshot For Test Projects
     runs-on: ubuntu-latest
     permissions:
       actions: read
