@@ -280,7 +280,7 @@ internal class KoScopeCreatorCore : KoScopeCreator {
                 return false
             }
 
-            val moduleDirectoryPath = ModuleUtil.getModuleDirectoryPath(projectPath) { getModuleDirectory(projectRootPath, it) }
+            val moduleDirectoryPath = getModuleDirectoryPath(projectPath, projectRootPath)
             return PathUtil.residesInSourceDirectory(projectPath, moduleDirectoryPath)
         }
 
@@ -290,7 +290,12 @@ internal class KoScopeCreatorCore : KoScopeCreator {
         private fun getModuleName(
             filePath: String,
             projectRootPath: String,
-        ): String = ModuleUtil.getModuleName(getProjectPath(filePath, projectRootPath)) { getModuleDirectory(projectRootPath, it) }
+        ): String =
+            ModuleUtil.getModuleName(
+                getProjectPath(filePath, projectRootPath),
+                isSourceSetDirectory = { ModuleDirectoryDetector.isSourceSetDirectory(projectRootPath, it) },
+                getModuleDirectory = { ModuleDirectoryDetector.getModuleDirectory(projectRootPath, it) },
+            )
 
         /**
          * Returns source set name (see [PathUtil.getSourceSetName]) of the file with given absolute [filePath].
@@ -300,7 +305,7 @@ internal class KoScopeCreatorCore : KoScopeCreator {
             projectRootPath: String,
         ): String {
             val projectPath = getProjectPath(filePath, projectRootPath)
-            val moduleDirectoryPath = ModuleUtil.getModuleDirectoryPath(projectPath) { getModuleDirectory(projectRootPath, it) }
+            val moduleDirectoryPath = getModuleDirectoryPath(projectPath, projectRootPath)
 
             return PathUtil.getSourceSetName(projectPath, moduleDirectoryPath)
         }
@@ -318,9 +323,17 @@ internal class KoScopeCreatorCore : KoScopeCreator {
                 .toMacOsSeparator()
                 .removePrefix(projectRootPath.toMacOsSeparator().trimEnd('/'))
 
-        private fun getModuleDirectory(
+        /**
+         * Returns module directory path (see [ModuleUtil.getModuleDirectoryPath]) of the file with given [projectPath].
+         */
+        private fun getModuleDirectoryPath(
+            projectPath: String,
             projectRootPath: String,
-            directoryPath: String,
-        ): String? = ModuleDirectoryDetector.getModuleDirectory(projectRootPath, directoryPath)
+        ): String =
+            ModuleUtil.getModuleDirectoryPath(
+                projectPath,
+                isSourceSetDirectory = { ModuleDirectoryDetector.isSourceSetDirectory(projectRootPath, it) },
+                getModuleDirectory = { ModuleDirectoryDetector.getModuleDirectory(projectRootPath, it) },
+            )
     }
 }

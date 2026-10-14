@@ -5,12 +5,14 @@ import java.util.Optional
 import java.util.concurrent.ConcurrentHashMap
 
 /**
- * Detects module directories. Module directory contains a Gradle or Maven build file (e.g. "build.gradle.kts",
- * "settings.gradle.kts", "pom.xml") or the "src" directory.
+ * Detects module and source set directories. Module directory contains a Gradle or Maven build file
+ * (e.g. "build.gradle.kts", "settings.gradle.kts", "pom.xml") or the "src" directory. Source set directory contains
+ * the "kotlin", "java" or "resources" directory.
  * Results are cached, because many files reside in the same directories.
  */
 internal object ModuleDirectoryDetector {
     private val moduleDirectories = ConcurrentHashMap<File, Optional<String>>()
+    private val sourceSetDirectories = ConcurrentHashMap<File, Boolean>()
 
     private val moduleDirectoryMarkers =
         listOf(
@@ -21,6 +23,8 @@ internal object ModuleDirectoryDetector {
             "pom.xml",
             "src",
         )
+
+    private val sourceSetDirectoryMarkers = listOf("kotlin", "java", "resources")
 
     /**
      * Returns the closest module directory containing the directory with given [projectPath] (relative to
@@ -35,6 +39,18 @@ internal object ModuleDirectoryDetector {
             .getOrPut(File(rootProjectPath, projectPath)) {
                 Optional.ofNullable(findModuleDirectory(rootProjectPath, projectPath))
             }.orElse(null)
+
+    /**
+     * Returns true if the directory with given [projectPath] (relative to [rootProjectPath], "/" separators,
+     * e.g. "/app/src/test") contains the "kotlin", "java" or "resources" directory.
+     */
+    fun isSourceSetDirectory(
+        rootProjectPath: String,
+        projectPath: String,
+    ): Boolean =
+        sourceSetDirectories.getOrPut(File(rootProjectPath, projectPath)) {
+            sourceSetDirectoryMarkers.any { File(rootProjectPath, "$projectPath/$it").isDirectory }
+        }
 
     private fun findModuleDirectory(
         rootProjectPath: String,
