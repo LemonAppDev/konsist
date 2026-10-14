@@ -33,7 +33,7 @@ interface KoScope {
     val imports: List<KoImportDeclaration>
 
     /**
-     * The annotations present in the scope.
+     * The file annotations (e.g. `@file:Suppress`) present in the scope. Annotations of declarations are not included.
      */
     val annotations: List<KoAnnotationDeclaration>
 

@@ -4,7 +4,7 @@ import com.lemonappdev.konsist.api.provider.KoSourceTypeProvider
 import kotlin.reflect.KClass
 
 /**
- * List containing declarations with source type of.
+ * List containing declarations with source type of the specified Kotlin class(es).
  *
  * @param kClass The Kotlin class representing the source type to include.
  * @param kClasses The Kotlin classes representing the source types to include.
@@ -17,7 +17,7 @@ fun <T : KoSourceTypeProvider> List<T>.withSourceTypeOf(
 ): List<T> = withSourceTypeOf(listOf(kClass, *kClasses))
 
 /**
- * List containing declarations with source type of.
+ * List containing declarations with source type of the specified Kotlin class(es).
  *
  * @param kClasses The Kotlin classes representing the source types to include.
  * @return A list containing declarations with the source type matching any of the specified types.
@@ -32,7 +32,7 @@ fun <T : KoSourceTypeProvider> List<T>.withSourceTypeOf(kClasses: Collection<KCl
     }
 
 /**
- * List containing declarations without source type of.
+ * List containing declarations without source type of the specified Kotlin class(es).
  *
  * @param kClass The Kotlin class representing the source type to exclude.
  * @param kClasses The Kotlin classes representing the source types to exclude.
@@ -45,7 +45,7 @@ fun <T : KoSourceTypeProvider> List<T>.withoutSourceTypeOf(
 ): List<T> = withoutSourceTypeOf(listOf(kClass, *kClasses))
 
 /**
- * List containing declarations without source type of.
+ * List containing declarations without source type of the specified Kotlin class(es).
  *
  * @param kClasses The Kotlin classes representing the source types to exclude.
  * @return A list containing declarations without the source type matching any of the specified types.
@@ -116,7 +116,7 @@ fun <T : KoSourceTypeProvider> List<T>.withoutSourceType(names: Collection<Strin
     }
 
 /**
- * List containing declarations with bare source type of.
+ * List containing declarations with bare source type of the specified Kotlin class(es).
  *
  * @param kClass The Kotlin class representing the bare source type to include.
  * @param kClasses The Kotlin classes representing the bare source types to include.
@@ -129,7 +129,7 @@ fun <T : KoSourceTypeProvider> List<T>.withBareSourceTypeOf(
 ): List<T> = withBareSourceTypeOf(listOf(kClass, *kClasses))
 
 /**
- * List containing declarations with bare source type of.
+ * List containing declarations with bare source type of the specified Kotlin class(es).
  *
  * @param kClasses The Kotlin classes representing the bare source types to include.
  * @return A list containing declarations with the bare source type matching any of the specified types.
@@ -144,7 +144,7 @@ fun <T : KoSourceTypeProvider> List<T>.withBareSourceTypeOf(kClasses: Collection
     }
 
 /**
- * List containing declarations without bare source type of.
+ * List containing declarations without bare source type of the specified Kotlin class(es).
  *
  * @param kClass The Kotlin class representing the bare source type to exclude.
  * @param kClasses The Kotlin classes representing the bare source types to exclude.
@@ -157,7 +157,7 @@ fun <T : KoSourceTypeProvider> List<T>.withoutBareSourceTypeOf(
 ): List<T> = withoutBareSourceTypeOf(listOf(kClass, *kClasses))
 
 /**
- * List containing declarations without bare source type of.
+ * List containing declarations without bare source type of the specified Kotlin class(es).
  *
  * @param kClasses The Kotlin classes representing the bare source types to exclude.
  * @return A list containing declarations without the bare source type matching any of the specified types.

@@ -21,7 +21,9 @@ interface KoSourceDeclarationProvider : KoBaseProvider {
      *  - `KoTypeAliasDeclaration` represents type alias
      *  - `KoImportAliasDeclaration` represents import alias
      *  - `KoKotlinTypeDeclaration` represents Kotlin basic types and collections
-     *  - `KoFunctionDeclaration` represents function type
+     *  - `KoTypeParameterDeclaration` represents type parameter
+     *  - `KoFunctionDeclaration` represents function (e.g. imported top-level function)
+     *  - `KoPropertyDeclaration` represents property (e.g. imported top-level property)
      *  - `KoExternalDeclaration` represents declaration which is not defined in the project
      *
      * For import statements, `sourceDeclaration` refers to the declaration being imported.
@@ -34,7 +36,7 @@ interface KoSourceDeclarationProvider : KoBaseProvider {
      * scope
      *     .properties()
      *     .types
-     *     .assertTrue { it.isInterface }
+     *     .assertTrue { it.sourceDeclaration?.isInterface == true }
      * ```
      */
     val sourceDeclaration: KoDeclarationCastProvider?

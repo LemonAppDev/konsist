@@ -71,7 +71,7 @@ fun <T : KoTextProvider> List<T>.withText(predicate: (String) -> Boolean): List<
 fun <T : KoTextProvider> List<T>.withoutText(predicate: (String) -> Boolean): List<T> = filterNot { predicate(it.text) }
 
 /**
- * List containing declarations with text with any of the specified prefixes.
+ * List containing declarations with text starting with any of the specified prefixes.
  *
  * @param prefix The prefix to include.
  * @param prefixes The prefixes to include.
@@ -84,7 +84,7 @@ fun <T : KoTextProvider> List<T>.withTextStartingWith(
 ): List<T> = withTextStartingWith(listOf(prefix, *prefixes))
 
 /**
- * List containing declarations with text with any of the specified prefixes.
+ * List containing declarations with text starting with any of the specified prefixes.
  *
  * @param prefixes The prefixes to include.
  * @return A list containing declarations with texts starting with the specified prefixes.
@@ -99,7 +99,7 @@ fun <T : KoTextProvider> List<T>.withTextStartingWith(prefixes: Collection<Strin
     }
 
 /**
- * List containing declarations without text with any of the specified prefixes.
+ * List containing declarations without text starting with any of the specified prefixes.
  *
  * @param prefix The prefix to exclude.
  * @param prefixes The prefixes to exclude.
@@ -112,7 +112,7 @@ fun <T : KoTextProvider> List<T>.withoutTextStartingWith(
 ): List<T> = withoutTextStartingWith(listOf(prefix, *prefixes))
 
 /**
- * List containing declarations without text with any of the specified prefixes.
+ * List containing declarations without text starting with any of the specified prefixes.
  *
  * @param prefixes The prefixes to exclude.
  * @return A list containing declarations without texts starting with the specified prefixes.
@@ -127,7 +127,7 @@ fun <T : KoTextProvider> List<T>.withoutTextStartingWith(prefixes: Collection<St
     }
 
 /**
- * List containing declarations with text with any of the specified suffixes.
+ * List containing declarations with text ending with any of the specified suffixes.
  *
  * @param suffix The suffix to include.
  * @param suffixes The suffixes to include.
@@ -140,7 +140,7 @@ fun <T : KoTextProvider> List<T>.withTextEndingWith(
 ): List<T> = withTextEndingWith(listOf(suffix, *suffixes))
 
 /**
- * List containing declarations with text with any of the specified suffixes.
+ * List containing declarations with text ending with any of the specified suffixes.
  *
  * @param suffixes The suffixes to include.
  * @return A list containing declarations with texts ending with the specified suffixes.
@@ -155,7 +155,7 @@ fun <T : KoTextProvider> List<T>.withTextEndingWith(suffixes: Collection<String>
     }
 
 /**
- * List containing declarations without text with any of the specified suffixes.
+ * List containing declarations without text ending with any of the specified suffixes.
  *
  * @param suffix The suffix to exclude.
  * @param suffixes The suffixes to exclude.
@@ -168,7 +168,7 @@ fun <T : KoTextProvider> List<T>.withoutTextEndingWith(
 ): List<T> = withoutTextEndingWith(listOf(suffix, *suffixes))
 
 /**
- * List containing declarations without text with any of the specified suffixes.
+ * List containing declarations without text ending with any of the specified suffixes.
  *
  * @param suffixes The suffixes to exclude.
  * @return A list containing declarations without texts ending with the specified suffixes.

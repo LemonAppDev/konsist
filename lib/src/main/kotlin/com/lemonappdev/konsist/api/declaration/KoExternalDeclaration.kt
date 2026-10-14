@@ -6,8 +6,8 @@ import com.lemonappdev.konsist.api.provider.KoFullyQualifiedNameProvider
 
 /**
  * Represents a Kotlin external declaration - a declaration which is not defined in the project (e.g. defined
- * in a library). It may be a class, interface or object. Its kind ([isClass], [isInterface], [isObject]) is read
- * from the class on the classpath.
+ * in a library). It may be a class, interface or object. Its kind (`isClass`, `isInterface`, `isObject` of the type or
+ * parent referencing it) is read from the class on the classpath.
  */
 interface KoExternalDeclaration :
     KoChildProvider,

@@ -20,7 +20,7 @@ interface KoVariableProvider : KoBaseProvider {
      * Returns the number of variables that satisfy the specified predicate present in the declaration.
      *
      * @param predicate The predicate function to determine if a variable satisfies a condition.
-     * @return The number of variables in the declaration.
+     * @return The number of matching variables in the declaration.
      */
     fun countVariables(predicate: (KoVariableDeclaration) -> Boolean): Int
 

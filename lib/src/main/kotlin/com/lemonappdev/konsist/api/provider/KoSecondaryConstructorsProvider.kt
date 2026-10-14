@@ -20,7 +20,7 @@ interface KoSecondaryConstructorsProvider : KoBaseProvider {
      * Returns the number of secondary constructors that satisfy the specified predicate present in the declaration.
      *
      * @param predicate The predicate function to determine if a secondary constructor satisfies a condition.
-     * @return The number of secondary constructors in the declaration.
+     * @return The number of matching secondary constructors in the declaration.
      */
     fun countSecondaryConstructors(predicate: (KoSecondaryConstructorDeclaration) -> Boolean): Int
 

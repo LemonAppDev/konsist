@@ -20,7 +20,7 @@ interface KoUpperBoundsProvider : KoBaseProvider {
      * Returns the number of upper bounds that satisfy the specified predicate present in the declaration.
      *
      * @param predicate The predicate function to determine if an upper bound satisfies a condition.
-     * @return The number of upper bounds in the declaration.
+     * @return The number of matching upper bounds in the declaration.
      */
     fun countUpperBounds(predicate: (KoTypeDeclaration) -> Boolean): Int
 
