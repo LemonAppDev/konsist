@@ -29,6 +29,40 @@ class KoKDocDeclarationForKoKDocSeeTagProviderTest {
         }
     }
 
+    @Test
+    fun `kdoc-with-bare-see-tag`() {
+        // given
+        val sut =
+            getSnippetFile("kdoc-with-bare-see-tag")
+                .classes()
+                .first()
+                .kDoc
+
+        // then
+        assertSoftly(sut) {
+            it?.seeTags shouldBeEqualTo emptyList()
+            it?.numSeeTags shouldBeEqualTo 0
+            it?.hasSeeTags shouldBeEqualTo false
+        }
+    }
+
+    @Test
+    fun `kdoc-with-html-link-see-tag`() {
+        // given
+        val sut =
+            getSnippetFile("kdoc-with-html-link-see-tag")
+                .classes()
+                .first()
+                .kDoc
+
+        // then
+        assertSoftly(sut) {
+            it?.seeTags shouldBeEqualTo emptyList()
+            it?.numSeeTags shouldBeEqualTo 0
+            it?.hasSeeTags shouldBeEqualTo false
+        }
+    }
+
     @ParameterizedTest
     @MethodSource("provideValues")
     fun `see-tag`(

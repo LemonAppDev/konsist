@@ -206,5 +206,29 @@ class KoParametersProviderExtTest {
         sut.hasValidKDocParamTags() shouldBeEqualTo true
     }
 
+    @Test
+    fun `declaration-with-parameters-has-bare-param-tag`() {
+        // given
+        val sut =
+            getSnippetFile("declaration-with-parameters-has-bare-param-tag")
+                .declarationsOf<KoParametersProvider>()
+                .first()
+
+        // then
+        sut.hasValidKDocParamTags() shouldBeEqualTo false
+    }
+
+    @Test
+    fun `declaration-without-parameters-has-bare-param-tag`() {
+        // given
+        val sut =
+            getSnippetFile("declaration-without-parameters-has-bare-param-tag")
+                .declarationsOf<KoParametersProvider>()
+                .first()
+
+        // then
+        sut.hasValidKDocParamTags() shouldBeEqualTo false
+    }
+
     private fun getSnippetFile(fileName: String) = TestSnippetProvider.getSnippetKoScope("api/ext/provider/koparameters/snippet/", fileName)
 }
