@@ -14,6 +14,7 @@ import io.mockk.mockkObject
 import io.mockk.unmockkObject
 import org.amshove.kluent.shouldBeEqualTo
 import org.amshove.kluent.shouldContain
+import org.amshove.kluent.shouldThrow
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
@@ -415,6 +416,24 @@ class KoScopeCreatorCoreNestedModuleTest {
 
         // then
         result shouldBeEqualTo emptyList()
+    }
+
+    @Test
+    fun `scopeFromModule for module name with three dots throws exception`() {
+        // given
+        val func = { sut.scopeFromModule(":feature...") }
+
+        // then
+        func shouldThrow IllegalArgumentException::class
+    }
+
+    @Test
+    fun `scopeFromProject for module name with three dots throws exception`() {
+        // given
+        val func = { sut.scopeFromProject(moduleName = "...data") }
+
+        // then
+        func shouldThrow IllegalArgumentException::class
     }
 
     private fun KoScope.filePaths() = files.map { it.path }

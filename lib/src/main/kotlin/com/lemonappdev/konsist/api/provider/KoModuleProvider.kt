@@ -30,8 +30,9 @@ interface KoModuleProvider : KoBaseProvider {
      * (Gradle `projectDir` overrides in settings.gradle(.kts) are not supported).
      * Use `..` as a wildcard for any number of module directories, including none, e.g. `:feature..` matches
      * `feature` and its nested modules (`feature/payment`), `..data` matches `data` and `feature/data`,
-     * and `..` matches all modules.
+     * and `..` matches all modules. More than two consecutive dots (e.g. `:feature...`) are not allowed.
      * @return `true` if the declaration resides in the specified module, `false` otherwise.
+     * @throws IllegalArgumentException if module name contains more than two consecutive dots.
      */
     fun residesInModule(name: String): Boolean
 
