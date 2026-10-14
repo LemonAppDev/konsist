@@ -77,10 +77,10 @@ internal class KoScopeCreatorCore : KoScopeCreator {
 
     /*
      * Files are filtered by path before parsing, so files of other modules and source sets are not parsed.
+     * Files located outside the module "src" directory (e.g. "/app/A.kt" and "/app/testData/A.kt") are ignored.
      * Module and source set are computed the same way as [KoFileDeclaration.moduleName] and
-     * [KoFileDeclaration.sourceSetName], so module scope contains exactly the files residing in the module (including
-     * files located outside the "src" directory) and source set scope contains exactly the files residing in
-     * the source set.
+     * [KoFileDeclaration.sourceSetName], so module scope contains exactly the module files located in the "src"
+     * directory and source set scope contains exactly the files residing in the source set.
      */
     private suspend fun getFiles(
         moduleName: String? = null,
@@ -91,7 +91,8 @@ internal class KoScopeCreatorCore : KoScopeCreator {
         val moduleNameMatcher = moduleName?.let { ModuleUtil.getModuleNameMatcher(it) }
 
         return KoFileDeclarationProvider.getKoFileDeclarations { file ->
-            (!ignoreBuildConfig || !KoFileDeclarationProvider.isBuildConfigFile(file.path)) &&
+            residesInSourceDirectory(file.path, projectRootPath) &&
+                (!ignoreBuildConfig || !KoFileDeclarationProvider.isBuildConfigFile(file.path)) &&
                 (moduleNameMatcher == null || moduleNameMatcher(getModuleName(file.path, projectRootPath))) &&
                 (sourceSetName == null || residesInSourceSet(file.path, projectRootPath, sourceSetName)) &&
                 predicate(file)
@@ -262,6 +263,25 @@ internal class KoScopeCreatorCore : KoScopeCreator {
             val normalizedSourceSetName = sourceSetName.toMacOsSeparator().trim().trim('/')
 
             return normalizedSourceSetName.isNotEmpty() && getSourceSetName(filePath, projectRootPath) == normalizedSourceSetName
+        }
+
+        /**
+         * Returns true if the file with given absolute [filePath] is located in the module "src" directory
+         * (see [PathUtil.residesInSourceDirectory]). Module directory is not computed for the file without "src"
+         * directory in its path.
+         */
+        internal fun residesInSourceDirectory(
+            filePath: String,
+            projectRootPath: String,
+        ): Boolean {
+            val projectPath = getProjectPath(filePath, projectRootPath)
+
+            if (PathUtil.getSourceDirectoryIndex(projectPath) == -1) {
+                return false
+            }
+
+            val moduleDirectoryPath = ModuleUtil.getModuleDirectoryPath(projectPath) { getModuleDirectory(projectRootPath, it) }
+            return PathUtil.residesInSourceDirectory(projectPath, moduleDirectoryPath)
         }
 
         /**

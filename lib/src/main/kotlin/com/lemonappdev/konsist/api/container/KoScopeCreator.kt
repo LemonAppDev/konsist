@@ -17,8 +17,9 @@ interface KoScopeCreator {
 
     /**
      * Creates a [KoScope] containing all Kotlin files in the project.
-     * Method does not return Kotlin files present in build directories ("build" and "target" outside "src" directory),
-     * hidden directories (e.g. ".git", ".gradle", ".idea") and "node_modules" directories.
+     * Method does not return Kotlin files located outside the module "src" directory (e.g. `feature/Script.kt`,
+     * `feature/testData/Script.kt` and build directories), hidden directories (e.g. ".git", ".gradle", ".idea")
+     * and "node_modules" directories.
      *
      * @param moduleName The name of the module. If null, all modules will be included.
      * Gradle project path (e.g. `:feature:auth`) is the preferred format, but `feature/auth` and `feature\auth`
@@ -28,9 +29,8 @@ interface KoScopeCreator {
      * Use `..` as a wildcard for any number of module directories, including none, e.g. `:feature..` matches
      * `feature` and its nested modules (`feature/payment`), `..data` matches `data` and `feature/data`,
      * and `..` matches all modules. More than two consecutive dots (e.g. `:feature...`) are not allowed.
-     * Module contains the same files as [KoModuleProvider.moduleName] reports, including Kotlin files located in the
-     * module directory outside the "src" directory (e.g. `feature/Script.kt` and `feature/config/Script.kt` reside in
-     * the `feature` module, when `feature/config` is not a module directory).
+     * Module contains the files located in the module "src" directory whose [KoModuleProvider.moduleName] matches
+     * the module name.
      * @param sourceSetName The name of the source set. If null, all source sets will be included.
      * @param ignoreBuildConfig If true, build config files and directories such as Gradle buildSrc directory will be ignored.
      * @return a [KoScope] containing all Kotlin files in the project.
@@ -44,8 +44,9 @@ interface KoScopeCreator {
 
     /**
      * Creates a [KoScope] containing all Kotlin files in the module.
-     * Method does not return Kotlin files present in build directories ("build" and "target" outside "src" directory),
-     * hidden directories (e.g. ".git", ".gradle", ".idea") and "node_modules" directories.
+     * Method does not return Kotlin files located outside the module "src" directory (e.g. `feature/Script.kt`,
+     * `feature/testData/Script.kt` and build directories), hidden directories (e.g. ".git", ".gradle", ".idea")
+     * and "node_modules" directories.
      *
      * @param moduleName The name of the module.
      * Gradle project path (e.g. `:feature:auth`) is the preferred format, but `feature/auth` and `feature\auth`
@@ -55,9 +56,8 @@ interface KoScopeCreator {
      * Use `..` as a wildcard for any number of module directories, including none, e.g. `:feature..` matches
      * `feature` and its nested modules (`feature/payment`), `..data` matches `data` and `feature/data`,
      * and `..` matches all modules. More than two consecutive dots (e.g. `:feature...`) are not allowed.
-     * Module contains the same files as [KoModuleProvider.moduleName] reports, including Kotlin files located in the
-     * module directory outside the "src" directory (e.g. `feature/Script.kt` and `feature/config/Script.kt` reside in
-     * the `feature` module, when `feature/config` is not a module directory).
+     * Module contains the files located in the module "src" directory whose [KoModuleProvider.moduleName] matches
+     * the module name.
      * @param moduleNames The name(s) of the module(s), in the same format as [moduleName].
      * @return a [KoScope] containing all Kotlin files in the module.
      * @throws IllegalArgumentException if module name contains more than two consecutive dots.
@@ -69,8 +69,9 @@ interface KoScopeCreator {
 
     /**
      * Creates a [KoScope] containing all Kotlin files in the module.
-     * Method does not return Kotlin files present in build directories ("build" and "target" outside "src" directory),
-     * hidden directories (e.g. ".git", ".gradle", ".idea") and "node_modules" directories.
+     * Method does not return Kotlin files located outside the module "src" directory (e.g. `feature/Script.kt`,
+     * `feature/testData/Script.kt` and build directories), hidden directories (e.g. ".git", ".gradle", ".idea")
+     * and "node_modules" directories.
      *
      * @param moduleNames Set of the module names.
      * Gradle project path (e.g. `:feature:auth`) is the preferred format, but `feature/auth` and `feature\auth`
@@ -80,9 +81,8 @@ interface KoScopeCreator {
      * Use `..` as a wildcard for any number of module directories, including none, e.g. `:feature..` matches
      * `feature` and its nested modules (`feature/payment`), `..data` matches `data` and `feature/data`,
      * and `..` matches all modules. More than two consecutive dots (e.g. `:feature...`) are not allowed.
-     * Module contains the same files as [KoModuleProvider.moduleName] reports, including Kotlin files located in the
-     * module directory outside the "src" directory (e.g. `feature/Script.kt` and `feature/config/Script.kt` reside in
-     * the `feature` module, when `feature/config` is not a module directory).
+     * Module contains the files located in the module "src" directory whose [KoModuleProvider.moduleName] matches
+     * the module name.
      * @return a [KoScope] containing all Kotlin files in the module.
      * @throws IllegalArgumentException if module name contains more than two consecutive dots.
      */
@@ -90,8 +90,9 @@ interface KoScopeCreator {
 
     /**
      * Creates a [KoScope] containing all Kotlin files in the given package.
-     * Method does not return Kotlin files present in build directories ("build" and "target" outside "src" directory),
-     * hidden directories (e.g. ".git", ".gradle", ".idea") and "node_modules" directories.
+     * Method does not return Kotlin files located outside the module "src" directory (e.g. `feature/Script.kt`,
+     * `feature/testData/Script.kt` and build directories), hidden directories (e.g. ".git", ".gradle", ".idea")
+     * and "node_modules" directories.
      *
      * @param packagee The name of the package.
      * @param moduleName The name of the module. If null, all modules will be included.
@@ -102,9 +103,8 @@ interface KoScopeCreator {
      * Use `..` as a wildcard for any number of module directories, including none, e.g. `:feature..` matches
      * `feature` and its nested modules (`feature/payment`), `..data` matches `data` and `feature/data`,
      * and `..` matches all modules. More than two consecutive dots (e.g. `:feature...`) are not allowed.
-     * Module contains the same files as [KoModuleProvider.moduleName] reports, including Kotlin files located in the
-     * module directory outside the "src" directory (e.g. `feature/Script.kt` and `feature/config/Script.kt` reside in
-     * the `feature` module, when `feature/config` is not a module directory).
+     * Module contains the files located in the module "src" directory whose [KoModuleProvider.moduleName] matches
+     * the module name.
      * @param sourceSetName The name of the source set. If null, all source sets will be included.
      * @return a [KoScope] containing all Kotlin files in the given package.
      * @throws IllegalArgumentException if module name contains more than two consecutive dots.
@@ -118,8 +118,9 @@ interface KoScopeCreator {
     /**
      * Creates a [KoScope] containing all Kotlin files in the given source set(s). If the source set is present in multiple modules
      * then all of them will be included.
-     * Method does not return Kotlin files present in build directories ("build" and "target" outside "src" directory),
-     * hidden directories (e.g. ".git", ".gradle", ".idea") and "node_modules" directories.
+     * Method does not return Kotlin files located outside the module "src" directory (e.g. `feature/Script.kt`,
+     * `feature/testData/Script.kt` and build directories), hidden directories (e.g. ".git", ".gradle", ".idea")
+     * and "node_modules" directories.
      *
      * @param sourceSetName The name of the source set.
      * @param sourceSetNames The name(s) of the source set(s).
@@ -133,8 +134,9 @@ interface KoScopeCreator {
     /**
      * Creates a [KoScope] containing all Kotlin files in the given source set(s). If the source set is present in multiple modules
      * then all of them will be included.
-     * Method does not return Kotlin files present in build directories ("build" and "target" outside "src" directory),
-     * hidden directories (e.g. ".git", ".gradle", ".idea") and "node_modules" directories.
+     * Method does not return Kotlin files located outside the module "src" directory (e.g. `feature/Script.kt`,
+     * `feature/testData/Script.kt` and build directories), hidden directories (e.g. ".git", ".gradle", ".idea")
+     * and "node_modules" directories.
      *
      * @param sourceSetNames Set of the source set names.
      * @return a [KoScope] containing all Kotlin files in the given source set(s).
@@ -144,8 +146,9 @@ interface KoScopeCreator {
     /**
      * Creates a [KoScope] containing all Kotlin files in the production source sets.
      * The production source set is the source set whose name neither starts nor ends with "test".
-     * Method does not return Kotlin files present in build directories ("build" and "target" outside "src" directory),
-     * hidden directories (e.g. ".git", ".gradle", ".idea") and "node_modules" directories.
+     * Method does not return Kotlin files located outside the module "src" directory (e.g. `feature/Script.kt`,
+     * `feature/testData/Script.kt` and build directories), hidden directories (e.g. ".git", ".gradle", ".idea")
+     * and "node_modules" directories.
      *
      * @param moduleName The name of the module. If null, all modules will be included.
      * Gradle project path (e.g. `:feature:auth`) is the preferred format, but `feature/auth` and `feature\auth`
@@ -155,9 +158,8 @@ interface KoScopeCreator {
      * Use `..` as a wildcard for any number of module directories, including none, e.g. `:feature..` matches
      * `feature` and its nested modules (`feature/payment`), `..data` matches `data` and `feature/data`,
      * and `..` matches all modules. More than two consecutive dots (e.g. `:feature...`) are not allowed.
-     * Module contains the same files as [KoModuleProvider.moduleName] reports, including Kotlin files located in the
-     * module directory outside the "src" directory (e.g. `feature/Script.kt` and `feature/config/Script.kt` reside in
-     * the `feature` module, when `feature/config` is not a module directory).
+     * Module contains the files located in the module "src" directory whose [KoModuleProvider.moduleName] matches
+     * the module name.
      * @param sourceSetName The name of the source set. If null, all source sets will be included.
      * @return a [KoScope] containing all Kotlin files in the production source sets.
      * @throws IllegalArgumentException if module name contains more than two consecutive dots.
@@ -173,8 +175,9 @@ interface KoScopeCreator {
     /**
      * Creates a [KoScope] containing all Kotlin files in the test source sets.
      * The test source set is the source set whose name starts or ends with "test".
-     * Method does not return Kotlin files present in build directories ("build" and "target" outside "src" directory),
-     * hidden directories (e.g. ".git", ".gradle", ".idea") and "node_modules" directories.
+     * Method does not return Kotlin files located outside the module "src" directory (e.g. `feature/Script.kt`,
+     * `feature/testData/Script.kt` and build directories), hidden directories (e.g. ".git", ".gradle", ".idea")
+     * and "node_modules" directories.
      *
      * @param moduleName The name of the module. If null, all modules will be included.
      * Gradle project path (e.g. `:feature:auth`) is the preferred format, but `feature/auth` and `feature\auth`
@@ -184,9 +187,8 @@ interface KoScopeCreator {
      * Use `..` as a wildcard for any number of module directories, including none, e.g. `:feature..` matches
      * `feature` and its nested modules (`feature/payment`), `..data` matches `data` and `feature/data`,
      * and `..` matches all modules. More than two consecutive dots (e.g. `:feature...`) are not allowed.
-     * Module contains the same files as [KoModuleProvider.moduleName] reports, including Kotlin files located in the
-     * module directory outside the "src" directory (e.g. `feature/Script.kt` and `feature/config/Script.kt` reside in
-     * the `feature` module, when `feature/config` is not a module directory).
+     * Module contains the files located in the module "src" directory whose [KoModuleProvider.moduleName] matches
+     * the module name.
      * @param sourceSetName The name of the source set. If null, all source sets will be included.
      * @return a [KoScope] containing all Kotlin files in the test source sets.
      * @throws IllegalArgumentException if module name contains more than two consecutive dots.

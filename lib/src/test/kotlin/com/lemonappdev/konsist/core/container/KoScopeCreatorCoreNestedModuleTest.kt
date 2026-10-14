@@ -14,6 +14,7 @@ import io.mockk.mockkObject
 import io.mockk.unmockkObject
 import org.amshove.kluent.shouldBeEqualTo
 import org.amshove.kluent.shouldContain
+import org.amshove.kluent.shouldNotContain
 import org.amshove.kluent.shouldThrow
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.BeforeEach
@@ -26,6 +27,9 @@ import java.io.File
  * It also contains sibling nested modules with the same name ("feature/authentication/data" and "feature/main/data")
  * and Kotlin files located outside the "src" directory ("feature/FeatureScript.kt", "feature/payment/PaymentScript.kt"
  * and "feature/config/FeatureConfig.kt", where "feature/config" is not a module directory).
+ * Module "feature/payment" contains Kotlin files located outside the "src" directory in directories named like a test
+ * source set ("feature/payment/test/PaymentTestScript.kt" and "feature/payment/testData/PaymentTestData.kt").
+ * Project scopes do not contain files located outside the module "src" directory.
  * Module "src/tools" is located in a directory named "src" and contains Kotlin files located outside its source root
  * ("src/tools/ToolsScript.kt" and "src/tools/src/test/testData/ToolsFixture.kt").
  * Module "app" contains Gradle test fixture project located in resources ("app/src/functionalTest/resources/project"),
@@ -52,6 +56,8 @@ class KoScopeCreatorCoreNestedModuleTest {
                 PAYMENT_MAIN,
                 PAYMENT_SCRIPT,
                 PAYMENT_TEST,
+                PAYMENT_TEST_SCRIPT,
+                PAYMENT_TEST_DATA,
                 AUTHENTICATION_DATA_MAIN,
                 AUTHENTICATION_DATA_TEST,
                 MAIN_DATA_MAIN,
@@ -86,7 +92,7 @@ class KoScopeCreatorCoreNestedModuleTest {
         val result = sut.scopeFromModule("feature").filePaths()
 
         // then
-        result shouldBeEqualTo listOf(FEATURE_SCRIPT, FEATURE_CONFIG, FEATURE_MAIN, FEATURE_TEST)
+        result shouldBeEqualTo listOf(FEATURE_MAIN, FEATURE_TEST)
     }
 
     @Test
@@ -95,7 +101,7 @@ class KoScopeCreatorCoreNestedModuleTest {
         val result = sut.scopeFromModule(":feature:payment").filePaths()
 
         // then
-        result shouldBeEqualTo listOf(PAYMENT_SCRIPT, PAYMENT_MAIN, PAYMENT_TEST)
+        result shouldBeEqualTo listOf(PAYMENT_MAIN, PAYMENT_TEST)
     }
 
     @Test
@@ -104,8 +110,7 @@ class KoScopeCreatorCoreNestedModuleTest {
         val result = sut.scopeFromModule(":feature", ":feature:payment").filePaths()
 
         // then
-        result shouldBeEqualTo
-            listOf(FEATURE_SCRIPT, FEATURE_CONFIG, PAYMENT_SCRIPT, PAYMENT_MAIN, PAYMENT_TEST, FEATURE_MAIN, FEATURE_TEST)
+        result shouldBeEqualTo listOf(PAYMENT_MAIN, PAYMENT_TEST, FEATURE_MAIN, FEATURE_TEST)
     }
 
     @Test
@@ -141,7 +146,7 @@ class KoScopeCreatorCoreNestedModuleTest {
         val result = sut.scopeFromProject(moduleName = "feature").filePaths()
 
         // then
-        result shouldBeEqualTo listOf(FEATURE_SCRIPT, FEATURE_CONFIG, FEATURE_MAIN, FEATURE_TEST)
+        result shouldBeEqualTo listOf(FEATURE_MAIN, FEATURE_TEST)
     }
 
     @Test
@@ -150,7 +155,7 @@ class KoScopeCreatorCoreNestedModuleTest {
         val result = sut.scopeFromProduction(moduleName = "feature").filePaths()
 
         // then
-        result shouldBeEqualTo listOf(FEATURE_SCRIPT, FEATURE_CONFIG, FEATURE_MAIN)
+        result shouldBeEqualTo listOf(FEATURE_MAIN)
     }
 
     @Test
@@ -159,7 +164,7 @@ class KoScopeCreatorCoreNestedModuleTest {
         val result = sut.scopeFromProduction(moduleName = "feature/payment").filePaths()
 
         // then
-        result shouldBeEqualTo listOf(PAYMENT_SCRIPT, PAYMENT_MAIN)
+        result shouldBeEqualTo listOf(PAYMENT_MAIN)
     }
 
     @Test
@@ -199,12 +204,57 @@ class KoScopeCreatorCoreNestedModuleTest {
     }
 
     @Test
+    fun `scopeFromProduction does not contain files located outside src directory`() {
+        // when
+        val result = sut.scopeFromProduction(moduleName = ":feature:payment").filePaths()
+
+        // then
+        result shouldNotContain PAYMENT_SCRIPT
+        result shouldNotContain PAYMENT_TEST_SCRIPT
+        result shouldNotContain PAYMENT_TEST_DATA
+    }
+
+    @Test
+    fun `scopeFromTest does not contain files located outside src directory`() {
+        // when
+        val result = sut.scopeFromTest(moduleName = ":feature:payment").filePaths()
+
+        // then
+        result shouldNotContain PAYMENT_SCRIPT
+        result shouldNotContain PAYMENT_TEST_SCRIPT
+        result shouldNotContain PAYMENT_TEST_DATA
+    }
+
+    @Test
+    fun `scopeFromProject does not contain files located outside src directory`() {
+        // when
+        val result = sut.scopeFromProject().filePaths()
+
+        // then
+        result shouldBeEqualTo
+            listOf(
+                APP_FIXTURE_PROJECT_SCRIPT,
+                APP_FIXTURE_PROJECT_MAIN,
+                APP_MAIN,
+                AUTHENTICATION_DATA_MAIN,
+                AUTHENTICATION_DATA_TEST,
+                MAIN_DATA_MAIN,
+                PAYMENT_MAIN,
+                PAYMENT_TEST,
+                FEATURE_MAIN,
+                FEATURE_TEST,
+                SRC_TOOLS_MAIN,
+                SRC_TOOLS_FIXTURE,
+            )
+    }
+
+    @Test
     fun `scopeFromPackage for parent module does not contain files from nested module`() {
         // when
         val result = sut.scopeFromPackage(PACKAGE_NAME, moduleName = "feature").filePaths()
 
         // then
-        result shouldBeEqualTo listOf(FEATURE_SCRIPT, FEATURE_CONFIG, FEATURE_MAIN, FEATURE_TEST)
+        result shouldBeEqualTo listOf(FEATURE_MAIN, FEATURE_TEST)
     }
 
     @Test
@@ -247,12 +297,9 @@ class KoScopeCreatorCoreNestedModuleTest {
         // then
         result shouldBeEqualTo
             listOf(
-                FEATURE_SCRIPT,
                 AUTHENTICATION_DATA_MAIN,
                 AUTHENTICATION_DATA_TEST,
-                FEATURE_CONFIG,
                 MAIN_DATA_MAIN,
-                PAYMENT_SCRIPT,
                 PAYMENT_MAIN,
                 PAYMENT_TEST,
                 FEATURE_MAIN,
@@ -266,7 +313,7 @@ class KoScopeCreatorCoreNestedModuleTest {
         val result = sut.scopeFromModule(":feature:payment..", ":feature:payment").filePaths()
 
         // then
-        result shouldBeEqualTo listOf(PAYMENT_SCRIPT, PAYMENT_MAIN, PAYMENT_TEST)
+        result shouldBeEqualTo listOf(PAYMENT_MAIN, PAYMENT_TEST)
     }
 
     @Test
@@ -311,7 +358,7 @@ class KoScopeCreatorCoreNestedModuleTest {
         val result = sut.scopeFromModule(":src:tools").filePaths()
 
         // then
-        result shouldBeEqualTo listOf(SRC_TOOLS_SCRIPT, SRC_TOOLS_MAIN, SRC_TOOLS_FIXTURE)
+        result shouldBeEqualTo listOf(SRC_TOOLS_MAIN, SRC_TOOLS_FIXTURE)
     }
 
     @Test
@@ -347,7 +394,7 @@ class KoScopeCreatorCoreNestedModuleTest {
         val result = sut.scopeFromProduction(moduleName = ":src:tools").filePaths()
 
         // then
-        result shouldBeEqualTo listOf(SRC_TOOLS_SCRIPT, SRC_TOOLS_MAIN)
+        result shouldBeEqualTo listOf(SRC_TOOLS_MAIN)
     }
 
     @Test
@@ -401,12 +448,12 @@ class KoScopeCreatorCoreNestedModuleTest {
     }
 
     @Test
-    fun `scopeFromModule for parent module contains files from its subdirectory that is not a module directory`() {
+    fun `scopeFromModule for parent module does not contain files from its subdirectory that is not a module directory`() {
         // when
         val result = sut.scopeFromModule(":feature").filePaths()
 
         // then
-        result shouldContain FEATURE_CONFIG
+        result shouldNotContain FEATURE_CONFIG
     }
 
     @Test
@@ -458,6 +505,8 @@ class KoScopeCreatorCoreNestedModuleTest {
         private const val PAYMENT_SCRIPT = "$PROJECT_ROOT_PATH/feature/payment/PaymentScript.kt"
         private const val PAYMENT_MAIN = "$PROJECT_ROOT_PATH/feature/payment/src/main/kotlin/PaymentMain.kt"
         private const val PAYMENT_TEST = "$PROJECT_ROOT_PATH/feature/payment/src/test/kotlin/PaymentTest.kt"
+        private const val PAYMENT_TEST_SCRIPT = "$PROJECT_ROOT_PATH/feature/payment/test/PaymentTestScript.kt"
+        private const val PAYMENT_TEST_DATA = "$PROJECT_ROOT_PATH/feature/payment/testData/PaymentTestData.kt"
         private const val AUTHENTICATION_DATA_MAIN =
             "$PROJECT_ROOT_PATH/feature/authentication/data/src/main/kotlin/AuthenticationDataMain.kt"
         private const val AUTHENTICATION_DATA_TEST =
@@ -478,6 +527,8 @@ class KoScopeCreatorCoreNestedModuleTest {
                 "/feature" to "/feature",
                 "/feature/config" to "/feature",
                 "/feature/payment" to "/feature/payment",
+                "/feature/payment/test" to "/feature/payment",
+                "/feature/payment/testData" to "/feature/payment",
                 "/src/tools" to "/src/tools",
                 "/src/tools/src/test/testData" to "/src/tools",
                 "/app/src/functionalTest/resources/project" to "/app/src/functionalTest/resources/project",

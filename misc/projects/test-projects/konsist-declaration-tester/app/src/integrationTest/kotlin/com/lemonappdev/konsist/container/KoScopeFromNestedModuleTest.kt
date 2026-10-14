@@ -7,6 +7,7 @@ import com.lemonappdev.konsist.helper.util.PathProvider.featureDirectory
 import com.lemonappdev.konsist.helper.util.PathProvider.featureMainSourceSetDirectory
 import com.lemonappdev.konsist.helper.util.PathProvider.featurePaymentMainSourceSetDirectory
 import org.amshove.kluent.shouldBeEqualTo
+import org.amshove.kluent.shouldNotContainAny
 import org.junit.jupiter.api.Test
 
 /**
@@ -14,7 +15,7 @@ import org.junit.jupiter.api.Test
  * "/" and "\" separators ("feature/payment", "feature\payment") on all OSes.
  * Parent module ("feature") has its own source set, which should not contain files of the nested module.
  * Parent module also contains files located outside the "src" directory ("feature/FeatureScript.kt" and
- * "feature/config/FeatureConfig.kt", where "feature/config" is not a module directory), which reside in the parent module.
+ * "feature/config/FeatureConfig.kt", where "feature/config" is not a module directory), which are not part of project scopes.
  */
 class KoScopeFromNestedModuleTest {
     private val featureClassPath = "$featureMainSourceSetDirectory/fixture/FeatureClass.kt".toOsSeparator()
@@ -23,12 +24,7 @@ class KoScopeFromNestedModuleTest {
 
     private val featureConfigPath = "$featureDirectory/config/FeatureConfig.kt".toOsSeparator()
 
-    private val featureFilePaths =
-        listOf(
-            featureClassPath,
-            featureScriptPath,
-            featureConfigPath,
-        ).sorted()
+    private val featureFilePaths = listOf(featureClassPath)
 
     private val featurePaymentClassPath = "$featurePaymentMainSourceSetDirectory/fixture/FeaturePaymentClass.kt".toOsSeparator()
 
@@ -132,7 +128,7 @@ class KoScopeFromNestedModuleTest {
         val sut = Konsist.scopeFromPackage("com.lemonappdev.fixture", moduleName = ":feature")
 
         // then
-        sut.mapToFilePaths().sorted() shouldBeEqualTo listOf(featureClassPath, featureScriptPath).sorted()
+        sut.mapToFilePaths() shouldBeEqualTo listOf(featureClassPath)
     }
 
     @Test
@@ -190,12 +186,21 @@ class KoScopeFromNestedModuleTest {
     }
 
     @Test
-    fun `scopeFromPackage for parent module contains file located outside src directory in non-module directory`() {
+    fun `scopeFromPackage for parent module does not contain file located outside src directory in non-module directory`() {
         // given
         val sut = Konsist.scopeFromPackage("com.lemonappdev.fixture.config", moduleName = ":feature")
 
         // then
-        sut.mapToFilePaths() shouldBeEqualTo listOf(featureConfigPath)
+        sut.mapToFilePaths() shouldBeEqualTo emptyList()
+    }
+
+    @Test
+    fun `scopeFromProject does not contain files located outside src directory`() {
+        // given
+        val sut = Konsist.scopeFromProject()
+
+        // then
+        sut.mapToFilePaths() shouldNotContainAny listOf(featureScriptPath, featureConfigPath)
     }
 
     private fun KoScope.mapToFilePaths() = files.map { it.path }

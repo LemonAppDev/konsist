@@ -54,6 +54,16 @@ object PathUtil {
     }
 
     /**
+     * Returns true if the file with given [projectPath] is located in the "src" directory of the module directory with
+     * given [moduleDirectoryPath] (see [ModuleUtil.getModuleDirectoryPath]), e.g. true for "/app/src/main/kotlin/A.kt"
+     * and "/app/src/A.kt", and false for "/app/A.kt", "/app/test/A.kt" and "/src/app/A.kt" (module "/src/app").
+     */
+    internal fun residesInSourceDirectory(
+        projectPath: String,
+        moduleDirectoryPath: String = ModuleUtil.getModuleDirectoryPath(projectPath),
+    ): Boolean = toMacOsSeparator(projectPath).startsWith("$moduleDirectoryPath$SOURCE_DIRECTORY_PATH")
+
+    /**
      * Returns index of the module "/src/" directory in [path] ("/" separators), or -1 if the path has no "src" directory.
      * Module may reside in a directory named "src" (e.g. "/src/app/src/main/kotlin/A.kt"), so the first "src" directory
      * followed by the source set directory and the "kotlin", "java" or "resources" directory is used. If there is no such
