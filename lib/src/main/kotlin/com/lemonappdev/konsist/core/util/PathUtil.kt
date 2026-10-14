@@ -53,7 +53,14 @@ object PathUtil {
      * the first "src" directory is used.
      */
     internal fun getSourceDirectoryIndex(path: String): Int =
-        SOURCE_ROOT_REGEX.find(path)?.range?.first ?: path.indexOf(SOURCE_DIRECTORY_PATH)
+        getSourceRootIndex(path).takeIf { it != -1 } ?: path.indexOf(SOURCE_DIRECTORY_PATH)
+
+    /**
+     * Returns index of the "/src/" directory of the first source root ("/src/<sourceSet>/kotlin/" or
+     * "/src/<sourceSet>/java/") in [path] ("/" separators), or -1 if the path has no source root,
+     * e.g. 4 for "/app/src/main/kotlin/A.kt" and -1 for "/app/src/test/resources/A.kt".
+     */
+    internal fun getSourceRootIndex(path: String): Int = SOURCE_ROOT_REGEX.find(path)?.range?.first ?: -1
 
     /**
      * Returns true if the file with given [projectPath] is located in the Gradle build configuration directory

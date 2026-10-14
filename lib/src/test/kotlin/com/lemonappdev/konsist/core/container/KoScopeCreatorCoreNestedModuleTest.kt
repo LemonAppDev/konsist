@@ -25,7 +25,8 @@ import java.io.File
  * It also contains sibling nested modules with the same name ("feature/authentication/data" and "feature/main/data")
  * and Kotlin files located outside the "src" directory ("feature/FeatureScript.kt", "feature/payment/PaymentScript.kt"
  * and "feature/config/FeatureConfig.kt", where "feature/config" is not a module directory).
- * Module "src/tools" is located in a directory named "src".
+ * Module "src/tools" is located in a directory named "src" and contains Kotlin files located outside its source root
+ * ("src/tools/ToolsScript.kt" and "src/tools/src/test/resources/ToolsFixture.kt").
  * Runs in isolation, because it mocks global objects.
  */
 @Isolated
@@ -53,6 +54,8 @@ class KoScopeCreatorCoreNestedModuleTest {
                 MAIN_DATA_MAIN,
                 APP_MAIN,
                 SRC_TOOLS_MAIN,
+                SRC_TOOLS_SCRIPT,
+                SRC_TOOLS_FIXTURE,
             ).filter { predicate(File(it)) }
                 .map { createKoFile(it) }
         }
@@ -303,7 +306,7 @@ class KoScopeCreatorCoreNestedModuleTest {
         val result = sut.scopeFromModule(":src:tools").filePaths()
 
         // then
-        result shouldBeEqualTo listOf(SRC_TOOLS_MAIN)
+        result shouldBeEqualTo listOf(SRC_TOOLS_SCRIPT, SRC_TOOLS_MAIN, SRC_TOOLS_FIXTURE)
     }
 
     @Test
@@ -371,13 +374,17 @@ class KoScopeCreatorCoreNestedModuleTest {
         private const val MAIN_DATA_MAIN = "$PROJECT_ROOT_PATH/feature/main/data/src/main/kotlin/MainDataMain.kt"
         private const val APP_MAIN = "$PROJECT_ROOT_PATH/app/src/main/kotlin/AppMain.kt"
         private const val SRC_TOOLS_MAIN = "$PROJECT_ROOT_PATH/src/tools/src/main/kotlin/ToolsMain.kt"
+        private const val SRC_TOOLS_SCRIPT = "$PROJECT_ROOT_PATH/src/tools/ToolsScript.kt"
+        private const val SRC_TOOLS_FIXTURE = "$PROJECT_ROOT_PATH/src/tools/src/test/resources/ToolsFixture.kt"
 
-        // Module directories of directories containing files located outside the "src" directory
+        // Module directories of directories containing files located outside the source root
         private val MODULE_DIRECTORIES =
             mapOf(
                 "/feature" to "/feature",
                 "/feature/config" to "/feature",
                 "/feature/payment" to "/feature/payment",
+                "/src/tools" to "/src/tools",
+                "/src/tools/src/test/resources" to "/src/tools",
             )
     }
 }

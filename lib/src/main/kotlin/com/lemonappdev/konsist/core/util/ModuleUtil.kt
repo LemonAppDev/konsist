@@ -12,12 +12,14 @@ object ModuleUtil {
     /**
      * Returns module name with "/" separators (regardless of OS), e.g. "feature/data", or "root" for the top-level module.
      * Module may reside in a directory named "src", e.g. "src/app" for "/src/app/src/main/kotlin/A.kt"
-     * (see [PathUtil.getSourceDirectoryIndex]).
+     * (see [PathUtil.getSourceRootIndex]).
      *
-     * Module of the file located outside the "src" directory is the closest module directory containing the file
-     * (see [ModuleDirectoryDetector]), e.g. "feature" for "/feature/config/A.kt" and "root" for "/samples/A.kt"
-     * (when "feature/config" and "samples" are not module directories). If there is no such directory, module is
-     * the file directory.
+     * Module of the file located outside the source root ("src/<sourceSet>/kotlin" or "src/<sourceSet>/java") is
+     * the closest module directory containing the file (see [ModuleDirectoryDetector]), e.g. "feature" for
+     * "/feature/config/A.kt" and "/feature/src/test/resources/A.kt", "src/tools" for "/src/tools/A.kt" and "root" for
+     * "/samples/A.kt" (when "feature/config" and "samples" are not module directories). If there is no such directory,
+     * module is the directory containing the first "src" directory (see [PathUtil.getSourceDirectoryIndex]) or,
+     * for the file located outside the "src" directory, the file directory.
      *
      * [getModuleDirectory] returns module directory (see [ModuleDirectoryDetector.getModuleDirectory]) containing
      * the directory with given path (relative to the project root, e.g. "/feature/config", or "" for the project root
@@ -30,19 +32,32 @@ object ModuleUtil {
         },
     ): String {
         val path = toMacOsSeparator(projectPath)
-        val sourceDirectoryIndex = PathUtil.getSourceDirectoryIndex(path)
+        val sourceRootIndex = PathUtil.getSourceRootIndex(path)
 
         val moduleDirectory =
-            if (sourceDirectoryIndex == -1) {
+            if (sourceRootIndex == -1) {
                 val fileDirectory = path.substringBeforeLast("/", "")
-                getModuleDirectory(fileDirectory) ?: fileDirectory
+                getModuleDirectory(fileDirectory) ?: getDefaultModuleDirectory(path, fileDirectory)
             } else {
-                path.substring(0, sourceDirectoryIndex)
+                path.substring(0, sourceRootIndex)
             }
 
         return moduleDirectory
             .substringAfter("/")
             .ifEmpty { ROOT_MODULE_NAME }
+    }
+
+    /*
+     * Directory containing the first "src" directory, or the file directory for the file located outside the "src"
+     * directory, e.g. "/app" for "/app/src/test/resources/A.kt" and "/samples" for "/samples/A.kt".
+     */
+    private fun getDefaultModuleDirectory(
+        path: String,
+        fileDirectory: String,
+    ): String {
+        val sourceDirectoryIndex = PathUtil.getSourceDirectoryIndex(path)
+
+        return if (sourceDirectoryIndex == -1) fileDirectory else path.substring(0, sourceDirectoryIndex)
     }
 
     /**
