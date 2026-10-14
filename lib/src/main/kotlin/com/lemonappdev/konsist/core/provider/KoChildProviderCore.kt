@@ -84,7 +84,7 @@ internal interface KoChildProviderCore :
         name: KClass<*>,
         vararg names: KClass<*>,
         indirectChildren: Boolean,
-    ): Boolean = hasChildOf(listOf(name, *names))
+    ): Boolean = hasChildOf(listOf(name, *names), indirectChildren)
 
     override fun hasChildOf(
         names: Collection<KClass<*>>,
@@ -99,7 +99,7 @@ internal interface KoChildProviderCore :
         name: KClass<*>,
         vararg names: KClass<*>,
         indirectChildren: Boolean,
-    ): Boolean = hasAllChildrenOf(listOf(name, *names))
+    ): Boolean = hasAllChildrenOf(listOf(name, *names), indirectChildren)
 
     override fun hasAllChildrenOf(
         names: Collection<KClass<*>>,
