@@ -15,6 +15,7 @@ inline fun <reified T> KoReceiverTypeProvider.hasReceiverTypeOf(): Boolean = has
 
 /**
  * Determines whether the declaration has a valid KDoc with a RECEIVER tag.
+ * A declaration with a receiver type must have a RECEIVER tag. Otherwise, it must not have one.
  *
  * @return `true` if the declaration has a valid KDoc with the RECEIVER tag, `false` otherwise.
  */

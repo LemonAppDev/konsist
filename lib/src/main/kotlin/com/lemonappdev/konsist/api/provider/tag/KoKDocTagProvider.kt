@@ -26,11 +26,11 @@ interface KoKDocTagProvider : KoBaseProvider {
     fun hasTags(): Boolean
 
     /**
-     * Determines whether the declaration has at least one specified tag.
+     * Determines whether the declaration has at least one of the specified tags.
      *
      * @param tag the tag to check.
      * @param tags the tags to check.
-     * @return `true` if there is a matching declaration, `false` otherwise.
+     * @return `true` if the declaration has at least one of the specified tags, `false` otherwise.
      */
     fun hasTag(
         tag: KoKDocTag,
@@ -38,10 +38,10 @@ interface KoKDocTagProvider : KoBaseProvider {
     ): Boolean
 
     /**
-     * Determines whether the declaration has at least one specified tag.
+     * Determines whether the declaration has at least one of the specified tags.
      *
      * @param tags the tags to check.
-     * @return `true` if there is a matching declaration, `false` otherwise.
+     * @return `true` if the declaration has at least one of the specified tags, `false` otherwise.
      */
     fun hasTag(tags: Collection<KoKDocTag>): Boolean
 

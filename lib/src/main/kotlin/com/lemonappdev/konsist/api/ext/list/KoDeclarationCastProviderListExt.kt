@@ -1486,7 +1486,7 @@ fun <T : KoDeclarationCastProvider> List<T>.withoutExternalDeclarationOf(kClasse
  * @return A list containing declarations with the specified external declaration.
  * @see KoDeclarationCastProvider.isExternalType
  */
-@Deprecated("Will be removed in version 0.19.0", ReplaceWith("withExternalDeclaration"))
+@Deprecated("Will be removed in version 0.19.0", ReplaceWith("withExternalDeclaration()"))
 fun <T : KoDeclarationCastProvider> List<T>.withExternalTypeDeclaration(predicate: ((KoExternalDeclaration) -> Boolean)? = null): List<T> =
     filter {
         when (predicate) {
@@ -1509,7 +1509,7 @@ fun <T : KoDeclarationCastProvider> List<T>.withExternalTypeDeclaration(predicat
  * @return A list containing declarations without the specified external declaration.
  * @see KoDeclarationCastProvider.isExternalType
  */
-@Deprecated("Will be removed in version 0.19.0", ReplaceWith("withoutExternalDeclaration"))
+@Deprecated("Will be removed in version 0.19.0", ReplaceWith("withoutExternalDeclaration()"))
 fun <T : KoDeclarationCastProvider> List<T>.withoutExternalTypeDeclaration(
     predicate: ((KoExternalDeclaration) -> Boolean)? = null,
 ): List<T> =
@@ -1535,7 +1535,7 @@ fun <T : KoDeclarationCastProvider> List<T>.withoutExternalTypeDeclaration(
  * @return A list containing declarations with the external declaration of the specified Kotlin class(es).
  * @see KoDeclarationCastProvider.hasExternalTypeDeclarationOf
  */
-@Deprecated("Will be removed in version 0.19.0", ReplaceWith("withExternalDeclarationOf"))
+@Deprecated("Will be removed in version 0.19.0", ReplaceWith("withExternalDeclarationOf()"))
 fun <T : KoDeclarationCastProvider> List<T>.withExternalTypeDeclarationOf(
     kClass: KClass<*>,
     vararg kClasses: KClass<*>,
@@ -1548,7 +1548,7 @@ fun <T : KoDeclarationCastProvider> List<T>.withExternalTypeDeclarationOf(
  * @return A list containing declarations with the external declaration of the specified Kotlin class(es).
  * @see KoDeclarationCastProvider.hasExternalTypeDeclarationOf
  */
-@Deprecated("Will be removed in version 0.19.0", ReplaceWith("withExternalDeclarationOf"))
+@Deprecated("Will be removed in version 0.19.0", ReplaceWith("withExternalDeclarationOf()"))
 fun <T : KoDeclarationCastProvider> List<T>.withExternalTypeDeclarationOf(kClasses: Collection<KClass<*>>): List<T> =
     filter {
         when {
@@ -1565,7 +1565,7 @@ fun <T : KoDeclarationCastProvider> List<T>.withExternalTypeDeclarationOf(kClass
  * @return A list containing declarations without external declaration of the specified Kotlin class(es).
  * @see KoDeclarationCastProvider.hasExternalTypeDeclarationOf
  */
-@Deprecated("Will be removed in version 0.19.0", ReplaceWith("withoutExternalDeclarationOf"))
+@Deprecated("Will be removed in version 0.19.0", ReplaceWith("withoutExternalDeclarationOf()"))
 fun <T : KoDeclarationCastProvider> List<T>.withoutExternalTypeDeclarationOf(
     kClass: KClass<*>,
     vararg kClasses: KClass<*>,
@@ -1578,7 +1578,7 @@ fun <T : KoDeclarationCastProvider> List<T>.withoutExternalTypeDeclarationOf(
  * @return A list containing declarations without external declaration of the specified Kotlin class(es).
  * @see KoDeclarationCastProvider.hasExternalTypeDeclarationOf
  */
-@Deprecated("Will be removed in version 0.19.0", ReplaceWith("withoutExternalDeclarationOf"))
+@Deprecated("Will be removed in version 0.19.0", ReplaceWith("withoutExternalDeclarationOf()"))
 fun <T : KoDeclarationCastProvider> List<T>.withoutExternalTypeDeclarationOf(kClasses: Collection<KClass<*>>): List<T> =
     filterNot {
         when {

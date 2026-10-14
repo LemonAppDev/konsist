@@ -7,7 +7,7 @@ import com.lemonappdev.konsist.api.declaration.KoFileDeclaration
 /**
  * Architecture scope: layer dependencies and the scope they are checked against.
  *
- * @param layerDependencies dependency configuration for a particular Layer
+ * @param layerDependencies dependency configuration of the layers
  * @param koScope Scope of declaration
  * @param allowFilesOutsideLayers Whether files that reside in no declared layer are ignored
  */
@@ -20,7 +20,7 @@ internal data class KoArchitectureScope(
 /**
  * Architecture files: layer dependencies and the files they are checked against.
  *
- * @param layerDependencies dependency configuration for a particular Layer
+ * @param layerDependencies dependency configuration of the layers
  * @param files Files within the scope
  * @param allowFilesOutsideLayers Whether files that reside in no declared layer are ignored
  */

@@ -99,7 +99,7 @@ object ModuleUtil {
 
     /*
      * Directory containing the first "src" directory, or the file directory for the file located outside the "src"
-     * directory, e.g. "/app" for "/app/src/test/resources/A.kt" and "/samples" for "/samples/A.kt".
+     * directory, e.g. "/app" for "/app/src/test/testData/A.kt" and "/samples" for "/samples/A.kt".
      */
     private fun getDefaultModuleDirectory(
         path: String,

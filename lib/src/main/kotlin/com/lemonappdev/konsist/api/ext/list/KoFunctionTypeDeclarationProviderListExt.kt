@@ -6,7 +6,7 @@ import com.lemonappdev.konsist.api.provider.KoFunctionTypeDeclarationProvider
 import kotlin.reflect.KClass
 
 /**
- * Gets the list of return types for the function declarations in the list.
+ * Gets the list of return types for the function type declarations in the list.
  *
  * @see KoFunctionTypeDeclarationProvider.returnType
  */
@@ -14,7 +14,7 @@ val <T : KoFunctionTypeDeclarationProvider> List<T>.returnTypes: List<KoTypeDecl
     get() = mapNotNull { it.returnType }
 
 /**
- * Gets the list of parameter types for the function declarations in the list.
+ * Gets the list of parameter types for the function type declarations in the list.
  *
  * @see KoFunctionTypeDeclarationProvider.parameterTypes
  */
@@ -23,7 +23,7 @@ val <T : KoFunctionTypeDeclarationProvider> List<T>.parameterTypes: List<KoParam
     get() = parameters
 
 /**
- * Gets the list of parameters for the function declarations in the list.
+ * Gets the list of parameters for the function type declarations in the list.
  *
  * @see KoFunctionTypeDeclarationProvider.parameters
  */
@@ -36,28 +36,28 @@ val <T : KoFunctionTypeDeclarationProvider> List<T>.parameters: List<KoParameter
  * Filters the list by return type using the given predicate.
  *
  * @param predicate A function that defines the condition to be met by the return type.
- * @return A list of function declarations that match the predicate for the return type.
+ * @return A list of function type declarations that match the predicate for the return type.
  * @see KoFunctionTypeDeclarationProvider.returnType
  */
 fun <T : KoFunctionTypeDeclarationProvider> List<T>.withReturnType(predicate: (KoTypeDeclaration) -> Boolean): List<T> =
     filter { it.returnType?.let { type -> predicate(type) } == true }
 
 /**
- * Filters the list by excluding function declarations that match the return type predicate.
+ * Filters the list by excluding function type declarations that match the return type predicate.
  *
  * @param predicate A function that defines the condition to be met by the return type.
- * @return A list of function declarations that do not match the predicate for the return type.
+ * @return A list of function type declarations that do not match the predicate for the return type.
  * @see KoFunctionTypeDeclarationProvider.returnType
  */
 fun <T : KoFunctionTypeDeclarationProvider> List<T>.withoutReturnType(predicate: (KoTypeDeclaration) -> Boolean): List<T> =
     filterNot { it.returnType?.let { type -> predicate(type) } == true }
 
 /**
- * Filters the list to include only the functions that return a type of the specified class(es).
+ * Filters the list to include only the function types that return a type of the specified class(es).
  *
  * @param kClass The first class to match the return type.
  * @param kClasses Additional classes to match the return type.
- * @return A list of function declarations that have a return type matching any of the provided classes.
+ * @return A list of function type declarations that have a return type matching any of the provided classes.
  * @see KoFunctionTypeDeclarationProvider.hasReturnTypeOf
  */
 fun <T : KoFunctionTypeDeclarationProvider> List<T>.withReturnTypeOf(
@@ -66,10 +66,10 @@ fun <T : KoFunctionTypeDeclarationProvider> List<T>.withReturnTypeOf(
 ): List<T> = withReturnTypeOf(listOf(kClass, *kClasses))
 
 /**
- * Filters the list to include only the functions that return a type of the specified classes.
+ * Filters the list to include only the function types that return a type of the specified classes.
  *
  * @param kClasses A collection of classes to match the return type.
- * @return A list of function declarations that have a return type matching any of the provided classes.
+ * @return A list of function type declarations that have a return type matching any of the provided classes.
  * @see KoFunctionTypeDeclarationProvider.hasReturnTypeOf
  */
 fun <T : KoFunctionTypeDeclarationProvider> List<T>.withReturnTypeOf(kClasses: Collection<KClass<*>>): List<T> =
@@ -81,11 +81,11 @@ fun <T : KoFunctionTypeDeclarationProvider> List<T>.withReturnTypeOf(kClasses: C
     }
 
 /**
- * Filters the list to exclude functions that return a type of the specified class(es).
+ * Filters the list to exclude function types that return a type of the specified class(es).
  *
  * @param kClass The first class to match the return type.
  * @param kClasses Additional classes to match the return type.
- * @return A list of function declarations that do not have a return type matching any of the provided classes.
+ * @return A list of function type declarations that do not have a return type matching any of the provided classes.
  * @see KoFunctionTypeDeclarationProvider.hasReturnTypeOf
  */
 fun <T : KoFunctionTypeDeclarationProvider> List<T>.withoutReturnTypeOf(
@@ -94,10 +94,10 @@ fun <T : KoFunctionTypeDeclarationProvider> List<T>.withoutReturnTypeOf(
 ): List<T> = withoutReturnTypeOf(listOf(kClass, *kClasses))
 
 /**
- * Filters the list to exclude functions that return a type of the specified classes.
+ * Filters the list to exclude function types that return a type of the specified classes.
  *
  * @param kClasses A collection of classes to match the return type.
- * @return A list of function declarations that do not have a return type matching any of the provided classes.
+ * @return A list of function type declarations that do not have a return type matching any of the provided classes.
  * @see KoFunctionTypeDeclarationProvider.hasReturnTypeOf
  */
 fun <T : KoFunctionTypeDeclarationProvider> List<T>.withoutReturnTypeOf(kClasses: Collection<KClass<*>>): List<T> =
@@ -112,7 +112,7 @@ fun <T : KoFunctionTypeDeclarationProvider> List<T>.withoutReturnTypeOf(kClasses
  * Filters the list by parameter type using the given predicate.
  *
  * @param predicate A function that defines the condition to be met by the parameter type.
- * @return A list of function declarations that match the predicate for at least one parameter type.
+ * @return A list of function type declarations that match the predicate for at least one parameter type.
  * @see KoFunctionTypeDeclarationProvider.hasParameter
  */
 @Deprecated("Will be removed in version 0.19.0", ReplaceWith("withParameter(predicate)"))
@@ -120,10 +120,10 @@ fun <T : KoFunctionTypeDeclarationProvider> List<T>.withParameterType(predicate:
     withParameter(predicate)
 
 /**
- * Filters the list by excluding functions that match the parameter type predicate.
+ * Filters the list by excluding function types that match the parameter type predicate.
  *
  * @param predicate A function that defines the condition to be met by the parameter type.
- * @return A list of function declarations that do not match the predicate for the parameter type.
+ * @return A list of function type declarations that do not match the predicate for the parameter type.
  * @see KoFunctionTypeDeclarationProvider.hasParameter
  */
 @Deprecated("Will be removed in version 0.19.0", ReplaceWith("withoutParameter(predicate)"))
@@ -134,7 +134,7 @@ fun <T : KoFunctionTypeDeclarationProvider> List<T>.withoutParameterType(predica
  * Filters the list by requiring that all parameter types match the given predicate.
  *
  * @param predicate A function that defines the condition to be met by all parameter types.
- * @return A list of function declarations where all parameter types match the given predicate.
+ * @return A list of function type declarations where all parameter types match the given predicate.
  * @see KoFunctionTypeDeclarationProvider.hasAllParameters
  */
 @Deprecated("Will be removed in version 0.19.0", ReplaceWith("withAllParameters(predicate)"))
@@ -142,10 +142,10 @@ fun <T : KoFunctionTypeDeclarationProvider> List<T>.withAllParameterTypes(predic
     withAllParameters(predicate)
 
 /**
- * Filters the list by excluding functions where all parameter types match the given predicate.
+ * Filters the list by excluding function types where all parameter types match the given predicate.
  *
  * @param predicate A function that defines the condition to be met by all parameter types.
- * @return A list of function declarations where not all parameter types match the given predicate.
+ * @return A list of function type declarations where not all parameter types match the given predicate.
  * @see KoFunctionTypeDeclarationProvider.hasAllParameters
  */
 @Deprecated("Will be removed in version 0.19.0", ReplaceWith("withoutAllParameters(predicate)"))
@@ -156,7 +156,7 @@ fun <T : KoFunctionTypeDeclarationProvider> List<T>.withoutAllParameterTypes(pre
  * Filters the list by parameter types as a collection using the given predicate.
  *
  * @param predicate A function that defines the condition to be met by the list of parameter types.
- * @return A list of function declarations that match the predicate for the list of parameter types.
+ * @return A list of function type declarations that match the predicate for the list of parameter types.
  * @see KoFunctionTypeDeclarationProvider.parameters
  */
 @Deprecated("Will be removed in version 0.19.0", ReplaceWith("withParameters(predicate)"))
@@ -164,10 +164,10 @@ fun <T : KoFunctionTypeDeclarationProvider> List<T>.withParameterTypes(predicate
     withParameters(predicate)
 
 /**
- * Filters the list by excluding functions that match the parameter types predicate as a collection.
+ * Filters the list by excluding function types that match the parameter types predicate as a collection.
  *
  * @param predicate A function that defines the condition to be met by the list of parameter types.
- * @return A list of function declarations that do not match the predicate for the list of parameter types.
+ * @return A list of function type declarations that do not match the predicate for the list of parameter types.
  * @see KoFunctionTypeDeclarationProvider.parameters
  */
 @Deprecated("Will be removed in version 0.19.0", ReplaceWith("withoutParameters(predicate)"))
@@ -178,17 +178,17 @@ fun <T : KoFunctionTypeDeclarationProvider> List<T>.withoutParameterTypes(predic
  * Filters the list by parameter using the given predicate.
  *
  * @param predicate A function that defines the condition to be met by the parameter.
- * @return A list of function declarations that match the predicate for at least one parameter.
+ * @return A list of function type declarations that match the predicate for at least one parameter.
  * @see KoFunctionTypeDeclarationProvider.hasParameter
  */
 fun <T : KoFunctionTypeDeclarationProvider> List<T>.withParameter(predicate: (KoParameterDeclaration) -> Boolean): List<T> =
     filter { it.hasParameter(predicate) }
 
 /**
- * Filters the list by excluding functions that match the parameter predicate.
+ * Filters the list by excluding function types that match the parameter predicate.
  *
  * @param predicate A function that defines the condition to be met by the parameter.
- * @return A list of function declarations that do not match the predicate for the parameter.
+ * @return A list of function type declarations that do not match the predicate for the parameter.
  * @see KoFunctionTypeDeclarationProvider.hasParameter
  */
 fun <T : KoFunctionTypeDeclarationProvider> List<T>.withoutParameter(predicate: (KoParameterDeclaration) -> Boolean): List<T> =
@@ -198,17 +198,17 @@ fun <T : KoFunctionTypeDeclarationProvider> List<T>.withoutParameter(predicate: 
  * Filters the list by requiring that all parameters match the given predicate.
  *
  * @param predicate A function that defines the condition to be met by all parameters.
- * @return A list of function declarations where all parameters match the given predicate.
+ * @return A list of function type declarations where all parameters match the given predicate.
  * @see KoFunctionTypeDeclarationProvider.hasAllParameters
  */
 fun <T : KoFunctionTypeDeclarationProvider> List<T>.withAllParameters(predicate: (KoParameterDeclaration) -> Boolean): List<T> =
     filter { it.hasAllParameters(predicate) }
 
 /**
- * Filters the list by excluding functions where all parameters match the given predicate.
+ * Filters the list by excluding function types where all parameters match the given predicate.
  *
  * @param predicate A function that defines the condition to be met by all parameters.
- * @return A list of function declarations where not all parameters match the given predicate.
+ * @return A list of function type declarations where not all parameters match the given predicate.
  * @see KoFunctionTypeDeclarationProvider.hasAllParameters
  */
 fun <T : KoFunctionTypeDeclarationProvider> List<T>.withoutAllParameters(predicate: (KoParameterDeclaration) -> Boolean): List<T> =
@@ -218,17 +218,17 @@ fun <T : KoFunctionTypeDeclarationProvider> List<T>.withoutAllParameters(predica
  * Filters the list by parameters as a collection using the given predicate.
  *
  * @param predicate A function that defines the condition to be met by the list of parameters.
- * @return A list of function declarations that match the predicate for the list of parameters.
+ * @return A list of function type declarations that match the predicate for the list of parameters.
  * @see KoFunctionTypeDeclarationProvider.parameters
  */
 fun <T : KoFunctionTypeDeclarationProvider> List<T>.withParameters(predicate: (List<KoParameterDeclaration>) -> Boolean): List<T> =
     filter { it.parameters?.let { parameters -> predicate(parameters) } == true }
 
 /**
- * Filters the list by excluding functions that match the parameters predicate as a collection.
+ * Filters the list by excluding function types that match the parameters predicate as a collection.
  *
  * @param predicate A function that defines the condition to be met by the list of parameters.
- * @return A list of function declarations that do not match the predicate for the list of parameters.
+ * @return A list of function type declarations that do not match the predicate for the list of parameters.
  * @see KoFunctionTypeDeclarationProvider.parameters
  */
 fun <T : KoFunctionTypeDeclarationProvider> List<T>.withoutParameters(predicate: (List<KoParameterDeclaration>) -> Boolean): List<T> =

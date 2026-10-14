@@ -234,7 +234,7 @@ interface KoDeclarationCastProvider :
      *
      * @return the external declaration associated with this declaration.
      */
-    @Deprecated("Will be removed in version 0.19.0", ReplaceWith("asExternal"))
+    @Deprecated("Will be removed in version 0.19.0", ReplaceWith("asExternalDeclaration"))
     fun asExternalTypeDeclaration(): KoExternalDeclaration?
 
     /**

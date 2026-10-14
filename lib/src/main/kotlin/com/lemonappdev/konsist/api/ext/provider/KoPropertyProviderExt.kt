@@ -4,7 +4,8 @@ import com.lemonappdev.konsist.api.provider.KoKDocProvider
 import com.lemonappdev.konsist.api.provider.KoPropertyProvider
 
 /**
- * Determines whether the declaration has a valid KDoc with a PROPERTY tag.
+ * Determines whether the declaration has a valid KDoc with a PROPERTY tag for each property.
+ * PROPERTY tag values must match the property names. A declaration without properties is valid if it has no PROPERTY tags.
  *
  * @return `true` if the declaration has a valid KDoc with the PROPERTY tag, `false` otherwise.
  */

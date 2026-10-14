@@ -20,7 +20,7 @@ interface KoTypeParameterProvider : KoBaseProvider {
      * Returns the number of type parameters that satisfy the specified predicate present in the declaration.
      *
      * @param predicate The predicate function to determine if a type parameter satisfies a condition.
-     * @return The number of type parameters in the declaration.
+     * @return The number of matching type parameters in the declaration.
      */
     fun countTypeParameters(predicate: (KoTypeParameterDeclaration) -> Boolean): Int
 

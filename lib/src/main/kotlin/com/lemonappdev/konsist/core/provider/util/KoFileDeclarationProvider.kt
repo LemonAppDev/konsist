@@ -104,8 +104,7 @@ internal object KoFileDeclarationProvider {
     private fun parseKotlinFile(file: File): KoFileDeclaration? {
         /*
         Due to asynchronous execution, the file's state may have changed since the initial file tree walk.
-        This is particularly common with code generators. We don't exclude build or generated files at this stage
-        (that happens later), so we need to be more permissive in the initial loading process.
+        This is particularly common with code generators.
         We verify the file is still a valid Kotlin file before parsing to handle cases where files may have been
         removed or altered. If the file is no longer valid, we return null instead of attempting to parse it.
          */

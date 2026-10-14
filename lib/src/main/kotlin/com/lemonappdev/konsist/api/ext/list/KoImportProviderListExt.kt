@@ -25,7 +25,6 @@ fun <T : KoImportProvider> List<T>.withImports(): List<T> = filter { it.hasImpor
  * @return A list containing declarations with no import.
  * @see KoImportProvider.hasImports
  */
-
 fun <T : KoImportProvider> List<T>.withoutImports(): List<T> = filterNot { it.hasImports() }
 
 /**

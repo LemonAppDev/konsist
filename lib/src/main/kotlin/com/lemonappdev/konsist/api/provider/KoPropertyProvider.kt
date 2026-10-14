@@ -27,7 +27,7 @@ interface KoPropertyProvider : KoBaseProvider {
      *
      * @param includeNested Specifies whether to include nested properties in the count (optional, default is `true`).
      * @param predicate The predicate function to determine if a property satisfies a condition.
-     * @return The number of properties in the declaration.
+     * @return The number of matching properties in the declaration.
      */
     fun countProperties(
         includeNested: Boolean = true,

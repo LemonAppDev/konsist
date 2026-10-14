@@ -368,7 +368,7 @@ object TypeUtil {
 
     /*
      * Removes brackets from the type.
-     * For `((Int) -> Unit)` value will be "(Int) -> Unit)"
+     * For `((Int) -> Unit)` value will be "(Int) -> Unit"
      */
     private fun String.removeBrackets(): String =
         if (startsWith("(") and endsWith(")")) {

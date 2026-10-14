@@ -3,7 +3,7 @@ package com.lemonappdev.konsist.core.cache
 /**
  * Caches property values of declarations in private fields.
  *
- * Declarations are created for elements of every parsed file and stay in memory for the whole test run.
+ * Declarations are created for elements of every parsed file and can stay in memory for the whole test run.
  * Lazy delegate allocates ~40 bytes for every property of every declaration (delegate and initializer lambda), even
  * when the property is never read, while the cache field takes 4 bytes:
  *

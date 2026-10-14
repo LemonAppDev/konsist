@@ -49,7 +49,7 @@ interface KoDeclarationProvider : KoBaseProvider {
      *
      * @param includeNested Specifies whether to include nested declarations in the count (optional, default is `true`).
      * @param includeLocal Specifies whether to include local declarations in the count (optional, default is `true`).
-     * @return The number of declarations in the declaration.
+     * @return The number of public declarations in the declaration.
      */
     fun numPublicDeclarations(
         includeNested: Boolean = true,
@@ -61,7 +61,7 @@ interface KoDeclarationProvider : KoBaseProvider {
      *
      * @param includeNested Specifies whether to include nested declarations in the count (optional, default is `true`).
      * @param includeLocal Specifies whether to include local declarations in the count (optional, default is `true`).
-     * @return The number of declarations in the declaration.
+     * @return The number of public or default declarations in the declaration.
      */
     fun numPublicOrDefaultDeclarations(
         includeNested: Boolean = true,
@@ -73,7 +73,7 @@ interface KoDeclarationProvider : KoBaseProvider {
      *
      * @param includeNested Specifies whether to include nested declarations in the count (optional, default is `true`).
      * @param includeLocal Specifies whether to include local declarations in the count (optional, default is `true`).
-     * @return The number of declarations in the declaration.
+     * @return The number of private declarations in the declaration.
      */
     fun numPrivateDeclarations(
         includeNested: Boolean = true,
@@ -85,7 +85,7 @@ interface KoDeclarationProvider : KoBaseProvider {
      *
      * @param includeNested Specifies whether to include nested declarations in the count (optional, default is `true`).
      * @param includeLocal Specifies whether to include local declarations in the count (optional, default is `true`).
-     * @return The number of declarations in the declaration.
+     * @return The number of protected declarations in the declaration.
      */
     fun numProtectedDeclarations(
         includeNested: Boolean = true,
@@ -97,7 +97,7 @@ interface KoDeclarationProvider : KoBaseProvider {
      *
      * @param includeNested Specifies whether to include nested declarations in the count (optional, default is `true`).
      * @param includeLocal Specifies whether to include local declarations in the count (optional, default is `true`).
-     * @return The number of declarations in the declaration.
+     * @return The number of internal declarations in the declaration.
      */
     fun numInternalDeclarations(
         includeNested: Boolean = true,

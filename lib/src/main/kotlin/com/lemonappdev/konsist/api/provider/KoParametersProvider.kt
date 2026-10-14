@@ -20,7 +20,7 @@ interface KoParametersProvider : KoBaseProvider {
      * Returns the number of parameters that satisfy the specified predicate present in the declaration.
      *
      * @param predicate The predicate function to determine if a parameter satisfies a condition.
-     * @return The number of parameters in the declaration.
+     * @return The number of matching parameters in the declaration.
      */
     fun countParameters(predicate: (KoParameterDeclaration) -> Boolean): Int
 
@@ -34,8 +34,8 @@ interface KoParametersProvider : KoBaseProvider {
     /**
      * Determines whether the declaration has at least one parameter whose name matches any of the specified names.
      *
-     * @param name the name of the parameter to check.
-     * @param names the names of the parameters to check.
+     * @param name The name of the parameter to check.
+     * @param names The names of additional parameters to check.
      * @param ignoreCase Specifies whether the comparison should ignore case.
      *        If `true`, the comparison will be case-insensitive.
      *        If `false`, the comparison will consider case sensitivity.
@@ -50,7 +50,7 @@ interface KoParametersProvider : KoBaseProvider {
     /**
      * Determines whether the declaration has at least one parameter whose name matches any of the specified names.
      *
-     * @param names the names of the parameters to check.
+     * @param names The names of the parameters to check.
      * @param ignoreCase Specifies whether the comparison should ignore case.
      *        If `true`, the comparison will be case-insensitive.
      *        If `false`, the comparison will consider case sensitivity.
