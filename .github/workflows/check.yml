@@ -98,7 +98,7 @@ jobs:
           path: ./lib/build/reports/tests/konsistTest/
 
   konsist-integration-test:
-    name: Konsist Integration Test
+    name: Konsist Integration Test Ubuntu
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
