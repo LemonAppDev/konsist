@@ -39,11 +39,11 @@ class KoExplicitBackingFieldProviderListExtTest {
         // given
         val declaration1: KoExplicitBackingFieldProvider =
             mockk {
-                every { hasExplicitBackingField() } returns true
+                every { hasExplicitBackingField } returns true
             }
         val declaration2: KoExplicitBackingFieldProvider =
             mockk {
-                every { hasExplicitBackingField() } returns false
+                every { hasExplicitBackingField } returns false
             }
         val declarations = listOf(declaration1, declaration2)
 
@@ -59,58 +59,16 @@ class KoExplicitBackingFieldProviderListExtTest {
         // given
         val declaration1: KoExplicitBackingFieldProvider =
             mockk {
-                every { hasExplicitBackingField() } returns true
+                every { hasExplicitBackingField } returns true
             }
         val declaration2: KoExplicitBackingFieldProvider =
             mockk {
-                every { hasExplicitBackingField() } returns false
+                every { hasExplicitBackingField } returns false
             }
         val declarations = listOf(declaration1, declaration2)
 
         // when
         val sut = declarations.withoutExplicitBackingField()
-
-        // then
-        sut shouldBeEqualTo listOf(declaration2)
-    }
-
-    @Test
-    fun `withExplicitBackingField{} returns declaration with explicit backing field which satisfy predicate`() {
-        // given
-        val predicate: (KoExplicitBackingFieldDeclaration) -> Boolean = { it.hasValue("value") }
-        val declaration1: KoExplicitBackingFieldProvider =
-            mockk {
-                every { hasExplicitBackingField(predicate) } returns true
-            }
-        val declaration2: KoExplicitBackingFieldProvider =
-            mockk {
-                every { hasExplicitBackingField(predicate) } returns false
-            }
-        val declarations = listOf(declaration1, declaration2)
-
-        // when
-        val sut = declarations.withExplicitBackingField(predicate)
-
-        // then
-        sut shouldBeEqualTo listOf(declaration1)
-    }
-
-    @Test
-    fun `withoutExplicitBackingField{} returns declaration without explicit backing field which satisfy predicate`() {
-        // given
-        val predicate: (KoExplicitBackingFieldDeclaration) -> Boolean = { it.hasValue("value") }
-        val declaration1: KoExplicitBackingFieldProvider =
-            mockk {
-                every { hasExplicitBackingField(predicate) } returns true
-            }
-        val declaration2: KoExplicitBackingFieldProvider =
-            mockk {
-                every { hasExplicitBackingField(predicate) } returns false
-            }
-        val declarations = listOf(declaration1, declaration2)
-
-        // when
-        val sut = declarations.withoutExplicitBackingField(predicate)
 
         // then
         sut shouldBeEqualTo listOf(declaration2)

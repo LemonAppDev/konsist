@@ -17,9 +17,6 @@ internal interface KoExplicitBackingFieldProviderCore :
                 ?.fieldDeclaration
                 ?.let { KoExplicitBackingFieldDeclarationCore.getInstance(it, this.castToKoBaseDeclaration()) }
 
-    override fun hasExplicitBackingField(predicate: ((KoExplicitBackingFieldDeclaration) -> Boolean)?): Boolean =
-        when (predicate) {
-            null -> explicitBackingField != null
-            else -> explicitBackingField?.let { predicate(it) } ?: false
-        }
+    override val hasExplicitBackingField: Boolean
+        get() = ktProperty?.fieldDeclaration != null
 }

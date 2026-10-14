@@ -16,7 +16,6 @@ import com.lemonappdev.konsist.api.ext.list.withoutClassDeclaration
 import com.lemonappdev.konsist.api.ext.list.withoutKotlinBasicTypeDeclaration
 import com.lemonappdev.konsist.api.verify.assertFalse
 import com.lemonappdev.konsist.api.verify.assertTrue
-import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 
 class AndroidTestSnippets {
@@ -40,16 +39,14 @@ class AndroidTestSnippets {
             }
     }
 
-    fun `Every 'ViewModel' 'StateFlow' property has 'MutableStateFlow' explicit backing field`() {
+    fun `Every 'ViewModel' 'StateFlow' property has explicit backing field`() {
         Konsist
             .scopeFromProject()
             .classes()
             .withParentClassOf(ViewModel::class)
             .properties()
             .withTypeOf(StateFlow::class)
-            .assertTrue {
-                it.hasExplicitBackingField { field -> field.hasTacitTypeOf(MutableStateFlow::class) }
-            }
+            .assertTrue { it.hasExplicitBackingField }
     }
 
     fun `'Repository' classes should reside in 'repository' package`() {

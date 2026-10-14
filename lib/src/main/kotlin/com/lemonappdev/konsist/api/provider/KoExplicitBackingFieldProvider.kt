@@ -13,11 +13,7 @@ interface KoExplicitBackingFieldProvider : KoBaseProvider {
     val explicitBackingField: KoExplicitBackingFieldDeclaration?
 
     /**
-     * Determines whether the declaration has an explicit backing field that satisfies the specified predicate.
-     *
-     * @param predicate The predicate function used to determine if an explicit backing field satisfies a condition.
-     * @return `true` if the declaration has the specified explicit backing field (or any explicit backing field if
-     * [predicate] is `null`), `false` otherwise.
+     * Determines whether the declaration has an explicit backing field.
      */
-    fun hasExplicitBackingField(predicate: ((KoExplicitBackingFieldDeclaration) -> Boolean)? = null): Boolean
+    val hasExplicitBackingField: Boolean
 }

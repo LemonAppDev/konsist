@@ -12,25 +12,17 @@ val <T : KoExplicitBackingFieldProvider> List<T>.explicitBackingFields: List<KoE
     get() = mapNotNull { it.explicitBackingField }
 
 /**
- * List containing declarations with the specified explicit backing field.
+ * List containing declarations with explicit backing field.
  *
- * @param predicate The predicate function to determine if a declaration explicit backing field satisfies a condition.
- * @return A list containing declarations with the specified explicit backing field
- * (or any explicit backing field if [predicate] is null).
+ * @return A list containing declarations with explicit backing field.
  * @see KoExplicitBackingFieldProvider.hasExplicitBackingField
  */
-fun <T : KoExplicitBackingFieldProvider> List<T>.withExplicitBackingField(
-    predicate: ((KoExplicitBackingFieldDeclaration) -> Boolean)? = null,
-): List<T> = filter { it.hasExplicitBackingField(predicate) }
+fun <T : KoExplicitBackingFieldProvider> List<T>.withExplicitBackingField(): List<T> = filter { it.hasExplicitBackingField }
 
 /**
- * List containing declarations without the specified explicit backing field.
+ * List containing declarations without explicit backing field.
  *
- * @param predicate The predicate function to determine if a declaration explicit backing field satisfies a condition.
- * @return A list containing declarations without the specified explicit backing field
- * (or without an explicit backing field if [predicate] is null).
+ * @return A list containing declarations without explicit backing field.
  * @see KoExplicitBackingFieldProvider.hasExplicitBackingField
  */
-fun <T : KoExplicitBackingFieldProvider> List<T>.withoutExplicitBackingField(
-    predicate: ((KoExplicitBackingFieldDeclaration) -> Boolean)? = null,
-): List<T> = filterNot { it.hasExplicitBackingField(predicate) }
+fun <T : KoExplicitBackingFieldProvider> List<T>.withoutExplicitBackingField(): List<T> = filterNot { it.hasExplicitBackingField }

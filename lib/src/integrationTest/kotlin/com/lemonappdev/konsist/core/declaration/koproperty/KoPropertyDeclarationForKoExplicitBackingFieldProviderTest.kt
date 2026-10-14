@@ -19,8 +19,7 @@ class KoPropertyDeclarationForKoExplicitBackingFieldProviderTest {
         // then
         assertSoftly(sut) {
             explicitBackingField shouldBeEqualTo null
-            hasExplicitBackingField() shouldBeEqualTo false
-            hasExplicitBackingField { true } shouldBeEqualTo false
+            hasExplicitBackingField shouldBeEqualTo false
         }
     }
 
@@ -35,9 +34,7 @@ class KoPropertyDeclarationForKoExplicitBackingFieldProviderTest {
         // then
         assertSoftly(sut) {
             explicitBackingField shouldNotBeEqualTo null
-            hasExplicitBackingField() shouldBeEqualTo true
-            hasExplicitBackingField { it.hasValue("mutableListOf(0)") } shouldBeEqualTo true
-            hasExplicitBackingField { it.hasType() } shouldBeEqualTo false
+            hasExplicitBackingField shouldBeEqualTo true
         }
     }
 
@@ -53,9 +50,8 @@ class KoPropertyDeclarationForKoExplicitBackingFieldProviderTest {
 
         // then
         assertSoftly(sut) {
-            hasExplicitBackingField() shouldBeEqualTo true
-            hasExplicitBackingField { it.hasTypeOf(MutableList::class) } shouldBeEqualTo true
-            hasExplicitBackingField { it.hasTypeOf(Set::class) } shouldBeEqualTo false
+            explicitBackingField?.hasTypeOf(MutableList::class) shouldBeEqualTo true
+            hasExplicitBackingField shouldBeEqualTo true
         }
     }
 
@@ -72,7 +68,7 @@ class KoPropertyDeclarationForKoExplicitBackingFieldProviderTest {
         // then
         assertSoftly(sut) {
             explicitBackingField shouldBeEqualTo null
-            hasExplicitBackingField() shouldBeEqualTo false
+            hasExplicitBackingField shouldBeEqualTo false
         }
     }
 
