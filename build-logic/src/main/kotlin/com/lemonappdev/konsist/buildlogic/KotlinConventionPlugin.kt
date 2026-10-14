@@ -33,7 +33,7 @@ class KotlinConventionPlugin : Plugin<Project> {
 
                 compilerOptions {
                     jvmTarget.set(JvmTarget.fromTarget(jvmRelease.toString()))
-                    freeCompilerArgs.add("-Xjdk-release=$jvmRelease")
+                    freeCompilerArgs.addAll("-Xjdk-release=$jvmRelease", "-Xbackend-threads=4")
                 }
             }
         }
