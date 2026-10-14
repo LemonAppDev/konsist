@@ -320,10 +320,63 @@ class ModuleUtilTest {
         val result =
             ModuleUtil.getModuleName(
                 projectPath = "/src/app/SampleClass.kt",
+                getModuleDirectory = { null },
             )
 
         // then
         result shouldBeEqualTo "root"
+    }
+
+    @Test
+    fun `should return module located in src directory for file outside its src directory`() {
+        // when
+        val result =
+            ModuleUtil.getModuleName(
+                projectPath = "/src/tools/SampleClass.kt",
+                getModuleDirectory = mapOf("/src/tools" to "/src/tools")::get,
+            )
+
+        // then
+        result shouldBeEqualTo "src/tools"
+    }
+
+    @Test
+    fun `should return module located in src directory for file in its src directory outside source root`() {
+        // when
+        val result =
+            ModuleUtil.getModuleName(
+                projectPath = "/src/tools/src/test/resources/SampleClass.kt",
+                getModuleDirectory = mapOf("/src/tools/src/test/resources" to "/src/tools")::get,
+            )
+
+        // then
+        result shouldBeEqualTo "src/tools"
+    }
+
+    @Test
+    fun `should return closest module for file in src directory outside source root for windows path`() {
+        // when
+        val result =
+            ModuleUtil.getModuleName(
+                projectPath = """\src\tools\src\test\resources\SampleClass.kt""",
+                getModuleDirectory = mapOf("/src/tools/src/test/resources" to "/src/tools")::get,
+            )
+
+        // then
+        result shouldBeEqualTo "src/tools"
+    }
+
+    @Test
+    fun `should return directory containing first src directory for file outside source root without module directory`() {
+        // when
+        val result =
+            ModuleUtil.getModuleName(
+                projectPath = "/feature/src/test/resources/SampleClass.kt",
+                getModuleDirectory = { null },
+            )
+
+        // then
+        result shouldBeEqualTo "feature"
     }
 
     @Test

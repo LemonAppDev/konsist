@@ -114,6 +114,33 @@ class PathUtilTest {
     }
 
     @Test
+    fun `getSourceRootIndex returns index of src directory of source root`() {
+        // when
+        val result = PathUtil.getSourceRootIndex("/src/tools/src/main/kotlin/SampleClass.kt")
+
+        // then
+        result shouldBeEqualTo 10
+    }
+
+    @Test
+    fun `getSourceRootIndex returns -1 for file in src directory outside source root`() {
+        // when
+        val result = PathUtil.getSourceRootIndex("/src/tools/src/test/resources/SampleClass.kt")
+
+        // then
+        result shouldBeEqualTo -1
+    }
+
+    @Test
+    fun `getSourceRootIndex returns -1 for file outside src directory`() {
+        // when
+        val result = PathUtil.getSourceRootIndex("/src/tools/SampleClass.kt")
+
+        // then
+        result shouldBeEqualTo -1
+    }
+
+    @Test
     fun `isBuildConfigPath returns true for file in buildSrc source set`() {
         // when
         val result = PathUtil.isBuildConfigPath(projectPath = "/buildSrc/src/main/kotlin/SampleClass.kt")
