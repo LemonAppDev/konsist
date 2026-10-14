@@ -32,8 +32,8 @@ import java.io.File
  * Project scopes do not contain files located outside the module "src" directory.
  * Module "src/tools" is located in a directory named "src" and contains Kotlin files located outside its source root
  * ("src/tools/ToolsScript.kt" and "src/tools/src/test/testData/ToolsFixture.kt").
- * Module "app" contains Gradle test fixture project located in resources ("app/src/functionalTest/resources/project"),
- * which is not a module.
+ * Module "app" contains Gradle test fixture projects located in resources ("app/src/functionalTest/resources/project")
+ * and in the test source set ("app/src/test/testData/project"), which are not modules.
  * Runs in isolation, because it mocks global objects.
  */
 @Isolated
@@ -67,6 +67,8 @@ class KoScopeCreatorCoreNestedModuleTest {
                 SRC_TOOLS_FIXTURE,
                 APP_FIXTURE_PROJECT_SCRIPT,
                 APP_FIXTURE_PROJECT_MAIN,
+                APP_TEST_DATA_PROJECT_SCRIPT,
+                APP_TEST_DATA_PROJECT_MAIN,
             ).filter { predicate(File(it)) }
                 .map { createKoFile(it) }
         }
@@ -79,6 +81,8 @@ class KoScopeCreatorCoreNestedModuleTest {
         // Project files do not exist, so module directories of files located outside the "src" directory are mocked
         mockkObject(ModuleDirectoryDetector)
         every { ModuleDirectoryDetector.getModuleDirectory(PROJECT_ROOT_PATH, any()) } answers { MODULE_DIRECTORIES[secondArg()] }
+        every { ModuleDirectoryDetector.isSourceSetDirectory(PROJECT_ROOT_PATH, any()) } answers
+            { secondArg<String>() in SOURCE_SET_DIRECTORIES }
     }
 
     @AfterEach
@@ -236,6 +240,8 @@ class KoScopeCreatorCoreNestedModuleTest {
                 APP_FIXTURE_PROJECT_SCRIPT,
                 APP_FIXTURE_PROJECT_MAIN,
                 APP_MAIN,
+                APP_TEST_DATA_PROJECT_SCRIPT,
+                APP_TEST_DATA_PROJECT_MAIN,
                 AUTHENTICATION_DATA_MAIN,
                 AUTHENTICATION_DATA_TEST,
                 MAIN_DATA_MAIN,
@@ -421,21 +427,34 @@ class KoScopeCreatorCoreNestedModuleTest {
     }
 
     @Test
-    fun `scopeFromModule contains files from project located in resources`() {
+    fun `scopeFromModule contains files from projects located in source sets`() {
         // when
         val result = sut.scopeFromModule(":app").filePaths()
 
         // then
-        result shouldBeEqualTo listOf(APP_FIXTURE_PROJECT_SCRIPT, APP_FIXTURE_PROJECT_MAIN, APP_MAIN)
+        result shouldBeEqualTo
+            listOf(
+                APP_FIXTURE_PROJECT_SCRIPT,
+                APP_FIXTURE_PROJECT_MAIN,
+                APP_MAIN,
+                APP_TEST_DATA_PROJECT_SCRIPT,
+                APP_TEST_DATA_PROJECT_MAIN,
+            )
     }
 
     @Test
-    fun `scopeFromTest contains files from project located in test resources`() {
+    fun `scopeFromTest contains files from projects located in test source sets`() {
         // when
         val result = sut.scopeFromTest(moduleName = ":app").filePaths()
 
         // then
-        result shouldBeEqualTo listOf(APP_FIXTURE_PROJECT_SCRIPT, APP_FIXTURE_PROJECT_MAIN)
+        result shouldBeEqualTo
+            listOf(
+                APP_FIXTURE_PROJECT_SCRIPT,
+                APP_FIXTURE_PROJECT_MAIN,
+                APP_TEST_DATA_PROJECT_SCRIPT,
+                APP_TEST_DATA_PROJECT_MAIN,
+            )
     }
 
     @Test
@@ -445,6 +464,35 @@ class KoScopeCreatorCoreNestedModuleTest {
 
         // then
         result shouldBeEqualTo listOf(APP_MAIN)
+    }
+
+    @Test
+    fun `scopeFromModule for project located in test source set returns empty scope`() {
+        // when
+        val result = sut.scopeFromModule(":app:src:test:testData:project").filePaths()
+
+        // then
+        result shouldBeEqualTo emptyList()
+    }
+
+    @Test
+    fun `scopeFromProduction does not contain files from project located in test source set`() {
+        // when
+        val result = sut.scopeFromProduction().filePaths()
+
+        // then
+        result shouldNotContain APP_TEST_DATA_PROJECT_SCRIPT
+        result shouldNotContain APP_TEST_DATA_PROJECT_MAIN
+    }
+
+    @Test
+    fun `scopeFromSourceSet for test source set contains files from project located in test source set`() {
+        // when
+        val result = sut.scopeFromSourceSet("test").filePaths()
+
+        // then
+        result shouldContain APP_TEST_DATA_PROJECT_SCRIPT
+        result shouldContain APP_TEST_DATA_PROJECT_MAIN
     }
 
     @Test
@@ -520,6 +568,10 @@ class KoScopeCreatorCoreNestedModuleTest {
             "$PROJECT_ROOT_PATH/app/src/functionalTest/resources/project/FixtureScript.kt"
         private const val APP_FIXTURE_PROJECT_MAIN =
             "$PROJECT_ROOT_PATH/app/src/functionalTest/resources/project/src/main/kotlin/FixtureMain.kt"
+        private const val APP_TEST_DATA_PROJECT_SCRIPT =
+            "$PROJECT_ROOT_PATH/app/src/test/testData/project/TestDataProjectScript.kt"
+        private const val APP_TEST_DATA_PROJECT_MAIN =
+            "$PROJECT_ROOT_PATH/app/src/test/testData/project/src/main/kotlin/TestDataProjectMain.kt"
 
         // Module directories of directories containing files located outside the source root
         private val MODULE_DIRECTORIES =
@@ -532,6 +584,15 @@ class KoScopeCreatorCoreNestedModuleTest {
                 "/src/tools" to "/src/tools",
                 "/src/tools/src/test/testData" to "/src/tools",
                 "/app/src/functionalTest/resources/project" to "/app/src/functionalTest/resources/project",
+                "/app/src/test/testData/project" to "/app/src/test/testData/project",
+            )
+
+        // Directories containing the "kotlin", "java" or "resources" directory
+        private val SOURCE_SET_DIRECTORIES =
+            setOf(
+                "/app/src/main",
+                "/app/src/test",
+                "/app/src/functionalTest",
             )
     }
 }

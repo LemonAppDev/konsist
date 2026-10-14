@@ -189,6 +189,109 @@ class ModuleDirectoryDetectorTest {
         result shouldBeEqualTo null
     }
 
+    @Test
+    fun `should return true for directory containing kotlin directory`(
+        @TempDir projectRootDir: File,
+    ) {
+        // given
+        createFiles(
+            projectRootDir,
+            "app/src/test/kotlin/AppTest.kt",
+        )
+
+        // when
+        val result = ModuleDirectoryDetector.isSourceSetDirectory(projectRootDir.path, "/app/src/test")
+
+        // then
+        result shouldBeEqualTo true
+    }
+
+    @Test
+    fun `should return true for directory containing java directory`(
+        @TempDir projectRootDir: File,
+    ) {
+        // given
+        createFiles(
+            projectRootDir,
+            "app/src/test/java/AppTest.java",
+        )
+
+        // when
+        val result = ModuleDirectoryDetector.isSourceSetDirectory(projectRootDir.path, "/app/src/test")
+
+        // then
+        result shouldBeEqualTo true
+    }
+
+    @Test
+    fun `should return true for directory containing resources directory`(
+        @TempDir projectRootDir: File,
+    ) {
+        // given
+        createFiles(
+            projectRootDir,
+            "app/src/test/resources/config.json",
+        )
+
+        // when
+        val result = ModuleDirectoryDetector.isSourceSetDirectory(projectRootDir.path, "/app/src/test")
+
+        // then
+        result shouldBeEqualTo true
+    }
+
+    @Test
+    fun `should return false for directory without kotlin, java and resources directories`(
+        @TempDir projectRootDir: File,
+    ) {
+        // given
+        createFiles(
+            projectRootDir,
+            "src/app/build.gradle.kts",
+            "src/app/src/main/kotlin/App.kt",
+        )
+
+        // when
+        val result = ModuleDirectoryDetector.isSourceSetDirectory(projectRootDir.path, "/src/app")
+
+        // then
+        result shouldBeEqualTo false
+    }
+
+    @Test
+    fun `should return false for directory containing file named kotlin`(
+        @TempDir projectRootDir: File,
+    ) {
+        // given
+        createFiles(
+            projectRootDir,
+            "app/src/test/kotlin",
+        )
+
+        // when
+        val result = ModuleDirectoryDetector.isSourceSetDirectory(projectRootDir.path, "/app/src/test")
+
+        // then
+        result shouldBeEqualTo false
+    }
+
+    @Test
+    fun `should return false for source set directory that does not exist`(
+        @TempDir projectRootDir: File,
+    ) {
+        // given
+        createFiles(
+            projectRootDir,
+            "settings.gradle.kts",
+        )
+
+        // when
+        val result = ModuleDirectoryDetector.isSourceSetDirectory(projectRootDir.path, "/app/src/test")
+
+        // then
+        result shouldBeEqualTo false
+    }
+
     private fun createFiles(
         projectRootDir: File,
         vararg paths: String,

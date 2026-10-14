@@ -10,6 +10,7 @@ object ModuleUtil {
     private const val GRADLE_ROOT_PROJECT_PATH = ":"
     private const val WILDCARD = ".."
     private const val INVALID_WILDCARD = "..."
+    private val sourceSetDirectoryRegex = Regex("/src/[^/]+")
 
     /*
      * Matchers are cached, because the same module name is usually checked for many declarations
@@ -28,16 +29,22 @@ object ModuleUtil {
      * and "root" for "/samples/A.kt" (when "feature/config" and "samples" are not module directories). If there is no such directory,
      * module is the directory containing the first "src" directory (see [PathUtil.getSourceDirectoryIndex]) or,
      * for the file located outside the "src" directory, the file directory.
+     * Project located in the source set directory of the module (e.g. Gradle test fixture project
+     * "/app/src/test/testData/project") is not a module, so its files reside in the module containing the source set,
+     * e.g. "app" for "/app/src/test/testData/project/src/main/kotlin/A.kt".
      *
+     * [isSourceSetDirectory] returns true if the directory with given path (relative to the project root,
+     * e.g. "/app/src/test") is a source set directory (see [ModuleDirectoryDetector.isSourceSetDirectory]).
      * [getModuleDirectory] returns module directory (see [ModuleDirectoryDetector.getModuleDirectory]) containing
      * the directory with given path (relative to the project root, e.g. "/feature/config", or "" for the project root
      * directory), or null if there is no such directory.
      */
     fun getModuleName(
         projectPath: String,
+        isSourceSetDirectory: (String) -> Boolean = ::isProjectSourceSetDirectory,
         getModuleDirectory: (String) -> String? = ::getProjectModuleDirectory,
     ): String =
-        getModuleDirectoryPath(projectPath, getModuleDirectory)
+        getModuleDirectoryPath(projectPath, isSourceSetDirectory, getModuleDirectory)
             .substringAfter("/")
             .ifEmpty { ROOT_MODULE_NAME }
 
@@ -47,9 +54,17 @@ object ModuleUtil {
      */
     internal fun getModuleDirectoryPath(
         projectPath: String,
+        isSourceSetDirectory: (String) -> Boolean = ::isProjectSourceSetDirectory,
         getModuleDirectory: (String) -> String? = ::getProjectModuleDirectory,
     ): String {
-        val path = toMacOsSeparator(projectPath)
+        val moduleDirectoryPath = getClosestModuleDirectoryPath(toMacOsSeparator(projectPath), getModuleDirectory)
+        return getOuterModuleDirectoryPath(moduleDirectoryPath, isSourceSetDirectory) ?: moduleDirectoryPath
+    }
+
+    private fun getClosestModuleDirectoryPath(
+        path: String,
+        getModuleDirectory: (String) -> String?,
+    ): String {
         val sourceRootIndex = PathUtil.getSourceRootIndex(path)
 
         if (sourceRootIndex != -1) {
@@ -60,8 +75,27 @@ object ModuleUtil {
         return getModuleDirectory(fileDirectory) ?: getDefaultModuleDirectory(path, fileDirectory)
     }
 
+    /*
+     * Returns path of the module containing the source set directory in which the module directory with given
+     * [moduleDirectoryPath] is located, e.g. "/app" for "/app/src/test/testData/project" (when "/app/src/test" is
+     * a source set directory), or null if the module directory is not located in a source set directory.
+     * Module located in a directory named "src" (e.g. "/src/app") is not located in a source set directory,
+     * because "/src/app" does not contain the "kotlin", "java" or "resources" directory.
+     */
+    private fun getOuterModuleDirectoryPath(
+        moduleDirectoryPath: String,
+        isSourceSetDirectory: (String) -> Boolean,
+    ): String? =
+        sourceSetDirectoryRegex
+            .findAll(moduleDirectoryPath)
+            .firstOrNull { isSourceSetDirectory(moduleDirectoryPath.substring(0, it.range.last + 1)) }
+            ?.let { moduleDirectoryPath.substring(0, it.range.first) }
+
     private fun getProjectModuleDirectory(directoryPath: String): String? =
         ModuleDirectoryDetector.getModuleDirectory(PathProvider.rootProjectPath, directoryPath)
+
+    private fun isProjectSourceSetDirectory(directoryPath: String): Boolean =
+        ModuleDirectoryDetector.isSourceSetDirectory(PathProvider.rootProjectPath, directoryPath)
 
     /*
      * Directory containing the first "src" directory, or the file directory for the file located outside the "src"

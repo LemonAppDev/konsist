@@ -421,6 +421,111 @@ class ModuleUtilTest {
     }
 
     @Test
+    fun `should return module containing source set for file in source root of project located in source set`() {
+        // when
+        val result =
+            ModuleUtil.getModuleName(
+                projectPath = "/app/src/test/testData/project/src/main/kotlin/SampleClass.kt",
+                isSourceSetDirectory = setOf("/app/src/test")::contains,
+            )
+
+        // then
+        result shouldBeEqualTo "app"
+    }
+
+    @Test
+    fun `should return module containing source set for file in source root of project located in source set for windows path`() {
+        // when
+        val result =
+            ModuleUtil.getModuleName(
+                projectPath = """\app\src\test\testData\project\src\main\kotlin\SampleClass.kt""",
+                isSourceSetDirectory = setOf("/app/src/test")::contains,
+            )
+
+        // then
+        result shouldBeEqualTo "app"
+    }
+
+    @Test
+    fun `should return module containing source set for file outside source root of project located in source set`() {
+        // when
+        val result =
+            ModuleUtil.getModuleName(
+                projectPath = "/app/src/test/testData/project/SampleClass.kt",
+                isSourceSetDirectory = setOf("/app/src/test")::contains,
+                getModuleDirectory = mapOf("/app/src/test/testData/project" to "/app/src/test/testData/project")::get,
+            )
+
+        // then
+        result shouldBeEqualTo "app"
+    }
+
+    @Test
+    fun `should return outermost module containing source set for file in project located in source set of nested project`() {
+        // when
+        val result =
+            ModuleUtil.getModuleName(
+                projectPath = "/app/src/test/testData/project/src/test/testData/nested/src/main/kotlin/SampleClass.kt",
+                isSourceSetDirectory = setOf("/app/src/test", "/app/src/test/testData/project/src/test")::contains,
+            )
+
+        // then
+        result shouldBeEqualTo "app"
+    }
+
+    @Test
+    fun `should return nested module containing source set for file in project located in source set of nested module`() {
+        // when
+        val result =
+            ModuleUtil.getModuleName(
+                projectPath = "/feature/payment/src/test/testData/project/src/main/kotlin/SampleClass.kt",
+                isSourceSetDirectory = setOf("/feature/payment/src/test")::contains,
+            )
+
+        // then
+        result shouldBeEqualTo "feature/payment"
+    }
+
+    @Test
+    fun `should return project located in src directory without source set directory as module`() {
+        // when
+        val result =
+            ModuleUtil.getModuleName(
+                projectPath = "/app/src/test/testData/project/src/main/kotlin/SampleClass.kt",
+                isSourceSetDirectory = { false },
+            )
+
+        // then
+        result shouldBeEqualTo "app/src/test/testData/project"
+    }
+
+    @Test
+    fun `should return module located in src directory when its directory name contains test`() {
+        // when
+        val result =
+            ModuleUtil.getModuleName(
+                projectPath = "/src/test-utils/src/main/kotlin/SampleClass.kt",
+                isSourceSetDirectory = { false },
+            )
+
+        // then
+        result shouldBeEqualTo "src/test-utils"
+    }
+
+    @Test
+    fun `should not look for source set directory for module not located in src directory`() {
+        // when
+        val result =
+            ModuleUtil.getModuleName(
+                projectPath = "/feature/payment/src/main/kotlin/SampleClass.kt",
+                isSourceSetDirectory = { error("Source set directory should not be looked up") },
+            )
+
+        // then
+        result shouldBeEqualTo "feature/payment"
+    }
+
+    @Test
     fun `should normalize gradle project path`() {
         // when
         val result = ModuleUtil.normalizeModuleName(":feature:auth")
