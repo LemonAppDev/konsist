@@ -8,14 +8,18 @@ kotlin {
     jvmToolchain(21)
 }
 
+dependencies {
+    // Add Konsist dependency
+    testImplementation(libs.konsist)
+
+    // Add JUnit 5 dependency
+    testImplementation(libs.junit.jupiter)
+    testRuntimeOnly(libs.junit.platform.launcher)
+}
+
 tasks.withType<Test> {
     // Configure JUnit 5 tests
     useJUnitPlatform()
-}
-
-dependencies {
-    testImplementation(libs.konsist)
-    testImplementation(libs.junit.jupiter.engine)
 }
 
 // Optional block to show Konsist assertion messages (invalid declarations, file links, reasons) in the command line.

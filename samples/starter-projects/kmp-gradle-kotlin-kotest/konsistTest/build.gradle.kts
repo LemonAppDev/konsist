@@ -8,13 +8,17 @@ kotlin {
     jvmToolchain(21)
 }
 
-tasks.withType<Test> {
-    useJUnitPlatform()
+dependencies {
+    // Add Konsist dependency
+    testImplementation(libs.konsist)
+
+    // Add Kotest dependency
+    testImplementation(libs.kotest.runner.junit5)
 }
 
-dependencies {
-    testImplementation(libs.konsist)
-    testImplementation(libs.kotest.runner.junit5)
+tasks.withType<Test> {
+    // Kotest runs on JUnit Platform
+    useJUnitPlatform()
 }
 
 // Optional block to show Konsist assertion messages (invalid declarations, file links, reasons) in the command line.
