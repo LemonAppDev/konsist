@@ -37,4 +37,26 @@ object PathUtil {
         projectPath
             .substringAfter("${File.separator}src${File.separator}")
             .substringBefore(File.separator)
+
+    /**
+     * Returns true if the file with given [projectPath] is located in the Gradle build configuration directory
+     * (buildSrc), e.g. "/buildSrc/src/main/kotlin/A.kt". Directory name is compared case-insensitively.
+     * Only directories outside the "src" directory are checked, so a "buildsrc" package is not a build configuration
+     * directory.
+     */
+    internal fun isBuildConfigPath(projectPath: String): Boolean {
+        val directories =
+            toMacOsSeparator(projectPath)
+                .split('/')
+                .dropLast(1)
+
+        val sourceDirIndex = directories.indexOf(SOURCE_DIR).takeIf { it != -1 } ?: directories.size
+
+        return directories
+            .take(sourceDirIndex)
+            .any { it.equals(GRADLE_BUILD_CONFIG_DIRECTORY_NAME, ignoreCase = true) }
+    }
+
+    private const val SOURCE_DIR = "src"
+    private const val GRADLE_BUILD_CONFIG_DIRECTORY_NAME = "buildSrc"
 }
