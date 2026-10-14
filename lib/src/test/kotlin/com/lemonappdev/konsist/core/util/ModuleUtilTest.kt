@@ -125,6 +125,66 @@ class ModuleUtilTest {
     }
 
     @Test
+    fun `should return file directory for file outside src directory for unix path`() {
+        // when
+        val result =
+            ModuleUtil.getModuleName(
+                projectPath = "/samples/SampleClass.kt",
+            )
+
+        // then
+        result shouldBeEqualTo "samples"
+    }
+
+    @Test
+    fun `should return file directory for file outside src directory for windows path`() {
+        // when
+        val result =
+            ModuleUtil.getModuleName(
+                projectPath = """\samples\SampleClass.kt""",
+            )
+
+        // then
+        result shouldBeEqualTo "samples"
+    }
+
+    @Test
+    fun `should return nested file directory for file outside src directory`() {
+        // when
+        val result =
+            ModuleUtil.getModuleName(
+                projectPath = "/feature/samples/SampleClass.kt",
+            )
+
+        // then
+        result shouldBeEqualTo "feature/samples"
+    }
+
+    @Test
+    fun `should return root for file in project root directory for unix path`() {
+        // when
+        val result =
+            ModuleUtil.getModuleName(
+                projectPath = "/SampleClass.kt",
+            )
+
+        // then
+        result shouldBeEqualTo "root"
+    }
+
+    @Test
+    fun `should return root for file in project root directory for windows path`() {
+        // when
+        val result =
+            ModuleUtil.getModuleName(
+                projectPath = """\SampleClass.kt""",
+            )
+
+        // then
+        result shouldBeEqualTo "root"
+    }
+
+    @Test
     fun `should normalize gradle project path`() {
         // when
         val result = ModuleUtil.normalizeModuleName(":feature:auth")

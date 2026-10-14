@@ -8,14 +8,21 @@ object ModuleUtil {
 
     /**
      * Returns module name with "/" separators (regardless of OS), e.g. "feature/data", or "root" for the top-level module.
+     * Module of the file located outside the "src" directory is the file directory, e.g. "samples" for "/samples/A.kt".
      */
     fun getModuleName(projectPath: String): String {
-        val moduleName =
-            toMacOsSeparator(projectPath)
-                .substringBefore("/src/")
-                .substringAfter("/")
+        val path = toMacOsSeparator(projectPath)
 
-        return moduleName.ifEmpty { ROOT_MODULE_NAME }
+        val moduleDirectory =
+            if (path.contains("/src/")) {
+                path.substringBefore("/src/")
+            } else {
+                path.substringBeforeLast("/", "")
+            }
+
+        return moduleDirectory
+            .substringAfter("/")
+            .ifEmpty { ROOT_MODULE_NAME }
     }
 
     /**
