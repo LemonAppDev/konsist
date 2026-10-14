@@ -1,6 +1,8 @@
 package com.lemonappdev.konsist.core.util
 
 import org.amshove.kluent.shouldBeEqualTo
+import org.amshove.kluent.shouldThrow
+import org.amshove.kluent.withMessage
 import org.junit.jupiter.api.Test
 
 class ModuleUtilTest {
@@ -667,5 +669,49 @@ class ModuleUtilTest {
 
         // then
         result shouldBeEqualTo false
+    }
+
+    @Test
+    fun `should throw for module name with trailing three dots`() {
+        // given
+        val func = { ModuleUtil.residesInModule(moduleName = "feature/data", name = ":feature...") }
+
+        // then
+        func shouldThrow IllegalArgumentException::class withMessage
+            "Module name ':feature...' contains more than two consecutive dots. Use '..' as a wildcard " +
+            "for any number of module directories, e.g. ':feature..' or ':feature..:data'."
+    }
+
+    @Test
+    fun `should throw for module name with leading three dots`() {
+        // given
+        val func = { ModuleUtil.residesInModule(moduleName = "feature/data", name = "...data") }
+
+        // then
+        func shouldThrow IllegalArgumentException::class withMessage
+            "Module name '...data' contains more than two consecutive dots. Use '..' as a wildcard " +
+            "for any number of module directories, e.g. ':feature..' or ':feature..:data'."
+    }
+
+    @Test
+    fun `should throw for module name with three dots in the middle`() {
+        // given
+        val func = { ModuleUtil.residesInModule(moduleName = "feature/data", name = ":feature...:data") }
+
+        // then
+        func shouldThrow IllegalArgumentException::class withMessage
+            "Module name ':feature...:data' contains more than two consecutive dots. Use '..' as a wildcard " +
+            "for any number of module directories, e.g. ':feature..' or ':feature..:data'."
+    }
+
+    @Test
+    fun `should throw for module name with four dots`() {
+        // given
+        val func = { ModuleUtil.residesInModule(moduleName = "feature/data", name = "feature....data") }
+
+        // then
+        func shouldThrow IllegalArgumentException::class withMessage
+            "Module name 'feature....data' contains more than two consecutive dots. Use '..' as a wildcard " +
+            "for any number of module directories, e.g. ':feature..' or ':feature..:data'."
     }
 }

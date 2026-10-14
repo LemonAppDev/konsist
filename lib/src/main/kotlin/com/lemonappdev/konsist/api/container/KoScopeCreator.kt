@@ -27,13 +27,14 @@ interface KoScopeCreator {
      * (Gradle `projectDir` overrides in settings.gradle(.kts) are not supported).
      * Use `..` as a wildcard for any number of module directories, including none, e.g. `:feature..` matches
      * `feature` and its nested modules (`feature/payment`), `..data` matches `data` and `feature/data`,
-     * and `..` matches all modules.
+     * and `..` matches all modules. More than two consecutive dots (e.g. `:feature...`) are not allowed.
      * Module contains the same files as [KoModuleProvider.moduleName] reports, including Kotlin files located in the
      * module directory outside the "src" directory (e.g. `feature/Script.kt` and `feature/config/Script.kt` reside in
      * the `feature` module, when `feature/config` is not a module directory).
      * @param sourceSetName The name of the source set. If null, all source sets will be included.
      * @param ignoreBuildConfig If true, build config files and directories such as Gradle buildSrc directory will be ignored.
      * @return a [KoScope] containing all Kotlin files in the project.
+     * @throws IllegalArgumentException if module name contains more than two consecutive dots.
      */
     fun scopeFromProject(
         moduleName: String? = null,
@@ -53,12 +54,13 @@ interface KoScopeCreator {
      * (Gradle `projectDir` overrides in settings.gradle(.kts) are not supported).
      * Use `..` as a wildcard for any number of module directories, including none, e.g. `:feature..` matches
      * `feature` and its nested modules (`feature/payment`), `..data` matches `data` and `feature/data`,
-     * and `..` matches all modules.
+     * and `..` matches all modules. More than two consecutive dots (e.g. `:feature...`) are not allowed.
      * Module contains the same files as [KoModuleProvider.moduleName] reports, including Kotlin files located in the
      * module directory outside the "src" directory (e.g. `feature/Script.kt` and `feature/config/Script.kt` reside in
      * the `feature` module, when `feature/config` is not a module directory).
      * @param moduleNames The name(s) of the module(s), in the same format as [moduleName].
      * @return a [KoScope] containing all Kotlin files in the module.
+     * @throws IllegalArgumentException if module name contains more than two consecutive dots.
      */
     fun scopeFromModule(
         moduleName: String,
@@ -77,11 +79,12 @@ interface KoScopeCreator {
      * (Gradle `projectDir` overrides in settings.gradle(.kts) are not supported).
      * Use `..` as a wildcard for any number of module directories, including none, e.g. `:feature..` matches
      * `feature` and its nested modules (`feature/payment`), `..data` matches `data` and `feature/data`,
-     * and `..` matches all modules.
+     * and `..` matches all modules. More than two consecutive dots (e.g. `:feature...`) are not allowed.
      * Module contains the same files as [KoModuleProvider.moduleName] reports, including Kotlin files located in the
      * module directory outside the "src" directory (e.g. `feature/Script.kt` and `feature/config/Script.kt` reside in
      * the `feature` module, when `feature/config` is not a module directory).
      * @return a [KoScope] containing all Kotlin files in the module.
+     * @throws IllegalArgumentException if module name contains more than two consecutive dots.
      */
     fun scopeFromModules(moduleNames: Collection<String>): KoScope
 
@@ -98,12 +101,13 @@ interface KoScopeCreator {
      * (Gradle `projectDir` overrides in settings.gradle(.kts) are not supported).
      * Use `..` as a wildcard for any number of module directories, including none, e.g. `:feature..` matches
      * `feature` and its nested modules (`feature/payment`), `..data` matches `data` and `feature/data`,
-     * and `..` matches all modules.
+     * and `..` matches all modules. More than two consecutive dots (e.g. `:feature...`) are not allowed.
      * Module contains the same files as [KoModuleProvider.moduleName] reports, including Kotlin files located in the
      * module directory outside the "src" directory (e.g. `feature/Script.kt` and `feature/config/Script.kt` reside in
      * the `feature` module, when `feature/config` is not a module directory).
      * @param sourceSetName The name of the source set. If null, all source sets will be included.
      * @return a [KoScope] containing all Kotlin files in the given package.
+     * @throws IllegalArgumentException if module name contains more than two consecutive dots.
      */
     fun scopeFromPackage(
         packagee: String,
@@ -150,12 +154,13 @@ interface KoScopeCreator {
      * (Gradle `projectDir` overrides in settings.gradle(.kts) are not supported).
      * Use `..` as a wildcard for any number of module directories, including none, e.g. `:feature..` matches
      * `feature` and its nested modules (`feature/payment`), `..data` matches `data` and `feature/data`,
-     * and `..` matches all modules.
+     * and `..` matches all modules. More than two consecutive dots (e.g. `:feature...`) are not allowed.
      * Module contains the same files as [KoModuleProvider.moduleName] reports, including Kotlin files located in the
      * module directory outside the "src" directory (e.g. `feature/Script.kt` and `feature/config/Script.kt` reside in
      * the `feature` module, when `feature/config` is not a module directory).
      * @param sourceSetName The name of the source set. If null, all source sets will be included.
      * @return a [KoScope] containing all Kotlin files in the production source sets.
+     * @throws IllegalArgumentException if module name contains more than two consecutive dots.
      * @throws IllegalArgumentException if [sourceSetName] is a test source set.
      *
      * @see [scopeFromTest]
@@ -178,12 +183,13 @@ interface KoScopeCreator {
      * (Gradle `projectDir` overrides in settings.gradle(.kts) are not supported).
      * Use `..` as a wildcard for any number of module directories, including none, e.g. `:feature..` matches
      * `feature` and its nested modules (`feature/payment`), `..data` matches `data` and `feature/data`,
-     * and `..` matches all modules.
+     * and `..` matches all modules. More than two consecutive dots (e.g. `:feature...`) are not allowed.
      * Module contains the same files as [KoModuleProvider.moduleName] reports, including Kotlin files located in the
      * module directory outside the "src" directory (e.g. `feature/Script.kt` and `feature/config/Script.kt` reside in
      * the `feature` module, when `feature/config` is not a module directory).
      * @param sourceSetName The name of the source set. If null, all source sets will be included.
      * @return a [KoScope] containing all Kotlin files in the test source sets.
+     * @throws IllegalArgumentException if module name contains more than two consecutive dots.
      * @throws IllegalArgumentException if [sourceSetName] is a production source set.
      *
      * @see [scopeFromProduction]
