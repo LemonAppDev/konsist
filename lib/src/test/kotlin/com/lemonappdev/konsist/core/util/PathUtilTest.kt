@@ -159,6 +159,15 @@ class PathUtilTest {
     }
 
     @Test
+    fun `getSourceSetName returns source set name for file in source set of project located in resources`() {
+        // when
+        val result = PathUtil.getSourceSetName("/app/src/functionalTest/resources/project/src/main/kotlin/SampleClass.kt")
+
+        // then
+        result shouldBeEqualTo "functionalTest"
+    }
+
+    @Test
     fun `getSourceRootIndex returns index of src directory of source root`() {
         // when
         val result = PathUtil.getSourceRootIndex("/src/tools/src/main/kotlin/SampleClass.kt")
@@ -170,10 +179,28 @@ class PathUtilTest {
     @Test
     fun `getSourceRootIndex returns -1 for file in src directory outside source root`() {
         // when
-        val result = PathUtil.getSourceRootIndex("/src/tools/src/test/resources/SampleClass.kt")
+        val result = PathUtil.getSourceRootIndex("/src/tools/src/test/testData/SampleClass.kt")
 
         // then
         result shouldBeEqualTo -1
+    }
+
+    @Test
+    fun `getSourceRootIndex returns index of src directory of resources`() {
+        // when
+        val result = PathUtil.getSourceRootIndex("/src/tools/src/test/resources/SampleClass.kt")
+
+        // then
+        result shouldBeEqualTo 10
+    }
+
+    @Test
+    fun `getSourceRootIndex returns index of src directory of resources containing project`() {
+        // when
+        val result = PathUtil.getSourceRootIndex("/app/src/functionalTest/resources/project/src/main/kotlin/SampleClass.kt")
+
+        // then
+        result shouldBeEqualTo 4
     }
 
     @Test

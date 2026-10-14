@@ -56,16 +56,19 @@ object PathUtil {
     /**
      * Returns index of the module "/src/" directory in [path] ("/" separators), or -1 if the path has no "src" directory.
      * Module may reside in a directory named "src" (e.g. "/src/app/src/main/kotlin/A.kt"), so the first "src" directory
-     * followed by the source set directory and the "kotlin" or "java" directory is used. If there is no such directory,
-     * the first "src" directory is used.
+     * followed by the source set directory and the "kotlin", "java" or "resources" directory is used. If there is no such
+     * directory, the first "src" directory is used.
      */
     internal fun getSourceDirectoryIndex(path: String): Int =
         getSourceRootIndex(path).takeIf { it != -1 } ?: path.indexOf(SOURCE_DIRECTORY_PATH)
 
     /**
-     * Returns index of the "/src/" directory of the first source root ("/src/<sourceSet>/kotlin/" or
-     * "/src/<sourceSet>/java/") in [path] ("/" separators), or -1 if the path has no source root,
-     * e.g. 4 for "/app/src/main/kotlin/A.kt" and -1 for "/app/src/test/resources/A.kt".
+     * Returns index of the "/src/" directory of the first source root ("/src/<sourceSet>/kotlin/",
+     * "/src/<sourceSet>/java/" or "/src/<sourceSet>/resources/") in [path] ("/" separators), or -1 if the path has
+     * no source root, e.g. 4 for "/app/src/main/kotlin/A.kt" and "/app/src/test/resources/A.kt", and -1 for
+     * "/app/src/test/testData/A.kt".
+     * Resources are a source root, so a project located in resources (e.g. Gradle test fixture project
+     * "/app/src/test/resources/project/build.gradle.kts") is not a module.
      */
     internal fun getSourceRootIndex(path: String): Int = SOURCE_ROOT_REGEX.find(path)?.range?.first ?: -1
 
@@ -92,6 +95,6 @@ object PathUtil {
     }
 
     private const val SOURCE_DIRECTORY_PATH = "/src/"
-    private val SOURCE_ROOT_REGEX = Regex("/src/[^/]+/(?:kotlin|java)/")
+    private val SOURCE_ROOT_REGEX = Regex("/src/[^/]+/(?:kotlin|java|resources)/")
     private const val GRADLE_BUILD_CONFIG_DIRECTORY_NAME = "buildSrc"
 }

@@ -345,8 +345,8 @@ class ModuleUtilTest {
         // when
         val result =
             ModuleUtil.getModuleName(
-                projectPath = "/src/tools/src/test/resources/SampleClass.kt",
-                getModuleDirectory = mapOf("/src/tools/src/test/resources" to "/src/tools")::get,
+                projectPath = "/src/tools/src/test/testData/SampleClass.kt",
+                getModuleDirectory = mapOf("/src/tools/src/test/testData" to "/src/tools")::get,
             )
 
         // then
@@ -358,8 +358,8 @@ class ModuleUtilTest {
         // when
         val result =
             ModuleUtil.getModuleName(
-                projectPath = """\src\tools\src\test\resources\SampleClass.kt""",
-                getModuleDirectory = mapOf("/src/tools/src/test/resources" to "/src/tools")::get,
+                projectPath = """\src\tools\src\test\testData\SampleClass.kt""",
+                getModuleDirectory = mapOf("/src/tools/src/test/testData" to "/src/tools")::get,
             )
 
         // then
@@ -371,12 +371,50 @@ class ModuleUtilTest {
         // when
         val result =
             ModuleUtil.getModuleName(
-                projectPath = "/feature/src/test/resources/SampleClass.kt",
+                projectPath = "/feature/src/test/testData/SampleClass.kt",
                 getModuleDirectory = { null },
             )
 
         // then
         result shouldBeEqualTo "feature"
+    }
+
+    @Test
+    fun `should return module containing resources for file in resources`() {
+        // when
+        val result =
+            ModuleUtil.getModuleName(
+                projectPath = "/feature/src/test/resources/SampleClass.kt",
+                getModuleDirectory = { error("Module directory should not be looked up") },
+            )
+
+        // then
+        result shouldBeEqualTo "feature"
+    }
+
+    @Test
+    fun `should return module containing resources for file in project located in resources`() {
+        // when
+        val result =
+            ModuleUtil.getModuleName(
+                projectPath = "/app/src/functionalTest/resources/project/SampleClass.kt",
+                getModuleDirectory = mapOf("/app/src/functionalTest/resources/project" to "/app/src/functionalTest/resources/project")::get,
+            )
+
+        // then
+        result shouldBeEqualTo "app"
+    }
+
+    @Test
+    fun `should return module containing resources for file in source set of project located in resources`() {
+        // when
+        val result =
+            ModuleUtil.getModuleName(
+                projectPath = "/app/src/functionalTest/resources/project/src/main/kotlin/SampleClass.kt",
+            )
+
+        // then
+        result shouldBeEqualTo "app"
     }
 
     @Test
