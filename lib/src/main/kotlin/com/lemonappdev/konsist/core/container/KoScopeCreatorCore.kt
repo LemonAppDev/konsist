@@ -13,6 +13,7 @@ import com.lemonappdev.konsist.core.filesystem.PathProvider
 import com.lemonappdev.konsist.core.provider.util.KoFileDeclarationProvider
 import com.lemonappdev.konsist.core.util.ModuleUtil
 import com.lemonappdev.konsist.core.util.ModuleUtil.ROOT_MODULE_NAME
+import com.lemonappdev.konsist.core.util.PathUtil
 import kotlinx.coroutines.runBlocking
 import java.io.File
 
@@ -75,6 +76,7 @@ internal class KoScopeCreatorCore : KoScopeCreator {
         moduleName: String? = null,
         sourceSetName: String? = null,
         ignoreBuildConfig: Boolean = true,
+        sourceSetNamePredicate: ((String) -> Boolean)? = null,
     ): List<KoFileDeclaration> {
         val pathRegex =
             if (moduleName == null && sourceSetName == null) {
@@ -85,7 +87,8 @@ internal class KoScopeCreatorCore : KoScopeCreator {
 
         return KoFileDeclarationProvider.getKoFileDeclarations { file ->
             (!ignoreBuildConfig || !KoFileDeclarationProvider.isBuildConfigFile(file.path)) &&
-                (pathRegex == null || file.path.toMacOsSeparator().matches(pathRegex))
+                (pathRegex == null || file.path.toMacOsSeparator().matches(pathRegex)) &&
+                (sourceSetNamePredicate == null || sourceSetNamePredicate(getSourceSetName(file.path)))
         }
     }
 
@@ -98,9 +101,7 @@ internal class KoScopeCreatorCore : KoScopeCreator {
                 require(!isTestSourceSet(it)) { "Source set '$it' is a test source set, but it should be production source set." }
             }
 
-            val koFiles =
-                getFiles(moduleName, sourceSetName)
-                    .filterNot { isTestSourceSet(it.sourceSetName) }
+            val koFiles = getFiles(moduleName, sourceSetName) { !isTestSourceSet(it) }
 
             KoScopeCore(koFiles)
         }
@@ -114,9 +115,7 @@ internal class KoScopeCreatorCore : KoScopeCreator {
                 require(isTestSourceSet(it)) { "Source set '$it' is a production source set, but it should be test source set." }
             }
 
-            val koFiles =
-                getFiles(moduleName, sourceSetName)
-                    .filter { isTestSourceSet(it.sourceSetName) }
+            val koFiles = getFiles(moduleName, sourceSetName) { isTestSourceSet(it) }
 
             KoScopeCore(koFiles)
         }
@@ -195,6 +194,8 @@ internal class KoScopeCreatorCore : KoScopeCreator {
 
         return KoScopeCore(koFiles + notKotlinFiles)
     }
+
+    private fun getSourceSetName(path: String): String = PathUtil.getSourceSetName(PathUtil.getProjectPath(path, projectRootPath))
 
     private fun getAbsolutePath(projectPath: String): String = "$projectRootPath$sep${projectPath.toOsSeparator()}"
 

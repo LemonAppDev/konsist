@@ -28,4 +28,13 @@ object PathUtil {
         path: String,
         rootProjectPath: String,
     ): String = path.removePrefix(toOsSeparator(rootProjectPath).trimEnd(File.separatorChar))
+
+    /**
+     * Returns name of the source set containing the file with given [projectPath], e.g. "main" for
+     * "/app/src/main/kotlin/A.kt".
+     */
+    internal fun getSourceSetName(projectPath: String): String =
+        projectPath
+            .substringAfter("${File.separator}src${File.separator}")
+            .substringBefore(File.separator)
 }
