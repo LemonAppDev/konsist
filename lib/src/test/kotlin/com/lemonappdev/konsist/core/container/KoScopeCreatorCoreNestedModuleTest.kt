@@ -5,6 +5,7 @@ import com.lemonappdev.konsist.api.declaration.KoFileDeclaration
 import com.lemonappdev.konsist.core.filesystem.PathProvider
 import com.lemonappdev.konsist.core.provider.util.KoFileDeclarationProvider
 import com.lemonappdev.konsist.core.util.ModuleUtil
+import com.lemonappdev.konsist.core.util.PathUtil
 import io.mockk.coEvery
 import io.mockk.every
 import io.mockk.mockk
@@ -21,6 +22,7 @@ import java.io.File
  * Project with parent module that has its own source sets ("feature") and nested child module ("feature/payment").
  * It also contains sibling nested modules with the same name ("feature/authentication/data" and "feature/main/data")
  * and Kotlin files located outside the "src" directory ("feature/FeatureScript.kt" and "feature/payment/PaymentScript.kt").
+ * Module "src/tools" is located in a directory named "src".
  * Runs in isolation, because it mocks global objects.
  */
 @Isolated
@@ -46,6 +48,7 @@ class KoScopeCreatorCoreNestedModuleTest {
                 AUTHENTICATION_DATA_TEST,
                 MAIN_DATA_MAIN,
                 APP_MAIN,
+                SRC_TOOLS_MAIN,
             ).filter { predicate(File(it)) }
                 .map { createKoFile(it) }
         }
@@ -201,7 +204,7 @@ class KoScopeCreatorCoreNestedModuleTest {
         // given
         val projectFiles = sut.scopeFromProject().files
 
-        listOf("root", "feature", "feature/payment", "feature/authentication/data", "app").forEach { moduleName ->
+        listOf("root", "feature", "feature/payment", "feature/authentication/data", "app", "src/tools").forEach { moduleName ->
             // when
             val result = sut.scopeFromModule(moduleName).filePaths()
 
@@ -284,6 +287,33 @@ class KoScopeCreatorCoreNestedModuleTest {
         result shouldBeEqualTo listOf(AUTHENTICATION_DATA_TEST, PAYMENT_TEST, FEATURE_TEST)
     }
 
+    @Test
+    fun `scopeFromModule for module located in src directory`() {
+        // when
+        val result = sut.scopeFromModule(":src:tools").filePaths()
+
+        // then
+        result shouldBeEqualTo listOf(SRC_TOOLS_MAIN)
+    }
+
+    @Test
+    fun `scopeFromModule for root module does not contain files from module located in src directory`() {
+        // when
+        val result = sut.scopeFromModule("root").filePaths()
+
+        // then
+        result shouldBeEqualTo emptyList()
+    }
+
+    @Test
+    fun `scopeFromProduction for module located in src directory and source set`() {
+        // when
+        val result = sut.scopeFromProduction(moduleName = ":src:tools", sourceSetName = "main").filePaths()
+
+        // then
+        result shouldBeEqualTo listOf(SRC_TOOLS_MAIN)
+    }
+
     private fun KoScope.filePaths() = files.map { it.path }
 
     private fun createKoFile(filePath: String): KoFileDeclaration {
@@ -291,7 +321,7 @@ class KoScopeCreatorCoreNestedModuleTest {
 
         return mockk {
             every { path } returns filePath
-            every { sourceSetName } returns projectPath.substringAfter("/src/").substringBefore("/")
+            every { sourceSetName } returns PathUtil.getSourceSetName(projectPath)
             every { moduleName } returns ModuleUtil.getModuleName(projectPath)
         }
     }
@@ -311,5 +341,6 @@ class KoScopeCreatorCoreNestedModuleTest {
             "$PROJECT_ROOT_PATH/feature/authentication/data/src/test/kotlin/AuthenticationDataTest.kt"
         private const val MAIN_DATA_MAIN = "$PROJECT_ROOT_PATH/feature/main/data/src/main/kotlin/MainDataMain.kt"
         private const val APP_MAIN = "$PROJECT_ROOT_PATH/app/src/main/kotlin/AppMain.kt"
+        private const val SRC_TOOLS_MAIN = "$PROJECT_ROOT_PATH/src/tools/src/main/kotlin/ToolsMain.kt"
     }
 }

@@ -87,6 +87,33 @@ class PathUtilTest {
     }
 
     @Test
+    fun `getSourceSetName returns source set name for file in module located in src directory`() {
+        // when
+        val result = PathUtil.getSourceSetName(PathUtil.toOsSeparator("/src/app/src/test/kotlin/SampleClass.kt"))
+
+        // then
+        result shouldBeEqualTo "test"
+    }
+
+    @Test
+    fun `getSourceSetName returns source set name for file in java directory of module located in src directory`() {
+        // when
+        val result = PathUtil.getSourceSetName(PathUtil.toOsSeparator("/src/app/src/main/java/SampleClass.kt"))
+
+        // then
+        result shouldBeEqualTo "main"
+    }
+
+    @Test
+    fun `getSourceSetName returns empty string for file outside src directory`() {
+        // when
+        val result = PathUtil.getSourceSetName(PathUtil.toOsSeparator("/app/SampleClass.kt"))
+
+        // then
+        result shouldBeEqualTo ""
+    }
+
+    @Test
     fun `isBuildConfigPath returns true for file in buildSrc source set`() {
         // when
         val result = PathUtil.isBuildConfigPath(projectPath = "/buildSrc/src/main/kotlin/SampleClass.kt")
@@ -162,6 +189,24 @@ class PathUtilTest {
     fun `isBuildConfigPath returns false for file named buildSrc`() {
         // when
         val result = PathUtil.isBuildConfigPath(projectPath = "/app/buildSrc.kt")
+
+        // then
+        result shouldBeEqualTo false
+    }
+
+    @Test
+    fun `isBuildConfigPath returns true for buildSrc located in src directory`() {
+        // when
+        val result = PathUtil.isBuildConfigPath(projectPath = "/src/buildSrc/src/main/kotlin/SampleClass.kt")
+
+        // then
+        result shouldBeEqualTo true
+    }
+
+    @Test
+    fun `isBuildConfigPath returns false for buildsrc package of module located in src directory`() {
+        // when
+        val result = PathUtil.isBuildConfigPath(projectPath = "/src/app/src/main/kotlin/com/buildsrc/SampleClass.kt")
 
         // then
         result shouldBeEqualTo false
