@@ -45,6 +45,8 @@ class KoScopeCreatorCoreNestedModuleTest {
             ).filter { predicate(File(it)) }
                 .map { createKoFile(it) }
         }
+        // Package name is read without parsing the file
+        every { KoFileDeclarationProvider.getPackageName(any()) } returns PACKAGE_NAME
 
         mockkObject(PathProvider)
         every { PathProvider.rootProjectPath } returns PROJECT_ROOT_PATH
@@ -172,6 +174,24 @@ class KoScopeCreatorCoreNestedModuleTest {
         result shouldBeEqualTo listOf(PAYMENT_TEST)
     }
 
+    @Test
+    fun `scopeFromPackage for parent module does not contain files from nested module`() {
+        // when
+        val result = sut.scopeFromPackage(PACKAGE_NAME, moduleName = "feature").filePaths()
+
+        // then
+        result shouldBeEqualTo listOf(FEATURE_MAIN, FEATURE_TEST)
+    }
+
+    @Test
+    fun `scopeFromPackage for nested gradle project path and source set`() {
+        // when
+        val result = sut.scopeFromPackage(PACKAGE_NAME, moduleName = ":feature:payment", sourceSetName = "main").filePaths()
+
+        // then
+        result shouldBeEqualTo listOf(PAYMENT_MAIN)
+    }
+
     private fun KoScope.filePaths() = files.map { it.path }
 
     private fun createKoFile(filePath: String): KoFileDeclaration {
@@ -185,6 +205,7 @@ class KoScopeCreatorCoreNestedModuleTest {
 
     companion object {
         private const val PROJECT_ROOT_PATH = "/project"
+        private const val PACKAGE_NAME = "com.app"
         private const val FEATURE_MAIN = "$PROJECT_ROOT_PATH/feature/src/main/kotlin/FeatureMain.kt"
         private const val FEATURE_TEST = "$PROJECT_ROOT_PATH/feature/src/test/kotlin/FeatureTest.kt"
         private const val PAYMENT_MAIN = "$PROJECT_ROOT_PATH/feature/payment/src/main/kotlin/PaymentMain.kt"

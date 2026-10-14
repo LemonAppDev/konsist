@@ -4,6 +4,7 @@ import com.lemonappdev.konsist.api.Konsist
 import com.lemonappdev.konsist.helper.ext.toOsSeparator
 import com.lemonappdev.konsist.helper.util.PathProvider.appMainSourceSetProjectDirectory
 import com.lemonappdev.konsist.helper.util.PathProvider.dataMainSourceSetProjectDirectory
+import com.lemonappdev.konsist.helper.util.PathProvider.featureMainSourceSetProjectDirectory
 import com.lemonappdev.konsist.helper.util.PathProvider.featurePaymentMainSourceSetProjectDirectory
 import com.lemonappdev.konsist.helper.util.PathProvider.rootMainSourceSetProjectDirectory
 import org.amshove.kluent.assertSoftly
@@ -14,6 +15,7 @@ class KoFileForKoModuleProviderTest {
     private val app = "app"
     private val data = "data"
     private val root = "root"
+    private val feature = "feature"
     private val featurePayment = "feature/payment"
 
     @Test
@@ -81,7 +83,29 @@ class KoFileForKoModuleProviderTest {
             moduleName shouldBeEqualTo featurePayment
             residesInModule(featurePayment) shouldBeEqualTo true
             residesInModule("""feature\payment""") shouldBeEqualTo true
+            residesInModule(":feature:payment") shouldBeEqualTo true
+            residesInModule(feature) shouldBeEqualTo false
+            residesInModule(":feature") shouldBeEqualTo false
             residesInModule(data) shouldBeEqualTo false
+        }
+    }
+
+    @Test
+    fun `module name of parent module does not contain nested module`() {
+        // given
+        val sut =
+            Konsist
+                .scopeFromFile("$featureMainSourceSetProjectDirectory/fixture/FeatureClass.kt".toOsSeparator())
+                .files
+                .first()
+
+        // then
+        assertSoftly(sut) {
+            moduleName shouldBeEqualTo feature
+            residesInModule(feature) shouldBeEqualTo true
+            residesInModule(":feature") shouldBeEqualTo true
+            residesInModule(featurePayment) shouldBeEqualTo false
+            residesInModule(":feature:payment") shouldBeEqualTo false
         }
     }
 }
