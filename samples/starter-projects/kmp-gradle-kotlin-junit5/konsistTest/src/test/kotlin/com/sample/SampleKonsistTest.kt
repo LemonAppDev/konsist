@@ -12,6 +12,24 @@ class SampleKonsistTest {
             .scopeFromProject()
             .classes()
             .withNameEndingWith("UseCase")
-            .assertTrue { it.resideInPackage("..domain..") }
+            .assertTrue { it.residesInPackage("..domain.usecase..") }
+    }
+
+    @Test
+    fun `every expect declaration has actual declaration in each platform source set`() {
+        val actualFunctionNames = Konsist
+            .scopeFromProduction()
+            .functions()
+            .filter { it.hasActualModifier }
+            .groupBy { it.sourceSetName }
+            .mapValues { (_, functions) -> functions.map { it.name } }
+
+        Konsist
+            .scopeFromSourceSet("commonMain")
+            .functions()
+            .filter { it.hasExpectModifier }
+            .assertTrue { expectFunction ->
+                listOf("androidMain", "iosMain").all { actualFunctionNames[it].orEmpty().contains(expectFunction.name) }
+            }
     }
 }
