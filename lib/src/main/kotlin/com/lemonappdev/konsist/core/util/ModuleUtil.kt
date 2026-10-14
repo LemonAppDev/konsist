@@ -14,10 +14,10 @@ object ModuleUtil {
      * Module may reside in a directory named "src", e.g. "src/app" for "/src/app/src/main/kotlin/A.kt"
      * (see [PathUtil.getSourceRootIndex]).
      *
-     * Module of the file located outside the source root ("src/<sourceSet>/kotlin" or "src/<sourceSet>/java") is
-     * the closest module directory containing the file (see [ModuleDirectoryDetector]), e.g. "feature" for
-     * "/feature/config/A.kt" and "/feature/src/test/resources/A.kt", "src/tools" for "/src/tools/A.kt" and "root" for
-     * "/samples/A.kt" (when "feature/config" and "samples" are not module directories). If there is no such directory,
+     * Module of the file located outside the source root ("src/<sourceSet>/kotlin", "src/<sourceSet>/java" or
+     * "src/<sourceSet>/resources") is the closest module directory containing the file (see [ModuleDirectoryDetector]),
+     * e.g. "feature" for "/feature/config/A.kt" and "/feature/src/test/testData/A.kt", "src/tools" for "/src/tools/A.kt"
+     * and "root" for "/samples/A.kt" (when "feature/config" and "samples" are not module directories). If there is no such directory,
      * module is the directory containing the first "src" directory (see [PathUtil.getSourceDirectoryIndex]) or,
      * for the file located outside the "src" directory, the file directory.
      *
