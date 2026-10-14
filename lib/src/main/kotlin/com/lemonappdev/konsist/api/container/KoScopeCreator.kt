@@ -25,6 +25,9 @@ interface KoScopeCreator {
      * are also accepted on all OSes. Use `root` (or `:`) for the top-level module. Module names are case-sensitive.
      * Module name is the module directory path, so Gradle project path works only when it matches the directory
      * (Gradle `projectDir` overrides in settings.gradle(.kts) are not supported).
+     * Use `..` as a wildcard for any number of module directories, including none, e.g. `:feature..` matches
+     * `feature` and its nested modules (`feature/payment`), `..data` matches `data` and `feature/data`,
+     * and `..` matches all modules.
      * Module contains the same files as [KoModuleProvider.moduleName] reports, including Kotlin files located in the
      * module directory outside the "src" directory (e.g. `feature/Script.kt` resides in the `feature` module).
      * @param sourceSetName The name of the source set. If null, all source sets will be included.
@@ -47,6 +50,9 @@ interface KoScopeCreator {
      * are also accepted on all OSes. Use `root` (or `:`) for the top-level module. Module names are case-sensitive.
      * Module name is the module directory path, so Gradle project path works only when it matches the directory
      * (Gradle `projectDir` overrides in settings.gradle(.kts) are not supported).
+     * Use `..` as a wildcard for any number of module directories, including none, e.g. `:feature..` matches
+     * `feature` and its nested modules (`feature/payment`), `..data` matches `data` and `feature/data`,
+     * and `..` matches all modules.
      * Module contains the same files as [KoModuleProvider.moduleName] reports, including Kotlin files located in the
      * module directory outside the "src" directory (e.g. `feature/Script.kt` resides in the `feature` module).
      * @param moduleNames The name(s) of the module(s), in the same format as [moduleName].
@@ -67,6 +73,9 @@ interface KoScopeCreator {
      * are also accepted on all OSes. Use `root` (or `:`) for the top-level module. Module names are case-sensitive.
      * Module name is the module directory path, so Gradle project path works only when it matches the directory
      * (Gradle `projectDir` overrides in settings.gradle(.kts) are not supported).
+     * Use `..` as a wildcard for any number of module directories, including none, e.g. `:feature..` matches
+     * `feature` and its nested modules (`feature/payment`), `..data` matches `data` and `feature/data`,
+     * and `..` matches all modules.
      * Module contains the same files as [KoModuleProvider.moduleName] reports, including Kotlin files located in the
      * module directory outside the "src" directory (e.g. `feature/Script.kt` resides in the `feature` module).
      * @return a [KoScope] containing all Kotlin files in the module.
@@ -84,6 +93,9 @@ interface KoScopeCreator {
      * are also accepted on all OSes. Use `root` (or `:`) for the top-level module. Module names are case-sensitive.
      * Module name is the module directory path, so Gradle project path works only when it matches the directory
      * (Gradle `projectDir` overrides in settings.gradle(.kts) are not supported).
+     * Use `..` as a wildcard for any number of module directories, including none, e.g. `:feature..` matches
+     * `feature` and its nested modules (`feature/payment`), `..data` matches `data` and `feature/data`,
+     * and `..` matches all modules.
      * Module contains the same files as [KoModuleProvider.moduleName] reports, including Kotlin files located in the
      * module directory outside the "src" directory (e.g. `feature/Script.kt` resides in the `feature` module).
      * @param sourceSetName The name of the source set. If null, all source sets will be included.
@@ -132,6 +144,9 @@ interface KoScopeCreator {
      * are also accepted on all OSes. Use `root` (or `:`) for the top-level module. Module names are case-sensitive.
      * Module name is the module directory path, so Gradle project path works only when it matches the directory
      * (Gradle `projectDir` overrides in settings.gradle(.kts) are not supported).
+     * Use `..` as a wildcard for any number of module directories, including none, e.g. `:feature..` matches
+     * `feature` and its nested modules (`feature/payment`), `..data` matches `data` and `feature/data`,
+     * and `..` matches all modules.
      * Module contains the same files as [KoModuleProvider.moduleName] reports, including Kotlin files located in the
      * module directory outside the "src" directory (e.g. `feature/Script.kt` resides in the `feature` module).
      * @param sourceSetName The name of the source set. If null, all source sets will be included.
@@ -156,6 +171,9 @@ interface KoScopeCreator {
      * are also accepted on all OSes. Use `root` (or `:`) for the top-level module. Module names are case-sensitive.
      * Module name is the module directory path, so Gradle project path works only when it matches the directory
      * (Gradle `projectDir` overrides in settings.gradle(.kts) are not supported).
+     * Use `..` as a wildcard for any number of module directories, including none, e.g. `:feature..` matches
+     * `feature` and its nested modules (`feature/payment`), `..data` matches `data` and `feature/data`,
+     * and `..` matches all modules.
      * Module contains the same files as [KoModuleProvider.moduleName] reports, including Kotlin files located in the
      * module directory outside the "src" directory (e.g. `feature/Script.kt` resides in the `feature` module).
      * @param sourceSetName The name of the source set. If null, all source sets will be included.

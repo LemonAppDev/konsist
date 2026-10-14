@@ -9,6 +9,9 @@ import com.lemonappdev.konsist.api.provider.KoModuleProvider
  * but `feature/auth` and `feature\auth` are also accepted on all OSes.
  * Module name is the module directory path, so Gradle project path works only when it matches the directory
  * (Gradle `projectDir` overrides in settings.gradle(.kts) are not supported).
+ * Use `..` as a wildcard for any number of module directories, including none, e.g. `:feature..` matches
+ * `feature` and its nested modules (`feature/payment`), `..data` matches `data` and `feature/data`,
+ * and `..` matches all modules.
  *
  * @param name The module name to include.
  * @param names The module name(s) to include.
@@ -27,6 +30,9 @@ fun <T : KoModuleProvider> List<T>.withModule(
  * but `feature/auth` and `feature\auth` are also accepted on all OSes.
  * Module name is the module directory path, so Gradle project path works only when it matches the directory
  * (Gradle `projectDir` overrides in settings.gradle(.kts) are not supported).
+ * Use `..` as a wildcard for any number of module directories, including none, e.g. `:feature..` matches
+ * `feature` and its nested modules (`feature/payment`), `..data` matches `data` and `feature/data`,
+ * and `..` matches all modules.
  *
  * @param names The module name(s) to include.
  * @return A list containing declarations that reside in any of the specified modules.
@@ -47,6 +53,9 @@ fun <T : KoModuleProvider> List<T>.withModule(names: Collection<String>): List<T
  * but `feature/auth` and `feature\auth` are also accepted on all OSes.
  * Module name is the module directory path, so Gradle project path works only when it matches the directory
  * (Gradle `projectDir` overrides in settings.gradle(.kts) are not supported).
+ * Use `..` as a wildcard for any number of module directories, including none, e.g. `:feature..` matches
+ * `feature` and its nested modules (`feature/payment`), `..data` matches `data` and `feature/data`,
+ * and `..` matches all modules.
  *
  * @param name The module name to exclude.
  * @param names The module name(s) to exclude.
@@ -65,6 +74,9 @@ fun <T : KoModuleProvider> List<T>.withoutModule(
  * but `feature/auth` and `feature\auth` are also accepted on all OSes.
  * Module name is the module directory path, so Gradle project path works only when it matches the directory
  * (Gradle `projectDir` overrides in settings.gradle(.kts) are not supported).
+ * Use `..` as a wildcard for any number of module directories, including none, e.g. `:feature..` matches
+ * `feature` and its nested modules (`feature/payment`), `..data` matches `data` and `feature/data`,
+ * and `..` matches all modules.
  *
  * @param names The module name(s) to exclude.
  * @return A list containing declarations that don't reside in any of the specified modules.

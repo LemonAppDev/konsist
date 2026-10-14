@@ -5,6 +5,7 @@ import com.lemonappdev.konsist.core.util.PathUtil.toMacOsSeparator
 object ModuleUtil {
     internal const val ROOT_MODULE_NAME = "root"
     private const val GRADLE_ROOT_PROJECT_PATH = ":"
+    private const val WILDCARD = ".."
 
     /**
      * Returns module name with "/" separators (regardless of OS), e.g. "feature/data", or "root" for the top-level module.
@@ -42,5 +43,61 @@ object ModuleUtil {
         return toMacOsSeparator(moduleName.trim())
             .replace(':', '/')
             .trim('/')
+    }
+
+    /**
+     * Returns true if module with given [moduleName] (format returned by [getModuleName]) matches module name [name]
+     * provided by the user (any format accepted by [normalizeModuleName]).
+     */
+    internal fun residesInModule(
+        moduleName: String,
+        name: String,
+    ): Boolean = getModuleNameMatcher(name)(moduleName)
+
+    /**
+     * Returns predicate checking if module name (format returned by [getModuleName]) matches module name [name]
+     * provided by the user (any format accepted by [normalizeModuleName]).
+     *
+     * Use '..' as a wildcard for any number of module directories, including none, e.g. ":feature.." matches
+     * "feature", "feature/payment" and "feature/payment/api", "..data" matches "data" and "feature/data",
+     * and ".." matches all modules. Module name without wildcard must match exactly.
+     * Predicate is built once, so it can be used to check many files.
+     */
+    internal fun getModuleNameMatcher(name: String): (String) -> Boolean {
+        val normalizedName = normalizeModuleName(name)
+
+        if (!normalizedName.contains(WILDCARD)) {
+            return { it == normalizedName }
+        }
+
+        val regex = getModuleNameRegex(normalizedName)
+        return { "/$it/".matches(regex) }
+    }
+
+    /*
+     * Each module directory is matched with a trailing '/' and wildcard matches any number of such directories,
+     * e.g. "feature/.." -> "/feature/(?:[^/]+/)*" matches "/feature/" and "/feature/payment/".
+     */
+    private fun getModuleNameRegex(normalizedName: String): Regex {
+        val segments =
+            normalizedName
+                .replace(WILDCARD, "/$WILDCARD/")
+                .split('/')
+                .filter { it.isNotEmpty() }
+
+        val pattern =
+            buildString {
+                append('/')
+                segments.forEach { segment ->
+                    if (segment == WILDCARD) {
+                        append("(?:[^/]+/)*")
+                    } else {
+                        append(Regex.escape(segment))
+                        append('/')
+                    }
+                }
+            }
+
+        return Regex(pattern)
     }
 }

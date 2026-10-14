@@ -10,7 +10,7 @@ internal interface KoModuleProviderCore :
     override val moduleName: String
         get() = ModuleUtil.getModuleName(projectPath)
 
-    override fun residesInModule(name: String): Boolean = ModuleUtil.normalizeModuleName(name) == moduleName
+    override fun residesInModule(name: String): Boolean = ModuleUtil.residesInModule(moduleName, name)
 
     @Deprecated("Will be removed in version 1.0.0-rc1", ReplaceWith("residesInModule(name)"))
     override fun resideInModule(name: String): Boolean = residesInModule(name)

@@ -264,4 +264,175 @@ class ModuleUtilTest {
         // then
         result shouldBeEqualTo ""
     }
+
+    @Test
+    fun `should match parent module for gradle project path with trailing wildcard`() {
+        // when
+        val result = ModuleUtil.residesInModule(moduleName = "feature", name = ":feature..")
+
+        // then
+        result shouldBeEqualTo true
+    }
+
+    @Test
+    fun `should match nested module for gradle project path with trailing wildcard`() {
+        // when
+        val result = ModuleUtil.residesInModule(moduleName = "feature/payment", name = ":feature..")
+
+        // then
+        result shouldBeEqualTo true
+    }
+
+    @Test
+    fun `should match three level nested module for module name with trailing wildcard`() {
+        // when
+        val result = ModuleUtil.residesInModule(moduleName = "feature/payment/api", name = "feature/..")
+
+        // then
+        result shouldBeEqualTo true
+    }
+
+    @Test
+    fun `should match nested module for module name with windows separator and trailing wildcard`() {
+        // when
+        val result = ModuleUtil.residesInModule(moduleName = "feature/payment", name = """feature\..""")
+
+        // then
+        result shouldBeEqualTo true
+    }
+
+    @Test
+    fun `should not match module with the same name prefix for module name with trailing wildcard`() {
+        // when
+        val result = ModuleUtil.residesInModule(moduleName = "featureflags", name = ":feature..")
+
+        // then
+        result shouldBeEqualTo false
+    }
+
+    @Test
+    fun `should not match other module for module name with trailing wildcard`() {
+        // when
+        val result = ModuleUtil.residesInModule(moduleName = "app", name = ":feature..")
+
+        // then
+        result shouldBeEqualTo false
+    }
+
+    @Test
+    fun `should not match parent module for nested module name with trailing wildcard`() {
+        // when
+        val result = ModuleUtil.residesInModule(moduleName = "feature", name = ":feature:payment..")
+
+        // then
+        result shouldBeEqualTo false
+    }
+
+    @Test
+    fun `should match module for module name with leading wildcard`() {
+        // when
+        val result = ModuleUtil.residesInModule(moduleName = "data", name = "..data")
+
+        // then
+        result shouldBeEqualTo true
+    }
+
+    @Test
+    fun `should match nested module for gradle project path with leading wildcard`() {
+        // when
+        val result = ModuleUtil.residesInModule(moduleName = "feature/data", name = ":..:data")
+
+        // then
+        result shouldBeEqualTo true
+    }
+
+    @Test
+    fun `should not match module with the same name suffix for module name with leading wildcard`() {
+        // when
+        val result = ModuleUtil.residesInModule(moduleName = "feature/metadata", name = "..data")
+
+        // then
+        result shouldBeEqualTo false
+    }
+
+    @Test
+    fun `should match nested module for module name with wildcard in the middle`() {
+        // when
+        val result = ModuleUtil.residesInModule(moduleName = "feature/payment/data", name = "feature..data")
+
+        // then
+        result shouldBeEqualTo true
+    }
+
+    @Test
+    fun `should match direct child module for module name with wildcard in the middle`() {
+        // when
+        val result = ModuleUtil.residesInModule(moduleName = "feature/data", name = "feature..data")
+
+        // then
+        result shouldBeEqualTo true
+    }
+
+    @Test
+    fun `should not match module outside parent for module name with wildcard in the middle`() {
+        // when
+        val result = ModuleUtil.residesInModule(moduleName = "data", name = "feature..data")
+
+        // then
+        result shouldBeEqualTo false
+    }
+
+    @Test
+    fun `should match root module for wildcard`() {
+        // when
+        val result = ModuleUtil.residesInModule(moduleName = "root", name = "..")
+
+        // then
+        result shouldBeEqualTo true
+    }
+
+    @Test
+    fun `should match nested module for gradle root project path with wildcard`() {
+        // when
+        val result = ModuleUtil.residesInModule(moduleName = "feature/payment", name = ":..")
+
+        // then
+        result shouldBeEqualTo true
+    }
+
+    @Test
+    fun `should match module name containing regex characters literally for module name with wildcard`() {
+        // when
+        val result = ModuleUtil.residesInModule(moduleName = "feature (1)/data", name = "feature (1)..")
+
+        // then
+        result shouldBeEqualTo true
+    }
+
+    @Test
+    fun `should not treat regex characters as wildcards for module name with wildcard`() {
+        // when
+        val result = ModuleUtil.residesInModule(moduleName = "featureXx/data", name = "feature.x..")
+
+        // then
+        result shouldBeEqualTo false
+    }
+
+    @Test
+    fun `should match module name case-sensitively for module name with wildcard`() {
+        // when
+        val result = ModuleUtil.residesInModule(moduleName = "feature", name = "Feature..")
+
+        // then
+        result shouldBeEqualTo false
+    }
+
+    @Test
+    fun `should not match nested module for module name without wildcard`() {
+        // when
+        val result = ModuleUtil.residesInModule(moduleName = "feature/payment", name = "feature")
+
+        // then
+        result shouldBeEqualTo false
+    }
 }
