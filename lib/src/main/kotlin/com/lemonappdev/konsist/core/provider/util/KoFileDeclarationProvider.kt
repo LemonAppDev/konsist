@@ -4,11 +4,11 @@ import com.lemonappdev.konsist.api.declaration.KoFileDeclaration
 import com.lemonappdev.konsist.core.cache.KoFileDeclarationCache
 import com.lemonappdev.konsist.core.ext.isKotlinFile
 import com.lemonappdev.konsist.core.ext.toKoFile
-import com.lemonappdev.konsist.core.ext.toMacOsSeparator
 import com.lemonappdev.konsist.core.filesystem.PathProvider
 import com.lemonappdev.konsist.core.filesystem.ProjectDirectoryFilter
 import com.lemonappdev.konsist.core.filesystem.ProjectKotlinFileScanner
 import com.lemonappdev.konsist.core.util.PackageNameReader
+import com.lemonappdev.konsist.core.util.PathUtil
 import kotlinx.coroutines.CompletableDeferred
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.Dispatchers
@@ -20,8 +20,6 @@ import kotlinx.coroutines.sync.withLock
 import java.io.File
 
 internal object KoFileDeclarationProvider {
-    private const val GRADLE_BUILD_CONFIG_DIRECTORY_NAME = "buildsrc"
-
     private val projectRootDir: File = File(PathProvider.rootProjectPath)
 
     private val projectKotlinFileScanner = ProjectKotlinFileScanner(projectRootDir)
@@ -99,12 +97,9 @@ internal object KoFileDeclarationProvider {
 
     /**
      * Returns true if the file is located in the Gradle build configuration directory (buildSrc).
+     * Only the path relative to the project root is checked (see [PathUtil.isBuildConfigPath]).
      */
-    fun isBuildConfigFile(path: String): Boolean =
-        path
-            .lowercase()
-            .toMacOsSeparator()
-            .contains("/$GRADLE_BUILD_CONFIG_DIRECTORY_NAME")
+    fun isBuildConfigFile(path: String): Boolean = PathUtil.isBuildConfigPath(PathUtil.getProjectPath(path, PathProvider.rootProjectPath))
 
     private fun parseKotlinFile(file: File): KoFileDeclaration? {
         /*

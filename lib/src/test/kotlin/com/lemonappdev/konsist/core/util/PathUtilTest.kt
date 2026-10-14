@@ -85,4 +85,85 @@ class PathUtilTest {
         // then
         result shouldBeEqualTo "main"
     }
+
+    @Test
+    fun `isBuildConfigPath returns true for file in buildSrc source set`() {
+        // when
+        val result = PathUtil.isBuildConfigPath(projectPath = "/buildSrc/src/main/kotlin/SampleClass.kt")
+
+        // then
+        result shouldBeEqualTo true
+    }
+
+    @Test
+    fun `isBuildConfigPath returns true for file in buildSrc source set for windows path`() {
+        // when
+        val result = PathUtil.isBuildConfigPath(projectPath = """\buildSrc\src\main\kotlin\SampleClass.kt""")
+
+        // then
+        result shouldBeEqualTo true
+    }
+
+    @Test
+    fun `isBuildConfigPath returns true for file directly in buildSrc directory`() {
+        // when
+        val result = PathUtil.isBuildConfigPath(projectPath = "/buildSrc/SampleClass.kt")
+
+        // then
+        result shouldBeEqualTo true
+    }
+
+    @Test
+    fun `isBuildConfigPath returns true for lowercase buildsrc directory`() {
+        // when
+        val result = PathUtil.isBuildConfigPath(projectPath = "/buildsrc/src/main/kotlin/SampleClass.kt")
+
+        // then
+        result shouldBeEqualTo true
+    }
+
+    @Test
+    fun `isBuildConfigPath returns true for buildSrc of nested build`() {
+        // when
+        val result = PathUtil.isBuildConfigPath(projectPath = "/build-logic/buildSrc/src/main/kotlin/SampleClass.kt")
+
+        // then
+        result shouldBeEqualTo true
+    }
+
+    @Test
+    fun `isBuildConfigPath returns false for module file`() {
+        // when
+        val result = PathUtil.isBuildConfigPath(projectPath = "/app/src/main/kotlin/SampleClass.kt")
+
+        // then
+        result shouldBeEqualTo false
+    }
+
+    @Test
+    fun `isBuildConfigPath returns false for directory name starting with buildSrc`() {
+        // when
+        val result = PathUtil.isBuildConfigPath(projectPath = "/buildSrcTools/src/main/kotlin/SampleClass.kt")
+
+        // then
+        result shouldBeEqualTo false
+    }
+
+    @Test
+    fun `isBuildConfigPath returns false for buildsrc package`() {
+        // when
+        val result = PathUtil.isBuildConfigPath(projectPath = "/app/src/main/kotlin/com/buildsrc/SampleClass.kt")
+
+        // then
+        result shouldBeEqualTo false
+    }
+
+    @Test
+    fun `isBuildConfigPath returns false for file named buildSrc`() {
+        // when
+        val result = PathUtil.isBuildConfigPath(projectPath = "/app/buildSrc.kt")
+
+        // then
+        result shouldBeEqualTo false
+    }
 }
