@@ -59,6 +59,21 @@ class ProjectKotlinFileScannerTest {
     }
 
     @Test
+    fun `should return kotlin files from directory with kotlin file extension`(
+        @TempDir projectRootDir: File,
+    ) {
+        // given
+        createFiles(projectRootDir, "app/src/main/kotlin/directory.kt/NestedClass.kt")
+        val sut = ProjectKotlinFileScanner(projectRootDir)
+
+        // when
+        val actual = runBlocking { sut.scan() }
+
+        // then
+        actual.relativePaths(projectRootDir) shouldBeEqualTo setOf("app/src/main/kotlin/directory.kt/NestedClass.kt")
+    }
+
+    @Test
     fun `should not return kotlin files from ignored directories`(
         @TempDir projectRootDir: File,
     ) {
