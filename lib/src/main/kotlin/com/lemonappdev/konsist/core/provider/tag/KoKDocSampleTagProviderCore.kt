@@ -13,7 +13,7 @@ internal interface KoKDocSampleTagProviderCore :
         get() =
             tags
                 .filter { it.name == KoKDocTag.SAMPLE }
-                .map { it as KoValuedKDocTagDeclaration }
+                .filterIsInstance<KoValuedKDocTagDeclaration>()
 
     override val numSampleTags: Int
         get() = sampleTags.size

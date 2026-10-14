@@ -1,5 +1,6 @@
 package com.lemonappdev.konsist.api.ext.provider
 
+import com.lemonappdev.konsist.api.KoKDocTag
 import com.lemonappdev.konsist.api.declaration.KoPrimaryConstructorDeclaration
 import com.lemonappdev.konsist.api.provider.KoKDocProvider
 import com.lemonappdev.konsist.api.provider.KoParametersProvider
@@ -20,5 +21,5 @@ fun <T : KoParametersProvider> T.hasValidKDocParamTags(): Boolean =
 
         parameters.map { it.name }.sorted() == kDoc?.paramTags?.map { it.value }?.sorted()
     } else {
-        (this as? KoKDocProvider)?.kDoc?.paramTags?.isEmpty() ?: true
+        (this as? KoKDocProvider)?.kDoc?.hasTag(KoKDocTag.PARAM) != true
     }
