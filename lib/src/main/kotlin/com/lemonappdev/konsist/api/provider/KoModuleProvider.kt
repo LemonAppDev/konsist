@@ -7,6 +7,7 @@ interface KoModuleProvider : KoBaseProvider {
     /**
      * The declaration's module name - module directory path relative to the project root (not Gradle project path).
      * Uses `/` separators on all OSes, e.g. "feature/data", or "root" for the top-level module.
+     * For the file located outside the `src` directory, it is the file directory path, e.g. "samples" for `samples/A.kt`.
      */
     val moduleName: String
 
