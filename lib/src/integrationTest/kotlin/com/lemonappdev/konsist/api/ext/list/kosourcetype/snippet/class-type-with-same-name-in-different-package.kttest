@@ -1,0 +1,5 @@
+package com.lemonappdev.konsist.samplepackage
+
+val fixtureProperty: FixtureType = FixtureType()
+
+class FixtureType
