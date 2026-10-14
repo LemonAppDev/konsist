@@ -23,6 +23,7 @@ class KoImportAliasDeclarationForKoNameProviderTest {
                 ?.parameters
                 ?.first()
                 ?.type
+                ?.sourceDeclaration
                 ?.asImportAliasDeclaration()
 
         // then

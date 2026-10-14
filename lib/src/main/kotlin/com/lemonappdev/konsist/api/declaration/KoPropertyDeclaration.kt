@@ -40,8 +40,6 @@ import com.lemonappdev.konsist.api.provider.modifier.KoLateinitModifierProvider
 import com.lemonappdev.konsist.api.provider.modifier.KoModifierProvider
 import com.lemonappdev.konsist.api.provider.modifier.KoOpenModifierProvider
 import com.lemonappdev.konsist.api.provider.modifier.KoOverrideModifierProvider
-import com.lemonappdev.konsist.api.provider.modifier.KoValModifierProvider
-import com.lemonappdev.konsist.api.provider.modifier.KoVarModifierProvider
 import com.lemonappdev.konsist.api.provider.modifier.KoVisibilityModifierProvider
 
 /**
@@ -74,8 +72,6 @@ interface KoPropertyDeclaration :
     KoIsTopLevelProvider,
     KoValueProvider,
     KoVisibilityModifierProvider,
-    KoValModifierProvider,
-    KoVarModifierProvider,
     KoLateinitModifierProvider,
     KoOverrideModifierProvider,
     KoAbstractModifierProvider,

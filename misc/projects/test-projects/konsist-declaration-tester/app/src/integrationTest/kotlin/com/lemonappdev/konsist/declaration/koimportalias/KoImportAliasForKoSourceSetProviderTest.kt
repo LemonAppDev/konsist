@@ -22,6 +22,7 @@ class KoImportAliasForKoSourceSetProviderTest {
                 .properties()
                 .first { it.name == "appPropertyWithImportAliasType" }
                 .type
+                ?.sourceDeclaration
                 ?.asImportAliasDeclaration()
 
         // then
@@ -41,6 +42,7 @@ class KoImportAliasForKoSourceSetProviderTest {
                 .properties()
                 .first { it.name == "appPropertyWithImportAliasTypeTest" }
                 .type
+                ?.sourceDeclaration
                 ?.asImportAliasDeclaration()
 
         // then
@@ -60,6 +62,7 @@ class KoImportAliasForKoSourceSetProviderTest {
                 .properties()
                 .first { it.name == "libPropertyWithImportAliasType" }
                 .type
+                ?.sourceDeclaration
                 ?.asImportAliasDeclaration()
 
         // then
@@ -79,6 +82,7 @@ class KoImportAliasForKoSourceSetProviderTest {
                 .properties()
                 .first { it.name == "libPropertyWithImportAliasTypeTest" }
                 .type
+                ?.sourceDeclaration
                 ?.asImportAliasDeclaration()
 
         // then
@@ -98,6 +102,7 @@ class KoImportAliasForKoSourceSetProviderTest {
                 .properties()
                 .first { it.name == "rootPropertyWithImportAliasType" }
                 .type
+                ?.sourceDeclaration
                 ?.asImportAliasDeclaration()
 
         // then
@@ -117,6 +122,7 @@ class KoImportAliasForKoSourceSetProviderTest {
                 .properties()
                 .first { it.name == "rootSrcPropertyWithImportAliasType" }
                 .type
+                ?.sourceDeclaration
                 ?.asImportAliasDeclaration()
 
         // then

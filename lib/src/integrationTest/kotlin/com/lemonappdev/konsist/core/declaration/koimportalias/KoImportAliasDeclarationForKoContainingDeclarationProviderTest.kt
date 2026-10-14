@@ -20,6 +20,7 @@ class KoImportAliasDeclarationForKoContainingDeclarationProviderTest {
                 ?.parameters
                 ?.first()
                 ?.type
+                ?.sourceDeclaration
                 ?.asImportAliasDeclaration()
 
         // then

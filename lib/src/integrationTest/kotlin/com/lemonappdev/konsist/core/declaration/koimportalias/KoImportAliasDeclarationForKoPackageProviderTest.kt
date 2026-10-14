@@ -16,6 +16,7 @@ class KoImportAliasDeclarationForKoPackageProviderTest {
                 ?.parameters
                 ?.first()
                 ?.type
+                ?.sourceDeclaration
                 ?.asImportAliasDeclaration()
 
         // then
@@ -33,6 +34,7 @@ class KoImportAliasDeclarationForKoPackageProviderTest {
                 ?.parameters
                 ?.first()
                 ?.type
+                ?.sourceDeclaration
                 ?.asImportAliasDeclaration()
 
         // then

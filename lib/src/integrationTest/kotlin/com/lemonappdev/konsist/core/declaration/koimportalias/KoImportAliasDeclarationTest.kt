@@ -13,6 +13,7 @@ class KoImportAliasDeclarationTest {
                 .properties()
                 .first()
                 .type
+                ?.sourceDeclaration
                 ?.asImportAliasDeclaration()
 
         // then
@@ -27,6 +28,7 @@ class KoImportAliasDeclarationTest {
                 .properties()
                 .first()
                 .type
+                ?.sourceDeclaration
                 ?.asImportAliasDeclaration()
 
         // then

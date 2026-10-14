@@ -1,5 +1,0 @@
-package com.fixturepackage
-
-class SampleClass(val sampleParameter: Result)
-
-class Result

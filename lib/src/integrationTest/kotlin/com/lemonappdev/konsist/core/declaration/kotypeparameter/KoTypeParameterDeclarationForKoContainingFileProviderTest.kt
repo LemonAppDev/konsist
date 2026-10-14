@@ -18,6 +18,7 @@ class KoTypeParameterDeclarationForKoContainingFileProviderTest {
                 .functions()
                 .returnTypes
                 .firstOrNull()
+                ?.sourceDeclaration
                 ?.asTypeParameterDeclaration()
 
         // then
@@ -34,7 +35,8 @@ class KoTypeParameterDeclarationForKoContainingFileProviderTest {
                 .parameters
                 .first()
                 .type
-                .asTypeParameterDeclaration()
+                .sourceDeclaration
+                ?.asTypeParameterDeclaration()
 
         // then
         (sut?.containingDeclaration as? KoNameProvider)?.name shouldBeEqualTo "class-type-parameter-containing-file"
@@ -49,6 +51,7 @@ class KoTypeParameterDeclarationForKoContainingFileProviderTest {
                 .properties()
                 .first()
                 .type
+                ?.sourceDeclaration
                 ?.asTypeParameterDeclaration()
 
         // then
@@ -63,6 +66,7 @@ class KoTypeParameterDeclarationForKoContainingFileProviderTest {
                 .properties()
                 .first()
                 .type
+                ?.sourceDeclaration
                 ?.asTypeParameterDeclaration()
 
         // then

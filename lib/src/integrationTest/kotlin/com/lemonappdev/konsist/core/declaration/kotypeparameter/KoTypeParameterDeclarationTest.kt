@@ -16,6 +16,7 @@ class KoTypeParameterDeclarationTest {
                 .functions()
                 .first()
                 .returnType
+                ?.sourceDeclaration
                 ?.asTypeParameterDeclaration()
 
         // then
@@ -32,7 +33,8 @@ class KoTypeParameterDeclarationTest {
                 .parameters
                 .first()
                 .type
-                .asTypeParameterDeclaration()
+                .sourceDeclaration
+                ?.asTypeParameterDeclaration()
 
         // then
         sut.toString() shouldBeEqualTo "TestType"
@@ -47,6 +49,7 @@ class KoTypeParameterDeclarationTest {
                 .properties()
                 .first()
                 .type
+                ?.sourceDeclaration
                 ?.asTypeParameterDeclaration()
 
         // then
@@ -61,6 +64,7 @@ class KoTypeParameterDeclarationTest {
                 .properties()
                 .first()
                 .type
+                ?.sourceDeclaration
                 ?.asTypeParameterDeclaration()
 
         // then

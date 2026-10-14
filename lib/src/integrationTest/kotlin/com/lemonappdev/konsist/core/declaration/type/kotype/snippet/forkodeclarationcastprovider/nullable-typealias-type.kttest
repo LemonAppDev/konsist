@@ -1,3 +1,0 @@
-import com.lemonappdev.konsist.testdata.FixtureTypeAlias
-
-class FixtureClass1(val fixtureProperty1: FixtureTypeAlias?)

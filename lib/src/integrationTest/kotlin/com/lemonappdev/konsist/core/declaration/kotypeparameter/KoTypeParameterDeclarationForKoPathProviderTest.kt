@@ -19,6 +19,7 @@ class KoTypeParameterDeclarationForKoPathProviderTest {
                 .functions()
                 .returnTypes
                 .firstOrNull()
+                ?.sourceDeclaration
                 ?.asTypeParameterDeclaration()
 
         // then
@@ -36,6 +37,7 @@ class KoTypeParameterDeclarationForKoPathProviderTest {
                 .functions()
                 .returnTypes
                 .firstOrNull()
+                ?.sourceDeclaration
                 ?.asTypeParameterDeclaration()
 
         // then
@@ -57,6 +59,7 @@ class KoTypeParameterDeclarationForKoPathProviderTest {
                 .functions()
                 .returnTypes
                 .firstOrNull()
+                ?.sourceDeclaration
                 ?.asTypeParameterDeclaration()
 
         // then
@@ -76,6 +79,7 @@ class KoTypeParameterDeclarationForKoPathProviderTest {
                 .functions()
                 .returnTypes
                 .firstOrNull()
+                ?.sourceDeclaration
                 ?.asTypeParameterDeclaration()
 
         // then
@@ -97,7 +101,8 @@ class KoTypeParameterDeclarationForKoPathProviderTest {
                 .parameters
                 .first()
                 .type
-                .asTypeParameterDeclaration()
+                .sourceDeclaration
+                ?.asTypeParameterDeclaration()
 
         // then
         assertSoftly(sut?.path) {
@@ -116,7 +121,8 @@ class KoTypeParameterDeclarationForKoPathProviderTest {
                 .parameters
                 .first()
                 .type
-                .asTypeParameterDeclaration()
+                .sourceDeclaration
+                ?.asTypeParameterDeclaration()
 
         // then
         sut
@@ -139,7 +145,8 @@ class KoTypeParameterDeclarationForKoPathProviderTest {
                 .parameters
                 .first()
                 .type
-                .asTypeParameterDeclaration()
+                .sourceDeclaration
+                ?.asTypeParameterDeclaration()
 
         // then
         assertSoftly(sut) {
@@ -160,7 +167,8 @@ class KoTypeParameterDeclarationForKoPathProviderTest {
                 .parameters
                 .first()
                 .type
-                .asTypeParameterDeclaration()
+                .sourceDeclaration
+                ?.asTypeParameterDeclaration()
 
         // then
         assertSoftly(sut) {
@@ -180,6 +188,7 @@ class KoTypeParameterDeclarationForKoPathProviderTest {
                 .properties()
                 .first()
                 .type
+                ?.sourceDeclaration
                 ?.asTypeParameterDeclaration()
 
         // then
@@ -198,6 +207,7 @@ class KoTypeParameterDeclarationForKoPathProviderTest {
                 .properties()
                 .first()
                 .type
+                ?.sourceDeclaration
                 ?.asTypeParameterDeclaration()
 
         // then
@@ -220,6 +230,7 @@ class KoTypeParameterDeclarationForKoPathProviderTest {
                 .properties()
                 .first()
                 .type
+                ?.sourceDeclaration
                 ?.asTypeParameterDeclaration()
 
         // then
@@ -240,6 +251,7 @@ class KoTypeParameterDeclarationForKoPathProviderTest {
                 .properties()
                 .first()
                 .type
+                ?.sourceDeclaration
                 ?.asTypeParameterDeclaration()
 
         // then
@@ -259,6 +271,7 @@ class KoTypeParameterDeclarationForKoPathProviderTest {
                 .properties()
                 .first()
                 .type
+                ?.sourceDeclaration
                 ?.asTypeParameterDeclaration()
 
         // then
@@ -276,6 +289,7 @@ class KoTypeParameterDeclarationForKoPathProviderTest {
                 .properties()
                 .first()
                 .type
+                ?.sourceDeclaration
                 ?.asTypeParameterDeclaration()
 
         // then
@@ -297,6 +311,7 @@ class KoTypeParameterDeclarationForKoPathProviderTest {
                 .properties()
                 .first()
                 .type
+                ?.sourceDeclaration
                 ?.asTypeParameterDeclaration()
 
         // then
@@ -316,6 +331,7 @@ class KoTypeParameterDeclarationForKoPathProviderTest {
                 .properties()
                 .first()
                 .type
+                ?.sourceDeclaration
                 ?.asTypeParameterDeclaration()
 
         // then

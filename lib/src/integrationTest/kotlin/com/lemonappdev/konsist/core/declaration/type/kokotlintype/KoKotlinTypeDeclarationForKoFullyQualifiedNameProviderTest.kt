@@ -13,6 +13,7 @@ class KoKotlinTypeDeclarationForKoFullyQualifiedNameProviderTest {
                 .properties()
                 .first()
                 .type
+                ?.sourceDeclaration
                 ?.asKotlinTypeDeclaration()
 
         // then
@@ -27,6 +28,7 @@ class KoKotlinTypeDeclarationForKoFullyQualifiedNameProviderTest {
                 .properties()
                 .first()
                 .type
+                ?.sourceDeclaration
                 ?.asKotlinTypeDeclaration()
 
         // then
@@ -41,6 +43,7 @@ class KoKotlinTypeDeclarationForKoFullyQualifiedNameProviderTest {
                 .properties()
                 .first()
                 .type
+                ?.sourceDeclaration
                 ?.asKotlinTypeDeclaration()
 
         // then
@@ -55,6 +58,7 @@ class KoKotlinTypeDeclarationForKoFullyQualifiedNameProviderTest {
                 .properties()
                 .first()
                 .type
+                ?.sourceDeclaration
                 ?.asKotlinTypeDeclaration()
 
         // then
@@ -69,6 +73,7 @@ class KoKotlinTypeDeclarationForKoFullyQualifiedNameProviderTest {
                 .properties()
                 .first()
                 .type
+                ?.sourceDeclaration
                 ?.asKotlinTypeDeclaration()
 
         // then
@@ -83,6 +88,7 @@ class KoKotlinTypeDeclarationForKoFullyQualifiedNameProviderTest {
                 .properties()
                 .first()
                 .type
+                ?.sourceDeclaration
                 ?.asKotlinTypeDeclaration()
 
         // then
@@ -97,6 +103,7 @@ class KoKotlinTypeDeclarationForKoFullyQualifiedNameProviderTest {
                 .properties()
                 .first()
                 .type
+                ?.sourceDeclaration
                 ?.asKotlinTypeDeclaration()
 
         // then
@@ -111,6 +118,7 @@ class KoKotlinTypeDeclarationForKoFullyQualifiedNameProviderTest {
                 .properties()
                 .first()
                 .type
+                ?.sourceDeclaration
                 ?.asKotlinTypeDeclaration()
 
         // then
@@ -173,6 +181,7 @@ class KoKotlinTypeDeclarationForKoFullyQualifiedNameProviderTest {
                 .properties()
                 .first()
                 .type
+                ?.sourceDeclaration
                 ?.asKotlinTypeDeclaration()
 
         // then

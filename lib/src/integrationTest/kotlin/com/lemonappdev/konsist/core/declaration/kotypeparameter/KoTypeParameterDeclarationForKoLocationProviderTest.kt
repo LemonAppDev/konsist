@@ -17,6 +17,7 @@ class KoTypeParameterDeclarationForKoLocationProviderTest {
                 .functions()
                 .returnTypes
                 .firstOrNull()
+                ?.sourceDeclaration
                 ?.asTypeParameterDeclaration()
 
         // then
@@ -33,7 +34,8 @@ class KoTypeParameterDeclarationForKoLocationProviderTest {
                 .parameters
                 .first()
                 .type
-                .asTypeParameterDeclaration()
+                .sourceDeclaration
+                ?.asTypeParameterDeclaration()
 
         // then
         sut?.location shouldBeEqualTo "${sut?.path}:1:20"
@@ -48,6 +50,7 @@ class KoTypeParameterDeclarationForKoLocationProviderTest {
                 .properties()
                 .first()
                 .type
+                ?.sourceDeclaration
                 ?.asTypeParameterDeclaration()
 
         // then
@@ -62,6 +65,7 @@ class KoTypeParameterDeclarationForKoLocationProviderTest {
                 .properties()
                 .first()
                 .type
+                ?.sourceDeclaration
                 ?.asTypeParameterDeclaration()
 
         // then

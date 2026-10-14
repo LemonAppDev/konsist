@@ -19,6 +19,7 @@ class KoImportAliasDeclarationForKoLocationProviderTest {
                 ?.parameters
                 ?.first()
                 ?.type
+                ?.sourceDeclaration
                 ?.asImportAliasDeclaration()
 
         // then

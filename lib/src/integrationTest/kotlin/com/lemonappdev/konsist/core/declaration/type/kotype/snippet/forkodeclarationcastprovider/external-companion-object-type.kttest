@@ -1,3 +1,0 @@
-import kotlin.random.Random
-
-class FixtureClass1(val fixtureProperty1: Random.Default)

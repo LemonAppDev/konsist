@@ -8,7 +8,6 @@ import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
 import com.lemonappdev.konsist.core.provider.KoFunctionTypeDeclarationProviderCore
 import com.lemonappdev.konsist.core.provider.KoIsFunctionTypeProviderCore
 import com.lemonappdev.konsist.core.provider.KoIsGenericProviderCore
-import com.lemonappdev.konsist.core.provider.KoIsGenericTypeProviderCore
 import com.lemonappdev.konsist.core.provider.KoIsStarProjectionProviderCore
 import com.lemonappdev.konsist.core.provider.KoLocationProviderCore
 import com.lemonappdev.konsist.core.provider.KoNameProviderCore
@@ -48,7 +47,6 @@ data class KoTypeArgumentDeclarationCore(
     KoInModifierProviderCore,
     KoLocationProviderCore,
     KoPathProviderCore,
-    KoIsGenericTypeProviderCore,
     KoIsGenericProviderCore,
     KoIsFunctionTypeProviderCore,
     KoFunctionTypeDeclarationProviderCore,

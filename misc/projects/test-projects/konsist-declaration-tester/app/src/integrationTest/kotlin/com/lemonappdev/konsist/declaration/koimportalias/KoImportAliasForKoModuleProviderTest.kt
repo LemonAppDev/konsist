@@ -24,6 +24,7 @@ class KoImportAliasForKoModuleProviderTest {
                 .properties()
                 .first { it.name == "appPropertyWithImportAliasType" }
                 .type
+                ?.sourceDeclaration
                 ?.asImportAliasDeclaration()
 
         // then
@@ -43,6 +44,7 @@ class KoImportAliasForKoModuleProviderTest {
                 .properties()
                 .first { it.name == "libPropertyWithImportAliasType" }
                 .type
+                ?.sourceDeclaration
                 ?.asImportAliasDeclaration()
 
         // then
@@ -62,6 +64,7 @@ class KoImportAliasForKoModuleProviderTest {
                 .properties()
                 .first { it.name == "rootPropertyWithImportAliasType" }
                 .type
+                ?.sourceDeclaration
                 ?.asImportAliasDeclaration()
 
         // then
