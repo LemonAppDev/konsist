@@ -23,12 +23,12 @@ tests ([JUnit](https://junit.org/) / [Kotest](https://kotest.io/)).
 
 Gradle Kotlin:
 ```kotlin
-testImplementation("com.lemonappdev:konsist:1.0.0-alpha.1")
+testImplementation("com.lemonappdev:konsist:0.18.1")
 ```
 
 Gradle Groovy:
 ```groovy
-testImplementation "com.lemonappdev:konsist:1.0.0-alpha.1"
+testImplementation "com.lemonappdev:konsist:0.18.1"
 ```
 
 Maven:
