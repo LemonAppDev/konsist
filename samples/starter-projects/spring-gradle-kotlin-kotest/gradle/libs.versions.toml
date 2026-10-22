@@ -1,5 +1,5 @@
 [versions]
-spring-boot = "4.1.1"
+spring-boot = "4.1.2"
 spring-dep-management = "1.1.7"
 kotlin = "2.4.21"
 kotest = "6.2.6"
