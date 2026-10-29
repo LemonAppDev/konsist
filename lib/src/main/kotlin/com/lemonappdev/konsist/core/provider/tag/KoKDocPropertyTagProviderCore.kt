@@ -13,7 +13,7 @@ internal interface KoKDocPropertyTagProviderCore :
         get() =
             tags
                 .filter { it.name == KoKDocTag.PROPERTY }
-                .map { it as KoValuedKDocTagDeclaration }
+                .filterIsInstance<KoValuedKDocTagDeclaration>()
 
     override val numPropertyTags: Int
         get() = propertyTags.size

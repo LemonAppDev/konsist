@@ -13,6 +13,7 @@ import com.lemonappdev.konsist.core.provider.KoContainingFileProviderCore
 import com.lemonappdev.konsist.core.provider.KoContextParametersProviderCore
 import com.lemonappdev.konsist.core.provider.KoDeclarationCastProviderCore
 import com.lemonappdev.konsist.core.provider.KoDeclarationFullyQualifiedNameProviderCore
+import com.lemonappdev.konsist.core.provider.KoExplicitBackingFieldProviderCore
 import com.lemonappdev.konsist.core.provider.KoGetterProviderCore
 import com.lemonappdev.konsist.core.provider.KoIsConstructorDefinedProviderCore
 import com.lemonappdev.konsist.core.provider.KoIsExtensionProviderCore
@@ -50,6 +51,7 @@ import com.lemonappdev.konsist.core.provider.modifier.KoVisibilityModifierProvid
 import com.lemonappdev.konsist.core.provider.packagee.KoPackageDeclarationProviderCore
 import org.jetbrains.kotlin.com.intellij.psi.PsiElement
 import org.jetbrains.kotlin.psi.KtAnnotationEntry
+import org.jetbrains.kotlin.psi.KtBackingField
 import org.jetbrains.kotlin.psi.KtCallableDeclaration
 import org.jetbrains.kotlin.psi.KtDeclaration
 import org.jetbrains.kotlin.psi.KtElement
@@ -81,6 +83,7 @@ internal class KoPropertyDeclarationCore private constructor(
     KoIsConstructorDefinedProviderCore,
     KoContainingFileProviderCore,
     KoContextParametersProviderCore,
+    KoExplicitBackingFieldProviderCore,
     KoDeclarationFullyQualifiedNameProviderCore,
     KoPropertyDelegateProviderCore,
     KoNullableTypeProviderCore,
@@ -147,10 +150,13 @@ internal class KoPropertyDeclarationCore private constructor(
             KoPropertyCache.getOrCompute(cachedKtExpression, { cachedKtExpression = it }) {
                 ktCallableDeclaration
                     .children
-                    .filterNot { it is KtPropertyAccessor }
+                    .filterNot { it is KtPropertyAccessor || it is KtBackingField }
                     .filterIsInstance<KtExpression>()
                     .firstOrNull()
             }
+
+    override val isInitialized: Boolean
+        get() = super.isInitialized || ktProperty?.fieldDeclaration?.hasInitializer() == true
 
     override val isVal: Boolean
         get() =

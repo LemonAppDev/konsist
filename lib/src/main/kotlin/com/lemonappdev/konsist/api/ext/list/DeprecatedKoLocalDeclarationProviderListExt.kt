@@ -8,7 +8,7 @@ import com.lemonappdev.konsist.api.declaration.KoEnumConstantDeclaration
  *
  * @see KoEnumConstantDeclaration.localDeclarations
  */
-@Deprecated("Will be removed in version 1.0.0-beta.1", ReplaceWith("declarations()"))
+@Deprecated("Will be removed in version 1.0.0-rc.1", ReplaceWith("declarations()"))
 val <T : KoEnumConstantDeclaration> List<T>.localDeclarations: List<KoBaseDeclaration>
     get() = flatMap { it.localDeclarations }
 
@@ -18,7 +18,7 @@ val <T : KoEnumConstantDeclaration> List<T>.localDeclarations: List<KoBaseDeclar
  * @return A list containing declarations with any local declaration.
  * @see KoEnumConstantDeclaration.hasLocalDeclarations
  */
-@Deprecated("Will be removed in version 1.0.0-beta.1", ReplaceWith("withDeclarations()"))
+@Deprecated("Will be removed in version 1.0.0-rc.1", ReplaceWith("withDeclarations()"))
 fun <T : KoEnumConstantDeclaration> List<T>.withLocalDeclarations(): List<T> = filter { it.hasLocalDeclarations() }
 
 /**
@@ -27,7 +27,7 @@ fun <T : KoEnumConstantDeclaration> List<T>.withLocalDeclarations(): List<T> = f
  * @return A list containing declarations with no local declarations.
  * @see KoEnumConstantDeclaration.hasLocalDeclarations
  */
-@Deprecated("Will be removed in version 1.0.0-beta.1", ReplaceWith("withoutDeclarations()"))
+@Deprecated("Will be removed in version 1.0.0-rc.1", ReplaceWith("withoutDeclarations()"))
 fun <T : KoEnumConstantDeclaration> List<T>.withoutLocalDeclarations(): List<T> = filterNot { it.hasLocalDeclarations() }
 
 /**
@@ -37,7 +37,7 @@ fun <T : KoEnumConstantDeclaration> List<T>.withoutLocalDeclarations(): List<T> 
  * @return A list containing declarations with at least one local declaration satisfying the predicate.
  * @see KoEnumConstantDeclaration.hasLocalDeclaration
  */
-@Deprecated("Will be removed in version 1.0.0-beta.1", ReplaceWith("withDeclaration()"))
+@Deprecated("Will be removed in version 1.0.0-rc.1", ReplaceWith("withDeclaration()"))
 fun <T : KoEnumConstantDeclaration> List<T>.withLocalDeclaration(predicate: (KoBaseDeclaration) -> Boolean): List<T> =
     filter {
         it.hasLocalDeclaration(predicate)
@@ -50,7 +50,7 @@ fun <T : KoEnumConstantDeclaration> List<T>.withLocalDeclaration(predicate: (KoB
  * @return A list containing declarations without any local declaration satisfying the provided predicate.
  * @see KoEnumConstantDeclaration.hasLocalDeclaration
  */
-@Deprecated("Will be removed in version 1.0.0-beta.1", ReplaceWith("withoutDeclaration()"))
+@Deprecated("Will be removed in version 1.0.0-rc.1", ReplaceWith("withoutDeclaration()"))
 fun <T : KoEnumConstantDeclaration> List<T>.withoutLocalDeclaration(predicate: (KoBaseDeclaration) -> Boolean): List<T> =
     filterNot { it.hasLocalDeclaration(predicate) }
 
@@ -61,7 +61,7 @@ fun <T : KoEnumConstantDeclaration> List<T>.withoutLocalDeclaration(predicate: (
  * @return A filtered list containing declarations with all local declarations satisfying the predicate.
  * @see KoEnumConstantDeclaration.hasAllLocalDeclarations
  */
-@Deprecated("Will be removed in version 1.0.0-beta.1", ReplaceWith("withAllDeclarations()"))
+@Deprecated("Will be removed in version 1.0.0-rc.1", ReplaceWith("withAllDeclarations()"))
 fun <T : KoEnumConstantDeclaration> List<T>.withAllLocalDeclarations(predicate: (KoBaseDeclaration) -> Boolean): List<T> =
     filter {
         it.hasAllLocalDeclarations(predicate)
@@ -74,7 +74,7 @@ fun <T : KoEnumConstantDeclaration> List<T>.withAllLocalDeclarations(predicate: 
  * @return A list containing declarations that have at least one local declaration not satisfying the provided predicate.
  * @see KoEnumConstantDeclaration.hasAllLocalDeclarations
  */
-@Deprecated("Will be removed in version 1.0.0-beta.1", ReplaceWith("withoutAllDeclarations()"))
+@Deprecated("Will be removed in version 1.0.0-rc.1", ReplaceWith("withoutAllDeclarations()"))
 fun <T : KoEnumConstantDeclaration> List<T>.withoutAllLocalDeclarations(predicate: (KoBaseDeclaration) -> Boolean): List<T> =
     filterNot { it.hasAllLocalDeclarations(predicate) }
 
@@ -85,7 +85,7 @@ fun <T : KoEnumConstantDeclaration> List<T>.withoutAllLocalDeclarations(predicat
  * @return A list containing declarations with local declarations satisfying the predicate.
  * @see KoEnumConstantDeclaration.localDeclarations
  */
-@Deprecated("Will be removed in version 1.0.0-beta.1", ReplaceWith("withDeclarations()"))
+@Deprecated("Will be removed in version 1.0.0-rc.1", ReplaceWith("withDeclarations()"))
 fun <T : KoEnumConstantDeclaration> List<T>.withLocalDeclarations(predicate: (List<KoBaseDeclaration>) -> Boolean): List<T> =
     filter { predicate(it.localDeclarations) }
 
@@ -96,6 +96,6 @@ fun <T : KoEnumConstantDeclaration> List<T>.withLocalDeclarations(predicate: (Li
  * @return A list containing declarations without local declarations satisfying the predicate.
  * @see KoEnumConstantDeclaration.localDeclarations
  */
-@Deprecated("Will be removed in version 1.0.0-beta.1", ReplaceWith("withoutDeclarations()"))
+@Deprecated("Will be removed in version 1.0.0-rc.1", ReplaceWith("withoutDeclarations()"))
 fun <T : KoEnumConstantDeclaration> List<T>.withoutLocalDeclarations(predicate: (List<KoBaseDeclaration>) -> Boolean): List<T> =
     filterNot { predicate(it.localDeclarations) }

@@ -25,7 +25,6 @@ fun <T : KoImportAliasProvider> List<T>.withImportAliases(): List<T> = filter { 
  * @return A list containing declarations with no import alias.
  * @see KoImportAliasProvider.hasImportAliases
  */
-
 fun <T : KoImportAliasProvider> List<T>.withoutImportAliases(): List<T> = filterNot { it.hasImportAliases() }
 
 /**

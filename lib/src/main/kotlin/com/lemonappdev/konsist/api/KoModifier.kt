@@ -2,6 +2,8 @@ package com.lemonappdev.konsist.api
 
 /**
  * Represents a Kotlin modifier.
+ *
+ * @property type The modifier keyword, e.g. `abstract`.
  */
 enum class KoModifier(
     val type: String,

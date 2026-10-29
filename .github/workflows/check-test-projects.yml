@@ -17,7 +17,7 @@ jobs:
 
   # Test projects are tested against Konsist snapshot published by the Publish workflow
   published-snapshot:
-    name: Get Published Snapshot
+    name: Get Published Snapshot For Test Projects
     runs-on: ubuntu-latest
     permissions:
       actions: read
@@ -58,7 +58,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v7
         with:
-          python-version: '3.15.0'
+          python-version: '3.x'
 
       - name: Use Konsist Snapshot From Maven Central
         run: python misc/scripts/replace_konsist_version/use_konsist_snapshot_in_test_project.py misc/projects/test-projects/konsist-declaration-tester ${{ needs.published-snapshot.outputs.version }}
@@ -95,7 +95,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v7
         with:
-          python-version: '3.15.0'
+          python-version: '3.x'
 
       - name: Use Konsist Snapshot From Maven Central
         run: python misc/scripts/replace_konsist_version/use_konsist_snapshot_in_test_project.py misc/projects/test-projects/konsist-declaration-tester ${{ needs.published-snapshot.outputs.version }}
@@ -132,7 +132,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v7
         with:
-          python-version: '3.15.0'
+          python-version: '3.x'
 
       - name: Use Konsist Snapshot From Maven Central
         run: python misc/scripts/replace_konsist_version/use_konsist_snapshot_in_test_project.py misc/projects/test-projects/konsist-declaration-tester ${{ needs.published-snapshot.outputs.version }}
@@ -171,7 +171,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v7
         with:
-          python-version: '3.15.0'
+          python-version: '3.x'
 
       - name: Use Konsist Snapshot From Maven Central
         run: python misc/scripts/replace_konsist_version/use_konsist_snapshot_in_test_project.py misc/projects/test-projects/konsist-compiler-configuration-extension-storage-tester ${{ needs.published-snapshot.outputs.version }}
@@ -208,7 +208,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v7
         with:
-          python-version: '3.15.0'
+          python-version: '3.x'
 
       - name: Use Konsist Snapshot From Maven Central
         run: python misc/scripts/replace_konsist_version/use_konsist_snapshot_in_test_project.py misc/projects/test-projects/konsist-kotlin-compiler-classpath-conflict-tester ${{ needs.published-snapshot.outputs.version }}
@@ -245,7 +245,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v7
         with:
-          python-version: '3.15.0'
+          python-version: '3.x'
 
       - name: Use Konsist Snapshot From Maven Central
         run: python misc/scripts/replace_konsist_version/use_konsist_snapshot_in_test_project.py misc/projects/test-projects/konsist-path-tester ${{ needs.published-snapshot.outputs.version }}
@@ -286,7 +286,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v7
         with:
-          python-version: '3.15.0'
+          python-version: '3.x'
 
       - name: Use Konsist Snapshot From Maven Central
         run: python misc/scripts/replace_konsist_version/use_konsist_snapshot_in_test_project.py misc/projects/test-projects/konsist-path-tester ${{ needs.published-snapshot.outputs.version }}
@@ -323,7 +323,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v7
         with:
-          python-version: '3.15.0'
+          python-version: '3.x'
 
       - name: Use Konsist Snapshot From Maven Central
         run: python misc/scripts/replace_konsist_version/use_konsist_snapshot_in_test_project.py misc/projects/test-projects/konsist-path-tester ${{ needs.published-snapshot.outputs.version }}
@@ -358,7 +358,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v7
         with:
-          python-version: '3.15.0'
+          python-version: '3.x'
 
       - name: Use Konsist Snapshot From Maven Central
         run: python misc/scripts/replace_konsist_version/use_konsist_snapshot_in_test_project.py misc/projects/test-projects/konsist-root-path-gradle-tester ${{ needs.published-snapshot.outputs.version }}
@@ -403,7 +403,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v7
         with:
-          python-version: '3.15.0'
+          python-version: '3.x'
 
       - name: Use Konsist Snapshot From Maven Central
         run: python misc/scripts/replace_konsist_version/use_konsist_snapshot_in_test_project.py misc/projects/test-projects/konsist-root-path-gradle-tester ${{ needs.published-snapshot.outputs.version }}
@@ -443,7 +443,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v7
         with:
-          python-version: '3.15.0'
+          python-version: '3.x'
 
       - name: Use Konsist Snapshot From Maven Central
         run: python misc/scripts/replace_konsist_version/use_konsist_snapshot_in_test_project.py misc/projects/test-projects/konsist-root-path-gradle-tester ${{ needs.published-snapshot.outputs.version }}
@@ -481,7 +481,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v7
         with:
-          python-version: '3.15.0'
+          python-version: '3.x'
 
       - name: Use Konsist Snapshot From Maven Central
         run: python misc/scripts/replace_konsist_version/use_konsist_snapshot_in_test_project.py misc/projects/test-projects/konsist-root-path-nested-gradle-wrapper-tester ${{ needs.published-snapshot.outputs.version }}
@@ -526,7 +526,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v7
         with:
-          python-version: '3.15.0'
+          python-version: '3.x'
 
       - name: Use Konsist Snapshot From Maven Central
         run: python misc/scripts/replace_konsist_version/use_konsist_snapshot_in_test_project.py misc/projects/test-projects/konsist-root-path-nested-gradle-wrapper-tester ${{ needs.published-snapshot.outputs.version }}
@@ -566,7 +566,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v7
         with:
-          python-version: '3.15.0'
+          python-version: '3.x'
 
       - name: Use Konsist Snapshot From Maven Central
         run: python misc/scripts/replace_konsist_version/use_konsist_snapshot_in_test_project.py misc/projects/test-projects/konsist-root-path-nested-gradle-wrapper-tester ${{ needs.published-snapshot.outputs.version }}
@@ -604,7 +604,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v7
         with:
-          python-version: '3.15.0'
+          python-version: '3.x'
 
       - name: Add Konsist Snapshot Repository
         run: python misc/scripts/replace_konsist_version/add_konsist_snapshot_repository_to_config_file.py misc/projects/test-projects/konsist-root-path-maven-tester/pom.xml
@@ -648,7 +648,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v7
         with:
-          python-version: '3.15.0'
+          python-version: '3.x'
 
       - name: Add Konsist Snapshot Repository
         run: python misc/scripts/replace_konsist_version/add_konsist_snapshot_repository_to_config_file.py misc/projects/test-projects/konsist-root-path-maven-tester/pom.xml
@@ -688,7 +688,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v7
         with:
-          python-version: '3.15.0'
+          python-version: '3.x'
 
       - name: Add Konsist Snapshot Repository
         run: python misc/scripts/replace_konsist_version/add_konsist_snapshot_repository_to_config_file.py misc/projects/test-projects/konsist-root-path-maven-tester/pom.xml

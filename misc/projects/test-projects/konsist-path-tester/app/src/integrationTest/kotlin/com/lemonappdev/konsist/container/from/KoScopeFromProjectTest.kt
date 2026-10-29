@@ -90,7 +90,7 @@ class KoScopeFromProjectTest {
                 "$appIntegrationTestSourceSetDirectory/konsist/path/AbsolutePathTest.kt",
                 "$appMainSourceSetDirectory/fixture/AppClass.kt",
                 "$appMainSourceSetDirectory/fixture/data/AppDataClass.kt",
-                "$projectRootDirectory/buildSrc/RootBuildScrKotlinClass.kt",
+                "$projectRootDirectory/buildSrc/src/main/kotlin/RootBuildScrKotlinClass.kt",
                 "$dataMainSourceSetDirectory/fixture/LibClass.kt",
                 "$dataMainSourceSetDirectory/fixture/data/LibDataClass.kt",
                 "$dataTestSourceSetDirectory/fixture/LibClassSpec.kt",

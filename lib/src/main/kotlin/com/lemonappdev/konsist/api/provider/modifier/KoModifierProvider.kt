@@ -25,11 +25,11 @@ interface KoModifierProvider : KoBaseProvider {
     fun hasModifiers(): Boolean
 
     /**
-     * Determines whether the declaration has at least one specified modifier.
+     * Determines whether the declaration has at least one of the specified modifiers.
      *
      * @param modifier the modifier to check.
      * @param modifiers the modifiers to check.
-     * @return `true` if there is a matching declaration, `false` otherwise.
+     * @return `true` if the declaration has at least one of the specified modifiers, `false` otherwise.
      */
     fun hasModifier(
         modifier: KoModifier,
@@ -37,10 +37,10 @@ interface KoModifierProvider : KoBaseProvider {
     ): Boolean
 
     /**
-     * Determines whether the declaration has at least one specified modifier.
+     * Determines whether the declaration has at least one of the specified modifiers.
      *
      * @param modifiers the modifiers to check.
-     * @return `true` if there is a matching declaration, `false` otherwise.
+     * @return `true` if the declaration has at least one of the specified modifiers, `false` otherwise.
      */
     fun hasModifier(modifiers: Collection<KoModifier>): Boolean
 

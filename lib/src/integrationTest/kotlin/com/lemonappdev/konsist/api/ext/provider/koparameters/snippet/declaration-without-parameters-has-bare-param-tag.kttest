@@ -1,0 +1,6 @@
+/**
+ * Fixture description
+ *
+ * @param
+ */
+fun fixtureFunction() {}

@@ -29,6 +29,23 @@ class KoKDocDeclarationForKoKDocSampleTagProviderTest {
         }
     }
 
+    @Test
+    fun `kdoc-with-bare-tag`() {
+        // given
+        val sut =
+            getSnippetFile("kdoc-with-bare-tag")
+                .classes()
+                .first()
+                .kDoc
+
+        // then
+        assertSoftly(sut) {
+            it?.sampleTags shouldBeEqualTo emptyList()
+            it?.numSampleTags shouldBeEqualTo 0
+            it?.hasSampleTags shouldBeEqualTo false
+        }
+    }
+
     @ParameterizedTest
     @MethodSource("provideValues")
     fun `sample-tag`(

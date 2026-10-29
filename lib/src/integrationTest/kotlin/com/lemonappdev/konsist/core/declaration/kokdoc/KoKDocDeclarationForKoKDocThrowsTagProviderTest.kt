@@ -29,6 +29,23 @@ class KoKDocDeclarationForKoKDocThrowsTagProviderTest {
         }
     }
 
+    @Test
+    fun `kdoc-with-bare-throws-tag`() {
+        // given
+        val sut =
+            getSnippetFile("kdoc-with-bare-throws-tag")
+                .classes()
+                .first()
+                .kDoc
+
+        // then
+        assertSoftly(sut) {
+            it?.throwsTags shouldBeEqualTo emptyList()
+            it?.numThrowsTags shouldBeEqualTo 0
+            it?.hasThrowsTags shouldBeEqualTo false
+        }
+    }
+
     @ParameterizedTest
     @MethodSource("provideValues")
     fun `throws-tag`(

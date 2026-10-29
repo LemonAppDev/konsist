@@ -13,7 +13,7 @@ internal interface KoKDocThrowsTagProviderCore :
         get() =
             tags
                 .filter { it.name == KoKDocTag.THROWS }
-                .map { it as KoValuedKDocTagDeclaration }
+                .filterIsInstance<KoValuedKDocTagDeclaration>()
 
     override val numThrowsTags: Int
         get() = throwsTags.size

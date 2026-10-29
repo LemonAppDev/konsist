@@ -37,7 +37,7 @@ internal object MutableTypeUtil {
      * it declares a `val` property whose type is mutable or has a mutable type argument (at any nesting level),
      * or any of its parents is mutable.
      * Properties of nested declarations (including companion objects) are not checked.
-     * Properties with an inferred type are not checked.
+     * Types of properties with an inferred type are not checked.
      * Visited declarations are tracked to avoid infinite recursion for self-referencing types and when parents are
      * resolved ambiguously.
      */

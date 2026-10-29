@@ -4,9 +4,11 @@ import com.lemonappdev.konsist.api.declaration.KoFileDeclaration
 import com.lemonappdev.konsist.core.cache.KoFileDeclarationCache
 import com.lemonappdev.konsist.core.ext.isKotlinFile
 import com.lemonappdev.konsist.core.ext.toKoFile
-import com.lemonappdev.konsist.core.ext.toMacOsSeparator
 import com.lemonappdev.konsist.core.filesystem.PathProvider
 import com.lemonappdev.konsist.core.filesystem.ProjectDirectoryFilter
+import com.lemonappdev.konsist.core.filesystem.ProjectKotlinFileScanner
+import com.lemonappdev.konsist.core.util.PackageNameReader
+import com.lemonappdev.konsist.core.util.PathUtil
 import kotlinx.coroutines.CompletableDeferred
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.Dispatchers
@@ -18,11 +20,9 @@ import kotlinx.coroutines.sync.withLock
 import java.io.File
 
 internal object KoFileDeclarationProvider {
-    private const val GRADLE_BUILD_CONFIG_DIRECTORY_NAME = "buildsrc"
-
     private val projectRootDir: File = File(PathProvider.rootProjectPath)
 
-    private val projectDirectoryFilter = ProjectDirectoryFilter(projectRootDir)
+    private val projectKotlinFileScanner = ProjectKotlinFileScanner(projectRootDir)
 
     private val mutex: Mutex = Mutex()
 
@@ -37,7 +37,7 @@ internal object KoFileDeclarationProvider {
     /**
      * Retrieves a list of Kotlin files from the project's root directory. The directory is scanned once, files are not
      * parsed. Directories ignored by [ProjectDirectoryFilter] (build outputs, hidden directories, node_modules) are not
-     * scanned.
+     * scanned. Directories are scanned in parallel (see [ProjectKotlinFileScanner]).
      *
      * Threading Strategy:
      * Ensures thread-safe initialization of a single deferred operation to scan the directory, using a mutex to guard
@@ -53,13 +53,8 @@ internal object KoFileDeclarationProvider {
         coroutineScope {
             val currentDeferred: Deferred<List<File>> =
                 mutex.withLock {
-                    projectKotlinFilesDeferred ?: async(Dispatchers.IO) {
-                        projectRootDir
-                            .walk()
-                            .onEnter { !projectDirectoryFilter.isIgnored(it) }
-                            .filter { it.isKotlinFile }
-                            .toList()
-                    }.also { projectKotlinFilesDeferred = it }
+                    projectKotlinFilesDeferred ?: async(Dispatchers.IO) { projectKotlinFileScanner.scan() }
+                        .also { projectKotlinFilesDeferred = it }
                 }
 
             currentDeferred.await()
@@ -92,19 +87,24 @@ internal object KoFileDeclarationProvider {
     }
 
     /**
-     * Returns true if the file is located in the Gradle build configuration directory (buildSrc).
+     * Returns the package name of the file (empty for the file without package) or `null` when the file can't be read.
+     * Package name of the parsed file is taken from its package directive, other files are not parsed
+     * (see [PackageNameReader]).
      */
-    fun isBuildConfigFile(path: String): Boolean =
-        path
-            .lowercase()
-            .toMacOsSeparator()
-            .contains("/$GRADLE_BUILD_CONFIG_DIRECTORY_NAME")
+    fun getPackageName(file: File): String? =
+        KoFileDeclarationCache.getInstanceOrNull(file)?.let { it.packagee?.name.orEmpty() }
+            ?: PackageNameReader.getPackageName(file)
+
+    /**
+     * Returns true if the file is located in the Gradle build configuration directory (buildSrc).
+     * Only the path relative to the project root is checked (see [PathUtil.isBuildConfigPath]).
+     */
+    fun isBuildConfigFile(path: String): Boolean = PathUtil.isBuildConfigPath(PathUtil.getProjectPath(path, PathProvider.rootProjectPath))
 
     private fun parseKotlinFile(file: File): KoFileDeclaration? {
         /*
         Due to asynchronous execution, the file's state may have changed since the initial file tree walk.
-        This is particularly common with code generators. We don't exclude build or generated files at this stage
-        (that happens later), so we need to be more permissive in the initial loading process.
+        This is particularly common with code generators.
         We verify the file is still a valid Kotlin file before parsing to handle cases where files may have been
         removed or altered. If the file is no longer valid, we return null instead of attempting to parse it.
          */

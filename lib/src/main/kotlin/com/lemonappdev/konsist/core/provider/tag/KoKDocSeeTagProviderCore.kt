@@ -13,7 +13,7 @@ internal interface KoKDocSeeTagProviderCore :
         get() =
             tags
                 .filter { it.name == KoKDocTag.SEE }
-                .map { it as KoValuedKDocTagDeclaration }
+                .filterIsInstance<KoValuedKDocTagDeclaration>()
 
     override val numSeeTags: Int
         get() = seeTags.size

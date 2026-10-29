@@ -1,10 +1,17 @@
 package com.lemonappdev.konsist.api.ext.list
 
+import com.lemonappdev.konsist.api.declaration.type.KoTypeDeclaration
+import com.lemonappdev.konsist.api.provider.KoDeclarationCastProvider
+import com.lemonappdev.konsist.api.provider.KoFullyQualifiedNameProvider
 import com.lemonappdev.konsist.api.provider.KoSourceTypeProvider
+import com.lemonappdev.konsist.core.util.TypeUtil
 import kotlin.reflect.KClass
 
 /**
- * List containing declarations with source type of.
+ * List containing declarations with source type of the specified Kotlin class(es).
+ *
+ * Types are matched by fully qualified name. Type arguments and nullability are ignored,
+ * e.g. `MyClass<String>?` matches `MyClass::class`. Type aliases and import aliases are resolved to the aliased type.
  *
  * @param kClass The Kotlin class representing the source type to include.
  * @param kClasses The Kotlin classes representing the source types to include.
@@ -17,7 +24,10 @@ fun <T : KoSourceTypeProvider> List<T>.withSourceTypeOf(
 ): List<T> = withSourceTypeOf(listOf(kClass, *kClasses))
 
 /**
- * List containing declarations with source type of.
+ * List containing declarations with source type of the specified Kotlin class(es).
+ *
+ * Types are matched by fully qualified name. Type arguments and nullability are ignored,
+ * e.g. `MyClass<String>?` matches `MyClass::class`. Type aliases and import aliases are resolved to the aliased type.
  *
  * @param kClasses The Kotlin classes representing the source types to include.
  * @return A list containing declarations with the source type matching any of the specified types.
@@ -27,12 +37,15 @@ fun <T : KoSourceTypeProvider> List<T>.withSourceTypeOf(kClasses: Collection<KCl
     filter {
         when {
             kClasses.isEmpty() -> true
-            else -> kClasses.any { kClass -> it.sourceType == kClass.simpleName }
+            else -> kClasses.any { kClass -> it.hasSourceTypeOf(kClass) }
         }
     }
 
 /**
- * List containing declarations without source type of.
+ * List containing declarations without source type of the specified Kotlin class(es).
+ *
+ * Types are matched by fully qualified name. Type arguments and nullability are ignored,
+ * e.g. `MyClass<String>?` matches `MyClass::class`. Type aliases and import aliases are resolved to the aliased type.
  *
  * @param kClass The Kotlin class representing the source type to exclude.
  * @param kClasses The Kotlin classes representing the source types to exclude.
@@ -45,7 +58,10 @@ fun <T : KoSourceTypeProvider> List<T>.withoutSourceTypeOf(
 ): List<T> = withoutSourceTypeOf(listOf(kClass, *kClasses))
 
 /**
- * List containing declarations without source type of.
+ * List containing declarations without source type of the specified Kotlin class(es).
+ *
+ * Types are matched by fully qualified name. Type arguments and nullability are ignored,
+ * e.g. `MyClass<String>?` matches `MyClass::class`. Type aliases and import aliases are resolved to the aliased type.
  *
  * @param kClasses The Kotlin classes representing the source types to exclude.
  * @return A list containing declarations without the source type matching any of the specified types.
@@ -55,7 +71,7 @@ fun <T : KoSourceTypeProvider> List<T>.withoutSourceTypeOf(kClasses: Collection<
     filterNot {
         when {
             kClasses.isEmpty() -> true
-            else -> kClasses.any { kClass -> it.sourceType == kClass.simpleName }
+            else -> kClasses.any { kClass -> it.hasSourceTypeOf(kClass) }
         }
     }
 
@@ -116,7 +132,10 @@ fun <T : KoSourceTypeProvider> List<T>.withoutSourceType(names: Collection<Strin
     }
 
 /**
- * List containing declarations with bare source type of.
+ * List containing declarations with bare source type of the specified Kotlin class(es).
+ *
+ * Types are matched by fully qualified name. Type arguments and nullability are ignored,
+ * e.g. `MyClass<String>?` matches `MyClass::class`. Type aliases and import aliases are resolved to the aliased type.
  *
  * @param kClass The Kotlin class representing the bare source type to include.
  * @param kClasses The Kotlin classes representing the bare source types to include.
@@ -129,7 +148,10 @@ fun <T : KoSourceTypeProvider> List<T>.withBareSourceTypeOf(
 ): List<T> = withBareSourceTypeOf(listOf(kClass, *kClasses))
 
 /**
- * List containing declarations with bare source type of.
+ * List containing declarations with bare source type of the specified Kotlin class(es).
+ *
+ * Types are matched by fully qualified name. Type arguments and nullability are ignored,
+ * e.g. `MyClass<String>?` matches `MyClass::class`. Type aliases and import aliases are resolved to the aliased type.
  *
  * @param kClasses The Kotlin classes representing the bare source types to include.
  * @return A list containing declarations with the bare source type matching any of the specified types.
@@ -139,12 +161,15 @@ fun <T : KoSourceTypeProvider> List<T>.withBareSourceTypeOf(kClasses: Collection
     filter {
         when {
             kClasses.isEmpty() -> true
-            else -> kClasses.any { kClass -> it.bareSourceType == kClass.simpleName }
+            else -> kClasses.any { kClass -> it.hasSourceTypeOf(kClass) }
         }
     }
 
 /**
- * List containing declarations without bare source type of.
+ * List containing declarations without bare source type of the specified Kotlin class(es).
+ *
+ * Types are matched by fully qualified name. Type arguments and nullability are ignored,
+ * e.g. `MyClass<String>?` matches `MyClass::class`. Type aliases and import aliases are resolved to the aliased type.
  *
  * @param kClass The Kotlin class representing the bare source type to exclude.
  * @param kClasses The Kotlin classes representing the bare source types to exclude.
@@ -157,7 +182,10 @@ fun <T : KoSourceTypeProvider> List<T>.withoutBareSourceTypeOf(
 ): List<T> = withoutBareSourceTypeOf(listOf(kClass, *kClasses))
 
 /**
- * List containing declarations without bare source type of.
+ * List containing declarations without bare source type of the specified Kotlin class(es).
+ *
+ * Types are matched by fully qualified name. Type arguments and nullability are ignored,
+ * e.g. `MyClass<String>?` matches `MyClass::class`. Type aliases and import aliases are resolved to the aliased type.
  *
  * @param kClasses The Kotlin classes representing the bare source types to exclude.
  * @return A list containing declarations without the bare source type matching any of the specified types.
@@ -167,7 +195,7 @@ fun <T : KoSourceTypeProvider> List<T>.withoutBareSourceTypeOf(kClasses: Collect
     filterNot {
         when {
             kClasses.isEmpty() -> true
-            else -> kClasses.any { kClass -> it.bareSourceType == kClass.simpleName }
+            else -> kClasses.any { kClass -> it.hasSourceTypeOf(kClass) }
         }
     }
 
@@ -226,3 +254,21 @@ fun <T : KoSourceTypeProvider> List<T>.withoutBareSourceType(names: Collection<S
             else -> names.any { type -> it.bareSourceType == type }
         }
     }
+
+private fun KoSourceTypeProvider.hasSourceTypeOf(kClass: KClass<*>): Boolean =
+    when (this) {
+        is KoTypeDeclaration -> sourceDeclaration.hasSourceDeclarationOf(kClass)
+        is KoFullyQualifiedNameProvider -> TypeUtil.matchesKClass(fullyQualifiedName, kClass)
+        else -> bareSourceType == kClass.simpleName
+    }
+
+private fun KoDeclarationCastProvider?.hasSourceDeclarationOf(kClass: KClass<*>): Boolean {
+    val importAlias = this?.asImportAliasDeclaration()
+    val typeAlias = this?.asTypeAliasDeclaration()
+
+    return when {
+        importAlias != null -> TypeUtil.matchesKClass(importAlias.importDirective.name, kClass)
+        typeAlias != null -> typeAlias.type.hasSourceTypeOf(kClass)
+        else -> TypeUtil.matchesKClass((this as? KoFullyQualifiedNameProvider)?.fullyQualifiedName, kClass)
+    }
+}

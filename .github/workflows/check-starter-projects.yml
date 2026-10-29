@@ -56,7 +56,7 @@ jobs:
 
   # Starter projects are tested against Konsist snapshot published by the Publish workflow
   published-snapshot:
-    name: Get Published Snapshot
+    name: Get Published Snapshot For Starter Projects
     needs: get-github-context
     if: |
       needs.get-github-context.outputs.base_ref_branch == 'main' ||
@@ -107,7 +107,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v7
         with:
-          python-version: '3.15.0'
+          python-version: '3.x'
 
       - name: Add Konsist Snapshot Repository
         run: python3 misc/scripts/replace_konsist_version/add_konsist_snapshot_repository_to_config_file.py samples/starter-projects/android-gradle-groovy-junit-4/settings.gradle
@@ -145,7 +145,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v7
         with:
-          python-version: '3.15.0'
+          python-version: '3.x'
 
       - name: Add Konsist Snapshot Repository
         run: python3 misc/scripts/replace_konsist_version/add_konsist_snapshot_repository_to_config_file.py samples/starter-projects/android-gradle-groovy-junit-5/settings.gradle
@@ -183,7 +183,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v7
         with:
-          python-version: '3.15.0'
+          python-version: '3.x'
 
       - name: Add Konsist Snapshot Repository
         run: python3 misc/scripts/replace_konsist_version/add_konsist_snapshot_repository_to_config_file.py samples/starter-projects/android-gradle-groovy-kotest/settings.gradle
@@ -221,7 +221,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v7
         with:
-          python-version: '3.15.0'
+          python-version: '3.x'
 
       - name: Add Konsist Snapshot Repository
         run: python3 misc/scripts/replace_konsist_version/add_konsist_snapshot_repository_to_config_file.py samples/starter-projects/android-gradle-kotlin-junit-4/settings.gradle.kts
@@ -258,7 +258,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v7
         with:
-          python-version: '3.15.0'
+          python-version: '3.x'
 
       - name: Add Konsist Snapshot Repository
         run: python3 misc/scripts/replace_konsist_version/add_konsist_snapshot_repository_to_config_file.py samples/starter-projects/android-gradle-kotlin-junit-5/settings.gradle.kts
@@ -295,7 +295,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v7
         with:
-          python-version: '3.15.0'
+          python-version: '3.x'
 
       - name: Add Konsist Snapshot Repository
         run: python3 misc/scripts/replace_konsist_version/add_konsist_snapshot_repository_to_config_file.py samples/starter-projects/android-gradle-kotlin-kotest/settings.gradle.kts
@@ -332,7 +332,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v7
         with:
-          python-version: '3.15.0'
+          python-version: '3.x'
 
       - name: Add Konsist Snapshot Repository
         run: python3 misc/scripts/replace_konsist_version/add_konsist_snapshot_repository_to_config_file.py samples/starter-projects/spring-gradle-kotlin-junit-5/build.gradle.kts
@@ -369,7 +369,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v7
         with:
-          python-version: '3.15.0'
+          python-version: '3.x'
 
       - name: Add Konsist Snapshot Repository
         run: python3 misc/scripts/replace_konsist_version/add_konsist_snapshot_repository_to_config_file.py samples/starter-projects/spring-gradle-kotlin-kotest/build.gradle.kts
@@ -406,7 +406,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v7
         with:
-          python-version: '3.15.0'
+          python-version: '3.x'
 
       - name: Add Konsist Snapshot Repository
         run: python3 misc/scripts/replace_konsist_version/add_konsist_snapshot_repository_to_config_file.py samples/starter-projects/spring-gradle-groovy-junit-5/build.gradle
@@ -444,7 +444,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v7
         with:
-          python-version: '3.15.0'
+          python-version: '3.x'
 
       - name: Add Konsist Snapshot Repository
         run: python3 misc/scripts/replace_konsist_version/add_konsist_snapshot_repository_to_config_file.py samples/starter-projects/spring-gradle-groovy-kotest/build.gradle
@@ -481,7 +481,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v7
         with:
-          python-version: '3.15.0'
+          python-version: '3.x'
 
       - name: Add Konsist Snapshot Repository
         run: python3 misc/scripts/replace_konsist_version/add_konsist_snapshot_repository_to_config_file.py samples/starter-projects/spring-maven-junit5/pom.xml
@@ -518,7 +518,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v7
         with:
-          python-version: '3.15.0'
+          python-version: '3.x'
 
       - name: Add Konsist Snapshot Repository
         run: python3 misc/scripts/replace_konsist_version/add_konsist_snapshot_repository_to_config_file.py samples/starter-projects/spring-maven-kotest/pom.xml
@@ -529,73 +529,76 @@ jobs:
       - name: Run Konsist Test
         run: cd samples/starter-projects/spring-maven-kotest/ && mvn test
 
-#  kmp-gradle-kotlin-junit5:
-#    name: KMP Gradle Kotlin Junit 5
-#    needs: [ get-github-context, published-snapshot ]
-#    runs-on: ubuntu-latest
-#    if: |
-#      needs.get-github-context.outputs.base_ref_branch == 'main' ||
-#      startsWith(needs.get-github-context.outputs.current_branch, 'release/') ||
-#      startsWith(needs.get-github-context.outputs.current_branch, 'renovate/') ||
-#      contains(needs.get-github-context.outputs.current_branch, 'starter-projects') ||
-#      contains(needs.get-github-context.outputs.all_changed_files, 'samples/starter-projects/')
-#
-#    steps:
-#      - name: Checkout
-#        uses: actions/checkout@v4
-#
-#      - name: Set up JDK
-#        uses: actions/setup-java@v3
-#        with:
-#          java-version: 25
-#          distribution: 'corretto'
-#
-#      - name: Set up Python
-#        uses: actions/setup-python@v4
-#        with:
-#          python-version: '3.11.3'
-#
-#      - name: Add Konsist Snapshot Repository
-#        run: python3 misc/scripts/replace_konsist_version/add_konsist_snapshot_repository_to_config_file.py samples/starter-projects/kmp-gradle-kotlin-junit5/build.gradle.kts
-#
-#      - name: Replace Konsist Version
-#        run: python3 misc/scripts/replace_konsist_version/replace_konsist_version_gradle_groovy.py samples/starter-projects/kmp-gradle-kotlin-junit5/gradle/libs.versions.toml ${{ needs.published-snapshot.outputs.version }}
-##
-#      - name: Run Konsist Test
-#        run: cd samples/starter-projects/kmp-gradle-kotlin-junit5/ && ./gradlew test
+  kmp-gradle-kotlin-junit5:
+    name: KMP Gradle Kotlin Junit 5
+    needs: [ get-github-context, published-snapshot ]
+    runs-on: ubuntu-latest
+    if: |
+      needs.get-github-context.outputs.base_ref_branch == 'main' ||
+      startsWith(needs.get-github-context.outputs.current_branch, 'release/') ||
+      startsWith(needs.get-github-context.outputs.current_branch, 'renovate/') ||
+      contains(needs.get-github-context.outputs.current_branch, 'starter-projects') ||
+      contains(needs.get-github-context.outputs.all_changed_files, 'samples/starter-projects/')
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
 
+      - name: Set up JDK
+        uses: actions/setup-java@v6
+        with:
+          java-version: 25
+          distribution: 'corretto'
 
-#  kmp-gradle-kotlin-kotest:
-#    name: KMP Gradle Kotlin Kotest
-#    needs: [ get-github-context, published-snapshot ]
-#    runs-on: ubuntu-latest
-#    if: |
-#      needs.get-github-context.outputs.base_ref_branch == 'main' ||
-#      startsWith(needs.get-github-context.outputs.current_branch, 'release/') ||
-#      startsWith(needs.get-github-context.outputs.current_branch, 'renovate/') ||
-#      contains(needs.get-github-context.outputs.current_branch, 'starter-projects') ||
-#      contains(needs.get-github-context.outputs.all_changed_files, 'samples/starter-projects/')
-#
-#    steps:
-#      - name: Checkout
-#        uses: actions/checkout@v4
-#
-#      - name: Set up JDK
-#        uses: actions/setup-java@v3
-#        with:
-#          java-version: 25
-#          distribution: 'corretto'
-#
-#      - name: Set up Python
-#        uses: actions/setup-python@v4
-#        with:
-#          python-version: '3.11.3'
-#
-#      - name: Add Konsist Snapshot Repository
-#        run: python3 misc/scripts/replace_konsist_version/add_konsist_snapshot_repository_to_config_file.py samples/starter-projects/kmp-gradle-kotlin-kotest/build.gradle.kts
-#
-#      - name: Replace Konsist Version
-#        run: python3 misc/scripts/replace_konsist_version/replace_konsist_version_gradle_groovy.py samples/starter-projects/kmp-gradle-kotlin-kotest/gradle/libs.versions.toml ${{ needs.published-snapshot.outputs.version }}
-##
-#      - name: Run Konsist Test
-#        run: cd samples/starter-projects/kmp-gradle-kotlin-kotest/ && ./gradlew test
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v6
+
+      - name: Set up Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: '3.x'
+
+      - name: Add Konsist Snapshot Repository
+        run: python3 misc/scripts/replace_konsist_version/add_konsist_snapshot_repository_to_config_file.py samples/starter-projects/kmp-gradle-kotlin-junit5/settings.gradle.kts
+
+      - name: Replace Konsist Version
+        run: python3 misc/scripts/replace_konsist_version/replace_konsist_version_gradle_groovy.py samples/starter-projects/kmp-gradle-kotlin-junit5/gradle/libs.versions.toml ${{ needs.published-snapshot.outputs.version }}
+
+      - name: Run Konsist Test
+        run: cd samples/starter-projects/kmp-gradle-kotlin-junit5/ && ./gradlew konsistTest:test
+
+  kmp-gradle-kotlin-kotest:
+    name: KMP Gradle Kotlin Kotest
+    needs: [ get-github-context, published-snapshot ]
+    runs-on: ubuntu-latest
+    if: |
+      needs.get-github-context.outputs.base_ref_branch == 'main' ||
+      startsWith(needs.get-github-context.outputs.current_branch, 'release/') ||
+      startsWith(needs.get-github-context.outputs.current_branch, 'renovate/') ||
+      contains(needs.get-github-context.outputs.current_branch, 'starter-projects') ||
+      contains(needs.get-github-context.outputs.all_changed_files, 'samples/starter-projects/')
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Set up JDK
+        uses: actions/setup-java@v6
+        with:
+          java-version: 25
+          distribution: 'corretto'
+
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v6
+
+      - name: Set up Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: '3.x'
+
+      - name: Add Konsist Snapshot Repository
+        run: python3 misc/scripts/replace_konsist_version/add_konsist_snapshot_repository_to_config_file.py samples/starter-projects/kmp-gradle-kotlin-kotest/settings.gradle.kts
+
+      - name: Replace Konsist Version
+        run: python3 misc/scripts/replace_konsist_version/replace_konsist_version_gradle_groovy.py samples/starter-projects/kmp-gradle-kotlin-kotest/gradle/libs.versions.toml ${{ needs.published-snapshot.outputs.version }}
+
+      - name: Run Konsist Test
+        run: cd samples/starter-projects/kmp-gradle-kotlin-kotest/ && ./gradlew konsistTest:test

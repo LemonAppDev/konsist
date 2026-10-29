@@ -1,11 +1,14 @@
 package com.lemonappdev.konsist.api.ext.provider
 
+import com.lemonappdev.konsist.api.KoKDocTag
 import com.lemonappdev.konsist.api.declaration.KoPrimaryConstructorDeclaration
 import com.lemonappdev.konsist.api.provider.KoKDocProvider
 import com.lemonappdev.konsist.api.provider.KoParametersProvider
 
 /**
- * Determines whether the declaration has a valid KDoc with a PARAM tag.
+ * Determines whether the declaration has a valid KDoc with a PARAM tag for each parameter.
+ * PARAM tag values must match the parameter names. A declaration without parameters is valid if it has no PARAM tags.
+ * For a primary constructor, the KDoc of the containing declaration is checked.
  *
  * @return `true` if the declaration has a valid KDoc with the PARAM tag, `false` otherwise.
  */
@@ -20,5 +23,5 @@ fun <T : KoParametersProvider> T.hasValidKDocParamTags(): Boolean =
 
         parameters.map { it.name }.sorted() == kDoc?.paramTags?.map { it.value }?.sorted()
     } else {
-        (this as? KoKDocProvider)?.kDoc?.paramTags?.isEmpty() ?: true
+        (this as? KoKDocProvider)?.kDoc?.hasTag(KoKDocTag.PARAM) != true
     }

@@ -88,6 +88,30 @@ class KoPropertyProviderExtTest {
     }
 
     @Test
+    fun `declaration-with-properties-and-nested-class-has-valid-kdoc-property-tag`() {
+        // given
+        val sut =
+            getSnippetFile("declaration-with-properties-and-nested-class-has-valid-kdoc-property-tag")
+                .classes()
+                .first { it.name == "FixtureClass" }
+
+        // then
+        sut.hasValidKDocPropertyTags() shouldBeEqualTo true
+    }
+
+    @Test
+    fun `declaration-without-properties-and-with-nested-class-has-no-kdoc`() {
+        // given
+        val sut =
+            getSnippetFile("declaration-without-properties-and-with-nested-class-has-no-kdoc")
+                .classes()
+                .first { it.name == "FixtureClass" }
+
+        // then
+        sut.hasValidKDocPropertyTags() shouldBeEqualTo true
+    }
+
+    @Test
     fun `declaration-without-properties-has-valid-kdoc-property-tag`() {
         // given
         val sut =

@@ -11,10 +11,12 @@ import com.lemonappdev.konsist.api.ext.list.withAnnotationOf
 import com.lemonappdev.konsist.api.ext.list.withNameEndingWith
 import com.lemonappdev.konsist.api.ext.list.withParentClassOf
 import com.lemonappdev.konsist.api.ext.list.withParentNamed
+import com.lemonappdev.konsist.api.ext.list.withTypeOf
 import com.lemonappdev.konsist.api.ext.list.withoutClassDeclaration
 import com.lemonappdev.konsist.api.ext.list.withoutKotlinBasicTypeDeclaration
 import com.lemonappdev.konsist.api.verify.assertFalse
 import com.lemonappdev.konsist.api.verify.assertTrue
+import kotlinx.coroutines.flow.StateFlow
 
 class AndroidTestSnippets {
     fun `classes extending 'ViewModel' should have 'ViewModel' suffix`() {
@@ -35,6 +37,16 @@ class AndroidTestSnippets {
             .assertTrue {
                 it.hasType { type -> type.bareSourceType == "Flow" }
             }
+    }
+
+    fun `Every 'ViewModel' 'StateFlow' property has explicit backing field`() {
+        Konsist
+            .scopeFromProject()
+            .classes()
+            .withParentClassOf(ViewModel::class)
+            .properties()
+            .withTypeOf(StateFlow::class)
+            .assertTrue { it.hasExplicitBackingField }
     }
 
     fun `'Repository' classes should reside in 'repository' package`() {

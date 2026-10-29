@@ -15,6 +15,7 @@ inline fun <reified T> KoReturnProvider.hasReturnTypeOf(): Boolean = hasReturnTy
 
 /**
  * Determines whether the declaration has a valid KDoc with a RETURN tag.
+ * A declaration with an explicitly declared non-`Unit` return type must have a RETURN tag. Otherwise, it must not have one.
  *
  * @return `true` if the declaration has a valid KDoc with the RETURN tag, `false` otherwise.
  */

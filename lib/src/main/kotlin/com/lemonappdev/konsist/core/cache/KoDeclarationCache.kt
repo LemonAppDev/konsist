@@ -43,7 +43,7 @@ internal class KoDeclarationCache<T : KoBaseProvider> {
 
     /**
      * Declaration instances of the element for each containing declaration. Element usually has one containing
-     * declaration (e.g. parameter defining property has a different one for parameter and property declaration).
+     * declaration, but e.g. parameter defining property has a different one for parameter and property declaration.
      */
     private class Entry<T>(
         private val containingDeclaration: KoBaseProvider?,

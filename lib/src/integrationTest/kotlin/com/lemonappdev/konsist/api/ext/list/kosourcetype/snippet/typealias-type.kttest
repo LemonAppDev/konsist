@@ -1,0 +1,5 @@
+import com.lemonappdev.konsist.testdata.FixtureType
+
+val fixtureProperty: SampleTypeAlias = FixtureType()
+
+typealias SampleTypeAlias = FixtureType

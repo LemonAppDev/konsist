@@ -44,7 +44,7 @@ fun <T : KoSourceDeclarationProvider> List<T>.withoutSourceDeclaration(predicate
     filterNot { it.sourceDeclaration?.let { declaration -> predicate(declaration) } == true }
 
 /**
- * List containing declarations with source declaration of.
+ * List containing declarations with source declaration of the specified Kotlin class(es).
  *
  * @param kClass The Kotlin class representing the source declaration to include.
  * @param kClasses The Kotlin class(es) representing the source declaration(s) to include.
@@ -57,7 +57,7 @@ fun <T : KoSourceDeclarationProvider> List<T>.withSourceDeclarationOf(
 ): List<T> = withSourceDeclarationOf(listOf(kClass, *kClasses))
 
 /**
- * List containing declarations with source declaration of.
+ * List containing declarations with source declaration of the specified Kotlin class(es).
  *
  * @param kClasses The Kotlin class(es) representing the source declaration(s) to include.
  * @return A list containing declarations with the source declaration of the specified Kotlin class(es).
@@ -72,7 +72,7 @@ fun <T : KoSourceDeclarationProvider> List<T>.withSourceDeclarationOf(kClasses: 
     }
 
 /**
- * List containing declarations without source declaration of.
+ * List containing declarations without source declaration of the specified Kotlin class(es).
  *
  * @param kClass The Kotlin class representing the source declaration to exclude.
  * @param kClasses The Kotlin class(es) representing the source declaration(s) to exclude.
@@ -85,7 +85,7 @@ fun <T : KoSourceDeclarationProvider> List<T>.withoutSourceDeclarationOf(
 ): List<T> = withoutSourceDeclarationOf(listOf(kClass, *kClasses))
 
 /**
- * List containing declarations without source declaration of.
+ * List containing declarations without source declaration of the specified Kotlin class(es).
  *
  * @param kClasses The Kotlin class(es) representing the source declaration(s) to exclude.
  * @return A list containing declarations without the source declaration of the specified Kotlin class(es).
