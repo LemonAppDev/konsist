@@ -51,9 +51,6 @@ internal interface KoFunctionTypeDeclarationProviderCore :
     @Deprecated("Will be removed in version 0.19.0", replaceWith = ReplaceWith("countParameters"))
     override fun countParameterTypes(predicate: (KoParameterDeclaration) -> Boolean): Int = countParameters(predicate)
 
-    @Deprecated("Will be removed in version 0.19.0", replaceWith = ReplaceWith("hasParameter"))
-    override fun hasParameterType(predicate: (KoParameterDeclaration) -> Boolean): Boolean = hasParameter(predicate)
-
     @Deprecated("Will be removed in version 0.19.0", replaceWith = ReplaceWith("hasAllParameters"))
     override fun hasAllParameterTypes(predicate: (KoParameterDeclaration) -> Boolean): Boolean = hasAllParameters(predicate)
 
