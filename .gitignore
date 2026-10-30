@@ -18,6 +18,7 @@ build/
 
 # Claude
 .claude
+!.claude/skills/
 
 # Python cache
 __pycache__
