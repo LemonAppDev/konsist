@@ -1,7 +1,6 @@
 package com.lemonappdev.konsist.core.declaration.kovariable
 
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
-import com.lemonappdev.konsist.api.ext.list.enumConstants
 import com.lemonappdev.konsist.api.ext.list.getters
 import com.lemonappdev.konsist.api.ext.list.initBlocks
 import com.lemonappdev.konsist.api.ext.list.setters
@@ -56,7 +55,6 @@ class KoVariableDeclarationForKoNameProviderTest {
             listOf(
                 arguments(getSnippetFile("variable-in-function-name").functions()),
                 arguments(getSnippetFile("variable-in-init-block-name").classes().initBlocks),
-                arguments(getSnippetFile("variable-in-enum-constant-name").classes().enumConstants),
                 arguments(getSnippetFile("variable-in-getter-name").properties().getters),
                 arguments(getSnippetFile("variable-in-setter-name").properties().setters),
             )

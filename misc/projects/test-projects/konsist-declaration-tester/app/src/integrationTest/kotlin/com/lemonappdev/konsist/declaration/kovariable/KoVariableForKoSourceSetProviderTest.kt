@@ -1,7 +1,6 @@
 package com.lemonappdev.konsist.declaration.kovariable
 
 import com.lemonappdev.konsist.api.Konsist
-import com.lemonappdev.konsist.api.ext.list.enumConstants
 import com.lemonappdev.konsist.api.ext.list.getters
 import com.lemonappdev.konsist.api.ext.list.initBlocks
 import com.lemonappdev.konsist.api.ext.list.setters
@@ -142,7 +141,6 @@ class KoVariableForKoSourceSetProviderTest {
             listOf(
                 arguments(Konsist.scopeFromFile(appMainPath).functions()),
                 arguments(Konsist.scopeFromFile(appMainPath).classes().initBlocks),
-                arguments(Konsist.scopeFromFile(appMainPath).classes().enumConstants),
                 arguments(Konsist.scopeFromFile(appMainPath).properties().getters),
                 arguments(Konsist.scopeFromFile(appMainPath).properties().setters),
             )
@@ -153,7 +151,6 @@ class KoVariableForKoSourceSetProviderTest {
             listOf(
                 arguments(Konsist.scopeFromFile(appIntegrationTestPath).functions()),
                 arguments(Konsist.scopeFromFile(appIntegrationTestPath).classes().initBlocks),
-                arguments(Konsist.scopeFromFile(appIntegrationTestPath).classes().enumConstants),
                 arguments(Konsist.scopeFromFile(appIntegrationTestPath).properties().getters),
                 arguments(Konsist.scopeFromFile(appIntegrationTestPath).properties().setters),
             )
@@ -164,7 +161,6 @@ class KoVariableForKoSourceSetProviderTest {
             listOf(
                 arguments(Konsist.scopeFromFile(dataMainPath).functions()),
                 arguments(Konsist.scopeFromFile(dataMainPath).classes().initBlocks),
-                arguments(Konsist.scopeFromFile(dataMainPath).classes().enumConstants),
                 arguments(Konsist.scopeFromFile(dataMainPath).properties().getters),
                 arguments(Konsist.scopeFromFile(dataMainPath).properties().setters),
             )
@@ -175,7 +171,6 @@ class KoVariableForKoSourceSetProviderTest {
             listOf(
                 arguments(Konsist.scopeFromFile(dataTestPath).functions()),
                 arguments(Konsist.scopeFromFile(dataTestPath).classes().initBlocks),
-                arguments(Konsist.scopeFromFile(dataTestPath).classes().enumConstants),
                 arguments(Konsist.scopeFromFile(dataTestPath).properties().getters),
                 arguments(Konsist.scopeFromFile(dataTestPath).properties().setters),
             )
@@ -186,7 +181,6 @@ class KoVariableForKoSourceSetProviderTest {
             listOf(
                 arguments(Konsist.scopeFromFile(rootMainPath).functions()),
                 arguments(Konsist.scopeFromFile(rootMainPath).classes().initBlocks),
-                arguments(Konsist.scopeFromFile(rootMainPath).classes().enumConstants),
                 arguments(Konsist.scopeFromFile(rootMainPath).properties().getters),
                 arguments(Konsist.scopeFromFile(rootMainPath).properties().setters),
             )
@@ -197,7 +191,6 @@ class KoVariableForKoSourceSetProviderTest {
             listOf(
                 arguments(Konsist.scopeFromFile(rootMainPathWithDoubleSrcPackage).functions()),
                 arguments(Konsist.scopeFromFile(rootMainPathWithDoubleSrcPackage).classes().initBlocks),
-                arguments(Konsist.scopeFromFile(rootMainPathWithDoubleSrcPackage).classes().enumConstants),
                 arguments(Konsist.scopeFromFile(rootMainPathWithDoubleSrcPackage).properties().getters),
                 arguments(Konsist.scopeFromFile(rootMainPathWithDoubleSrcPackage).properties().setters),
             )

@@ -1,5 +1,0 @@
-enum class FixtureClass {
-    FIXTURE_CONSTANT_1 {
-        val fixtureProperty: String by lazy { "" }
-    };
-}

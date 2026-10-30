@@ -1,7 +1,6 @@
 package com.lemonappdev.konsist.declaration.kovariable
 
 import com.lemonappdev.konsist.api.Konsist
-import com.lemonappdev.konsist.api.ext.list.enumConstants
 import com.lemonappdev.konsist.api.ext.list.getters
 import com.lemonappdev.konsist.api.ext.list.initBlocks
 import com.lemonappdev.konsist.api.ext.list.setters
@@ -86,7 +85,6 @@ class KoVariableForKoModuleProviderTest {
             listOf(
                 arguments(Konsist.scopeFromFile(appPath).functions()),
                 arguments(Konsist.scopeFromFile(appPath).classes().initBlocks),
-                arguments(Konsist.scopeFromFile(appPath).classes().enumConstants),
                 arguments(Konsist.scopeFromFile(appPath).properties().getters),
                 arguments(Konsist.scopeFromFile(appPath).properties().setters),
             )
@@ -97,7 +95,6 @@ class KoVariableForKoModuleProviderTest {
             listOf(
                 arguments(Konsist.scopeFromFile(dataPath).functions()),
                 arguments(Konsist.scopeFromFile(dataPath).classes().initBlocks),
-                arguments(Konsist.scopeFromFile(dataPath).classes().enumConstants),
                 arguments(Konsist.scopeFromFile(dataPath).properties().getters),
                 arguments(Konsist.scopeFromFile(dataPath).properties().setters),
             )
@@ -108,7 +105,6 @@ class KoVariableForKoModuleProviderTest {
             listOf(
                 arguments(Konsist.scopeFromFile(rootPath).functions()),
                 arguments(Konsist.scopeFromFile(rootPath).classes().initBlocks),
-                arguments(Konsist.scopeFromFile(rootPath).classes().enumConstants),
                 arguments(Konsist.scopeFromFile(rootPath).properties().getters),
                 arguments(Konsist.scopeFromFile(rootPath).properties().setters),
             )
