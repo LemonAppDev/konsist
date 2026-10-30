@@ -116,8 +116,8 @@ class KoInterfaceDeclarationForKoPropertyProviderTest {
         assertSoftly(sut) {
             numProperties(includeNested = true) shouldBeEqualTo 2
             numProperties(includeNested = false) shouldBeEqualTo 1
-            countProperties(includeNested = false) { it.hasValModifier } shouldBeEqualTo 1
-            countProperties { it.hasValModifier } shouldBeEqualTo 2
+            countProperties(includeNested = false) { it.isVal } shouldBeEqualTo 1
+            countProperties { it.isVal } shouldBeEqualTo 2
             countProperties { it.name == "fixtureProperty" && it.hasVarModifier } shouldBeEqualTo 0
         }
     }

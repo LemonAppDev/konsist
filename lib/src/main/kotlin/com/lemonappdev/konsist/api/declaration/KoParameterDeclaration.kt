@@ -20,7 +20,6 @@ import com.lemonappdev.konsist.api.provider.KoTextProvider
 import com.lemonappdev.konsist.api.provider.modifier.KoCrossInlineModifierProvider
 import com.lemonappdev.konsist.api.provider.modifier.KoModifierProvider
 import com.lemonappdev.konsist.api.provider.modifier.KoNoInlineModifierProvider
-import com.lemonappdev.konsist.api.provider.modifier.KoValModifierProvider
 import com.lemonappdev.konsist.api.provider.modifier.KoVarArgModifierProvider
 import com.lemonappdev.konsist.api.provider.modifier.KoVarModifierProvider
 
@@ -46,7 +45,6 @@ interface KoParameterDeclaration :
     KoTextProvider,
     KoNonNullableTypeProvider,
     KoVarModifierProvider,
-    KoValModifierProvider,
     KoVarArgModifierProvider,
     KoNoInlineModifierProvider,
     KoCrossInlineModifierProvider,

@@ -1,1 +1,0 @@
-class FixtureClass(val fixtureProperty: Int)
