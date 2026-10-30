@@ -26,7 +26,6 @@ import com.lemonappdev.konsist.core.provider.modifier.KoCrossInlineModifierProvi
 import com.lemonappdev.konsist.core.provider.modifier.KoModifierProviderCore
 import com.lemonappdev.konsist.core.provider.modifier.KoNoInlineModifierProviderCore
 import com.lemonappdev.konsist.core.provider.modifier.KoVarArgModifierProviderCore
-import com.lemonappdev.konsist.core.provider.modifier.KoVarModifierProviderCore
 import com.lemonappdev.konsist.core.provider.packagee.KoPackageDeclarationProviderCore
 import org.jetbrains.kotlin.com.intellij.psi.PsiElement
 import org.jetbrains.kotlin.psi.KtAnnotationEntry
@@ -54,7 +53,6 @@ internal class KoParameterDeclarationCore private constructor(
     KoResideInPackageProviderCore,
     KoTextProviderCore,
     KoNonNullableTypeProviderCore,
-    KoVarModifierProviderCore,
     KoVarArgModifierProviderCore,
     KoNoInlineModifierProviderCore,
     KoCrossInlineModifierProviderCore,
@@ -92,10 +90,6 @@ internal class KoParameterDeclarationCore private constructor(
         name: String?,
         ignoreCase: Boolean,
     ): Boolean = name?.let { type.hasName(it, ignoreCase) } == true
-
-    @Deprecated("Will be removed in version 0.19.0", ReplaceWith("isVar"))
-    override val hasVarModifier: Boolean
-        get() = ktParameter.valOrVarKeyword?.text == "var"
 
     override val isVal: Boolean
         get() = ktParameter.valOrVarKeyword?.text == "val"

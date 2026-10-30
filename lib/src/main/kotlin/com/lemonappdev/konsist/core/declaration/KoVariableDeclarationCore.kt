@@ -22,7 +22,6 @@ import com.lemonappdev.konsist.core.provider.KoSourceSetProviderCore
 import com.lemonappdev.konsist.core.provider.KoTacitTypeProviderCore
 import com.lemonappdev.konsist.core.provider.KoTextProviderCore
 import com.lemonappdev.konsist.core.provider.KoValueProviderCore
-import com.lemonappdev.konsist.core.provider.modifier.KoVarModifierProviderCore
 import com.lemonappdev.konsist.core.provider.packagee.KoPackageDeclarationProviderCore
 import org.jetbrains.kotlin.com.intellij.psi.PsiElement
 import org.jetbrains.kotlin.psi.KtAnnotationEntry
@@ -52,7 +51,6 @@ internal class KoVariableDeclarationCore private constructor(
     KoResideInPackageProviderCore,
     KoTextProviderCore,
     KoValueProviderCore,
-    KoVarModifierProviderCore,
     KoTacitTypeProviderCore,
     KoIsValProviderCore,
     KoIsVarProviderCore {
@@ -80,10 +78,6 @@ internal class KoVariableDeclarationCore private constructor(
                     .filterIsInstance<KtExpression>()
                     .firstOrNull()
             }
-
-    @Deprecated("Will be removed in version 0.19.0", ReplaceWith("isVar"))
-    override val hasVarModifier: Boolean
-        get() = ktProperty.isVar
 
     override val isVal: Boolean
         get() = !ktProperty.isVar
