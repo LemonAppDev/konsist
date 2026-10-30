@@ -45,15 +45,6 @@ interface KoFunctionTypeDeclarationProvider : KoBaseProvider {
     fun countParameterTypes(predicate: (KoParameterDeclaration) -> Boolean): Int
 
     /**
-     * Checks if any parameter type matches the given predicate.
-     *
-     * @param predicate A function that evaluates each parameter declaration.
-     * @return `true` if any parameter type matches the predicate, otherwise `false`.
-     */
-    @Deprecated("Will be removed in version 0.19.0", ReplaceWith("hasParameter"))
-    fun hasParameterType(predicate: (KoParameterDeclaration) -> Boolean): Boolean
-
-    /**
      * Checks if all parameter types match the given predicate.
      *
      * @param predicate A function that evaluates each parameter declaration.
