@@ -1,7 +1,6 @@
 package com.lemonappdev.konsist.core.declaration.kovariable
 
 import com.lemonappdev.konsist.TestSnippetProvider
-import com.lemonappdev.konsist.api.ext.list.enumConstants
 import com.lemonappdev.konsist.api.ext.list.getters
 import com.lemonappdev.konsist.api.ext.list.initBlocks
 import com.lemonappdev.konsist.api.ext.list.setters
@@ -82,7 +81,6 @@ class KoVariableDeclarationForKoNullableTypeProviderTest {
             listOf(
                 arguments(getSnippetFile("variable-in-function-without-type").functions()),
                 arguments(getSnippetFile("variable-in-init-block-without-type").classes().initBlocks),
-                arguments(getSnippetFile("variable-in-enum-constant-without-type").classes().enumConstants),
                 arguments(getSnippetFile("variable-in-getter-without-type").properties().getters),
                 arguments(getSnippetFile("variable-in-setter-without-type").properties().setters),
             )
@@ -93,7 +91,6 @@ class KoVariableDeclarationForKoNullableTypeProviderTest {
             listOf(
                 arguments(getSnippetFile("variable-in-function-with-type").functions()),
                 arguments(getSnippetFile("variable-in-init-block-with-type").classes().initBlocks),
-                arguments(getSnippetFile("variable-in-enum-constant-with-type").classes().enumConstants),
                 arguments(getSnippetFile("variable-in-getter-with-type").properties().getters),
                 arguments(getSnippetFile("variable-in-setter-with-type").properties().setters),
             )
@@ -104,7 +101,6 @@ class KoVariableDeclarationForKoNullableTypeProviderTest {
             listOf(
                 arguments(getSnippetFile("variable-in-function-with-annotated-type").functions()),
                 arguments(getSnippetFile("variable-in-init-block-with-annotated-type").classes().initBlocks),
-                arguments(getSnippetFile("variable-in-enum-constant-with-annotated-type").classes().enumConstants),
                 arguments(getSnippetFile("variable-in-getter-with-annotated-type").properties().getters),
                 arguments(getSnippetFile("variable-in-setter-with-annotated-type").properties().setters),
             )

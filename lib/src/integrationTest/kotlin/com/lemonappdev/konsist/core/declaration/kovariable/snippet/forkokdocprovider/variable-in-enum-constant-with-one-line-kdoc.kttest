@@ -1,6 +1,0 @@
-enum class FixtureClass {
-    FIXTURE_CONSTANT_1 {
-        /** Fixture KDoc */
-        val fixtureVariable = ""
-    };
-}

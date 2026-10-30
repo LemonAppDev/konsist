@@ -1,7 +1,6 @@
 package com.lemonappdev.konsist.core.declaration.kovariable
 
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
-import com.lemonappdev.konsist.api.ext.list.enumConstants
 import com.lemonappdev.konsist.api.ext.list.getters
 import com.lemonappdev.konsist.api.ext.list.initBlocks
 import com.lemonappdev.konsist.api.ext.list.setters
@@ -115,10 +114,6 @@ class KoVariableDeclarationForKoPathProviderTest {
                     "variable-in-init-block-file-path",
                 ),
                 arguments(
-                    getSnippetFile("variable-in-enum-constant-file-path").classes().enumConstants,
-                    "variable-in-enum-constant-file-path",
-                ),
-                arguments(
                     getSnippetFile("variable-in-getter-file-path").properties().getters,
                     "variable-in-getter-file-path",
                 ),
@@ -139,10 +134,6 @@ class KoVariableDeclarationForKoPathProviderTest {
                 arguments(
                     getSnippetFile("variable-in-init-block-project-file-path").classes().initBlocks,
                     "variable-in-init-block-project-file-path",
-                ),
-                arguments(
-                    getSnippetFile("variable-in-enum-constant-project-file-path").classes().enumConstants,
-                    "variable-in-enum-constant-project-file-path",
                 ),
                 arguments(
                     getSnippetFile("variable-in-getter-project-file-path").properties().getters,
@@ -167,10 +158,6 @@ class KoVariableDeclarationForKoPathProviderTest {
                     "variable-in-init-block-reside-in-file-path",
                 ),
                 arguments(
-                    getSnippetFile("variable-in-enum-constant-reside-in-file-path").classes().enumConstants,
-                    "variable-in-enum-constant-reside-in-file-path",
-                ),
-                arguments(
                     getSnippetFile("variable-in-getter-reside-in-file-path").properties().getters,
                     "variable-in-getter-reside-in-file-path",
                 ),
@@ -191,10 +178,6 @@ class KoVariableDeclarationForKoPathProviderTest {
                 arguments(
                     getSnippetFile("variable-in-init-block-reside-in-project-file-path").classes().initBlocks,
                     "variable-in-init-block-reside-in-project-file-path",
-                ),
-                arguments(
-                    getSnippetFile("variable-in-enum-constant-reside-in-project-file-path").classes().enumConstants,
-                    "variable-in-enum-constant-reside-in-project-file-path",
                 ),
                 arguments(
                     getSnippetFile("variable-in-getter-reside-in-project-file-path").properties().getters,

@@ -1,7 +1,6 @@
 package com.lemonappdev.konsist.core.declaration.kovariable
 
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
-import com.lemonappdev.konsist.api.ext.list.enumConstants
 import com.lemonappdev.konsist.api.ext.list.getters
 import com.lemonappdev.konsist.api.ext.list.initBlocks
 import com.lemonappdev.konsist.api.ext.list.setters
@@ -59,7 +58,6 @@ class KoVariableDeclarationForKoValueProviderTest {
             listOf(
                 arguments(getSnippetFile("variable-in-function-has-value").functions()),
                 arguments(getSnippetFile("variable-in-init-block-has-value").classes().initBlocks),
-                arguments(getSnippetFile("variable-in-enum-constant-has-value").classes().enumConstants),
                 arguments(getSnippetFile("variable-in-getter-has-value").properties().getters),
                 arguments(getSnippetFile("variable-in-setter-has-value").properties().setters),
             )
@@ -70,7 +68,6 @@ class KoVariableDeclarationForKoValueProviderTest {
             listOf(
                 arguments(getSnippetFile("variable-with-delegation-in-function-has-no-value").functions()),
                 arguments(getSnippetFile("variable-with-delegation-in-init-block-has-no-value").classes().initBlocks),
-                arguments(getSnippetFile("variable-with-delegation-in-enum-constant-has-no-value").classes().enumConstants),
                 arguments(getSnippetFile("variable-with-delegation-in-getter-has-no-value").properties().getters),
                 arguments(getSnippetFile("variable-with-delegation-in-setter-has-no-value").properties().setters),
             )

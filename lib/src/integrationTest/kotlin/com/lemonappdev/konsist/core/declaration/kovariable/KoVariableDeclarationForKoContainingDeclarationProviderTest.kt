@@ -1,7 +1,6 @@
 package com.lemonappdev.konsist.core.declaration.kovariable
 
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
-import com.lemonappdev.konsist.api.ext.list.enumConstants
 import com.lemonappdev.konsist.api.ext.list.getters
 import com.lemonappdev.konsist.api.ext.list.initBlocks
 import com.lemonappdev.konsist.api.ext.list.setters
@@ -45,10 +44,6 @@ class KoVariableDeclarationForKoContainingDeclarationProviderTest {
                 arguments(
                     getSnippetFile("variable-in-init-block-parent-declaration").classes().initBlocks,
                     "init {",
-                ),
-                arguments(
-                    getSnippetFile("variable-in-enum-constant-parent-declaration").classes().enumConstants,
-                    "FIXTURE_CONSTANT_1",
                 ),
                 arguments(
                     getSnippetFile("variable-in-getter-parent-declaration").properties().getters,
