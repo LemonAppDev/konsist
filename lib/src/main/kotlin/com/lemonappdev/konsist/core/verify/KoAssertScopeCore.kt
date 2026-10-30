@@ -3,12 +3,12 @@ package com.lemonappdev.konsist.core.verify
 import com.lemonappdev.konsist.api.verify.KoAssertScope
 
 internal class KoAssertScopeCore : KoAssertScope {
-    private val _reasons = mutableListOf<String>()
+    private val _failureReasons = mutableListOf<String>()
 
-    val reasons: List<String>
-        get() = _reasons
+    val failureReasons: List<String>
+        get() = _failureReasons
 
-    override fun addReason(reason: String): Unit {
-        _reasons += reason
+    override fun addFailureReason(reason: String): Unit {
+        _failureReasons += reason
     }
 }
