@@ -19,7 +19,6 @@ import com.lemonappdev.konsist.api.provider.KoSourceSetProvider
 import com.lemonappdev.konsist.api.provider.KoTacitTypeProvider
 import com.lemonappdev.konsist.api.provider.KoTextProvider
 import com.lemonappdev.konsist.api.provider.KoValueProvider
-import com.lemonappdev.konsist.api.provider.modifier.KoVarModifierProvider
 
 /**
  * Represents a Kotlin variable declaration.
@@ -42,7 +41,6 @@ interface KoVariableDeclaration :
     KoSourceSetProvider,
     KoTextProvider,
     KoValueProvider,
-    KoVarModifierProvider,
     KoTacitTypeProvider,
     KoIsValProvider,
     KoIsVarProvider

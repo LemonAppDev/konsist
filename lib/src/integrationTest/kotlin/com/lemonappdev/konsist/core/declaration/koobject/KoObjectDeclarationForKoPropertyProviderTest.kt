@@ -118,7 +118,7 @@ class KoObjectDeclarationForKoPropertyProviderTest {
             numProperties(includeNested = false) shouldBeEqualTo 1
             countProperties(includeNested = false) { it.isVal } shouldBeEqualTo 1
             countProperties { it.isVal } shouldBeEqualTo 2
-            countProperties { it.name == "fixtureProperty" && it.hasVarModifier } shouldBeEqualTo 0
+            countProperties { it.name == "fixtureProperty" && it.isVar } shouldBeEqualTo 0
         }
     }
 

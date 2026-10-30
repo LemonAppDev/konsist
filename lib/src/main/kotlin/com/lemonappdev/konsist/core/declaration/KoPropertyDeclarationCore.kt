@@ -47,7 +47,6 @@ import com.lemonappdev.konsist.core.provider.modifier.KoLateinitModifierProvider
 import com.lemonappdev.konsist.core.provider.modifier.KoModifierProviderCore
 import com.lemonappdev.konsist.core.provider.modifier.KoOpenModifierProviderCore
 import com.lemonappdev.konsist.core.provider.modifier.KoOverrideModifierProviderCore
-import com.lemonappdev.konsist.core.provider.modifier.KoVarModifierProviderCore
 import com.lemonappdev.konsist.core.provider.modifier.KoVisibilityModifierProviderCore
 import com.lemonappdev.konsist.core.provider.packagee.KoPackageDeclarationProviderCore
 import org.jetbrains.kotlin.com.intellij.psi.PsiElement
@@ -104,7 +103,6 @@ internal class KoPropertyDeclarationCore private constructor(
     KoIsTopLevelProviderCore,
     KoValueProviderCore,
     KoVisibilityModifierProviderCore,
-    KoVarModifierProviderCore,
     KoLateinitModifierProviderCore,
     KoOverrideModifierProviderCore,
     KoAbstractModifierProviderCore,
@@ -159,15 +157,6 @@ internal class KoPropertyDeclarationCore private constructor(
 
     override val isInitialized: Boolean
         get() = super.isInitialized || ktProperty?.fieldDeclaration?.hasInitializer() == true
-
-    @Deprecated("Will be removed in version 0.19.0", ReplaceWith("isVar"))
-    override val hasVarModifier: Boolean
-        get() =
-            when (ktCallableDeclaration) {
-                is KtProperty -> ktCallableDeclaration.isVar
-                is KtParameter -> ktCallableDeclaration.valOrVarKeyword?.text == "var"
-                else -> false
-            }
 
     override val isVal: Boolean
         get() =
