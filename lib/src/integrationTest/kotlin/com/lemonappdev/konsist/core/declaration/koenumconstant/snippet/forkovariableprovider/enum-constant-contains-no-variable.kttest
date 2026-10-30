@@ -1,5 +1,0 @@
-enum class FixtureClass {
-    FIXTURE_CONSTANT_1 {
-        fun fixtureLocalFunction() = 1
-    };
-}

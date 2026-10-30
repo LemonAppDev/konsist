@@ -1,3 +1,0 @@
-enum class FixtureClass {
-    FIXTURE_CONSTANT_1
-}
