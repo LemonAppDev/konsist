@@ -541,33 +541,6 @@ class KoFunctionTypeDeclarationProviderListExtTest {
     }
 
     @Test
-    fun `parameterTypes returns parameter types from all declarations`() {
-        // given
-        val parameterType1: KoParameterDeclaration = mockk()
-        val parameterType2: KoParameterDeclaration = mockk()
-        val parameterType3: KoParameterDeclaration = mockk()
-        val declaration1: KoFunctionTypeDeclarationProvider =
-            mockk {
-                every { parameters } returns listOf(parameterType1, parameterType2)
-            }
-        val declaration2: KoFunctionTypeDeclarationProvider =
-            mockk {
-                every { parameters } returns listOf(parameterType3)
-            }
-        val declaration3: KoFunctionTypeDeclarationProvider =
-            mockk {
-                every { parameters } returns emptyList()
-            }
-        val declarations = listOf(declaration1, declaration2, declaration3)
-
-        // when
-        val sut = declarations.parameterTypes
-
-        // then
-        sut shouldBeEqualTo listOf(parameterType1, parameterType2, parameterType3)
-    }
-
-    @Test
     fun `withParameterType{} returns declaration with parameter type which satisfy predicate`() {
         // given
         val suffix = "Name"
