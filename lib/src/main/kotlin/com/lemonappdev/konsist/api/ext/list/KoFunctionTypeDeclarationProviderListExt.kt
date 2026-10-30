@@ -14,15 +14,6 @@ val <T : KoFunctionTypeDeclarationProvider> List<T>.returnTypes: List<KoTypeDecl
     get() = mapNotNull { it.returnType }
 
 /**
- * Gets the list of parameter types for the function type declarations in the list.
- *
- * @see KoFunctionTypeDeclarationProvider.parameterTypes
- */
-@Deprecated("Will be removed in version 0.19.0", ReplaceWith("parameters"))
-val <T : KoFunctionTypeDeclarationProvider> List<T>.parameterTypes: List<KoParameterDeclaration>
-    get() = parameters
-
-/**
  * Gets the list of parameters for the function type declarations in the list.
  *
  * @see KoFunctionTypeDeclarationProvider.parameters
