@@ -220,7 +220,7 @@ class KoTypeArgumentDeclarationForKoFunctionTypeDeclarationProviderTest {
             it?.countParameterTypes { parameter -> parameter.type.isClass } shouldBeEqualTo 1
             it?.hasParameterType { parameter -> parameter.type.isKotlinType } shouldBeEqualTo true
             it?.hasParameterType { parameter -> parameter.type.isExternal } shouldBeEqualTo false
-            it?.hasAllParameterTypes { parameter -> parameter.type.isKotlinType || parameter.type.isGenericType } shouldBeEqualTo true
+            it?.hasAllParameterTypes { parameter -> parameter.type.isKotlinType || parameter.type.isGeneric } shouldBeEqualTo true
             it?.hasAllParameterTypes { parameter -> parameter.type.isExternal } shouldBeEqualTo false
             it?.parameters?.map { parameter -> parameter.type.name } shouldBeEqualTo listOf("String", "List<Int>")
             it?.numParameters shouldBeEqualTo 2
@@ -230,7 +230,7 @@ class KoTypeArgumentDeclarationForKoFunctionTypeDeclarationProviderTest {
             it?.countParameters { parameter -> parameter.type.isClass } shouldBeEqualTo 1
             it?.hasParameter { parameter -> parameter.type.isKotlinType } shouldBeEqualTo true
             it?.hasParameter { parameter -> parameter.type.isExternal } shouldBeEqualTo false
-            it?.hasAllParameters { parameter -> parameter.type.isKotlinType || parameter.type.isGenericType } shouldBeEqualTo true
+            it?.hasAllParameters { parameter -> parameter.type.isKotlinType || parameter.type.isGeneric } shouldBeEqualTo true
             it?.hasAllParameters { parameter -> parameter.type.isExternal } shouldBeEqualTo false
         }
     }
@@ -256,7 +256,7 @@ class KoTypeArgumentDeclarationForKoFunctionTypeDeclarationProviderTest {
             it?.countParameterTypes { parameter -> parameter.type.isClass } shouldBeEqualTo 1
             it?.hasParameterType { parameter -> parameter.type.isKotlinType } shouldBeEqualTo true
             it?.hasParameterType { parameter -> parameter.type.isExternal } shouldBeEqualTo false
-            it?.hasAllParameterTypes { parameter -> parameter.type.isKotlinType || parameter.type.isGenericType } shouldBeEqualTo true
+            it?.hasAllParameterTypes { parameter -> parameter.type.isKotlinType || parameter.type.isGeneric } shouldBeEqualTo true
             it?.hasAllParameterTypes { parameter -> parameter.type.isExternal } shouldBeEqualTo false
             it?.parameters?.map { parameter -> parameter.type.name } shouldBeEqualTo listOf("String", "List<Int>")
             it?.numParameters shouldBeEqualTo 2
@@ -266,7 +266,7 @@ class KoTypeArgumentDeclarationForKoFunctionTypeDeclarationProviderTest {
             it?.countParameters { parameter -> parameter.type.isClass } shouldBeEqualTo 1
             it?.hasParameter { parameter -> parameter.type.isKotlinType } shouldBeEqualTo true
             it?.hasParameter { parameter -> parameter.type.isExternal } shouldBeEqualTo false
-            it?.hasAllParameters { parameter -> parameter.type.isKotlinType || parameter.type.isGenericType } shouldBeEqualTo true
+            it?.hasAllParameters { parameter -> parameter.type.isKotlinType || parameter.type.isGeneric } shouldBeEqualTo true
             it?.hasAllParameters { parameter -> parameter.type.isExternal } shouldBeEqualTo false
         }
     }
@@ -367,7 +367,7 @@ class KoTypeArgumentDeclarationForKoFunctionTypeDeclarationProviderTest {
         // then
         assertSoftly(sut) {
             it?.returnType?.name shouldBeEqualTo "List<String>"
-            it?.hasReturnType { type -> type.isGenericType } shouldBeEqualTo true
+            it?.hasReturnType { type -> type.isGeneric } shouldBeEqualTo true
             it?.hasReturnType { type -> type.isExternal } shouldBeEqualTo false
             it?.hasReturnTypeOf(String::class) shouldBeEqualTo false
         }
