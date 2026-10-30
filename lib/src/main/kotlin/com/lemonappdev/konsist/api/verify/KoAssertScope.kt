@@ -12,5 +12,5 @@ interface KoAssertScope {
      *
      * @param reason The reason to display under the failed element.
      */
-    fun addReason(reason: String): Unit
+    fun addFailureReason(reason: String): Unit
 }

@@ -17,7 +17,7 @@ import com.lemonappdev.konsist.core.verify.assert
  *                 or [KoJUnitExtension], or pass the test name manually.
  * @param function The predicate function that takes an element of type [E] and returns a [Boolean] value or `null`.
  *                If the function returns `false`, the element is considered invalid; otherwise, it's considered valid.
- *                Inside the function [KoAssertScope.addReason] can be used to add a reason displayed under the failed element.
+ *                Inside the function [KoAssertScope.addFailureReason] can be used to add a reason displayed under the failed element.
  */
 fun <E : KoBaseProvider> E?.assertTrue(
     strict: Boolean = false,
@@ -42,7 +42,7 @@ fun <E : KoBaseProvider> E?.assertTrue(
  *                 or [KoJUnitExtension], or pass the test name manually.
  * @param function The predicate function that takes an element of type [E] and returns a [Boolean] value or `null`.
  *                If the function returns `true`, the element is considered invalid; otherwise, it's considered valid.
- *                Inside the function [KoAssertScope.addReason] can be used to add a reason displayed under the failed element.
+ *                Inside the function [KoAssertScope.addFailureReason] can be used to add a reason displayed under the failed element.
  */
 fun <E : KoBaseProvider> E?.assertFalse(
     strict: Boolean = false,
@@ -67,7 +67,7 @@ fun <E : KoBaseProvider> E?.assertFalse(
  *                 or [KoJUnitExtension], or pass the test name manually.
  * @param function The predicate function that takes an element of type [E] and returns a [Boolean] value or `null`.
  *                If the function returns `false`, the element is considered invalid; otherwise, it's considered valid.
- *                Inside the function [KoAssertScope.addReason] can be used to add a reason displayed under the failed element.
+ *                Inside the function [KoAssertScope.addFailureReason] can be used to add a reason displayed under the failed element.
  */
 fun <E : KoBaseProvider> List<E?>.assertTrue(
     strict: Boolean = false,
@@ -92,7 +92,7 @@ fun <E : KoBaseProvider> List<E?>.assertTrue(
  *                 or [KoJUnitExtension], or pass the test name manually.
  * @param function The predicate function that takes an element of type [E] and returns a [Boolean] value or `null`.
  *                If the function returns `true`, the element is considered invalid; otherwise, it's considered valid.
- *                Inside the function [KoAssertScope.addReason] can be used to add a reason displayed under the failed element.
+ *                Inside the function [KoAssertScope.addFailureReason] can be used to add a reason displayed under the failed element.
  */
 fun <E : KoBaseProvider> List<E?>.assertFalse(
     strict: Boolean = false,
@@ -117,7 +117,7 @@ fun <E : KoBaseProvider> List<E?>.assertFalse(
  *                 or [KoJUnitExtension], or pass the test name manually.
  * @param function The predicate function that takes an element of type [E] and returns a [Boolean] value or `null`.
  *                If the function returns `false`, the element is considered invalid; otherwise, it's considered valid.
- *                Inside the function [KoAssertScope.addReason] can be used to add a reason displayed under the failed element.
+ *                Inside the function [KoAssertScope.addFailureReason] can be used to add a reason displayed under the failed element.
  */
 fun <E : KoBaseProvider> Sequence<E?>.assertTrue(
     strict: Boolean = false,
@@ -142,7 +142,7 @@ fun <E : KoBaseProvider> Sequence<E?>.assertTrue(
  *                 or [KoJUnitExtension], or pass the test name manually.
  * @param function The predicate function that takes an element of type [E] and returns a [Boolean] value or `null`.
  *                If the function returns `true`, the element is considered invalid; otherwise, it's considered valid.
- *                Inside the function [KoAssertScope.addReason] can be used to add a reason displayed under the failed element.
+ *                Inside the function [KoAssertScope.addFailureReason] can be used to add a reason displayed under the failed element.
  */
 fun <E : KoBaseProvider> Sequence<E?>.assertFalse(
     strict: Boolean = false,

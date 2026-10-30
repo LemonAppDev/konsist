@@ -396,27 +396,27 @@ class AssertTrueOnSingleDeclarationTest {
     }
 
     @Test
-    fun `assert-on-single-declaration-fails-with-added-reason`() {
+    fun `assert-on-single-declaration-fails-with-added-failure-reason`() {
         // given
         val sut =
-            getSnippetFile("assert-on-single-declaration-fails-with-added-reason")
+            getSnippetFile("assert-on-single-declaration-fails-with-added-failure-reason")
                 .classes()
                 .first()
         val filepath =
             "$rootPathUrl/lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core/verify/kodeclarationassert/" +
-                "asserttrue/snippet/assert-on-single-declaration-fails-with-added-reason.kt"
+                "asserttrue/snippet/assert-on-single-declaration-fails-with-added-failure-reason.kt"
 
         // when
         val func = {
             sut.assertTrue {
-                addReason("${it.name} reason")
+                addFailureReason("${it.name} reason")
                 false
             }
         }
 
         // then
         func shouldThrow KoAssertionFailedException::class withMessage
-            "Assert 'assert-on-single-declaration-fails-with-added-reason' was violated (1 time). Invalid declarations:\n" +
+            "Assert 'assert-on-single-declaration-fails-with-added-failure-reason' was violated (1 time). Invalid declarations:\n" +
             "└── Class FixtureClass $filepath:1:1\n" +
             "    └── FixtureClass reason"
     }
