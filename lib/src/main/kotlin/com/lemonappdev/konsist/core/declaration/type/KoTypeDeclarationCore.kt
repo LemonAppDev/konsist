@@ -29,7 +29,6 @@ import com.lemonappdev.konsist.core.provider.KoDeclarationCastProviderCore
 import com.lemonappdev.konsist.core.provider.KoFunctionTypeDeclarationProviderCore
 import com.lemonappdev.konsist.core.provider.KoIsFunctionTypeProviderCore
 import com.lemonappdev.konsist.core.provider.KoIsGenericProviderCore
-import com.lemonappdev.konsist.core.provider.KoIsGenericTypeProviderCore
 import com.lemonappdev.konsist.core.provider.KoIsMutableTypeProviderCore
 import com.lemonappdev.konsist.core.provider.KoIsNullableProviderCore
 import com.lemonappdev.konsist.core.provider.KoLocationProviderCore
@@ -76,7 +75,6 @@ internal class KoTypeDeclarationCore private constructor(
     KoSourceSetProviderCore,
     KoSourceAndAliasTypeProviderCore,
     KoSourceTypeProviderCore,
-    KoIsGenericTypeProviderCore,
     KoIsGenericProviderCore,
     KoIsFunctionTypeProviderCore,
     KoPackageProviderCore,
