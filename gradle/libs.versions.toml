@@ -30,7 +30,7 @@ ktlint-cli = { module = "com.pinterest.ktlint:ktlint-cli", version.ref = "ktlint
 
 [plugins]
 kotlinJvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlinVersion" }
-spotless = "com.diffplug.spotless:8.10.4"
+spotless = "com.diffplug.spotless:8.11.0"
 testLogger = "com.adarshr.test-logger:4.0.0"
 detekt = "io.gitlab.arturbosch.detekt:1.23.8"
 nmcp = "com.gradleup.nmcp:1.6.2"
