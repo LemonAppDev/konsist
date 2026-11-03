@@ -59,7 +59,7 @@ internal class KoTypeParameterDeclarationCore private constructor(
     private var cachedName: Any? = KoPropertyCache.NOT_COMPUTED
 
     override val name: String
-        get() = KoPropertyCache.getOrCompute(cachedName, { cachedName = it }) { ktTypeParameter.text }
+        get() = KoPropertyCache.getOrCompute(cachedName, { cachedName = it }) { ktTypeParameter.name ?: ktTypeParameter.text }
 
     override fun toString(): String = name
 

@@ -117,6 +117,38 @@ class KoTypeParameterDeclarationForKoNameProviderTest {
         }
     }
 
+    @Test
+    fun `class-type-parameter-with-modifier-and-upper-bound-name`() {
+        // given
+        val sut =
+            getSnippetFile("class-type-parameter-with-modifier-and-upper-bound-name")
+                .classes()
+                .first()
+
+        // then
+        assertSoftly(sut) {
+            it.typeParameters.first().name shouldBeEqualTo "TestType"
+            it.typeParameters.first().text shouldBeEqualTo "out TestType : Number"
+            it.hasTypeParameterWithName("TestType") shouldBeEqualTo true
+            it.hasTypeParameterWithName("out TestType : Number") shouldBeEqualTo false
+        }
+    }
+
+    @Test
+    fun `function-type-parameter-with-modifier-and-upper-bound-name`() {
+        // given
+        val sut =
+            getSnippetFile("function-type-parameter-with-modifier-and-upper-bound-name")
+                .functions()
+                .first()
+
+        // then
+        assertSoftly(sut) {
+            it.typeParameters.first().name shouldBeEqualTo "TestType"
+            it.hasTypeParameterWithName("TestType") shouldBeEqualTo true
+        }
+    }
+
     private fun getSnippetFile(fileName: String) =
         TestSnippetProvider.getSnippetKoScope(
             "core/declaration/kotypeparameter/snippet/forkonameprovider/",

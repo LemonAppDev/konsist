@@ -36,6 +36,19 @@ class KoTypeDeclarationForKoIsFunctionTypeProviderTest {
     }
 
     @Test
+    fun `nullable-function-type`() {
+        // given
+        val sut =
+            getSnippetFile("nullable-function-type")
+                .properties()
+                .first()
+                .type
+
+        // then
+        sut?.isFunctionType shouldBeEqualTo true
+    }
+
+    @Test
     fun `typealias-with-function-type`() {
         // given
         val sut =
@@ -66,6 +79,8 @@ class KoTypeDeclarationForKoIsFunctionTypeProviderTest {
                 arguments("not-generic-import-alias-type"),
                 arguments("generic-typealias-type"),
                 arguments("external-type"),
+                arguments("generic-type-with-function-type-argument"),
+                arguments("typealias-with-generic-type-with-function-type-argument"),
             )
     }
 }

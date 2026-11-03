@@ -84,6 +84,22 @@ class KoTypeArgumentDeclarationForKoIsGenericProviderTest {
         sut?.isGeneric shouldBeEqualTo true
     }
 
+    @ParameterizedTest
+    @MethodSource("provideGenericValues")
+    fun `type-argument-is-generic`(fileName: String) {
+        // given
+        val sut =
+            getSnippetFile(fileName)
+                .properties()
+                .first()
+                .type
+                ?.typeArguments
+                ?.firstOrNull()
+
+        // then
+        sut?.isGeneric shouldBeEqualTo true
+    }
+
     private fun getSnippetFile(fileName: String) =
         TestSnippetProvider.getSnippetKoScope("core/declaration/kotypeargument/snippet/forkoisgenericprovider/", fileName)
 
@@ -100,6 +116,15 @@ class KoTypeArgumentDeclarationForKoIsGenericProviderTest {
                 arguments("kotlin-type-argument"),
                 arguments("object-type-argument"),
                 arguments("typealias-without-generic-type-argument"),
+            )
+
+        @Suppress("unused")
+        @JvmStatic
+        fun provideGenericValues() =
+            listOf(
+                arguments("generic-type-argument-with-digit-in-type-argument"),
+                arguments("fully-qualified-generic-type-argument"),
+                arguments("generic-type-argument-with-function-type-argument"),
             )
     }
 }

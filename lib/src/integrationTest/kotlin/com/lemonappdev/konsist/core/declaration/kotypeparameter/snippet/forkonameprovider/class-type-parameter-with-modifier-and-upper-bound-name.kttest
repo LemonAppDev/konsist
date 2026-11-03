@@ -1,0 +1,1 @@
+class FixtureClass<out TestType : Number>(val fixtureParameter: TestType)
