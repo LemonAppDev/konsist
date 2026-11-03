@@ -53,20 +53,6 @@ class KoClassDeclarationForKoResideInPackageProviderTest {
         sut.residesOutsidePackage("com") shouldBeEqualTo true
     }
 
-    @Suppress("DEPRECATION")
-    @Test
-    fun `deprecated resideInPackage and resideOutsidePackage delegate to new methods`() {
-        // given
-        val sut =
-            getSnippetFile("class-reside-in-file-package")
-                .classes()
-                .first()
-
-        // then
-        sut.resideInPackage("com..") shouldBeEqualTo true
-        sut.resideOutsidePackage("com..") shouldBeEqualTo false
-    }
-
     private fun getSnippetFile(fileName: String) =
         getSnippetKoScope("core/declaration/koclass/snippet/forkoresideinpackageprovider/", fileName)
 }

@@ -114,23 +114,6 @@ class KoClassForKoSourceSetProviderTest {
         }
     }
 
-    @Suppress("DEPRECATION")
-    @Test
-    fun `deprecated resideInSourceSet delegates to residesInSourceSet`() {
-        // given
-        val sut =
-            Konsist
-                .scopeFromFile("$appMainSourceSetProjectDirectory/fixture/AppClass.kt".toOsSeparator())
-                .classes()
-                .first()
-
-        // then
-        assertSoftly(sut) {
-            resideInSourceSet(MAIN) shouldBeEqualTo true
-            resideInSourceSet(TEST) shouldBeEqualTo false
-        }
-    }
-
     companion object {
         private const val MAIN = "main"
         private const val TEST = "test"

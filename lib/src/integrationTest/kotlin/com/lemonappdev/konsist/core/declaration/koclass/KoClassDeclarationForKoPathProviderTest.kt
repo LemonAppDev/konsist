@@ -75,21 +75,5 @@ class KoClassDeclarationForKoPathProviderTest {
         }
     }
 
-    @Suppress("DEPRECATION")
-    @Test
-    fun `deprecated resideInPath delegates to residesInPath`() {
-        // given
-        val sut =
-            getSnippetFile("class-reside-in-project-file-path")
-                .classes()
-                .first()
-
-        // then
-        assertSoftly(sut) {
-            resideInPath("..koclass/snippet..") shouldBeEqualTo true
-            resideInPath("koclass/snippet/") shouldBeEqualTo false
-        }
-    }
-
     private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/koclass/snippet/forkopathprovider/", fileName)
 }

@@ -39,13 +39,4 @@ interface KoModuleProvider : KoBaseProvider {
      * @throws IllegalArgumentException if module name contains more than two consecutive dots.
      */
     fun residesInModule(name: String): Boolean
-
-    /**
-     * Determines whether the declaration resides in the specified module.
-     *
-     * @param name The name of the module to check. If this is the top-level module, use "root" (or ":").
-     * @return `true` if the declaration resides in the specified module, `false` otherwise.
-     */
-    @Deprecated("Will be removed in version 1.0.0-rc1", ReplaceWith("residesInModule(name)"))
-    fun resideInModule(name: String): Boolean
 }

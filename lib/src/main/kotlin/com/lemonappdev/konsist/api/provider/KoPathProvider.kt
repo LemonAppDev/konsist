@@ -33,19 +33,4 @@ interface KoPathProvider : KoBaseProvider {
         path: String,
         absolutePath: Boolean = false,
     ): Boolean
-
-    /**
-     * Determines whether the declaration (or file) resides in the specified path.
-     *
-     * @param path the (file) path to check. Both `/` and `\` separators are accepted on all OSes.
-     * @param absolutePath Flag indicating whether the provided path is an absolute path.
-     *                    If set to `true`, the `path` parameter represents an absolute path.
-     *                    If set to `false` (default), the `path` parameter represents a relative path.
-     * @return `true` if the declaration resides in the specified (file) path, `false` otherwise.
-     */
-    @Deprecated("Will be removed in version 1.0.0-rc1", ReplaceWith("residesInPath(path, absolutePath)"))
-    fun resideInPath(
-        path: String,
-        absolutePath: Boolean = false,
-    ): Boolean
 }

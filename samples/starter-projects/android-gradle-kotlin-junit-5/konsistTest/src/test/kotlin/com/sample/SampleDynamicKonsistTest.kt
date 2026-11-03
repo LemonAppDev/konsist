@@ -22,7 +22,7 @@ class SampleDynamicKonsistTest {
                 },
                 dynamicTest("${useCase.name} should reside in ..domain.usecase.. package") {
                     useCase.assertTrue(testName = "${useCase.name} should reside in ..domain.usecase.. package") {
-                        it.resideInPackage("..domain.usecase..")
+                        it.residesInPackage("..domain.usecase..")
                     }
                 },
             )
