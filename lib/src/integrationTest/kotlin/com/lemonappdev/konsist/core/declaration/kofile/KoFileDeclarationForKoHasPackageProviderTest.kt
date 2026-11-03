@@ -31,6 +31,42 @@ class KoFileDeclarationForKoHasPackageProviderTest {
     }
 
     @Test
+    fun `file-has-package-matching-parent-directory`() {
+        // given
+        val sut =
+            getSnippetFile("file-has-package-matching-parent-directory")
+                .files
+                .first()
+
+        // then
+        sut.hasMatchingPackage shouldBeEqualTo false
+    }
+
+    @Test
+    fun `file-has-package-matching-directory-name-prefix`() {
+        // given
+        val sut =
+            getSnippetFile("file-has-package-matching-directory-name-prefix")
+                .files
+                .first()
+
+        // then
+        sut.hasMatchingPackage shouldBeEqualTo false
+    }
+
+    @Test
+    fun `file-has-one-segment-package-matching-directory-name-suffix`() {
+        // given
+        val sut =
+            getSnippetFile("file-has-one-segment-package-matching-directory-name-suffix")
+                .files
+                .first()
+
+        // then
+        sut.hasMatchingPackage shouldBeEqualTo false
+    }
+
+    @Test
     fun `file-has-no-package`() {
         // given
         val sut =
