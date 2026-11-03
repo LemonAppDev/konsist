@@ -1,0 +1,6 @@
+package com.lemonappdev.konsist.core.declaration.type.kotype.snippet.forkonameprovider
+
+import com.lemonappdev.konsist.testdata.FixtureAnnotation
+import com.lemonappdev.konsist.testdata.FixtureObject
+
+class FixtureClass1(val fixtureProperty1: (@FixtureAnnotation (FixtureObject) -> Unit)?)

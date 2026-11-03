@@ -121,8 +121,14 @@ internal class KoTypeDeclarationCore private constructor(
             ?.lastOrNull()
     }
 
+    // Annotations can be declared before the nullable type (`@Composable (() -> Unit)?`) or inside
+    // the parentheses of the nullable type (`(@Composable () -> Unit)?`)
     override val ktAnnotationEntries: List<KtAnnotationEntry>?
-        get() = ktTypeReference?.annotationEntries
+        get() =
+            ktTypeReference?.let { typeReference ->
+                typeReference.annotationEntries +
+                    (typeReference.typeElement as? KtNullableType)?.annotationEntries.orEmpty()
+            }
 
     // Constructor call the type is inferred from, e.g. `Foo<Bar>()` in `val foo = Foo<Bar>()`
     private val ktCallExpression: KtCallExpression?
@@ -166,7 +172,7 @@ internal class KoTypeDeclarationCore private constructor(
                     }
 
                     typeReference is KtNullableType -> {
-                        typeReference.children.firstOrNull()?.text ?: ""
+                        typeReference.innerType?.text ?: ""
                     }
 
                     else -> {

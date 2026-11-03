@@ -60,6 +60,9 @@ class KoTypeDeclarationForKoNameProviderTest {
                 arguments("not-nullable-type-parameter-name", "TestType"),
                 arguments("nullable-external-type-name", "FixtureExternalClass"),
                 arguments("not-nullable-external-type-name", "FixtureExternalClass"),
+                arguments("nullable-annotated-class-type-name", "FixtureType"),
+                arguments("nullable-annotated-function-type-name", "(FixtureObject) -> Unit"),
+                arguments("nullable-suspend-function-type-name", "(FixtureObject) -> Unit"),
             )
     }
 }

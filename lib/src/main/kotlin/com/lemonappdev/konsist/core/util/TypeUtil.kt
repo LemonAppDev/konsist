@@ -105,9 +105,7 @@ object TypeUtil {
 
         val nestedType =
             if (type is KtNullableType) {
-                type
-                    .children
-                    .firstOrNull()
+                type.innerType
             } else {
                 type
             }
@@ -240,9 +238,7 @@ object TypeUtil {
     ): KoDeclarationCastProvider? {
         val nestedType =
             if (type is KtNullableType) {
-                type
-                    .children
-                    .firstOrNull()
+                type.innerType
             } else {
                 type
             }
