@@ -22,7 +22,6 @@ import kotlin.reflect.KClass
  *
  * @see KoDeclarationCastProvider.asClassDeclaration
  */
-@Deprecated("Will be removed in version 0.19.0", ReplaceWith("classDeclarations()"))
 val <T : KoDeclarationCastProvider> List<T>.classDeclarations: List<KoClassDeclaration>
     get() = mapNotNull { it.asClassDeclaration() }
 
@@ -31,7 +30,6 @@ val <T : KoDeclarationCastProvider> List<T>.classDeclarations: List<KoClassDecla
  *
  * @see KoDeclarationCastProvider.asObjectDeclaration
  */
-@Deprecated("Will be removed in version 0.19.0", ReplaceWith("objectDeclarations()"))
 val <T : KoDeclarationCastProvider> List<T>.objectDeclarations: List<KoObjectDeclaration>
     get() = mapNotNull { it.asObjectDeclaration() }
 
@@ -40,7 +38,6 @@ val <T : KoDeclarationCastProvider> List<T>.objectDeclarations: List<KoObjectDec
  *
  * @see KoDeclarationCastProvider.asInterfaceDeclaration
  */
-@Deprecated("Will be removed in version 0.19.0", ReplaceWith("interfaceDeclarations()"))
 val <T : KoDeclarationCastProvider> List<T>.interfaceDeclarations: List<KoInterfaceDeclaration>
     get() = mapNotNull { it.asInterfaceDeclaration() }
 
@@ -49,7 +46,6 @@ val <T : KoDeclarationCastProvider> List<T>.interfaceDeclarations: List<KoInterf
  *
  * @see KoDeclarationCastProvider.asTypeAliasDeclaration
  */
-@Deprecated("Will be removed in version 0.19.0", ReplaceWith("typeAliasDeclarations()"))
 val <T : KoDeclarationCastProvider> List<T>.typeAliasDeclarations: List<KoTypeAliasDeclaration>
     get() = mapNotNull { it.asTypeAliasDeclaration() }
 
@@ -58,7 +54,6 @@ val <T : KoDeclarationCastProvider> List<T>.typeAliasDeclarations: List<KoTypeAl
  *
  * @see KoDeclarationCastProvider.asImportAliasDeclaration
  */
-@Deprecated("Will be removed in version 0.19.0", ReplaceWith("importAliasDeclarations()"))
 val <T : KoDeclarationCastProvider> List<T>.importAliasDeclarations: List<KoImportAliasDeclaration>
     get() = mapNotNull { it.asImportAliasDeclaration() }
 
@@ -67,7 +62,6 @@ val <T : KoDeclarationCastProvider> List<T>.importAliasDeclarations: List<KoImpo
  *
  * @see KoDeclarationCastProvider.asKotlinTypeDeclaration
  */
-@Deprecated("Will be removed in version 0.19.0", ReplaceWith("kotlinTypeDeclarations()"))
 val <T : KoDeclarationCastProvider> List<T>.kotlinTypeDeclarations: List<KoKotlinTypeDeclaration>
     get() = mapNotNull { it.asKotlinTypeDeclaration() }
 
@@ -76,7 +70,6 @@ val <T : KoDeclarationCastProvider> List<T>.kotlinTypeDeclarations: List<KoKotli
  *
  * @see KoDeclarationCastProvider.asExternalDeclaration
  */
-@Deprecated("Will be removed in version 0.19.0", ReplaceWith("externalDeclarations()"))
 val <T : KoDeclarationCastProvider> List<T>.externalTypeDeclarations: List<KoExternalDeclaration>
     get() = mapNotNull { it.asExternalDeclaration() }
 
