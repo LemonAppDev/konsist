@@ -1,4 +1,4 @@
 @file:Suppress("assert-suppress-by-name-at-file-level-when-declarations-are-imports")
 
-import com.lemonappdev.sample.SampleClass
-import com.lemonappdev.sample.OtherClass
+import kotlin.random.Random
+import kotlin.math.max
