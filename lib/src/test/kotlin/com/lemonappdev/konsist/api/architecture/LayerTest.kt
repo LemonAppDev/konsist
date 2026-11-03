@@ -25,14 +25,36 @@ class LayerTest {
     }
 
     @Test
-    fun `create Layer with package not ending in double dots should throw exception`() {
+    fun `create Layer with package ending in single dot should throw exception`() {
         // when
-        val func = { Layer(name = "name", rootPackage = "com.example") }
+        val func = { Layer(name = "name", rootPackage = "com.example.") }
 
         // then
         func shouldThrow IllegalArgumentException::class withMessage
-            "Invalid package definition for layer 'name'. To include subpackages, the definition must end with '..'. " +
-            "Current definition: com.example"
+            "Invalid package definition for layer 'name'. Definition must end with a package segment (single package) " +
+            "or with '..' (package and its subpackages). Current definition: com.example."
+    }
+
+    @Test
+    fun `create Layer with package ending in three dots should throw exception`() {
+        // when
+        val func = { Layer(name = "name", rootPackage = "com.example...") }
+
+        // then
+        func shouldThrow IllegalArgumentException::class withMessage
+            "Invalid package definition for layer 'name'. Definition must end with a package segment (single package) " +
+            "or with '..' (package and its subpackages). Current definition: com.example..."
+    }
+
+    @Test
+    fun `create Layer with single package with invalid segment should throw exception`() {
+        // when
+        val func = { Layer(name = "name", rootPackage = "com.Example") }
+
+        // then
+        func shouldThrow IllegalArgumentException::class withMessage
+            "Invalid package definition for layer 'name'. Invalid package segment 'Example' at position 2. Package segments " +
+            "must start with a lowercase letter and contain only letters, numbers, or underscores. Current definition: com.Example"
     }
 
     @Test
@@ -112,6 +134,10 @@ class LayerTest {
                 "com.example1.test2..",
                 "com.example_test..",
                 "com.exampleTest..",
+                "com.example",
+                "example",
+                "com.example.test",
+                "..domain",
             )
 
         // then

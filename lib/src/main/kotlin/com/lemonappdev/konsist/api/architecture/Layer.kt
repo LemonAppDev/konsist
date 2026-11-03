@@ -4,7 +4,8 @@ package com.lemonappdev.konsist.api.architecture
  * Represents an architectural layer within a software system.
  *
  * An architectural layer is defined by a name and a package path pattern that determines which code belongs to it.
- * The package pattern supports wildcards using ".." to include all subpackages at that level.
+ * The package pattern supports wildcards using ".." to include all subpackages at that level. A pattern without
+ * trailing ".." covers a single package only.
  *
  * Usage:
  * ```kotlin
@@ -15,13 +16,18 @@ package com.lemonappdev.konsist.api.architecture
  * // Wildcard layer definitions (wildcards at the start and at the end)
  * val specificDomainLayer = Layer("Domain", "..domain..")  // matches any package containing a "domain" segment
  *
+ * // Single package layer definition (no wildcard at the end)
+ * val appLayer = Layer("App", "com.example")  // matches "com.example" only, not "com.example.domain"
+ *
  * // Optional layer definition (layer may not contain any files yet)
  * val presentationLayer = Layer("Presentation", "com.example.presentation..", optional = true)
  * ```
  *
  * Package Pattern Rules:
  * 1. Basic Structure
- *    - Must end with ".." to indicate subpackage inclusion
+ *    - Ends with ".." to include subpackages, e.g. "com.example.." matches "com.example" and "com.example.domain"
+ *    - Ends with a package segment to cover a single package, e.g. "com.example" matches "com.example" only
+ *    - Cannot end with a single dot or more than two dots
  *    - Cannot be empty (just "..")
  *    - Can start with ".." for wildcard matching
  *
@@ -35,6 +41,7 @@ package com.lemonappdev.konsist.api.architecture
  *
  * 4. Overlapping Layers
  *    - Each file must belong to only one layer, e.g. "com.example.." and "com.example.domain.." overlap
+ *    - Single package layer does not overlap with layers in its subpackages, e.g. "com.example" and "com.example.domain.."
  *    - Architecture assertion fails when a file belongs to more than one layer
  *
  * @property name Layer identifier (non-blank)
@@ -64,14 +71,14 @@ data class Layer(
             )
         }
 
-        // Check if ends with exactly '..'
-        if (!endsWithExactlyTwoDots()) {
+        // Ending dot is allowed only as part of the '..' wildcard
+        if (rootPackage.endsWith(".") && !endsWithExactlyTwoDots()) {
             throw IllegalArgumentException(
                 buildPackageErrorMessage(),
             )
         }
 
-        // Remove the ending '..' for further validation
+        // Remove the ending '..' (if present) for further validation
         val packageWithoutEndingDots = rootPackage.removeSuffix("..")
 
         // Empty package (just ..) is not valid
@@ -126,8 +133,8 @@ data class Layer(
     }
 
     private fun buildPackageErrorMessage(): String =
-        "Invalid package definition for layer '$name'. To include subpackages, " +
-            "the definition must end with '..'. Current definition: $rootPackage"
+        "Invalid package definition for layer '$name'. Definition must end with a package segment (single package) " +
+            "or with '..' (package and its subpackages). Current definition: $rootPackage"
 
     private companion object {
         private val REGEX_VALID_PACKAGE_SEGMENT: Regex = Regex("^[a-z][a-zA-Z0-9_]*$")
