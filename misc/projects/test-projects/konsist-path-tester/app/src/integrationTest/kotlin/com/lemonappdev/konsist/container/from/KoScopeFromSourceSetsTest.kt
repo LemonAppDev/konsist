@@ -224,4 +224,16 @@ class KoScopeFromSourceSetsTest {
             ).toOsSeparator(),
         )
     }
+
+    @Test
+    fun `scopeFromSourceSets does not duplicate files for same source set in two formats`() {
+        // given
+        val sut =
+            Konsist
+                .scopeFromSourceSet("main", "main/")
+                .mapToFilePaths()
+
+        // then
+        sut shouldBeEqualTo Konsist.scopeFromSourceSet("main").mapToFilePaths()
+    }
 }

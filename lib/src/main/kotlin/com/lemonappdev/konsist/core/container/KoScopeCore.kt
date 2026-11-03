@@ -26,14 +26,16 @@ class KoScopeCore(
 
     /*
      * Files can be changed by `plusAssign` and `minusAssign` operators, so cached values are recreated with them.
+     * Files are deduplicated (file equality is path based), so a file added many times (e.g. `scope + scope` or
+     * overlapping directories) is present in the scope once and its declarations are not reported twice.
      */
-    private var koFiles: List<KoFileDeclaration> = koFiles
+    private var koFiles: List<KoFileDeclaration> = koFiles.distinct()
         set(value) {
-            field = value
-            cache = KoScopeCache(value)
+            field = value.distinct()
+            cache = KoScopeCache(field)
         }
 
-    private var cache = KoScopeCache(koFiles)
+    private var cache = KoScopeCache(this.koFiles)
 
     override val files: List<KoFileDeclaration>
         get() = cache.files

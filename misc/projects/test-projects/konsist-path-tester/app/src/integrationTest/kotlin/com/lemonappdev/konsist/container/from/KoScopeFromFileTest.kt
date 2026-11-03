@@ -74,4 +74,42 @@ class KoScopeFromFileTest {
         val message = "Path is a directory, but should be a file: $appMainSourceSetDirectory${fileSeparator}fixture"
         func shouldThrow IllegalArgumentException::class withMessage message
     }
+
+    @Test
+    fun `scopeFromFile accepts dot slash prefix`() {
+        // given
+        val sut =
+            Konsist
+                .scopeFromFile("./app/src/main/kotlin/com/lemonappdev/fixture/AppClass.kt")
+                .mapToFilePaths()
+
+        // then
+        sut shouldBeEqualTo listOf("$appMainSourceSetDirectory/fixture/AppClass.kt".toOsSeparator())
+    }
+
+    @Test
+    fun `scopeFromFile accepts parent directory segment`() {
+        // given
+        val sut =
+            Konsist
+                .scopeFromFile("app/src/../src/main/kotlin/com/lemonappdev/fixture/AppClass.kt")
+                .mapToFilePaths()
+
+        // then
+        sut shouldBeEqualTo listOf("$appMainSourceSetDirectory/fixture/AppClass.kt".toOsSeparator())
+    }
+
+    @Test
+    fun `scopeFromFile does not duplicate the same file given in two formats`() {
+        // given
+        val sut =
+            Konsist
+                .scopeFromFile(
+                    "app/src/main/kotlin/com/lemonappdev/fixture/AppClass.kt",
+                    "./app/src/main/kotlin/com/lemonappdev/fixture/AppClass.kt",
+                ).mapToFilePaths()
+
+        // then
+        sut shouldBeEqualTo listOf("$appMainSourceSetDirectory/fixture/AppClass.kt".toOsSeparator())
+    }
 }
