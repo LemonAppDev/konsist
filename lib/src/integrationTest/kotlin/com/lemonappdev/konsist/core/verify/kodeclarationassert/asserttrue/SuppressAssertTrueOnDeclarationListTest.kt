@@ -754,6 +754,18 @@ class SuppressAssertTrueOnDeclarationListTest {
         func shouldThrow KoAssertionFailedException::class
     }
 
+    @Test
+    fun `assert-not-suppress-non-suppress-annotation-containing-test-name`() {
+        // given
+        val sut = getSnippetFile("assert-not-suppress-non-suppress-annotation-containing-test-name").classes().annotations
+
+        // when
+        val func = { sut.assertTrue { it.name.endsWith("Text") } }
+
+        // then
+        func shouldThrow KoAssertionFailedException::class
+    }
+
     private fun getSnippetFile(fileName: String) =
         TestSnippetProvider.getSnippetKoScope("core/verify/kodeclarationassert/asserttrue/snippet/", fileName)
 }

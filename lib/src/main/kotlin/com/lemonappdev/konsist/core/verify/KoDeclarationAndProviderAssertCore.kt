@@ -163,9 +163,9 @@ private fun <E : KoBaseProvider> checkIfAnnotatedWithSuppress(
     localList
         .filterNot {
             it is KoAnnotationDeclaration &&
+                it.name == SUPPRESS_ANNOTATION_NAME &&
                 suppressNames.any { suppressName ->
-                    (it.name == "Suppress" && it.hasTextContaining("\"konsist.$suppressName\"")) ||
-                        it.hasTextContaining("\"$suppressName\"")
+                    it.hasTextContaining("\"konsist.$suppressName\"") || it.hasTextContaining("\"$suppressName\"")
                 }
         }.forEach {
             declarations[it] =
@@ -251,7 +251,7 @@ private fun checkIfSuppressed(
     val suppressedNames =
         item
             .annotations
-            .filter { it.name == "Suppress" }
+            .filter { it.name == SUPPRESS_ANNOTATION_NAME }
             .flatMap { it.getSuppressedNames() }
 
     return testNames.any { it in suppressedNames || "konsist.$it" in suppressedNames }

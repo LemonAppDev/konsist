@@ -1,0 +1,4 @@
+@file:Suppress("unused")
+
+@Deprecated("assert-not-suppress-non-suppress-annotation-containing-test-name")
+class SampleClass
