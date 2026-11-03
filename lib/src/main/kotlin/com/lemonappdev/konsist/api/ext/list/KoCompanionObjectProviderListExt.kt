@@ -6,17 +6,6 @@ import com.lemonappdev.konsist.api.declaration.KoCompanionObjectDeclaration
 import com.lemonappdev.konsist.api.provider.KoCompanionObjectProvider
 
 /**
- * Returns a list of direct companion objects from each declaration in this list.
- *
- * Only direct companion objects are included; nested companion objects are ignored.
- *
- * @return A list containing direct [KoCompanionObjectDeclaration] instances from the declarations in this list.
- * @see KoCompanionObjectProvider.companionObject
- */
-val <T : KoCompanionObjectProvider> List<T>.companionObjects: List<KoCompanionObjectDeclaration>
-    get() = mapNotNull { it.companionObject }
-
-/**
  * Returns a list of companion objects from each declaration in this list.
  *
  * @param includeNested Whether to include companion objects declared in nested declarations.

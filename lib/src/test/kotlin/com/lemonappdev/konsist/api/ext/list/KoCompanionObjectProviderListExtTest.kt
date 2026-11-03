@@ -10,32 +10,6 @@ import org.junit.jupiter.api.Test
 @Suppress("detekt.LargeClass")
 class KoCompanionObjectProviderListExtTest {
     @Test
-    fun `companionObjects returns companion objects from all declarations`() {
-        // given
-        val companionObject1: KoCompanionObjectDeclaration = mockk()
-        val companionObject2: KoCompanionObjectDeclaration = mockk()
-        val declaration1: KoCompanionObjectProvider =
-            mockk {
-                every { companionObject } returns companionObject1
-            }
-        val declaration2: KoCompanionObjectProvider =
-            mockk {
-                every { companionObject } returns companionObject2
-            }
-        val declaration3: KoCompanionObjectProvider =
-            mockk {
-                every { companionObject } returns null
-            }
-        val declarations = listOf(declaration1, declaration2, declaration3)
-
-        // when
-        val sut = declarations.companionObjects
-
-        // then
-        sut shouldBeEqualTo listOf(companionObject1, companionObject2)
-    }
-
-    @Test
     fun `companionObjects() returns companion objects from all declarations`() {
         // given
         val companionObject1: KoCompanionObjectDeclaration = mockk()
