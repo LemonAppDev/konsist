@@ -8,8 +8,8 @@ import kotlin.reflect.KClass
  */
 interface KoTypeArgumentProvider : KoBaseProvider {
     /**
-     * A list of type arguments associated with this declaration, if any.
-     * If there are no type arguments, this returns `null`.
+     * A list of type arguments associated with this declaration.
+     * If there are no type arguments, this returns an empty list.
      *
      * Type arguments are used to specify concrete types for generic type parameters.
      * They appear within angle brackets `<>` after a generic type name.
@@ -18,7 +18,7 @@ interface KoTypeArgumentProvider : KoBaseProvider {
      * 1. In `List<String>`, `String` is a type argument for `List`.
      * 2. In `Map<String, Int>`, both `String` and `Int` are type arguments for `Map`.
      * 3. In `List<Set<String>>`, `Set<String>` is a type argument for `List`. It has a nested type argument `String`.
-     * 4. For a non-generic type like `String`, this property would return `null`.
+     * 4. For a non-generic type like `String`, this property returns an empty list.
      *
      * Kotlin snippet:
      * ```kotlin
@@ -33,7 +33,7 @@ interface KoTypeArgumentProvider : KoBaseProvider {
      *     .first()
      *     .type
      *     ?.typeArguments
-     *     ?.map { it.name } // listOf("String", "Int")
+     *     .map { it.name } // listOf("String", "Int")
      * ```
      *
      * The flattened list of type arguments can be obtained using the `flatten` extension function:
@@ -51,14 +51,14 @@ interface KoTypeArgumentProvider : KoBaseProvider {
      *     .first()
      *     .type
      *     ?.typeArguments // listOf("String", "Map<Int, Boolean>")
-     *     ?.flatten() // listOf("String", "Map", "Int", "Boolean")
+     *     .flatten() // listOf("String", "Map", "Int", "Boolean")
      * ```
      * @see numTypeArguments
      *
      * @return A list of [KoTypeArgumentDeclaration] representing the type arguments,
-     *         or `null` if there are no type arguments.
+     *         or an empty list if there are no type arguments.
      */
-    val typeArguments: List<KoTypeArgumentDeclaration>?
+    val typeArguments: List<KoTypeArgumentDeclaration>
 
     /**
      * The number of type arguments.

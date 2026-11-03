@@ -78,113 +78,161 @@ class KoTypeArgumentProviderListExtTest {
     @Test
     fun `withTypeArgumentNamed(empty list) returns declaration with any type argument`() {
         // given
-        val declaration1: KoTypeArgumentProvider = mockk()
-        val declaration2: KoTypeArgumentProvider = mockk()
+        val declaration1: KoTypeArgumentProvider =
+            mockk {
+                every { hasTypeArguments() } returns true
+            }
+        val declaration2: KoTypeArgumentProvider =
+            mockk {
+                every { hasTypeArguments() } returns false
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when
         val sut = declarations.withTypeArgumentNamed(emptyList())
 
         // then
-        sut shouldBeEqualTo listOf(declaration1, declaration2)
+        sut shouldBeEqualTo listOf(declaration1)
     }
 
     @Test
     fun `withTypeArgumentNamed(empty set) returns declaration with any type argument`() {
         // given
-        val declaration1: KoTypeArgumentProvider = mockk()
-        val declaration2: KoTypeArgumentProvider = mockk()
+        val declaration1: KoTypeArgumentProvider =
+            mockk {
+                every { hasTypeArguments() } returns true
+            }
+        val declaration2: KoTypeArgumentProvider =
+            mockk {
+                every { hasTypeArguments() } returns false
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when
         val sut = declarations.withTypeArgumentNamed(emptySet())
 
         // then
-        sut shouldBeEqualTo listOf(declaration1, declaration2)
+        sut shouldBeEqualTo listOf(declaration1)
     }
 
     @Test
     fun `withAllTypeArgumentsNamed(empty list) returns declaration with any type argument`() {
         // given
-        val declaration1: KoTypeArgumentProvider = mockk()
-        val declaration2: KoTypeArgumentProvider = mockk()
+        val declaration1: KoTypeArgumentProvider =
+            mockk {
+                every { hasTypeArguments() } returns true
+            }
+        val declaration2: KoTypeArgumentProvider =
+            mockk {
+                every { hasTypeArguments() } returns false
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when
         val sut = declarations.withAllTypeArgumentsNamed(emptyList())
 
         // then
-        sut shouldBeEqualTo listOf(declaration1, declaration2)
+        sut shouldBeEqualTo listOf(declaration1)
     }
 
     @Test
     fun `withAllTypeArgumentsNamed(empty set) returns declaration with any type argument`() {
         // given
-        val declaration1: KoTypeArgumentProvider = mockk()
-        val declaration2: KoTypeArgumentProvider = mockk()
+        val declaration1: KoTypeArgumentProvider =
+            mockk {
+                every { hasTypeArguments() } returns true
+            }
+        val declaration2: KoTypeArgumentProvider =
+            mockk {
+                every { hasTypeArguments() } returns false
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when
         val sut = declarations.withAllTypeArgumentsNamed(emptySet())
 
         // then
-        sut shouldBeEqualTo listOf(declaration1, declaration2)
+        sut shouldBeEqualTo listOf(declaration1)
     }
 
     @Test
     fun `withoutTypeArgumentNamed(empty list) returns declaration without any type argument`() {
         // given
-        val declaration1: KoTypeArgumentProvider = mockk()
-        val declaration2: KoTypeArgumentProvider = mockk()
+        val declaration1: KoTypeArgumentProvider =
+            mockk {
+                every { hasTypeArguments() } returns true
+            }
+        val declaration2: KoTypeArgumentProvider =
+            mockk {
+                every { hasTypeArguments() } returns false
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when
         val sut = declarations.withoutTypeArgumentNamed(emptyList())
 
         // then
-        sut shouldBeEqualTo emptyList()
+        sut shouldBeEqualTo listOf(declaration2)
     }
 
     @Test
     fun `withoutTypeArgumentNamed(empty set) returns declaration without any type argument`() {
         // given
-        val declaration1: KoTypeArgumentProvider = mockk()
-        val declaration2: KoTypeArgumentProvider = mockk()
+        val declaration1: KoTypeArgumentProvider =
+            mockk {
+                every { hasTypeArguments() } returns true
+            }
+        val declaration2: KoTypeArgumentProvider =
+            mockk {
+                every { hasTypeArguments() } returns false
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when
         val sut = declarations.withoutTypeArgumentNamed(emptySet())
 
         // then
-        sut shouldBeEqualTo emptyList()
+        sut shouldBeEqualTo listOf(declaration2)
     }
 
     @Test
     fun `withoutAllTypeArgumentsNamed(empty list) returns declaration without any type argument`() {
         // given
-        val declaration1: KoTypeArgumentProvider = mockk()
-        val declaration2: KoTypeArgumentProvider = mockk()
+        val declaration1: KoTypeArgumentProvider =
+            mockk {
+                every { hasTypeArguments() } returns true
+            }
+        val declaration2: KoTypeArgumentProvider =
+            mockk {
+                every { hasTypeArguments() } returns false
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when
         val sut = declarations.withoutAllTypeArgumentsNamed(emptyList())
 
         // then
-        sut shouldBeEqualTo emptyList()
+        sut shouldBeEqualTo listOf(declaration2)
     }
 
     @Test
     fun `withoutAllTypeArgumentsNamed(empty set) returns declaration without any type argument`() {
         // given
-        val declaration1: KoTypeArgumentProvider = mockk()
-        val declaration2: KoTypeArgumentProvider = mockk()
+        val declaration1: KoTypeArgumentProvider =
+            mockk {
+                every { hasTypeArguments() } returns true
+            }
+        val declaration2: KoTypeArgumentProvider =
+            mockk {
+                every { hasTypeArguments() } returns false
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when
         val sut = declarations.withoutAllTypeArgumentsNamed(emptySet())
 
         // then
-        sut shouldBeEqualTo emptyList()
+        sut shouldBeEqualTo listOf(declaration2)
     }
 
     @Test

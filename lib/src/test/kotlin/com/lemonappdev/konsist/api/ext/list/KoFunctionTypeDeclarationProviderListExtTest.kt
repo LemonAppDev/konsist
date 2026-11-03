@@ -96,57 +96,81 @@ class KoFunctionTypeDeclarationProviderListExtTest {
     @Test
     fun `withReturnTypeOf(empty list) returns declaration with any return type`() {
         // given
-        val declaration1: KoFunctionTypeDeclarationProvider = mockk()
-        val declaration2: KoFunctionTypeDeclarationProvider = mockk()
+        val declaration1: KoFunctionTypeDeclarationProvider =
+            mockk {
+                every { returnType } returns mockk()
+            }
+        val declaration2: KoFunctionTypeDeclarationProvider =
+            mockk {
+                every { returnType } returns null
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when
         val sut = declarations.withReturnTypeOf(emptyList())
 
         // then
-        sut shouldBeEqualTo listOf(declaration1, declaration2)
+        sut shouldBeEqualTo listOf(declaration1)
     }
 
     @Test
     fun `withReturnTypeOf(empty set) returns declaration with any return type`() {
         // given
-        val declaration1: KoFunctionTypeDeclarationProvider = mockk()
-        val declaration2: KoFunctionTypeDeclarationProvider = mockk()
+        val declaration1: KoFunctionTypeDeclarationProvider =
+            mockk {
+                every { returnType } returns mockk()
+            }
+        val declaration2: KoFunctionTypeDeclarationProvider =
+            mockk {
+                every { returnType } returns null
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when
         val sut = declarations.withReturnTypeOf(emptySet())
 
         // then
-        sut shouldBeEqualTo listOf(declaration1, declaration2)
+        sut shouldBeEqualTo listOf(declaration1)
     }
 
     @Test
     fun `withoutReturnTypeOf(empty list) returns declaration without any return type`() {
         // given
-        val declaration1: KoFunctionTypeDeclarationProvider = mockk()
-        val declaration2: KoFunctionTypeDeclarationProvider = mockk()
+        val declaration1: KoFunctionTypeDeclarationProvider =
+            mockk {
+                every { returnType } returns mockk()
+            }
+        val declaration2: KoFunctionTypeDeclarationProvider =
+            mockk {
+                every { returnType } returns null
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when
         val sut = declarations.withoutReturnTypeOf(emptyList())
 
         // then
-        sut shouldBeEqualTo emptyList()
+        sut shouldBeEqualTo listOf(declaration2)
     }
 
     @Test
     fun `withoutReturnTypeOf(empty set) returns declaration without any return type`() {
         // given
-        val declaration1: KoFunctionTypeDeclarationProvider = mockk()
-        val declaration2: KoFunctionTypeDeclarationProvider = mockk()
+        val declaration1: KoFunctionTypeDeclarationProvider =
+            mockk {
+                every { returnType } returns mockk()
+            }
+        val declaration2: KoFunctionTypeDeclarationProvider =
+            mockk {
+                every { returnType } returns null
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when
         val sut = declarations.withoutReturnTypeOf(emptySet())
 
         // then
-        sut shouldBeEqualTo emptyList()
+        sut shouldBeEqualTo listOf(declaration2)
     }
 
     @Test

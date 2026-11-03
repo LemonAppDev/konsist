@@ -65,7 +65,7 @@ fun <T : KoNullableTypeProvider> List<T>.withTypeOf(
 fun <T : KoNullableTypeProvider> List<T>.withTypeOf(kClasses: Collection<KClass<*>>): List<T> =
     filter {
         when {
-            kClasses.isEmpty() -> true
+            kClasses.isEmpty() -> it.hasType()
             else -> kClasses.any { kClass -> it.hasTypeOf(kClass) }
         }
     }
@@ -93,7 +93,7 @@ fun <T : KoNullableTypeProvider> List<T>.withoutTypeOf(
 fun <T : KoNullableTypeProvider> List<T>.withoutTypeOf(kClasses: Collection<KClass<*>>): List<T> =
     filterNot {
         when {
-            kClasses.isEmpty() -> true
+            kClasses.isEmpty() -> it.hasType()
             else -> kClasses.any { kClass -> it.hasTypeOf(kClass) }
         }
     }

@@ -64,18 +64,18 @@ internal object MutableTypeUtil {
      */
     internal fun hasMutableTypeArgument(
         sourceDeclaration: KoDeclarationCastProvider?,
-        typeArguments: List<KoTypeArgumentDeclaration>?,
+        typeArguments: List<KoTypeArgumentDeclaration>,
     ): Boolean = hasMutableTypeArgument(sourceDeclaration, typeArguments, mutableSetOf())
 
     private fun hasMutableTypeArgument(
         sourceDeclaration: KoDeclarationCastProvider?,
-        typeArguments: List<KoTypeArgumentDeclaration>?,
+        typeArguments: List<KoTypeArgumentDeclaration>,
         visitedDeclarations: MutableSet<KoClassAndInterfaceAndObjectDeclaration>,
     ): Boolean =
         (sourceDeclaration.resolveImportAlias() as? KoTypeAliasDeclaration)?.type?.let {
             hasMutableTypeArgument(it.sourceDeclaration, it.typeArguments, visitedDeclarations)
         } == true ||
-            typeArguments.orEmpty().any {
+            typeArguments.any {
                 isMutableType(it.sourceDeclaration, visitedDeclarations) ||
                     hasMutableTypeArgument(it.sourceDeclaration, it.typeArguments, visitedDeclarations)
             }
@@ -112,10 +112,10 @@ internal object MutableTypeUtil {
      */
     internal fun hasImmutableTypeArgument(
         sourceDeclaration: KoDeclarationCastProvider?,
-        typeArguments: List<KoTypeArgumentDeclaration>?,
+        typeArguments: List<KoTypeArgumentDeclaration>,
     ): Boolean =
         (sourceDeclaration.resolveImportAlias() as? KoTypeAliasDeclaration)?.type?.hasImmutableTypeArgument == true ||
-            typeArguments.orEmpty().any {
+            typeArguments.any {
                 isImmutableType(it.sourceDeclaration) || hasImmutableTypeArgument(it.sourceDeclaration, it.typeArguments)
             }
 

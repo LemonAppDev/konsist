@@ -30,8 +30,13 @@ class KoTypeDeclarationForKoTypeArgumentProviderTest {
 
         // then
         assertSoftly(sut) {
-            it?.typeArguments shouldBeEqualTo null
+            it?.typeArguments shouldBeEqualTo emptyList()
             it?.numTypeArguments shouldBeEqualTo 0
+            it?.hasTypeArguments() shouldBeEqualTo false
+            it?.hasTypeArgumentWithName(emptyList()) shouldBeEqualTo false
+            it?.hasTypeArgumentsWithAllNames(emptyList()) shouldBeEqualTo false
+            it?.hasTypeArgumentOf(emptyList()) shouldBeEqualTo false
+            it?.hasAllTypeArgumentsOf(emptyList()) shouldBeEqualTo false
             it?.countTypeArguments { type -> type.sourceDeclaration?.isClass == true } shouldBeEqualTo 0
             it?.hasTypeArgumentWithName("String", "Int") shouldBeEqualTo false
             it?.hasTypeArgumentWithName(listOf("String", "Int")) shouldBeEqualTo false
@@ -43,7 +48,8 @@ class KoTypeDeclarationForKoTypeArgumentProviderTest {
             it?.hasAllTypeArgumentsOf(listOf(String::class, Int::class)) shouldBeEqualTo false
             it?.hasAllTypeArgumentsOf(listOf(FixtureClass::class, Int::class)) shouldBeEqualTo false
             it?.hasTypeArgument { type -> type.sourceDeclaration?.isExternal == true } shouldBeEqualTo false
-            it?.hasAllTypeArguments { type -> type.sourceDeclaration?.isExternal == true } shouldBeEqualTo false
+            it?.hasAllTypeArguments { type -> type.sourceDeclaration?.isExternal == true } shouldBeEqualTo true
+            it?.hasAllTypeArguments { false } shouldBeEqualTo true
         }
     }
 
@@ -65,6 +71,10 @@ class KoTypeDeclarationForKoTypeArgumentProviderTest {
 
             it?.typeArguments?.firstOrNull()?.name shouldBeEqualTo "String"
             it?.numTypeArguments shouldBeEqualTo 1
+            it?.hasTypeArgumentWithName(emptyList()) shouldBeEqualTo true
+            it?.hasTypeArgumentsWithAllNames(emptyList()) shouldBeEqualTo true
+            it?.hasTypeArgumentOf(emptyList()) shouldBeEqualTo true
+            it?.hasAllTypeArgumentsOf(emptyList()) shouldBeEqualTo true
             it?.countTypeArguments { type -> type.sourceDeclaration?.isKotlinType == true } shouldBeEqualTo 1
             it?.countTypeArguments { type -> type.sourceDeclaration?.isClass == true } shouldBeEqualTo 1
             it?.hasTypeArgumentWithName("String", "Int") shouldBeEqualTo true

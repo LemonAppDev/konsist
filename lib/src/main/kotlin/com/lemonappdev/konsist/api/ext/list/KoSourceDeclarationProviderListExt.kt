@@ -66,7 +66,7 @@ fun <T : KoSourceDeclarationProvider> List<T>.withSourceDeclarationOf(
 fun <T : KoSourceDeclarationProvider> List<T>.withSourceDeclarationOf(kClasses: Collection<KClass<*>>): List<T> =
     filter {
         when {
-            kClasses.isEmpty() -> true
+            kClasses.isEmpty() -> it.sourceDeclaration != null
             else -> kClasses.any { kClass -> it.hasSourceDeclarationOf(kClass) }
         }
     }
@@ -94,7 +94,7 @@ fun <T : KoSourceDeclarationProvider> List<T>.withoutSourceDeclarationOf(
 fun <T : KoSourceDeclarationProvider> List<T>.withoutSourceDeclarationOf(kClasses: Collection<KClass<*>>): List<T> =
     filterNot {
         when {
-            kClasses.isEmpty() -> true
+            kClasses.isEmpty() -> it.sourceDeclaration != null
             else -> kClasses.any { kClass -> it.hasSourceDeclarationOf(kClass) }
         }
     }

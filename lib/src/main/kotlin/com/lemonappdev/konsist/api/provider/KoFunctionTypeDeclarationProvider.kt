@@ -10,8 +10,9 @@ import kotlin.reflect.KClass
 interface KoFunctionTypeDeclarationProvider : KoBaseProvider {
     /**
      * Represents the parameters of the function type.
+     * If there are no parameters (or the declaration is not a function type), this returns an empty list.
      */
-    val parameters: List<KoParameterDeclaration>?
+    val parameters: List<KoParameterDeclaration>
 
     /**
      * The number of parameters for the function type.

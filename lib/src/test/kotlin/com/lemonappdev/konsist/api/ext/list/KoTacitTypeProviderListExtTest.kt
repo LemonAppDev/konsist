@@ -37,59 +37,83 @@ class KoTacitTypeProviderListExtTest {
     }
 
     @Test
-    fun `withTacitType(empty list) returns all declarations`() {
+    fun `withTacitType(empty list) returns declaration with any tacit type`() {
         // given
-        val declaration1: KoTacitTypeProvider = mockk()
-        val declaration2: KoTacitTypeProvider = mockk()
+        val declaration1: KoTacitTypeProvider =
+            mockk {
+                every { tacitType } returns mockk()
+            }
+        val declaration2: KoTacitTypeProvider =
+            mockk {
+                every { tacitType } returns null
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when
         val sut = declarations.withTacitType(emptyList())
 
         // then
-        sut shouldBeEqualTo listOf(declaration1, declaration2)
+        sut shouldBeEqualTo listOf(declaration1)
     }
 
     @Test
-    fun `withTacitType(empty set) returns all declarations`() {
+    fun `withTacitType(empty set) returns declaration with any tacit type`() {
         // given
-        val declaration1: KoTacitTypeProvider = mockk()
-        val declaration2: KoTacitTypeProvider = mockk()
+        val declaration1: KoTacitTypeProvider =
+            mockk {
+                every { tacitType } returns mockk()
+            }
+        val declaration2: KoTacitTypeProvider =
+            mockk {
+                every { tacitType } returns null
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when
         val sut = declarations.withTacitType(emptySet())
 
         // then
-        sut shouldBeEqualTo listOf(declaration1, declaration2)
+        sut shouldBeEqualTo listOf(declaration1)
     }
 
     @Test
-    fun `withoutTacitType(empty list) returns none declaration`() {
+    fun `withoutTacitType(empty list) returns declaration without any tacit type`() {
         // given
-        val declaration1: KoTacitTypeProvider = mockk()
-        val declaration2: KoTacitTypeProvider = mockk()
+        val declaration1: KoTacitTypeProvider =
+            mockk {
+                every { tacitType } returns mockk()
+            }
+        val declaration2: KoTacitTypeProvider =
+            mockk {
+                every { tacitType } returns null
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when
         val sut = declarations.withoutTacitType(emptyList())
 
         // then
-        sut shouldBeEqualTo emptyList()
+        sut shouldBeEqualTo listOf(declaration2)
     }
 
     @Test
-    fun `withoutTacitType(empty set) returns none declaration`() {
+    fun `withoutTacitType(empty set) returns declaration without any tacit type`() {
         // given
-        val declaration1: KoTacitTypeProvider = mockk()
-        val declaration2: KoTacitTypeProvider = mockk()
+        val declaration1: KoTacitTypeProvider =
+            mockk {
+                every { tacitType } returns mockk()
+            }
+        val declaration2: KoTacitTypeProvider =
+            mockk {
+                every { tacitType } returns null
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when
         val sut = declarations.withoutTacitType(emptySet())
 
         // then
-        sut shouldBeEqualTo emptyList()
+        sut shouldBeEqualTo listOf(declaration2)
     }
 
     @Test
@@ -313,59 +337,83 @@ class KoTacitTypeProviderListExtTest {
     }
 
     @Test
-    fun `withTacitTypeOf(empty list) returns all declarations`() {
+    fun `withTacitTypeOf(empty list) returns declaration with any tacit type`() {
         // given
-        val declaration1: KoTacitTypeProvider = mockk()
-        val declaration2: KoTacitTypeProvider = mockk()
+        val declaration1: KoTacitTypeProvider =
+            mockk {
+                every { tacitType } returns mockk()
+            }
+        val declaration2: KoTacitTypeProvider =
+            mockk {
+                every { tacitType } returns null
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when
         val sut = declarations.withTacitTypeOf(emptyList())
 
         // then
-        sut shouldBeEqualTo listOf(declaration1, declaration2)
+        sut shouldBeEqualTo listOf(declaration1)
     }
 
     @Test
-    fun `withTacitTypeOf(empty set) returns all declarations`() {
+    fun `withTacitTypeOf(empty set) returns declaration with any tacit type`() {
         // given
-        val declaration1: KoTacitTypeProvider = mockk()
-        val declaration2: KoTacitTypeProvider = mockk()
+        val declaration1: KoTacitTypeProvider =
+            mockk {
+                every { tacitType } returns mockk()
+            }
+        val declaration2: KoTacitTypeProvider =
+            mockk {
+                every { tacitType } returns null
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when
         val sut = declarations.withTacitTypeOf(emptySet())
 
         // then
-        sut shouldBeEqualTo listOf(declaration1, declaration2)
+        sut shouldBeEqualTo listOf(declaration1)
     }
 
     @Test
-    fun `withoutTacitTypeOf(empty list) returns none declaration`() {
+    fun `withoutTacitTypeOf(empty list) returns declaration without any tacit type`() {
         // given
-        val declaration1: KoTacitTypeProvider = mockk()
-        val declaration2: KoTacitTypeProvider = mockk()
+        val declaration1: KoTacitTypeProvider =
+            mockk {
+                every { tacitType } returns mockk()
+            }
+        val declaration2: KoTacitTypeProvider =
+            mockk {
+                every { tacitType } returns null
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when
         val sut = declarations.withoutTacitTypeOf(emptyList())
 
         // then
-        sut shouldBeEqualTo emptyList()
+        sut shouldBeEqualTo listOf(declaration2)
     }
 
     @Test
-    fun `withoutTacitTypeOf(empty set) returns none declaration`() {
+    fun `withoutTacitTypeOf(empty set) returns declaration without any tacit type`() {
         // given
-        val declaration1: KoTacitTypeProvider = mockk()
-        val declaration2: KoTacitTypeProvider = mockk()
+        val declaration1: KoTacitTypeProvider =
+            mockk {
+                every { tacitType } returns mockk()
+            }
+        val declaration2: KoTacitTypeProvider =
+            mockk {
+                every { tacitType } returns null
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when
         val sut = declarations.withoutTacitTypeOf(emptySet())
 
         // then
-        sut shouldBeEqualTo emptyList()
+        sut shouldBeEqualTo listOf(declaration2)
     }
 
     @Test

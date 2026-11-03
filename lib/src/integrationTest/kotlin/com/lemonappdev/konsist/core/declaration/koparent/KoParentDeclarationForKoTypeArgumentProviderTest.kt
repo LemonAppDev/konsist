@@ -25,7 +25,7 @@ class KoParentDeclarationForKoTypeArgumentProviderTest {
 
         // then
         assertSoftly(sut) {
-            typeArguments shouldBeEqualTo null
+            typeArguments shouldBeEqualTo emptyList()
             numTypeArguments shouldBeEqualTo 0
             countTypeArguments { type -> type.sourceDeclaration?.isClass == true } shouldBeEqualTo 0
             hasTypeArgumentWithName("String", "Int") shouldBeEqualTo false
@@ -38,7 +38,7 @@ class KoParentDeclarationForKoTypeArgumentProviderTest {
             hasAllTypeArgumentsOf(listOf(String::class, Int::class)) shouldBeEqualTo false
             hasAllTypeArgumentsOf(listOf(FixtureClass::class, Int::class)) shouldBeEqualTo false
             hasTypeArgument { type -> type.sourceDeclaration?.isExternal == true } shouldBeEqualTo false
-            hasAllTypeArguments { type -> type.sourceDeclaration?.isExternal == true } shouldBeEqualTo false
+            hasAllTypeArguments { type -> type.sourceDeclaration?.isExternal == true } shouldBeEqualTo true
         }
     }
 
@@ -162,7 +162,7 @@ class KoParentDeclarationForKoTypeArgumentProviderTest {
 
         // then
         assertSoftly(sut) {
-            typeArguments shouldBeEqualTo null
+            typeArguments shouldBeEqualTo emptyList()
             numTypeArguments shouldBeEqualTo 0
             countTypeArguments { type -> type.sourceDeclaration?.isClass == true } shouldBeEqualTo 0
             hasTypeArgumentWithName("String", "Int") shouldBeEqualTo false
@@ -175,7 +175,7 @@ class KoParentDeclarationForKoTypeArgumentProviderTest {
             hasAllTypeArgumentsOf(listOf(String::class, Int::class)) shouldBeEqualTo false
             hasAllTypeArgumentsOf(listOf(FixtureClass::class, Int::class)) shouldBeEqualTo false
             hasTypeArgument { type -> type.sourceDeclaration?.isExternal == true } shouldBeEqualTo false
-            hasAllTypeArguments { type -> type.sourceDeclaration?.isExternal == true } shouldBeEqualTo false
+            hasAllTypeArguments { type -> type.sourceDeclaration?.isExternal == true } shouldBeEqualTo true
         }
     }
 
@@ -300,7 +300,7 @@ class KoParentDeclarationForKoTypeArgumentProviderTest {
 
         // then
         assertSoftly(sut) {
-            typeArguments shouldBeEqualTo null
+            typeArguments shouldBeEqualTo emptyList()
             numTypeArguments shouldBeEqualTo 0
             countTypeArguments { type -> type.sourceDeclaration?.isClass == true } shouldBeEqualTo 0
             hasTypeArgumentWithName("String", "Int") shouldBeEqualTo false
@@ -313,7 +313,7 @@ class KoParentDeclarationForKoTypeArgumentProviderTest {
             hasAllTypeArgumentsOf(listOf(String::class, Int::class)) shouldBeEqualTo false
             hasAllTypeArgumentsOf(listOf(FixtureClass::class, Int::class)) shouldBeEqualTo false
             hasTypeArgument { type -> type.sourceDeclaration?.isExternal == true } shouldBeEqualTo false
-            hasAllTypeArguments { type -> type.sourceDeclaration?.isExternal == true } shouldBeEqualTo false
+            hasAllTypeArguments { type -> type.sourceDeclaration?.isExternal == true } shouldBeEqualTo true
         }
     }
 
