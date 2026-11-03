@@ -208,6 +208,9 @@ interface KoScopeCreator {
      * Both `/` and `\` separators are accepted on all OSes.
      * Letter case follows the file system: on case-sensitive file systems (Linux) `app/src` does not match `App/src`,
      * on case-insensitive ones (macOS, Windows) it does, and returned file paths keep the letter case passed in.
+     * Build output directories (e.g. `app/build`), hidden directories (e.g. `.gradle`, `.idea`) and `node_modules`
+     * located in the directory are skipped, the same way as for [scopeFromProject]. A directory that is itself
+     * skipped by [scopeFromProject] (e.g. `app/build/generated`) can be passed explicitly to check generated files.
      *
      * @param path The path relative to the project root directory.
      * @param paths The path(s) relative to the project root directory.
@@ -224,6 +227,9 @@ interface KoScopeCreator {
      * Both `/` and `\` separators are accepted on all OSes.
      * Letter case follows the file system: on case-sensitive file systems (Linux) `app/src` does not match `App/src`,
      * on case-insensitive ones (macOS, Windows) it does, and returned file paths keep the letter case passed in.
+     * Build output directories (e.g. `app/build`), hidden directories (e.g. `.gradle`, `.idea`) and `node_modules`
+     * located in the directory are skipped, the same way as for [scopeFromProject]. A directory that is itself
+     * skipped by [scopeFromProject] (e.g. `app/build/generated`) can be passed explicitly to check generated files.
      *
      * @param paths The set of paths relative to the project root directory.
      * @return a [KoScope] containing all Kotlin files in the given directories.
@@ -236,6 +242,8 @@ interface KoScopeCreator {
      * Both `/` and `\` separators are accepted on all OSes.
      * Letter case follows the file system: on case-sensitive file systems (Linux) `app/src` does not match `App/src`,
      * on case-insensitive ones (macOS, Windows) it does, and returned file paths keep the letter case passed in.
+     * Build output directories (e.g. `build`), hidden directories (e.g. `.gradle`, `.idea`) and `node_modules`
+     * located in the directory are skipped.
      *
      * @param absolutePath The absolute path to the directory from outside the project.
      * @param paths The absolute path(s) to the directories from outside the project.
@@ -252,6 +260,8 @@ interface KoScopeCreator {
      * Both `/` and `\` separators are accepted on all OSes.
      * Letter case follows the file system: on case-sensitive file systems (Linux) `app/src` does not match `App/src`,
      * on case-insensitive ones (macOS, Windows) it does, and returned file paths keep the letter case passed in.
+     * Build output directories (e.g. `build`), hidden directories (e.g. `.gradle`, `.idea`) and `node_modules`
+     * located in the directory are skipped.
      *
      * @param absolutePaths Set of the absolute paths to the directories from outside the project.
      * @return a [KoScope] containing all Kotlin files in the given directories.
