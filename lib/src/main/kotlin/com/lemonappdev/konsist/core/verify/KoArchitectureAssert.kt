@@ -348,7 +348,7 @@ private fun Layer.isDependentOn(
     val isDependentOn =
         layerFiles
             .flatMap { it.imports }
-            .any { import -> LocationUtil.residesInLocation(otherLayer.rootPackage, import.name) }
+            .any { import -> import.residesInLayer(otherLayer) }
 
     return isDependentOn
 }
@@ -359,7 +359,7 @@ private fun Layer.getDependentOnFiles(
 ): Map<KoFileDeclaration, List<KoImportDeclaration>> =
     files
         .withPackage(rootPackage)
-        .getFailedImports { import -> LocationUtil.residesInLocation(otherLayer.rootPackage, import.name) }
+        .getFailedImports { import -> import.residesInLayer(otherLayer) }
 
 private fun Layer.getDependentOnNotAllowedLayerFiles(
     notAllowedLayer: Layer,
@@ -370,10 +370,10 @@ private fun Layer.getDependentOnNotAllowedLayerFiles(
         .withPackage(rootPackage)
         .getFailedImports { import ->
             // Import is not part of layer
-            !LocationUtil.residesInLocation(rootPackage, import.name) &&
+            !import.residesInLayer(this) &&
                 // Import is not part of allowed layer
-                allowedLayers.none { LocationUtil.residesInLocation(it.rootPackage, import.name) } &&
-                LocationUtil.residesInLocation(notAllowedLayer.rootPackage, import.name)
+                allowedLayers.none { import.residesInLayer(it) } &&
+                import.residesInLayer(notAllowedLayer)
         }
 
 private fun Layer.getDependentOnAnyLayerFiles(
@@ -384,10 +384,35 @@ private fun Layer.getDependentOnAnyLayerFiles(
         .withPackage(rootPackage)
         .getFailedImports { import ->
             // Import is not part of layer
-            !LocationUtil.residesInLocation(rootPackage, import.name) &&
+            !import.residesInLayer(this) &&
                 // Import is part of other layer
-                layerDependencies.layers.any { LocationUtil.residesInLocation(it.rootPackage, import.name) }
+                layerDependencies.layers.any { import.residesInLayer(it) }
         }
+
+/**
+ * Checks if the imported declaration resides in the [layer] package. Package of the imported declaration is compared,
+ * not the import name, so class names are not matched as packages, e.g. "android.provider.ContactsContract.Data"
+ * does not reside in "..data.." layer.
+ */
+private fun KoImportDeclaration.residesInLayer(layer: Layer): Boolean = LocationUtil.residesInLocation(layer.rootPackage, importedPackage)
+
+/**
+ * Package of the imported declaration, e.g. "com.app.data" for "com.app.data.Repository",
+ * "com.app.data.Repository.Nested", "com.app.data.topLevelFunction" and "com.app.data.*" imports.
+ *
+ * Package segments start with a lowercase letter (see [Layer] package rules) and class names start with an uppercase
+ * letter, so trailing segments starting with an uppercase letter (classes and objects) are removed.
+ */
+private val KoImportDeclaration.importedPackage: String
+    get() {
+        val segments = name.split(".")
+        // Wildcard import name has no imported declaration name, e.g. "com.app.data" for "com.app.data.*"
+        val packageAndClassSegments = if (isWildcard) segments else segments.dropLast(1)
+
+        return packageAndClassSegments
+            .dropLastWhile { it.firstOrNull()?.isUpperCase() == true }
+            .joinToString(".")
+    }
 
 /**
  * Maps each file to its imports matching [isFailedImport]. Files without such imports are skipped.
