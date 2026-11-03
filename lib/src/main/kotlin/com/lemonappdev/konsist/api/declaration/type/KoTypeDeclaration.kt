@@ -36,7 +36,6 @@ import com.lemonappdev.konsist.api.provider.KoSourceSetProvider
 import com.lemonappdev.konsist.api.provider.KoSourceTypeProvider
 import com.lemonappdev.konsist.api.provider.KoTextProvider
 import com.lemonappdev.konsist.api.provider.KoTypeArgumentProvider
-import com.lemonappdev.konsist.core.annotation.RemoveInVersion
 import kotlin.reflect.KClass
 
 /**
@@ -65,7 +64,6 @@ interface KoTypeDeclaration :
     KoIsMutableTypeProvider,
     KoTypeArgumentProvider,
     KoFunctionTypeDeclarationProvider,
-    @RemoveInVersion("0.19.0")
     KoDeclarationCastProvider {
     /**
      * Package of the file where the type is referenced (the use site), not the package where the type is declared,
