@@ -382,4 +382,108 @@ class PathUtilTest {
         // then
         result shouldBeEqualTo false
     }
+
+    @Test
+    fun `hasPackageMatchingPath returns true for directory matching package`() {
+        // when
+        val result =
+            PathUtil.hasPackageMatchingPath(
+                packageName = "com.app",
+                filePath = "/project/src/main/kotlin/com/app/A.kt",
+            )
+
+        // then
+        result shouldBeEqualTo true
+    }
+
+    @Test
+    fun `hasPackageMatchingPath returns true for directory path equal to package`() {
+        // when
+        val result =
+            PathUtil.hasPackageMatchingPath(
+                packageName = "com.app",
+                filePath = "com/app/A.kt",
+            )
+
+        // then
+        result shouldBeEqualTo true
+    }
+
+    @Test
+    fun `hasPackageMatchingPath returns true for windows path`() {
+        // when
+        val result =
+            PathUtil.hasPackageMatchingPath(
+                packageName = "com.app",
+                filePath = """C:\project\src\main\kotlin\com\app\A.kt""",
+            )
+
+        // then
+        result shouldBeEqualTo true
+    }
+
+    @Test
+    fun `hasPackageMatchingPath returns false for directory deeper than package`() {
+        // when
+        val result =
+            PathUtil.hasPackageMatchingPath(
+                packageName = "com.app",
+                filePath = "/project/com/app/feature/A.kt",
+            )
+
+        // then
+        result shouldBeEqualTo false
+    }
+
+    @Test
+    fun `hasPackageMatchingPath returns false for directory sharing prefix with package`() {
+        // when
+        val result =
+            PathUtil.hasPackageMatchingPath(
+                packageName = "com.app",
+                filePath = "/project/com/application/A.kt",
+            )
+
+        // then
+        result shouldBeEqualTo false
+    }
+
+    @Test
+    fun `hasPackageMatchingPath returns false for directory sharing suffix with one-segment package`() {
+        // when
+        val result =
+            PathUtil.hasPackageMatchingPath(
+                packageName = "app",
+                filePath = "/project/myapp/A.kt",
+            )
+
+        // then
+        result shouldBeEqualTo false
+    }
+
+    @Test
+    fun `hasPackageMatchingPath returns false for directory sharing suffix with package`() {
+        // when
+        val result =
+            PathUtil.hasPackageMatchingPath(
+                packageName = "com.app",
+                filePath = "/project/xcom/app/A.kt",
+            )
+
+        // then
+        result shouldBeEqualTo false
+    }
+
+    @Test
+    fun `hasPackageMatchingPath returns false for empty package`() {
+        // when
+        val result =
+            PathUtil.hasPackageMatchingPath(
+                packageName = "",
+                filePath = "/project/A.kt",
+            )
+
+        // then
+        result shouldBeEqualTo false
+    }
 }

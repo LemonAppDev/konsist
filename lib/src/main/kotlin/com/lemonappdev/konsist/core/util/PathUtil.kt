@@ -104,6 +104,26 @@ object PathUtil {
             .any { it.equals(GRADLE_BUILD_CONFIG_DIRECTORY_NAME, ignoreCase = true) }
     }
 
+    /**
+     * Returns true if the directory containing the file with given [filePath] matches the package with given
+     * [packageName] - the directory path is equal to or ends with whole directories built from the package name segments,
+     * e.g. true for package "com.app" and "/project/src/main/kotlin/com/app/A.kt", and false for package "com.app" and
+     * "/project/com/application/A.kt" or "/project/com/app/feature/A.kt".
+     */
+    internal fun hasPackageMatchingPath(
+        packageName: String,
+        filePath: String,
+    ): Boolean {
+        if (packageName.isEmpty()) {
+            return false
+        }
+
+        val directoryPath = toMacOsSeparator(filePath).substringBeforeLast('/', "")
+        val packagePath = packageName.replace('.', '/')
+
+        return directoryPath == packagePath || directoryPath.endsWith("/$packagePath")
+    }
+
     private const val SOURCE_DIRECTORY_PATH = "/src/"
     private val SOURCE_ROOT_REGEX = Regex("/src/[^/]+/(?:kotlin|java|resources)/")
     private const val GRADLE_BUILD_CONFIG_DIRECTORY_NAME = "buildSrc"
