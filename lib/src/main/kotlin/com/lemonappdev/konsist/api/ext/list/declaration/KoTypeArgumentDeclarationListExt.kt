@@ -22,7 +22,7 @@ import com.lemonappdev.konsist.api.provider.KoDeclarationCastProvider
 fun <T : KoTypeArgumentDeclaration> List<T>.flatten(): List<KoDeclarationCastProvider> =
     mapNotNull { typeArg ->
         // Directly use the existing type argument declaration and flatten recursively
-        val flattenedDeclarations = listOf(typeArg) + (typeArg.typeArguments?.flattenRecursively() ?: emptyList())
+        val flattenedDeclarations = listOf(typeArg) + typeArg.typeArguments.flattenRecursively()
         flattenedDeclarations
     }.flatten()
         .mapNotNull { it.sourceDeclaration }
@@ -30,5 +30,5 @@ fun <T : KoTypeArgumentDeclaration> List<T>.flatten(): List<KoDeclarationCastPro
 private fun <T : KoTypeArgumentDeclaration> List<T>.flattenRecursively(): List<KoTypeArgumentDeclaration> =
     flatMap { typeArg ->
         // Recursively flatten type arguments, if any
-        listOf(typeArg) + (typeArg.typeArguments?.flattenRecursively() ?: emptyList())
+        listOf(typeArg) + typeArg.typeArguments.flattenRecursively()
     }

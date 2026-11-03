@@ -29,8 +29,8 @@ class GenericTypesTestSnippets {
             .assertFalse { type ->
                 type
                     .typeArguments
-                    ?.flatten()
-                    ?.any { it.isStarProjection }
+                    .flatten()
+                    .any { it.isStarProjection }
             }
     }
 

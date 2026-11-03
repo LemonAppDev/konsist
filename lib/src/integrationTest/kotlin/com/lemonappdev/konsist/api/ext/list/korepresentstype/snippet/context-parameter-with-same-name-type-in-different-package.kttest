@@ -1,0 +1,7 @@
+package com.lemonappdev.konsist.samplepackage
+
+context(fixtureParameter: File)
+fun fixtureFunction() {
+}
+
+class File

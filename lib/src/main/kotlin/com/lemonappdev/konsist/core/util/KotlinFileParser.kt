@@ -11,6 +11,7 @@ import org.jetbrains.kotlin.CoreEnvironmentDeprecation
 import org.jetbrains.kotlin.cli.jvm.compiler.EnvironmentConfigFiles
 import org.jetbrains.kotlin.cli.jvm.compiler.KotlinCoreEnvironment
 import org.jetbrains.kotlin.com.intellij.openapi.util.Disposer
+import org.jetbrains.kotlin.com.intellij.openapi.util.text.StringUtil
 import org.jetbrains.kotlin.com.intellij.psi.PsiManager
 import org.jetbrains.kotlin.com.intellij.testFramework.LightVirtualFile
 import org.jetbrains.kotlin.compiler.plugin.CompilerPluginRegistrar
@@ -68,7 +69,8 @@ object KotlinFileParser {
                     .readText()
                     // Files saved by some editors (mostly on Windows) start with UTF-8 BOM that breaks package parsing
                     .removePrefix(UTF8_BOM)
-                    .replace(Regex(EndOfLine.WINDOWS.value), EndOfLine.UNIX.value)
+                    // PSI documents accept only LF line endings, so CRLF and lone CR must be converted
+                    .let(StringUtil::convertLineSeparators)
 
             // Tests are using code snippets with txt extension that is messing up with Kotlin file parsing
             val filePath = file.path.replace(KOTLIN_TEST_SNIPPET, KOTLIN)

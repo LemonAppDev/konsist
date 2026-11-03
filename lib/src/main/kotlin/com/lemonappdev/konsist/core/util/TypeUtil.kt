@@ -37,6 +37,7 @@ import kotlin.reflect.KType
 import kotlin.reflect.KTypeProjection
 import kotlin.reflect.KVariance
 
+@Suppress("detekt.TooManyFunctions")
 object TypeUtil {
     private val availableTypes = ConcurrentHashMap<String, Boolean>()
 
@@ -125,6 +126,25 @@ object TypeUtil {
         ) as KoDeclarationCastProvider?
     }
 
+    /*
+     * Checks if the type represents the given name. The name can be the type name as written in source
+     * (e.g. `File`) or the fully qualified name of the type's source declaration (e.g. `java.io.File`).
+     * Nullability is ignored, e.g. `File?` represents `java.io.File`.
+     */
+    internal fun representsType(
+        type: KoTypeDeclaration,
+        name: String?,
+        ignoreCase: Boolean,
+    ): Boolean {
+        if (name == null) return false
+        if (type.hasName(name, ignoreCase)) return true
+
+        val fullyQualifiedName = getFullyQualifiedName(type.sourceDeclaration) ?: return false
+
+        return name.equals(fullyQualifiedName, ignoreCase) ||
+            name.equals(getKotlinTypeQualifiedName(fullyQualifiedName), ignoreCase)
+    }
+
     internal fun hasTypeOf(
         type: KoTypeDeclaration?,
         kClass: KClass<*>,
@@ -187,7 +207,7 @@ object TypeUtil {
             typeArgument.hasOutModifier == (kTypeProjection.variance == KVariance.OUT) &&
             isNullable == kType.isMarkedNullable &&
             matchesKClass(getFullyQualifiedName(typeArgument.sourceDeclaration), kClass) &&
-            matchesTypeArguments(typeArgument.typeArguments.orEmpty(), kType.arguments)
+            matchesTypeArguments(typeArgument.typeArguments, kType.arguments)
     }
 
     /*

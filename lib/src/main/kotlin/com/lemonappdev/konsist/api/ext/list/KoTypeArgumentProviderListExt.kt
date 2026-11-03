@@ -10,8 +10,7 @@ import com.lemonappdev.konsist.api.provider.KoTypeArgumentProvider
  */
 val <T : KoTypeArgumentProvider> List<T>.typeArguments: List<KoTypeArgumentDeclaration>
     get() =
-        mapNotNull { it.typeArguments }
-            .flatten()
+        flatMap { it.typeArguments }
 
 /**
  * List containing declarations with any type argument.
@@ -62,7 +61,7 @@ fun <T : KoTypeArgumentProvider> List<T>.withTypeArgumentNamed(
 ): List<T> =
     filter {
         when {
-            names.isEmpty() -> true
+            names.isEmpty() -> it.hasTypeArguments()
             else -> it.hasTypeArgumentWithName(names, ignoreCase = ignoreCase)
         }
     }
@@ -100,7 +99,7 @@ fun <T : KoTypeArgumentProvider> List<T>.withoutTypeArgumentNamed(
 ): List<T> =
     filterNot {
         when {
-            names.isEmpty() -> true
+            names.isEmpty() -> it.hasTypeArguments()
             else -> it.hasTypeArgumentWithName(names, ignoreCase = ignoreCase)
         }
     }
@@ -138,7 +137,7 @@ fun <T : KoTypeArgumentProvider> List<T>.withAllTypeArgumentsNamed(
 ): List<T> =
     filter {
         when {
-            names.isEmpty() -> true
+            names.isEmpty() -> it.hasTypeArguments()
             else -> it.hasTypeArgumentsWithAllNames(names, ignoreCase = ignoreCase)
         }
     }
@@ -176,7 +175,7 @@ fun <T : KoTypeArgumentProvider> List<T>.withoutAllTypeArgumentsNamed(
 ): List<T> =
     filterNot {
         when {
-            names.isEmpty() -> true
+            names.isEmpty() -> it.hasTypeArguments()
             else -> it.hasTypeArgumentsWithAllNames(names, ignoreCase = ignoreCase)
         }
     }
@@ -233,7 +232,7 @@ fun <T : KoTypeArgumentProvider> List<T>.withoutAllTypeArguments(predicate: (KoT
  * @see KoTypeArgumentProvider.typeArguments
  */
 fun <T : KoTypeArgumentProvider> List<T>.withTypeArguments(predicate: (List<KoTypeArgumentDeclaration>) -> Boolean): List<T> =
-    filter { it.typeArguments?.let { typeArgument -> predicate(typeArgument) } == true }
+    filter { predicate(it.typeArguments) }
 
 /**
  * List containing declarations without type argument declarations satisfying the predicate.
@@ -243,4 +242,4 @@ fun <T : KoTypeArgumentProvider> List<T>.withTypeArguments(predicate: (List<KoTy
  * @see KoTypeArgumentProvider.typeArguments
  */
 fun <T : KoTypeArgumentProvider> List<T>.withoutTypeArguments(predicate: (List<KoTypeArgumentDeclaration>) -> Boolean): List<T> =
-    filterNot { it.typeArguments?.let { typeArgument -> predicate(typeArgument) } == true }
+    filterNot { predicate(it.typeArguments) }

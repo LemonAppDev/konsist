@@ -19,37 +19,33 @@ internal interface KoTypeArgumentProviderCore :
     val ktTypeProjections: List<KtTypeProjection>
         get() = ktUserType?.typeArguments.orEmpty()
 
-    override val typeArguments: List<KoTypeArgumentDeclaration>?
-        get() {
-            val typeArguments =
-                ktTypeProjections
-                    .map {
-                        val type =
-                            it.typeReference?.let { typeReference ->
-                                KoTypeDeclarationCore.getInstance(typeReference, this.castToKoBaseDeclaration())
-                            } ?: KoTypeDeclarationCore.getInstance(it, this.castToKoBaseDeclaration())
+    override val typeArguments: List<KoTypeArgumentDeclaration>
+        get() =
+            ktTypeProjections
+                .map {
+                    val type =
+                        it.typeReference?.let { typeReference ->
+                            KoTypeDeclarationCore.getInstance(typeReference, this.castToKoBaseDeclaration())
+                        } ?: KoTypeDeclarationCore.getInstance(it, this.castToKoBaseDeclaration())
 
-                        KoTypeArgumentDeclarationCore(
-                            type.name,
-                            if (!type.isFunctionType || type.sourceDeclaration?.isTypeAlias == true) type.sourceDeclaration else null,
-                            type.typeArguments,
-                            it.projectionKind == KtProjectionKind.IN,
-                            it.projectionKind == KtProjectionKind.OUT,
-                            it.projectionKind == KtProjectionKind.STAR,
-                            it,
-                            this.castToKoBaseDeclaration(),
-                        )
-                    }
-
-            return typeArguments.ifEmpty { null }
-        }
+                    KoTypeArgumentDeclarationCore(
+                        type.name,
+                        if (!type.isFunctionType || type.sourceDeclaration?.isTypeAlias == true) type.sourceDeclaration else null,
+                        type.typeArguments,
+                        it.projectionKind == KtProjectionKind.IN,
+                        it.projectionKind == KtProjectionKind.OUT,
+                        it.projectionKind == KtProjectionKind.STAR,
+                        it,
+                        this.castToKoBaseDeclaration(),
+                    )
+                }
 
     override val numTypeArguments: Int
-        get() = typeArguments?.size ?: 0
+        get() = typeArguments.size
 
-    override fun countTypeArguments(predicate: (KoTypeArgumentDeclaration) -> Boolean): Int = typeArguments?.count { predicate(it) } ?: 0
+    override fun countTypeArguments(predicate: (KoTypeArgumentDeclaration) -> Boolean): Int = typeArguments.count { predicate(it) }
 
-    override fun hasTypeArguments(): Boolean = typeArguments?.isNotEmpty() ?: false
+    override fun hasTypeArguments(): Boolean = typeArguments.isNotEmpty()
 
     override fun hasTypeArgumentWithName(
         name: String,
@@ -62,8 +58,8 @@ internal interface KoTypeArgumentProviderCore :
         ignoreCase: Boolean,
     ): Boolean =
         when {
-            names.isEmpty() -> true
-            else -> names.any { typeArguments?.any { argument -> argument.hasName(it, ignoreCase) } == true }
+            names.isEmpty() -> hasTypeArguments()
+            else -> names.any { typeArguments.any { argument -> argument.hasName(it, ignoreCase) } }
         }
 
     override fun hasTypeArgumentsWithAllNames(
@@ -77,8 +73,8 @@ internal interface KoTypeArgumentProviderCore :
         ignoreCase: Boolean,
     ): Boolean =
         when {
-            names.isEmpty() -> true
-            else -> names.all { typeArguments?.any { argument -> argument.hasName(it, ignoreCase) } == true }
+            names.isEmpty() -> hasTypeArguments()
+            else -> names.all { typeArguments.any { argument -> argument.hasName(it, ignoreCase) } }
         }
 
     override fun hasTypeArgumentOf(
@@ -89,14 +85,14 @@ internal interface KoTypeArgumentProviderCore :
     override fun hasTypeArgumentOf(names: Collection<KClass<*>>): Boolean =
         when {
             names.isEmpty() -> {
-                true
+                hasTypeArguments()
             }
 
             else -> {
                 names.any { name ->
-                    typeArguments?.any { typeArgument ->
+                    typeArguments.any { typeArgument ->
                         TypeUtil.matchesKClass(TypeUtil.getFullyQualifiedName(typeArgument.sourceDeclaration), name)
-                    } == true
+                    }
                 }
             }
         }
@@ -109,19 +105,19 @@ internal interface KoTypeArgumentProviderCore :
     override fun hasAllTypeArgumentsOf(names: Collection<KClass<*>>): Boolean =
         when {
             names.isEmpty() -> {
-                true
+                hasTypeArguments()
             }
 
             else -> {
                 names.all { name ->
-                    typeArguments?.any { typeArgument ->
+                    typeArguments.any { typeArgument ->
                         TypeUtil.matchesKClass(TypeUtil.getFullyQualifiedName(typeArgument.sourceDeclaration), name)
-                    } == true
+                    }
                 }
             }
         }
 
-    override fun hasTypeArgument(predicate: (KoTypeArgumentDeclaration) -> Boolean): Boolean = typeArguments?.any(predicate) ?: false
+    override fun hasTypeArgument(predicate: (KoTypeArgumentDeclaration) -> Boolean): Boolean = typeArguments.any(predicate)
 
-    override fun hasAllTypeArguments(predicate: (KoTypeArgumentDeclaration) -> Boolean): Boolean = typeArguments?.all(predicate) ?: false
+    override fun hasAllTypeArguments(predicate: (KoTypeArgumentDeclaration) -> Boolean): Boolean = typeArguments.all(predicate)
 }

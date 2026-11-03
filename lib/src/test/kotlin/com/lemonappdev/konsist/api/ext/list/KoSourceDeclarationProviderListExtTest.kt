@@ -97,31 +97,43 @@ class KoSourceDeclarationProviderListExtTest {
     }
 
     @Test
-    fun `withSourceDeclarationOf(empty list) returns all source declarations`() {
+    fun `withSourceDeclarationOf(empty list) returns declaration with any source declaration`() {
         // given
-        val declaration1: KoSourceDeclarationProvider = mockk()
-        val declaration2: KoSourceDeclarationProvider = mockk()
+        val declaration1: KoSourceDeclarationProvider =
+            mockk {
+                every { sourceDeclaration } returns mockk()
+            }
+        val declaration2: KoSourceDeclarationProvider =
+            mockk {
+                every { sourceDeclaration } returns null
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when
         val sut = declarations.withSourceDeclarationOf(emptyList())
 
         // then
-        sut shouldBeEqualTo listOf(declaration1, declaration2)
+        sut shouldBeEqualTo listOf(declaration1)
     }
 
     @Test
-    fun `withSourceDeclarationOf(empty set) returns all source declarations`() {
+    fun `withSourceDeclarationOf(empty set) returns declaration with any source declaration`() {
         // given
-        val declaration1: KoSourceDeclarationProvider = mockk()
-        val declaration2: KoSourceDeclarationProvider = mockk()
+        val declaration1: KoSourceDeclarationProvider =
+            mockk {
+                every { sourceDeclaration } returns mockk()
+            }
+        val declaration2: KoSourceDeclarationProvider =
+            mockk {
+                every { sourceDeclaration } returns null
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when
         val sut = declarations.withSourceDeclarationOf(emptySet())
 
         // then
-        sut shouldBeEqualTo listOf(declaration1, declaration2)
+        sut shouldBeEqualTo listOf(declaration1)
     }
 
     @Test
@@ -228,15 +240,15 @@ class KoSourceDeclarationProviderListExtTest {
     }
 
     @Test
-    fun `withoutSourceDeclarationOf(empty list) returns none source declaration`() {
+    fun `withoutSourceDeclarationOf(empty list) returns declaration without any source declaration`() {
         // given
         val declaration1: KoSourceDeclarationProvider =
             mockk {
-                every { hasSourceDeclarationOf(FixtureType1::class) } returns true
+                every { sourceDeclaration } returns mockk()
             }
         val declaration2: KoSourceDeclarationProvider =
             mockk {
-                every { hasSourceDeclarationOf(FixtureType1::class) } returns false
+                every { sourceDeclaration } returns null
             }
         val declarations = listOf(declaration1, declaration2)
 
@@ -244,19 +256,19 @@ class KoSourceDeclarationProviderListExtTest {
         val sut = declarations.withoutSourceDeclarationOf(emptyList())
 
         // then
-        sut shouldBeEqualTo emptyList()
+        sut shouldBeEqualTo listOf(declaration2)
     }
 
     @Test
-    fun `withoutSourceDeclarationOf(empty set) returns none source declaration`() {
+    fun `withoutSourceDeclarationOf(empty set) returns declaration without any source declaration`() {
         // given
         val declaration1: KoSourceDeclarationProvider =
             mockk {
-                every { hasSourceDeclarationOf(FixtureType1::class) } returns true
+                every { sourceDeclaration } returns mockk()
             }
         val declaration2: KoSourceDeclarationProvider =
             mockk {
-                every { hasSourceDeclarationOf(FixtureType1::class) } returns false
+                every { sourceDeclaration } returns null
             }
         val declarations = listOf(declaration1, declaration2)
 
@@ -264,7 +276,7 @@ class KoSourceDeclarationProviderListExtTest {
         val sut = declarations.withoutSourceDeclarationOf(emptySet())
 
         // then
-        sut shouldBeEqualTo emptyList()
+        sut shouldBeEqualTo listOf(declaration2)
     }
 
     @Test

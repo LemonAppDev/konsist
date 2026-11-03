@@ -7,9 +7,4 @@ internal enum class EndOfLine(
      * Unix-style end-of-line marker (LF)
      */
     UNIX("\n"),
-
-    /**
-     * Windows-style end-of-line marker (CRLF)
-     */
-    WINDOWS("\r\n"),
 }

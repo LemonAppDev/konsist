@@ -33,7 +33,7 @@ import org.jetbrains.kotlin.psi.KtUserType
 data class KoTypeArgumentDeclarationCore(
     override val name: String,
     override val sourceDeclaration: KoDeclarationCastProvider?,
-    override val typeArguments: List<KoTypeArgumentDeclaration>?,
+    override val typeArguments: List<KoTypeArgumentDeclaration>,
     override val hasInModifier: Boolean,
     override val hasOutModifier: Boolean,
     override val isStarProjection: Boolean,
