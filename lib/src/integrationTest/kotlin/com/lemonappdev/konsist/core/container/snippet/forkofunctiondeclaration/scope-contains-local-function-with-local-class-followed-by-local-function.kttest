@@ -1,0 +1,9 @@
+fun sampleOuterFunction() {
+    fun sampleLocalFunction1() {
+        class SampleLocalClass {
+            fun sampleMemberFunction() {}
+        }
+    }
+
+    fun sampleLocalFunction2() {}
+}

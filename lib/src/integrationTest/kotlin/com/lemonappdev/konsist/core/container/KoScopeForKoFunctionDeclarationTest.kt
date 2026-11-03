@@ -70,5 +70,25 @@ class KoScopeForKoFunctionDeclarationTest {
             .shouldBeEqualTo(expected)
     }
 
+    @Test
+    fun `scope-contains-local-function-with-local-class-followed-by-local-function`() {
+        // given
+        val sut = getSnippetFile("scope-contains-local-function-with-local-class-followed-by-local-function")
+
+        // then
+        val expected =
+            listOf(
+                "sampleOuterFunction",
+                "sampleLocalFunction1",
+                "sampleLocalFunction2",
+                "sampleMemberFunction",
+            )
+
+        sut
+            .functions(includeNested = true, includeLocal = true)
+            .map { it.name }
+            .shouldBeEqualTo(expected)
+    }
+
     private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/container/snippet/forkofunctiondeclaration/", fileName)
 }

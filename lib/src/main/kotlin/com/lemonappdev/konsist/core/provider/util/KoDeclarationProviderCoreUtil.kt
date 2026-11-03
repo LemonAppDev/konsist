@@ -226,9 +226,10 @@ internal object KoDeclarationProviderCoreUtil {
         includeNested: Boolean,
     ): List<KoBaseDeclaration> {
         val localDeclarations = mutableListOf<KoBaseDeclaration>()
-        val nestedDeclarations = mutableListOf<KoBaseDeclaration>()
 
         koFunctions.forEach { koFunction ->
+            val nestedDeclarations = mutableListOf<KoBaseDeclaration>()
+
             koFunction.localDeclarations.forEach {
                 if (it is KoDeclarationProvider && includeNested) {
                     nestedDeclarations += it.declarations(includeNested = true, includeLocal = true)
