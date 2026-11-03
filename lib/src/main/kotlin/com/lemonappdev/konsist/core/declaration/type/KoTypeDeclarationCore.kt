@@ -18,7 +18,6 @@ import com.lemonappdev.konsist.api.declaration.combined.KoClassAndObjectDeclarat
 import com.lemonappdev.konsist.api.declaration.combined.KoInterfaceAndObjectDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoKotlinTypeDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoTypeDeclaration
-import com.lemonappdev.konsist.core.annotation.RemoveInVersion
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
 import com.lemonappdev.konsist.core.cache.KoPropertyCache
 import com.lemonappdev.konsist.core.provider.KoAnnotationProviderCore
@@ -78,7 +77,6 @@ internal class KoTypeDeclarationCore private constructor(
     KoPackageProviderCore,
     KoResideInPackageProviderCore,
     KoAnnotationProviderCore,
-    @RemoveInVersion("0.19.0")
     KoDeclarationCastProviderCore,
     KoSourceDeclarationProviderCore,
     KoIsMutableTypeProviderCore,
@@ -220,14 +218,12 @@ internal class KoTypeDeclarationCore private constructor(
     @Volatile
     private var cachedSourceType: Any? = KoPropertyCache.NOT_COMPUTED
 
-    @RemoveInVersion("0.19.0")
     override val sourceType: String
         get() = KoPropertyCache.getOrCompute(cachedSourceType, { cachedSourceType = it }) { super<KoSourceTypeProviderCore>.sourceType }
 
     @Volatile
     private var cachedBareSourceType: Any? = KoPropertyCache.NOT_COMPUTED
 
-    @RemoveInVersion("0.19.0")
     override val bareSourceType: String
         get() =
             KoPropertyCache.getOrCompute(

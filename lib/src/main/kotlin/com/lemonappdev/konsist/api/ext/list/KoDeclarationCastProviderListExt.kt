@@ -18,62 +18,6 @@ import com.lemonappdev.konsist.api.provider.KoDeclarationCastProvider
 import kotlin.reflect.KClass
 
 /**
- * List containing class declarations associated with types.
- *
- * @see KoDeclarationCastProvider.asClassDeclaration
- */
-val <T : KoDeclarationCastProvider> List<T>.classDeclarations: List<KoClassDeclaration>
-    get() = mapNotNull { it.asClassDeclaration() }
-
-/**
- * List containing object declarations associated with types.
- *
- * @see KoDeclarationCastProvider.asObjectDeclaration
- */
-val <T : KoDeclarationCastProvider> List<T>.objectDeclarations: List<KoObjectDeclaration>
-    get() = mapNotNull { it.asObjectDeclaration() }
-
-/**
- * List containing interface declarations associated with types.
- *
- * @see KoDeclarationCastProvider.asInterfaceDeclaration
- */
-val <T : KoDeclarationCastProvider> List<T>.interfaceDeclarations: List<KoInterfaceDeclaration>
-    get() = mapNotNull { it.asInterfaceDeclaration() }
-
-/**
- * List containing type alias declarations associated with types.
- *
- * @see KoDeclarationCastProvider.asTypeAliasDeclaration
- */
-val <T : KoDeclarationCastProvider> List<T>.typeAliasDeclarations: List<KoTypeAliasDeclaration>
-    get() = mapNotNull { it.asTypeAliasDeclaration() }
-
-/**
- * List containing import alias declarations associated with types.
- *
- * @see KoDeclarationCastProvider.asImportAliasDeclaration
- */
-val <T : KoDeclarationCastProvider> List<T>.importAliasDeclarations: List<KoImportAliasDeclaration>
-    get() = mapNotNull { it.asImportAliasDeclaration() }
-
-/**
- * List containing Kotlin type declarations associated with types.
- *
- * @see KoDeclarationCastProvider.asKotlinTypeDeclaration
- */
-val <T : KoDeclarationCastProvider> List<T>.kotlinTypeDeclarations: List<KoKotlinTypeDeclaration>
-    get() = mapNotNull { it.asKotlinTypeDeclaration() }
-
-/**
- * List containing external type declarations associated with types.
- *
- * @see KoDeclarationCastProvider.asExternalDeclaration
- */
-val <T : KoDeclarationCastProvider> List<T>.externalTypeDeclarations: List<KoExternalDeclaration>
-    get() = mapNotNull { it.asExternalDeclaration() }
-
-/**
  * List containing class declarations associated with declarations.
  *
  * @param predicate A function that defines the condition to be met by the class declaration.
