@@ -72,9 +72,36 @@ class KoKDocDeclarationForKoTextProviderTest {
         }
     }
 
+    @ParameterizedTest
+    @MethodSource("provideValuesForExactText")
+    fun `kdoc-text`(
+        fileName: String,
+        value: String,
+    ) {
+        // given
+        val sut =
+            getSnippetFile(fileName)
+                .classes()
+                .first()
+                .kDoc
+
+        // then
+        sut?.text shouldBeEqualTo value
+    }
+
     private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/kokdoc/snippet/forkotextprovider/", fileName)
 
     companion object {
+        @Suppress("unused")
+        @JvmStatic
+        fun provideValuesForExactText() =
+            listOf(
+                arguments("class-with-description-on-opening-line", "First line summary\nsecond line"),
+                arguments("class-with-description-on-closing-line", "First line\nText"),
+                arguments("class-with-at-sign-in-description", "Contact me at john@example.com"),
+                arguments("class-with-backticked-annotation-in-description", "Use with `@Composable` functions.\n\n@param T type"),
+            )
+
         @Suppress("unused")
         @JvmStatic
         fun provideValuesForClass() =
