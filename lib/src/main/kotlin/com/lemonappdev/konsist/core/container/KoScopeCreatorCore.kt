@@ -4,7 +4,6 @@ import com.lemonappdev.konsist.api.container.KoScope
 import com.lemonappdev.konsist.api.container.KoScopeCreator
 import com.lemonappdev.konsist.api.declaration.KoFileDeclaration
 import com.lemonappdev.konsist.core.ext.isKotlinFile
-import com.lemonappdev.konsist.core.ext.sep
 import com.lemonappdev.konsist.core.ext.toKoFile
 import com.lemonappdev.konsist.core.ext.toMacOsSeparator
 import com.lemonappdev.konsist.core.ext.toOsSeparator
@@ -73,11 +72,18 @@ internal class KoScopeCreatorCore : KoScopeCreator {
         vararg sourceSetNames: String,
     ): KoScope = scopeFromSourceSets(setOf(sourceSetName) + sourceSetNames)
 
+    /*
+     * Files are collected in a single pass, so a file matching many source set names (e.g. "main" and "main/")
+     * is added once.
+     */
     override fun scopeFromSourceSets(sourceSetNames: Collection<String>): KoScope =
         runBlocking {
-            sourceSetNames
-                .flatMap { getFiles(sourceSetName = it) }
-                .let { KoScopeCore(it) }
+            val koFiles =
+                getFiles { file ->
+                    sourceSetNames.any { residesInSourceSet(file.path, projectRootPath, it) }
+                }
+
+            KoScopeCore(koFiles)
         }
 
     /*
@@ -210,13 +216,13 @@ internal class KoScopeCreatorCore : KoScopeCreator {
         vararg paths: String,
     ): KoScope {
         val totalPaths = setOf(absolutePath) + paths
-        val filesFromPaths = totalPaths.flatMap { getFilesFromDirectory(absolutePath = it) }
+        val filesFromPaths = totalPaths.flatMap { getFilesFromDirectory(absolutePath = normalizePath(it)) }
 
         return KoScopeCore(koFiles = filesFromPaths)
     }
 
     override fun scopeFromExternalDirectories(absolutePaths: Collection<String>): KoScope {
-        val filesFromPaths = absolutePaths.flatMap { getFilesFromDirectory(absolutePath = it) }
+        val filesFromPaths = absolutePaths.flatMap { getFilesFromDirectory(absolutePath = normalizePath(it)) }
 
         return KoScopeCore(koFiles = filesFromPaths)
     }
@@ -236,14 +242,19 @@ internal class KoScopeCreatorCore : KoScopeCreator {
                     require(it.isFile) { "Path is a directory, but should be a file: ${it.absolutePath}" }
                 }
 
-        val notKotlinFiles =
-            files
-                .filterNot { it.isKotlinFile }
+        val (kotlinFiles, notKotlinFiles) = files.distinct().partition { it.isKotlinFile }
+        val projectKoFiles = getKoFiles(kotlinFiles)
+        val projectKoFilePaths = projectKoFiles.map { it.path }.toSet()
+
+        /*
+         * Existing Kotlin files not found among project files (e.g. files in directories ignored by
+         * project file scan) are parsed directly, so they are not dropped silently.
+         */
+        val otherKoFiles =
+            (kotlinFiles.filterNot { it.path in projectKoFilePaths } + notKotlinFiles)
                 .map { it.toKoFile() }
 
-        val koFiles = getKoFiles(files)
-
-        return KoScopeCore(koFiles + notKotlinFiles)
+        return KoScopeCore(projectKoFiles + otherKoFiles)
     }
 
     /*
@@ -257,7 +268,16 @@ internal class KoScopeCreatorCore : KoScopeCreator {
         return !packageName.isNullOrEmpty() && LocationUtil.residesInLocation(packagee, packageName)
     }
 
-    private fun getAbsolutePath(projectPath: String): String = "$projectRootPath$sep${projectPath.toOsSeparator()}"
+    /*
+     * Path is normalized, so "./" and "../" segments are resolved (e.g. "./app" and "app/../app" point to "app").
+     */
+    private fun getAbsolutePath(projectPath: String): String = normalizePath(File(projectRootPath, projectPath.toOsSeparator()).path)
+
+    private fun normalizePath(path: String): String =
+        File(path.toOsSeparator())
+            .toPath()
+            .normalize()
+            .toString()
 
     private fun isTestSourceSet(name: String): Boolean {
         val lowercaseName = name.lowercase()
@@ -278,6 +298,10 @@ internal class KoScopeCreatorCore : KoScopeCreator {
      * Returns project files with the given paths. Other project files are not parsed.
      */
     private fun getKoFiles(files: List<File>): List<KoFileDeclaration> {
+        if (files.isEmpty()) {
+            return emptyList()
+        }
+
         val paths = files.map { it.path }.toSet()
 
         return runBlocking {

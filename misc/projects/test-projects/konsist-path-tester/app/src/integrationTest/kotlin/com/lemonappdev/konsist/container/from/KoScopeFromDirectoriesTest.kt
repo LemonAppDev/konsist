@@ -92,7 +92,7 @@ class KoScopeFromDirectoriesTest {
         val func = { Konsist.scopeFromDirectories(paths) }
 
         // then
-        val message = "Directory does not exist: $appMainSourceSetDirectory${fileSeparator}nonExisting$fileSeparator"
+        val message = "Directory does not exist: $appMainSourceSetDirectory${fileSeparator}nonExisting"
         func shouldThrow IllegalArgumentException::class withMessage message
     }
 
@@ -104,7 +104,7 @@ class KoScopeFromDirectoriesTest {
         val func = { Konsist.scopeFromDirectories(paths) }
 
         // then
-        val message = "Directory does not exist: $appMainSourceSetDirectory${fileSeparator}nonExisting$fileSeparator"
+        val message = "Directory does not exist: $appMainSourceSetDirectory${fileSeparator}nonExisting"
         func shouldThrow IllegalArgumentException::class withMessage message
     }
 
@@ -132,5 +132,29 @@ class KoScopeFromDirectoriesTest {
         val message =
             "Path is a file, but should be a directory: $appMainSourceSetDirectory${fileSeparator}fixture${fileSeparator}AppClass.kt"
         func shouldThrow IllegalArgumentException::class withMessage message
+    }
+
+    @Test
+    fun `scopeFromDirectories does not duplicate files of overlapping directories`() {
+        // given
+        val paths =
+            listOf(
+                "app/src/main/kotlin/com/lemonappdev/fixture/",
+                "app/src/main/kotlin/com/lemonappdev/fixture/data/",
+                "./app/src/main/kotlin/com/lemonappdev/fixture",
+            )
+
+        val sut =
+            Konsist
+                .scopeFromDirectories(paths)
+                .mapToFilePaths()
+
+        // then
+        sut.shouldBeEqualTo(
+            listOf(
+                "$appMainSourceSetDirectory/fixture/AppClass.kt",
+                "$appMainSourceSetDirectory/fixture/data/AppDataClass.kt",
+            ).toOsSeparator(),
+        )
     }
 }

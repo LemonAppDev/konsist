@@ -77,7 +77,7 @@ class KoScopeFromDirectoryTest {
             { Konsist.scopeFromDirectory("app/src/main/kotlin/com/lemonappdev/nonExisting/") }
 
         // then
-        val message = "Directory does not exist: $appMainSourceSetDirectory${fileSeparator}nonExisting$fileSeparator"
+        val message = "Directory does not exist: $appMainSourceSetDirectory${fileSeparator}nonExisting"
         func shouldThrow IllegalArgumentException::class withMessage message
     }
 
@@ -95,6 +95,49 @@ class KoScopeFromDirectoryTest {
         val message =
             "Path is a file, but should be a directory: $appMainSourceSetDirectory${fileSeparator}fixture${fileSeparator}AppClass.kt"
         func shouldThrow IllegalArgumentException::class withMessage message
+    }
+
+    @Test
+    fun `scopeFromDirectory accepts dot slash prefix`() {
+        // given
+        val sut =
+            Konsist
+                .scopeFromDirectory("./app/src/main/kotlin/com/lemonappdev/fixture/")
+                .mapToFilePaths()
+
+        // then
+        sut.shouldBeEqualTo(
+            listOf(
+                "$appMainSourceSetDirectory/fixture/AppClass.kt",
+                "$appMainSourceSetDirectory/fixture/data/AppDataClass.kt",
+            ).toOsSeparator(),
+        )
+    }
+
+    @Test
+    fun `scopeFromDirectory with dot slash prefix has module name app`() {
+        // given
+        val sut = Konsist.scopeFromDirectory("./app")
+
+        // then
+        sut.files.map { it.moduleName }.distinct() shouldBeEqualTo listOf("app")
+    }
+
+    @Test
+    fun `scopeFromDirectory accepts parent directory segment`() {
+        // given
+        val sut =
+            Konsist
+                .scopeFromDirectory("app/src/main/kotlin/com/lemonappdev/fixture/data/../")
+                .mapToFilePaths()
+
+        // then
+        sut.shouldBeEqualTo(
+            listOf(
+                "$appMainSourceSetDirectory/fixture/AppClass.kt",
+                "$appMainSourceSetDirectory/fixture/data/AppDataClass.kt",
+            ).toOsSeparator(),
+        )
     }
 
     @Test

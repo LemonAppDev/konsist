@@ -58,7 +58,6 @@ class KoScopeTest {
                 "$dataMainSourceSetDirectory/fixture/LibClass.kt",
                 "$dataMainSourceSetDirectory/fixture/data/LibDataClass.kt",
                 "$dataTestSourceSetDirectory/fixture/LibClassSpec.kt",
-                "$dataTestSourceSetDirectory/fixture/LibClassSpec.kt",
                 "$dataTestSourceSetDirectory/fixture/data/LibDataClassTest.kt",
             ).toOsSeparator(),
         )
@@ -114,7 +113,6 @@ class KoScopeTest {
                     "$dataMainSourceSetDirectory/fixture/LibClass.kt",
                     "$dataMainSourceSetDirectory/fixture/data/LibDataClass.kt",
                     "$dataTestSourceSetDirectory/fixture/LibClassSpec.kt",
-                    "$dataTestSourceSetDirectory/fixture/LibClassSpec.kt",
                     "$dataTestSourceSetDirectory/fixture/data/LibDataClassTest.kt",
                 ).toOsSeparator(),
             )
@@ -155,7 +153,6 @@ class KoScopeTest {
                     "$dataMainSourceSetDirectory/fixture/LibClass.kt",
                     "$dataMainSourceSetDirectory/fixture/data/LibDataClass.kt",
                     "$dataTestSourceSetDirectory/fixture/LibClassSpec.kt",
-                    "$dataTestSourceSetDirectory/fixture/LibClassSpec.kt",
                     "$dataTestSourceSetDirectory/fixture/data/LibDataClassTest.kt",
                 ).toOsSeparator(),
             )
@@ -177,5 +174,46 @@ class KoScopeTest {
             .shouldBeEqualTo(
                 emptyList(),
             )
+    }
+
+    @Test
+    fun `plus does not duplicate overlapping files`() {
+        // given
+        val scope1 = Konsist.scopeFromProject(moduleName = "data")
+        val scope2 = Konsist.scopeFromProject(moduleName = "data", sourceSetName = "test")
+
+        // when
+        val sut =
+            (scope1 + scope2)
+                .mapToFilePaths()
+
+        // then
+        sut shouldBeEqualTo scope1.mapToFilePaths()
+    }
+
+    @Test
+    fun `plusAssign does not duplicate overlapping files`() {
+        // given
+        val scope1 = Konsist.scopeFromProject(moduleName = "data")
+        val scope2 = Konsist.scopeFromProject(moduleName = "data")
+        val expected = scope1.mapToFilePaths()
+
+        // when
+        scope1 += scope2
+
+        // then
+        scope1.mapToFilePaths() shouldBeEqualTo expected
+    }
+
+    @Test
+    fun `plus does not duplicate declarations of overlapping files`() {
+        // given
+        val scope = Konsist.scopeFromProject(moduleName = "data")
+
+        // when
+        val sut = scope + scope
+
+        // then
+        sut.classes().map { it.name }.sorted() shouldBeEqualTo scope.classes().map { it.name }.sorted()
     }
 }
