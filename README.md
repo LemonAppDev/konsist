@@ -36,7 +36,7 @@ Maven:
 <dependency>
 <groupId>com.lemonappdev</groupId>
 <artifactId>konsist</artifactId>
-<version>1.0.0-alpha.1</version>
+<version>0.18.1</version>
 <scope>test</scope>
 </dependency>
 ```
