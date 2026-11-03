@@ -1,0 +1,5 @@
+import com.lemonappdev.konsist.testdata.FixtureAnnotation1
+import com.lemonappdev.konsist.testdata.FixtureAnnotation2
+import com.lemonappdev.konsist.testdata.FixtureObject
+
+class FixtureClass1(val fixtureProperty1: (@FixtureAnnotation1 @FixtureAnnotation2 (FixtureObject) -> Unit)?)

@@ -60,9 +60,7 @@ internal interface KoSourceDeclarationProviderCore :
 
                             val notNullableTypeElement =
                                 if (typeElement is KtNullableType) {
-                                    typeElement
-                                        .children
-                                        .firstOrNull()
+                                    typeElement.innerType
                                 } else {
                                     typeElement
                                 }

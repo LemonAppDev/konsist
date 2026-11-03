@@ -558,6 +558,22 @@ class KoTypeDeclarationForKoSourceDeclarationProviderTest {
                     "com.lemonappdev.konsist.testdata.FixtureType",
                 ),
                 arguments(
+                    "nullable-annotated-class-type",
+                    KoClassDeclaration::class,
+                    KoKotlinTypeDeclaration::class,
+                    FixtureType::class,
+                    String::class,
+                    "com.lemonappdev.konsist.testdata.FixtureType",
+                ),
+                arguments(
+                    "nullable-annotated-import-alias-type",
+                    KoImportAliasDeclaration::class,
+                    KoKotlinTypeDeclaration::class,
+                    null,
+                    String::class,
+                    null,
+                ),
+                arguments(
                     "not-nullable-class-type",
                     KoClassDeclaration::class,
                     KoKotlinTypeDeclaration::class,
