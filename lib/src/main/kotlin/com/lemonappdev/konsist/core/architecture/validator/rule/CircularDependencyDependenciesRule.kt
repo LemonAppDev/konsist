@@ -14,12 +14,14 @@ internal class CircularDependencyDependenciesRule : LayerDependenciesRule {
     private fun requireNoCircularDependencies(dependencies: Set<LayerDependency>) {
         val dependencyGraph = buildDependencyGraph(dependencies)
         val visited = mutableSetOf<Layer>()
-        val recursionStack = mutableSetOf<Layer>()
 
         dependencyGraph.keys.forEach { layer ->
-            if (!visited.contains(layer) && hasCycle(layer, dependencyGraph, visited, recursionStack)) {
-                val cycle = findCycle(layer, dependencyGraph)
-                throw KoPreconditionFailedException(formatCircularDependencyMessage(cycle))
+            if (!visited.contains(layer)) {
+                val cycle = findCycle(layer, dependencyGraph, visited, mutableListOf())
+
+                if (cycle != null) {
+                    throw KoPreconditionFailedException(formatCircularDependencyMessage(cycle))
+                }
             }
         }
     }
@@ -30,65 +32,36 @@ internal class CircularDependencyDependenciesRule : LayerDependenciesRule {
             .groupBy { it.layer1 }
             .mapValues { (_, deps) -> deps.mapNotNull { it.layer2 }.toSet() }
 
-    private fun hasCycle(
+    /**
+     * Depth-first search keeping the current path. A dependency on a layer already present in the path closes a cycle,
+     * which may not contain the start layer, e.g. start 'A', path 'A' -> 'B' -> 'C' -> 'B' gives cycle 'B' -> 'C' -> 'B'.
+     *
+     * @return the cycle with the same layer at start and end, or null if no cycle is reachable from [layer]
+     */
+    private fun findCycle(
         layer: Layer,
         graph: Map<Layer, Set<Layer>>,
         visited: MutableSet<Layer>,
-        recursionStack: MutableSet<Layer>,
-    ): Boolean {
-        if (recursionStack.contains(layer)) {
-            return true
+        path: MutableList<Layer>,
+    ): List<Layer>? {
+        val indexInPath = path.indexOf(layer)
+
+        if (indexInPath != -1) {
+            return path.subList(indexInPath, path.size) + layer
         }
 
-        if (visited.contains(layer)) {
-            return false
+        if (!visited.add(layer)) {
+            return null
         }
 
-        visited.add(layer)
-        recursionStack.add(layer)
+        path.add(layer)
 
         graph[layer]?.forEach { dependentLayer ->
-            if (hasCycle(dependentLayer, graph, visited, recursionStack)) {
-                return true
-            }
-        }
-
-        recursionStack.remove(layer)
-        return false
-    }
-
-    private fun findCycle(
-        start: Layer,
-        graph: Map<Layer, Set<Layer>>,
-    ): List<Layer> {
-        val path = mutableListOf<Layer>()
-        val visited = mutableSetOf<Layer>()
-        findCycleDFS(start, start, graph, path, visited)
-        return path
-    }
-
-    private fun findCycleDFS(
-        current: Layer,
-        target: Layer,
-        graph: Map<Layer, Set<Layer>>,
-        path: MutableList<Layer>,
-        visited: MutableSet<Layer>,
-    ): Boolean {
-        path.add(current)
-        visited.add(current)
-
-        graph[current]?.forEach { next ->
-            if (next == target && path.size > 1) {
-                path.add(next)
-                return true
-            }
-            if (!visited.contains(next) && findCycleDFS(next, target, graph, path, visited)) {
-                return true
-            }
+            findCycle(dependentLayer, graph, visited, path)?.let { return it }
         }
 
         path.removeAt(path.lastIndex)
-        return false
+        return null
     }
 
     private fun formatCircularDependencyMessage(cycle: List<Layer>): String {
