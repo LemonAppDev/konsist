@@ -32,7 +32,7 @@ class KoContextParameterDeclarationTest {
             containingDeclaration shouldBeEqualTo function
             containingFile.name shouldBeEqualTo "function-has-context-parameter"
             packagee?.name shouldBeEqualTo "com.samplepackage"
-            resideInPackage("com.samplepackage") shouldBeEqualTo true
+            residesInPackage("com.samplepackage") shouldBeEqualTo true
             location shouldBeEqualTo "$path:6:9"
         }
     }

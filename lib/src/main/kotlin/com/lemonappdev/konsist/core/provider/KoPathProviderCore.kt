@@ -32,10 +32,4 @@ internal interface KoPathProviderCore :
         } else {
             LocationUtil.residesInLocation(path, projectPath)
         }
-
-    @Deprecated("Will be removed in version 1.0.0-rc1", ReplaceWith("residesInPath(path, absolutePath)"))
-    override fun resideInPath(
-        path: String,
-        absolutePath: Boolean,
-    ): Boolean = residesInPath(path, absolutePath)
 }

@@ -84,21 +84,4 @@ class KoClassForKoModuleProviderTest {
             residesInModule(":feature") shouldBeEqualTo false
         }
     }
-
-    @Suppress("DEPRECATION")
-    @Test
-    fun `deprecated resideInModule delegates to residesInModule`() {
-        // given
-        val sut =
-            Konsist
-                .scopeFromFile("$appMainSourceSetProjectDirectory/fixture/AppClass.kt".toOsSeparator())
-                .classes()
-                .first()
-
-        // then
-        assertSoftly(sut) {
-            resideInModule(app) shouldBeEqualTo true
-            resideInModule(data) shouldBeEqualTo false
-        }
-    }
 }
