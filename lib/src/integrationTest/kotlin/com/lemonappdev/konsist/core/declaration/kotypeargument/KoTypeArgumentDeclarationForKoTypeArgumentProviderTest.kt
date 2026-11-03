@@ -534,6 +534,43 @@ class KoTypeArgumentDeclarationForKoTypeArgumentProviderTest {
         }
     }
 
+    @Test
+    fun `generic-type-argument-with-digit-in-type-argument-type-arguments`() {
+        // given
+        val sut =
+            getSnippetFile("generic-type-argument-with-digit-in-type-argument-type-arguments")
+                .properties()
+                .first()
+                .type
+                ?.typeArguments
+                ?.firstOrNull()
+
+        // then
+        assertSoftly(sut) {
+            it?.isGeneric shouldBeEqualTo true
+            it?.typeArguments?.map { typeArgument -> typeArgument.name } shouldBeEqualTo listOf("Item2")
+            it?.typeArguments?.map { typeArgument -> typeArgument.sourceDeclaration?.name } shouldBeEqualTo listOf("Item2")
+        }
+    }
+
+    @Test
+    fun `fully-qualified-generic-type-argument-type-arguments`() {
+        // given
+        val sut =
+            getSnippetFile("fully-qualified-generic-type-argument-type-arguments")
+                .properties()
+                .first()
+                .type
+                ?.typeArguments
+                ?.firstOrNull()
+
+        // then
+        assertSoftly(sut) {
+            it?.isGeneric shouldBeEqualTo true
+            it?.typeArguments?.map { typeArgument -> typeArgument.name } shouldBeEqualTo listOf("String")
+        }
+    }
+
     private fun getSnippetFile(fileName: String) =
         TestSnippetProvider.getSnippetKoScope("core/declaration/kotypeargument/snippet/forkotypeargumentprovider/", fileName)
 }

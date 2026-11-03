@@ -40,6 +40,21 @@ class KoTypeArgumentDeclarationForKoIsFunctionTypeProviderTest {
     }
 
     @Test
+    fun `out-projection-function-type-argument`() {
+        // given
+        val sut =
+            getSnippetFile("out-projection-function-type-argument")
+                .properties()
+                .first()
+                .type
+                ?.typeArguments
+                ?.firstOrNull()
+
+        // then
+        sut?.isFunctionType shouldBeEqualTo true
+    }
+
+    @Test
     fun `typealias-with-function-type-argument`() {
         // given
         val sut =
@@ -70,6 +85,7 @@ class KoTypeArgumentDeclarationForKoIsFunctionTypeProviderTest {
                 arguments("kotlin-type-argument"),
                 arguments("object-type-argument"),
                 arguments("typealias-without-function-type-argument"),
+                arguments("generic-type-with-function-type-argument"),
             )
     }
 }

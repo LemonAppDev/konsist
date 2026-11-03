@@ -1,0 +1,3 @@
+val fixtureProperty1: List<List<Item2>> = emptyList()
+
+class Item2

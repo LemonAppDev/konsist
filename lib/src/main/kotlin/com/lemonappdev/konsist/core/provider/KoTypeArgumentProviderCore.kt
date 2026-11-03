@@ -33,7 +33,7 @@ internal interface KoTypeArgumentProviderCore :
                         KoTypeArgumentDeclarationCore(
                             type.name,
                             if (!type.isFunctionType || type.sourceDeclaration?.isTypeAlias == true) type.sourceDeclaration else null,
-                            if (type.isGeneric) type.typeArguments else null,
+                            type.typeArguments,
                             it.projectionKind == KtProjectionKind.IN,
                             it.projectionKind == KtProjectionKind.OUT,
                             it.projectionKind == KtProjectionKind.STAR,

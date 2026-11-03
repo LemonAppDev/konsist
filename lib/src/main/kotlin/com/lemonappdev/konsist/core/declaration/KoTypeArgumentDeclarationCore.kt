@@ -24,6 +24,7 @@ import org.jetbrains.kotlin.psi.KtFunctionType
 import org.jetbrains.kotlin.psi.KtModifierListOwner
 import org.jetbrains.kotlin.psi.KtNameReferenceExpression
 import org.jetbrains.kotlin.psi.KtNullableType
+import org.jetbrains.kotlin.psi.KtTypeElement
 import org.jetbrains.kotlin.psi.KtTypeProjection
 import org.jetbrains.kotlin.psi.KtTypeReference
 import org.jetbrains.kotlin.psi.KtUserType
@@ -54,8 +55,9 @@ data class KoTypeArgumentDeclarationCore(
     override val ktElement: KtElement
         get() = ktTypeProjection
 
+    // Nested type arguments are passed via the constructor, the user type is only used to detect generic types
     override val ktUserType: KtUserType?
-        get() = null
+        get() = nonNullableTypeElement as? KtUserType
 
     override val psiElement: PsiElement
         get() = ktTypeProjection
@@ -63,28 +65,15 @@ data class KoTypeArgumentDeclarationCore(
     override val ktModifierListOwner: KtModifierListOwner
         get() = ktTypeProjection
 
-    @Volatile
-    private var cachedKtFunctionType: Any? = KoPropertyCache.NOT_COMPUTED
+    private val nonNullableTypeElement: KtTypeElement?
+        get() =
+            when (val typeElement = ktTypeProjection.typeReference?.typeElement) {
+                is KtNullableType -> typeElement.innerType
+                else -> typeElement
+            }
 
     override val ktFunctionType: KtFunctionType?
-        get() =
-            KoPropertyCache.getOrCompute(cachedKtFunctionType, { cachedKtFunctionType = it }) {
-                val children =
-                    ktTypeProjection
-                        .children
-                        .firstOrNull()
-                        ?.children
-
-                val effectiveChildren =
-                    when (val nullableType = children?.filterIsInstance<KtNullableType>()?.firstOrNull()) {
-                        null -> children
-                        else -> nullableType.children
-                    }
-
-                effectiveChildren
-                    ?.filterIsInstance<KtFunctionType>()
-                    ?.firstOrNull()
-            }
+        get() = nonNullableTypeElement as? KtFunctionType
 
     override val ktNameReferenceExpression: KtNameReferenceExpression?
         get() = null
