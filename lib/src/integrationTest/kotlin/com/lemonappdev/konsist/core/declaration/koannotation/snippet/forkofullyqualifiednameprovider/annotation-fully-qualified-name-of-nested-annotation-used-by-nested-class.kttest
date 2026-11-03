@@ -1,0 +1,12 @@
+package com.fixturepackage
+
+class Outer {
+    annotation class FixtureAnnotation
+
+    @FixtureAnnotation
+    class Nested {
+        @FixtureAnnotation
+        fun sampleFunction() {
+        }
+    }
+}

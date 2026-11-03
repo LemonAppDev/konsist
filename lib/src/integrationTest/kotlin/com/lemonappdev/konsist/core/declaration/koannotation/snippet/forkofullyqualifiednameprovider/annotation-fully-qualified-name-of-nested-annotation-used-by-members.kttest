@@ -1,0 +1,16 @@
+package com.fixturepackage
+
+class Outer(
+    @FixtureAnnotation val constructorProperty: Int,
+) {
+    annotation class FixtureAnnotation
+
+    @FixtureAnnotation
+    fun sampleFunction(
+        @FixtureAnnotation sampleParameter: Int,
+    ) {
+    }
+
+    @FixtureAnnotation
+    val sampleProperty: Int = 0
+}

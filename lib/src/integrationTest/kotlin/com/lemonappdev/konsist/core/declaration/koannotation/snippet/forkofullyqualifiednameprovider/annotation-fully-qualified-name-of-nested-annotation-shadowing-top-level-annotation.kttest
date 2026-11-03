@@ -1,0 +1,12 @@
+package com.fixturepackage
+
+annotation class FixtureAnnotation
+
+@FixtureAnnotation
+class Outer {
+    annotation class FixtureAnnotation
+
+    @FixtureAnnotation
+    fun sampleFunction() {
+    }
+}
