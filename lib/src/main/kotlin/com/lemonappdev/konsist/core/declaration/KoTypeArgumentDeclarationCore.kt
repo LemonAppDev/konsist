@@ -1,6 +1,7 @@
 package com.lemonappdev.konsist.core.declaration
 
 import com.lemonappdev.konsist.api.KoModifier
+import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoTypeArgumentDeclaration
 import com.lemonappdev.konsist.api.provider.KoDeclarationCastProvider
 import com.lemonappdev.konsist.core.cache.KoPropertyCache
@@ -37,6 +38,8 @@ data class KoTypeArgumentDeclarationCore(
     override val hasOutModifier: Boolean,
     override val isStarProjection: Boolean,
     override val ktTypeProjection: KtTypeProjection,
+    // Declaration containing this type argument (e.g. used to check if the type argument is suppressed by the parent)
+    internal val parentDeclaration: KoBaseDeclaration,
 ) : KoTypeArgumentDeclaration,
     KoBaseProviderCore,
     KoNameProviderCore,

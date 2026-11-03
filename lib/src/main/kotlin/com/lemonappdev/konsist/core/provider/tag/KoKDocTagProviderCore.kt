@@ -5,6 +5,7 @@ import com.lemonappdev.konsist.api.declaration.KoKDocTagDeclaration
 import com.lemonappdev.konsist.api.provider.tag.KoKDocTagProvider
 import com.lemonappdev.konsist.core.declaration.KoKDocTagDeclarationCore
 import com.lemonappdev.konsist.core.declaration.KoValuedKDocTagDeclarationCore
+import com.lemonappdev.konsist.core.ext.castToKoBaseDeclaration
 import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
 import com.lemonappdev.konsist.core.provider.KoTextProviderCore
 import org.jetbrains.kotlin.kdoc.psi.impl.KDocLink
@@ -39,9 +40,9 @@ internal interface KoKDocTagProviderCore :
                     val description = tag.getContent()
 
                     if (value != null) {
-                        KoValuedKDocTagDeclarationCore(name, value, description)
+                        KoValuedKDocTagDeclarationCore(name, value, description, this.castToKoBaseDeclaration())
                     } else {
-                        KoKDocTagDeclarationCore(name, description)
+                        KoKDocTagDeclarationCore(name, description, this.castToKoBaseDeclaration())
                     }
                 }.filterNotNull()
 

@@ -28,6 +28,19 @@ tasks.withType<Test> {
     useJUnitPlatform()
 }
 
+// Simulates generated code (e.g. KSP, Hilt) to test that Konsist skips build output directories
+val generateBuildDirectoryFixture by tasks.registering {
+    val outputFile = layout.buildDirectory.file("generated/konsist/com/lemonappdev/fixture/GeneratedClass.kt")
+    outputs.file(outputFile)
+
+    doLast {
+        outputFile.get().asFile.apply {
+            parentFile.mkdirs()
+            writeText("package com.lemonappdev.fixture\n\nclass GeneratedClass\n")
+        }
+    }
+}
+
 dependencies {
     implementation(libs.kotlinStdlibJdk8)
 }
@@ -44,4 +57,8 @@ testing {
             }
         }
     }
+}
+
+tasks.named("integrationTest") {
+    dependsOn(generateBuildDirectoryFixture)
 }

@@ -9,6 +9,7 @@ import com.lemonappdev.konsist.core.ext.toMacOsSeparator
 import com.lemonappdev.konsist.core.ext.toOsSeparator
 import com.lemonappdev.konsist.core.filesystem.ModuleDirectoryDetector
 import com.lemonappdev.konsist.core.filesystem.PathProvider
+import com.lemonappdev.konsist.core.filesystem.ProjectDirectoryFilter
 import com.lemonappdev.konsist.core.provider.util.KoFileDeclarationProvider
 import com.lemonappdev.konsist.core.util.LocationUtil
 import com.lemonappdev.konsist.core.util.ModuleUtil
@@ -19,6 +20,10 @@ import java.io.File
 @Suppress("detekt.TooManyFunctions")
 internal class KoScopeCreatorCore : KoScopeCreator {
     override val projectRootPath: String by lazy { PathProvider.rootProjectPath }
+
+    private val projectRootDir: File by lazy { File(projectRootPath) }
+
+    private val projectDirectoryFilter: ProjectDirectoryFilter by lazy { ProjectDirectoryFilter(projectRootDir) }
 
     override fun scopeFromProject(
         moduleName: String?,
@@ -150,6 +155,16 @@ internal class KoScopeCreatorCore : KoScopeCreator {
      * The function will throw an [IllegalArgumentException] when:
      *  - the directory does not exist.
      *  - the path is a file.
+     *
+     * Directories ignored by [ProjectDirectoryFilter] (build outputs, hidden directories, node_modules) are skipped,
+     * the same way as for project scope:
+     *  - project directory - files are taken from the project scan (see [KoFileDeclarationProvider.getProjectKotlinFiles]),
+     *    so the directory is not walked again. When the path differs from the scanned one (letter case on
+     *    case-insensitive file systems, symbolic links), the directory is walked, so returned file paths keep the
+     *    path passed in.
+     *  - ignored project directory (e.g. "app/build/generated") or directory outside the project - the directory is
+     *    walked and directories ignored inside it (relative to it) are skipped. Explicitly requested ignored
+     *    directory is not skipped, so generated files can still be checked.
      */
     private fun getFilesFromDirectory(absolutePath: String): List<KoFileDeclaration> {
         val osAbsolutePath = absolutePath.toOsSeparator()
@@ -157,7 +172,36 @@ internal class KoScopeCreatorCore : KoScopeCreator {
         require(directory.exists()) { "Directory does not exist: $osAbsolutePath" }
         require(!directory.isFile) { "Path is a file, but should be a directory: $osAbsolutePath" }
 
-        return directory.toKoFiles()
+        val normalizedDirectory = directory.absoluteFile.normalize()
+        val isProjectDirectory =
+            normalizedDirectory.startsWith(projectRootDir) && !projectDirectoryFilter.isIgnored(normalizedDirectory)
+        val scannedDirectory = if (isProjectDirectory) getScannedDirectory(normalizedDirectory) else null
+
+        return when {
+            scannedDirectory != null -> getProjectKoFiles(scannedDirectory)
+            isProjectDirectory -> normalizedDirectory.toKoFiles(projectDirectoryFilter)
+            else -> normalizedDirectory.toKoFiles(ProjectDirectoryFilter(normalizedDirectory))
+        }
+    }
+
+    /*
+     * Returns the [directory] with the path used by the project scan or null if the path is different.
+     * Scanned project files keep the letter case of the file system and do not resolve symbolic links, so the path is
+     * the same only if the path relative to the project root does not change after canonicalization.
+     */
+    private fun getScannedDirectory(directory: File): File? {
+        val relativePath = directory.relativeToOrNull(projectRootDir)?.path
+        val canonicalRelativePath = directory.canonicalFile.relativeToOrNull(projectRootDir.canonicalFile)?.path
+
+        return if (relativePath != null && relativePath == canonicalRelativePath) File(projectRootDir, relativePath) else null
+    }
+
+    private fun getProjectKoFiles(directory: File): List<KoFileDeclaration> {
+        val directoryPathPrefix = directory.path.trimEnd(File.separatorChar) + File.separator
+
+        return runBlocking {
+            KoFileDeclarationProvider.getKoFileDeclarations { it.path.startsWith(directoryPathPrefix) }
+        }
     }
 
     override fun scopeFromDirectory(
@@ -240,8 +284,12 @@ internal class KoScopeCreatorCore : KoScopeCreator {
         return lowercaseName.substringAfter(':').matches(Regex(".*$TEST_NAME_IN_PATH.*"))
     }
 
-    private fun File.toKoFiles(): List<KoFileDeclaration> =
+    /*
+     * Directories ignored by [directoryFilter] are pruned, so their content is not visited.
+     */
+    private fun File.toKoFiles(directoryFilter: ProjectDirectoryFilter): List<KoFileDeclaration> =
         walk()
+            .onEnter { !directoryFilter.isIgnored(it) }
             .filter { it.isKotlinFile }
             .map { it.toKoFile() }
             .toList()

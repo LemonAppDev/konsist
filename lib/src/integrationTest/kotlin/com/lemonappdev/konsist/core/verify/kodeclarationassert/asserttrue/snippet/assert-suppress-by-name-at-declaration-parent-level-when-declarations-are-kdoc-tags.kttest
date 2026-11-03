@@ -1,0 +1,7 @@
+/**
+ * Sample description
+ *
+ * @since 1.0
+ */
+@Suppress("assert-suppress-by-name-at-declaration-parent-level-when-declarations-are-kdoc-tags")
+class SampleClass

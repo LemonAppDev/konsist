@@ -6,13 +6,18 @@ import com.lemonappdev.konsist.api.declaration.KoFileDeclaration
 import com.lemonappdev.konsist.api.provider.KoAnnotationProvider
 import com.lemonappdev.konsist.api.provider.KoBaseProvider
 import com.lemonappdev.konsist.api.provider.KoContainingDeclarationProvider
+import com.lemonappdev.konsist.api.provider.KoContainingFileProvider
 import com.lemonappdev.konsist.api.provider.KoLocationProvider
 import com.lemonappdev.konsist.api.provider.KoNameProvider
 import com.lemonappdev.konsist.api.verify.KoAssertScope
 import com.lemonappdev.konsist.api.verify.KoRule
 import com.lemonappdev.konsist.core.architecture.validator.ascii.AsciiTreeCreator
 import com.lemonappdev.konsist.core.architecture.validator.ascii.AsciiTreeNode
+import com.lemonappdev.konsist.core.declaration.KoAnnotationDeclarationCore
 import com.lemonappdev.konsist.core.declaration.KoFileDeclarationCore
+import com.lemonappdev.konsist.core.declaration.KoKDocDeclarationCore
+import com.lemonappdev.konsist.core.declaration.KoKDocTagDeclarationCore
+import com.lemonappdev.konsist.core.declaration.KoTypeArgumentDeclarationCore
 import com.lemonappdev.konsist.core.exception.KoAssertionFailedException
 import com.lemonappdev.konsist.core.exception.KoException
 import com.lemonappdev.konsist.core.exception.KoInternalException
@@ -181,9 +186,9 @@ private fun <E : KoBaseProvider> checkIfAnnotatedWithSuppress(
 private fun isInFileContainingSuppress(declaration: KoBaseProvider): Boolean {
     var file = declaration
 
-    // File declaration is the last containing declaration (its containing declaration is the file itself)
+    // File declaration is the last parent declaration (its containing declaration is the file itself)
     while (file !is KoFileDeclaration) {
-        file = (file as? KoContainingDeclarationProvider)?.containingDeclaration ?: return true
+        file = getParentDeclaration(file) ?: return true
     }
 
     val ktFile = (file as? KoFileDeclarationCore)?.ktFile ?: return true
@@ -219,10 +224,24 @@ private fun checkIfParentIsAnnotatedWithSuppress(
     declaration: KoBaseDeclaration,
     testNames: List<String>,
 ): Boolean =
-    if (declaration is KoContainingDeclarationProvider) {
-        checkIfDeclarationIsAnnotatedWithSuppress(declaration.containingDeclaration, testNames)
-    } else {
-        false
+    getParentDeclaration(declaration)
+        ?.let { checkIfDeclarationIsAnnotatedWithSuppress(it, testNames) }
+        ?: false
+
+/*
+ * Some declarations (e.g. annotations, KDocs or imports) do not provide the containing declaration, so their parent is
+ * the declaration they belong to (e.g. annotated declaration) or their file. These cases are checked before
+ * `KoContainingDeclarationProvider`, because e.g. annotation core implements it internally and returns the file.
+ */
+private fun getParentDeclaration(declaration: KoBaseProvider): KoBaseDeclaration? =
+    when (declaration) {
+        is KoAnnotationDeclarationCore -> declaration.annotatedDeclaration
+        is KoKDocDeclarationCore -> declaration.documentedDeclaration
+        is KoKDocTagDeclarationCore -> declaration.kDocDeclaration
+        is KoTypeArgumentDeclarationCore -> declaration.parentDeclaration
+        is KoContainingDeclarationProvider -> declaration.containingDeclaration
+        is KoContainingFileProvider -> declaration.containingFile
+        else -> null
     }
 
 private fun checkIfSuppressed(
