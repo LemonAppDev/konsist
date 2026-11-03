@@ -6,17 +6,15 @@ import com.lemonappdev.konsist.core.ext.isKotlinFile
 import com.lemonappdev.konsist.core.ext.toKoFile
 import com.lemonappdev.konsist.core.filesystem.PathProvider
 import com.lemonappdev.konsist.core.filesystem.ProjectDirectoryFilter
+import com.lemonappdev.konsist.core.filesystem.ProjectFilesLoader
 import com.lemonappdev.konsist.core.filesystem.ProjectKotlinFileScanner
 import com.lemonappdev.konsist.core.util.PackageNameReader
 import com.lemonappdev.konsist.core.util.PathUtil
 import kotlinx.coroutines.CompletableDeferred
-import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.coroutineScope
-import kotlinx.coroutines.sync.Mutex
-import kotlinx.coroutines.sync.withLock
 import java.io.File
 
 internal object KoFileDeclarationProvider {
@@ -24,10 +22,7 @@ internal object KoFileDeclarationProvider {
 
     private val projectKotlinFileScanner = ProjectKotlinFileScanner(projectRootDir)
 
-    private val mutex: Mutex = Mutex()
-
-    @Volatile
-    private var projectKotlinFilesDeferred: Deferred<List<File>>? = null
+    private val projectFilesLoader = ProjectFilesLoader { projectKotlinFileScanner.scan() }
 
     init {
         check(projectRootDir.exists()) { "Directory does not exist: ${projectRootDir.absolutePath}" }
@@ -39,26 +34,10 @@ internal object KoFileDeclarationProvider {
      * parsed. Directories ignored by [ProjectDirectoryFilter] (build outputs, hidden directories, node_modules) are not
      * scanned. Directories are scanned in parallel (see [ProjectKotlinFileScanner]).
      *
-     * Threading Strategy:
-     * Ensures thread-safe initialization of a single deferred operation to scan the directory, using a mutex to guard
-     * against concurrent initializations.
-     *
-     * e.g.
-     * 1. getProjectKotlinFiles started at Thread 1 - start directory scanning
-     * 2. getProjectKotlinFiles started at Thread 2 - directory scanning in progress, wait for it to complete
-     * 3. getProjectKotlinFiles started at Thread 1 completes
-     * 4. getProjectKotlinFiles started at Thread 2 completes
+     * Concurrent callers share a single scan. Cancelled or failed scan is retried by the next call
+     * (see [ProjectFilesLoader]).
      */
-    suspend fun getProjectKotlinFiles(): List<File> =
-        coroutineScope {
-            val currentDeferred: Deferred<List<File>> =
-                mutex.withLock {
-                    projectKotlinFilesDeferred ?: async(Dispatchers.IO) { projectKotlinFileScanner.scan() }
-                        .also { projectKotlinFilesDeferred = it }
-                }
-
-            currentDeferred.await()
-        }
+    suspend fun getProjectKotlinFiles(): List<File> = projectFilesLoader.getFiles()
 
     /**
      * Retrieves a list of [KoFileDeclaration]s of the project's Kotlin files matching the [predicate].
