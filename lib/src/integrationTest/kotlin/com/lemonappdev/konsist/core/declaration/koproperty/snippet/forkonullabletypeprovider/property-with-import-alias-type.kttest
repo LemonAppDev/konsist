@@ -1,0 +1,8 @@
+import com.lemonappdev.konsist.testdata.FixtureType as ImportAlias
+import java.io.File as AliasFile
+
+val sampleProperty1: ImportAlias? = null
+
+val sampleProperty2: List<ImportAlias> = emptyList()
+
+val sampleProperty3: AliasFile = AliasFile("")

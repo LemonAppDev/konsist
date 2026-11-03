@@ -2,6 +2,9 @@ package com.lemonappdev.konsist.core.declaration.koparameter
 
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
 import com.lemonappdev.konsist.api.ext.list.parameters
+import com.lemonappdev.konsist.api.ext.provider.representsTypeOf
+import com.lemonappdev.konsist.testdata.FixtureType
+import com.lemonappdev.konsist.testdata.FixtureType1
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
@@ -50,6 +53,25 @@ class KoParameterDeclarationForKoRepresentsTypeProviderTest {
             representsType("othertype", true) shouldBeEqualTo false
             representsType(null, false) shouldBeEqualTo false
             representsType(null, true) shouldBeEqualTo false
+        }
+    }
+
+    @Test
+    fun `parameter-with-import-alias-represents-type`() {
+        // given
+        val sut =
+            getSnippetFile("parameter-with-import-alias-represents-type")
+                .functions()
+                .parameters
+                .first()
+
+        // then
+        assertSoftly(sut) {
+            representsType("ImportAlias") shouldBeEqualTo true
+            representsType("com.lemonappdev.konsist.testdata.FixtureType") shouldBeEqualTo true
+            representsType("com.lemonappdev.konsist.testdata.FixtureType1") shouldBeEqualTo false
+            representsTypeOf<FixtureType>() shouldBeEqualTo true
+            representsTypeOf<FixtureType1>() shouldBeEqualTo false
         }
     }
 

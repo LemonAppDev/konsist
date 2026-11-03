@@ -83,4 +83,45 @@ class KoChildProviderCoreTest {
         // then
         result shouldBeEqualTo true
     }
+
+    @Test
+    fun `hasChildOf(vararg) should not match class with the same name declared in other package`() {
+        // when
+        val result = sut.hasChildOf(OtherPackage.KoParentProviderCore::class)
+
+        // then
+        result shouldBeEqualTo false
+    }
+
+    @Test
+    fun `hasChildOf(collection) should not match class with the same name declared in other package`() {
+        // when
+        val result = sut.hasChildOf(listOf(OtherPackage.KoParentProviderCore::class))
+
+        // then
+        result shouldBeEqualTo false
+    }
+
+    @Test
+    fun `hasAllChildrenOf(vararg) should not match class with the same name declared in other package`() {
+        // when
+        val result = sut.hasAllChildrenOf(KoClassDeclaration::class, OtherPackage.KoParentProviderCore::class, indirectChildren = true)
+
+        // then
+        result shouldBeEqualTo false
+    }
+
+    @Test
+    fun `hasAllChildrenOf(collection) should not match class with the same name declared in other package`() {
+        // when
+        val result = sut.hasAllChildrenOf(listOf(OtherPackage.KoParentProviderCore::class))
+
+        // then
+        result shouldBeEqualTo false
+    }
+
+    // Has the same name as the direct child of `KoParentProvider` (`core.provider.KoParentProviderCore`), but other fully qualified name
+    private object OtherPackage {
+        class KoParentProviderCore
+    }
 }

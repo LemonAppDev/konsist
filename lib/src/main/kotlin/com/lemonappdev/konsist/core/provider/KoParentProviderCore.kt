@@ -1,7 +1,6 @@
 package com.lemonappdev.konsist.core.provider
 
 import com.lemonappdev.konsist.api.declaration.KoParentDeclaration
-import com.lemonappdev.konsist.api.provider.KoFullyQualifiedNameProvider
 import com.lemonappdev.konsist.api.provider.KoParentProvider
 import com.lemonappdev.konsist.core.declaration.KoParentDeclarationCore
 import com.lemonappdev.konsist.core.ext.castToKoBaseDeclaration
@@ -53,7 +52,10 @@ internal interface KoParentProviderCore :
         visitedDeclarations: MutableSet<KoParentProviderCore>,
     ): List<KoParentDeclaration> =
         parents.flatMap { parent ->
-            val sourceDeclaration = parent.sourceDeclaration as? KoParentProviderCore
+            // Import alias (`import com.app.Foo as Bar`) is resolved to the imported declaration
+            val sourceDeclaration =
+                (parent.sourceDeclaration?.asImportAliasDeclaration()?.sourceDeclaration ?: parent.sourceDeclaration)
+                    as? KoParentProviderCore
 
             when {
                 sourceDeclaration == null -> {
@@ -91,8 +93,8 @@ internal interface KoParentProviderCore :
     private fun KoParentDeclaration.isClasspathParent(): Boolean = (this as? KoParentDeclarationCore)?.isClasspathParent == true
 
     private fun KoParentDeclaration.getQualifiedName(): String? =
-        (sourceDeclaration as? KoFullyQualifiedNameProvider)
-            ?.fullyQualifiedName
+        TypeUtil
+            .getFullyQualifiedName(sourceDeclaration)
             ?.let { TypeUtil.getKotlinTypeQualifiedName(it) }
 
     override fun numParents(indirectParents: Boolean): Int = parents(indirectParents).size

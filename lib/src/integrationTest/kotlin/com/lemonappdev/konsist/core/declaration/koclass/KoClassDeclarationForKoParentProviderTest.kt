@@ -1,6 +1,7 @@
 package com.lemonappdev.konsist.core.declaration.koclass
 
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
+import com.lemonappdev.konsist.testdata.FixtureCollection1
 import com.lemonappdev.konsist.testdata.FixtureInterface
 import com.lemonappdev.konsist.testdata.FixtureParentClass
 import com.lemonappdev.konsist.testdata.FixtureParentInterface
@@ -9,6 +10,7 @@ import com.lemonappdev.konsist.testdata.FixtureParentInterface2
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
+import java.io.ByteArrayInputStream
 import java.io.Closeable
 import java.io.InputStream
 
@@ -360,6 +362,43 @@ class KoClassDeclarationForKoParentProviderTest {
         assertSoftly(sut.parents().first()) {
             name shouldBeEqualTo "AliasParent"
             sourceDeclaration?.isImportAlias shouldBeEqualTo true
+        }
+
+        assertSoftly(sut) {
+            hasParentOf(FixtureParentInterface::class) shouldBeEqualTo true
+            hasParentOf(FixtureParentInterface::class, indirectParents = true) shouldBeEqualTo true
+            hasParentOf(FixtureInterface::class) shouldBeEqualTo false
+            hasAllParentsOf(FixtureParentInterface::class) shouldBeEqualTo true
+            hasAllParentsOf(listOf(FixtureParentInterface::class)) shouldBeEqualTo true
+        }
+    }
+
+    @Test
+    fun `class-has-indirect-parents-defined-by-import-alias`() {
+        // given
+        val sut =
+            getSnippetFile("class-has-indirect-parents-defined-by-import-alias")
+                .classes()
+
+        // then
+        assertSoftly(sut.first { it.name == "FixtureClass1" }) {
+            hasParentOf(FixtureCollection1::class) shouldBeEqualTo true
+            hasParentOf(Collection::class) shouldBeEqualTo false
+            hasParentOf(Collection::class, indirectParents = true) shouldBeEqualTo true
+            hasParentOf(Iterable::class, indirectParents = true) shouldBeEqualTo true
+            hasAllParentsOf(FixtureCollection1::class, Collection::class, Iterable::class, indirectParents = true) shouldBeEqualTo true
+        }
+
+        assertSoftly(sut.first { it.name == "FixtureClass2" }) {
+            hasParentOf(ByteArrayInputStream::class) shouldBeEqualTo true
+            hasParentOf(InputStream::class) shouldBeEqualTo false
+            hasParentOf(InputStream::class, indirectParents = true) shouldBeEqualTo true
+            hasParentOf(Closeable::class, indirectParents = true) shouldBeEqualTo true
+            hasAllParentsOf(
+                listOf(ByteArrayInputStream::class, InputStream::class, Closeable::class),
+                indirectParents = true,
+            ) shouldBeEqualTo
+                true
         }
     }
 

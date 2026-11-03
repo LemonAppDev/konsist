@@ -225,7 +225,7 @@ internal class KoParentDeclarationCore private constructor(
         get() =
             KoPropertyCache.getOrCompute(cachedClasspathParents, { cachedClasspathParents = it }) {
                 val fullyQualifiedName =
-                    when (val declaration = sourceDeclaration) {
+                    when (val declaration = sourceDeclaration?.asImportAliasDeclaration()?.sourceDeclaration ?: sourceDeclaration) {
                         is KoExternalDeclaration -> declaration.fullyQualifiedName
                         is KoKotlinTypeDeclaration -> declaration.fullyQualifiedName
                         else -> null
