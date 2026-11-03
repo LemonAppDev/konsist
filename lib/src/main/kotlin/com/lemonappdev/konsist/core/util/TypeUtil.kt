@@ -2,6 +2,7 @@ package com.lemonappdev.konsist.core.util
 
 import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoFileDeclaration
+import com.lemonappdev.konsist.api.declaration.KoImportAliasDeclaration
 import com.lemonappdev.konsist.api.declaration.KoSourceDeclaration
 import com.lemonappdev.konsist.api.declaration.KoTypeArgumentDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoTypeDeclaration
@@ -127,12 +128,23 @@ object TypeUtil {
     internal fun hasTypeOf(
         type: KoTypeDeclaration?,
         kClass: KClass<*>,
-    ): Boolean = matchesKClass((type?.sourceDeclaration as? KoFullyQualifiedNameProvider)?.fullyQualifiedName, kClass)
+    ): Boolean = matchesKClass(getFullyQualifiedName(type?.sourceDeclaration), kClass)
 
     internal fun hasTypeOf(
         type: KoSourceDeclaration?,
         kClass: KClass<*>,
-    ): Boolean = matchesKClass((type as? KoFullyQualifiedNameProvider)?.fullyQualifiedName, kClass)
+    ): Boolean = matchesKClass(getFullyQualifiedName(type), kClass)
+
+    /*
+     * Returns the fully qualified name of the declaration. For the import alias (`import com.app.Foo as Bar`) it is
+     * the name of the imported declaration (`com.app.Foo`), because the alias refers to the same type.
+     */
+    internal fun getFullyQualifiedName(declaration: Any?): String? =
+        when (declaration) {
+            is KoImportAliasDeclaration -> declaration.importDirective.name
+            is KoFullyQualifiedNameProvider -> declaration.fullyQualifiedName
+            else -> null
+        }
 
     internal fun hasTypeOf(
         type: KoTypeDeclaration?,
@@ -174,7 +186,7 @@ object TypeUtil {
             typeArgument.hasInModifier == (kTypeProjection.variance == KVariance.IN) &&
             typeArgument.hasOutModifier == (kTypeProjection.variance == KVariance.OUT) &&
             isNullable == kType.isMarkedNullable &&
-            matchesKClass((typeArgument.sourceDeclaration as? KoFullyQualifiedNameProvider)?.fullyQualifiedName, kClass) &&
+            matchesKClass(getFullyQualifiedName(typeArgument.sourceDeclaration), kClass) &&
             matchesTypeArguments(typeArgument.typeArguments.orEmpty(), kType.arguments)
     }
 

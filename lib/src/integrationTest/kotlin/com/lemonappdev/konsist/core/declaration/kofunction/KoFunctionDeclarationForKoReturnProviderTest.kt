@@ -74,7 +74,7 @@ class KoFunctionDeclarationForKoReturnProviderTest {
             hasReturnType() shouldBeEqualTo true
             hasReturnType { it.name == "ImportAlias" } shouldBeEqualTo true
             hasReturnType { it.name == "Int" } shouldBeEqualTo false
-            hasReturnTypeOf(FixtureType::class) shouldBeEqualTo false
+            hasReturnTypeOf(FixtureType::class) shouldBeEqualTo true
             hasReturnTypeOf(Int::class) shouldBeEqualTo false
         }
     }

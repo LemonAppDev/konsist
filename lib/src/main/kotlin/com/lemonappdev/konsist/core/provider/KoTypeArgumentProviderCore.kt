@@ -1,7 +1,6 @@
 package com.lemonappdev.konsist.core.provider
 
 import com.lemonappdev.konsist.api.declaration.KoTypeArgumentDeclaration
-import com.lemonappdev.konsist.api.provider.KoFullyQualifiedNameProvider
 import com.lemonappdev.konsist.api.provider.KoTypeArgumentProvider
 import com.lemonappdev.konsist.core.declaration.KoTypeArgumentDeclarationCore
 import com.lemonappdev.konsist.core.declaration.type.KoTypeDeclarationCore
@@ -96,10 +95,7 @@ internal interface KoTypeArgumentProviderCore :
             else -> {
                 names.any { name ->
                     typeArguments?.any { typeArgument ->
-                        TypeUtil.matchesKClass(
-                            (typeArgument.sourceDeclaration as? KoFullyQualifiedNameProvider)?.fullyQualifiedName,
-                            name,
-                        )
+                        TypeUtil.matchesKClass(TypeUtil.getFullyQualifiedName(typeArgument.sourceDeclaration), name)
                     } == true
                 }
             }
@@ -119,10 +115,7 @@ internal interface KoTypeArgumentProviderCore :
             else -> {
                 names.all { name ->
                     typeArguments?.any { typeArgument ->
-                        TypeUtil.matchesKClass(
-                            (typeArgument.sourceDeclaration as? KoFullyQualifiedNameProvider)?.fullyQualifiedName,
-                            name,
-                        )
+                        TypeUtil.matchesKClass(TypeUtil.getFullyQualifiedName(typeArgument.sourceDeclaration), name)
                     } == true
                 }
             }
