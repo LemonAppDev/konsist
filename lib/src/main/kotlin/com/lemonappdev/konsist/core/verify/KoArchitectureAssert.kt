@@ -4,6 +4,7 @@ import com.lemonappdev.konsist.api.architecture.Layer
 import com.lemonappdev.konsist.api.declaration.KoFileDeclaration
 import com.lemonappdev.konsist.api.declaration.KoImportDeclaration
 import com.lemonappdev.konsist.api.ext.list.withPackage
+import com.lemonappdev.konsist.api.verify.KoRule
 import com.lemonappdev.konsist.core.architecture.KoArchitectureFiles
 import com.lemonappdev.konsist.core.architecture.KoArchitectureScope
 import com.lemonappdev.konsist.core.architecture.LayerDependenciesCore
@@ -22,6 +23,7 @@ import com.lemonappdev.konsist.core.verify.failure.DoesNotDependsOnLayerDependen
 internal fun KoArchitectureFiles.assert(
     additionalMessage: String?,
     testName: String?,
+    rule: KoRule?,
 ): Unit {
     try {
         val layerDependenciesCore = layerDependencies as LayerDependenciesCore
@@ -32,6 +34,7 @@ internal fun KoArchitectureFiles.assert(
             allowFilesOutsideLayers,
             additionalMessage,
             testName,
+            rule,
         )
     } catch (e: KoException) {
         throw e
@@ -46,6 +49,7 @@ internal fun KoArchitectureFiles.assert(
 internal fun KoArchitectureScope.assert(
     additionalMessage: String?,
     testName: String?,
+    rule: KoRule?,
 ): Unit {
     try {
         val layerDependenciesCore = layerDependencies as LayerDependenciesCore
@@ -56,6 +60,7 @@ internal fun KoArchitectureScope.assert(
             allowFilesOutsideLayers,
             additionalMessage,
             testName,
+            rule,
         )
     } catch (e: KoException) {
         throw e
@@ -66,13 +71,14 @@ internal fun KoArchitectureScope.assert(
     }
 }
 
-@Suppress("detekt.ThrowsCount")
+@Suppress("detekt.ThrowsCount", "detekt.LongParameterList")
 private fun assertCommon(
     files: List<KoFileDeclaration>,
     layerDependenciesCore: LayerDependenciesCore,
     allowFilesOutsideLayers: Boolean,
     additionalMessage: String?,
     testName: String?,
+    rule: KoRule?,
 ) {
     layerDependenciesCore.checkEmptyLayersDependencies()
     layerDependenciesCore.checkLayersWithoutFiles(files)
@@ -101,7 +107,7 @@ private fun assertCommon(
     if (hasFailures) {
         val exceptionMessage =
             getExceptionMessage(
-                additionalMessage,
+                getCustomMessage(rule, additionalMessage),
                 testName,
                 failedDependsOnLayers,
                 failedDependsOnNotAllowedLayers,

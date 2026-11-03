@@ -4,6 +4,7 @@ import com.lemonappdev.konsist.api.container.KoScope
 import com.lemonappdev.konsist.api.declaration.KoFileDeclaration
 import com.lemonappdev.konsist.api.verify.KoJUnitExtension
 import com.lemonappdev.konsist.api.verify.KoKotestExtension
+import com.lemonappdev.konsist.api.verify.KoRule
 
 /**
  * An interface for asserting a KoArchitecture with its associated dependencies and configurations.
@@ -31,6 +32,8 @@ interface KoArchitectureAssertion {
      *                     including files without a package, are reported as a violation.
      *              - true: files that reside in no layer are ignored.
      *              A file that resides in more than one layer always fails.
+     * @param rule An optional [KoRule] displayed in the assertion error if the assertion fails. It describes what the
+     *             rule checks, why it exists and how to fix the violation.
      * @param layerDependenciesFunc The function literal with receiver [LayerDependencies] that allows configuring the dependencies
      * of the architecture.
      */
@@ -38,6 +41,7 @@ interface KoArchitectureAssertion {
         additionalMessage: String? = null,
         testName: String? = null,
         allowFilesOutsideLayers: Boolean = false,
+        rule: KoRule? = null,
         layerDependenciesFunc: LayerDependencies.() -> Unit,
     ): Unit
 
@@ -62,12 +66,15 @@ interface KoArchitectureAssertion {
      *                     including files without a package, are reported as a violation.
      *              - true: files that reside in no layer are ignored.
      *              A file that resides in more than one layer always fails.
+     * @param rule An optional [KoRule] displayed in the assertion error if the assertion fails. It describes what the
+     *             rule checks, why it exists and how to fix the violation.
      * @param layerDependenciesFunc The [LayerDependencies] instance representing the configured dependencies of the architecture.
      */
     fun KoScope.assertArchitecture(
         additionalMessage: String? = null,
         testName: String? = null,
         allowFilesOutsideLayers: Boolean = false,
+        rule: KoRule? = null,
         layerDependenciesFunc: LayerDependencies,
     ): Unit
 
@@ -93,6 +100,8 @@ interface KoArchitectureAssertion {
      *                     including files without a package, are reported as a violation.
      *              - true: files that reside in no layer are ignored.
      *              A file that resides in more than one layer always fails.
+     * @param rule An optional [KoRule] displayed in the assertion error if the assertion fails. It describes what the
+     *             rule checks, why it exists and how to fix the violation.
      * @param layerDependenciesFunc The function literal with receiver [LayerDependencies] that allows configuring the dependencies
      * of the architecture.
      */
@@ -100,6 +109,7 @@ interface KoArchitectureAssertion {
         additionalMessage: String? = null,
         testName: String? = null,
         allowFilesOutsideLayers: Boolean = false,
+        rule: KoRule? = null,
         layerDependenciesFunc: LayerDependencies.() -> Unit,
     ): Unit
 
@@ -124,12 +134,15 @@ interface KoArchitectureAssertion {
      *                     including files without a package, are reported as a violation.
      *              - true: files that reside in no layer are ignored.
      *              A file that resides in more than one layer always fails.
+     * @param rule An optional [KoRule] displayed in the assertion error if the assertion fails. It describes what the
+     *             rule checks, why it exists and how to fix the violation.
      * @param layerDependenciesFunc The [LayerDependencies] instance representing the configured dependencies of the architecture.
      */
     fun List<KoFileDeclaration>.assertArchitecture(
         additionalMessage: String? = null,
         testName: String? = null,
         allowFilesOutsideLayers: Boolean = false,
+        rule: KoRule? = null,
         layerDependenciesFunc: LayerDependencies,
     ): Unit
 
