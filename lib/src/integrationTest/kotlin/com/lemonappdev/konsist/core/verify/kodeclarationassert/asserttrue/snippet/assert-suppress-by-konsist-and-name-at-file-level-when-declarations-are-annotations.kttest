@@ -1,0 +1,4 @@
+@file:Suppress("konsist.assert-suppress-by-konsist-and-name-at-file-level-when-declarations-are-annotations")
+
+@Deprecated("message")
+class SampleClass

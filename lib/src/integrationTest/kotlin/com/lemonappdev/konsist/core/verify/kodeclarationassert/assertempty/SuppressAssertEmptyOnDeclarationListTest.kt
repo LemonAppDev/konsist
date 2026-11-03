@@ -5,6 +5,7 @@ import com.lemonappdev.konsist.api.ext.list.classes
 import com.lemonappdev.konsist.api.ext.list.initBlocks
 import com.lemonappdev.konsist.api.ext.list.localFunctions
 import com.lemonappdev.konsist.api.verify.assertEmpty
+import com.lemonappdev.konsist.api.verify.assertNotEmpty
 import org.junit.jupiter.api.Test
 
 class SuppressAssertEmptyOnDeclarationListTest {
@@ -431,6 +432,17 @@ class SuppressAssertEmptyOnDeclarationListTest {
 
         // then
         sut.assertEmpty(testName = "konsist.assert-suppress-with-suppress-name-parameter")
+    }
+
+    @Test
+    fun `assert-not-empty-passes-when-all-declarations-are-suppressed`() {
+        // given
+        val sut =
+            getSnippetFile("assert-not-empty-passes-when-all-declarations-are-suppressed")
+                .classes()
+
+        // then
+        sut.assertNotEmpty()
     }
 
     private fun getSnippetFile(fileName: String) =

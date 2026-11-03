@@ -1,5 +1,6 @@
 package com.lemonappdev.konsist.core.declaration
 
+import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoKDocDeclaration
 import com.lemonappdev.konsist.core.cache.KoPropertyCache
 import com.lemonappdev.konsist.core.provider.KoKDocDescriptionProviderCore
@@ -32,6 +33,8 @@ import org.jetbrains.kotlin.kdoc.psi.impl.KDocTag
 
 internal class KoKDocDeclarationCore(
     private val kDocElement: KDoc,
+    // Declaration documented by this KDoc (e.g. used to check if the KDoc is suppressed by the declaration)
+    internal val documentedDeclaration: KoBaseDeclaration,
 ) : KoKDocDeclaration,
     KoKDocDescriptionProviderCore,
     KoKDocTagProviderCore,

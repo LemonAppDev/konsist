@@ -1,0 +1,5 @@
+@Suppress("konsist.assert-not-suppress-annotations-of-not-suppressed-declaration")
+class SuppressedClass
+
+@Deprecated("message")
+class NotSuppressedClass
