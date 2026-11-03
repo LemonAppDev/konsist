@@ -71,7 +71,7 @@ internal fun KoArchitectureScope.assert(
     }
 }
 
-@Suppress("detekt.ThrowsCount")
+@Suppress("detekt.ThrowsCount", "detekt.LongParameterList")
 private fun assertCommon(
     files: List<KoFileDeclaration>,
     layerDependenciesCore: LayerDependenciesCore,

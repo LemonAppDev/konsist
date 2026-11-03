@@ -28,6 +28,7 @@ private const val SUPPRESS_ANNOTATION_NAME = "Suppress"
 
 private val containsSuppressKey: Key<Boolean> = Key.create("KoContainsSuppress")
 
+@Suppress("detekt.LongParameterList")
 internal fun <E : KoBaseProvider> List<E?>.assert(
     strict: Boolean,
     additionalMessage: String?,
@@ -70,6 +71,7 @@ internal fun <E : KoBaseProvider> List<E?>.assert(
     }
 }
 
+@Suppress("detekt.LongParameterList")
 internal fun <E : KoBaseProvider> List<E?>.assert(
     strict: Boolean,
     additionalMessage: String?,
