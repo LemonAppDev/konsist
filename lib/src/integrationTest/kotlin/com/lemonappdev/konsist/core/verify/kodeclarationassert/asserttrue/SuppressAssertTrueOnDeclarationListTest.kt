@@ -1,8 +1,12 @@
 package com.lemonappdev.konsist.core.verify.kodeclarationassert.asserttrue
 
 import com.lemonappdev.konsist.TestSnippetProvider
+import com.lemonappdev.konsist.api.ext.list.annotations
 import com.lemonappdev.konsist.api.ext.list.initBlocks
+import com.lemonappdev.konsist.api.ext.list.kDocs
 import com.lemonappdev.konsist.api.ext.list.localFunctions
+import com.lemonappdev.konsist.api.ext.list.tagprovider.tags
+import com.lemonappdev.konsist.api.ext.list.typeArguments
 import com.lemonappdev.konsist.api.verify.assertTrue
 import com.lemonappdev.konsist.core.exception.KoAssertionFailedException
 import org.amshove.kluent.shouldThrow
@@ -607,6 +611,144 @@ class SuppressAssertTrueOnDeclarationListTest {
 
         // when
         val func = { sut.assertTrue(testName = "suppress") { it.name.endsWith("Text") } }
+
+        // then
+        func shouldThrow KoAssertionFailedException::class
+    }
+
+    @Test
+    fun `assert-suppress-by-name-at-file-level-when-declarations-are-imports`() {
+        // given
+        val sut = getSnippetFile("assert-suppress-by-name-at-file-level-when-declarations-are-imports").imports
+
+        // then
+        sut.assertTrue { it.name.endsWith("Text") }
+    }
+
+    @Test
+    fun `assert-suppress-by-name-at-file-level-when-declaration-is-package`() {
+        // given
+        val sut = getSnippetFile("assert-suppress-by-name-at-file-level-when-declaration-is-package").packages
+
+        // then
+        sut.assertTrue { it.name.endsWith("Text") }
+    }
+
+    @Test
+    fun `assert-suppress-by-name-at-file-level-when-declarations-are-annotations`() {
+        // given
+        val sut = getSnippetFile("assert-suppress-by-name-at-file-level-when-declarations-are-annotations").classes().annotations
+
+        // then
+        sut.assertTrue { it.name.endsWith("Text") }
+    }
+
+    @Test
+    fun `assert-suppress-by-name-at-declaration-parent-level-when-declarations-are-annotations`() {
+        // given
+        val sut =
+            getSnippetFile(
+                "assert-suppress-by-name-at-declaration-parent-level-when-declarations-are-annotations",
+            ).classes().annotations
+
+        // then
+        sut.assertTrue { it.name.endsWith("Text") }
+    }
+
+    @Test
+    fun `assert-suppress-by-name-at-declaration-parent-level-when-declarations-are-kdocs`() {
+        // given
+        val sut = getSnippetFile("assert-suppress-by-name-at-declaration-parent-level-when-declarations-are-kdocs").classes().kDocs
+
+        // then
+        sut.assertTrue { it.text.endsWith("Text") }
+    }
+
+    @Test
+    fun `assert-suppress-by-konsist-and-name-at-file-level-when-declarations-are-imports`() {
+        // given
+        val sut = getSnippetFile("assert-suppress-by-konsist-and-name-at-file-level-when-declarations-are-imports").imports
+
+        // then
+        sut.assertTrue { it.name.endsWith("Text") }
+    }
+
+    @Test
+    fun `assert-suppress-by-konsist-and-name-at-file-level-when-declaration-is-package`() {
+        // given
+        val sut = getSnippetFile("assert-suppress-by-konsist-and-name-at-file-level-when-declaration-is-package").packages
+
+        // then
+        sut.assertTrue { it.name.endsWith("Text") }
+    }
+
+    @Test
+    fun `assert-suppress-by-konsist-and-name-at-file-level-when-declarations-are-annotations`() {
+        // given
+        val sut =
+            getSnippetFile(
+                "assert-suppress-by-konsist-and-name-at-file-level-when-declarations-are-annotations",
+            ).classes().annotations
+
+        // then
+        sut.assertTrue { it.name.endsWith("Text") }
+    }
+
+    @Test
+    fun `assert-suppress-by-konsist-and-name-at-declaration-parent-level-when-declarations-are-annotations`() {
+        // given
+        val sut =
+            getSnippetFile(
+                "assert-suppress-by-konsist-and-name-at-declaration-parent-level-when-declarations-are-annotations",
+            ).classes().annotations
+
+        // then
+        sut.assertTrue { it.name.endsWith("Text") }
+    }
+
+    @Test
+    fun `assert-suppress-by-konsist-and-name-at-declaration-parent-level-when-declarations-are-kdocs`() {
+        // given
+        val sut =
+            getSnippetFile(
+                "assert-suppress-by-konsist-and-name-at-declaration-parent-level-when-declarations-are-kdocs",
+            ).classes().kDocs
+
+        // then
+        sut.assertTrue { it.text.endsWith("Text") }
+    }
+
+    @Test
+    fun `assert-suppress-by-name-at-declaration-parent-level-when-declarations-are-kdoc-tags`() {
+        // given
+        val sut = getSnippetFile("assert-suppress-by-name-at-declaration-parent-level-when-declarations-are-kdoc-tags").classes().kDocs.tags
+
+        // then
+        sut.assertTrue { it.description.endsWith("Text") }
+    }
+
+    @Test
+    fun `assert-suppress-by-name-at-declaration-parent-level-when-declarations-are-type-arguments`() {
+        // given
+        val sut =
+            getSnippetFile(
+                "assert-suppress-by-name-at-declaration-parent-level-when-declarations-are-type-arguments",
+            ).properties()
+                .mapNotNull {
+                    it.type
+                }.typeArguments
+
+        // then
+        sut.assertTrue { it.name.endsWith("Text") }
+    }
+
+    @Test
+    fun `assert-not-suppress-annotations-of-not-suppressed-declaration`() {
+        // given
+        val sut = getSnippetFile("assert-not-suppress-annotations-of-not-suppressed-declaration").classes().annotations
+
+        // when
+        val func = { sut.assertTrue { it.name.endsWith("Text") } }
 
         // then
         func shouldThrow KoAssertionFailedException::class

@@ -1,0 +1,4 @@
+@file:Suppress("konsist.assert-suppress-by-konsist-and-name-at-file-level-when-declarations-are-imports")
+
+import com.lemonappdev.sample.SampleClass
+import com.lemonappdev.sample.OtherClass
