@@ -26,12 +26,12 @@ import com.lemonappdev.konsist.core.provider.tag.KoKDocThrowsTagProviderCore
 import com.lemonappdev.konsist.core.provider.tag.KoKDocVersionTagProviderCore
 import com.lemonappdev.konsist.core.util.EndOfLine
 import org.jetbrains.kotlin.com.intellij.psi.PsiElement
-import org.jetbrains.kotlin.kdoc.psi.api.KDocElement
+import org.jetbrains.kotlin.kdoc.psi.api.KDoc
 import org.jetbrains.kotlin.kdoc.psi.impl.KDocSection
 import org.jetbrains.kotlin.kdoc.psi.impl.KDocTag
 
 internal class KoKDocDeclarationCore(
-    private val kDocElement: KDocElement,
+    private val kDocElement: KDoc,
 ) : KoKDocDeclaration,
     KoKDocDescriptionProviderCore,
     KoKDocTagProviderCore,
@@ -77,29 +77,36 @@ internal class KoKDocDeclarationCore(
     override val text: String
         get() =
             KoPropertyCache.getOrCompute(cachedText, { cachedText = it }) {
-                val splitKDoc =
-                    kDocElement
-                        .text
-                        .split(EndOfLine.UNIX.value)
-                        .toMutableList()
+                kDocElement
+                    .text
+                    .removePrefix("/**")
+                    .removeSuffix("*/")
+                    .split(EndOfLine.UNIX.value)
+                    .joinToString(EndOfLine.UNIX.value) {
+                        it
+                            .trim()
+                            .removePrefix("*")
+                            .trim()
+                    }.trim()
+            }
 
-                if (splitKDoc.size == 1 && splitKDoc.first().startsWith("/**") && splitKDoc.first().endsWith("*/")) {
-                    splitKDoc
-                        .first()
-                        .removePrefix("/**")
-                        .removeSuffix("*/")
+    @Volatile
+    private var cachedDescription: Any? = KoPropertyCache.NOT_COMPUTED
+
+    override val description: String
+        get() =
+            KoPropertyCache.getOrCompute(cachedDescription, { cachedDescription = it }) {
+                val content =
+                    kDocElement
+                        .getDefaultSection()
+                        .getContent()
                         .trim()
+
+                // "/***" opener: parser treats the extra asterisk as content
+                if (kDocElement.text.startsWith("/***")) {
+                    content.removePrefix("*").trim()
                 } else {
-                    splitKDoc
-                        .also {
-                            it.removeFirst()
-                            it.removeLast()
-                        }.joinToString("\n") {
-                            it
-                                .trim()
-                                .removePrefix("*")
-                                .trim()
-                        }
+                    content
                 }
             }
 
