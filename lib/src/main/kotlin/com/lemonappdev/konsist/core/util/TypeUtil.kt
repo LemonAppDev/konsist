@@ -175,7 +175,7 @@ object TypeUtil {
             typeArgument.hasOutModifier == (kTypeProjection.variance == KVariance.OUT) &&
             isNullable == kType.isMarkedNullable &&
             matchesKClass((typeArgument.sourceDeclaration as? KoFullyQualifiedNameProvider)?.fullyQualifiedName, kClass) &&
-            matchesTypeArguments(typeArgument.typeArguments.orEmpty(), kType.arguments)
+            matchesTypeArguments(typeArgument.typeArguments, kType.arguments)
     }
 
     /*

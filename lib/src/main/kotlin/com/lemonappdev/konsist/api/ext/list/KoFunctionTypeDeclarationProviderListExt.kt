@@ -66,7 +66,7 @@ fun <T : KoFunctionTypeDeclarationProvider> List<T>.withReturnTypeOf(
 fun <T : KoFunctionTypeDeclarationProvider> List<T>.withReturnTypeOf(kClasses: Collection<KClass<*>>): List<T> =
     filter {
         when {
-            kClasses.isEmpty() -> true
+            kClasses.isEmpty() -> it.returnType != null
             else -> kClasses.any { kClass -> it.hasReturnTypeOf(kClass) }
         }
     }
@@ -94,7 +94,7 @@ fun <T : KoFunctionTypeDeclarationProvider> List<T>.withoutReturnTypeOf(
 fun <T : KoFunctionTypeDeclarationProvider> List<T>.withoutReturnTypeOf(kClasses: Collection<KClass<*>>): List<T> =
     filterNot {
         when {
-            kClasses.isEmpty() -> true
+            kClasses.isEmpty() -> it.returnType != null
             else -> kClasses.any { kClass -> it.hasReturnTypeOf(kClass) }
         }
     }

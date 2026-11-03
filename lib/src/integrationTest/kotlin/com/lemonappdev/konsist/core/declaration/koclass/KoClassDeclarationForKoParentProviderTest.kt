@@ -310,7 +310,7 @@ class KoClassDeclarationForKoParentProviderTest {
         assertSoftly(sut.parents(indirectParents = true).first { it.name == "InputStream" }) {
             text shouldBeEqualTo "InputStream"
             arguments shouldBeEqualTo emptyList()
-            typeArguments shouldBeEqualTo null
+            typeArguments shouldBeEqualTo emptyList()
             containingDeclaration shouldBeEqualTo sut.containingFile.classes().first { it.name == "FixtureParentClass" }
             sourceDeclaration?.isExternal shouldBeEqualTo true
             sourceDeclaration?.asExternalDeclaration()?.fullyQualifiedName shouldBeEqualTo "java.io.InputStream"

@@ -145,59 +145,83 @@ class KoNullableTypeProviderListExtTest {
     }
 
     @Test
-    fun `withTypeOf(empty list) returns all declarations`() {
+    fun `withTypeOf(empty list) returns declaration with any type`() {
         // given
-        val declaration1: KoNullableTypeProvider = mockk()
-        val declaration2: KoNullableTypeProvider = mockk()
+        val declaration1: KoNullableTypeProvider =
+            mockk {
+                every { hasType() } returns true
+            }
+        val declaration2: KoNullableTypeProvider =
+            mockk {
+                every { hasType() } returns false
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when
         val sut = declarations.withTypeOf(emptyList())
 
         // then
-        sut shouldBeEqualTo listOf(declaration1, declaration2)
+        sut shouldBeEqualTo listOf(declaration1)
     }
 
     @Test
-    fun `withTypeOf(empty set) returns all declarations`() {
+    fun `withTypeOf(empty set) returns declaration with any type`() {
         // given
-        val declaration1: KoNullableTypeProvider = mockk()
-        val declaration2: KoNullableTypeProvider = mockk()
+        val declaration1: KoNullableTypeProvider =
+            mockk {
+                every { hasType() } returns true
+            }
+        val declaration2: KoNullableTypeProvider =
+            mockk {
+                every { hasType() } returns false
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when
         val sut = declarations.withTypeOf(emptySet())
 
         // then
-        sut shouldBeEqualTo listOf(declaration1, declaration2)
+        sut shouldBeEqualTo listOf(declaration1)
     }
 
     @Test
-    fun `withoutTypeOf(empty list) returns none declaration`() {
+    fun `withoutTypeOf(empty list) returns declaration without any type`() {
         // given
-        val declaration1: KoNullableTypeProvider = mockk()
-        val declaration2: KoNullableTypeProvider = mockk()
+        val declaration1: KoNullableTypeProvider =
+            mockk {
+                every { hasType() } returns true
+            }
+        val declaration2: KoNullableTypeProvider =
+            mockk {
+                every { hasType() } returns false
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when
         val sut = declarations.withoutTypeOf(emptyList())
 
         // then
-        sut shouldBeEqualTo emptyList()
+        sut shouldBeEqualTo listOf(declaration2)
     }
 
     @Test
-    fun `withoutTypeOf(empty set) returns none declaration`() {
+    fun `withoutTypeOf(empty set) returns declaration without any type`() {
         // given
-        val declaration1: KoNullableTypeProvider = mockk()
-        val declaration2: KoNullableTypeProvider = mockk()
+        val declaration1: KoNullableTypeProvider =
+            mockk {
+                every { hasType() } returns true
+            }
+        val declaration2: KoNullableTypeProvider =
+            mockk {
+                every { hasType() } returns false
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when
         val sut = declarations.withoutTypeOf(emptySet())
 
         // then
-        sut shouldBeEqualTo emptyList()
+        sut shouldBeEqualTo listOf(declaration2)
     }
 
     @Test

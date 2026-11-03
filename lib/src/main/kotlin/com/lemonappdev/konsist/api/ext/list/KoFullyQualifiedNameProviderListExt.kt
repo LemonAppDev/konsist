@@ -35,7 +35,7 @@ fun <T : KoFullyQualifiedNameProvider> List<T>.withFullyQualifiedName(
 ): List<T> =
     filter {
         when {
-            names.isEmpty() -> true
+            names.isEmpty() -> it.fullyQualifiedName != null
             else -> names.any { fullyQualifiedName -> it.fullyQualifiedName.equals(fullyQualifiedName, ignoreCase) }
         }
     }
@@ -73,7 +73,7 @@ fun <T : KoFullyQualifiedNameProvider> List<T>.withoutFullyQualifiedName(
 ): List<T> =
     filter {
         when {
-            names.isEmpty() -> false
+            names.isEmpty() -> it.fullyQualifiedName == null
             else -> names.none { fullyQualifiedName -> it.fullyQualifiedName.equals(fullyQualifiedName, ignoreCase) }
         }
     }

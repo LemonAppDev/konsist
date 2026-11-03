@@ -8,59 +8,83 @@ import org.junit.jupiter.api.Test
 
 class KoFullyQualifiedNameProviderListExtTest {
     @Test
-    fun `withFullyQualifiedName(empty list) returns all declarations`() {
+    fun `withFullyQualifiedName(empty list) returns declaration with any fully qualified name`() {
         // given
-        val declaration1: KoFullyQualifiedNameProvider = mockk()
-        val declaration2: KoFullyQualifiedNameProvider = mockk()
+        val declaration1: KoFullyQualifiedNameProvider =
+            mockk {
+                every { fullyQualifiedName } returns "com.sample.SampleClass"
+            }
+        val declaration2: KoFullyQualifiedNameProvider =
+            mockk {
+                every { fullyQualifiedName } returns null
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when
         val sut = declarations.withFullyQualifiedName(emptyList())
 
         // then
-        sut shouldBeEqualTo listOf(declaration1, declaration2)
+        sut shouldBeEqualTo listOf(declaration1)
     }
 
     @Test
-    fun `withFullyQualifiedName(empty set) returns all declarations`() {
+    fun `withFullyQualifiedName(empty set) returns declaration with any fully qualified name`() {
         // given
-        val declaration1: KoFullyQualifiedNameProvider = mockk()
-        val declaration2: KoFullyQualifiedNameProvider = mockk()
+        val declaration1: KoFullyQualifiedNameProvider =
+            mockk {
+                every { fullyQualifiedName } returns "com.sample.SampleClass"
+            }
+        val declaration2: KoFullyQualifiedNameProvider =
+            mockk {
+                every { fullyQualifiedName } returns null
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when
         val sut = declarations.withFullyQualifiedName(emptySet())
 
         // then
-        sut shouldBeEqualTo listOf(declaration1, declaration2)
+        sut shouldBeEqualTo listOf(declaration1)
     }
 
     @Test
-    fun `withoutFullyQualifiedName(empty list) returns none declaration`() {
+    fun `withoutFullyQualifiedName(empty list) returns declaration without any fully qualified name`() {
         // given
-        val declaration1: KoFullyQualifiedNameProvider = mockk()
-        val declaration2: KoFullyQualifiedNameProvider = mockk()
+        val declaration1: KoFullyQualifiedNameProvider =
+            mockk {
+                every { fullyQualifiedName } returns "com.sample.SampleClass"
+            }
+        val declaration2: KoFullyQualifiedNameProvider =
+            mockk {
+                every { fullyQualifiedName } returns null
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when
         val sut = declarations.withoutFullyQualifiedName(emptyList())
 
         // then
-        sut shouldBeEqualTo emptyList()
+        sut shouldBeEqualTo listOf(declaration2)
     }
 
     @Test
-    fun `withoutFullyQualifiedName(empty set) returns none declaration`() {
+    fun `withoutFullyQualifiedName(empty set) returns declaration without any fully qualified name`() {
         // given
-        val declaration1: KoFullyQualifiedNameProvider = mockk()
-        val declaration2: KoFullyQualifiedNameProvider = mockk()
+        val declaration1: KoFullyQualifiedNameProvider =
+            mockk {
+                every { fullyQualifiedName } returns "com.sample.SampleClass"
+            }
+        val declaration2: KoFullyQualifiedNameProvider =
+            mockk {
+                every { fullyQualifiedName } returns null
+            }
         val declarations = listOf(declaration1, declaration2)
 
         // when
         val sut = declarations.withoutFullyQualifiedName(emptySet())
 
         // then
-        sut shouldBeEqualTo emptyList()
+        sut shouldBeEqualTo listOf(declaration2)
     }
 
     @Test

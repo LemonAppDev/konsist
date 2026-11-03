@@ -35,7 +35,7 @@ fun <T : KoTacitTypeProvider> List<T>.withTacitType(
 fun <T : KoTacitTypeProvider> List<T>.withTacitType(types: Collection<String>): List<T> =
     filter {
         when {
-            types.isEmpty() -> true
+            types.isEmpty() -> it.tacitType != null
             else -> types.any { type -> it.hasTacitType(type) }
         }
     }
@@ -63,7 +63,7 @@ fun <T : KoTacitTypeProvider> List<T>.withoutTacitType(
 fun <T : KoTacitTypeProvider> List<T>.withoutTacitType(types: Collection<String>): List<T> =
     filterNot {
         when {
-            types.isEmpty() -> true
+            types.isEmpty() -> it.tacitType != null
             else -> types.any { type -> it.hasTacitType(type) }
         }
     }
@@ -91,7 +91,7 @@ fun <T : KoTacitTypeProvider> List<T>.withTacitTypeOf(
 fun <T : KoTacitTypeProvider> List<T>.withTacitTypeOf(kClasses: Collection<KClass<*>>): List<T> =
     filter {
         when {
-            kClasses.isEmpty() -> true
+            kClasses.isEmpty() -> it.tacitType != null
             else -> kClasses.any { kClass -> it.hasTacitTypeOf(kClass) }
         }
     }
@@ -119,7 +119,7 @@ fun <T : KoTacitTypeProvider> List<T>.withoutTacitTypeOf(
 fun <T : KoTacitTypeProvider> List<T>.withoutTacitTypeOf(kClasses: Collection<KClass<*>>): List<T> =
     filterNot {
         when {
-            kClasses.isEmpty() -> true
+            kClasses.isEmpty() -> it.tacitType != null
             else -> kClasses.any { kClass -> it.hasTacitTypeOf(kClass) }
         }
     }
