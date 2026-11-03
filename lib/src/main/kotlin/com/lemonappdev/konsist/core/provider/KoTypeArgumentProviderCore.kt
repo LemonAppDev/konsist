@@ -38,6 +38,7 @@ internal interface KoTypeArgumentProviderCore :
                             it.projectionKind == KtProjectionKind.OUT,
                             it.projectionKind == KtProjectionKind.STAR,
                             it,
+                            this.castToKoBaseDeclaration(),
                         )
                     }
 

@@ -28,6 +28,8 @@ import org.jetbrains.kotlin.psi.KtValueArgumentList
 
 internal class KoAnnotationDeclarationCore private constructor(
     override val ktAnnotationEntry: KtAnnotationEntry,
+    // Declaration annotated with this annotation (e.g. used to check if the annotation is suppressed by the declaration)
+    internal val annotatedDeclaration: KoBaseDeclaration,
 ) : KoAnnotationDeclaration,
     KoBaseProviderCore,
     KoArgumentProviderCore,
@@ -109,6 +111,7 @@ internal class KoAnnotationDeclarationCore private constructor(
             cache.getOrCreateInstance(ktAnnotationEntry, containingDeclaration) {
                 KoAnnotationDeclarationCore(
                     ktAnnotationEntry,
+                    containingDeclaration,
                 )
             }
     }
