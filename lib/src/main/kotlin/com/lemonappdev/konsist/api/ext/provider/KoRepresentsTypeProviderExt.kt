@@ -10,7 +10,8 @@ import com.lemonappdev.konsist.api.provider.KoRepresentsTypeProvider
  * No: representsTypeOf<List<String>>()
  * Yes: representsType("List<String>")
  *
+ * Types are matched by fully qualified name, so a type with the same simple name declared in another package does not match.
+ *
  * @return `true` if the declaration represents the type of [T], `false` otherwise.
  */
-inline fun <reified T> KoRepresentsTypeProvider.representsTypeOf(): Boolean =
-    representsType(T::class.simpleName) || representsType(T::class.qualifiedName)
+inline fun <reified T> KoRepresentsTypeProvider.representsTypeOf(): Boolean = representsType(T::class.qualifiedName)
