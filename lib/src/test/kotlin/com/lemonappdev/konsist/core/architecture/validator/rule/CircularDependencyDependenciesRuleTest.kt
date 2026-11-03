@@ -128,4 +128,78 @@ class CircularDependencyDependenciesRuleTest {
         func shouldThrow KoPreconditionFailedException::class withMessage
             "Circular dependency detected: 'layer name 1' -> 'layer name 2' -> 'layer name 3' -> 'layer name 4' -> 'layer name 1'."
     }
+
+    @Test
+    fun `should detect circular dependency not including first layer`() {
+        // given
+        val layer1 = Layer("layer name 1", "package1..")
+        val layer2 = Layer("layer name 2", "package2..")
+        val layer3 = Layer("layer name 3", "package3..")
+
+        val dependencies =
+            setOf(
+                LayerDependency(
+                    layer1 = layer1,
+                    layer2 = layer2,
+                    dependencyType = LayerDependencyType.DEPENDS_ON_LAYER,
+                ),
+                LayerDependency(
+                    layer1 = layer3,
+                    layer2 = layer2,
+                    dependencyType = LayerDependencyType.DEPENDS_ON_LAYER,
+                ),
+                LayerDependency(
+                    layer1 = layer2,
+                    layer2 = layer3,
+                    dependencyType = LayerDependencyType.DEPENDS_ON_LAYER,
+                ),
+            )
+
+        // when
+        val func = { sut.validate(dependencies) }
+
+        // then
+        func shouldThrow KoPreconditionFailedException::class withMessage
+            "Circular dependency detected: 'layer name 2' <-> 'layer name 3'."
+    }
+
+    @Test
+    fun `should detect indirect circular dependency not including first layer`() {
+        // given
+        val layer1 = Layer("layer name 1", "package1..")
+        val layer2 = Layer("layer name 2", "package2..")
+        val layer3 = Layer("layer name 3", "package3..")
+        val layer4 = Layer("layer name 4", "package4..")
+
+        val dependencies =
+            setOf(
+                LayerDependency(
+                    layer1 = layer1,
+                    layer2 = layer2,
+                    dependencyType = LayerDependencyType.DEPENDS_ON_LAYER,
+                ),
+                LayerDependency(
+                    layer1 = layer2,
+                    layer2 = layer3,
+                    dependencyType = LayerDependencyType.DEPENDS_ON_LAYER,
+                ),
+                LayerDependency(
+                    layer1 = layer3,
+                    layer2 = layer4,
+                    dependencyType = LayerDependencyType.DEPENDS_ON_LAYER,
+                ),
+                LayerDependency(
+                    layer1 = layer4,
+                    layer2 = layer2,
+                    dependencyType = LayerDependencyType.DEPENDS_ON_LAYER,
+                ),
+            )
+
+        // when
+        val func = { sut.validate(dependencies) }
+
+        // then
+        func shouldThrow KoPreconditionFailedException::class withMessage
+            "Circular dependency detected: 'layer name 2' -> 'layer name 3' -> 'layer name 4' -> 'layer name 2'."
+    }
 }
