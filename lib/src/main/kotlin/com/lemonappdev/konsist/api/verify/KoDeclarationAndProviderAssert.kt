@@ -15,6 +15,8 @@ import com.lemonappdev.konsist.core.verify.assert
  * @param testName An optional test name, displayed in error messages and used for suppression. By default, test name is
  *                 derived from the JUnit method name. For Kotest and JUnit 5 dynamic tests register [KoKotestExtension]
  *                 or [KoJUnitExtension], or pass the test name manually.
+ * @param rule An optional [KoRule] displayed in the assertion error if the assertion fails. It describes what the
+ *             rule checks, why it exists and how to fix the violation.
  * @param function The predicate function that takes an element of type [E] and returns a [Boolean] value or `null`.
  *                If the function returns `false`, the element is considered invalid; otherwise, it's considered valid.
  *                Inside the function [KoAssertScope.addFailureReason] can be used to add a reason displayed under the failed element.
@@ -23,9 +25,10 @@ fun <E : KoBaseProvider> E?.assertTrue(
     strict: Boolean = false,
     additionalMessage: String? = null,
     testName: String? = null,
+    rule: KoRule? = null,
     function: KoAssertScope.(E) -> Boolean?,
 ): Unit {
-    listOf(this).assert(strict, additionalMessage, testName, function, positiveCheck = true)
+    listOf(this).assert(strict, additionalMessage, testName, rule, function, positiveCheck = true)
 }
 
 /**
@@ -40,6 +43,8 @@ fun <E : KoBaseProvider> E?.assertTrue(
  * @param testName An optional test name, displayed in error messages and used for suppression. By default, test name is
  *                 derived from the JUnit method name. For Kotest and JUnit 5 dynamic tests register [KoKotestExtension]
  *                 or [KoJUnitExtension], or pass the test name manually.
+ * @param rule An optional [KoRule] displayed in the assertion error if the assertion fails. It describes what the
+ *             rule checks, why it exists and how to fix the violation.
  * @param function The predicate function that takes an element of type [E] and returns a [Boolean] value or `null`.
  *                If the function returns `true`, the element is considered invalid; otherwise, it's considered valid.
  *                Inside the function [KoAssertScope.addFailureReason] can be used to add a reason displayed under the failed element.
@@ -48,9 +53,10 @@ fun <E : KoBaseProvider> E?.assertFalse(
     strict: Boolean = false,
     additionalMessage: String? = null,
     testName: String? = null,
+    rule: KoRule? = null,
     function: KoAssertScope.(E) -> Boolean?,
 ): Unit {
-    listOf(this).assert(strict, additionalMessage, testName, function, positiveCheck = false)
+    listOf(this).assert(strict, additionalMessage, testName, rule, function, positiveCheck = false)
 }
 
 /**
@@ -65,6 +71,8 @@ fun <E : KoBaseProvider> E?.assertFalse(
  * @param testName An optional test name, displayed in error messages and used for suppression. By default, test name is
  *                 derived from the JUnit method name. For Kotest and JUnit 5 dynamic tests register [KoKotestExtension]
  *                 or [KoJUnitExtension], or pass the test name manually.
+ * @param rule An optional [KoRule] displayed in the assertion error if the assertion fails. It describes what the
+ *             rule checks, why it exists and how to fix the violation.
  * @param function The predicate function that takes an element of type [E] and returns a [Boolean] value or `null`.
  *                If the function returns `false`, the element is considered invalid; otherwise, it's considered valid.
  *                Inside the function [KoAssertScope.addFailureReason] can be used to add a reason displayed under the failed element.
@@ -73,9 +81,10 @@ fun <E : KoBaseProvider> List<E?>.assertTrue(
     strict: Boolean = false,
     additionalMessage: String? = null,
     testName: String? = null,
+    rule: KoRule? = null,
     function: KoAssertScope.(E) -> Boolean?,
 ): Unit {
-    assert(strict, additionalMessage, testName, function, positiveCheck = true)
+    assert(strict, additionalMessage, testName, rule, function, positiveCheck = true)
 }
 
 /**
@@ -90,6 +99,8 @@ fun <E : KoBaseProvider> List<E?>.assertTrue(
  * @param testName An optional test name, displayed in error messages and used for suppression. By default, test name is
  *                 derived from the JUnit method name. For Kotest and JUnit 5 dynamic tests register [KoKotestExtension]
  *                 or [KoJUnitExtension], or pass the test name manually.
+ * @param rule An optional [KoRule] displayed in the assertion error if the assertion fails. It describes what the
+ *             rule checks, why it exists and how to fix the violation.
  * @param function The predicate function that takes an element of type [E] and returns a [Boolean] value or `null`.
  *                If the function returns `true`, the element is considered invalid; otherwise, it's considered valid.
  *                Inside the function [KoAssertScope.addFailureReason] can be used to add a reason displayed under the failed element.
@@ -98,9 +109,10 @@ fun <E : KoBaseProvider> List<E?>.assertFalse(
     strict: Boolean = false,
     additionalMessage: String? = null,
     testName: String? = null,
+    rule: KoRule? = null,
     function: KoAssertScope.(E) -> Boolean?,
 ): Unit {
-    assert(strict, additionalMessage, testName, function, positiveCheck = false)
+    assert(strict, additionalMessage, testName, rule, function, positiveCheck = false)
 }
 
 /**
@@ -115,6 +127,8 @@ fun <E : KoBaseProvider> List<E?>.assertFalse(
  * @param testName An optional test name, displayed in error messages and used for suppression. By default, test name is
  *                 derived from the JUnit method name. For Kotest and JUnit 5 dynamic tests register [KoKotestExtension]
  *                 or [KoJUnitExtension], or pass the test name manually.
+ * @param rule An optional [KoRule] displayed in the assertion error if the assertion fails. It describes what the
+ *             rule checks, why it exists and how to fix the violation.
  * @param function The predicate function that takes an element of type [E] and returns a [Boolean] value or `null`.
  *                If the function returns `false`, the element is considered invalid; otherwise, it's considered valid.
  *                Inside the function [KoAssertScope.addFailureReason] can be used to add a reason displayed under the failed element.
@@ -123,9 +137,10 @@ fun <E : KoBaseProvider> Sequence<E?>.assertTrue(
     strict: Boolean = false,
     additionalMessage: String? = null,
     testName: String? = null,
+    rule: KoRule? = null,
     function: KoAssertScope.(E) -> Boolean?,
 ): Unit {
-    this.toList().assert(strict, additionalMessage, testName, function, true)
+    this.toList().assert(strict, additionalMessage, testName, rule, function, true)
 }
 
 /**
@@ -140,6 +155,8 @@ fun <E : KoBaseProvider> Sequence<E?>.assertTrue(
  * @param testName An optional test name, displayed in error messages and used for suppression. By default, test name is
  *                 derived from the JUnit method name. For Kotest and JUnit 5 dynamic tests register [KoKotestExtension]
  *                 or [KoJUnitExtension], or pass the test name manually.
+ * @param rule An optional [KoRule] displayed in the assertion error if the assertion fails. It describes what the
+ *             rule checks, why it exists and how to fix the violation.
  * @param function The predicate function that takes an element of type [E] and returns a [Boolean] value or `null`.
  *                If the function returns `true`, the element is considered invalid; otherwise, it's considered valid.
  *                Inside the function [KoAssertScope.addFailureReason] can be used to add a reason displayed under the failed element.
@@ -148,9 +165,10 @@ fun <E : KoBaseProvider> Sequence<E?>.assertFalse(
     strict: Boolean = false,
     additionalMessage: String? = null,
     testName: String? = null,
+    rule: KoRule? = null,
     function: KoAssertScope.(E) -> Boolean?,
 ): Unit {
-    this.toList().assert(strict, additionalMessage, testName, function, false)
+    this.toList().assert(strict, additionalMessage, testName, rule, function, false)
 }
 
 /**
@@ -161,12 +179,15 @@ fun <E : KoBaseProvider> Sequence<E?>.assertFalse(
  * @param testName An optional test name, displayed in error messages and used for suppression. By default, test name is
  *                 derived from the JUnit method name. For Kotest and JUnit 5 dynamic tests register [KoKotestExtension]
  *                 or [KoJUnitExtension], or pass the test name manually.
+ * @param rule An optional [KoRule] displayed in the assertion error if the assertion fails. It describes what the
+ *             rule checks, why it exists and how to fix the violation.
  */
 fun <E : KoBaseProvider> E?.assertNull(
     additionalMessage: String? = null,
     testName: String? = null,
+    rule: KoRule? = null,
 ): Unit {
-    listOf(this).assert(true, additionalMessage, testName, isEmptyOrNull = true, onSingleElement = true)
+    listOf(this).assert(true, additionalMessage, testName, rule, isEmptyOrNull = true, onSingleElement = true)
 }
 
 /**
@@ -177,12 +198,15 @@ fun <E : KoBaseProvider> E?.assertNull(
  * @param testName An optional test name, displayed in error messages and used for suppression. By default, test name is
  *                 derived from the JUnit method name. For Kotest and JUnit 5 dynamic tests register [KoKotestExtension]
  *                 or [KoJUnitExtension], or pass the test name manually.
+ * @param rule An optional [KoRule] displayed in the assertion error if the assertion fails. It describes what the
+ *             rule checks, why it exists and how to fix the violation.
  */
 fun <E : KoBaseProvider> E?.assertNotNull(
     additionalMessage: String? = null,
     testName: String? = null,
+    rule: KoRule? = null,
 ): Unit {
-    listOf(this).assert(true, additionalMessage, testName, isEmptyOrNull = false, onSingleElement = true)
+    listOf(this).assert(true, additionalMessage, testName, rule, isEmptyOrNull = false, onSingleElement = true)
 }
 
 /**
@@ -198,13 +222,16 @@ fun <E : KoBaseProvider> E?.assertNotNull(
  * @param testName An optional test name, displayed in error messages and used for suppression. By default, test name is
  *                 derived from the JUnit method name. For Kotest and JUnit 5 dynamic tests register [KoKotestExtension]
  *                 or [KoJUnitExtension], or pass the test name manually.
+ * @param rule An optional [KoRule] displayed in the assertion error if the assertion fails. It describes what the
+ *             rule checks, why it exists and how to fix the violation.
  */
 fun <E : KoBaseProvider> List<E?>.assertEmpty(
     strict: Boolean = false,
     additionalMessage: String? = null,
     testName: String? = null,
+    rule: KoRule? = null,
 ): Unit {
-    assert(strict, additionalMessage, testName, isEmptyOrNull = true, onSingleElement = false)
+    assert(strict, additionalMessage, testName, rule, isEmptyOrNull = true, onSingleElement = false)
 }
 
 /**
@@ -220,13 +247,16 @@ fun <E : KoBaseProvider> List<E?>.assertEmpty(
  * @param testName An optional test name, displayed in error messages and used for suppression. By default, test name is
  *                 derived from the JUnit method name. For Kotest and JUnit 5 dynamic tests register [KoKotestExtension]
  *                 or [KoJUnitExtension], or pass the test name manually.
+ * @param rule An optional [KoRule] displayed in the assertion error if the assertion fails. It describes what the
+ *             rule checks, why it exists and how to fix the violation.
  */
 fun <E : KoBaseProvider> List<E?>.assertNotEmpty(
     strict: Boolean = false,
     additionalMessage: String? = null,
     testName: String? = null,
+    rule: KoRule? = null,
 ): Unit {
-    assert(strict, additionalMessage, testName, isEmptyOrNull = false, onSingleElement = false)
+    assert(strict, additionalMessage, testName, rule, isEmptyOrNull = false, onSingleElement = false)
 }
 
 /**
@@ -242,13 +272,16 @@ fun <E : KoBaseProvider> List<E?>.assertNotEmpty(
  * @param testName An optional test name, displayed in error messages and used for suppression. By default, test name is
  *                 derived from the JUnit method name. For Kotest and JUnit 5 dynamic tests register [KoKotestExtension]
  *                 or [KoJUnitExtension], or pass the test name manually.
+ * @param rule An optional [KoRule] displayed in the assertion error if the assertion fails. It describes what the
+ *             rule checks, why it exists and how to fix the violation.
  */
 fun <E : KoBaseProvider> Sequence<E?>.assertEmpty(
     strict: Boolean = false,
     additionalMessage: String? = null,
     testName: String? = null,
+    rule: KoRule? = null,
 ): Unit {
-    this.toList().assert(strict, additionalMessage, testName, isEmptyOrNull = true, onSingleElement = false)
+    this.toList().assert(strict, additionalMessage, testName, rule, isEmptyOrNull = true, onSingleElement = false)
 }
 
 /**
@@ -264,11 +297,14 @@ fun <E : KoBaseProvider> Sequence<E?>.assertEmpty(
  * @param testName An optional test name, displayed in error messages and used for suppression. By default, test name is
  *                 derived from the JUnit method name. For Kotest and JUnit 5 dynamic tests register [KoKotestExtension]
  *                 or [KoJUnitExtension], or pass the test name manually.
+ * @param rule An optional [KoRule] displayed in the assertion error if the assertion fails. It describes what the
+ *             rule checks, why it exists and how to fix the violation.
  */
 fun <E : KoBaseProvider> Sequence<E?>.assertNotEmpty(
     strict: Boolean = false,
     additionalMessage: String? = null,
     testName: String? = null,
+    rule: KoRule? = null,
 ): Unit {
-    this.toList().assert(strict, additionalMessage, testName, isEmptyOrNull = false, onSingleElement = false)
+    this.toList().assert(strict, additionalMessage, testName, rule, isEmptyOrNull = false, onSingleElement = false)
 }

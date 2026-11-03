@@ -9,6 +9,7 @@ import com.lemonappdev.konsist.api.provider.KoContainingDeclarationProvider
 import com.lemonappdev.konsist.api.provider.KoLocationProvider
 import com.lemonappdev.konsist.api.provider.KoNameProvider
 import com.lemonappdev.konsist.api.verify.KoAssertScope
+import com.lemonappdev.konsist.api.verify.KoRule
 import com.lemonappdev.konsist.core.architecture.validator.ascii.AsciiTreeCreator
 import com.lemonappdev.konsist.core.architecture.validator.ascii.AsciiTreeNode
 import com.lemonappdev.konsist.core.declaration.KoFileDeclarationCore
@@ -31,6 +32,7 @@ internal fun <E : KoBaseProvider> List<E?>.assert(
     strict: Boolean,
     additionalMessage: String?,
     testName: String?,
+    rule: KoRule?,
     function: KoAssertScope.(E) -> Boolean?,
     positiveCheck: Boolean,
 ) {
@@ -58,7 +60,7 @@ internal fun <E : KoBaseProvider> List<E?>.assert(
                 if (passed) null else FailedItem(it, scope.failureReasons)
             }
 
-        getResult(failedItems, testMethodName, additionalMessage)
+        getResult(failedItems, testMethodName, getCustomMessage(rule, additionalMessage))
     } catch (e: KoException) {
         throw e
     } catch (
@@ -72,6 +74,7 @@ internal fun <E : KoBaseProvider> List<E?>.assert(
     strict: Boolean,
     additionalMessage: String?,
     testName: String?,
+    rule: KoRule?,
     isEmptyOrNull: Boolean,
     onSingleElement: Boolean,
 ) {
@@ -89,9 +92,9 @@ internal fun <E : KoBaseProvider> List<E?>.assert(
         if (!onSingleElement) {
             val items = if (strict) notSuppressedDeclarations.filterNotNull() else notSuppressedDeclarations
 
-            getEmptyResult(items, additionalMessage, isEmptyOrNull, testMethodName)
+            getEmptyResult(items, getCustomMessage(rule, additionalMessage), isEmptyOrNull, testMethodName)
         } else {
-            getNullResult(notSuppressedDeclarations.firstOrNull(), additionalMessage, isEmptyOrNull, testMethodName)
+            getNullResult(notSuppressedDeclarations.firstOrNull(), getCustomMessage(rule, additionalMessage), isEmptyOrNull, testMethodName)
         }
     } catch (e: KoException) {
         throw e

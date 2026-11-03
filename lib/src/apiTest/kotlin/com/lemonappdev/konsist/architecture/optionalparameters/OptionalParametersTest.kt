@@ -4,6 +4,7 @@ import com.lemonappdev.konsist.api.Konsist
 import com.lemonappdev.konsist.api.architecture.KoArchitectureCreator.architecture
 import com.lemonappdev.konsist.api.architecture.KoArchitectureCreator.assertArchitecture
 import com.lemonappdev.konsist.api.architecture.Layer
+import com.lemonappdev.konsist.api.verify.KoRule
 import com.lemonappdev.konsist.core.exception.KoAssertionFailedException
 import com.lemonappdev.konsist.core.filesystem.PathProvider
 import io.kotest.assertions.throwables.shouldThrow
@@ -534,6 +535,82 @@ class OptionalParametersTest {
             .message
             .shouldBeEqualTo(
                 "'SOME CUSTOM TEST NAME' test has failed. \n" +
+                    "SOME ADDITIONAL MESSAGE\n" +
+                    "'Presentation' layer should not depend on anything but has dependencies in files:\n" +
+                    "└── File $filepath\n" +
+                    "    └── Import com.lemonappdev.konsist.architecture.optionalparameters.project.domain." +
+                    "DomainFirstClass ($filepath:3:1)",
+            )
+    }
+
+    @Test
+    fun `error message when rule is provided (scope)`() {
+        // when
+        val result =
+            shouldThrow<KoAssertionFailedException> {
+                scope.assertArchitecture(
+                    rule =
+                        KoRule(
+                            title = "Presentation must not depend on domain.",
+                            rationale = "Presentation is the outermost layer.",
+                            howToFix = "Move the dependency to the domain layer.",
+                        ),
+                ) {
+                    presentation.dependsOnNothing()
+                    domain.dependsOn(presentation)
+                }
+            }
+
+        // then
+        val filepath =
+            "file://$rootPath/lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/" +
+                "optionalparameters/project/presentation/fixture/PresentationThirdClass.kt"
+
+        result
+            .message
+            .shouldBeEqualTo(
+                "'error message when rule is provided (scope)' test has failed. \n" +
+                    "RULE: Presentation must not depend on domain.\n" +
+                    "WHY: Presentation is the outermost layer.\n" +
+                    "HOW TO FIX: Move the dependency to the domain layer.\n" +
+                    "'Presentation' layer should not depend on anything but has dependencies in files:\n" +
+                    "└── File $filepath\n" +
+                    "    └── Import com.lemonappdev.konsist.architecture.optionalparameters.project.domain." +
+                    "DomainFirstClass ($filepath:3:1)",
+            )
+    }
+
+    @Test
+    fun `error message when rule and additionalMessage are provided (files)`() {
+        // when
+        val result =
+            shouldThrow<KoAssertionFailedException> {
+                scope.files.assertArchitecture(
+                    additionalMessage = "SOME ADDITIONAL MESSAGE",
+                    rule =
+                        KoRule(
+                            title = "Presentation must not depend on domain.",
+                            rationale = "Presentation is the outermost layer.",
+                            howToFix = "Move the dependency to the domain layer.",
+                        ),
+                ) {
+                    presentation.dependsOnNothing()
+                    domain.dependsOn(presentation)
+                }
+            }
+
+        // then
+        val filepath =
+            "file://$rootPath/lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/" +
+                "optionalparameters/project/presentation/fixture/PresentationThirdClass.kt"
+
+        result
+            .message
+            .shouldBeEqualTo(
+                "'error message when rule and additionalMessage are provided (files)' test has failed. \n" +
+                    "RULE: Presentation must not depend on domain.\n" +
+                    "WHY: Presentation is the outermost layer.\n" +
+                    "HOW TO FIX: Move the dependency to the domain layer.\n" +
                     "SOME ADDITIONAL MESSAGE\n" +
                     "'Presentation' layer should not depend on anything but has dependencies in files:\n" +
                     "└── File $filepath\n" +
