@@ -1,0 +1,2 @@
+@Suppress("konsist.assert-not-null-passes-when-declaration-is-suppressed")
+class SampleClass

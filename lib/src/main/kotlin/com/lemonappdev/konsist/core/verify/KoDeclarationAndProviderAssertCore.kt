@@ -84,19 +84,26 @@ internal fun <E : KoBaseProvider> List<E?>.assert(
         val testNames = testName?.let { listOf(it) } ?: listOfNotNull(KoTestNameContext.current, getTestMethodNameFromFifthIndex())
         val testMethodName = testNames.firstOrNull()
 
-        val declarationWithoutNull = filterNotNull()
+        // Suppressed declarations count as passing. Filtering them out only helps `assertNull`/`assertEmpty`; for
+        // `assertNotNull`/`assertNotEmpty` it would turn a suppressed (non-null) declaration into a failure.
+        val declarations =
+            if (isEmptyOrNull) {
+                val declarationWithoutNull = filterNotNull()
 
-        val suppressedDeclarations =
-            declarationWithoutNull - checkIfAnnotatedWithSuppress(declarationWithoutNull, testNames).toSet()
+                val suppressedDeclarations =
+                    declarationWithoutNull - checkIfAnnotatedWithSuppress(declarationWithoutNull, testNames).toSet()
 
-        val notSuppressedDeclarations = this - suppressedDeclarations.toSet()
+                this - suppressedDeclarations.toSet()
+            } else {
+                this
+            }
 
         if (!onSingleElement) {
-            val items = if (strict) notSuppressedDeclarations.filterNotNull() else notSuppressedDeclarations
+            val items = if (strict) declarations.filterNotNull() else declarations
 
             getEmptyResult(items, getCustomMessage(rule, additionalMessage), isEmptyOrNull, testMethodName)
         } else {
-            getNullResult(notSuppressedDeclarations.firstOrNull(), getCustomMessage(rule, additionalMessage), isEmptyOrNull, testMethodName)
+            getNullResult(declarations.firstOrNull(), getCustomMessage(rule, additionalMessage), isEmptyOrNull, testMethodName)
         }
     } catch (e: KoException) {
         throw e
