@@ -1,0 +1,5 @@
+@file:Suppress("konsist.assert-not-empty-passes-when-all-declarations-are-suppressed")
+
+class SampleClass1
+
+class SampleClass2

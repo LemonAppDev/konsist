@@ -3,6 +3,7 @@ package com.lemonappdev.konsist.core.verify.kodeclarationassert.assertnull
 import com.lemonappdev.konsist.TestSnippetProvider
 import com.lemonappdev.konsist.api.ext.list.initBlocks
 import com.lemonappdev.konsist.api.ext.list.localFunctions
+import com.lemonappdev.konsist.api.verify.assertNotNull
 import com.lemonappdev.konsist.api.verify.assertNull
 import org.junit.jupiter.api.Test
 
@@ -461,6 +462,18 @@ class SuppressAssertNullOnSingleDeclarationTest {
 
         // then
         sut.assertNull(testName = "konsist.assert-suppress-with-suppress-name-parameter")
+    }
+
+    @Test
+    fun `assert-not-null-passes-when-declaration-is-suppressed`() {
+        // given
+        val sut =
+            getSnippetFile("assert-not-null-passes-when-declaration-is-suppressed")
+                .classes()
+                .first()
+
+        // then
+        sut.assertNotNull()
     }
 
     private fun getSnippetFile(fileName: String) =
