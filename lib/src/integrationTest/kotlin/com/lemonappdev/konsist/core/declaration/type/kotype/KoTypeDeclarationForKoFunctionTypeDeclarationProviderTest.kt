@@ -18,13 +18,14 @@ class KoTypeDeclarationForKoFunctionTypeDeclarationProviderTest {
 
         // then
         assertSoftly(sut) {
-            it?.parameters shouldBeEqualTo null
+            it?.parameters shouldBeEqualTo emptyList()
             it?.numParameters shouldBeEqualTo 0
             it?.countParameters { parameter -> parameter.type.isKotlinType } shouldBeEqualTo 0
             it?.countParameters { parameter -> parameter.type.isKotlinCollectionType } shouldBeEqualTo 0
             it?.countParameters { parameter -> parameter.type.isKotlinBasicType } shouldBeEqualTo 0
             it?.hasParameter { parameter -> parameter.type.isKotlinType } shouldBeEqualTo false
-            it?.hasAllParameters { parameter -> parameter.type.isKotlinType } shouldBeEqualTo false
+            it?.hasAllParameters { parameter -> parameter.type.isKotlinType } shouldBeEqualTo true
+            it?.hasAllParameters { false } shouldBeEqualTo true
         }
     }
 
@@ -39,13 +40,13 @@ class KoTypeDeclarationForKoFunctionTypeDeclarationProviderTest {
 
         // then
         assertSoftly(sut) {
-            it?.parameters shouldBeEqualTo null
+            it?.parameters shouldBeEqualTo emptyList()
             it?.numParameters shouldBeEqualTo 0
             it?.countParameters { parameter -> parameter.type.isKotlinType } shouldBeEqualTo 0
             it?.countParameters { parameter -> parameter.type.isKotlinCollectionType } shouldBeEqualTo 0
             it?.countParameters { parameter -> parameter.type.isKotlinBasicType } shouldBeEqualTo 0
             it?.hasParameter { parameter -> parameter.type.isKotlinType } shouldBeEqualTo false
-            it?.hasAllParameters { parameter -> parameter.type.isKotlinType } shouldBeEqualTo false
+            it?.hasAllParameters { parameter -> parameter.type.isKotlinType } shouldBeEqualTo true
         }
     }
 

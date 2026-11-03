@@ -20,8 +20,7 @@ val <T : KoFunctionTypeDeclarationProvider> List<T>.returnTypes: List<KoTypeDecl
  */
 val <T : KoFunctionTypeDeclarationProvider> List<T>.parameters: List<KoParameterDeclaration>
     get() =
-        mapNotNull { it.parameters }
-            .flatten()
+        flatMap { it.parameters }
 
 /**
  * Filters the list by return type using the given predicate.
@@ -147,7 +146,7 @@ fun <T : KoFunctionTypeDeclarationProvider> List<T>.withoutAllParameters(predica
  * @see KoFunctionTypeDeclarationProvider.parameters
  */
 fun <T : KoFunctionTypeDeclarationProvider> List<T>.withParameters(predicate: (List<KoParameterDeclaration>) -> Boolean): List<T> =
-    filter { it.parameters?.let { parameters -> predicate(parameters) } == true }
+    filter { predicate(it.parameters) }
 
 /**
  * Filters the list by excluding function types that match the parameters predicate as a collection.
@@ -157,4 +156,4 @@ fun <T : KoFunctionTypeDeclarationProvider> List<T>.withParameters(predicate: (L
  * @see KoFunctionTypeDeclarationProvider.parameters
  */
 fun <T : KoFunctionTypeDeclarationProvider> List<T>.withoutParameters(predicate: (List<KoParameterDeclaration>) -> Boolean): List<T> =
-    filterNot { it.parameters?.let { parameters -> predicate(parameters) } == true }
+    filterNot { predicate(it.parameters) }

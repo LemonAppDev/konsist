@@ -17,7 +17,7 @@ internal interface KoFunctionTypeDeclarationProviderCore :
     KoBaseProviderCore {
     val ktFunctionType: KtFunctionType?
 
-    override val parameters: List<KoParameterDeclaration>?
+    override val parameters: List<KoParameterDeclaration>
         get() =
             ktFunctionType
                 ?.children
@@ -25,9 +25,10 @@ internal interface KoFunctionTypeDeclarationProviderCore :
                 ?.flatMap { it.children.toList() }
                 ?.filterIsInstance<KtParameter>()
                 ?.map { KoParameterDeclarationCore.getInstance(it, this.castToKoBaseDeclaration()) }
+                .orEmpty()
 
     override val numParameters: Int
-        get() = parameters?.size ?: 0
+        get() = parameters.size
 
     override val returnType: KoTypeDeclaration?
         get() {
@@ -40,9 +41,9 @@ internal interface KoFunctionTypeDeclarationProviderCore :
 
     override fun hasReturnTypeOf(kClass: KClass<*>): Boolean = hasTypeOf(returnType, kClass)
 
-    override fun countParameters(predicate: (KoParameterDeclaration) -> Boolean): Int = parameters?.count { predicate(it) } ?: 0
+    override fun countParameters(predicate: (KoParameterDeclaration) -> Boolean): Int = parameters.count { predicate(it) }
 
-    override fun hasParameter(predicate: (KoParameterDeclaration) -> Boolean): Boolean = parameters?.any(predicate) ?: false
+    override fun hasParameter(predicate: (KoParameterDeclaration) -> Boolean): Boolean = parameters.any(predicate)
 
-    override fun hasAllParameters(predicate: (KoParameterDeclaration) -> Boolean): Boolean = parameters?.all(predicate) ?: false
+    override fun hasAllParameters(predicate: (KoParameterDeclaration) -> Boolean): Boolean = parameters.all(predicate)
 }
