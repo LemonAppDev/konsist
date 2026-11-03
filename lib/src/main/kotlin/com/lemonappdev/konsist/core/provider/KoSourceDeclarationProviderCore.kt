@@ -33,13 +33,20 @@ internal interface KoSourceDeclarationProviderCore :
     val ktAnnotationEntry: KtAnnotationEntry?
         get() = null
 
+    /**
+     * Declaration used to resolve the source declaration. Nested types of this declaration and its containing
+     * declarations are visible during resolution.
+     */
+    val sourceDeclarationResolutionScope: KoBaseDeclaration
+        get() = getDeclarationWithfullyQualifiedName(containingDeclaration) ?: containingDeclaration
+
     override val sourceDeclaration: KoDeclarationCastProvider?
         get() {
             val type =
                 TypeUtil.getBasicType(
                     listOf(ktTypeReference, ktNameReferenceExpression, ktTypeProjection, ktAnnotationEntry),
                     isExtensionDeclaration(),
-                    getDeclarationWithfullyQualifiedName(containingDeclaration) ?: containingDeclaration,
+                    sourceDeclarationResolutionScope,
                     containingFile,
                 )
 

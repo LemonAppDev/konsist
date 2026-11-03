@@ -3,7 +3,11 @@ package com.lemonappdev.konsist.core.declaration
 import com.lemonappdev.konsist.api.declaration.KoAnnotationDeclaration
 import com.lemonappdev.konsist.api.declaration.KoArgumentDeclaration
 import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
+import com.lemonappdev.konsist.api.declaration.KoClassDeclaration
 import com.lemonappdev.konsist.api.declaration.KoImportAliasDeclaration
+import com.lemonappdev.konsist.api.declaration.KoInterfaceDeclaration
+import com.lemonappdev.konsist.api.declaration.KoObjectDeclaration
+import com.lemonappdev.konsist.api.provider.KoContainingDeclarationProvider
 import com.lemonappdev.konsist.api.provider.KoDeclarationCastProvider
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
 import com.lemonappdev.konsist.core.cache.KoPropertyCache
@@ -19,6 +23,7 @@ import com.lemonappdev.konsist.core.provider.KoRepresentsTypeProviderCore
 import com.lemonappdev.konsist.core.provider.KoSourceDeclarationProviderCore
 import com.lemonappdev.konsist.core.provider.KoSourceSetProviderCore
 import com.lemonappdev.konsist.core.provider.KoTextProviderCore
+import com.lemonappdev.konsist.core.util.TypeResolver
 import com.lemonappdev.konsist.core.util.TypeUtil
 import org.jetbrains.kotlin.com.intellij.psi.PsiElement
 import org.jetbrains.kotlin.psi.KtAnnotationEntry
@@ -59,6 +64,23 @@ internal class KoAnnotationDeclarationCore private constructor(
     override val stringUsedAsFullyQualifiedName: String
         get() = TypeUtil.getTypeName(ktAnnotationEntry.typeReference) ?: name
 
+    /*
+     * Nested types of the annotated declaration and its containing declarations are visible in the annotation, e.g.
+     * `@Inner` used on a member of `Outer` refers to `Outer.Inner`. Nested types of a class, interface or object
+     * are not visible in its own annotations, so resolution starts from its containing declaration.
+     */
+    override val sourceDeclarationResolutionScope: KoBaseDeclaration
+        get() =
+            when (annotatedDeclaration) {
+                is KoClassDeclaration, is KoInterfaceDeclaration, is KoObjectDeclaration -> {
+                    (annotatedDeclaration as? KoContainingDeclarationProvider)?.containingDeclaration ?: containingFile
+                }
+
+                else -> {
+                    annotatedDeclaration
+                }
+            }
+
     @Volatile
     private var cachedArguments: Any? = KoPropertyCache.NOT_COMPUTED
 
@@ -96,7 +118,9 @@ internal class KoAnnotationDeclarationCore private constructor(
     override val fullyQualifiedName: String?
         get() =
             KoPropertyCache.getOrCompute(cachedFullyQualifiedName, { cachedFullyQualifiedName = it }) {
-                super<KoFullyQualifiedNameProviderCore>.fullyQualifiedName
+                TypeResolver.resolveFullyQualifiedName(stringUsedAsFullyQualifiedName, containingFile, sourceDeclarationResolutionScope)
+                    // Fallback: return the name if the type cannot be resolved
+                    ?: stringUsedAsFullyQualifiedName
             }
 
     override fun toString(): String = name
