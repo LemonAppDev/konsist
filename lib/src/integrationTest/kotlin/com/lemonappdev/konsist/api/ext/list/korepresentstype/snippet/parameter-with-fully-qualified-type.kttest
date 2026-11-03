@@ -1,0 +1,1 @@
+fun fixtureFunction(fixtureParameter: java.io.File) {}

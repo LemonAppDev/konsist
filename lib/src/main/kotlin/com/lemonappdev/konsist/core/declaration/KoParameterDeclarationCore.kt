@@ -27,6 +27,7 @@ import com.lemonappdev.konsist.core.provider.modifier.KoModifierProviderCore
 import com.lemonappdev.konsist.core.provider.modifier.KoNoInlineModifierProviderCore
 import com.lemonappdev.konsist.core.provider.modifier.KoVarArgModifierProviderCore
 import com.lemonappdev.konsist.core.provider.packagee.KoPackageDeclarationProviderCore
+import com.lemonappdev.konsist.core.util.TypeUtil
 import org.jetbrains.kotlin.com.intellij.psi.PsiElement
 import org.jetbrains.kotlin.psi.KtAnnotationEntry
 import org.jetbrains.kotlin.psi.KtElement
@@ -89,7 +90,7 @@ internal class KoParameterDeclarationCore private constructor(
     override fun representsType(
         name: String?,
         ignoreCase: Boolean,
-    ): Boolean = name?.let { type.hasName(it, ignoreCase) } == true
+    ): Boolean = TypeUtil.representsType(type, name, ignoreCase)
 
     override val isVal: Boolean
         get() = ktParameter.valOrVarKeyword?.text == "val"

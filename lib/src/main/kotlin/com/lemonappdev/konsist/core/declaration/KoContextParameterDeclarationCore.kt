@@ -20,6 +20,7 @@ import com.lemonappdev.konsist.core.provider.KoResideInPackageProviderCore
 import com.lemonappdev.konsist.core.provider.KoSourceSetProviderCore
 import com.lemonappdev.konsist.core.provider.KoTextProviderCore
 import com.lemonappdev.konsist.core.provider.packagee.KoPackageDeclarationProviderCore
+import com.lemonappdev.konsist.core.util.TypeUtil
 import org.jetbrains.kotlin.com.intellij.psi.PsiElement
 import org.jetbrains.kotlin.psi.KtAnnotationEntry
 import org.jetbrains.kotlin.psi.KtElement
@@ -66,7 +67,7 @@ internal class KoContextParameterDeclarationCore private constructor(
     override fun representsType(
         name: String?,
         ignoreCase: Boolean,
-    ): Boolean = name?.let { type.hasName(it, ignoreCase) } == true
+    ): Boolean = TypeUtil.representsType(type, name, ignoreCase)
 
     override fun toString(): String = name
 
