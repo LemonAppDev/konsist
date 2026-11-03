@@ -77,216 +77,125 @@ interface KoTypeDeclaration :
      */
     override val packagee: KoPackageDeclaration?
 
-    @Deprecated("Will be removed in version 0.19.0", ReplaceWith("sourceDeclaration?.isClass"))
     override val isClass: Boolean
 
-    @Deprecated("Will be removed in version 0.19.0", ReplaceWith("sourceDeclaration?.isObject"))
     override val isObject: Boolean
 
-    @Deprecated("Will be removed in version 0.19.0", ReplaceWith("sourceDeclaration?.isInterface"))
     override val isInterface: Boolean
 
-    @Deprecated("Will be removed in version 0.19.0", ReplaceWith("sourceDeclaration?.isClassOrObject"))
     override val isClassOrObject: Boolean
 
-    @Deprecated("Will be removed in version 0.19.0", ReplaceWith("sourceDeclaration?.isClassOrInterface"))
     override val isClassOrInterface: Boolean
 
-    @Deprecated("Will be removed in version 0.19.0", ReplaceWith("sourceDeclaration?.isInterfaceOrObject"))
     override val isInterfaceOrObject: Boolean
 
-    @Deprecated("Will be removed in version 0.19.0", ReplaceWith("sourceDeclaration?.isClassOrInterfaceOrObject"))
     override val isClassOrInterfaceOrObject: Boolean
 
-    @Deprecated("Will be removed in version 0.19.0", ReplaceWith("sourceDeclaration?.isTypeAlias"))
     override val isTypeAlias: Boolean
 
-    @Deprecated("Will be removed in version 0.19.0", ReplaceWith("sourceDeclaration?.isImportAlias"))
     override val isImportAlias: Boolean
 
-    @Deprecated("Will be removed in version 0.19.0", ReplaceWith("sourceDeclaration?.isKotlinType"))
     override val isKotlinType: Boolean
 
-    @Deprecated("Will be removed in version 0.19.0", ReplaceWith("sourceDeclaration?.isKotlinBasicType"))
     override val isKotlinBasicType: Boolean
 
-    @Deprecated("Will be removed in version 0.19.0", ReplaceWith("sourceDeclaration?.isKotlinCollectionType"))
     override val isKotlinCollectionType: Boolean
 
-    @Deprecated("Will be removed in version 0.19.0", ReplaceWith("sourceDeclaration?.isTypeParameter"))
     override val isTypeParameter: Boolean
 
-    @Deprecated("Will be removed in version 0.19.0", ReplaceWith("sourceDeclaration?.isExternal"))
     override val isExternal: Boolean
 
-    @Deprecated("Will be removed in version 0.19.0", ReplaceWith("sourceDeclaration?.isFunction"))
     override val isFunction: Boolean
 
-    @Deprecated("Will be removed in version 0.19.0", ReplaceWith("sourceDeclaration?.isProperty"))
     override val isProperty: Boolean
 
-    @Deprecated("Will be removed in version 0.19.0", ReplaceWith("sourceDeclaration?.asClassDeclaration()"))
     override fun asClassDeclaration(): KoClassDeclaration?
 
-    @Deprecated("Will be removed in version 0.19.0", ReplaceWith("sourceDeclaration?.asObjectDeclaration()"))
     override fun asObjectDeclaration(): KoObjectDeclaration?
 
-    @Deprecated("Will be removed in version 0.19.0", ReplaceWith("sourceDeclaration?.asInterfaceDeclaration()"))
     override fun asInterfaceDeclaration(): KoInterfaceDeclaration?
 
-    @Deprecated("Will be removed in version 0.19.0", ReplaceWith("sourceDeclaration?.asClassOrObjectDeclaration()"))
     override fun asClassOrObjectDeclaration(): KoClassAndObjectDeclaration?
 
-    @Deprecated("Will be removed in version 0.19.0", ReplaceWith("sourceDeclaration?.asClassOrInterfaceDeclaration()"))
     override fun asClassOrInterfaceDeclaration(): KoClassAndInterfaceDeclaration?
 
-    @Deprecated("Will be removed in version 0.19.0", ReplaceWith("sourceDeclaration?.asInterfaceOrObjectDeclaration()"))
     override fun asInterfaceOrObjectDeclaration(): KoInterfaceAndObjectDeclaration?
 
-    @Deprecated(
-        "Will be removed in version 0.19.0",
-        ReplaceWith("sourceDeclaration?.asClassOrInterfaceOrObjectDeclaration()"),
-    )
     override fun asClassOrInterfaceOrObjectDeclaration(): KoClassAndInterfaceAndObjectDeclaration?
 
-    @Deprecated("Will be removed in version 0.19.0", ReplaceWith("sourceDeclaration?.asTypeAliasDeclaration()"))
     override fun asTypeAliasDeclaration(): KoTypeAliasDeclaration?
 
-    @Deprecated("Will be removed in version 0.19.0", ReplaceWith("sourceDeclaration?.asImportAliasDeclaration()"))
     override fun asImportAliasDeclaration(): KoImportAliasDeclaration?
 
-    @Deprecated("Will be removed in version 0.19.0", ReplaceWith("sourceDeclaration?.asKotlinTypeDeclaration()"))
     override fun asKotlinTypeDeclaration(): KoKotlinTypeDeclaration?
 
-    @Deprecated("Will be removed in version 0.19.0", ReplaceWith("sourceDeclaration?.asKotlinBasicTypeDeclaration()"))
     override fun asKotlinBasicTypeDeclaration(): KoKotlinTypeDeclaration?
 
-    @Deprecated(
-        "Will be removed in version 0.19.0",
-        ReplaceWith("sourceDeclaration?.asKotlinCollectionTypeDeclaration()"),
-    )
     override fun asKotlinCollectionTypeDeclaration(): KoKotlinTypeDeclaration?
 
-    @Deprecated("Will be removed in version 0.19.0", ReplaceWith("sourceDeclaration?.asTypeParameterDeclaration()"))
     override fun asTypeParameterDeclaration(): KoTypeParameterDeclaration?
 
-    @Deprecated("Will be removed in version 0.19.0", ReplaceWith("sourceDeclaration?.asExternalDeclaration()"))
     override fun asExternalDeclaration(): KoExternalDeclaration?
 
-    @Deprecated("Will be removed in version 0.19.0", ReplaceWith("sourceDeclaration?.asFunctionDeclaration()"))
     override fun asFunctionDeclaration(): KoFunctionDeclaration?
 
-    @Deprecated("Will be removed in version 0.19.0", ReplaceWith("sourceDeclaration?.asPropertyDeclaration()"))
     override fun asPropertyDeclaration(): KoPropertyDeclaration?
 
-    @Deprecated("Will be removed in version 0.19.0", ReplaceWith("sourceDeclaration?.hasClassDeclaration()"))
     override fun hasClassDeclaration(predicate: ((KoClassDeclaration) -> Boolean)?): Boolean
 
-    @Deprecated("Will be removed in version 0.19.0", ReplaceWith("sourceDeclaration?.hasClassDeclarationOf()"))
     override fun hasClassDeclarationOf(kClass: KClass<*>): Boolean
 
-    @Deprecated("Will be removed in version 0.19.0", ReplaceWith("sourceDeclaration?.hasObjectDeclaration()"))
     override fun hasObjectDeclaration(predicate: ((KoObjectDeclaration) -> Boolean)?): Boolean
 
-    @Deprecated("Will be removed in version 0.19.0", ReplaceWith("sourceDeclaration?.hasObjectDeclarationOf()"))
     override fun hasObjectDeclarationOf(kClass: KClass<*>): Boolean
 
-    @Deprecated("Will be removed in version 0.19.0", ReplaceWith("sourceDeclaration?.hasInterfaceDeclaration()"))
     override fun hasInterfaceDeclaration(predicate: ((KoInterfaceDeclaration) -> Boolean)?): Boolean
 
-    @Deprecated("Will be removed in version 0.19.0", ReplaceWith("sourceDeclaration?.hasInterfaceDeclarationOf()"))
     override fun hasInterfaceDeclarationOf(kClass: KClass<*>): Boolean
 
-    @Deprecated("Will be removed in version 0.19.0", ReplaceWith("sourceDeclaration?.hasClassOrObjectDeclaration()"))
     override fun hasClassOrObjectDeclaration(predicate: ((KoClassAndObjectDeclaration) -> Boolean)?): Boolean
 
-    @Deprecated("Will be removed in version 0.19.0", ReplaceWith("sourceDeclaration?.hasClassOrObjectDeclarationOf()"))
     override fun hasClassOrObjectDeclarationOf(kClass: KClass<*>): Boolean
 
-    @Deprecated("Will be removed in version 0.19.0", ReplaceWith("sourceDeclaration?.hasClassOrInterfaceDeclaration()"))
     override fun hasClassOrInterfaceDeclaration(predicate: ((KoClassAndInterfaceDeclaration) -> Boolean)?): Boolean
 
-    @Deprecated(
-        "Will be removed in version 0.19.0",
-        ReplaceWith("sourceDeclaration?.hasClassOrInterfaceDeclarationOf()"),
-    )
     override fun hasClassOrInterfaceDeclarationOf(kClass: KClass<*>): Boolean
 
-    @Deprecated(
-        "Will be removed in version 0.19.0",
-        ReplaceWith("sourceDeclaration?.hasInterfaceOrObjectDeclaration()"),
-    )
     override fun hasInterfaceOrObjectDeclaration(predicate: ((KoInterfaceAndObjectDeclaration) -> Boolean)?): Boolean
 
-    @Deprecated(
-        "Will be removed in version 0.19.0",
-        ReplaceWith("sourceDeclaration?.hasInterfaceOrObjectDeclarationOf()"),
-    )
     override fun hasInterfaceOrObjectDeclarationOf(kClass: KClass<*>): Boolean
 
-    @Deprecated(
-        "Will be removed in version 0.19.0",
-        ReplaceWith("sourceDeclaration?.hasClassOrInterfaceOrObjectDeclaration()"),
-    )
     override fun hasClassOrInterfaceOrObjectDeclaration(predicate: ((KoClassAndInterfaceAndObjectDeclaration) -> Boolean)?): Boolean
 
-    @Deprecated(
-        "Will be removed in version 0.19.0",
-        ReplaceWith("sourceDeclaration?.hasClassOrInterfaceOrObjectDeclarationOf()"),
-    )
     override fun hasClassOrInterfaceOrObjectDeclarationOf(kClass: KClass<*>): Boolean
 
-    @Deprecated("Will be removed in version 0.19.0", ReplaceWith("sourceDeclaration?.hasTypeAliasDeclaration()"))
     override fun hasTypeAliasDeclaration(predicate: ((KoTypeAliasDeclaration) -> Boolean)?): Boolean
 
-    @Deprecated("Will be removed in version 0.19.0", ReplaceWith("sourceDeclaration?.hasImportAliasDeclaration()"))
     override fun hasImportAliasDeclaration(predicate: ((KoImportAliasDeclaration) -> Boolean)?): Boolean
 
-    @Deprecated("Will be removed in version 0.19.0", ReplaceWith("sourceDeclaration?.hasKotlinTypeDeclaration()"))
     override fun hasKotlinTypeDeclaration(predicate: ((KoKotlinTypeDeclaration) -> Boolean)?): Boolean
 
-    @Deprecated("Will be removed in version 0.19.0", ReplaceWith("sourceDeclaration?.hasKotlinTypeDeclarationOf()"))
     override fun hasKotlinTypeDeclarationOf(kClass: KClass<*>): Boolean
 
-    @Deprecated("Will be removed in version 0.19.0", ReplaceWith("sourceDeclaration?.hasKotlinBasicTypeDeclaration()"))
     override fun hasKotlinBasicTypeDeclaration(predicate: ((KoKotlinTypeDeclaration) -> Boolean)?): Boolean
 
-    @Deprecated(
-        "Will be removed in version 0.19.0",
-        ReplaceWith("sourceDeclaration?.hasKotlinBasicTypeDeclarationOf()"),
-    )
     override fun hasKotlinBasicTypeDeclarationOf(kClass: KClass<*>): Boolean
 
-    @Deprecated(
-        "Will be removed in version 0.19.0",
-        ReplaceWith("sourceDeclaration?.hasKotlinCollectionTypeDeclaration()"),
-    )
     override fun hasKotlinCollectionTypeDeclaration(predicate: ((KoKotlinTypeDeclaration) -> Boolean)?): Boolean
 
-    @Deprecated(
-        "Will be removed in version 0.19.0",
-        ReplaceWith("sourceDeclaration?.hasKotlinCollectionTypeDeclarationOf()"),
-    )
     override fun hasKotlinCollectionTypeDeclarationOf(kClass: KClass<*>): Boolean
 
-    @Deprecated("Will be removed in version 0.19.0", ReplaceWith("sourceDeclaration?.hasTypeParameterDeclaration()"))
     override fun hasTypeParameterDeclaration(predicate: ((KoTypeParameterDeclaration) -> Boolean)?): Boolean
 
-    @Deprecated("Will be removed in version 0.19.0", ReplaceWith("sourceDeclaration?.hasExternalDeclaration()"))
     override fun hasExternalDeclaration(predicate: ((KoExternalDeclaration) -> Boolean)?): Boolean
 
-    @Deprecated("Will be removed in version 0.19.0", ReplaceWith("sourceDeclaration?.hasExternalDeclarationOf()"))
     override fun hasExternalDeclarationOf(kClass: KClass<*>): Boolean
 
-    @Deprecated("Will be removed in version 0.19.0", ReplaceWith("sourceDeclaration?.hasFunctionDeclaration()"))
     override fun hasFunctionDeclaration(predicate: ((KoFunctionDeclaration) -> Boolean)?): Boolean
 
-    @Deprecated("Will be removed in version 0.19.0", ReplaceWith("sourceDeclaration?.hasFunctionDeclarationOf()"))
     override fun hasFunctionDeclarationOf(kClass: KClass<*>): Boolean
 
-    @Deprecated("Will be removed in version 0.19.0", ReplaceWith("sourceDeclaration?.hasPropertyDeclaration()"))
     override fun hasPropertyDeclaration(predicate: ((KoPropertyDeclaration) -> Boolean)?): Boolean
 
-    @Deprecated("Will be removed in version 0.19.0", ReplaceWith("sourceDeclaration?.hasPropertyDeclarationOf()"))
     override fun hasPropertyDeclarationOf(kClass: KClass<*>): Boolean
 }
