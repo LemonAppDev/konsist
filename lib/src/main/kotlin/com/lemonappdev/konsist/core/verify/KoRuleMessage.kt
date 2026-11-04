@@ -15,8 +15,10 @@ internal fun getCustomMessage(
 
 private fun KoRule.toMessage(): String =
     listOfNotNull(
+        "ID: $id",
         "RULE: $title",
-        "WHY: $rationale",
+        description.toSection("DESCRIPTION: "),
+        "REASON: $reason",
         howToFix.toSection("HOW TO FIX: "),
         goodExample?.trimIndent().toSection("GOOD EXAMPLE:\n"),
         badExample?.trimIndent().toSection("BAD EXAMPLE:\n"),

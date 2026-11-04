@@ -11,8 +11,10 @@ package com.lemonappdev.konsist.api.verify
  *     .withNameEndingWith("ViewModel")
  *     .assertTrue(
  *         rule = KoRule(
+ *             id = "VM-001",
  *             title = "ViewModels must extend BaseViewModel.",
- *             rationale = "Lifecycle handling lives in BaseViewModel.",
+ *             reason = "Lifecycle handling lives in BaseViewModel.",
+ *             description = "Applies to every class with the ViewModel suffix.",
  *             howToFix = "Change the parent class to BaseViewModel.",
  *             goodExample = "class LoginViewModel : BaseViewModel()",
  *             badExample = "class LoginViewModel : ViewModel()",
@@ -20,21 +22,26 @@ package com.lemonappdev.konsist.api.verify
  *     ) { it.hasParentClassWithName("BaseViewModel") }
  * ```
  *
+ * @property id Unique rule identifier, e.g. `"VM-001"`. Lets a developer (or an AI agent) refer to the rule.
  * @property title One sentence that says what the rule checks, e.g. `"ViewModels must extend BaseViewModel."`.
- * @property rationale Why the rule exists.
+ * @property reason Why the rule exists.
+ * @property description Additional details about the rule, e.g. its scope or exceptions.
  * @property howToFix How to fix a violation.
  * @property goodExample A short code sample that follows the rule. Common indentation is removed, so a raw string can be used.
  * @property badExample A short code sample that violates the rule. Common indentation is removed, so a raw string can be used.
  */
 data class KoRule(
+    val id: String,
     val title: String,
-    val rationale: String,
+    val reason: String,
+    val description: String? = null,
     val howToFix: String? = null,
     val goodExample: String? = null,
     val badExample: String? = null,
 ) {
     init {
+        require(id.isNotBlank()) { "KoRule id must not be blank." }
         require(title.isNotBlank()) { "KoRule title must not be blank." }
-        require(rationale.isNotBlank()) { "KoRule rationale must not be blank." }
+        require(reason.isNotBlank()) { "KoRule reason must not be blank." }
     }
 }
