@@ -29,6 +29,23 @@ class KoKDocDeclarationForKoKDocExceptionTagProviderTest {
         }
     }
 
+    @Test
+    fun `kdoc-with-bare-exception-tag`() {
+        // given
+        val sut =
+            getSnippetFile("kdoc-with-bare-exception-tag")
+                .classes()
+                .first()
+                .kDoc
+
+        // then
+        assertSoftly(sut) {
+            it?.exceptionTags shouldBeEqualTo emptyList()
+            it?.numExceptionTags shouldBeEqualTo 0
+            it?.hasExceptionTags shouldBeEqualTo false
+        }
+    }
+
     @ParameterizedTest
     @MethodSource("provideValues")
     fun `exception-tag`(

@@ -5,6 +5,8 @@ import com.lemonappdev.konsist.api.provider.KoLocalFunctionProvider
 
 /**
  * List containing local function declarations.
+ *
+ * @see KoLocalFunctionProvider.localFunctions
  */
 val <T : KoLocalFunctionProvider> List<T>.localFunctions: List<KoFunctionDeclaration>
     get() = flatMap { it.localFunctions }
@@ -13,6 +15,7 @@ val <T : KoLocalFunctionProvider> List<T>.localFunctions: List<KoFunctionDeclara
  * List containing declarations with any local function.
  *
  * @return A list containing declarations with any local function.
+ * @see KoLocalFunctionProvider.hasLocalFunctions
  */
 fun <T : KoLocalFunctionProvider> List<T>.withLocalFunctions(): List<T> = filter { it.hasLocalFunctions() }
 
@@ -20,6 +23,7 @@ fun <T : KoLocalFunctionProvider> List<T>.withLocalFunctions(): List<T> = filter
  * List containing declarations with no local functions.
  *
  * @return A list containing declarations with no local functions.
+ * @see KoLocalFunctionProvider.hasLocalFunctions
  */
 fun <T : KoLocalFunctionProvider> List<T>.withoutLocalFunctions(): List<T> = filterNot { it.hasLocalFunctions() }
 
@@ -29,9 +33,10 @@ fun <T : KoLocalFunctionProvider> List<T>.withoutLocalFunctions(): List<T> = fil
  * @param name The name of the local function to include.
  * @param names The names of additional local functions to include.
  * @param ignoreCase Specifies whether the comparison should ignore case.
- *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations with at least one of the specified local function(s).
+ * @see KoLocalFunctionProvider.hasLocalFunctionWithName
  */
 fun <T : KoLocalFunctionProvider> List<T>.withLocalFunctionNamed(
     name: String,
@@ -42,11 +47,12 @@ fun <T : KoLocalFunctionProvider> List<T>.withLocalFunctionNamed(
 /**
  * List containing declarations that have at least one local function with the specified name(s).
  *
- * @param names The names of additional local functions to include.
+ * @param names The names of the local functions to include.
  * @param ignoreCase Specifies whether the comparison should ignore case.
- *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations with at least one of the specified local function(s).
+ * @see KoLocalFunctionProvider.hasLocalFunctionWithName
  */
 fun <T : KoLocalFunctionProvider> List<T>.withLocalFunctionNamed(
     names: Collection<String>,
@@ -60,14 +66,15 @@ fun <T : KoLocalFunctionProvider> List<T>.withLocalFunctionNamed(
     }
 
 /**
- * List containing declarations without any of specified local functions.
+ * List containing declarations without any of the specified local functions.
  *
  * @param name The name of the local function to exclude.
  * @param names The names of additional local functions to exclude.
  * @param ignoreCase Specifies whether the comparison should ignore case.
- *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
- * @return A list containing declarations without any of specified local functions.
+ * @return A list containing declarations without any of the specified local functions.
+ * @see KoLocalFunctionProvider.hasLocalFunctionWithName
  */
 fun <T : KoLocalFunctionProvider> List<T>.withoutLocalFunctionNamed(
     name: String,
@@ -76,13 +83,14 @@ fun <T : KoLocalFunctionProvider> List<T>.withoutLocalFunctionNamed(
 ): List<T> = withoutLocalFunctionNamed(listOf(name, *names), ignoreCase)
 
 /**
- * List containing declarations without any of specified local functions.
+ * List containing declarations without any of the specified local functions.
  *
- * @param names The names of additional local functions to exclude.
+ * @param names The names of the local functions to exclude.
  * @param ignoreCase Specifies whether the comparison should ignore case.
- *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
- * @return A list containing declarations without any of specified local functions.
+ * @return A list containing declarations without any of the specified local functions.
+ * @see KoLocalFunctionProvider.hasLocalFunctionWithName
  */
 fun <T : KoLocalFunctionProvider> List<T>.withoutLocalFunctionNamed(
     names: Collection<String>,
@@ -99,11 +107,12 @@ fun <T : KoLocalFunctionProvider> List<T>.withoutLocalFunctionNamed(
  * List containing declarations that have all specified local functions.
  *
  * @param name The name of the local function to include.
- * @param names The name(s) of the local function(s) to include.
+ * @param names The names of additional local functions to include.
  * @param ignoreCase Specifies whether the comparison should ignore case.
- *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations with all specified local function(s).
+ * @see KoLocalFunctionProvider.hasLocalFunctionsWithAllNames
  */
 fun <T : KoLocalFunctionProvider> List<T>.withAllLocalFunctionsNamed(
     name: String,
@@ -114,11 +123,12 @@ fun <T : KoLocalFunctionProvider> List<T>.withAllLocalFunctionsNamed(
 /**
  * List containing declarations that have all specified local functions.
  *
- * @param names The name(s) of the local function(s) to include.
+ * @param names The names of the local functions to include.
  * @param ignoreCase Specifies whether the comparison should ignore case.
- *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations with all specified local function(s).
+ * @see KoLocalFunctionProvider.hasLocalFunctionsWithAllNames
  */
 fun <T : KoLocalFunctionProvider> List<T>.withAllLocalFunctionsNamed(
     names: Collection<String>,
@@ -135,11 +145,12 @@ fun <T : KoLocalFunctionProvider> List<T>.withAllLocalFunctionsNamed(
  * List containing declarations without all specified local functions.
  *
  * @param name The name of the local function to exclude.
- * @param names The name(s) of the local function(s) to exclude.
+ * @param names The names of additional local functions to exclude.
  * @param ignoreCase Specifies whether the comparison should ignore case.
- *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations without all specified local function(s).
+ * @see KoLocalFunctionProvider.hasLocalFunctionsWithAllNames
  */
 fun <T : KoLocalFunctionProvider> List<T>.withoutAllLocalFunctionsNamed(
     name: String,
@@ -150,11 +161,12 @@ fun <T : KoLocalFunctionProvider> List<T>.withoutAllLocalFunctionsNamed(
 /**
  * List containing declarations without all specified local functions.
  *
- * @param names The name(s) of the local function(s) to exclude.
+ * @param names The names of the local functions to exclude.
  * @param ignoreCase Specifies whether the comparison should ignore case.
- *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations without all specified local function(s).
+ * @see KoLocalFunctionProvider.hasLocalFunctionsWithAllNames
  */
 fun <T : KoLocalFunctionProvider> List<T>.withoutAllLocalFunctionsNamed(
     names: Collection<String>,
@@ -172,15 +184,17 @@ fun <T : KoLocalFunctionProvider> List<T>.withoutAllLocalFunctionsNamed(
  *
  * @param predicate A function that defines the condition to be met by a local function declaration.
  * @return A list containing declarations with at least one local function satisfying the predicate.
+ * @see KoLocalFunctionProvider.hasLocalFunction
  */
 fun <T : KoLocalFunctionProvider> List<T>.withLocalFunction(predicate: (KoFunctionDeclaration) -> Boolean): List<T> =
     filter { it.hasLocalFunction(predicate) }
 
 /**
- * List containing declarations that not have local function satisfying the provided predicate.
+ * List containing declarations that do not have any local function satisfying the provided predicate.
  *
  * @param predicate A function that defines the condition to be met by a local function declaration.
- * @return A list containing declarations without local function satisfying the provided predicate.
+ * @return A list containing declarations without any local function satisfying the provided predicate.
+ * @see KoLocalFunctionProvider.hasLocalFunction
  */
 fun <T : KoLocalFunctionProvider> List<T>.withoutLocalFunction(predicate: (KoFunctionDeclaration) -> Boolean): List<T> =
     filterNot { it.hasLocalFunction(predicate) }
@@ -189,7 +203,8 @@ fun <T : KoLocalFunctionProvider> List<T>.withoutLocalFunction(predicate: (KoFun
  * List containing declarations that have all local functions satisfying the provided predicate.
  *
  * @param predicate A function that defines the condition to be met by all local function declarations.
- * @return A filtered list containing declarations with all local functions satisfying the predicate.
+ * @return A list containing declarations with all local functions satisfying the predicate.
+ * @see KoLocalFunctionProvider.hasAllLocalFunctions
  */
 fun <T : KoLocalFunctionProvider> List<T>.withAllLocalFunctions(predicate: (KoFunctionDeclaration) -> Boolean): List<T> =
     filter { it.hasAllLocalFunctions(predicate) }
@@ -199,6 +214,7 @@ fun <T : KoLocalFunctionProvider> List<T>.withAllLocalFunctions(predicate: (KoFu
  *
  * @param predicate A function that defines the condition to be met by all local function declarations.
  * @return A list containing declarations that have at least one local function not satisfying the provided predicate.
+ * @see KoLocalFunctionProvider.hasAllLocalFunctions
  */
 fun <T : KoLocalFunctionProvider> List<T>.withoutAllLocalFunctions(predicate: (KoFunctionDeclaration) -> Boolean): List<T> =
     filterNot { it.hasAllLocalFunctions(predicate) }
@@ -208,6 +224,7 @@ fun <T : KoLocalFunctionProvider> List<T>.withoutAllLocalFunctions(predicate: (K
  *
  * @param predicate A function that defines the condition to be met by the list of local function declarations.
  * @return A list containing declarations with local function declarations satisfying the predicate.
+ * @see KoLocalFunctionProvider.localFunctions
  */
 fun <T : KoLocalFunctionProvider> List<T>.withLocalFunctions(predicate: (List<KoFunctionDeclaration>) -> Boolean): List<T> =
     filter { predicate(it.localFunctions) }
@@ -217,6 +234,7 @@ fun <T : KoLocalFunctionProvider> List<T>.withLocalFunctions(predicate: (List<Ko
  *
  * @param predicate A function that defines the condition to be met by the list of local function declarations.
  * @return A list containing declarations without local function declarations satisfying the predicate.
+ * @see KoLocalFunctionProvider.localFunctions
  */
 fun <T : KoLocalFunctionProvider> List<T>.withoutLocalFunctions(predicate: (List<KoFunctionDeclaration>) -> Boolean): List<T> =
     filterNot { predicate(it.localFunctions) }

@@ -1,6 +1,7 @@
 package com.lemonappdev.konsist.core.declaration.type.kotype
 
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
+import com.lemonappdev.konsist.helper.ext.toOsSeparator
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.params.ParameterizedTest
@@ -24,7 +25,7 @@ class KoTypeDeclarationForKoPathProviderTest {
         // then
         assertSoftly(sut?.path) {
             it?.startsWith("//") shouldBeEqualTo false
-            it?.endsWith("type/kotype/snippet/forkopathprovider/$fileName.kt") shouldBeEqualTo true
+            it?.endsWith("type/kotype/snippet/forkopathprovider/$fileName.kt".toOsSeparator()) shouldBeEqualTo true
         }
     }
 
@@ -45,8 +46,10 @@ class KoTypeDeclarationForKoPathProviderTest {
         sut
             ?.projectPath
             .shouldBeEqualTo(
-                "/lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core/declaration/type/kotype/snippet/" +
-                    "forkopathprovider/$fileName.kt",
+                (
+                    "/lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core/declaration/type/kotype/snippet/" +
+                        "forkopathprovider/$fileName.kt"
+                ).toOsSeparator(),
             )
     }
 
@@ -65,10 +68,10 @@ class KoTypeDeclarationForKoPathProviderTest {
 
         // then
         assertSoftly(sut) {
-            it?.resideInPath("..snippet..", true) shouldBeEqualTo true
-            it?.resideInPath("..type/kotype/snippet..", true) shouldBeEqualTo true
-            it?.resideInPath("..type/kotype..$fileName.kt", true) shouldBeEqualTo true
-            it?.resideInPath("type/kotype/snippet/", true) shouldBeEqualTo false
+            it?.residesInPath("..snippet..", true) shouldBeEqualTo true
+            it?.residesInPath("..type/kotype/snippet..", true) shouldBeEqualTo true
+            it?.residesInPath("..type/kotype..$fileName.kt", true) shouldBeEqualTo true
+            it?.residesInPath("type/kotype/snippet/", true) shouldBeEqualTo false
         }
     }
 
@@ -87,10 +90,10 @@ class KoTypeDeclarationForKoPathProviderTest {
 
         // then
         assertSoftly(sut) {
-            it?.resideInPath("..snippet..", false) shouldBeEqualTo true
-            it?.resideInPath("..type/kotype/snippet..", false) shouldBeEqualTo true
-            it?.resideInPath("..type/kotype..$fileName.kt", false) shouldBeEqualTo true
-            it?.resideInPath("type/kotype/snippet/", false) shouldBeEqualTo false
+            it?.residesInPath("..snippet..", false) shouldBeEqualTo true
+            it?.residesInPath("..type/kotype/snippet..", false) shouldBeEqualTo true
+            it?.residesInPath("..type/kotype..$fileName.kt", false) shouldBeEqualTo true
+            it?.residesInPath("type/kotype/snippet/", false) shouldBeEqualTo false
         }
     }
 

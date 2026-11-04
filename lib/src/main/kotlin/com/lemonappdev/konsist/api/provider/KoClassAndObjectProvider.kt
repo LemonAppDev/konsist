@@ -31,7 +31,7 @@ interface KoClassAndObjectProvider : KoBaseProvider {
     ): Int
 
     /**
-     * Returns the number of classes and objects that satisfies the specified predicate present in the declaration.
+     * Returns the number of classes and objects that satisfy the specified predicate present in the declaration.
      *
      * @param includeNested Specifies whether to include nested classes and objects in the count (optional, default is `true`).
      * @param includeLocal Specifies whether to include local classes in the count (optional, default is `true`).
@@ -45,7 +45,7 @@ interface KoClassAndObjectProvider : KoBaseProvider {
     ): Int
 
     /**
-     * Determines whatever the declaration has classes and objects.
+     * Determines whether the declaration has classes and objects.
      *
      * @param includeNested Specifies whether to include nested classes and objects in the check (optional, default is `true`).
      * @param includeLocal Specifies whether to include local classes in the check (optional, default is `true`).
@@ -64,7 +64,7 @@ interface KoClassAndObjectProvider : KoBaseProvider {
      * @param includeNested Specifies whether to include nested classes and objects in the check (optional, default is `true`).
      * @param includeLocal Specifies whether to include local classes in the check (optional, default is `true`).
      * @param ignoreCase Specifies whether the comparison should ignore case.
-     *        If `true`, the prefix comparison will be case-insensitive.
+     *        If `true`, the comparison will be case-insensitive.
      *        If `false`, the comparison will consider case sensitivity.
      * @return `true` if there is a matching declaration, `false` otherwise.
      */
@@ -83,7 +83,7 @@ interface KoClassAndObjectProvider : KoBaseProvider {
      * @param includeNested Specifies whether to include nested classes and objects in the check (optional, default is `true`).
      * @param includeLocal Specifies whether to include local classes in the check (optional, default is `true`).
      * @param ignoreCase Specifies whether the comparison should ignore case.
-     *        If `true`, the prefix comparison will be case-insensitive.
+     *        If `true`, the comparison will be case-insensitive.
      *        If `false`, the comparison will consider case sensitivity.
      * @return `true` if there is a matching declaration, `false` otherwise.
      */
@@ -98,11 +98,11 @@ interface KoClassAndObjectProvider : KoBaseProvider {
      * Determines whether the declaration has classes and objects with all the specified names.
      *
      * @param name The name of the class or object to check.
-     * @param names The names of the classes and objects to check.
+     * @param names The names of additional classes and objects to check.
      * @param includeNested Specifies whether to include nested classes and objects in the check (optional, default is `true`).
      * @param includeLocal Specifies whether to include local classes in the check (optional, default is `true`).
      * @param ignoreCase Specifies whether the comparison should ignore case.
-     *        If `true`, the prefix comparison will be case-insensitive.
+     *        If `true`, the comparison will be case-insensitive.
      *        If `false`, the comparison will consider case sensitivity.
      * @return `true` if there are declarations with all the specified names, `false` otherwise.
      */
@@ -121,7 +121,7 @@ interface KoClassAndObjectProvider : KoBaseProvider {
      * @param includeNested Specifies whether to include nested classes and objects in the check (optional, default is `true`).
      * @param includeLocal Specifies whether to include local classes in the check (optional, default is `true`).
      * @param ignoreCase Specifies whether the comparison should ignore case.
-     *        If `true`, the prefix comparison will be case-insensitive.
+     *        If `true`, the comparison will be case-insensitive.
      *        If `false`, the comparison will consider case sensitivity.
      * @return `true` if there are declarations with all the specified names, `false` otherwise.
      */
@@ -149,13 +149,13 @@ interface KoClassAndObjectProvider : KoBaseProvider {
     /**
      * Determines whether the declaration has all classes and objects that satisfy the provided predicate.
      *
-     * Note that if the classes and objects contains no elements, the function returns `true` because there are no elements in it
+     * Note that if the classes and objects contain no elements, the function returns `true` because there are no elements in it
      * that do not match the predicate.
      *
      * @param includeNested Specifies whether to include nested classes and objects in the check (optional, default is `true`).
      * @param includeLocal Specifies whether to include local classes in the check (optional, default is `true`).
      * @param predicate A function that defines the condition to be met by class or object declarations.
-     * @return `true` if all class and object declarations satisfy the predicate, `false` otherwise.
+     * @return `true` if all class or object declarations satisfy the predicate, `false` otherwise.
      */
     fun hasAllClassesAndObjects(
         includeNested: Boolean = true,

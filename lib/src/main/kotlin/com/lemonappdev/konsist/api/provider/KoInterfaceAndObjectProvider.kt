@@ -9,8 +9,8 @@ interface KoInterfaceAndObjectProvider : KoBaseProvider {
     /**
      * The interfaces and objects present in the declaration.
      *
-     * @param includeNested specifies whether to include nested interfaces and objects.
-     * @return a list of [KoInterfaceAndObjectDeclaration] representing the interfaces and objects in the declaration.
+     * @param includeNested Specifies whether to include nested interfaces and objects.
+     * @return A list of [KoInterfaceAndObjectDeclaration] representing the interfaces and objects in the declaration.
      */
     fun interfacesAndObjects(includeNested: Boolean = true): List<KoInterfaceAndObjectDeclaration>
 
@@ -23,11 +23,11 @@ interface KoInterfaceAndObjectProvider : KoBaseProvider {
     fun numInterfacesAndObjects(includeNested: Boolean = true): Int
 
     /**
-     * Returns the number of interfaces and objects that satisfies the specified predicate present in the declaration.
+     * Returns the number of interfaces and objects that satisfy the specified predicate present in the declaration.
      *
      * @param includeNested Specifies whether to include nested interfaces and objects in the count (optional, default is `true`).
      * @param predicate The predicate function to determine if an interface or object satisfies a condition.
-     * @return The number of interfaces and objects in the declaration.
+     * @return The number of matching interfaces and objects in the declaration.
      */
     fun countInterfacesAndObjects(
         includeNested: Boolean = true,
@@ -35,7 +35,7 @@ interface KoInterfaceAndObjectProvider : KoBaseProvider {
     ): Int
 
     /**
-     * Determines whatever the declaration has interfaces and objects.
+     * Determines whether the declaration has interfaces or objects.
      *
      * @param includeNested Specifies whether to include nested interfaces and objects in the check (optional, default is `true`).
      * @return `true` if the declaration has any interface or object, `false` otherwise.
@@ -45,11 +45,11 @@ interface KoInterfaceAndObjectProvider : KoBaseProvider {
     /**
      * Determines whether the declaration has at least one interface or object whose name matches any of the specified names.
      *
-     * @param name the name of the interface or object to check.
-     * @param names the names of the interfaces and objects to check.
+     * @param name The name of the interface or object to check.
+     * @param names The names of additional interfaces and objects to check.
      * @param includeNested Specifies whether to include nested interfaces and objects in the check (optional, default is `true`).
      * @param ignoreCase Specifies whether the comparison should ignore case.
-     *        If `true`, the prefix comparison will be case-insensitive.
+     *        If `true`, the comparison will be case-insensitive.
      *        If `false`, the comparison will consider case sensitivity.
      * @return `true` if there is a matching declaration, `false` otherwise.
      */
@@ -63,10 +63,10 @@ interface KoInterfaceAndObjectProvider : KoBaseProvider {
     /**
      * Determines whether the declaration has at least one interface or object whose name matches any of the specified names.
      *
-     * @param names the names of the interfaces and objects to check.
+     * @param names The names of the interfaces and objects to check.
      * @param includeNested Specifies whether to include nested interfaces and objects in the check (optional, default is `true`).
      * @param ignoreCase Specifies whether the comparison should ignore case.
-     *        If `true`, the prefix comparison will be case-insensitive.
+     *        If `true`, the comparison will be case-insensitive.
      *        If `false`, the comparison will consider case sensitivity.
      * @return `true` if there is a matching declaration, `false` otherwise.
      */
@@ -80,10 +80,10 @@ interface KoInterfaceAndObjectProvider : KoBaseProvider {
      * Determines whether the declaration has interfaces and objects with all the specified names.
      *
      * @param name The name of the interface or object to check.
-     * @param names The names of the interfaces and objects to check.
+     * @param names The names of additional interfaces and objects to check.
      * @param includeNested Specifies whether to include nested interfaces and objects in the check (optional, default is `true`).
      * @param ignoreCase Specifies whether the comparison should ignore case.
-     *        If `true`, the prefix comparison will be case-insensitive.
+     *        If `true`, the comparison will be case-insensitive.
      *        If `false`, the comparison will consider case sensitivity.
      * @return `true` if there are declarations with all the specified names, `false` otherwise.
      */
@@ -100,7 +100,7 @@ interface KoInterfaceAndObjectProvider : KoBaseProvider {
      * @param names The names of the interfaces and objects to check.
      * @param includeNested Specifies whether to include nested interfaces and objects in the check (optional, default is `true`).
      * @param ignoreCase Specifies whether the comparison should ignore case.
-     *        If `true`, the prefix comparison will be case-insensitive.
+     *        If `true`, the comparison will be case-insensitive.
      *        If `false`, the comparison will consider case sensitivity.
      * @return `true` if there are declarations with all the specified names, `false` otherwise.
      */
@@ -125,7 +125,7 @@ interface KoInterfaceAndObjectProvider : KoBaseProvider {
     /**
      * Determines whether the declaration has all interfaces and objects that satisfy the provided predicate.
      *
-     * Note that if the interfaces and objects contains no elements, the function returns `true` because
+     * Note that if the interfaces and objects contain no elements, the function returns `true` because
      * there are no elements in it that do not match the predicate.
      *
      * @param includeNested Specifies whether to include nested interfaces and objects in the check (optional, default is `true`).

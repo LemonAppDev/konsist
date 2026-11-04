@@ -1,0 +1,4 @@
+@file:Suppress("assert-suppress-by-name-at-file-level-when-declarations-are-annotations")
+
+@Deprecated("message")
+class SampleClass

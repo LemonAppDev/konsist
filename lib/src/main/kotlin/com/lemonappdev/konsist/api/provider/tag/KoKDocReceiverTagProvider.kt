@@ -13,7 +13,7 @@ interface KoKDocReceiverTagProvider : KoBaseProvider {
     val receiverTag: KoKDocTagDeclaration?
 
     /**
-     * Determines whatever the declaration has receiver tag.
+     * Determines whether the declaration has a receiver tag.
      */
     val hasReceiverTag: Boolean
 }

@@ -1,0 +1,200 @@
+package com.lemonappdev.konsist
+
+import com.lemonappdev.konsist.api.KoModifier
+import com.lemonappdev.konsist.api.Konsist
+import com.lemonappdev.konsist.api.declaration.KoInterfaceDeclaration
+import com.lemonappdev.konsist.api.ext.list.functions
+import com.lemonappdev.konsist.api.ext.list.modifierprovider.withModifier
+import com.lemonappdev.konsist.api.ext.list.objects
+import com.lemonappdev.konsist.api.ext.list.withAnnotationOf
+import com.lemonappdev.konsist.api.ext.list.withNameEndingWith
+import com.lemonappdev.konsist.api.ext.list.withPackage
+import com.lemonappdev.konsist.api.verify.assertFalse
+import com.lemonappdev.konsist.api.verify.assertTrue
+import dummyclasses.org.springframework.security.access.prepost.PreAuthorize
+import org.springframework.http.ResponseEntity
+import org.springframework.stereotype.Repository
+import org.springframework.stereotype.Service
+import org.springframework.web.bind.annotation.DeleteMapping
+import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.PatchMapping
+import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.PutMapping
+import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.web.bind.annotation.RestController
+import jakarta.persistence.Entity
+import jakarta.persistence.Id
+import dummyclasses.jakarta.transaction.annotation.Transactional
+import org.junit.jupiter.api.Test
+
+class SpringTestSnippets {
+    fun `interfaces with 'Repository' annotation should have 'Repository' suffix`() {
+        Konsist
+            .scopeFromProject()
+            .interfaces()
+            .withAnnotationOf(Repository::class)
+            .assertTrue { it.hasNameEndingWith("Repository") }
+    }
+
+    fun `classes with 'RestController' annotation should have 'Controller' suffix`() {
+        Konsist
+            .scopeFromProject()
+            .classes()
+            .withAnnotationOf(RestController::class)
+            .assertTrue { it.hasNameEndingWith("Controller") }
+    }
+
+    fun `controllers never return collection types`() {
+        /*
+        Avoid returning collection types directly. Structuring the response as
+        an object that contains a collection field is preferred. This approach
+        allows for future expansion (e.g., adding more properties like "totalPages")
+        without disrupting the existing API contract, which would happen if a JSON
+        array were returned directly.
+         */
+        Konsist
+            .scopeFromPackage("story.controller..")
+            .classes()
+            .withAnnotationOf(RestController::class)
+            .functions()
+            .assertFalse { function ->
+                function.hasReturnType { it.sourceDeclaration?.isKotlinCollectionType == true }
+            }
+    }
+
+    fun `classes with 'RestController' annotation should reside in 'controller' package`() {
+        Konsist
+            .scopeFromProject()
+            .classes()
+            .withAnnotationOf(RestController::class)
+            .assertTrue { it.residesInPackage("..controller..") }
+    }
+
+    fun `classes with 'RestController' annotation should never return collection`() {
+        Konsist
+            .scopeFromPackage("story.controller..")
+            .classes()
+            .withAnnotationOf(RestController::class)
+            .functions()
+            .assertFalse { function ->
+                function.hasReturnType { it.hasNameStartingWith("List") }
+            }
+    }
+
+    fun `Service classes should be annotated with Service annotation`() {
+        Konsist
+            .scopeFromProject()
+            .classes()
+            .withNameEndingWith("Service")
+            .assertTrue { it.hasAnnotationOf(Service::class) }
+    }
+
+    fun `Entity classes should have an Id field`() {
+        Konsist
+            .scopeFromProject()
+            .classes()
+            .withAnnotationOf(Entity::class)
+            .assertTrue { clazz ->
+                clazz.properties().any { property ->
+                    property.hasAnnotationOf(Id::class)
+                }
+            }
+    }
+
+    fun `DTO classes should be data classes`() {
+        Konsist
+            .scopeFromProject()
+            .classes()
+            .withNameEndingWith("DTO")
+            .assertTrue { it.hasModifier(KoModifier.DATA) }
+    }
+
+    fun `RestControllers should not have state fields`() {
+        Konsist
+            .scopeFromProject()
+            .classes()
+            .withAnnotationOf(RestController::class)
+            .objects()
+            .withModifier(KoModifier.COMPANION)
+            .assertTrue {
+                it.properties().isEmpty()
+            }
+    }
+
+    fun `files with domain package do not have Spring references`() {
+        Konsist.scopeFromProduction()
+            .files
+            .withPackage("..domain..")
+            .assertFalse {
+                it
+                    .imports
+                    .any { import ->
+                        import.name.startsWith("org.springframework")
+                    }
+            }
+    }
+
+    fun `Transactional annotation should only be used on default or public methods that are not part of an interface`() {
+        Konsist.scopeFromProject()
+            .functions()
+            .withAnnotationOf(Transactional::class)
+            .assertTrue {
+                it.hasPublicOrDefaultModifier && it.containingDeclaration !is KoInterfaceDeclaration
+            }
+    }
+
+    fun `every API method in RestController with 'Admin' suffix should have PreAuthorize annotation with ROLE_ADMIN`() {
+        Konsist.scopeFromProject()
+            .classes()
+            .withAnnotationOf(RestController::class)
+            .withNameEndingWith("Admin")
+            .functions()
+            .assertTrue {
+                it.hasAnnotationOf(PreAuthorize::class) && it.text.contains("hasRole('ROLE_ADMIN')")
+            }
+    }
+
+    fun `every non-public Controller should have @PreAuthorize on class or on each endpoint method`() {
+        Konsist.scopeFromProject()
+            .classes()
+            .withAnnotationOf(RestController::class)
+            .filterNot { it.hasPublicOrDefaultModifier }
+            .assertTrue { controller ->
+                controller.hasAnnotationOf(PreAuthorize::class) ||
+                        controller.functions()
+                            .all { it.hasAnnotationOf(PreAuthorize::class) }
+            }
+    }
+
+    fun `classes in 'domain' package should be internal`() {
+        Konsist
+            .scopeFromProduction()
+            .classes()
+            .withPackage("..domain..")
+            .assertTrue { it.hasInternalModifier }
+    }
+
+    fun `classes with 'Service' or 'Repository' annotation should not be public`() {
+        Konsist
+            .scopeFromProduction()
+            .classes()
+            .withAnnotationOf(Service::class, Repository::class)
+            .assertFalse { it.hasPublicOrDefaultModifier }
+    }
+
+    fun `endpoints in classes with 'RestController' annotation should return 'ResponseEntity'`() {
+        Konsist
+            .scopeFromProduction()
+            .classes()
+            .withAnnotationOf(RestController::class)
+            .functions()
+            .withAnnotationOf(
+                GetMapping::class,
+                PostMapping::class,
+                PutMapping::class,
+                PatchMapping::class,
+                DeleteMapping::class,
+                RequestMapping::class,
+            ).assertTrue { it.hasReturnTypeOf(ResponseEntity::class) }
+    }
+}

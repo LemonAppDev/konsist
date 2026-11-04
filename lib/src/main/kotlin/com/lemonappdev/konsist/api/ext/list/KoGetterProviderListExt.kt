@@ -5,6 +5,8 @@ import com.lemonappdev.konsist.api.provider.KoGetterProvider
 
 /**
  * List containing getter declarations.
+ *
+ * @see KoGetterProvider.getter
  */
 val <T : KoGetterProvider> List<T>.getters: List<KoGetterDeclaration>
     get() = mapNotNull { it.getter }
@@ -12,13 +14,15 @@ val <T : KoGetterProvider> List<T>.getters: List<KoGetterDeclaration>
 /**
  * List containing declarations with getter.
  *
- * @return List containing declarations with getter.
+ * @return A list containing declarations with getter.
+ * @see KoGetterProvider.hasGetter
  */
 fun <T : KoGetterProvider> List<T>.withGetter(): List<T> = filter { it.hasGetter }
 
 /**
  * List containing declarations without getter.
  *
- * @return List containing declarations without getter.
+ * @return A list containing declarations without getter.
+ * @see KoGetterProvider.hasGetter
  */
 fun <T : KoGetterProvider> List<T>.withoutGetter(): List<T> = filterNot { it.hasGetter }

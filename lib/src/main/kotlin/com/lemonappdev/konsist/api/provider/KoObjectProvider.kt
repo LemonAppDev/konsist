@@ -9,8 +9,8 @@ interface KoObjectProvider : KoBaseProvider {
     /**
      * The objects present in the declaration.
      *
-     * @param includeNested specifies whether to include nested objects.
-     * @return a list of [KoObjectDeclaration] representing the objects in the declaration.
+     * @param includeNested Specifies whether to include nested objects.
+     * @return A list of [KoObjectDeclaration] representing the objects in the declaration.
      */
     fun objects(includeNested: Boolean = true): List<KoObjectDeclaration>
 
@@ -23,11 +23,11 @@ interface KoObjectProvider : KoBaseProvider {
     fun numObjects(includeNested: Boolean = true): Int
 
     /**
-     * Returns the number of objects that satisfies the specified predicate present in the declaration.
+     * Returns the number of objects that satisfy the specified predicate present in the declaration.
      *
      * @param includeNested Specifies whether to include nested objects in the count (optional, default is `true`).
      * @param predicate The predicate function to determine if an object satisfies a condition.
-     * @return The number of objects in the declaration.
+     * @return The number of matching objects in the declaration.
      */
     fun countObjects(
         includeNested: Boolean = true,
@@ -35,7 +35,7 @@ interface KoObjectProvider : KoBaseProvider {
     ): Int
 
     /**
-     * Determines whatever the declaration has objects.
+     * Determines whether the declaration has objects.
      *
      * @param includeNested Specifies whether to include nested objects in the check (optional, default is `true`).
      * @return `true` if the declaration has any object, `false` otherwise.
@@ -45,11 +45,11 @@ interface KoObjectProvider : KoBaseProvider {
     /**
      * Determines whether the declaration has at least one object whose name matches any of the specified names.
      *
-     * @param name the name of the object to check.
-     * @param names the names of the objects to check.
+     * @param name The name of the object to check.
+     * @param names The names of additional objects to check.
      * @param includeNested Specifies whether to include nested objects in the check (optional, default is `true`).
      * @param ignoreCase Specifies whether the comparison should ignore case.
-     *        If `true`, the prefix comparison will be case-insensitive.
+     *        If `true`, the comparison will be case-insensitive.
      *        If `false`, the comparison will consider case sensitivity.
      * @return `true` if there is a matching declaration, `false` otherwise.
      */
@@ -63,10 +63,10 @@ interface KoObjectProvider : KoBaseProvider {
     /**
      * Determines whether the declaration has at least one object whose name matches any of the specified names.
      *
-     * @param names the names of the objects to check.
+     * @param names The names of the objects to check.
      * @param includeNested Specifies whether to include nested objects in the check (optional, default is `true`).
      * @param ignoreCase Specifies whether the comparison should ignore case.
-     *        If `true`, the prefix comparison will be case-insensitive.
+     *        If `true`, the comparison will be case-insensitive.
      *        If `false`, the comparison will consider case sensitivity.
      * @return `true` if there is a matching declaration, `false` otherwise.
      */
@@ -80,10 +80,10 @@ interface KoObjectProvider : KoBaseProvider {
      * Determines whether the declaration has objects with all the specified names.
      *
      * @param name The name of the object to check.
-     * @param names The names of the objects to check.
+     * @param names The names of additional objects to check.
      * @param includeNested Specifies whether to include nested objects in the check (optional, default is `true`).
      * @param ignoreCase Specifies whether the comparison should ignore case.
-     *        If `true`, the prefix comparison will be case-insensitive.
+     *        If `true`, the comparison will be case-insensitive.
      *        If `false`, the comparison will consider case sensitivity.
      * @return `true` if there are declarations with all the specified names, `false` otherwise.
      */
@@ -100,7 +100,7 @@ interface KoObjectProvider : KoBaseProvider {
      * @param names The names of the objects to check.
      * @param includeNested Specifies whether to include nested objects in the check (optional, default is `true`).
      * @param ignoreCase Specifies whether the comparison should ignore case.
-     *        If `true`, the prefix comparison will be case-insensitive.
+     *        If `true`, the comparison will be case-insensitive.
      *        If `false`, the comparison will consider case sensitivity.
      * @return `true` if there are declarations with all the specified names, `false` otherwise.
      */
@@ -114,7 +114,7 @@ interface KoObjectProvider : KoBaseProvider {
      * Determines whether the declaration has at least one object that satisfies the provided predicate.
      *
      * @param includeNested Specifies whether to include nested objects in the check (optional, default is `true`).
-     * @param predicate An object that defines the condition to be met by a object declaration.
+     * @param predicate A function that defines the condition to be met by an object declaration.
      * @return `true` if there is a matching declaration, `false` otherwise.
      */
     fun hasObject(
@@ -125,11 +125,11 @@ interface KoObjectProvider : KoBaseProvider {
     /**
      * Determines whether the declaration has all objects that satisfy the provided predicate.
      *
-     * Note that if the objects contains no elements, the object returns `true` because there are no elements in it
+     * Note that if the objects contain no elements, the function returns `true` because there are no elements in it
      * that do not match the predicate.
      *
      * @param includeNested Specifies whether to include nested objects in the check (optional, default is `true`).
-     * @param predicate An object that defines the condition to be met by object declarations.
+     * @param predicate A function that defines the condition to be met by object declarations.
      * @return `true` if all object declarations satisfy the predicate, `false` otherwise.
      */
     fun hasAllObjects(

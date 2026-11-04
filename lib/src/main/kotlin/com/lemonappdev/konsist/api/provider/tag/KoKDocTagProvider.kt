@@ -19,18 +19,18 @@ interface KoKDocTagProvider : KoBaseProvider {
     val numTags: Int
 
     /**
-     * Determines whatever the declaration has tags.
+     * Determines whether the declaration has any tags.
      *
-     * @return `true` if the declaration has tag, `false` otherwise.
+     * @return `true` if the declaration has at least one tag, `false` otherwise.
      */
     fun hasTags(): Boolean
 
     /**
-     * Determines whether the declaration has at least one specified tag.
+     * Determines whether the declaration has at least one of the specified tags.
      *
      * @param tag the tag to check.
      * @param tags the tags to check.
-     * @return `true` if there is a matching declaration, `false` otherwise.
+     * @return `true` if the declaration has at least one of the specified tags, `false` otherwise.
      */
     fun hasTag(
         tag: KoKDocTag,
@@ -38,10 +38,10 @@ interface KoKDocTagProvider : KoBaseProvider {
     ): Boolean
 
     /**
-     * Determines whether the declaration has at least one specified tag.
+     * Determines whether the declaration has at least one of the specified tags.
      *
      * @param tags the tags to check.
-     * @return `true` if there is a matching declaration, `false` otherwise.
+     * @return `true` if the declaration has at least one of the specified tags, `false` otherwise.
      */
     fun hasTag(tags: Collection<KoKDocTag>): Boolean
 
@@ -50,7 +50,7 @@ interface KoKDocTagProvider : KoBaseProvider {
      *
      * @param tag the tag to check.
      * @param tags the tags to check.
-     * @return `true` if there are declarations with all the specified tags, `false` otherwise.
+     * @return `true` if the declaration has all the specified tags, `false` otherwise.
      */
     fun hasAllTags(
         tag: KoKDocTag,
@@ -61,7 +61,7 @@ interface KoKDocTagProvider : KoBaseProvider {
      * Determines whether the declaration has all specified tags.
      *
      * @param tags the tags to check.
-     * @return `true` if there are declarations with all the specified tags, `false` otherwise.
+     * @return `true` if the declaration has all the specified tags, `false` otherwise.
      */
     fun hasAllTags(tags: Collection<KoKDocTag>): Boolean
 }

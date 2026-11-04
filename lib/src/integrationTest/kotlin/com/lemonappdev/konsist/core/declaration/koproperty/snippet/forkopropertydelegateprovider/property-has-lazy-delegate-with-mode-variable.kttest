@@ -1,0 +1,3 @@
+val mode = LazyThreadSafetyMode.NONE
+
+val fixtureProperty by lazy(mode) { 0 }

@@ -1,3 +1,0 @@
-import com.lemonappdev.konsist.testdata.FixtureInterface
-
-val fixtureProperty1: FixtureInterface? = null

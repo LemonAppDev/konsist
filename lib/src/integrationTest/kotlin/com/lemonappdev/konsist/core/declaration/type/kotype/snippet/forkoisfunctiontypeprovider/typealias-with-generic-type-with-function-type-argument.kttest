@@ -1,0 +1,3 @@
+val fixtureProperty1: FixtureTypeAlias = listOf()
+
+typealias FixtureTypeAlias = List<(Int) -> Unit>

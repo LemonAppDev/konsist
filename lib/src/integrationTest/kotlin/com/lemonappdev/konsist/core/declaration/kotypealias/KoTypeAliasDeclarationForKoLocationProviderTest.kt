@@ -1,6 +1,7 @@
 package com.lemonappdev.konsist.core.declaration.kotypealias
 
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
+import com.lemonappdev.konsist.core.filesystem.PathProvider
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
@@ -35,7 +36,7 @@ class KoTypeAliasDeclarationForKoLocationProviderTest {
         // then
         val declaration = "Declaration:\ntypealias FixtureTypeAlias = () -> Int"
         assertSoftly(sut.locationWithText) {
-            startsWith("Location: /") shouldBeEqualTo true
+            startsWith("Location: ${PathProvider.rootProjectPath}") shouldBeEqualTo true
             contains(projectPath) shouldBeEqualTo true
             endsWith(declaration) shouldBeEqualTo true
         }

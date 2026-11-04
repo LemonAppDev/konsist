@@ -9,7 +9,7 @@ interface KoEnumModifierProvider :
     KoBaseProvider,
     KoModifierProvider {
     /**
-     * Determines whatever declaration has `enum` modifier.
+     * Determines whether the declaration has the `enum` modifier.
      */
     val hasEnumModifier: Boolean
 }

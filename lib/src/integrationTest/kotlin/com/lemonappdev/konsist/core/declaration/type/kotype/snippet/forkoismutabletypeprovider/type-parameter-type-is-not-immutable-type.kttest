@@ -1,0 +1,1 @@
+class FixtureClass1<T>(val fixtureProperty1: T)

@@ -1,6 +1,7 @@
 package com.lemonappdev.konsist.core.declaration.kotypeargument
 
 import com.lemonappdev.konsist.TestSnippetProvider
+import com.lemonappdev.konsist.helper.ext.toOsSeparator
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
@@ -20,7 +21,8 @@ class KoTypeArgumentDeclarationForKoPathProviderTest {
         // then
         assertSoftly(sut?.path) {
             it?.startsWith("//") shouldBeEqualTo false
-            it?.endsWith("kotypeargument/snippet/forkopathprovider/not-generic-type-argument-file-path.kt") shouldBeEqualTo true
+            it?.endsWith("kotypeargument/snippet/forkopathprovider/not-generic-type-argument-file-path.kt".toOsSeparator()) shouldBeEqualTo
+                true
         }
     }
 
@@ -39,8 +41,10 @@ class KoTypeArgumentDeclarationForKoPathProviderTest {
         sut
             ?.projectPath
             .shouldBeEqualTo(
-                "/lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core/declaration/kotypeargument/snippet/" +
-                    "forkopathprovider/not-generic-type-argument-project-file-path.kt",
+                (
+                    "/lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core/declaration/kotypeargument/snippet/" +
+                        "forkopathprovider/not-generic-type-argument-project-file-path.kt"
+                ).toOsSeparator(),
             )
     }
 
@@ -57,10 +61,10 @@ class KoTypeArgumentDeclarationForKoPathProviderTest {
 
         // then
         assertSoftly(sut) {
-            it?.resideInPath("..snippet..", true) shouldBeEqualTo true
-            it?.resideInPath("..kotypeargument/snippet..", true) shouldBeEqualTo true
-            it?.resideInPath("..kotypeargument..not-generic-type-argument-reside-in-file-path.kt", true) shouldBeEqualTo true
-            it?.resideInPath("kotypeargument/snippet/", true) shouldBeEqualTo false
+            it?.residesInPath("..snippet..", true) shouldBeEqualTo true
+            it?.residesInPath("..kotypeargument/snippet..", true) shouldBeEqualTo true
+            it?.residesInPath("..kotypeargument..not-generic-type-argument-reside-in-file-path.kt", true) shouldBeEqualTo true
+            it?.residesInPath("kotypeargument/snippet/", true) shouldBeEqualTo false
         }
     }
 
@@ -77,10 +81,10 @@ class KoTypeArgumentDeclarationForKoPathProviderTest {
 
         // then
         assertSoftly(sut) {
-            it?.resideInPath("..snippet..", true) shouldBeEqualTo true
-            it?.resideInPath("..kotypeargument/snippet..", true) shouldBeEqualTo true
-            it?.resideInPath("..kotypeargument..not-generic-type-argument-reside-in-project-file-path.kt", true) shouldBeEqualTo true
-            it?.resideInPath("kotypeargument/snippet/", true) shouldBeEqualTo false
+            it?.residesInPath("..snippet..", true) shouldBeEqualTo true
+            it?.residesInPath("..kotypeargument/snippet..", true) shouldBeEqualTo true
+            it?.residesInPath("..kotypeargument..not-generic-type-argument-reside-in-project-file-path.kt", true) shouldBeEqualTo true
+            it?.residesInPath("kotypeargument/snippet/", true) shouldBeEqualTo false
         }
     }
 
@@ -98,7 +102,7 @@ class KoTypeArgumentDeclarationForKoPathProviderTest {
         // then
         assertSoftly(sut?.path) {
             it?.startsWith("//") shouldBeEqualTo false
-            it?.endsWith("kotypeargument/snippet/forkopathprovider/generic-type-argument-file-path.kt") shouldBeEqualTo true
+            it?.endsWith("kotypeargument/snippet/forkopathprovider/generic-type-argument-file-path.kt".toOsSeparator()) shouldBeEqualTo true
         }
     }
 
@@ -117,8 +121,10 @@ class KoTypeArgumentDeclarationForKoPathProviderTest {
         sut
             ?.projectPath
             .shouldBeEqualTo(
-                "/lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core/declaration/kotypeargument/snippet/" +
-                    "forkopathprovider/generic-type-argument-project-file-path.kt",
+                (
+                    "/lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core/declaration/kotypeargument/snippet/" +
+                        "forkopathprovider/generic-type-argument-project-file-path.kt"
+                ).toOsSeparator(),
             )
     }
 
@@ -135,10 +141,10 @@ class KoTypeArgumentDeclarationForKoPathProviderTest {
 
         // then
         assertSoftly(sut) {
-            it?.resideInPath("..snippet..", true) shouldBeEqualTo true
-            it?.resideInPath("..kotypeargument/snippet..", true) shouldBeEqualTo true
-            it?.resideInPath("..kotypeargument..generic-type-argument-reside-in-file-path.kt", true) shouldBeEqualTo true
-            it?.resideInPath("kotypeargument/snippet/", true) shouldBeEqualTo false
+            it?.residesInPath("..snippet..", true) shouldBeEqualTo true
+            it?.residesInPath("..kotypeargument/snippet..", true) shouldBeEqualTo true
+            it?.residesInPath("..kotypeargument..generic-type-argument-reside-in-file-path.kt", true) shouldBeEqualTo true
+            it?.residesInPath("kotypeargument/snippet/", true) shouldBeEqualTo false
         }
     }
 
@@ -155,10 +161,10 @@ class KoTypeArgumentDeclarationForKoPathProviderTest {
 
         // then
         assertSoftly(sut) {
-            it?.resideInPath("..snippet..", true) shouldBeEqualTo true
-            it?.resideInPath("..kotypeargument/snippet..", true) shouldBeEqualTo true
-            it?.resideInPath("..kotypeargument..generic-type-argument-reside-in-project-file-path.kt", true) shouldBeEqualTo true
-            it?.resideInPath("kotypeargument/snippet/", true) shouldBeEqualTo false
+            it?.residesInPath("..snippet..", true) shouldBeEqualTo true
+            it?.residesInPath("..kotypeargument/snippet..", true) shouldBeEqualTo true
+            it?.residesInPath("..kotypeargument..generic-type-argument-reside-in-project-file-path.kt", true) shouldBeEqualTo true
+            it?.residesInPath("kotypeargument/snippet/", true) shouldBeEqualTo false
         }
     }
 
@@ -176,7 +182,10 @@ class KoTypeArgumentDeclarationForKoPathProviderTest {
         // then
         assertSoftly(sut?.path) {
             it?.startsWith("//") shouldBeEqualTo false
-            it?.endsWith("kotypeargument/snippet/forkopathprovider/generic-complex-type-argument-file-path.kt") shouldBeEqualTo true
+            it?.endsWith(
+                "kotypeargument/snippet/forkopathprovider/generic-complex-type-argument-file-path.kt".toOsSeparator(),
+            ) shouldBeEqualTo
+                true
         }
     }
 
@@ -195,8 +204,10 @@ class KoTypeArgumentDeclarationForKoPathProviderTest {
         sut
             ?.projectPath
             .shouldBeEqualTo(
-                "/lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core/declaration/kotypeargument/snippet/" +
-                    "forkopathprovider/generic-complex-type-argument-project-file-path.kt",
+                (
+                    "/lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core/declaration/kotypeargument/snippet/" +
+                        "forkopathprovider/generic-complex-type-argument-project-file-path.kt"
+                ).toOsSeparator(),
             )
     }
 
@@ -213,10 +224,10 @@ class KoTypeArgumentDeclarationForKoPathProviderTest {
 
         // then
         assertSoftly(sut) {
-            it?.resideInPath("..snippet..", true) shouldBeEqualTo true
-            it?.resideInPath("..kotypeargument/snippet..", true) shouldBeEqualTo true
-            it?.resideInPath("..kotypeargument..generic-complex-type-argument-reside-in-file-path.kt", true) shouldBeEqualTo true
-            it?.resideInPath("kotypeargument/snippet/", true) shouldBeEqualTo false
+            it?.residesInPath("..snippet..", true) shouldBeEqualTo true
+            it?.residesInPath("..kotypeargument/snippet..", true) shouldBeEqualTo true
+            it?.residesInPath("..kotypeargument..generic-complex-type-argument-reside-in-file-path.kt", true) shouldBeEqualTo true
+            it?.residesInPath("kotypeargument/snippet/", true) shouldBeEqualTo false
         }
     }
 
@@ -233,10 +244,10 @@ class KoTypeArgumentDeclarationForKoPathProviderTest {
 
         // then
         assertSoftly(sut) {
-            it?.resideInPath("..snippet..", true) shouldBeEqualTo true
-            it?.resideInPath("..kotypeargument/snippet..", true) shouldBeEqualTo true
-            it?.resideInPath("..kotypeargument..generic-complex-type-argument-reside-in-project-file-path.kt", true) shouldBeEqualTo true
-            it?.resideInPath("kotypeargument/snippet/", true) shouldBeEqualTo false
+            it?.residesInPath("..snippet..", true) shouldBeEqualTo true
+            it?.residesInPath("..kotypeargument/snippet..", true) shouldBeEqualTo true
+            it?.residesInPath("..kotypeargument..generic-complex-type-argument-reside-in-project-file-path.kt", true) shouldBeEqualTo true
+            it?.residesInPath("kotypeargument/snippet/", true) shouldBeEqualTo false
         }
     }
 
@@ -254,7 +265,10 @@ class KoTypeArgumentDeclarationForKoPathProviderTest {
         // then
         assertSoftly(sut?.path) {
             it?.startsWith("//") shouldBeEqualTo false
-            it?.endsWith("kotypeargument/snippet/forkopathprovider/star-projection-type-argument-file-path.kt") shouldBeEqualTo true
+            it?.endsWith(
+                "kotypeargument/snippet/forkopathprovider/star-projection-type-argument-file-path.kt".toOsSeparator(),
+            ) shouldBeEqualTo
+                true
         }
     }
 
@@ -273,8 +287,10 @@ class KoTypeArgumentDeclarationForKoPathProviderTest {
         sut
             ?.projectPath
             .shouldBeEqualTo(
-                "/lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core/declaration/kotypeargument/snippet/" +
-                    "forkopathprovider/star-projection-type-argument-project-file-path.kt",
+                (
+                    "/lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core/declaration/kotypeargument/snippet/" +
+                        "forkopathprovider/star-projection-type-argument-project-file-path.kt"
+                ).toOsSeparator(),
             )
     }
 
@@ -291,10 +307,10 @@ class KoTypeArgumentDeclarationForKoPathProviderTest {
 
         // then
         assertSoftly(sut) {
-            it?.resideInPath("..snippet..", true) shouldBeEqualTo true
-            it?.resideInPath("..kotypeargument/snippet..", true) shouldBeEqualTo true
-            it?.resideInPath("..kotypeargument..star-projection-type-argument-reside-in-file-path.kt", true) shouldBeEqualTo true
-            it?.resideInPath("kotypeargument/snippet/", true) shouldBeEqualTo false
+            it?.residesInPath("..snippet..", true) shouldBeEqualTo true
+            it?.residesInPath("..kotypeargument/snippet..", true) shouldBeEqualTo true
+            it?.residesInPath("..kotypeargument..star-projection-type-argument-reside-in-file-path.kt", true) shouldBeEqualTo true
+            it?.residesInPath("kotypeargument/snippet/", true) shouldBeEqualTo false
         }
     }
 
@@ -311,10 +327,10 @@ class KoTypeArgumentDeclarationForKoPathProviderTest {
 
         // then
         assertSoftly(sut) {
-            it?.resideInPath("..snippet..", true) shouldBeEqualTo true
-            it?.resideInPath("..kotypeargument/snippet..", true) shouldBeEqualTo true
-            it?.resideInPath("..kotypeargument..star-projection-type-argument-reside-in-project-file-path.kt", true) shouldBeEqualTo true
-            it?.resideInPath("kotypeargument/snippet/", true) shouldBeEqualTo false
+            it?.residesInPath("..snippet..", true) shouldBeEqualTo true
+            it?.residesInPath("..kotypeargument/snippet..", true) shouldBeEqualTo true
+            it?.residesInPath("..kotypeargument..star-projection-type-argument-reside-in-project-file-path.kt", true) shouldBeEqualTo true
+            it?.residesInPath("kotypeargument/snippet/", true) shouldBeEqualTo false
         }
     }
 
@@ -332,7 +348,10 @@ class KoTypeArgumentDeclarationForKoPathProviderTest {
         // then
         assertSoftly(sut?.path) {
             it?.startsWith("//") shouldBeEqualTo false
-            it?.endsWith("kotypeargument/snippet/forkopathprovider/out-projection-type-argument-file-path.kt") shouldBeEqualTo true
+            it?.endsWith(
+                "kotypeargument/snippet/forkopathprovider/out-projection-type-argument-file-path.kt".toOsSeparator(),
+            ) shouldBeEqualTo
+                true
         }
     }
 
@@ -351,8 +370,10 @@ class KoTypeArgumentDeclarationForKoPathProviderTest {
         sut
             ?.projectPath
             .shouldBeEqualTo(
-                "/lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core/declaration/kotypeargument/snippet/" +
-                    "forkopathprovider/out-projection-type-argument-project-file-path.kt",
+                (
+                    "/lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core/declaration/kotypeargument/snippet/" +
+                        "forkopathprovider/out-projection-type-argument-project-file-path.kt"
+                ).toOsSeparator(),
             )
     }
 
@@ -369,10 +390,10 @@ class KoTypeArgumentDeclarationForKoPathProviderTest {
 
         // then
         assertSoftly(sut) {
-            it?.resideInPath("..snippet..", true) shouldBeEqualTo true
-            it?.resideInPath("..kotypeargument/snippet..", true) shouldBeEqualTo true
-            it?.resideInPath("..kotypeargument..out-projection-type-argument-reside-in-file-path.kt", true) shouldBeEqualTo true
-            it?.resideInPath("kotypeargument/snippet/", true) shouldBeEqualTo false
+            it?.residesInPath("..snippet..", true) shouldBeEqualTo true
+            it?.residesInPath("..kotypeargument/snippet..", true) shouldBeEqualTo true
+            it?.residesInPath("..kotypeargument..out-projection-type-argument-reside-in-file-path.kt", true) shouldBeEqualTo true
+            it?.residesInPath("kotypeargument/snippet/", true) shouldBeEqualTo false
         }
     }
 
@@ -389,10 +410,10 @@ class KoTypeArgumentDeclarationForKoPathProviderTest {
 
         // then
         assertSoftly(sut) {
-            it?.resideInPath("..snippet..", true) shouldBeEqualTo true
-            it?.resideInPath("..kotypeargument/snippet..", true) shouldBeEqualTo true
-            it?.resideInPath("..kotypeargument..out-projection-type-argument-reside-in-project-file-path.kt", true) shouldBeEqualTo true
-            it?.resideInPath("kotypeargument/snippet/", true) shouldBeEqualTo false
+            it?.residesInPath("..snippet..", true) shouldBeEqualTo true
+            it?.residesInPath("..kotypeargument/snippet..", true) shouldBeEqualTo true
+            it?.residesInPath("..kotypeargument..out-projection-type-argument-reside-in-project-file-path.kt", true) shouldBeEqualTo true
+            it?.residesInPath("kotypeargument/snippet/", true) shouldBeEqualTo false
         }
     }
 
@@ -410,7 +431,10 @@ class KoTypeArgumentDeclarationForKoPathProviderTest {
         // then
         assertSoftly(sut?.path) {
             it?.startsWith("//") shouldBeEqualTo false
-            it?.endsWith("kotypeargument/snippet/forkopathprovider/in-projection-type-argument-file-path.kt") shouldBeEqualTo true
+            it?.endsWith(
+                "kotypeargument/snippet/forkopathprovider/in-projection-type-argument-file-path.kt".toOsSeparator(),
+            ) shouldBeEqualTo
+                true
         }
     }
 
@@ -429,8 +453,10 @@ class KoTypeArgumentDeclarationForKoPathProviderTest {
         sut
             ?.projectPath
             .shouldBeEqualTo(
-                "/lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core/declaration/kotypeargument/snippet/" +
-                    "forkopathprovider/in-projection-type-argument-project-file-path.kt",
+                (
+                    "/lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core/declaration/kotypeargument/snippet/" +
+                        "forkopathprovider/in-projection-type-argument-project-file-path.kt"
+                ).toOsSeparator(),
             )
     }
 
@@ -447,10 +473,10 @@ class KoTypeArgumentDeclarationForKoPathProviderTest {
 
         // then
         assertSoftly(sut) {
-            it?.resideInPath("..snippet..", true) shouldBeEqualTo true
-            it?.resideInPath("..kotypeargument/snippet..", true) shouldBeEqualTo true
-            it?.resideInPath("..kotypeargument..in-projection-type-argument-reside-in-file-path.kt", true) shouldBeEqualTo true
-            it?.resideInPath("kotypeargument/snippet/", true) shouldBeEqualTo false
+            it?.residesInPath("..snippet..", true) shouldBeEqualTo true
+            it?.residesInPath("..kotypeargument/snippet..", true) shouldBeEqualTo true
+            it?.residesInPath("..kotypeargument..in-projection-type-argument-reside-in-file-path.kt", true) shouldBeEqualTo true
+            it?.residesInPath("kotypeargument/snippet/", true) shouldBeEqualTo false
         }
     }
 
@@ -467,10 +493,10 @@ class KoTypeArgumentDeclarationForKoPathProviderTest {
 
         // then
         assertSoftly(sut) {
-            it?.resideInPath("..snippet..", true) shouldBeEqualTo true
-            it?.resideInPath("..kotypeargument/snippet..", true) shouldBeEqualTo true
-            it?.resideInPath("..kotypeargument..in-projection-type-argument-reside-in-project-file-path.kt", true) shouldBeEqualTo true
-            it?.resideInPath("kotypeargument/snippet/", true) shouldBeEqualTo false
+            it?.residesInPath("..snippet..", true) shouldBeEqualTo true
+            it?.residesInPath("..kotypeargument/snippet..", true) shouldBeEqualTo true
+            it?.residesInPath("..kotypeargument..in-projection-type-argument-reside-in-project-file-path.kt", true) shouldBeEqualTo true
+            it?.residesInPath("kotypeargument/snippet/", true) shouldBeEqualTo false
         }
     }
 

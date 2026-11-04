@@ -15,7 +15,7 @@ internal interface KoSourceTypeProviderCore :
     val ktElement: KtElement
 
     private val file: KoFileDeclaration
-        get() = KoFileDeclarationCore(ktElement.containingKtFile)
+        get() = KoFileDeclarationCore.getInstance(ktElement.containingKtFile)
 
     override val sourceType: String
         get() =

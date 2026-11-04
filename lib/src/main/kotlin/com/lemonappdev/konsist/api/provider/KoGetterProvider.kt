@@ -3,7 +3,7 @@ package com.lemonappdev.konsist.api.provider
 import com.lemonappdev.konsist.api.declaration.KoGetterDeclaration
 
 /**
- * An interface representing a Kotlin declaration that provides access to getter declaration.
+ * An interface representing a Kotlin declaration that provides access to the getter declaration.
  */
 interface KoGetterProvider : KoBaseProvider {
     /**
@@ -12,7 +12,7 @@ interface KoGetterProvider : KoBaseProvider {
     val getter: KoGetterDeclaration?
 
     /**
-     * Determines whatever declaration has getter.
+     * Determines whether the declaration has a getter.
      */
     val hasGetter: Boolean
 }

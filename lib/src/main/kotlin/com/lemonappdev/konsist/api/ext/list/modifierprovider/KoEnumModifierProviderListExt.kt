@@ -6,6 +6,7 @@ import com.lemonappdev.konsist.api.provider.modifier.KoEnumModifierProvider
  * List containing declarations that have `enum` modifier.
  *
  * @return A list containing declarations with the `enum` modifier.
+ * @see KoEnumModifierProvider.hasEnumModifier
  */
 fun <T : KoEnumModifierProvider> List<T>.withEnumModifier(): List<T> = filter { it.hasEnumModifier }
 
@@ -13,5 +14,6 @@ fun <T : KoEnumModifierProvider> List<T>.withEnumModifier(): List<T> = filter { 
  * List containing declarations that don't have `enum` modifier.
  *
  * @return A list containing declarations without the `enum` modifier.
+ * @see KoEnumModifierProvider.hasEnumModifier
  */
 fun <T : KoEnumModifierProvider> List<T>.withoutEnumModifier(): List<T> = filterNot { it.hasEnumModifier }

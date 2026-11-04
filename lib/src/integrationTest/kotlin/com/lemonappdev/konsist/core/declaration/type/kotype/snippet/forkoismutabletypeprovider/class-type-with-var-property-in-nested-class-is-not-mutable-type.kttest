@@ -1,0 +1,7 @@
+class FixtureClass1(val fixtureProperty1: FixtureClass2?)
+
+class FixtureClass2 {
+    class FixtureClass3 {
+        var fixtureProperty2: Int = 0
+    }
+}

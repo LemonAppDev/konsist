@@ -47,6 +47,8 @@ class KoTypeDeclarationForKoIsNullableProviderTest {
                 arguments("object-type-is-not-nullable", false),
                 arguments("function-type-type-is-nullable", true),
                 arguments("function-type-type-is-not-nullable", false),
+                arguments("function-type-with-nullable-return-type-is-not-nullable", false),
+                arguments("generic-type-with-nullable-type-argument-is-not-nullable", false),
                 arguments("import-alias-type-is-nullable", true),
                 arguments("import-alias-type-is-not-nullable", false),
                 arguments("typealias-type-is-nullable", true),

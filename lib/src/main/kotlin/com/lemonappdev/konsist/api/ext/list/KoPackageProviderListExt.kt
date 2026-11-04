@@ -5,6 +5,8 @@ import com.lemonappdev.konsist.api.provider.KoPackageProvider
 
 /**
  * List containing package declarations.
+ *
+ * @see KoPackageProvider.packagee
  */
 val <T : KoPackageProvider> List<T>.packages: List<KoPackageDeclaration>
     get() = mapNotNull { it.packagee }

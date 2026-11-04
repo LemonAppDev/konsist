@@ -17,15 +17,15 @@ interface KoLocalFunctionProvider : KoBaseProvider {
     val numLocalFunctions: Int
 
     /**
-     * Returns the number of local functions that satisfies the specified predicate present in the declaration.
+     * Returns the number of local functions that satisfy the specified predicate present in the declaration.
      *
      * @param predicate The predicate function to determine if a local function satisfies a condition.
-     * @return The number of local functions in the declaration.
+     * @return The number of matching local functions in the declaration.
      */
     fun countLocalFunctions(predicate: (KoFunctionDeclaration) -> Boolean): Int
 
     /**
-     * Determines whatever the declaration has local functions.
+     * Determines whether the declaration has local functions.
      *
      * @return `true` if the declaration has any local function, `false` otherwise.
      */
@@ -34,10 +34,10 @@ interface KoLocalFunctionProvider : KoBaseProvider {
     /**
      * Determines whether the declaration has at least one local function whose name matches any of the specified names.
      *
-     * @param name the name of the local function to check.
-     * @param names the names of the local functions to check.
+     * @param name The name of the local function to check.
+     * @param names The names of additional local functions to check.
      * @param ignoreCase Specifies whether the comparison should ignore case.
-     *        If `true`, the prefix comparison will be case-insensitive.
+     *        If `true`, the comparison will be case-insensitive.
      *        If `false`, the comparison will consider case sensitivity.
      * @return `true` if there is a matching declaration, `false` otherwise.
      */
@@ -50,9 +50,9 @@ interface KoLocalFunctionProvider : KoBaseProvider {
     /**
      * Determines whether the declaration has at least one local function whose name matches any of the specified names.
      *
-     * @param names the names of the local functions to check.
+     * @param names The names of the local functions to check.
      * @param ignoreCase Specifies whether the comparison should ignore case.
-     *        If `true`, the prefix comparison will be case-insensitive.
+     *        If `true`, the comparison will be case-insensitive.
      *        If `false`, the comparison will consider case sensitivity.
      * @return `true` if there is a matching declaration, `false` otherwise.
      */
@@ -65,9 +65,9 @@ interface KoLocalFunctionProvider : KoBaseProvider {
      * Determines whether the declaration has local functions with all the specified names.
      *
      * @param name The name of the local function to check.
-     * @param names The names of the local functions to check.
+     * @param names The names of additional local functions to check.
      * @param ignoreCase Specifies whether the comparison should ignore case.
-     *        If `true`, the prefix comparison will be case-insensitive.
+     *        If `true`, the comparison will be case-insensitive.
      *        If `false`, the comparison will consider case sensitivity.
      * @return `true` if there are declarations with all the specified names, `false` otherwise.
      */
@@ -82,7 +82,7 @@ interface KoLocalFunctionProvider : KoBaseProvider {
      *
      * @param names The names of the local functions to check.
      * @param ignoreCase Specifies whether the comparison should ignore case.
-     *        If `true`, the prefix comparison will be case-insensitive.
+     *        If `true`, the comparison will be case-insensitive.
      *        If `false`, the comparison will consider case sensitivity.
      * @return `true` if there are declarations with all the specified names, `false` otherwise.
      */
@@ -102,7 +102,7 @@ interface KoLocalFunctionProvider : KoBaseProvider {
     /**
      * Determines whether the declaration has all local functions that satisfy the provided predicate.
      *
-     * Note that if the local functions contains no elements, the function returns `true` because there are no elements in it
+     * Note that if the local functions contain no elements, the function returns `true` because there are no elements in it
      * that do not match the predicate.
      *
      * @param predicate A function that defines the condition to be met by local function declarations.

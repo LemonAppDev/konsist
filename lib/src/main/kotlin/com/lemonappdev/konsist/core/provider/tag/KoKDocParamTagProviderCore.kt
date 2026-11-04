@@ -13,7 +13,7 @@ internal interface KoKDocParamTagProviderCore :
         get() =
             tags
                 .filter { it.name == KoKDocTag.PARAM }
-                .map { it as KoValuedKDocTagDeclaration }
+                .filterIsInstance<KoValuedKDocTagDeclaration>()
 
     override val numParamTags: Int
         get() = paramTags.size

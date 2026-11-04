@@ -5,6 +5,8 @@ import com.lemonappdev.konsist.api.provider.tag.KoKDocAuthorTagProvider
 
 /**
  * List containing author tags.
+ *
+ * @see KoKDocAuthorTagProvider.authorTags
  */
 val <T : KoKDocAuthorTagProvider> List<T>.authorTags: List<KoKDocTagDeclaration>
     get() = flatMap { it.authorTags }
@@ -13,6 +15,7 @@ val <T : KoKDocAuthorTagProvider> List<T>.authorTags: List<KoKDocTagDeclaration>
  * List containing declarations with author tag.
  *
  * @return A list containing declarations with author tag.
+ * @see KoKDocAuthorTagProvider.hasAuthorTags
  */
 fun <T : KoKDocAuthorTagProvider> List<T>.withAuthorTags(): List<T> = filter { it.hasAuthorTags }
 
@@ -20,5 +23,6 @@ fun <T : KoKDocAuthorTagProvider> List<T>.withAuthorTags(): List<T> = filter { i
  * List containing declarations with no author tag.
  *
  * @return A list containing declarations with no author tag.
+ * @see KoKDocAuthorTagProvider.hasAuthorTags
  */
 fun <T : KoKDocAuthorTagProvider> List<T>.withoutAuthorTags(): List<T> = filterNot { it.hasAuthorTags }

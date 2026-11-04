@@ -77,6 +77,18 @@ class KoPropertyDeclarationForKoIsInitializedProviderTest {
         sut.isInitialized shouldBeEqualTo false
     }
 
+    @Test
+    fun `property-with-explicit-backing-field-is-initialized`() {
+        // given
+        val sut =
+            getSnippetFile("property-with-explicit-backing-field-is-initialized")
+                .properties()
+                .first()
+
+        // then
+        sut.isInitialized shouldBeEqualTo true
+    }
+
     private fun getSnippetFile(fileName: String) =
         getSnippetKoScope("core/declaration/koproperty/snippet/forkoisinitializedprovider/", fileName)
 }

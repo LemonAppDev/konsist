@@ -11,6 +11,7 @@ import com.lemonappdev.konsist.api.provider.KoValueProvider
 
 internal interface KoTestClassProviderCore :
     KoTestClassProvider,
+    KoBaseTestClassProviderCore,
     KoNameProviderCore,
     KoBaseProviderCore {
     override fun testClasses(
@@ -26,39 +27,17 @@ internal interface KoTestClassProviderCore :
                     it.hasFunction { function -> function.isInstanceCreatedInMethodBody(testPropertyName, name) }
             }
 
-    override fun testClasses(
-        moduleName: String?,
-        sourceSetName: String?,
-        predicate: (KoClassDeclaration) -> Boolean,
-    ): List<KoClassDeclaration> =
-        Konsist
-            .scopeFromTest(moduleName, sourceSetName)
-            .classes()
-            .filter { predicate(it) }
-
     override fun numTestClasses(
         testPropertyName: String,
         moduleName: String?,
         sourceSetName: String?,
     ): Int = testClasses(testPropertyName, moduleName, sourceSetName).size
 
-    override fun countTestClasses(
-        moduleName: String?,
-        sourceSetName: String?,
-        predicate: (KoClassDeclaration) -> Boolean,
-    ): Int = testClasses(moduleName, sourceSetName, predicate).size
-
     override fun hasTestClasses(
         testPropertyName: String,
         moduleName: String?,
         sourceSetName: String?,
     ): Boolean = testClasses(testPropertyName, moduleName, sourceSetName).isNotEmpty()
-
-    override fun hasTestClass(
-        moduleName: String?,
-        sourceSetName: String?,
-        predicate: (KoClassDeclaration) -> Boolean,
-    ): Boolean = testClasses(moduleName, sourceSetName, predicate).isNotEmpty()
 }
 
 /*

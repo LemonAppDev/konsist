@@ -9,6 +9,7 @@ import com.lemonappdev.konsist.api.provider.KoFunctionProvider
  * @param includeNested Whether to include nested functions.
  * @param includeLocal Whether to include local functions.
  * @return A list containing function declarations.
+ * @see KoFunctionProvider.functions
  */
 fun <T : KoFunctionProvider> List<T>.functions(
     includeNested: Boolean = true,
@@ -21,6 +22,7 @@ fun <T : KoFunctionProvider> List<T>.functions(
  * @param includeNested Whether to include nested functions.
  * @param includeLocal Whether to include local functions.
  * @return A list containing declarations with any function.
+ * @see KoFunctionProvider.hasFunctions
  */
 fun <T : KoFunctionProvider> List<T>.withFunctions(
     includeNested: Boolean = true,
@@ -33,6 +35,7 @@ fun <T : KoFunctionProvider> List<T>.withFunctions(
  * @param includeNested Whether to include nested functions.
  * @param includeLocal Whether to include local functions.
  * @return A list containing declarations with no functions.
+ * @see KoFunctionProvider.hasFunctions
  */
 fun <T : KoFunctionProvider> List<T>.withoutFunctions(
     includeNested: Boolean = true,
@@ -47,9 +50,10 @@ fun <T : KoFunctionProvider> List<T>.withoutFunctions(
  * @param includeNested Whether to include nested functions.
  * @param includeLocal Whether to include local functions.
  * @param ignoreCase Specifies whether the comparison should ignore case.
- *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations with at least one of the specified function(s).
+ * @see KoFunctionProvider.hasFunctionWithName
  */
 fun <T : KoFunctionProvider> List<T>.withFunctionNamed(
     name: String,
@@ -62,13 +66,14 @@ fun <T : KoFunctionProvider> List<T>.withFunctionNamed(
 /**
  * List containing declarations that have at least one function with the specified name(s).
  *
- * @param names The names of additional functions to include.
+ * @param names The names of the functions to include.
  * @param includeNested Whether to include nested functions.
  * @param includeLocal Whether to include local functions.
  * @param ignoreCase Specifies whether the comparison should ignore case.
- *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations with at least one of the specified function(s).
+ * @see KoFunctionProvider.hasFunctionWithName
  */
 fun <T : KoFunctionProvider> List<T>.withFunctionNamed(
     names: Collection<String>,
@@ -94,16 +99,17 @@ fun <T : KoFunctionProvider> List<T>.withFunctionNamed(
     }
 
 /**
- * List containing declarations without any of specified functions.
+ * List containing declarations without any of the specified functions.
  *
  * @param name The name of the function to exclude.
  * @param names The names of additional functions to exclude.
  * @param includeNested Whether to include nested functions.
  * @param includeLocal Whether to include local functions.
  * @param ignoreCase Specifies whether the comparison should ignore case.
- *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
- * @return A list containing declarations without any of specified functions.
+ * @return A list containing declarations without any of the specified functions.
+ * @see KoFunctionProvider.hasFunctionWithName
  */
 fun <T : KoFunctionProvider> List<T>.withoutFunctionNamed(
     name: String,
@@ -114,15 +120,16 @@ fun <T : KoFunctionProvider> List<T>.withoutFunctionNamed(
 ): List<T> = withoutFunctionNamed(listOf(name, *names), includeNested, includeLocal, ignoreCase)
 
 /**
- * List containing declarations without any of specified functions.
+ * List containing declarations without any of the specified functions.
  *
- * @param names The names of additional functions to exclude.
+ * @param names The names of the functions to exclude.
  * @param includeNested Whether to include nested functions.
  * @param includeLocal Whether to include local functions.
  * @param ignoreCase Specifies whether the comparison should ignore case.
- *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
- * @return A list containing declarations without any of specified functions.
+ * @return A list containing declarations without any of the specified functions.
+ * @see KoFunctionProvider.hasFunctionWithName
  */
 fun <T : KoFunctionProvider> List<T>.withoutFunctionNamed(
     names: Collection<String>,
@@ -151,13 +158,14 @@ fun <T : KoFunctionProvider> List<T>.withoutFunctionNamed(
  * List containing declarations that have all specified functions.
  *
  * @param name The name of the function to include.
- * @param names The name(s) of the function(s) to include.
+ * @param names The names of additional functions to include.
  * @param includeNested Whether to include nested functions.
  * @param includeLocal Whether to include local functions.
  * @param ignoreCase Specifies whether the comparison should ignore case.
- *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations with all specified function(s).
+ * @see KoFunctionProvider.hasFunctionsWithAllNames
  */
 fun <T : KoFunctionProvider> List<T>.withAllFunctionsNamed(
     name: String,
@@ -170,13 +178,14 @@ fun <T : KoFunctionProvider> List<T>.withAllFunctionsNamed(
 /**
  * List containing declarations that have all specified functions.
  *
- * @param names The name(s) of the function(s) to include.
+ * @param names The names of the functions to include.
  * @param includeNested Whether to include nested functions.
  * @param includeLocal Whether to include local functions.
  * @param ignoreCase Specifies whether the comparison should ignore case.
- *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations with all specified function(s).
+ * @see KoFunctionProvider.hasFunctionsWithAllNames
  */
 fun <T : KoFunctionProvider> List<T>.withAllFunctionsNamed(
     names: Collection<String>,
@@ -205,13 +214,14 @@ fun <T : KoFunctionProvider> List<T>.withAllFunctionsNamed(
  * List containing declarations without all specified functions.
  *
  * @param name The name of the function to exclude.
- * @param names The name(s) of the function(s) to exclude.
+ * @param names The names of additional functions to exclude.
  * @param includeNested Whether to include nested functions.
  * @param includeLocal Whether to include local functions.
  * @param ignoreCase Specifies whether the comparison should ignore case.
- *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations without all specified function(s).
+ * @see KoFunctionProvider.hasFunctionsWithAllNames
  */
 fun <T : KoFunctionProvider> List<T>.withoutAllFunctionsNamed(
     name: String,
@@ -224,13 +234,14 @@ fun <T : KoFunctionProvider> List<T>.withoutAllFunctionsNamed(
 /**
  * List containing declarations without all specified functions.
  *
- * @param names The name(s) of the function(s) to exclude.
+ * @param names The names of the functions to exclude.
  * @param includeNested Whether to include nested functions.
  * @param includeLocal Whether to include local functions.
  * @param ignoreCase Specifies whether the comparison should ignore case.
- *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations without all specified function(s).
+ * @see KoFunctionProvider.hasFunctionsWithAllNames
  */
 fun <T : KoFunctionProvider> List<T>.withoutAllFunctionsNamed(
     names: Collection<String>,
@@ -262,6 +273,7 @@ fun <T : KoFunctionProvider> List<T>.withoutAllFunctionsNamed(
  * @param includeLocal Whether to include local functions.
  * @param predicate A function that defines the condition to be met by a function declaration.
  * @return A list containing declarations with at least one function satisfying the predicate.
+ * @see KoFunctionProvider.hasFunction
  */
 fun <T : KoFunctionProvider> List<T>.withFunction(
     includeNested: Boolean = true,
@@ -273,12 +285,13 @@ fun <T : KoFunctionProvider> List<T>.withFunction(
     }
 
 /**
- * List containing declarations that not have function satisfying the provided predicate.
+ * List containing declarations that do not have any function satisfying the provided predicate.
  *
  * @param includeNested Whether to include nested functions.
  * @param includeLocal Whether to include local functions.
  * @param predicate A function that defines the condition to be met by a function declaration.
- * @return A list containing declarations without function satisfying the provided predicate.
+ * @return A list containing declarations without any function satisfying the provided predicate.
+ * @see KoFunctionProvider.hasFunction
  */
 fun <T : KoFunctionProvider> List<T>.withoutFunction(
     includeNested: Boolean = true,
@@ -293,6 +306,7 @@ fun <T : KoFunctionProvider> List<T>.withoutFunction(
  * @param includeLocal Whether to include local functions.
  * @param predicate A function that defines the condition to be met by all function declarations.
  * @return A filtered list containing declarations with all functions satisfying the predicate.
+ * @see KoFunctionProvider.hasAllFunctions
  */
 fun <T : KoFunctionProvider> List<T>.withAllFunctions(
     includeNested: Boolean = true,
@@ -310,6 +324,7 @@ fun <T : KoFunctionProvider> List<T>.withAllFunctions(
  * @param includeLocal Whether to include local functions.
  * @param predicate A function that defines the condition to be met by all function declarations.
  * @return A list containing declarations that have at least one function not satisfying the provided predicate.
+ * @see KoFunctionProvider.hasAllFunctions
  */
 fun <T : KoFunctionProvider> List<T>.withoutAllFunctions(
     includeNested: Boolean = true,
@@ -324,6 +339,7 @@ fun <T : KoFunctionProvider> List<T>.withoutAllFunctions(
  * @param includeLocal Whether to include local functions.
  * @param predicate A function that defines the condition to be met by the list of function declarations.
  * @return A list containing declarations with function declarations satisfying the predicate.
+ * @see KoFunctionProvider.functions
  */
 fun <T : KoFunctionProvider> List<T>.withFunctions(
     includeNested: Boolean = true,
@@ -338,6 +354,7 @@ fun <T : KoFunctionProvider> List<T>.withFunctions(
  * @param includeLocal Whether to include local functions.
  * @param predicate A function that defines the condition to be met by the list of function declarations.
  * @return A list containing declarations without function declarations satisfying the predicate.
+ * @see KoFunctionProvider.functions
  */
 fun <T : KoFunctionProvider> List<T>.withoutFunctions(
     includeNested: Boolean = true,

@@ -8,7 +8,16 @@ import java.io.File
 class ProjectDirectoryFilterTest {
     private val projectRootDir = File("/project/build/target/.hidden/root")
 
-    private val sut = ProjectDirectoryFilter(projectRootDir)
+    // Module directories located in the "src" directory
+    private val moduleDirectories =
+        setOf(
+            "src/app",
+            "app/src/test/resources/project",
+            "app/src/test/testData/project",
+        )
+
+    private val sut =
+        ProjectDirectoryFilter(projectRootDir) { it.relativeTo(projectRootDir).invariantSeparatorsPath in moduleDirectories }
 
     @ParameterizedTest
     @ValueSource(
@@ -28,6 +37,11 @@ class ProjectDirectoryFilterTest {
             "web/node_modules/package/src",
             "app/src/main/kotlin/node_modules",
             "app/src/main/kotlin/.hidden",
+            "src/app/build",
+            "src/app/build/generated/ksp/main/kotlin",
+            "src/app/target",
+            "app/src/test/resources/project/build",
+            "app/src/test/testData/project/build/generated",
         ],
     )
     fun `should ignore directory`(relativePath: String) {
@@ -51,6 +65,10 @@ class ProjectDirectoryFilterTest {
             "buildSrc",
             "app/builder",
             "app/targets",
+            "src/app/src/main/kotlin/build",
+            "src/app/src/main/kotlin/com/sample/target",
+            "src/com/sample/build",
+            "app/src/test/resources/build",
         ],
     )
     fun `should not ignore directory`(relativePath: String) {

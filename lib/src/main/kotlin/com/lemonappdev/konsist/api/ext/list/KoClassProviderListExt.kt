@@ -9,6 +9,7 @@ import com.lemonappdev.konsist.api.provider.KoClassProvider
  * @param includeNested Whether to include nested classes.
  * @param includeLocal Whether to include local classes.
  * @return A list containing class declarations.
+ * @see KoClassProvider.classes
  */
 fun <T : KoClassProvider> List<T>.classes(
     includeNested: Boolean = true,
@@ -21,6 +22,7 @@ fun <T : KoClassProvider> List<T>.classes(
  * @param includeNested Whether to include nested classes.
  * @param includeLocal Whether to include local classes.
  * @return A list containing declarations with any class.
+ * @see KoClassProvider.hasClasses
  */
 fun <T : KoClassProvider> List<T>.withClasses(
     includeNested: Boolean = true,
@@ -33,6 +35,7 @@ fun <T : KoClassProvider> List<T>.withClasses(
  * @param includeNested Whether to include nested classes.
  * @param includeLocal Whether to include local classes.
  * @return A list containing declarations with no classes.
+ * @see KoClassProvider.hasClasses
  */
 fun <T : KoClassProvider> List<T>.withoutClasses(
     includeNested: Boolean = true,
@@ -47,9 +50,10 @@ fun <T : KoClassProvider> List<T>.withoutClasses(
  * @param includeNested Whether to include nested classes.
  * @param includeLocal Whether to include local classes.
  * @param ignoreCase Specifies whether the comparison should ignore case.
- *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
- * @return A list containing declarations with at least one of the specified class(s).
+ * @return A list containing declarations with at least one of the specified class(es).
+ * @see KoClassProvider.hasClassWithName
  */
 fun <T : KoClassProvider> List<T>.withClassNamed(
     name: String,
@@ -62,13 +66,14 @@ fun <T : KoClassProvider> List<T>.withClassNamed(
 /**
  * List containing declarations that have at least one class with the specified name(s).
  *
- * @param names The names of additional classes to include.
+ * @param names The names of the classes to include.
  * @param includeNested Whether to include nested classes.
  * @param includeLocal Whether to include local classes.
  * @param ignoreCase Specifies whether the comparison should ignore case.
- *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
- * @return A list containing declarations with at least one of the specified class(s).
+ * @return A list containing declarations with at least one of the specified class(es).
+ * @see KoClassProvider.hasClassWithName
  */
 fun <T : KoClassProvider> List<T>.withClassNamed(
     names: Collection<String>,
@@ -94,16 +99,17 @@ fun <T : KoClassProvider> List<T>.withClassNamed(
     }
 
 /**
- * List containing declarations without any of specified classes.
+ * List containing declarations without any of the specified classes.
  *
  * @param name The name of the class to exclude.
  * @param names The names of additional classes to exclude.
  * @param includeNested Whether to include nested classes.
  * @param includeLocal Whether to include local classes.
  * @param ignoreCase Specifies whether the comparison should ignore case.
- *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
- * @return A list containing declarations without any of specified classes.
+ * @return A list containing declarations without any of the specified classes.
+ * @see KoClassProvider.hasClassWithName
  */
 fun <T : KoClassProvider> List<T>.withoutClassNamed(
     name: String,
@@ -114,15 +120,16 @@ fun <T : KoClassProvider> List<T>.withoutClassNamed(
 ): List<T> = withoutClassNamed(listOf(name, *names), includeNested, includeLocal, ignoreCase)
 
 /**
- * List containing declarations without any of specified classes.
+ * List containing declarations without any of the specified classes.
  *
- * @param names The names of additional classes to exclude.
+ * @param names The names of the classes to exclude.
  * @param includeNested Whether to include nested classes.
  * @param includeLocal Whether to include local classes.
  * @param ignoreCase Specifies whether the comparison should ignore case.
- *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
- * @return A list containing declarations without any of specified classes.
+ * @return A list containing declarations without any of the specified classes.
+ * @see KoClassProvider.hasClassWithName
  */
 fun <T : KoClassProvider> List<T>.withoutClassNamed(
     names: Collection<String>,
@@ -151,13 +158,14 @@ fun <T : KoClassProvider> List<T>.withoutClassNamed(
  * List containing declarations that have all specified classes.
  *
  * @param name The name of the class to include.
- * @param names The name(s) of the class(s) to include.
+ * @param names The names of additional classes to include.
  * @param includeNested Whether to include nested classes.
  * @param includeLocal Whether to include local classes.
  * @param ignoreCase Specifies whether the comparison should ignore case.
- *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
- * @return A list containing declarations with all specified class(s).
+ * @return A list containing declarations with all specified class(es).
+ * @see KoClassProvider.hasClassesWithAllNames
  */
 fun <T : KoClassProvider> List<T>.withAllClassesNamed(
     name: String,
@@ -170,13 +178,14 @@ fun <T : KoClassProvider> List<T>.withAllClassesNamed(
 /**
  * List containing declarations that have all specified classes.
  *
- * @param names The name(s) of the class(s) to include.
+ * @param names The names of the classes to include.
  * @param includeNested Whether to include nested classes.
  * @param includeLocal Whether to include local classes.
  * @param ignoreCase Specifies whether the comparison should ignore case.
- *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
- * @return A list containing declarations with all specified class(s).
+ * @return A list containing declarations with all specified class(es).
+ * @see KoClassProvider.hasClassesWithAllNames
  */
 fun <T : KoClassProvider> List<T>.withAllClassesNamed(
     names: Collection<String>,
@@ -205,13 +214,14 @@ fun <T : KoClassProvider> List<T>.withAllClassesNamed(
  * List containing declarations without all specified classes.
  *
  * @param name The name of the class to exclude.
- * @param names The name(s) of the class(s) to exclude.
+ * @param names The names of additional classes to exclude.
  * @param includeNested Whether to include nested classes.
  * @param includeLocal Whether to include local classes.
  * @param ignoreCase Specifies whether the comparison should ignore case.
- *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
- * @return A list containing declarations without all specified class(s).
+ * @return A list containing declarations without all specified class(es).
+ * @see KoClassProvider.hasClassesWithAllNames
  */
 fun <T : KoClassProvider> List<T>.withoutAllClassesNamed(
     name: String,
@@ -224,13 +234,14 @@ fun <T : KoClassProvider> List<T>.withoutAllClassesNamed(
 /**
  * List containing declarations without all specified classes.
  *
- * @param names The name(s) of the class(s) to exclude.
+ * @param names The names of the classes to exclude.
  * @param includeNested Whether to include nested classes.
  * @param includeLocal Whether to include local classes.
  * @param ignoreCase Specifies whether the comparison should ignore case.
- *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
- * @return A list containing declarations without all specified class(s).
+ * @return A list containing declarations without all specified class(es).
+ * @see KoClassProvider.hasClassesWithAllNames
  */
 fun <T : KoClassProvider> List<T>.withoutAllClassesNamed(
     names: Collection<String>,
@@ -262,6 +273,7 @@ fun <T : KoClassProvider> List<T>.withoutAllClassesNamed(
  * @param includeLocal Whether to include local classes.
  * @param predicate A function that defines the condition to be met by a class declaration.
  * @return A list containing declarations with at least one class satisfying the predicate.
+ * @see KoClassProvider.hasClass
  */
 fun <T : KoClassProvider> List<T>.withClass(
     includeNested: Boolean = true,
@@ -273,12 +285,13 @@ fun <T : KoClassProvider> List<T>.withClass(
     }
 
 /**
- * List containing declarations that not have class satisfying the provided predicate.
+ * List containing declarations that do not have any class satisfying the provided predicate.
  *
  * @param includeNested Whether to include nested classes.
  * @param includeLocal Whether to include local classes.
  * @param predicate A function that defines the condition to be met by a class declaration.
- * @return A list containing declarations without class satisfying the provided predicate.
+ * @return A list containing declarations without any class satisfying the provided predicate.
+ * @see KoClassProvider.hasClass
  */
 fun <T : KoClassProvider> List<T>.withoutClass(
     includeNested: Boolean = true,
@@ -293,6 +306,7 @@ fun <T : KoClassProvider> List<T>.withoutClass(
  * @param includeLocal Whether to include local classes.
  * @param predicate A function that defines the condition to be met by all class declarations.
  * @return A filtered list containing declarations with all classes satisfying the predicate.
+ * @see KoClassProvider.hasAllClasses
  */
 fun <T : KoClassProvider> List<T>.withAllClasses(
     includeNested: Boolean = true,
@@ -310,6 +324,7 @@ fun <T : KoClassProvider> List<T>.withAllClasses(
  * @param includeLocal Whether to include local classes.
  * @param predicate A function that defines the condition to be met by all class declarations.
  * @return A list containing declarations that have at least one class not satisfying the provided predicate.
+ * @see KoClassProvider.hasAllClasses
  */
 fun <T : KoClassProvider> List<T>.withoutAllClasses(
     includeNested: Boolean = true,
@@ -324,6 +339,7 @@ fun <T : KoClassProvider> List<T>.withoutAllClasses(
  * @param includeLocal Whether to include local classes.
  * @param predicate A function that defines the condition to be met by the list of class declarations.
  * @return A list containing declarations with class declarations satisfying the predicate.
+ * @see KoClassProvider.classes
  */
 fun <T : KoClassProvider> List<T>.withClasses(
     includeNested: Boolean = true,
@@ -338,6 +354,7 @@ fun <T : KoClassProvider> List<T>.withClasses(
  * @param includeLocal Whether to include local classes.
  * @param predicate A function that defines the condition to be met by the list of class declarations.
  * @return A list containing declarations without class declarations satisfying the predicate.
+ * @see KoClassProvider.classes
  */
 fun <T : KoClassProvider> List<T>.withoutClasses(
     includeNested: Boolean = true,

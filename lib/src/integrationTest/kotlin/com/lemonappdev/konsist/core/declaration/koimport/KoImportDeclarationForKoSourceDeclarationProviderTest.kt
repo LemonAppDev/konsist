@@ -21,6 +21,7 @@ import org.amshove.kluent.shouldNotBeInstanceOf
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments.arguments
 import org.junit.jupiter.params.provider.MethodSource
+import java.util.Date
 import kotlin.reflect.KClass
 
 class KoImportDeclarationForKoSourceDeclarationProviderTest {
@@ -70,6 +71,13 @@ class KoImportDeclarationForKoSourceDeclarationProviderTest {
                     KoClassDeclaration::class,
                     String::class,
                     "kotlin.String",
+                ),
+                arguments(
+                    "external-source-declaration-with-kotlin-type-name",
+                    KoExternalDeclaration::class,
+                    KoKotlinTypeDeclaration::class,
+                    Date::class,
+                    "java.util.Date",
                 ),
                 arguments(
                     "class-source-declaration",

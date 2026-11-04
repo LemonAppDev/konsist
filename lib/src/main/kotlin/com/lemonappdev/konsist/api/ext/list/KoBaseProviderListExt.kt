@@ -6,10 +6,12 @@ import com.lemonappdev.konsist.api.provider.KoBaseProvider
 /**
  * Print the declarations.
  *
- * @param prefix An optional string to be printed before each declaration. Default is null.
+ * @param prefix An optional string to be printed once before the declarations. Default is `null`.
  * @param predicate An optional function that generates the string representation of each declaration.
- *                  If predicate is not provided (default is `null`), the function uses `toString` method.
+ *                  If predicate is not provided (default is `null`), the function uses the declaration's
+ *                  name (if available) or `toString` method otherwise.
  * @return The original list of declarations.
+ * @see com.lemonappdev.konsist.api.ext.provider.print
  */
 fun <T : KoBaseProvider> List<T>.print(
     prefix: String? = null,

@@ -25,6 +25,8 @@ class KoParentDeclarationForKoInterfaceDelegateProviderTest {
             hasDelegate() shouldBeEqualTo true
             hasDelegate("fixtureProperty") shouldBeEqualTo true
             hasDelegate("otherProperty") shouldBeEqualTo false
+            hasLazyDelegate() shouldBeEqualTo false
+            hasPropertyReferenceDelegate shouldBeEqualTo false
         }
     }
 

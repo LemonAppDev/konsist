@@ -1,5 +1,0 @@
-import com.lemonappdev.konsist.testdata.FixtureInterface
-
-val fixtureProperty1: List<FixtureInterface> = emptyList()
-
-class FixtureClass : FixtureInterface

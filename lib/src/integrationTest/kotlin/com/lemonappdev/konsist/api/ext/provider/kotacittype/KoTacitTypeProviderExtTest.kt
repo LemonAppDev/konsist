@@ -2,6 +2,7 @@ package com.lemonappdev.konsist.api.ext.provider.kotacittype
 
 import com.lemonappdev.konsist.TestSnippetProvider
 import com.lemonappdev.konsist.api.ext.koscope.declarationsOf
+import com.lemonappdev.konsist.api.provider.KoNameProvider
 import com.lemonappdev.konsist.api.provider.KoTacitTypeProvider
 import com.lemonappdev.konsist.testdata.FixtureClass
 import com.lemonappdev.konsist.testdata.FixtureClassWithParameter
@@ -44,16 +45,18 @@ class KoTacitTypeProviderExtTest {
     @Test
     fun `declaration-has-explicit-complex-type`() {
         // given
-        val sut =
+        val declarations =
             getSnippetFile("declaration-has-explicit-complex-type")
                 .declarationsOf<KoTacitTypeProvider>()
-                .first()
+        val list = declarations.first { (it as KoNameProvider).name == "list" }
+        val sut = declarations.first { (it as KoNameProvider).name == "fixtureProperty" }
 
         // then
         assertSoftly(sut) {
             hasTacitTypeOf<FixtureClassWithParameter>() shouldBeEqualTo true
             hasTacitTypeOf<FixtureClass>() shouldBeEqualTo false
         }
+        list.hasTacitTypeOf<FixtureClassWithParameter>() shouldBeEqualTo false
     }
 
     @Test

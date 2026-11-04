@@ -2,15 +2,17 @@ package com.lemonappdev.konsist.api.ext.list
 
 import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoClassDeclaration
+import com.lemonappdev.konsist.api.provider.KoBaseTestClassProvider
 import com.lemonappdev.konsist.api.provider.KoTestClassProvider
 
 /**
  * List containing test classes.
  *
- * @param testPropertyName the test property name to check. By default, "sut".
- * @param moduleName         the name of the module to check (optional).
- * @param sourceSetName      the name of the source set to check (optional).
+ * @param testPropertyName The test property name to check. By default, "sut".
+ * @param moduleName The name of the module to check (optional).
+ * @param sourceSetName The name of the source set to check (optional).
  * @return A list containing all test classes.
+ * @see KoTestClassProvider.testClasses
  */
 fun <T : KoTestClassProvider> List<T>.testClasses(
     testPropertyName: String = "sut",
@@ -21,12 +23,13 @@ fun <T : KoTestClassProvider> List<T>.testClasses(
 /**
  * List containing test classes matching the predicate.
  *
- * @param moduleName    the name of the module to check (optional).
- * @param sourceSetName the name of the source set to check (optional).
- * @param predicate     A function that defines the condition to be met by a test class.
+ * @param moduleName The name of the module to check (optional).
+ * @param sourceSetName The name of the source set to check (optional).
+ * @param predicate A function that defines the condition to be met by a test class.
  * @return A list containing all test classes matching the predicate.
+ * @see KoBaseTestClassProvider.testClasses
  */
-fun <T : KoTestClassProvider> List<T>.testClasses(
+fun <T : KoBaseTestClassProvider> List<T>.testClasses(
     moduleName: String? = null,
     sourceSetName: String? = null,
     predicate: (KoClassDeclaration) -> Boolean,
@@ -35,10 +38,11 @@ fun <T : KoTestClassProvider> List<T>.testClasses(
 /**
  * List containing declarations with a test.
  *
- * @param testPropertyName the test property name to check. By default, "sut".
- * @param moduleName         the name of the module to check (optional).
- * @param sourceSetName      the name of the source set to check (optional).
+ * @param testPropertyName The test property name to check. By default, "sut".
+ * @param moduleName The name of the module to check (optional).
+ * @param sourceSetName The name of the source set to check (optional).
  * @return A list containing declarations with a test.
+ * @see KoTestClassProvider.hasTestClasses
  */
 fun <T : KoTestClassProvider> List<T>.withTestClass(
     testPropertyName: String = "sut",
@@ -49,10 +53,11 @@ fun <T : KoTestClassProvider> List<T>.withTestClass(
 /**
  * List containing declarations without a test.
  *
- * @param testPropertyName the test property name to check. By default, "sut".
- * @param moduleName         the name of the module to check (optional).
- * @param sourceSetName      the name of the source set to check (optional).
+ * @param testPropertyName The test property name to check. By default, "sut".
+ * @param moduleName The name of the module to check (optional).
+ * @param sourceSetName The name of the source set to check (optional).
  * @return A list containing declarations without a test.
+ * @see KoTestClassProvider.hasTestClasses
  */
 fun <T : KoTestClassProvider> List<T>.withoutTestClass(
     testPropertyName: String = "sut",
@@ -63,12 +68,13 @@ fun <T : KoTestClassProvider> List<T>.withoutTestClass(
 /**
  * List containing declarations with a test matching the predicate.
  *
- * @param moduleName    the name of the module to check (optional).
- * @param sourceSetName the name of the source set to check (optional).
- * @param predicate     A function that defines the condition to be met by a test class.
- *  @return A list containing declarations with a test matching the predicate.
+ * @param moduleName The name of the module to check (optional).
+ * @param sourceSetName The name of the source set to check (optional).
+ * @param predicate A function that defines the condition to be met by a test class.
+ * @return A list containing declarations with a test matching the predicate.
+ * @see KoBaseTestClassProvider.hasTestClass
  */
-fun <T : KoTestClassProvider> List<T>.withTestClass(
+fun <T : KoBaseTestClassProvider> List<T>.withTestClass(
     moduleName: String? = null,
     sourceSetName: String? = null,
     predicate: (KoClassDeclaration) -> Boolean,
@@ -77,12 +83,13 @@ fun <T : KoTestClassProvider> List<T>.withTestClass(
 /**
  * List containing declarations without a test matching the predicate.
  *
- * @param moduleName    the name of the module to check (optional).
- * @param sourceSetName the name of the source set to check (optional).
- * @param predicate     A function that defines the condition to be met by a test class.
- *  @return A list containing declarations without a test matching the predicate.
+ * @param moduleName The name of the module to check (optional).
+ * @param sourceSetName The name of the source set to check (optional).
+ * @param predicate A function that defines the condition to be met by a test class.
+ * @return A list containing declarations without a test matching the predicate.
+ * @see KoBaseTestClassProvider.hasTestClass
  */
-fun <T : KoTestClassProvider> List<T>.withoutTestClass(
+fun <T : KoBaseTestClassProvider> List<T>.withoutTestClass(
     moduleName: String? = null,
     sourceSetName: String? = null,
     predicate: (KoClassDeclaration) -> Boolean,

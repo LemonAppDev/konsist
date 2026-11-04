@@ -1,117 +1,48 @@
 package com.lemonappdev.konsist.core.model
 
 import com.lemonappdev.konsist.api.Konsist
-import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
-import com.lemonappdev.konsist.api.declaration.KoClassDeclaration
-import com.lemonappdev.konsist.api.declaration.KoFileDeclaration
-import com.lemonappdev.konsist.api.declaration.KoInterfaceDeclaration
-import com.lemonappdev.konsist.api.declaration.KoObjectDeclaration
-import com.lemonappdev.konsist.api.declaration.KoTypeAliasDeclaration
-import com.lemonappdev.konsist.api.ext.koscope.declarationsOf
+import com.lemonappdev.konsist.api.declaration.KoChildDeclaration
+import com.lemonappdev.konsist.api.declaration.KoSourceDeclaration
+import com.lemonappdev.konsist.api.provider.KoBaseProvider
+import com.lemonappdev.konsist.core.ext.toKoFile
+import com.lemonappdev.konsist.core.provider.util.KoFileDeclarationProvider
+import kotlinx.coroutines.runBlocking
+import java.lang.ref.SoftReference
 
-object DataCore {
-    val declarations: List<KoBaseDeclaration> by lazy {
-        Konsist
-            .scopeFromProject()
-            .declarationsOf()
-    }
+/**
+ * Data of the whole project. Data is computed when needed and cached using soft references, so it can be released from
+ * memory (together with parsed files) when the memory is low.
+ */
+internal object DataCore {
+    val projectDeclarationIndex =
+        ProjectDeclarationIndex(
+            getFiles = {
+                runBlocking { KoFileDeclarationProvider.getProjectKotlinFiles() }
+                    .filterNot { KoFileDeclarationProvider.isBuildConfigFile(it.path) }
+            },
+            getPackageName = KoFileDeclarationProvider::getPackageName,
+            getKoFile = { it.toKoFile() },
+        )
 
-    val classes: List<KoClassDeclaration> by lazy {
-        Konsist
-            .scopeFromProject()
-            .classes()
-    }
+    @Volatile
+    private var childrenIndexReference: SoftReference<ChildrenIndex>? = null
 
-    val interfaces: List<KoInterfaceDeclaration> by lazy {
-        Konsist
-            .scopeFromProject()
-            .interfaces()
-    }
+    private val childrenIndex: ChildrenIndex
+        get() =
+            childrenIndexReference?.get() ?: synchronized(this) {
+                childrenIndexReference?.get() ?: createChildrenIndex().also { childrenIndexReference = SoftReference(it) }
+            }
 
-    val objects: List<KoObjectDeclaration> by lazy {
-        Konsist
-            .scopeFromProject()
-            .objects()
-    }
+    /**
+     * Returns classes, interfaces and objects of the project that have the given declaration as a parent.
+     */
+    fun getChildren(
+        declaration: KoBaseProvider,
+        indirectChildren: Boolean,
+    ): List<KoChildDeclaration> = childrenIndex.getChildren(declaration as? KoSourceDeclaration, indirectChildren)
 
-    val typeAliases: List<KoTypeAliasDeclaration> by lazy {
-        Konsist
-            .scopeFromProject()
-            .typeAliases
+    private fun createChildrenIndex(): ChildrenIndex {
+        val scope = Konsist.scopeFromProject()
+        return ChildrenIndex(scope.classes() + scope.interfaces() + scope.objects())
     }
 }
-
-fun getClass(
-    name: String,
-    fullyQualifiedName: String?,
-    isAlias: Boolean = false,
-    containingFile: KoFileDeclaration,
-): KoClassDeclaration? {
-    val declarationQualifiedName =
-        if (fullyQualifiedName?.endsWith(name) == true || isAlias) {
-            fullyQualifiedName
-        } else {
-            "$fullyQualifiedName.$name"
-        }
-
-    return DataCore
-        .classes
-        .firstOrNull { decl -> decl.fullyQualifiedName == declarationQualifiedName }
-        ?: containingFile
-            .classes()
-            .firstOrNull { decl -> decl.fullyQualifiedName == declarationQualifiedName }
-}
-
-fun getInterface(
-    name: String,
-    fullyQualifiedName: String?,
-    isAlias: Boolean,
-    containingFile: KoFileDeclaration,
-): KoInterfaceDeclaration? {
-    val declarationQualifiedName =
-        if (fullyQualifiedName?.endsWith(name) == true || isAlias) {
-            fullyQualifiedName
-        } else {
-            "$fullyQualifiedName.$name"
-        }
-
-    return DataCore
-        .interfaces
-        .firstOrNull { decl -> decl.fullyQualifiedName == declarationQualifiedName }
-        ?: containingFile
-            .interfaces()
-            .firstOrNull { decl -> decl.fullyQualifiedName == declarationQualifiedName }
-}
-
-fun getObject(
-    name: String,
-    fullyQualifiedName: String?,
-    isAlias: Boolean,
-    containingFile: KoFileDeclaration,
-): KoObjectDeclaration? {
-    val declarationQualifiedName =
-        if (fullyQualifiedName?.endsWith(name) == true || isAlias) {
-            fullyQualifiedName
-        } else {
-            "$fullyQualifiedName.$name"
-        }
-
-    return DataCore
-        .objects
-        .firstOrNull { decl -> decl.fullyQualifiedName == declarationQualifiedName }
-        ?: containingFile
-            .objects()
-            .firstOrNull { decl -> decl.fullyQualifiedName == declarationQualifiedName }
-}
-
-fun getTypeAlias(
-    name: String,
-    fullyQualifiedName: String?,
-    containingFile: KoFileDeclaration,
-): KoTypeAliasDeclaration? =
-    DataCore
-        .typeAliases
-        .firstOrNull { decl -> (decl.packagee?.name + "." + decl.name) == fullyQualifiedName }
-        ?: containingFile
-            .typeAliases
-            .firstOrNull { decl -> decl.name == name }

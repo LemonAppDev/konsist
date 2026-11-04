@@ -350,7 +350,7 @@ class Architecture2Test {
             .shouldBeEqualTo(
                 "'fails when dependency is set that presentation layer not depends on domain (lambda scope)' " +
                     "test has failed. \n" +
-                    "'Presentation' layer does not depends on 'Domain' layer failed. Files that depend on 'Domain' layer:\n" +
+                    "'Presentation' layer should not depend on 'Domain' layer but has dependencies in files:\n" +
                     "└── File $filepath\n" +
                     "    └── Import com.lemonappdev.konsist.architecture.assertarchitecture.architecture2." +
                     "project.domain.DomainFirstClass ($filepath:3:1)",
@@ -380,7 +380,7 @@ class Architecture2Test {
             .shouldBeEqualTo(
                 "'fails when dependency is set that presentation layer not depends on domain (lambda files)' " +
                     "test has failed. \n" +
-                    "'Presentation' layer does not depends on 'Domain' layer failed. Files that depend on 'Domain' layer:\n" +
+                    "'Presentation' layer should not depend on 'Domain' layer but has dependencies in files:\n" +
                     "└── File $filepath\n" +
                     "    └── Import com.lemonappdev.konsist.architecture.assertarchitecture.architecture2." +
                     "project.domain.DomainFirstClass ($filepath:3:1)",
@@ -413,7 +413,7 @@ class Architecture2Test {
             .shouldBeEqualTo(
                 "'fails when dependency is set that presentation layer not depends on domain (parameter scope)' " +
                     "test has failed. \n" +
-                    "'Presentation' layer does not depends on 'Domain' layer failed. Files that depend on 'Domain' layer:\n" +
+                    "'Presentation' layer should not depend on 'Domain' layer but has dependencies in files:\n" +
                     "└── File $filepath\n" +
                     "    └── Import com.lemonappdev.konsist.architecture.assertarchitecture.architecture2." +
                     "project.domain.DomainFirstClass ($filepath:3:1)",
@@ -448,7 +448,7 @@ class Architecture2Test {
             .shouldBeEqualTo(
                 "'fails when dependency is set that presentation layer not depends on domain (parameter files)' " +
                     "test has failed. \n" +
-                    "'Presentation' layer does not depends on 'Domain' layer failed. Files that depend on 'Domain' layer:\n" +
+                    "'Presentation' layer should not depend on 'Domain' layer but has dependencies in files:\n" +
                     "└── File $filepath\n" +
                     "    └── Import com.lemonappdev.konsist.architecture.assertarchitecture.architecture2." +
                     "project.domain.DomainFirstClass ($filepath:3:1)",
@@ -621,7 +621,7 @@ class Architecture2Test {
     @Test
     fun `passes when dependency is set that presentation layer depends on nothing and domain layer is not included (lambda scope)`() {
         // then
-        scope.assertArchitecture {
+        scope.assertArchitecture(allowFilesOutsideLayers = true) {
             presentation.dependsOnNothing()
         }
     }
@@ -629,7 +629,7 @@ class Architecture2Test {
     @Test
     fun `passes when dependency is set that presentation layer depends on nothing and domain layer is not included (lambda files)`() {
         // then
-        scope.files.assertArchitecture {
+        scope.files.assertArchitecture(allowFilesOutsideLayers = true) {
             presentation.dependsOnNothing()
         }
     }
@@ -643,7 +643,7 @@ class Architecture2Test {
             }
 
         // then
-        scope.assertArchitecture(layerDependencies)
+        scope.assertArchitecture(allowFilesOutsideLayers = true, layerDependenciesFunc = layerDependencies)
     }
 
     @Test
@@ -655,7 +655,7 @@ class Architecture2Test {
             }
 
         // then
-        scope.files.assertArchitecture(layerDependencies)
+        scope.files.assertArchitecture(allowFilesOutsideLayers = true, layerDependenciesFunc = layerDependencies)
     }
     // endregion
 }

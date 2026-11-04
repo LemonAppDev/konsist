@@ -1,12 +1,12 @@
 package com.lemonappdev.konsist.core.declaration.kovariable
 
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
-import com.lemonappdev.konsist.api.ext.list.enumConstants
 import com.lemonappdev.konsist.api.ext.list.getters
 import com.lemonappdev.konsist.api.ext.list.initBlocks
 import com.lemonappdev.konsist.api.ext.list.setters
 import com.lemonappdev.konsist.api.ext.list.variables
 import com.lemonappdev.konsist.api.provider.KoVariableProvider
+import com.lemonappdev.konsist.helper.ext.toOsSeparator
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.params.ParameterizedTest
@@ -29,7 +29,7 @@ class KoVariableDeclarationForKoPathProviderTest {
         // then
         assertSoftly(sut.path) {
             startsWith("//") shouldBeEqualTo false
-            endsWith("kovariable/snippet/forkopathprovider/$name.kt") shouldBeEqualTo true
+            endsWith("kovariable/snippet/forkopathprovider/$name.kt".toOsSeparator()) shouldBeEqualTo true
         }
     }
 
@@ -49,8 +49,10 @@ class KoVariableDeclarationForKoPathProviderTest {
         sut
             .projectPath
             .shouldBeEqualTo(
-                "/lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core/declaration/kovariable/snippet/" +
-                    "forkopathprovider/$name.kt",
+                (
+                    "/lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core/declaration/kovariable/snippet/" +
+                        "forkopathprovider/$name.kt"
+                ).toOsSeparator(),
             )
     }
 
@@ -68,10 +70,10 @@ class KoVariableDeclarationForKoPathProviderTest {
 
         // then
         assertSoftly(sut) {
-            resideInPath("..snippet..", true) shouldBeEqualTo true
-            resideInPath("..kovariable/snippet..", true) shouldBeEqualTo true
-            resideInPath("..kovariable..$name.kt", true) shouldBeEqualTo true
-            resideInPath("kovariable/snippet/", true) shouldBeEqualTo false
+            residesInPath("..snippet..", true) shouldBeEqualTo true
+            residesInPath("..kovariable/snippet..", true) shouldBeEqualTo true
+            residesInPath("..kovariable..$name.kt", true) shouldBeEqualTo true
+            residesInPath("kovariable/snippet/", true) shouldBeEqualTo false
         }
     }
 
@@ -89,10 +91,10 @@ class KoVariableDeclarationForKoPathProviderTest {
 
         // then
         assertSoftly(sut) {
-            resideInPath("..snippet..", false) shouldBeEqualTo true
-            resideInPath("..kovariable/snippet..", false) shouldBeEqualTo true
-            resideInPath("..kovariable..$name.kt", false) shouldBeEqualTo true
-            resideInPath("kovariable/snippet/", false) shouldBeEqualTo false
+            residesInPath("..snippet..", false) shouldBeEqualTo true
+            residesInPath("..kovariable/snippet..", false) shouldBeEqualTo true
+            residesInPath("..kovariable..$name.kt", false) shouldBeEqualTo true
+            residesInPath("kovariable/snippet/", false) shouldBeEqualTo false
         }
     }
 
@@ -110,10 +112,6 @@ class KoVariableDeclarationForKoPathProviderTest {
                 arguments(
                     getSnippetFile("variable-in-init-block-file-path").classes().initBlocks,
                     "variable-in-init-block-file-path",
-                ),
-                arguments(
-                    getSnippetFile("variable-in-enum-constant-file-path").classes().enumConstants,
-                    "variable-in-enum-constant-file-path",
                 ),
                 arguments(
                     getSnippetFile("variable-in-getter-file-path").properties().getters,
@@ -138,10 +136,6 @@ class KoVariableDeclarationForKoPathProviderTest {
                     "variable-in-init-block-project-file-path",
                 ),
                 arguments(
-                    getSnippetFile("variable-in-enum-constant-project-file-path").classes().enumConstants,
-                    "variable-in-enum-constant-project-file-path",
-                ),
-                arguments(
                     getSnippetFile("variable-in-getter-project-file-path").properties().getters,
                     "variable-in-getter-project-file-path",
                 ),
@@ -164,10 +158,6 @@ class KoVariableDeclarationForKoPathProviderTest {
                     "variable-in-init-block-reside-in-file-path",
                 ),
                 arguments(
-                    getSnippetFile("variable-in-enum-constant-reside-in-file-path").classes().enumConstants,
-                    "variable-in-enum-constant-reside-in-file-path",
-                ),
-                arguments(
                     getSnippetFile("variable-in-getter-reside-in-file-path").properties().getters,
                     "variable-in-getter-reside-in-file-path",
                 ),
@@ -188,10 +178,6 @@ class KoVariableDeclarationForKoPathProviderTest {
                 arguments(
                     getSnippetFile("variable-in-init-block-reside-in-project-file-path").classes().initBlocks,
                     "variable-in-init-block-reside-in-project-file-path",
-                ),
-                arguments(
-                    getSnippetFile("variable-in-enum-constant-reside-in-project-file-path").classes().enumConstants,
-                    "variable-in-enum-constant-reside-in-project-file-path",
                 ),
                 arguments(
                     getSnippetFile("variable-in-getter-reside-in-project-file-path").properties().getters,

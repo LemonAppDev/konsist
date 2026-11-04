@@ -318,6 +318,27 @@ class KoParentDeclarationForKoSourceDeclarationProviderTest {
                     "com.fixturepackage.FixtureInterface.FixtureName",
                 ),
                 arguments(
+                    "class-with-external-nested-parent-interface-from-default-import",
+                    KoExternalDeclaration::class,
+                    KoInterfaceDeclaration::class,
+                    Thread.UncaughtExceptionHandler::class,
+                    "java.lang.Thread.UncaughtExceptionHandler",
+                ),
+                arguments(
+                    "class-with-parent-class-from-wildcard-import",
+                    KoClassDeclaration::class,
+                    KoExternalDeclaration::class,
+                    FixtureParentClass::class,
+                    "com.lemonappdev.konsist.testdata.FixtureParentClass",
+                ),
+                arguments(
+                    "class-with-parent-class-with-name-being-suffix-of-imported-class-name",
+                    KoClassDeclaration::class,
+                    KoInterfaceDeclaration::class,
+                    null,
+                    "com.fixturepackage.ParentClass",
+                ),
+                arguments(
                     "class-with-parent-interface-with-two-part-name-from-the-same-file",
                     KoInterfaceDeclaration::class,
                     KoClassDeclaration::class,

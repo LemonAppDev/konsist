@@ -1,35 +1,54 @@
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+
 plugins {
     alias(libs.plugins.androidApplication)
-    kotlin("android")
+    alias(libs.plugins.composeCompiler)
+}
+
+kotlin {
+    compilerOptions {
+        jvmTarget = JvmTarget.JVM_11
+    }
+}
+dependencies {
+    implementation(project(":shared"))
+
+    implementation(libs.androidx.activity.compose)
+
+    implementation(libs.compose.uiToolingPreview)
+    debugImplementation(libs.compose.uiTooling)
 }
 
 android {
-    compileSdk = 34
+    namespace = "com.sample"
+    compileSdk = libs.versions.android.compileSdk.get().toInt()
+
     defaultConfig {
-        applicationId = "com.jetbrains.androidApp"
-        minSdk = 21
-        targetSdk = 34
+        applicationId = "com.sample"
+        minSdk = libs.versions.android.minSdk.get().toInt()
+        targetSdk = libs.versions.android.targetSdk.get().toInt()
         versionCode = 1
         versionName = "1.0"
     }
+    packaging {
+        resources {
+            excludes += "/META-INF/{AL2.0,LGPL2.1}"
+        }
+    }
     buildTypes {
-        getByName("release") {
+        release {
             isMinifyEnabled = false
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
     }
-    kotlinOptions {
-        jvmTarget = "1.8"
+    buildFeatures {
+        compose = true
     }
-    namespace = "com.jetbrains.androidApp"
-}
-
-dependencies {
-    implementation(project(":shared"))
-    implementation(libs.material)
-    implementation(libs.appcompat)
-    implementation(libs.constraintlayout)
 }

@@ -18,10 +18,10 @@ class KoKotlinTypeDeclarationForKoResideInPackageProviderTest {
 
         // then
         assertSoftly(sut) {
-            it?.resideInPackage("kotlin..") shouldBeEqualTo true
-            it?.resideInPackage("com..") shouldBeEqualTo false
-            it?.resideOutsidePackage("kotlin..") shouldBeEqualTo false
-            it?.resideOutsidePackage("com..") shouldBeEqualTo true
+            it?.residesInPackage("kotlin..") shouldBeEqualTo true
+            it?.residesInPackage("com..") shouldBeEqualTo false
+            it?.residesOutsidePackage("kotlin..") shouldBeEqualTo false
+            it?.residesOutsidePackage("com..") shouldBeEqualTo true
         }
     }
 
@@ -37,10 +37,10 @@ class KoKotlinTypeDeclarationForKoResideInPackageProviderTest {
 
         // then
         assertSoftly(sut) {
-            it?.resideInPackage("kotlin..") shouldBeEqualTo true
-            it?.resideInPackage("com..") shouldBeEqualTo false
-            it?.resideOutsidePackage("kotlin..") shouldBeEqualTo false
-            it?.resideOutsidePackage("com..") shouldBeEqualTo true
+            it?.residesInPackage("kotlin..") shouldBeEqualTo true
+            it?.residesInPackage("com..") shouldBeEqualTo false
+            it?.residesOutsidePackage("kotlin..") shouldBeEqualTo false
+            it?.residesOutsidePackage("com..") shouldBeEqualTo true
         }
     }
 

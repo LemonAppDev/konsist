@@ -1,7 +1,6 @@
 package com.lemonappdev.konsist.core.declaration.kovariable
 
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
-import com.lemonappdev.konsist.api.ext.list.enumConstants
 import com.lemonappdev.konsist.api.ext.list.getters
 import com.lemonappdev.konsist.api.ext.list.initBlocks
 import com.lemonappdev.konsist.api.ext.list.setters
@@ -25,8 +24,8 @@ class KoVariableDeclarationForKoResideInPackageProviderTest {
 
         // then
         assertSoftly(sut) {
-            resideInPackage("com") shouldBeEqualTo false
-            resideOutsidePackage("com") shouldBeEqualTo true
+            residesInPackage("com") shouldBeEqualTo false
+            residesOutsidePackage("com") shouldBeEqualTo true
         }
     }
 
@@ -41,10 +40,10 @@ class KoVariableDeclarationForKoResideInPackageProviderTest {
 
         // then
         assertSoftly(sut) {
-            resideInPackage("com..") shouldBeEqualTo true
-            resideInPackage("com") shouldBeEqualTo false
-            resideOutsidePackage("com..") shouldBeEqualTo false
-            resideOutsidePackage("com") shouldBeEqualTo true
+            residesInPackage("com..") shouldBeEqualTo true
+            residesInPackage("com") shouldBeEqualTo false
+            residesOutsidePackage("com..") shouldBeEqualTo false
+            residesOutsidePackage("com") shouldBeEqualTo true
         }
     }
 
@@ -58,7 +57,6 @@ class KoVariableDeclarationForKoResideInPackageProviderTest {
             listOf(
                 arguments(getSnippetFile("variable-in-function-not-reside-in-file-package").functions()),
                 arguments(getSnippetFile("variable-in-init-block-not-reside-in-file-package").classes().initBlocks),
-                arguments(getSnippetFile("variable-in-enum-constant-not-reside-in-file-package").classes().enumConstants),
                 arguments(getSnippetFile("variable-in-getter-not-reside-in-file-package").properties().getters),
                 arguments(getSnippetFile("variable-in-setter-not-reside-in-file-package").properties().setters),
             )
@@ -69,7 +67,6 @@ class KoVariableDeclarationForKoResideInPackageProviderTest {
             listOf(
                 arguments(getSnippetFile("variable-in-function-reside-in-file-package").functions()),
                 arguments(getSnippetFile("variable-in-init-block-reside-in-file-package").classes().initBlocks),
-                arguments(getSnippetFile("variable-in-enum-constant-reside-in-file-package").classes().enumConstants),
                 arguments(getSnippetFile("variable-in-getter-reside-in-file-package").properties().getters),
                 arguments(getSnippetFile("variable-in-setter-reside-in-file-package").properties().setters),
             )

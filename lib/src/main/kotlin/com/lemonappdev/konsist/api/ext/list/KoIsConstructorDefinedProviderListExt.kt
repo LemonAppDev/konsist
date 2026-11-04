@@ -6,6 +6,7 @@ import com.lemonappdev.konsist.api.provider.KoIsConstructorDefinedProvider
  * List containing declarations defined within a constructor.
  *
  * @return A list containing declarations defined within a constructor.
+ * @see KoIsConstructorDefinedProvider.isConstructorDefined
  */
 fun <T : KoIsConstructorDefinedProvider> List<T>.withConstructorDefined(): List<T> = filter { it.isConstructorDefined }
 
@@ -13,5 +14,6 @@ fun <T : KoIsConstructorDefinedProvider> List<T>.withConstructorDefined(): List<
  * List containing declarations defined outside a constructor.
  *
  * @return A list containing declarations defined outside a constructor.
+ * @see KoIsConstructorDefinedProvider.isConstructorDefined
  */
 fun <T : KoIsConstructorDefinedProvider> List<T>.withoutConstructorDefined(): List<T> = filterNot { it.isConstructorDefined }

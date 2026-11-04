@@ -1,6 +1,7 @@
 package com.lemonappdev.konsist.core.declaration.kotypeargument
 
 import com.lemonappdev.konsist.TestSnippetProvider
+import com.lemonappdev.konsist.core.filesystem.PathProvider
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
@@ -44,7 +45,7 @@ class KoTypeArgumentDeclarationForKoLocationProviderTest {
         // then
         val declaration = "Declaration:\nString"
         assertSoftly(sut?.locationWithText) {
-            it?.startsWith("Location: /") shouldBeEqualTo true
+            it?.startsWith("Location: ${PathProvider.rootProjectPath}") shouldBeEqualTo true
             projectPath?.let { path -> it?.contains(path) } shouldBeEqualTo true
             it?.endsWith(declaration) shouldBeEqualTo true
         }
@@ -88,7 +89,7 @@ class KoTypeArgumentDeclarationForKoLocationProviderTest {
         // then
         val declaration = "Declaration:\nSet<String>"
         assertSoftly(sut?.locationWithText) {
-            it?.startsWith("Location: /") shouldBeEqualTo true
+            it?.startsWith("Location: ${PathProvider.rootProjectPath}") shouldBeEqualTo true
             projectPath?.let { path -> it?.contains(path) } shouldBeEqualTo true
             it?.endsWith(declaration) shouldBeEqualTo true
         }
@@ -132,7 +133,7 @@ class KoTypeArgumentDeclarationForKoLocationProviderTest {
         // then
         val declaration = "Declaration:\nMap<List<String>, Int>"
         assertSoftly(sut?.locationWithText) {
-            it?.startsWith("Location: /") shouldBeEqualTo true
+            it?.startsWith("Location: ${PathProvider.rootProjectPath}") shouldBeEqualTo true
             projectPath?.let { path -> it?.contains(path) } shouldBeEqualTo true
             it?.endsWith(declaration) shouldBeEqualTo true
         }
@@ -176,7 +177,7 @@ class KoTypeArgumentDeclarationForKoLocationProviderTest {
         // then
         val declaration = "Declaration:\n*"
         assertSoftly(sut?.locationWithText) {
-            it?.startsWith("Location: /") shouldBeEqualTo true
+            it?.startsWith("Location: ${PathProvider.rootProjectPath}") shouldBeEqualTo true
             projectPath?.let { path -> it?.contains(path) } shouldBeEqualTo true
             it?.endsWith(declaration) shouldBeEqualTo true
         }
@@ -220,7 +221,7 @@ class KoTypeArgumentDeclarationForKoLocationProviderTest {
         // then
         val declaration = "Declaration:\nout String"
         assertSoftly(sut?.locationWithText) {
-            it?.startsWith("Location: /") shouldBeEqualTo true
+            it?.startsWith("Location: ${PathProvider.rootProjectPath}") shouldBeEqualTo true
             projectPath?.let { path -> it?.contains(path) } shouldBeEqualTo true
             it?.endsWith(declaration) shouldBeEqualTo true
         }
@@ -264,7 +265,7 @@ class KoTypeArgumentDeclarationForKoLocationProviderTest {
         // then
         val declaration = "Declaration:\nin String"
         assertSoftly(sut?.locationWithText) {
-            it?.startsWith("Location: /") shouldBeEqualTo true
+            it?.startsWith("Location: ${PathProvider.rootProjectPath}") shouldBeEqualTo true
             projectPath?.let { path -> it?.contains(path) } shouldBeEqualTo true
             it?.endsWith(declaration) shouldBeEqualTo true
         }

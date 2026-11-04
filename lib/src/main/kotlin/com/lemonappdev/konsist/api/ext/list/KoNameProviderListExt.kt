@@ -9,10 +9,11 @@ import com.lemonappdev.konsist.api.provider.KoNameProvider
  *
  * @param names The name(s) to include.
  * @param ignoreCase Specifies whether the comparison should ignore case.
- *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  *
  * @return A list containing declarations with the specified names (or any name if [names] is empty).
+ * @see KoNameProvider.hasName
  */
 fun <T : KoNameProvider> List<T>.withName(
     vararg names: String,
@@ -24,10 +25,11 @@ fun <T : KoNameProvider> List<T>.withName(
  *
  * @param names The name(s) to include.
  * @param ignoreCase Specifies whether the comparison should ignore case.
- *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  *
  * @return A list containing declarations with the specified names (or any name if [names] is empty).
+ * @see KoNameProvider.hasName
  */
 fun <T : KoNameProvider> List<T>.withName(
     names: Collection<String>,
@@ -45,10 +47,11 @@ fun <T : KoNameProvider> List<T>.withName(
  *
  * @param names The name(s) to exclude.
  * @param ignoreCase Specifies whether the comparison should ignore case.
- *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  *
- * @return A list containing declarations without the specified names (or none name if [names] is empty).
+ * @return A list containing declarations without the specified names (or declarations with an empty name if [names] is empty).
+ * @see KoNameProvider.hasName
  */
 fun <T : KoNameProvider> List<T>.withoutName(
     vararg names: String,
@@ -60,10 +63,11 @@ fun <T : KoNameProvider> List<T>.withoutName(
  *
  * @param names The name(s) to exclude.
  * @param ignoreCase Specifies whether the comparison should ignore case.
- *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  *
- * @return A list containing declarations without the specified names (or none name if [names] is empty).
+ * @return A list containing declarations without the specified names (or declarations with an empty name if [names] is empty).
+ * @see KoNameProvider.hasName
  */
 fun <T : KoNameProvider> List<T>.withoutName(
     names: Collection<String>,
@@ -81,6 +85,7 @@ fun <T : KoNameProvider> List<T>.withoutName(
  *
  * @param predicate A function that defines the condition to be met by a declaration name.
  * @return A list containing declarations with the name matching the provided predicate.
+ * @see KoNameProvider.name
  */
 fun <T : KoNameProvider> List<T>.withName(predicate: (String) -> Boolean): List<T> = filter { predicate(it.name) }
 
@@ -89,19 +94,21 @@ fun <T : KoNameProvider> List<T>.withName(predicate: (String) -> Boolean): List<
  *
  * @param predicate A function that defines the condition to be met by a declaration name.
  * @return A list containing declarations without the name matching the provided predicate.
+ * @see KoNameProvider.name
  */
 fun <T : KoNameProvider> List<T>.withoutName(predicate: (String) -> Boolean): List<T> = filterNot { predicate(it.name) }
 
 /**
- * List containing declarations with name with any of the specified prefix.
+ * List containing declarations with a name starting with any of the specified prefixes.
  *
  * @param prefix The prefix to include.
  * @param prefixes The prefixes to include.
  * @param ignoreCase Specifies whether the comparison should ignore case.
- *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  *
  * @return A list containing declarations with names starting with the specified prefixes.
+ * @see KoNameProvider.hasNameStartingWith
  */
 fun <T : KoNameProvider> List<T>.withNameStartingWith(
     prefix: String,
@@ -110,14 +117,15 @@ fun <T : KoNameProvider> List<T>.withNameStartingWith(
 ): List<T> = withNameStartingWith(listOf(prefix, *prefixes), ignoreCase)
 
 /**
- * List containing declarations with name with any of the specified prefix.
+ * List containing declarations with a name starting with any of the specified prefixes.
  *
  * @param prefixes The prefixes to include.
  * @param ignoreCase Specifies whether the comparison should ignore case.
- *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  *
  * @return A list containing declarations with names starting with the specified prefixes.
+ * @see KoNameProvider.hasNameStartingWith
  */
 fun <T : KoNameProvider> List<T>.withNameStartingWith(
     prefixes: Collection<String>,
@@ -131,15 +139,16 @@ fun <T : KoNameProvider> List<T>.withNameStartingWith(
     }
 
 /**
- * List containing declarations without name with any of the specified prefix.
+ * List containing declarations without a name starting with any of the specified prefixes.
  *
  * @param prefix The prefix to exclude.
  * @param prefixes The prefixes to exclude.
  * @param ignoreCase Specifies whether the comparison should ignore case.
- *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  *
  * @return A list containing declarations without names starting with the specified prefixes.
+ * @see KoNameProvider.hasNameStartingWith
  */
 fun <T : KoNameProvider> List<T>.withoutNameStartingWith(
     prefix: String,
@@ -148,14 +157,15 @@ fun <T : KoNameProvider> List<T>.withoutNameStartingWith(
 ): List<T> = withoutNameStartingWith(listOf(prefix, *prefixes), ignoreCase)
 
 /**
- * List containing declarations without name with any of the specified prefix.
+ * List containing declarations without a name starting with any of the specified prefixes.
  *
  * @param prefixes The prefixes to exclude.
  * @param ignoreCase Specifies whether the comparison should ignore case.
- *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  *
  * @return A list containing declarations without names starting with the specified prefixes.
+ * @see KoNameProvider.hasNameStartingWith
  */
 fun <T : KoNameProvider> List<T>.withoutNameStartingWith(
     prefixes: Collection<String>,
@@ -169,15 +179,16 @@ fun <T : KoNameProvider> List<T>.withoutNameStartingWith(
     }
 
 /**
- * List containing declarations with name with any of the specified suffix.
+ * List containing declarations with a name ending with any of the specified suffixes.
  *
  * @param suffix The suffix to include.
  * @param suffixes The suffixes to include.
  * @param ignoreCase Specifies whether the comparison should ignore case.
- *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  *
  * @return A list containing declarations with names ending with the specified suffixes.
+ * @see KoNameProvider.hasNameEndingWith
  */
 fun <T : KoNameProvider> List<T>.withNameEndingWith(
     suffix: String,
@@ -186,14 +197,15 @@ fun <T : KoNameProvider> List<T>.withNameEndingWith(
 ): List<T> = withNameEndingWith(listOf(suffix, *suffixes), ignoreCase)
 
 /**
- * List containing declarations with name with any of the specified suffix.
+ * List containing declarations with a name ending with any of the specified suffixes.
  *
  * @param suffixes The suffixes to include.
  * @param ignoreCase Specifies whether the comparison should ignore case.
- *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  *
  * @return A list containing declarations with names ending with the specified suffixes.
+ * @see KoNameProvider.hasNameEndingWith
  */
 fun <T : KoNameProvider> List<T>.withNameEndingWith(
     suffixes: Collection<String>,
@@ -207,15 +219,16 @@ fun <T : KoNameProvider> List<T>.withNameEndingWith(
     }
 
 /**
- * List containing declarations without name with any of the specified suffix.
+ * List containing declarations without a name ending with any of the specified suffixes.
  *
  * @param suffix The suffix to exclude.
  * @param suffixes The suffixes to exclude.
  * @param ignoreCase Specifies whether the comparison should ignore case.
- *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  *
  * @return A list containing declarations without names ending with the specified suffixes.
+ * @see KoNameProvider.hasNameEndingWith
  */
 fun <T : KoNameProvider> List<T>.withoutNameEndingWith(
     suffix: String,
@@ -224,14 +237,15 @@ fun <T : KoNameProvider> List<T>.withoutNameEndingWith(
 ): List<T> = withoutNameEndingWith(listOf(suffix, *suffixes), ignoreCase)
 
 /**
- * List containing declarations without name with any of the specified suffix.
+ * List containing declarations without a name ending with any of the specified suffixes.
  *
  * @param suffixes The suffixes to exclude.
  * @param ignoreCase Specifies whether the comparison should ignore case.
- *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  *
  * @return A list containing declarations without names ending with the specified suffixes.
+ * @see KoNameProvider.hasNameEndingWith
  */
 fun <T : KoNameProvider> List<T>.withoutNameEndingWith(
     suffixes: Collection<String>,
@@ -245,15 +259,16 @@ fun <T : KoNameProvider> List<T>.withoutNameEndingWith(
     }
 
 /**
- * List containing declarations with name containing any of the specified String.
+ * List containing declarations with a name containing any of the specified texts.
  *
  * @param text The text to include.
  * @param texts The texts to include.
  * @param ignoreCase Specifies whether the comparison should ignore case.
- *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  *
  * @return A list containing declarations with names containing the specified texts.
+ * @see KoNameProvider.hasNameContaining
  */
 fun <T : KoNameProvider> List<T>.withNameContaining(
     text: String,
@@ -262,14 +277,15 @@ fun <T : KoNameProvider> List<T>.withNameContaining(
 ): List<T> = withNameContaining(listOf(text, *texts), ignoreCase)
 
 /**
- * List containing declarations with name containing any of the specified String.
+ * List containing declarations with a name containing any of the specified texts.
  *
  * @param texts The texts to include.
  * @param ignoreCase Specifies whether the comparison should ignore case.
- *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  *
  * @return A list containing declarations with names containing the specified texts.
+ * @see KoNameProvider.hasNameContaining
  */
 fun <T : KoNameProvider> List<T>.withNameContaining(
     texts: Collection<String>,
@@ -283,15 +299,16 @@ fun <T : KoNameProvider> List<T>.withNameContaining(
     }
 
 /**
- * List containing declarations without name containing any of the specified String.
+ * List containing declarations without a name containing any of the specified texts.
  *
  * @param text The text to exclude.
  * @param texts The texts to exclude.
  * @param ignoreCase Specifies whether the comparison should ignore case.
- *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  *
  * @return A list containing declarations without names containing the specified texts.
+ * @see KoNameProvider.hasNameContaining
  */
 fun <T : KoNameProvider> List<T>.withoutNameContaining(
     text: String,
@@ -300,14 +317,15 @@ fun <T : KoNameProvider> List<T>.withoutNameContaining(
 ): List<T> = withoutNameContaining(listOf(text, *texts), ignoreCase)
 
 /**
- * List containing declarations without name containing any of the specified String.
+ * List containing declarations without a name containing any of the specified texts.
  *
  * @param texts The texts to exclude.
  * @param ignoreCase Specifies whether the comparison should ignore case.
- *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  *
  * @return A list containing declarations without names containing the specified texts.
+ * @see KoNameProvider.hasNameContaining
  */
 fun <T : KoNameProvider> List<T>.withoutNameContaining(
     texts: Collection<String>,
@@ -321,11 +339,14 @@ fun <T : KoNameProvider> List<T>.withoutNameContaining(
     }
 
 /**
- * List containing declarations with name matching any of the specified regex.
+ * List containing declarations with a name matching any of the specified regular expressions.
+ *
+ * The regex must match the entire name, see [KoNameProvider.hasNameMatching].
  *
  * @param regex The regular expression to include.
  * @param regexes The regular expressions to include.
  * @return A list containing declarations with names matching the specified regular expressions.
+ * @see KoNameProvider.hasNameMatching
  */
 fun <T : KoNameProvider> List<T>.withNameMatching(
     regex: Regex,
@@ -333,10 +354,13 @@ fun <T : KoNameProvider> List<T>.withNameMatching(
 ): List<T> = withNameMatching(listOf(regex, *regexes))
 
 /**
- * List containing declarations with name matching any of the specified regex.
+ * List containing declarations with a name matching any of the specified regular expressions.
+ *
+ * The regex must match the entire name, see [KoNameProvider.hasNameMatching].
  *
  * @param regexes The regular expressions to include.
  * @return A list containing declarations with names matching the specified regular expressions.
+ * @see KoNameProvider.hasNameMatching
  */
 fun <T : KoNameProvider> List<T>.withNameMatching(regexes: Collection<Regex>): List<T> =
     filter {
@@ -347,11 +371,14 @@ fun <T : KoNameProvider> List<T>.withNameMatching(regexes: Collection<Regex>): L
     }
 
 /**
- * List containing declarations without name matching any of the specified regex.
+ * List containing declarations without a name matching any of the specified regular expressions.
+ *
+ * The regex must match the entire name, see [KoNameProvider.hasNameMatching].
  *
  * @param regex The regular expression to exclude.
  * @param regexes The regular expressions to exclude.
  * @return A list containing declarations without names matching the specified regular expressions.
+ * @see KoNameProvider.hasNameMatching
  */
 fun <T : KoNameProvider> List<T>.withoutNameMatching(
     regex: Regex,
@@ -359,10 +386,13 @@ fun <T : KoNameProvider> List<T>.withoutNameMatching(
 ): List<T> = withoutNameMatching(listOf(regex, *regexes))
 
 /**
- * List containing declarations without name matching any of the specified regex.
+ * List containing declarations without a name matching any of the specified regular expressions.
+ *
+ * The regex must match the entire name, see [KoNameProvider.hasNameMatching].
  *
  * @param regexes The regular expressions to exclude.
  * @return A list containing declarations without names matching the specified regular expressions.
+ * @see KoNameProvider.hasNameMatching
  */
 fun <T : KoNameProvider> List<T>.withoutNameMatching(regexes: Collection<Regex>): List<T> =
     filterNot {

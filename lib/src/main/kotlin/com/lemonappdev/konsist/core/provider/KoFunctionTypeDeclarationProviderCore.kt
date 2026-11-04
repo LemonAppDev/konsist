@@ -17,15 +17,7 @@ internal interface KoFunctionTypeDeclarationProviderCore :
     KoBaseProviderCore {
     val ktFunctionType: KtFunctionType?
 
-    @Deprecated("Will be removed in version 0.19.0", replaceWith = ReplaceWith("parameters"))
-    override val parameterTypes: List<KoParameterDeclaration>?
-        get() = parameters
-
-    @Deprecated("Will be removed in version 0.19.0", replaceWith = ReplaceWith("numParameters"))
-    override val numParameterTypes: Int
-        get() = numParameters
-
-    override val parameters: List<KoParameterDeclaration>?
+    override val parameters: List<KoParameterDeclaration>
         get() =
             ktFunctionType
                 ?.children
@@ -33,9 +25,10 @@ internal interface KoFunctionTypeDeclarationProviderCore :
                 ?.flatMap { it.children.toList() }
                 ?.filterIsInstance<KtParameter>()
                 ?.map { KoParameterDeclarationCore.getInstance(it, this.castToKoBaseDeclaration()) }
+                .orEmpty()
 
     override val numParameters: Int
-        get() = parameters?.size ?: 0
+        get() = parameters.size
 
     override val returnType: KoTypeDeclaration?
         get() {
@@ -48,18 +41,9 @@ internal interface KoFunctionTypeDeclarationProviderCore :
 
     override fun hasReturnTypeOf(kClass: KClass<*>): Boolean = hasTypeOf(returnType, kClass)
 
-    @Deprecated("Will be removed in version 0.19.0", replaceWith = ReplaceWith("countParameters"))
-    override fun countParameterTypes(predicate: (KoParameterDeclaration) -> Boolean): Int = countParameters(predicate)
+    override fun countParameters(predicate: (KoParameterDeclaration) -> Boolean): Int = parameters.count { predicate(it) }
 
-    @Deprecated("Will be removed in version 0.19.0", replaceWith = ReplaceWith("hasParameter"))
-    override fun hasParameterType(predicate: (KoParameterDeclaration) -> Boolean): Boolean = hasParameter(predicate)
+    override fun hasParameter(predicate: (KoParameterDeclaration) -> Boolean): Boolean = parameters.any(predicate)
 
-    @Deprecated("Will be removed in version 0.19.0", replaceWith = ReplaceWith("hasAllParameters"))
-    override fun hasAllParameterTypes(predicate: (KoParameterDeclaration) -> Boolean): Boolean = hasAllParameters(predicate)
-
-    override fun countParameters(predicate: (KoParameterDeclaration) -> Boolean): Int = parameters?.count { predicate(it) } ?: 0
-
-    override fun hasParameter(predicate: (KoParameterDeclaration) -> Boolean): Boolean = parameters?.any(predicate) ?: false
-
-    override fun hasAllParameters(predicate: (KoParameterDeclaration) -> Boolean): Boolean = parameters?.all(predicate) ?: false
+    override fun hasAllParameters(predicate: (KoParameterDeclaration) -> Boolean): Boolean = parameters.all(predicate)
 }

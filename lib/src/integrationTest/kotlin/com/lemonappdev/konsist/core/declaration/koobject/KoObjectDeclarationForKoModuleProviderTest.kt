@@ -1,6 +1,6 @@
 package com.lemonappdev.konsist.core.declaration.koobject
 
 class KoObjectDeclarationForKoModuleProviderTest {
-    // Konsist koObject.moduleName and koObject.resideInModule() tests
-    // are implemented in the test\konsist-declaration-tester project.
+    // Konsist koObject.moduleName and koObject.residesInModule() tests
+    // are implemented in the misc/projects/test-projects/konsist-declaration-tester project.
 }

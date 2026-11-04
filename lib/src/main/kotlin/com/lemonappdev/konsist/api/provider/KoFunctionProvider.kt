@@ -31,7 +31,7 @@ interface KoFunctionProvider : KoBaseProvider {
     ): Int
 
     /**
-     * Returns the number of functions that satisfies the specified predicate present in the declaration.
+     * Returns the number of functions that satisfy the specified predicate present in the declaration.
      *
      * @param includeNested Specifies whether to include nested functions in the count (optional, default is `true`).
      * @param includeLocal Specifies whether to include local functions in the count (optional, default is `true`).
@@ -45,7 +45,7 @@ interface KoFunctionProvider : KoBaseProvider {
     ): Int
 
     /**
-     * Determines whatever the declaration has functions.
+     * Determines whether the declaration has functions.
      *
      * @param includeNested Specifies whether to include nested functions in the check (optional, default is `true`).
      * @param includeLocal Specifies whether to include local functions in the check (optional, default is `true`).
@@ -64,7 +64,7 @@ interface KoFunctionProvider : KoBaseProvider {
      * @param includeNested Specifies whether to include nested functions in the check (optional, default is `true`).
      * @param includeLocal Specifies whether to include local functions in the check (optional, default is `true`).
      * @param ignoreCase Specifies whether the comparison should ignore case.
-     *        If `true`, the prefix comparison will be case-insensitive.
+     *        If `true`, the comparison will be case-insensitive.
      *        If `false`, the comparison will consider case sensitivity.
      * @return `true` if there is a matching declaration, `false` otherwise.
      */
@@ -83,7 +83,7 @@ interface KoFunctionProvider : KoBaseProvider {
      * @param includeNested Specifies whether to include nested functions in the check (optional, default is `true`).
      * @param includeLocal Specifies whether to include local functions in the check (optional, default is `true`).
      * @param ignoreCase Specifies whether the comparison should ignore case.
-     *        If `true`, the prefix comparison will be case-insensitive.
+     *        If `true`, the comparison will be case-insensitive.
      *        If `false`, the comparison will consider case sensitivity.
      * @return `true` if there is a matching declaration, `false` otherwise.
      */
@@ -98,11 +98,11 @@ interface KoFunctionProvider : KoBaseProvider {
      * Determines whether the declaration has functions with all the specified names.
      *
      * @param name The name of the function to check.
-     * @param names The names of the functions to check.
+     * @param names The names of additional functions to check.
      * @param includeNested Specifies whether to include nested functions in the check (optional, default is `true`).
      * @param includeLocal Specifies whether to include local functions in the check (optional, default is `true`).
      * @param ignoreCase Specifies whether the comparison should ignore case.
-     *        If `true`, the prefix comparison will be case-insensitive.
+     *        If `true`, the comparison will be case-insensitive.
      *        If `false`, the comparison will consider case sensitivity.
      * @return `true` if there are declarations with all the specified names, `false` otherwise.
      */
@@ -121,7 +121,7 @@ interface KoFunctionProvider : KoBaseProvider {
      * @param includeNested Specifies whether to include nested functions in the check (optional, default is `true`).
      * @param includeLocal Specifies whether to include local functions in the check (optional, default is `true`).
      * @param ignoreCase Specifies whether the comparison should ignore case.
-     *        If `true`, the prefix comparison will be case-insensitive.
+     *        If `true`, the comparison will be case-insensitive.
      *        If `false`, the comparison will consider case sensitivity.
      * @return `true` if there are declarations with all the specified names, `false` otherwise.
      */
@@ -149,7 +149,7 @@ interface KoFunctionProvider : KoBaseProvider {
     /**
      * Determines whether the declaration has all functions that satisfy the provided predicate.
      *
-     * Note that if the functions contains no elements, the function returns `true` because there are no elements in it
+     * Note that if the functions contain no elements, the function returns `true` because there are no elements in it
      * that do not match the predicate.
      *
      * @param includeNested Specifies whether to include nested functions in the check (optional, default is `true`).

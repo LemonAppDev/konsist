@@ -9,7 +9,7 @@ interface KoSealedModifierProvider :
     KoBaseProvider,
     KoModifierProvider {
     /**
-     * Determines whatever declaration has `sealed` modifier.
+     * Determines whether the declaration has the `sealed` modifier.
      */
     val hasSealedModifier: Boolean
 }

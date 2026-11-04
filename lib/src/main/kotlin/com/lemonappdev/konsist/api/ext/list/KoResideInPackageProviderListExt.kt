@@ -8,6 +8,7 @@ import com.lemonappdev.konsist.api.provider.KoResideInPackageProvider
  *
  * @param names The package names to include.
  * @return A list containing elements that reside in any of the specified packages (or any package if [names] is empty).
+ * @see KoResideInPackageProvider.residesInPackage
  */
 fun <T : KoResideInPackageProvider> List<T>.withPackage(vararg names: String): List<T> = withPackage(listOf(*names))
 
@@ -16,12 +17,13 @@ fun <T : KoResideInPackageProvider> List<T>.withPackage(vararg names: String): L
  *
  * @param names The package names to include.
  * @return A list containing elements that reside in any of the specified packages (or any package if [names] is empty).
+ * @see KoResideInPackageProvider.residesInPackage
  */
 fun <T : KoResideInPackageProvider> List<T>.withPackage(names: Collection<String>): List<T> =
     filter {
         when {
             names.isEmpty() -> (it as? KoPackageProvider)?.packagee != null
-            else -> names.any { packagee -> it.resideInPackage(packagee) }
+            else -> names.any { packagee -> it.residesInPackage(packagee) }
         }
     }
 
@@ -29,7 +31,8 @@ fun <T : KoResideInPackageProvider> List<T>.withPackage(names: Collection<String
  * List containing elements without package.
  *
  * @param names The package names to exclude.
- * @return A list containing elements that don't reside in any of the specified packages (or none package if [names] is empty).
+ * @return A list containing elements that don't reside in any of the specified packages (or without a package if [names] is empty).
+ * @see KoResideInPackageProvider.residesOutsidePackage
  */
 fun <T : KoResideInPackageProvider> List<T>.withoutPackage(vararg names: String): List<T> = withoutPackage(listOf(*names))
 
@@ -37,12 +40,13 @@ fun <T : KoResideInPackageProvider> List<T>.withoutPackage(vararg names: String)
  * List containing elements without package.
  *
  * @param names The package names to exclude.
- * @return A list containing elements that don't reside in any of the specified packages (or none package if [names] is empty).
+ * @return A list containing elements that don't reside in any of the specified packages (or without a package if [names] is empty).
+ * @see KoResideInPackageProvider.residesOutsidePackage
  */
 fun <T : KoResideInPackageProvider> List<T>.withoutPackage(names: Collection<String>): List<T> =
     filter {
         when {
             names.isEmpty() -> (it as? KoPackageProvider)?.packagee == null
-            else -> names.all { packagee -> it.resideOutsidePackage(packagee) }
+            else -> names.all { packagee -> it.residesOutsidePackage(packagee) }
         }
     }

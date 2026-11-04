@@ -1,0 +1,3 @@
+class SampleType
+
+val fixtureProperty = SampleType()

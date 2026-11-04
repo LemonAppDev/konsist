@@ -8,50 +8,244 @@ import org.junit.jupiter.params.provider.MethodSource
 
 class KoTypeDeclarationForKoIsMutableTypeProviderTest {
     @ParameterizedTest
-    @MethodSource("provideValues")
+    @MethodSource("provideValuesForIsMutableType")
     fun `is-mutable-type`(
         fileName: String,
         value: Boolean,
     ) {
         // given
-        val sut =
-            getSnippetFile(fileName)
-                .classes()
-                .first()
-                .primaryConstructor
-                ?.parameters
-                ?.first()
-                ?.type
+        val sut = getType(fileName)
 
         // then
         sut?.isMutableType shouldBeEqualTo value
     }
 
+    @ParameterizedTest
+    @MethodSource("provideValuesForHasMutableTypeArgument")
+    fun `has-mutable-type-argument`(
+        fileName: String,
+        value: Boolean,
+    ) {
+        // given
+        val sut = getType(fileName)
+
+        // then
+        sut?.hasMutableTypeArgument shouldBeEqualTo value
+    }
+
+    @ParameterizedTest
+    @MethodSource("provideValuesForIsImmutableType")
+    fun `is-immutable-type`(
+        fileName: String,
+        value: Boolean,
+    ) {
+        // given
+        val sut = getType(fileName)
+
+        // then
+        sut?.isImmutableType shouldBeEqualTo value
+    }
+
+    @ParameterizedTest
+    @MethodSource("provideValuesForHasImmutableTypeArgument")
+    fun `has-immutable-type-argument`(
+        fileName: String,
+        value: Boolean,
+    ) {
+        // given
+        val sut = getType(fileName)
+
+        // then
+        sut?.hasImmutableTypeArgument shouldBeEqualTo value
+    }
+
+    private fun getType(fileName: String) =
+        getSnippetFile(fileName)
+            .classes()
+            .first()
+            .primaryConstructor
+            ?.parameters
+            ?.first()
+            ?.type
+
     private fun getSnippetFile(fileName: String) =
         TestSnippetProvider.getSnippetKoScope("core/declaration/type/kotype/snippet/forkoismutabletypeprovider/", fileName)
 
     companion object {
-        @Suppress("unused")
+        @Suppress("unused", "detekt.LongMethod")
         @JvmStatic
-        fun provideValues() =
+        fun provideValuesForIsMutableType() =
             listOf(
                 arguments("kotlin-type-is-mutable-type", true),
                 arguments("kotlin-type-is-not-mutable-type", false),
+                arguments("fully-qualified-kotlin-type-is-mutable-type", true),
+                arguments("known-kotlin-collection-type-is-mutable-type", true),
+                arguments("known-kotlin-array-type-is-mutable-type", true),
+                arguments("known-java-type-is-mutable-type", true),
+                arguments("fully-qualified-java-type-is-mutable-type", true),
                 arguments("generic-type-is-mutable-type", true),
                 arguments("generic-type-is-not-mutable-type", false),
+                arguments("type-with-mutable-type-argument-is-not-mutable-type", false),
                 arguments("class-type-is-mutable-type", true),
                 arguments("class-type-is-not-mutable-type", false),
+                arguments("class-type-with-var-property-is-mutable-type", true),
+                arguments("class-type-with-private-var-property-is-mutable-type", true),
+                arguments("class-type-with-var-constructor-property-is-mutable-type", true),
+                arguments("class-type-with-val-properties-is-not-mutable-type", false),
+                arguments("class-type-with-val-mutable-property-is-mutable-type", true),
+                arguments("class-type-with-val-known-mutable-property-is-mutable-type", true),
+                arguments("class-type-with-val-property-with-mutable-type-argument-is-mutable-type", true),
+                arguments("class-type-with-nested-val-mutable-property-is-mutable-type", true),
+                arguments("class-type-with-self-referencing-val-property-is-not-mutable-type", false),
+                arguments("class-type-with-typealias-cycle-val-property-is-not-mutable-type", false),
+                arguments("class-type-with-var-property-in-companion-object-is-not-mutable-type", false),
+                arguments("class-type-with-var-property-in-nested-class-is-not-mutable-type", false),
+                arguments("class-type-with-mutable-parent-class-is-mutable-type", true),
+                arguments("class-type-with-indirect-mutable-parent-class-is-mutable-type", true),
+                arguments("class-type-with-mutable-parent-interface-is-mutable-type", true),
+                arguments("class-type-with-not-mutable-parent-is-not-mutable-type", false),
+                arguments("class-type-with-known-mutable-parent-is-mutable-type", true),
+                arguments("class-type-with-mutable-kotlin-parent-interface-is-mutable-type", true),
+                arguments("class-type-with-mutable-external-parent-is-mutable-type", true),
                 arguments("interface-type-is-mutable-type", true),
                 arguments("interface-type-is-not-mutable-type", false),
+                arguments("interface-type-with-var-property-is-mutable-type", true),
                 arguments("object-type-is-mutable-type", true),
                 arguments("object-type-is-not-mutable-type", false),
+                arguments("object-type-with-var-property-is-mutable-type", true),
                 arguments("function-type-type-is-not-mutable-type", false),
                 arguments("import-alias-type-is-mutable-type", true),
                 arguments("import-alias-type-is-not-mutable-type", false),
+                arguments("import-alias-type-with-mutable-name-is-not-mutable-type", false),
                 arguments("typealias-type-is-mutable-type", true),
                 arguments("typealias-type-is-not-mutable-type", false),
+                arguments("typealias-type-with-mutable-name-is-not-mutable-type", false),
+                arguments("typealias-to-class-type-with-var-property-is-mutable-type", true),
                 arguments("external-type-is-mutable-type", true),
                 arguments("external-type-is-not-mutable-type", false),
+                arguments("type-parameter-type-is-not-immutable-type", false),
+                arguments("typealias-type-is-immutable-type", false),
+                arguments("known-immutable-java-time-type-is-immutable-type", false),
+                arguments("known-immutable-java-type-is-immutable-type", false),
+                arguments("known-immutable-java-lang-type-is-immutable-type", false),
+                arguments("known-immutable-kotlin-external-type-is-immutable-type", false),
+                arguments("unknown-external-type-is-not-immutable-type", false),
+                arguments("any-type-is-not-immutable-type", false),
+                arguments("open-kotlin-type-is-not-immutable-type", false),
+                arguments("read-only-kotlin-collection-type-is-immutable-type", false),
+                arguments("interface-type-with-val-property-is-not-immutable-type", false),
+                arguments("open-class-type-is-not-immutable-type", false),
+                arguments("abstract-class-type-is-not-immutable-type", false),
+                arguments("sealed-class-type-is-not-immutable-type", false),
+                arguments("class-type-with-interface-parent-is-immutable-type", false),
+            )
+
+        @Suppress("unused")
+        @JvmStatic
+        fun provideValuesForHasMutableTypeArgument() =
+            listOf(
+                arguments("type-has-mutable-type-argument", true),
+                arguments("type-has-nested-mutable-type-argument", true),
+                arguments("type-has-typealias-mutable-type-argument", true),
+                arguments("type-has-import-alias-mutable-type-argument", true),
+                arguments("typealias-type-has-mutable-type-argument", true),
+                arguments("mutable-type-has-not-mutable-type-argument", false),
+                arguments("non-generic-type-has-not-mutable-type-argument", false),
+                arguments("type-with-type-parameter-type-argument-has-not-immutable-type-argument", true),
+                arguments("type-with-star-projection-type-argument-has-not-immutable-type-argument", false),
+                arguments("type-with-function-type-argument-has-not-immutable-type-argument", false),
+                arguments("type-with-unknown-external-type-argument-has-not-immutable-type-argument", false),
+                arguments("type-with-known-immutable-external-type-argument-has-immutable-type-argument", false),
+                arguments("type-with-any-type-argument-has-not-immutable-type-argument", false),
+            )
+
+        @Suppress("unused", "detekt.LongMethod")
+        @JvmStatic
+        fun provideValuesForIsImmutableType() =
+            listOf(
+                arguments("kotlin-type-is-mutable-type", false),
+                arguments("kotlin-type-is-not-mutable-type", true),
+                arguments("fully-qualified-kotlin-type-is-mutable-type", false),
+                arguments("known-kotlin-collection-type-is-mutable-type", false),
+                arguments("known-kotlin-array-type-is-mutable-type", false),
+                arguments("known-java-type-is-mutable-type", false),
+                arguments("fully-qualified-java-type-is-mutable-type", false),
+                arguments("generic-type-is-mutable-type", false),
+                arguments("generic-type-is-not-mutable-type", true),
+                arguments("type-with-mutable-type-argument-is-not-mutable-type", true),
+                arguments("class-type-is-mutable-type", false),
+                arguments("class-type-is-not-mutable-type", true),
+                arguments("class-type-with-var-property-is-mutable-type", false),
+                arguments("class-type-with-private-var-property-is-mutable-type", false),
+                arguments("class-type-with-var-constructor-property-is-mutable-type", false),
+                arguments("class-type-with-val-properties-is-not-mutable-type", true),
+                arguments("class-type-with-val-mutable-property-is-mutable-type", false),
+                arguments("class-type-with-val-known-mutable-property-is-mutable-type", false),
+                arguments("class-type-with-val-property-with-mutable-type-argument-is-mutable-type", false),
+                arguments("class-type-with-nested-val-mutable-property-is-mutable-type", false),
+                arguments("class-type-with-self-referencing-val-property-is-not-mutable-type", true),
+                arguments("class-type-with-typealias-cycle-val-property-is-not-mutable-type", true),
+                arguments("class-type-with-var-property-in-companion-object-is-not-mutable-type", true),
+                arguments("class-type-with-var-property-in-nested-class-is-not-mutable-type", true),
+                arguments("class-type-with-mutable-parent-class-is-mutable-type", false),
+                arguments("class-type-with-indirect-mutable-parent-class-is-mutable-type", false),
+                arguments("class-type-with-mutable-parent-interface-is-mutable-type", false),
+                arguments("class-type-with-not-mutable-parent-is-not-mutable-type", true),
+                arguments("class-type-with-known-mutable-parent-is-mutable-type", false),
+                arguments("class-type-with-mutable-kotlin-parent-interface-is-mutable-type", false),
+                arguments("class-type-with-mutable-external-parent-is-mutable-type", false),
+                arguments("interface-type-is-mutable-type", false),
+                arguments("interface-type-is-not-mutable-type", false),
+                arguments("interface-type-with-var-property-is-mutable-type", false),
+                arguments("object-type-is-mutable-type", false),
+                arguments("object-type-is-not-mutable-type", true),
+                arguments("object-type-with-var-property-is-mutable-type", false),
+                arguments("function-type-type-is-not-mutable-type", false),
+                arguments("import-alias-type-is-mutable-type", false),
+                arguments("import-alias-type-is-not-mutable-type", true),
+                arguments("import-alias-type-with-mutable-name-is-not-mutable-type", true),
+                arguments("typealias-type-is-mutable-type", false),
+                arguments("typealias-type-is-not-mutable-type", false),
+                arguments("typealias-type-with-mutable-name-is-not-mutable-type", false),
+                arguments("typealias-to-class-type-with-var-property-is-mutable-type", false),
+                arguments("external-type-is-mutable-type", false),
+                arguments("external-type-is-not-mutable-type", false),
+                arguments("type-parameter-type-is-not-immutable-type", false),
+                arguments("typealias-type-is-immutable-type", true),
+                arguments("known-immutable-java-time-type-is-immutable-type", true),
+                arguments("known-immutable-java-type-is-immutable-type", true),
+                arguments("known-immutable-java-lang-type-is-immutable-type", true),
+                arguments("known-immutable-kotlin-external-type-is-immutable-type", true),
+                arguments("unknown-external-type-is-not-immutable-type", false),
+                arguments("any-type-is-not-immutable-type", false),
+                arguments("open-kotlin-type-is-not-immutable-type", false),
+                arguments("read-only-kotlin-collection-type-is-immutable-type", true),
+                arguments("interface-type-with-val-property-is-not-immutable-type", false),
+                arguments("open-class-type-is-not-immutable-type", false),
+                arguments("abstract-class-type-is-not-immutable-type", false),
+                arguments("sealed-class-type-is-not-immutable-type", false),
+                arguments("class-type-with-interface-parent-is-immutable-type", true),
+            )
+
+        @Suppress("unused")
+        @JvmStatic
+        fun provideValuesForHasImmutableTypeArgument() =
+            listOf(
+                arguments("type-has-mutable-type-argument", true),
+                arguments("type-has-nested-mutable-type-argument", true),
+                arguments("type-has-typealias-mutable-type-argument", true),
+                arguments("type-has-import-alias-mutable-type-argument", true),
+                arguments("typealias-type-has-mutable-type-argument", true),
+                arguments("mutable-type-has-not-mutable-type-argument", true),
+                arguments("type-has-nested-immutable-type-argument", true),
+                arguments("typealias-type-has-immutable-type-argument", true),
+                arguments("non-generic-type-has-not-mutable-type-argument", false),
+                arguments("type-with-type-parameter-type-argument-has-not-immutable-type-argument", false),
+                arguments("type-with-star-projection-type-argument-has-not-immutable-type-argument", false),
+                arguments("type-with-function-type-argument-has-not-immutable-type-argument", false),
+                arguments("type-with-unknown-external-type-argument-has-not-immutable-type-argument", false),
+                arguments("type-with-known-immutable-external-type-argument-has-immutable-type-argument", true),
+                arguments("type-with-any-type-argument-has-not-immutable-type-argument", false),
             )
     }
 }

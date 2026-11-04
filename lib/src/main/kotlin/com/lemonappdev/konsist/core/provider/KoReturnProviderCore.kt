@@ -9,6 +9,7 @@ import org.jetbrains.kotlin.psi.KtFunction
 import org.jetbrains.kotlin.psi.KtTypeReference
 import org.jetbrains.kotlin.psi.psiUtil.isExtensionDeclaration
 import kotlin.reflect.KClass
+import kotlin.reflect.KType
 
 internal interface KoReturnProviderCore :
     KoReturnProvider,
@@ -65,4 +66,6 @@ internal interface KoReturnProviderCore :
         }
 
     override fun hasReturnTypeOf(kClass: KClass<*>): Boolean = hasTypeOf(returnType, kClass)
+
+    override fun hasReturnTypeOf(kType: KType): Boolean = hasTypeOf(returnType, kType)
 }

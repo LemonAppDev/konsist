@@ -9,7 +9,7 @@ interface KoFinalModifierProvider :
     KoBaseProvider,
     KoModifierProvider {
     /**
-     * Determines whatever declaration has `final` modifier.
+     * Determines whether the declaration has the `final` modifier.
      */
     val hasFinalModifier: Boolean
 }

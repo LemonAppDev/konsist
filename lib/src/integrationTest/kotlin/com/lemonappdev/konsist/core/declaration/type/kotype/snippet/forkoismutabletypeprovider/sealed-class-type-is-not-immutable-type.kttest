@@ -1,0 +1,5 @@
+class FixtureClass1(val fixtureProperty1: FixtureClass2)
+
+sealed class FixtureClass2 {
+    data class FixtureClass3(val fixtureProperty2: Int) : FixtureClass2()
+}

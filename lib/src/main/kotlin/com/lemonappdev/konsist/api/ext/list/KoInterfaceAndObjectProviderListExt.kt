@@ -7,7 +7,8 @@ import com.lemonappdev.konsist.api.provider.KoInterfaceAndObjectProvider
  * List containing interface or/and object declarations.
  *
  * @param includeNested Whether to include nested interfaces and objects.
- * @return A list containing interface or/and objects declarations.
+ * @return A list containing interface or/and object declarations.
+ * @see KoInterfaceAndObjectProvider.interfacesAndObjects
  */
 fun <T : KoInterfaceAndObjectProvider> List<T>.interfacesAndObjects(includeNested: Boolean = true): List<KoInterfaceAndObjectDeclaration> =
     flatMap { it.interfacesAndObjects(includeNested) }
@@ -17,15 +18,17 @@ fun <T : KoInterfaceAndObjectProvider> List<T>.interfacesAndObjects(includeNeste
  *
  * @param includeNested Whether to include nested interfaces and objects.
  * @return A list containing declarations with any interface or object.
+ * @see KoInterfaceAndObjectProvider.hasInterfacesOrObjects
  */
 fun <T : KoInterfaceAndObjectProvider> List<T>.withInterfacesAndObjects(includeNested: Boolean = true): List<T> =
     filter { it.hasInterfacesOrObjects(includeNested) }
 
 /**
- * List containing declarations with no interfaces and objects.
+ * List containing declarations with no interfaces or objects.
  *
  * @param includeNested Whether to include nested interfaces and objects.
- * @return A list containing declarations with no interfaces and objects.
+ * @return A list containing declarations with no interfaces or objects.
+ * @see KoInterfaceAndObjectProvider.hasInterfacesOrObjects
  */
 fun <T : KoInterfaceAndObjectProvider> List<T>.withoutInterfacesAndObjects(includeNested: Boolean = true): List<T> =
     filterNot { it.hasInterfacesOrObjects(includeNested) }
@@ -37,9 +40,10 @@ fun <T : KoInterfaceAndObjectProvider> List<T>.withoutInterfacesAndObjects(inclu
  * @param names The names of additional interfaces and objects to include.
  * @param includeNested Whether to include nested interfaces and objects.
  * @param ignoreCase Specifies whether the comparison should ignore case.
- *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations with at least one of the specified interface(s) or object(s).
+ * @see KoInterfaceAndObjectProvider.hasInterfaceOrObjectWithName
  */
 fun <T : KoInterfaceAndObjectProvider> List<T>.withInterfaceOrObjectNamed(
     name: String,
@@ -51,12 +55,13 @@ fun <T : KoInterfaceAndObjectProvider> List<T>.withInterfaceOrObjectNamed(
 /**
  * List containing declarations that have at least one interface or object with the specified name(s).
  *
- * @param names The names of additional interfaces and objects to include.
+ * @param names The names of the interfaces and objects to include.
  * @param includeNested Whether to include nested interfaces and objects.
  * @param ignoreCase Specifies whether the comparison should ignore case.
- *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations with at least one of the specified interface(s) or object(s).
+ * @see KoInterfaceAndObjectProvider.hasInterfaceOrObjectWithName
  */
 fun <T : KoInterfaceAndObjectProvider> List<T>.withInterfaceOrObjectNamed(
     names: Collection<String>,
@@ -71,15 +76,16 @@ fun <T : KoInterfaceAndObjectProvider> List<T>.withInterfaceOrObjectNamed(
     }
 
 /**
- * List containing declarations without any of specified interfaces and objects.
+ * List containing declarations without any of the specified interfaces and objects.
  *
  * @param name The name of the interface or object to exclude.
  * @param names The names of additional interfaces and objects to exclude.
  * @param includeNested Whether to include nested interfaces and objects.
  * @param ignoreCase Specifies whether the comparison should ignore case.
- *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
- * @return A list containing declarations without any of specified interfaces and objects.
+ * @return A list containing declarations without any of the specified interfaces and objects.
+ * @see KoInterfaceAndObjectProvider.hasInterfaceOrObjectWithName
  */
 fun <T : KoInterfaceAndObjectProvider> List<T>.withoutInterfaceOrObjectNamed(
     name: String,
@@ -89,14 +95,15 @@ fun <T : KoInterfaceAndObjectProvider> List<T>.withoutInterfaceOrObjectNamed(
 ): List<T> = withoutInterfaceOrObjectNamed(listOf(name, *names), includeNested, ignoreCase)
 
 /**
- * List containing declarations without any of specified interfaces and objects.
+ * List containing declarations without any of the specified interfaces and objects.
  *
- * @param names The names of additional interfaces and objects to exclude.
+ * @param names The names of the interfaces and objects to exclude.
  * @param includeNested Whether to include nested interfaces and objects.
  * @param ignoreCase Specifies whether the comparison should ignore case.
- *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
- * @return A list containing declarations without any of specified interfaces and objects.
+ * @return A list containing declarations without any of the specified interfaces and objects.
+ * @see KoInterfaceAndObjectProvider.hasInterfaceOrObjectWithName
  */
 fun <T : KoInterfaceAndObjectProvider> List<T>.withoutInterfaceOrObjectNamed(
     names: Collection<String>,
@@ -114,12 +121,13 @@ fun <T : KoInterfaceAndObjectProvider> List<T>.withoutInterfaceOrObjectNamed(
  * List containing declarations that have all specified interfaces and objects.
  *
  * @param name The name of the interface or object to include.
- * @param names The name(s) of the interface(s) and object(s) to include.
+ * @param names The names of additional interfaces and objects to include.
  * @param includeNested Whether to include nested interfaces and objects.
  * @param ignoreCase Specifies whether the comparison should ignore case.
- *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations with all specified interface(s) and object(s).
+ * @see KoInterfaceAndObjectProvider.hasInterfacesAndObjectsWithAllNames
  */
 fun <T : KoInterfaceAndObjectProvider> List<T>.withAllInterfacesAndObjectsNamed(
     name: String,
@@ -131,12 +139,13 @@ fun <T : KoInterfaceAndObjectProvider> List<T>.withAllInterfacesAndObjectsNamed(
 /**
  * List containing declarations that have all specified interfaces and objects.
  *
- * @param names The name(s) of the interface(s) and object(s) to include.
+ * @param names The names of the interfaces and objects to include.
  * @param includeNested Whether to include nested interfaces and objects.
  * @param ignoreCase Specifies whether the comparison should ignore case.
- *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations with all specified interface(s) and object(s).
+ * @see KoInterfaceAndObjectProvider.hasInterfacesAndObjectsWithAllNames
  */
 fun <T : KoInterfaceAndObjectProvider> List<T>.withAllInterfacesAndObjectsNamed(
     names: Collection<String>,
@@ -163,12 +172,13 @@ fun <T : KoInterfaceAndObjectProvider> List<T>.withAllInterfacesAndObjectsNamed(
  * List containing declarations without all specified interfaces and objects.
  *
  * @param name The name of the interface or object to exclude.
- * @param names The name(s) of the interface(s) and object(s) to exclude.
+ * @param names The names of additional interfaces and objects to exclude.
  * @param includeNested Whether to include nested interfaces and objects.
  * @param ignoreCase Specifies whether the comparison should ignore case.
- *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations without all specified interface(s) and object(s).
+ * @see KoInterfaceAndObjectProvider.hasInterfacesAndObjectsWithAllNames
  */
 fun <T : KoInterfaceAndObjectProvider> List<T>.withoutAllInterfacesAndObjectsNamed(
     name: String,
@@ -180,12 +190,13 @@ fun <T : KoInterfaceAndObjectProvider> List<T>.withoutAllInterfacesAndObjectsNam
 /**
  * List containing declarations without all specified interfaces and objects.
  *
- * @param names The name(s) of the interface(s) and object(s) to exclude.
+ * @param names The names of the interfaces and objects to exclude.
  * @param includeNested Whether to include nested interfaces and objects.
  * @param ignoreCase Specifies whether the comparison should ignore case.
- *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations without all specified interface(s) and object(s).
+ * @see KoInterfaceAndObjectProvider.hasInterfacesAndObjectsWithAllNames
  */
 fun <T : KoInterfaceAndObjectProvider> List<T>.withoutAllInterfacesAndObjectsNamed(
     names: Collection<String>,
@@ -214,6 +225,7 @@ fun <T : KoInterfaceAndObjectProvider> List<T>.withoutAllInterfacesAndObjectsNam
  * @param includeNested Whether to include nested interfaces and objects.
  * @param predicate A function that defines the condition to be met by an interface or object declaration.
  * @return A list containing declarations with at least one interface or object satisfying the predicate.
+ * @see KoInterfaceAndObjectProvider.hasInterfaceOrObject
  */
 fun <T : KoInterfaceAndObjectProvider> List<T>.withInterfaceOrObject(
     includeNested: Boolean = true,
@@ -221,11 +233,12 @@ fun <T : KoInterfaceAndObjectProvider> List<T>.withInterfaceOrObject(
 ): List<T> = filter { it.hasInterfaceOrObject(includeNested, predicate) }
 
 /**
- * List containing declarations that not have interface or object satisfying the provided predicate.
+ * List containing declarations that do not have any interface or object satisfying the provided predicate.
  *
  * @param includeNested Whether to include nested interfaces and objects.
  * @param predicate A function that defines the condition to be met by an interface or object declaration.
- * @return A list containing declarations without interface or object satisfying the provided predicate.
+ * @return A list containing declarations without any interface or object satisfying the provided predicate.
+ * @see KoInterfaceAndObjectProvider.hasInterfaceOrObject
  */
 fun <T : KoInterfaceAndObjectProvider> List<T>.withoutInterfaceOrObject(
     includeNested: Boolean = true,
@@ -236,8 +249,9 @@ fun <T : KoInterfaceAndObjectProvider> List<T>.withoutInterfaceOrObject(
  * List containing declarations that have all interfaces and objects satisfying the provided predicate.
  *
  * @param includeNested Whether to include nested interfaces and objects.
- * @param predicate A function that defines the condition to be met by all interface and objects declarations.
+ * @param predicate A function that defines the condition to be met by all interface and object declarations.
  * @return A filtered list containing declarations with all interfaces and objects satisfying the predicate.
+ * @see KoInterfaceAndObjectProvider.hasAllInterfacesAndObjects
  */
 fun <T : KoInterfaceAndObjectProvider> List<T>.withAllInterfacesAndObjects(
     includeNested: Boolean = true,
@@ -251,8 +265,9 @@ fun <T : KoInterfaceAndObjectProvider> List<T>.withAllInterfacesAndObjects(
  * List containing declarations that have at least one interface or object not satisfying the provided predicate.
  *
  * @param includeNested Whether to include nested interfaces and objects.
- * @param predicate A function that defines the condition to be met by all interface or objects declarations.
+ * @param predicate A function that defines the condition to be met by all interface and object declarations.
  * @return A list containing declarations that have at least one interface or object not satisfying the provided predicate.
+ * @see KoInterfaceAndObjectProvider.hasAllInterfacesAndObjects
  */
 fun <T : KoInterfaceAndObjectProvider> List<T>.withoutAllInterfacesAndObjects(
     includeNested: Boolean = true,
@@ -265,6 +280,7 @@ fun <T : KoInterfaceAndObjectProvider> List<T>.withoutAllInterfacesAndObjects(
  * @param includeNested Whether to include nested interfaces and objects.
  * @param predicate A function that defines the condition to be met by the list of interfaces and objects declarations.
  * @return A list containing declarations with interfaces and objects declarations satisfying the predicate.
+ * @see KoInterfaceAndObjectProvider.interfacesAndObjects
  */
 fun <T : KoInterfaceAndObjectProvider> List<T>.withInterfacesAndObjects(
     includeNested: Boolean = true,
@@ -277,6 +293,7 @@ fun <T : KoInterfaceAndObjectProvider> List<T>.withInterfacesAndObjects(
  * @param includeNested Whether to include nested interfaces and objects.
  * @param predicate A function that defines the condition to be met by the list of interfaces and objects declarations.
  * @return A list containing declarations without interfaces and objects declarations satisfying the predicate.
+ * @see KoInterfaceAndObjectProvider.interfacesAndObjects
  */
 fun <T : KoInterfaceAndObjectProvider> List<T>.withoutInterfacesAndObjects(
     includeNested: Boolean = true,

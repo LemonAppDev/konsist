@@ -88,5 +88,21 @@ class KoPropertyDeclarationForKoValueProviderTest {
         }
     }
 
+    @Test
+    fun `property-with-explicit-backing-field-has-no-value`() {
+        // given
+        val sut =
+            getSnippetFile("property-with-explicit-backing-field-has-no-value")
+                .properties()
+                .first()
+
+        // then
+        assertSoftly(sut) {
+            value shouldBeEqualTo null
+            hasValue() shouldBeEqualTo false
+            hasValue("mutableListOf(0)") shouldBeEqualTo false
+        }
+    }
+
     private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/koproperty/snippet/forkovalueprovider/", fileName)
 }

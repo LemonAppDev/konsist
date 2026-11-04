@@ -1,7 +1,6 @@
 package com.lemonappdev.konsist.core.provider
 
 import com.lemonappdev.konsist.api.provider.KoIsGenericProvider
-import com.lemonappdev.konsist.api.provider.KoNameProvider
 import com.lemonappdev.konsist.api.provider.KoSourceDeclarationProvider
 import com.lemonappdev.konsist.api.provider.KoTypeParameterProvider
 
@@ -10,23 +9,20 @@ internal interface KoIsGenericProviderCore :
     KoBaseProviderCore {
     override val isGeneric: Boolean
         get() {
-            if ((this as? KoTypeParameterProvider) != null) {
-                return (this as? KoTypeParameterProvider)?.typeParameters?.isNotEmpty() == true
+            if (this is KoTypeParameterProvider) {
+                return typeParameters.isNotEmpty()
             }
 
-            val regex = "\\w+<[a-zA-Z*<>()?, ]+>".toRegex()
+            if ((this as? KoTypeArgumentProviderCore)?.ktTypeProjections?.isNotEmpty() == true) {
+                return true
+            }
 
-            val type =
-                if ((this as? KoSourceDeclarationProvider)?.sourceDeclaration?.isTypeAlias == true) {
-                    (this as? KoSourceDeclarationProvider)
-                        ?.sourceDeclaration
-                        ?.asTypeAliasDeclaration()
-                        ?.type
-                        ?.text
-                } else {
-                    (this as? KoNameProvider)?.name
-                }
+            val typeAliasType =
+                (this as? KoSourceDeclarationProvider)
+                    ?.sourceDeclaration
+                    ?.asTypeAliasDeclaration()
+                    ?.type
 
-            return type?.let { regex.matches(it) } ?: false
+            return (typeAliasType as? KoTypeArgumentProviderCore)?.ktTypeProjections?.isNotEmpty() == true
         }
 }

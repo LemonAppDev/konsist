@@ -1,0 +1,3 @@
+import com.lemonappdev.konsist.testdata.*
+
+class SampleClass(val sampleParameter: FixtureClass)

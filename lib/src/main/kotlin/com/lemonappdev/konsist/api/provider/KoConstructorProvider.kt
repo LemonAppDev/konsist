@@ -7,7 +7,7 @@ import com.lemonappdev.konsist.api.declaration.KoConstructorDeclaration
  */
 interface KoConstructorProvider : KoBaseProvider {
     /**
-     * The all primary and secondary constructors of the declaration.
+     * All primary and secondary constructors of the declaration.
      */
     val constructors: List<KoConstructorDeclaration>
 
@@ -17,7 +17,7 @@ interface KoConstructorProvider : KoBaseProvider {
     val numConstructors: Int
 
     /**
-     * Returns the number of constructors that satisfies the specified predicate present in the declaration.
+     * Returns the number of constructors that satisfy the specified predicate present in the declaration.
      *
      * @param predicate The predicate function to determine if a constructor satisfies a condition.
      * @return The number of constructors in the declaration.
@@ -25,14 +25,14 @@ interface KoConstructorProvider : KoBaseProvider {
     fun countConstructors(predicate: (KoConstructorDeclaration) -> Boolean): Int
 
     /**
-     * Determines whatever the declaration has any constructor.
+     * Determines whether the declaration has any constructor.
      *
      * @return `true` if the declaration has any constructor, `false` otherwise.
      */
     fun hasConstructors(): Boolean
 
     /**
-     * Determines whatever the declaration has any constructor with the specified predicate.
+     * Determines whether the declaration has any constructor with the specified predicate.
      *
      * @param predicate The predicate function to determine if a constructor satisfies a condition.
      * @return `true` if the declaration has constructors with the specified predicate, `false` otherwise.
@@ -40,9 +40,9 @@ interface KoConstructorProvider : KoBaseProvider {
     fun hasConstructor(predicate: (KoConstructorDeclaration) -> Boolean): Boolean
 
     /**
-     * Determines whatever the declaration has all constructors with the specified predicate.
+     * Determines whether the declaration has all constructors with the specified predicate.
      *
-     * Note that if the constructors contains no elements, the function returns `true` because there are no elements in it
+     * Note that if the constructors contain no elements, the function returns `true` because there are no elements in it
      * that do not match the predicate (["Vacuous truth"](https://en.wikipedia.org/wiki/Vacuous_truth)).
      *
      * @param predicate The predicate function to determine if a constructor satisfies a condition.

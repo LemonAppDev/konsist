@@ -62,6 +62,9 @@ class KoImportDeclarationForKoRepresentsTypeProviderTest {
                 arguments("com.lemonappdev.konsist.testdata.OtherClass", false, false),
                 arguments("com.lemonappdev.konsist.testdata.otherclass", false, false),
                 arguments("com.lemonappdev.konsist.testdata.otherclass", true, false),
+                arguments("testdata.FixtureClass", false, true),
+                arguments("Class", false, false),
+                arguments("class", true, false),
                 arguments(null, false, false),
                 arguments(null, true, false),
             )

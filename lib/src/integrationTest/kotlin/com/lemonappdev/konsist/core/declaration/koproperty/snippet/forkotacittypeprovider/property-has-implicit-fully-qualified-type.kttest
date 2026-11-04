@@ -1,0 +1,1 @@
+val fixtureProperty = com.lemonappdev.konsist.testdata.FixtureClassWithParameter("some text")

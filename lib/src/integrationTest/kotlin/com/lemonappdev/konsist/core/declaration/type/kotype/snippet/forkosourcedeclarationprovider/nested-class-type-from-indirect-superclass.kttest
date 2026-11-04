@@ -1,0 +1,5 @@
+import com.lemonappdev.konsist.testdata.FixtureParentClassWithNestedDeclarations
+
+class SampleClass(val sampleParameter: FixtureNestedClass) : SampleParentClass()
+
+open class SampleParentClass : FixtureParentClassWithNestedDeclarations()

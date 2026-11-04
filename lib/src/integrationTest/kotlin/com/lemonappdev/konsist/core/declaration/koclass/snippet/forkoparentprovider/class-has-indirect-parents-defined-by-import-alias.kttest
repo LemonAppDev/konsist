@@ -1,0 +1,6 @@
+import com.lemonappdev.konsist.testdata.FixtureCollection1 as AliasCollection
+import java.io.ByteArrayInputStream as AliasInputStream
+
+abstract class FixtureClass1 : AliasCollection<String>()
+
+class FixtureClass2 : AliasInputStream(byteArrayOf())

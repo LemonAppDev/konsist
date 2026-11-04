@@ -1,29 +1,27 @@
 package com.lemonappdev.konsist.core.util
 
-import com.lemonappdev.konsist.api.Konsist
 import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoFileDeclaration
+import com.lemonappdev.konsist.api.declaration.KoImportAliasDeclaration
 import com.lemonappdev.konsist.api.declaration.KoSourceDeclaration
+import com.lemonappdev.konsist.api.declaration.KoTypeArgumentDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoTypeDeclaration
-import com.lemonappdev.konsist.api.provider.KoContainingDeclarationProvider
+import com.lemonappdev.konsist.api.provider.KoBaseProvider
 import com.lemonappdev.konsist.api.provider.KoDeclarationCastProvider
-import com.lemonappdev.konsist.api.provider.KoDeclarationProvider
 import com.lemonappdev.konsist.api.provider.KoFullyQualifiedNameProvider
 import com.lemonappdev.konsist.core.declaration.KoExternalDeclarationCore
+import com.lemonappdev.konsist.core.declaration.KoTypeArgumentDeclarationCore
 import com.lemonappdev.konsist.core.declaration.KoTypeParameterDeclarationCore
 import com.lemonappdev.konsist.core.declaration.private.KoFunctionTypeDeclarationCore
 import com.lemonappdev.konsist.core.declaration.private.KoGenericTypeDeclarationCore
 import com.lemonappdev.konsist.core.declaration.type.KoKotlinTypeDeclarationCore
 import com.lemonappdev.konsist.core.declaration.type.KoStarProjectionDeclarationCore
-import com.lemonappdev.konsist.core.model.getClass
-import com.lemonappdev.konsist.core.model.getInterface
-import com.lemonappdev.konsist.core.model.getObject
-import com.lemonappdev.konsist.core.model.getTypeAlias
 import com.lemonappdev.konsist.core.provider.KoTypeParameterProviderCore
 import org.jetbrains.kotlin.com.intellij.psi.PsiElement
-import org.jetbrains.kotlin.org.jline.utils.Log
 import org.jetbrains.kotlin.psi.KtAnnotationEntry
+import org.jetbrains.kotlin.psi.KtCallExpression
 import org.jetbrains.kotlin.psi.KtConstructorCalleeExpression
+import org.jetbrains.kotlin.psi.KtDotQualifiedExpression
 import org.jetbrains.kotlin.psi.KtElement
 import org.jetbrains.kotlin.psi.KtFunctionType
 import org.jetbrains.kotlin.psi.KtNameReferenceExpression
@@ -33,16 +31,23 @@ import org.jetbrains.kotlin.psi.KtTypeArgumentList
 import org.jetbrains.kotlin.psi.KtTypeProjection
 import org.jetbrains.kotlin.psi.KtTypeReference
 import org.jetbrains.kotlin.psi.KtUserType
+import java.util.concurrent.ConcurrentHashMap
 import kotlin.reflect.KClass
+import kotlin.reflect.KType
+import kotlin.reflect.KTypeProjection
+import kotlin.reflect.KVariance
 
+@Suppress("detekt.TooManyFunctions")
 object TypeUtil {
+    private val availableTypes = ConcurrentHashMap<String, Boolean>()
+
+    /*
+     * Checks if the class is on the classpath. The class is loaded without initialization, so static initializers
+     * of the analyzed code are not executed.
+     */
     internal fun isTypeAvailable(fqn: String): Boolean =
-        try {
-            Class.forName(fqn)
-            true
-        } catch (e: ClassNotFoundException) {
-            Log.info(e)
-            false
+        availableTypes.computeIfAbsent(fqn) {
+            runCatching { Class.forName(fqn, false, TypeUtil::class.java.classLoader) }.isSuccess
         }
 
     internal fun getBasicType(
@@ -100,9 +105,7 @@ object TypeUtil {
 
         val nestedType =
             if (type is KtNullableType) {
-                type
-                    .children
-                    .firstOrNull()
+                type.innerType
             } else {
                 type
             }
@@ -121,17 +124,113 @@ object TypeUtil {
         ) as KoDeclarationCastProvider?
     }
 
+    /*
+     * Checks if the type represents the given name. The name can be the type name as written in source
+     * (e.g. `File`) or the fully qualified name of the type's source declaration (e.g. `java.io.File`).
+     * Nullability is ignored, e.g. `File?` represents `java.io.File`.
+     */
+    internal fun representsType(
+        type: KoTypeDeclaration,
+        name: String?,
+        ignoreCase: Boolean,
+    ): Boolean {
+        if (name == null) return false
+        if (type.hasName(name, ignoreCase)) return true
+
+        val fullyQualifiedName = getFullyQualifiedName(type.sourceDeclaration) ?: return false
+
+        return name.equals(fullyQualifiedName, ignoreCase) ||
+            name.equals(getKotlinTypeQualifiedName(fullyQualifiedName), ignoreCase)
+    }
+
     internal fun hasTypeOf(
         type: KoTypeDeclaration?,
         kClass: KClass<*>,
-    ): Boolean = kClass.qualifiedName == (type?.sourceDeclaration as? KoFullyQualifiedNameProvider)?.fullyQualifiedName
+    ): Boolean = matchesKClass(getFullyQualifiedName(type?.sourceDeclaration), kClass)
 
     internal fun hasTypeOf(
         type: KoSourceDeclaration?,
         kClass: KClass<*>,
-    ): Boolean = kClass.qualifiedName == (type as? KoFullyQualifiedNameProvider)?.fullyQualifiedName
+    ): Boolean = matchesKClass(getFullyQualifiedName(type), kClass)
 
-    @Suppress("detekt.CyclomaticComplexMethod", "detekt.LongMethod")
+    /*
+     * Returns the fully qualified name of the declaration. For the import alias (`import com.app.Foo as Bar`) it is
+     * the name of the imported declaration (`com.app.Foo`), because the alias refers to the same type.
+     */
+    internal fun getFullyQualifiedName(declaration: Any?): String? =
+        when (declaration) {
+            is KoImportAliasDeclaration -> declaration.importDirective.name
+            is KoFullyQualifiedNameProvider -> declaration.fullyQualifiedName
+            else -> null
+        }
+
+    internal fun hasTypeOf(
+        type: KoTypeDeclaration?,
+        kType: KType,
+    ): Boolean {
+        val kClass = kType.classifier as? KClass<*> ?: return false
+
+        return hasTypeOf(type, kClass) &&
+            (!kType.isMarkedNullable || type?.isNullable == true) &&
+            matchesTypeArguments(type?.typeArguments.orEmpty(), kType.arguments)
+    }
+
+    /*
+     * Checks if the type arguments match the given type projections, e.g. `List<Int>` and `typeOf<List<Int>>()`.
+     * Star projection (`typeOf<List<*>>()`) matches any type argument.
+     */
+    private fun matchesTypeArguments(
+        typeArguments: List<KoTypeArgumentDeclaration>,
+        kTypeProjections: List<KTypeProjection>,
+    ): Boolean =
+        typeArguments.size == kTypeProjections.size &&
+            typeArguments.zip(kTypeProjections).all { (typeArgument, kTypeProjection) ->
+                matchesTypeArgument(typeArgument, kTypeProjection)
+            }
+
+    private fun matchesTypeArgument(
+        typeArgument: KoTypeArgumentDeclaration,
+        kTypeProjection: KTypeProjection,
+    ): Boolean {
+        val kType = kTypeProjection.type ?: return true
+        val kClass = kType.classifier as? KClass<*> ?: return false
+        val isNullable =
+            (typeArgument as? KoTypeArgumentDeclarationCore)
+                ?.ktTypeProjection
+                ?.typeReference
+                ?.typeElement is KtNullableType
+
+        return !typeArgument.isStarProjection &&
+            typeArgument.hasInModifier == (kTypeProjection.variance == KVariance.IN) &&
+            typeArgument.hasOutModifier == (kTypeProjection.variance == KVariance.OUT) &&
+            isNullable == kType.isMarkedNullable &&
+            matchesKClass(getFullyQualifiedName(typeArgument.sourceDeclaration), kClass) &&
+            matchesTypeArguments(typeArgument.typeArguments, kType.arguments)
+    }
+
+    /*
+     * Checks if the fully qualified name refers to the given class.
+     * For `kotlin.RuntimeException` and `RuntimeException::class` value will be true,
+     * although `RuntimeException::class.qualifiedName` is `java.lang.RuntimeException`.
+     */
+    internal fun matchesKClass(
+        fullyQualifiedName: String?,
+        kClass: KClass<*>,
+    ): Boolean {
+        val qualifiedName = fullyQualifiedName?.let { getKotlinTypeQualifiedName(it) }
+
+        return kClass.qualifiedName == qualifiedName
+    }
+
+    internal fun getKotlinTypeQualifiedName(fullyQualifiedName: String): String =
+        kotlinTypeQualifiedNames[fullyQualifiedName] ?: fullyQualifiedName
+
+    /*
+     * Returns the name of the Kotlin type alias of the Java type, e.g. `kotlin.RuntimeException`
+     * for `java.lang.RuntimeException`.
+     */
+    internal fun getKotlinTypeAliasName(qualifiedName: String): String = kotlinTypeAliasNames[qualifiedName] ?: qualifiedName
+
     private fun transformPsiElementToKoTypeDeclaration(
         type: PsiElement?,
         parentDeclaration: KoBaseDeclaration,
@@ -139,37 +238,12 @@ object TypeUtil {
     ): KoDeclarationCastProvider? {
         val nestedType =
             if (type is KtNullableType) {
-                type
-                    .children
-                    .firstOrNull()
+                type.innerType
             } else {
                 type
             }
 
         val typeText = nestedType?.text
-
-        val fullyQualifiedName =
-            containingFile
-                .imports
-                .firstOrNull { import ->
-                    if (import.hasAlias()) {
-                        import.alias?.name == typeText
-                    } else {
-                        import.name.substringAfterLast(".") == typeText
-                    }
-                }?.name
-                ?: containingFile
-                    .declarations()
-                    .getDeclarationFullyQualifiedName(typeText, parentDeclaration)
-                ?: containingFile
-                    .packagee
-                    ?.name
-                    ?.let { packageName ->
-                        Konsist
-                            .scopeFromPackage(packageName)
-                            .declarations()
-                            .getDeclarationFullyQualifiedName(typeText, parentDeclaration)
-                    }
 
         val typeParameter =
             (parentDeclaration as? KoTypeParameterProviderCore)
@@ -194,50 +268,15 @@ object TypeUtil {
                 KoFunctionTypeDeclarationCore.getInstance(nestedType, containingFile)
             }
 
-            nestedType is KtUserType && typeText != null -> {
-                if (nestedType.children.filterIsInstance<KtTypeArgumentList>().isNotEmpty()) {
-                    KoGenericTypeDeclarationCore.getInstance(nestedType, parentDeclaration)
-                } else if (isKotlinType(typeText)) {
-                    KoKotlinTypeDeclarationCore.getInstance(nestedType, parentDeclaration)
-                } else {
-                    getClass(typeText, fullyQualifiedName, false, containingFile)
-                        ?: getInterface(typeText, fullyQualifiedName, false, containingFile)
-                        ?: getObject(typeText, fullyQualifiedName, false, containingFile)
-                        ?: getTypeAlias(typeText, fullyQualifiedName, containingFile)
-                        ?: KoExternalDeclarationCore.getInstance(typeText, nestedType)
-                }
+            nestedType is KtUserType && nestedType.children.filterIsInstance<KtTypeArgumentList>().isNotEmpty() -> {
+                KoGenericTypeDeclarationCore.getInstance(nestedType, parentDeclaration)
             }
 
-            nestedType is KtNameReferenceExpression && typeText != null -> {
-                if (isKotlinType(typeText)) {
-                    KoKotlinTypeDeclarationCore.getInstance(nestedType, parentDeclaration)
-                } else {
-                    getClass(typeText, fullyQualifiedName, false, containingFile)
-                        ?: getInterface(typeText, fullyQualifiedName, false, containingFile)
-                        ?: getObject(typeText, fullyQualifiedName, false, containingFile)
-                        ?: getTypeAlias(typeText, fullyQualifiedName, containingFile)
-                        ?: KoExternalDeclarationCore.getInstance(typeText, nestedType)
-                }
-            }
-
-            nestedType is KtTypeReference && typeText != null -> {
-                getClass(typeText, fullyQualifiedName, false, containingFile)
-                    ?: getInterface(typeText, fullyQualifiedName, false, containingFile)
-                    ?: getObject(typeText, fullyQualifiedName, false, containingFile)
-                    ?: getTypeAlias(typeText, fullyQualifiedName, containingFile)
-                    ?: KoExternalDeclarationCore.getInstance(typeText, nestedType)
-            }
-
-            nestedType is KtConstructorCalleeExpression && typeText != null -> {
-                if (isKotlinType(typeText)) {
-                    KoKotlinTypeDeclarationCore.getInstance(nestedType, parentDeclaration)
-                } else {
-                    getClass(typeText, fullyQualifiedName, false, containingFile)
-                        ?: getInterface(typeText, fullyQualifiedName, false, containingFile)
-                        ?: getObject(typeText, fullyQualifiedName, false, containingFile)
-                        ?: getTypeAlias(typeText, fullyQualifiedName, containingFile)
-                        ?: KoExternalDeclarationCore.getInstance(typeText, nestedType)
-                }
+            nestedType is KtUserType ||
+                nestedType is KtNameReferenceExpression ||
+                nestedType is KtTypeReference ||
+                nestedType is KtConstructorCalleeExpression -> {
+                getTypeDeclaration(nestedType, getTypeName(nestedType) ?: nestedType.text, parentDeclaration, containingFile)
             }
 
             else -> {
@@ -246,35 +285,77 @@ object TypeUtil {
         } as KoDeclarationCastProvider?
     }
 
-    private fun List<KoBaseDeclaration>.getDeclarationFullyQualifiedName(
-        typeText: String?,
-        parentDeclaration: KoBaseDeclaration,
-    ): String? {
-        val parentDeclarationFullyQualifiedName =
-            (parentDeclaration as? KoFullyQualifiedNameProvider)?.fullyQualifiedName.orEmpty()
+    /*
+     * Returns the declaration of the type with the given name: declaration from the file or project, Kotlin type
+     * or external declaration.
+     */
+    private fun getTypeDeclaration(
+        ktElement: KtElement,
+        name: String,
+        containingDeclaration: KoBaseDeclaration,
+        containingFile: KoFileDeclaration,
+    ): KoBaseProvider {
+        // Unresolved name is not searched in the project, because it would match a type from the default package
+        val fullyQualifiedName = TypeResolver.resolveFullyQualifiedName(name, containingFile, containingDeclaration)
 
-        val declarations =
-            filterIsInstance<KoFullyQualifiedNameProvider>()
-                .filter { it.fullyQualifiedName?.endsWith(typeText ?: "") == true }
-
-        val declaration =
-            declarations.singleOrNull()
-                ?: declarations.firstOrNull { declaration ->
-                    declaration.fullyQualifiedName?.contains(parentDeclarationFullyQualifiedName) == true ||
-                        (
-                            (declaration as? KoContainingDeclarationProvider)
-                                ?.containingDeclaration as? KoDeclarationProvider
-                        )?.hasDeclaration { it == parentDeclaration } == true
-                }
-
-        return declaration?.fullyQualifiedName
+        return fullyQualifiedName?.let { TypeResolver.getTypeDeclaration(it, containingFile) }
+            ?: if (fullyQualifiedName != null && isKotlinTypeFullyQualifiedName(fullyQualifiedName)) {
+                KoKotlinTypeDeclarationCore.getInstance(ktElement, containingDeclaration)
+            } else {
+                null
+            }
+            ?: KoExternalDeclarationCore.getInstance(name, fullyQualifiedName ?: name, ktElement)
     }
 
-    internal fun isKotlinType(typeName: String): Boolean {
-        val bareTypeName = getBareType(typeName)
+    /*
+     * Returns the name of the referenced type without type arguments.
+     * For `RecyclerView.ViewHolder<T>` and constructor call `RecyclerView.ViewHolder<T>()` value will be "RecyclerView.ViewHolder"
+     */
+    internal fun getTypeName(element: PsiElement?): String? =
+        when (element) {
+            is KtUserType -> {
+                element.getQualifiedName()
+            }
 
-        return kotlinTypes.any { it.endsWith(".$bareTypeName") }
+            is KtNameReferenceExpression -> {
+                (element.parent as? KtUserType)?.getQualifiedName()
+                    ?: element.getCallQualifiedName()
+                    ?: element.getReferencedName()
+            }
+
+            is KtTypeReference -> {
+                getTypeName(element.typeElement?.let { if (it is KtNullableType) it.innerType else it })
+            }
+
+            is KtConstructorCalleeExpression -> {
+                getTypeName(element.typeReference)
+            }
+
+            else -> {
+                null
+            }
+        }
+
+    private fun KtUserType.getQualifiedName(): String? =
+        referencedName?.let { name ->
+            qualifier
+                ?.getQualifiedName()
+                ?.let { "$it.$name" }
+                ?: name
+        }
+
+    private fun KtNameReferenceExpression.getCallQualifiedName(): String? {
+        val callExpression = parent as? KtCallExpression ?: return null
+        val qualifiedExpression = callExpression.parent as? KtDotQualifiedExpression ?: return null
+
+        return if (qualifiedExpression.selectorExpression == callExpression) {
+            "${qualifiedExpression.receiverExpression.text}.${getReferencedName()}"
+        } else {
+            null
+        }
     }
+
+    internal fun isKotlinTypeFullyQualifiedName(fullyQualifiedName: String): Boolean = fullyQualifiedName in kotlinTypeNames
 
     internal fun isKotlinBasicType(typeName: String): Boolean {
         val bareTypeName = getBareType(typeName)
@@ -315,7 +396,7 @@ object TypeUtil {
 
     /*
      * Removes brackets from the type.
-     * For `((Int) -> Unit)` value will be "(Int) -> Unit)"
+     * For `((Int) -> Unit)` value will be "(Int) -> Unit"
      */
     private fun String.removeBrackets(): String =
         if (startsWith("(") and endsWith(")")) {
@@ -386,11 +467,64 @@ object TypeUtil {
             .toSet()
 
     /*
+     * Kotlin types whose `KClass.qualifiedName` differs from the Kotlin name on the JVM:
+     * - type aliases, e.g. `RuntimeException::class.qualifiedName` is `java.lang.RuntimeException`
+     * - mutable collections, e.g. `MutableList::class.qualifiedName` is `kotlin.collections.List`
+     */
+    private val kotlinTypeQualifiedNames: Map<String, String> =
+        mapOf(
+            "kotlin.ArithmeticException" to ArithmeticException::class,
+            "kotlin.ArrayIndexOutOfBoundsException" to ArrayIndexOutOfBoundsException::class,
+            "kotlin.AssertionError" to AssertionError::class,
+            "kotlin.AutoCloseable" to AutoCloseable::class,
+            "kotlin.ClassCastException" to ClassCastException::class,
+            "kotlin.Comparator" to Comparator::class,
+            "kotlin.ConcurrentModificationException" to ConcurrentModificationException::class,
+            "kotlin.Error" to Error::class,
+            "kotlin.Exception" to Exception::class,
+            "kotlin.IllegalArgumentException" to IllegalArgumentException::class,
+            "kotlin.IllegalStateException" to IllegalStateException::class,
+            "kotlin.IndexOutOfBoundsException" to IndexOutOfBoundsException::class,
+            "kotlin.NoSuchElementException" to NoSuchElementException::class,
+            "kotlin.NullPointerException" to NullPointerException::class,
+            "kotlin.NumberFormatException" to NumberFormatException::class,
+            "kotlin.OutOfMemoryError" to OutOfMemoryError::class,
+            "kotlin.RuntimeException" to RuntimeException::class,
+            "kotlin.UnsupportedOperationException" to UnsupportedOperationException::class,
+            "kotlin.collections.ArrayList" to ArrayList::class,
+            "kotlin.collections.HashMap" to HashMap::class,
+            "kotlin.collections.HashSet" to HashSet::class,
+            "kotlin.collections.LinkedHashMap" to LinkedHashMap::class,
+            "kotlin.collections.LinkedHashSet" to LinkedHashSet::class,
+            "kotlin.collections.MutableCollection" to MutableCollection::class,
+            "kotlin.collections.MutableIterable" to MutableIterable::class,
+            "kotlin.collections.MutableIterator" to MutableIterator::class,
+            "kotlin.collections.MutableList" to MutableList::class,
+            "kotlin.collections.MutableListIterator" to MutableListIterator::class,
+            "kotlin.collections.MutableMap" to MutableMap::class,
+            "kotlin.collections.MutableSet" to MutableSet::class,
+            "kotlin.collections.RandomAccess" to RandomAccess::class,
+            "kotlin.text.Appendable" to Appendable::class,
+            "kotlin.text.CharacterCodingException" to CharacterCodingException::class,
+            "kotlin.text.StringBuilder" to StringBuilder::class,
+        ).mapValues { (_, kClass) -> kClass.qualifiedName.orEmpty() }
+
+    // Mutable collections are skipped, because they have the same qualified name as read-only ones
+    private val kotlinTypeAliasNames: Map<String, String> by lazy {
+        kotlinTypeQualifiedNames
+            .filterValues { !it.startsWith("kotlin.") }
+            .entries
+            .associate { (kotlinName, javaName) -> javaName to kotlinName }
+    }
+
+    /*
         List of Kotlin standard library class declarations
         (extracted from Kotlin stdlib version 2.2).
 
         https://kotlinlang.org/api/core/kotlin-stdlib/
      */
+    private val kotlinTypeNames: Set<String> by lazy { kotlinTypes.toSet() }
+
     val kotlinTypes =
         listOf(
             "kotlin.collections.AbstractCollection",

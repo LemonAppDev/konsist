@@ -16,6 +16,13 @@ class Architecture6Test {
             "com.lemonappdev.konsist.assertarchitecture.architecture6.project.emptylayer..",
         )
 
+    private val optionalLayer =
+        Layer(
+            "EmptyLayer",
+            "com.lemonappdev.konsist.assertarchitecture.architecture6.project.emptylayer..",
+            optional = true,
+        )
+
     private val scope =
         Konsist.scopeFromPackage(
             "com.lemonappdev.konsist.architecture.assertarchitecture.architecture6.project",
@@ -86,6 +93,53 @@ class Architecture6Test {
 
         // then
         func shouldThrow KoPreconditionFailedException::class withMessage "Layer EmptyLayer doesn't contain any files."
+    }
+
+    // endregion
+
+    // region passes when optional layer contains no files
+    @Test
+    fun `passes when optional layer contains no files (lambda scope)`() {
+        // then
+        scope.assertArchitecture {
+            optionalLayer.dependsOnNothing()
+        }
+    }
+
+    @Test
+    fun `passes when optional layer contains no files (lambda files)`() {
+        // then
+        scope
+            .files
+            .assertArchitecture {
+                optionalLayer.dependsOnNothing()
+            }
+    }
+
+    @Test
+    fun `passes when optional layer contains no files (parameter scope)`() {
+        // given
+        val layerDependencies =
+            architecture {
+                optionalLayer.dependsOnNothing()
+            }
+
+        // then
+        scope.assertArchitecture(layerDependencies)
+    }
+
+    @Test
+    fun `passes when optional layer contains no files (parameter files)`() {
+        // given
+        val layerDependencies =
+            architecture {
+                optionalLayer.dependsOnNothing()
+            }
+
+        // then
+        scope
+            .files
+            .assertArchitecture(layerDependencies)
     }
 
     // endregion

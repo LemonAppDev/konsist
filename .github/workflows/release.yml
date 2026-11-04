@@ -1,0 +1,125 @@
+name: Release
+
+# Every merge to main is a release:
+# 1. Publishes 'konsist.version' (gradle.properties) release to Maven Central (https://central.sonatype.com/)
+# 2. Publishes draft GitHub release with 'v<konsist.version>' tag or title (release notes), creating the tag on the
+#    merge commit
+#
+# PR checks guarantee that 'konsist.version' is increased ('check-konsist-version.yml') and draft release notes
+# exist ('check-release-notes.yml'). Re-running this workflow skips the Maven Central upload when the version is
+# already released.
+
+on:
+  push:
+    branches: [ main ]
+
+  workflow_dispatch:
+
+# Releases are never cancelled
+concurrency:
+  group: ${{ github.workflow }}
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    name: Release
+    if: github.repository == 'LemonAppDev/konsist' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+
+      - name: Set up JDK
+        uses: actions/setup-java@v6
+        with:
+          java-version: 25
+          distribution: 'corretto'
+
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v6
+
+      - name: Set up Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: '3.x'
+
+      - name: Get Konsist Version
+        id: konsist-version
+        run: |
+          VERSION=$(grep '^konsist.version=' gradle.properties | cut -d= -f2 | tr -d '\r')
+          echo "Konsist version: $VERSION"
+          echo "value=$VERSION" >> "$GITHUB_OUTPUT"
+
+      # Checked before the Maven Central upload, so the release is not published without release notes
+      - name: Get Draft Release Notes
+        id: release-notes
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          RELEASE_ID=$(python3 misc/scripts/get_konsist_release_notes_draft.py)
+          echo "id=$RELEASE_ID" >> "$GITHUB_OUTPUT"
+
+      # Maven Central doesn't allow re-publishing the same version (e.g. when re-running this workflow)
+      - name: Check Version Is Not Released
+        id: released
+        env:
+          VERSION: ${{ steps.konsist-version.outputs.value }}
+        run: |
+          if python3 -c "import sys; from check_konsist_snapshot_version import get_released_versions; sys.exit(0 if sys.argv[1] in get_released_versions() else 1)" "$VERSION"; then
+            echo "::warning::Konsist $VERSION is already released to Maven Central, skipping upload."
+            echo "value=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "value=false" >> "$GITHUB_OUTPUT"
+          fi
+        working-directory: misc/scripts
+
+      # Waits until Central Portal validates the deployment, then Central Portal publishes it automatically
+      # (visible on Maven Central after ~10-30 minutes). Configuration cache is disabled, so credentials passed as
+      # Gradle properties are not stored on disk.
+      - name: Publish Release To Maven Central
+        if: steps.released.outputs.value == 'false'
+        env:
+          MAVEN_CENTRAL_USERNAME: ${{ secrets.MAVEN_CENTRAL_USERNAME }}
+          MAVEN_CENTRAL_PASSWORD: ${{ secrets.MAVEN_CENTRAL_PASSWORD }}
+          GPG_SIGNING_KEY_BASE_64: ${{ secrets.GPG_SIGNING_KEY_BASE_64 }}
+          GPG_SIGNING_PASSWORD_BASE_64: ${{ secrets.GPG_SIGNING_PASSWORD_BASE_64 }}
+        run: |
+          ./gradlew publishAggregationToCentralPortal \
+            --no-configuration-cache \
+            -P konsist.releaseTarget=release \
+            -P konsist.mavenCentralUsername="$MAVEN_CENTRAL_USERNAME" \
+            -P konsist.mavenCentralPassword="$MAVEN_CENTRAL_PASSWORD" \
+            -P konsist.signingKey="$GPG_SIGNING_KEY_BASE_64" \
+            -P konsist.signingPassword="$GPG_SIGNING_PASSWORD_BASE_64"
+
+      # Pre-release versions (e.g. '1.0.0-beta.1') are published as GitHub pre-release and are not marked as latest
+      - name: Publish GitHub Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RELEASE_ID: ${{ steps.release-notes.outputs.id }}
+          VERSION: ${{ steps.konsist-version.outputs.value }}
+        run: |
+          if [[ "$VERSION" == *-* ]]; then
+            PRERELEASE=true
+            MAKE_LATEST=false
+          else
+            PRERELEASE=false
+            MAKE_LATEST=true
+          fi
+
+          RELEASE_URL=$(gh api --method PATCH "repos/$GITHUB_REPOSITORY/releases/$RELEASE_ID" \
+            -f tag_name="v$VERSION" \
+            -f name="v$VERSION" \
+            -f target_commitish="$GITHUB_SHA" \
+            -F draft=false \
+            -F prerelease="$PRERELEASE" \
+            -f make_latest="$MAKE_LATEST" \
+            --jq '.html_url')
+
+          echo "Published GitHub release: $RELEASE_URL"
+          echo "### 🚀 Konsist [v$VERSION]($RELEASE_URL) released" >> "$GITHUB_STEP_SUMMARY"

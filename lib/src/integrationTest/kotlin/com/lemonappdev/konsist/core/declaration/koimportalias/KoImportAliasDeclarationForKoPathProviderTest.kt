@@ -1,6 +1,7 @@
 package com.lemonappdev.konsist.core.declaration.koimportalias
 
 import com.lemonappdev.konsist.TestSnippetProvider
+import com.lemonappdev.konsist.helper.ext.toOsSeparator
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.params.ParameterizedTest
@@ -25,7 +26,7 @@ class KoImportAliasDeclarationForKoPathProviderTest {
         // then
         assertSoftly(sut?.path) {
             it?.startsWith("//") shouldBeEqualTo false
-            it?.endsWith("koimportalias/snippet/forkopathprovider/$fileName.kt") shouldBeEqualTo true
+            it?.endsWith("koimportalias/snippet/forkopathprovider/$fileName.kt".toOsSeparator()) shouldBeEqualTo true
         }
     }
 
@@ -47,8 +48,10 @@ class KoImportAliasDeclarationForKoPathProviderTest {
         sut
             ?.projectPath
             .shouldBeEqualTo(
-                "/lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core/declaration/koimportalias/snippet/" +
-                    "forkopathprovider/$fileName.kt",
+                (
+                    "/lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core/declaration/koimportalias/snippet/" +
+                        "forkopathprovider/$fileName.kt"
+                ).toOsSeparator(),
             )
     }
 
@@ -68,10 +71,10 @@ class KoImportAliasDeclarationForKoPathProviderTest {
 
         // then
         assertSoftly(sut) {
-            it?.resideInPath("..snippet..", true) shouldBeEqualTo true
-            it?.resideInPath("..koimportalias/snippet..", true) shouldBeEqualTo true
-            it?.resideInPath("..koimportalias..$fileName.kt", true) shouldBeEqualTo true
-            it?.resideInPath("koimportalias/snippet/", true) shouldBeEqualTo false
+            it?.residesInPath("..snippet..", true) shouldBeEqualTo true
+            it?.residesInPath("..koimportalias/snippet..", true) shouldBeEqualTo true
+            it?.residesInPath("..koimportalias..$fileName.kt", true) shouldBeEqualTo true
+            it?.residesInPath("koimportalias/snippet/", true) shouldBeEqualTo false
         }
     }
 
@@ -91,10 +94,10 @@ class KoImportAliasDeclarationForKoPathProviderTest {
 
         // then
         assertSoftly(sut) {
-            it?.resideInPath("..snippet..", false) shouldBeEqualTo true
-            it?.resideInPath("..koimportalias/snippet..", false) shouldBeEqualTo true
-            it?.resideInPath("..koimportalias..$fileName.kt", false) shouldBeEqualTo true
-            it?.resideInPath("koimportalias/snippet/", false) shouldBeEqualTo false
+            it?.residesInPath("..snippet..", false) shouldBeEqualTo true
+            it?.residesInPath("..koimportalias/snippet..", false) shouldBeEqualTo true
+            it?.residesInPath("..koimportalias..$fileName.kt", false) shouldBeEqualTo true
+            it?.residesInPath("koimportalias/snippet/", false) shouldBeEqualTo false
         }
     }
 

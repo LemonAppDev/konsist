@@ -1,0 +1,3 @@
+@file:Suppress("assert-not-suppress-by-kotest-test-name-without-test-name")
+
+class FixtureClass

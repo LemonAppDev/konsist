@@ -1,0 +1,5 @@
+import kotlin.Deprecated as DeprecatedImportAlias
+
+@DeprecatedImportAlias("message")
+fun fixtureFunction() {
+}

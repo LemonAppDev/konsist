@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test
 
 class KoScopeTest {
     // Other methods from KoScope (`slice`, `plus` etc.) tests
-    // are implemented in the test\konsist-path-tester project.
+    // are implemented in the misc/projects/test-projects/konsist-path-tester project.
 
     @Test
     fun `scopes-are-equal`() {

@@ -1,6 +1,7 @@
 package com.lemonappdev.konsist.core.declaration.type.kotype
 
 import com.lemonappdev.konsist.TestSnippetProvider
+import com.lemonappdev.konsist.api.Konsist
 import com.lemonappdev.konsist.api.declaration.KoClassDeclaration
 import com.lemonappdev.konsist.api.declaration.KoExternalDeclaration
 import com.lemonappdev.konsist.api.declaration.KoImportAliasDeclaration
@@ -20,6 +21,9 @@ import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.amshove.kluent.shouldBeInstanceOf
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.Arguments.arguments
+import org.junit.jupiter.params.provider.MethodSource
 
 @Suppress("detekt.LargeClass", "detekt.LongMethod")
 class KoTypeDeclarationForKoDeclarationCastProviderTest {
@@ -871,13 +875,13 @@ class KoTypeDeclarationForKoDeclarationCastProviderTest {
 
         // then
         assertSoftly(sut) {
-            it?.isClass shouldBeEqualTo false
+            it?.isClass shouldBeEqualTo true
             it?.isObject shouldBeEqualTo false
             it?.isInterface shouldBeEqualTo false
-            it?.isClassOrObject shouldBeEqualTo false
-            it?.isClassOrInterface shouldBeEqualTo false
+            it?.isClassOrObject shouldBeEqualTo true
+            it?.isClassOrInterface shouldBeEqualTo true
             it?.isInterfaceOrObject shouldBeEqualTo false
-            it?.isClassOrInterfaceOrObject shouldBeEqualTo false
+            it?.isClassOrInterfaceOrObject shouldBeEqualTo true
             it?.isTypeAlias shouldBeEqualTo false
             it?.isImportAlias shouldBeEqualTo false
             it?.isKotlinType shouldBeEqualTo true
@@ -953,13 +957,13 @@ class KoTypeDeclarationForKoDeclarationCastProviderTest {
 
         // then
         assertSoftly(sut) {
-            it?.isClass shouldBeEqualTo false
+            it?.isClass shouldBeEqualTo true
             it?.isObject shouldBeEqualTo false
             it?.isInterface shouldBeEqualTo false
-            it?.isClassOrObject shouldBeEqualTo false
-            it?.isClassOrInterface shouldBeEqualTo false
+            it?.isClassOrObject shouldBeEqualTo true
+            it?.isClassOrInterface shouldBeEqualTo true
             it?.isInterfaceOrObject shouldBeEqualTo false
-            it?.isClassOrInterfaceOrObject shouldBeEqualTo false
+            it?.isClassOrInterfaceOrObject shouldBeEqualTo true
             it?.isTypeAlias shouldBeEqualTo false
             it?.isImportAlias shouldBeEqualTo false
             it?.isKotlinType shouldBeEqualTo true
@@ -1294,6 +1298,172 @@ class KoTypeDeclarationForKoDeclarationCastProviderTest {
     }
 
     @Test
+    fun `nullable-generic-type-with-nullable-type-argument`() {
+        // given
+        val sut =
+            getSnippetFile("nullable-generic-type-with-nullable-type-argument")
+                .classes()
+                .first()
+                .primaryConstructor
+                ?.parameters
+                ?.first()
+                ?.type
+
+        // then
+        assertSoftly(sut) {
+            it?.isClass shouldBeEqualTo true
+            it?.isObject shouldBeEqualTo false
+            it?.isInterface shouldBeEqualTo false
+            it?.isClassOrObject shouldBeEqualTo true
+            it?.isClassOrInterface shouldBeEqualTo true
+            it?.isInterfaceOrObject shouldBeEqualTo false
+            it?.isClassOrInterfaceOrObject shouldBeEqualTo true
+            it?.isTypeAlias shouldBeEqualTo false
+            it?.isImportAlias shouldBeEqualTo false
+            it?.isKotlinType shouldBeEqualTo false
+            it?.isKotlinBasicType shouldBeEqualTo false
+            it?.isKotlinCollectionType shouldBeEqualTo false
+            it?.isTypeParameter shouldBeEqualTo false
+            it?.isExternal shouldBeEqualTo false
+            it?.asClassDeclaration() shouldBeInstanceOf KoClassDeclaration::class
+            it?.asClassDeclaration()?.name shouldBeEqualTo "FixtureCollection1"
+            it?.hasClassDeclaration() shouldBeEqualTo true
+            it?.hasClassDeclaration { declaration -> declaration.name == "FixtureCollection1" } shouldBeEqualTo true
+            it?.hasClassDeclaration { declaration -> declaration.name == "OtherName" } shouldBeEqualTo false
+            it?.hasClassDeclarationOf(FixtureCollection1::class) shouldBeEqualTo true
+            it?.hasClassDeclarationOf(FixtureClass::class) shouldBeEqualTo false
+            it?.asObjectDeclaration() shouldBeEqualTo null
+            it?.hasObjectDeclaration() shouldBeEqualTo false
+            it?.hasObjectDeclarationOf(FixtureCollection1::class) shouldBeEqualTo false
+            it?.asInterfaceDeclaration() shouldBeEqualTo null
+            it?.hasInterfaceDeclaration() shouldBeEqualTo false
+            it?.hasInterfaceDeclarationOf(FixtureCollection1::class) shouldBeEqualTo false
+            it?.asClassOrObjectDeclaration() shouldBeInstanceOf KoClassDeclaration::class
+            it?.hasClassOrObjectDeclaration() shouldBeEqualTo true
+            it?.hasClassOrObjectDeclaration { decl -> decl.name == "FixtureCollection1" } shouldBeEqualTo true
+            it?.hasClassOrObjectDeclaration { decl -> decl.name == "FixtureObject" } shouldBeEqualTo false
+            it?.hasClassOrObjectDeclarationOf(FixtureCollection1::class) shouldBeEqualTo true
+            it?.hasClassOrObjectDeclarationOf(FixtureClass::class) shouldBeEqualTo false
+            it?.asClassOrInterfaceDeclaration() shouldBeInstanceOf KoClassDeclaration::class
+            it?.hasClassOrInterfaceDeclaration() shouldBeEqualTo true
+            it?.hasClassOrInterfaceDeclaration { decl -> decl.name == "FixtureCollection1" } shouldBeEqualTo true
+            it?.hasClassOrInterfaceDeclaration { decl -> decl.name == "FixtureInterface" } shouldBeEqualTo false
+            it?.hasClassOrInterfaceDeclarationOf(FixtureCollection1::class) shouldBeEqualTo true
+            it?.hasClassOrInterfaceDeclarationOf(FixtureClass::class) shouldBeEqualTo false
+            it?.asInterfaceOrObjectDeclaration() shouldBeEqualTo null
+            it?.hasInterfaceOrObjectDeclaration() shouldBeEqualTo false
+            it?.hasInterfaceOrObjectDeclaration { decl -> decl.name == "someName" } shouldBeEqualTo false
+            it?.hasInterfaceOrObjectDeclarationOf(FixtureClass::class) shouldBeEqualTo false
+            it?.asClassOrInterfaceOrObjectDeclaration() shouldBeInstanceOf KoClassDeclaration::class
+            it?.hasClassOrInterfaceOrObjectDeclaration() shouldBeEqualTo true
+            it?.hasClassOrInterfaceOrObjectDeclaration { decl -> decl.name == "FixtureCollection1" } shouldBeEqualTo true
+            it?.hasClassOrInterfaceOrObjectDeclaration { decl -> decl.name == "FixtureInterface" } shouldBeEqualTo false
+            it?.hasClassOrInterfaceOrObjectDeclarationOf(FixtureCollection1::class) shouldBeEqualTo true
+            it?.hasClassOrInterfaceOrObjectDeclarationOf(FixtureClass::class) shouldBeEqualTo false
+            it?.asTypeAliasDeclaration() shouldBeEqualTo null
+            it?.hasTypeAliasDeclaration() shouldBeEqualTo false
+            it?.asImportAliasDeclaration() shouldBeEqualTo null
+            it?.hasImportAliasDeclaration() shouldBeEqualTo false
+            it?.asKotlinTypeDeclaration() shouldBeEqualTo null
+            it?.hasKotlinTypeDeclaration() shouldBeEqualTo false
+            it?.hasKotlinTypeDeclarationOf(FixtureCollection1::class) shouldBeEqualTo false
+            it?.asKotlinBasicTypeDeclaration() shouldBeEqualTo null
+            it?.hasKotlinBasicTypeDeclaration() shouldBeEqualTo false
+            it?.hasKotlinBasicTypeDeclarationOf(FixtureCollection1::class) shouldBeEqualTo false
+            it?.asKotlinCollectionTypeDeclaration() shouldBeEqualTo null
+            it?.hasKotlinCollectionTypeDeclaration() shouldBeEqualTo false
+            it?.hasKotlinCollectionTypeDeclarationOf(FixtureCollection1::class) shouldBeEqualTo false
+            it?.asExternalDeclaration() shouldBeEqualTo null
+            it?.hasExternalDeclaration() shouldBeEqualTo false
+            it?.asTypeParameterDeclaration() shouldBeEqualTo null
+            it?.hasTypeParameterDeclaration() shouldBeEqualTo false
+        }
+    }
+
+    @Test
+    fun `not-nullable-generic-type-with-nullable-type-argument`() {
+        // given
+        val sut =
+            getSnippetFile("not-nullable-generic-type-with-nullable-type-argument")
+                .classes()
+                .first()
+                .primaryConstructor
+                ?.parameters
+                ?.first()
+                ?.type
+
+        // then
+        assertSoftly(sut) {
+            it?.isClass shouldBeEqualTo true
+            it?.isObject shouldBeEqualTo false
+            it?.isInterface shouldBeEqualTo false
+            it?.isClassOrObject shouldBeEqualTo true
+            it?.isClassOrInterface shouldBeEqualTo true
+            it?.isInterfaceOrObject shouldBeEqualTo false
+            it?.isClassOrInterfaceOrObject shouldBeEqualTo true
+            it?.isTypeAlias shouldBeEqualTo false
+            it?.isImportAlias shouldBeEqualTo false
+            it?.isKotlinType shouldBeEqualTo false
+            it?.isKotlinBasicType shouldBeEqualTo false
+            it?.isKotlinCollectionType shouldBeEqualTo false
+            it?.isTypeParameter shouldBeEqualTo false
+            it?.isExternal shouldBeEqualTo false
+            it?.asClassDeclaration() shouldBeInstanceOf KoClassDeclaration::class
+            it?.asClassDeclaration()?.name shouldBeEqualTo "FixtureCollection1"
+            it?.hasClassDeclaration() shouldBeEqualTo true
+            it?.hasClassDeclaration { declaration -> declaration.name == "FixtureCollection1" } shouldBeEqualTo true
+            it?.hasClassDeclaration { declaration -> declaration.name == "OtherName" } shouldBeEqualTo false
+            it?.hasClassDeclarationOf(FixtureCollection1::class) shouldBeEqualTo true
+            it?.hasClassDeclarationOf(FixtureClass::class) shouldBeEqualTo false
+            it?.asObjectDeclaration() shouldBeEqualTo null
+            it?.hasObjectDeclaration() shouldBeEqualTo false
+            it?.hasObjectDeclarationOf(FixtureCollection1::class) shouldBeEqualTo false
+            it?.asInterfaceDeclaration() shouldBeEqualTo null
+            it?.hasInterfaceDeclaration() shouldBeEqualTo false
+            it?.hasInterfaceDeclarationOf(FixtureCollection1::class) shouldBeEqualTo false
+            it?.asClassOrObjectDeclaration() shouldBeInstanceOf KoClassDeclaration::class
+            it?.hasClassOrObjectDeclaration() shouldBeEqualTo true
+            it?.hasClassOrObjectDeclaration { decl -> decl.name == "FixtureCollection1" } shouldBeEqualTo true
+            it?.hasClassOrObjectDeclaration { decl -> decl.name == "FixtureObject" } shouldBeEqualTo false
+            it?.hasClassOrObjectDeclarationOf(FixtureCollection1::class) shouldBeEqualTo true
+            it?.hasClassOrObjectDeclarationOf(FixtureClass::class) shouldBeEqualTo false
+            it?.asClassOrInterfaceDeclaration() shouldBeInstanceOf KoClassDeclaration::class
+            it?.hasClassOrInterfaceDeclaration() shouldBeEqualTo true
+            it?.hasClassOrInterfaceDeclaration { decl -> decl.name == "FixtureCollection1" } shouldBeEqualTo true
+            it?.hasClassOrInterfaceDeclaration { decl -> decl.name == "FixtureInterface" } shouldBeEqualTo false
+            it?.hasClassOrInterfaceDeclarationOf(FixtureCollection1::class) shouldBeEqualTo true
+            it?.hasClassOrInterfaceDeclarationOf(FixtureClass::class) shouldBeEqualTo false
+            it?.asInterfaceOrObjectDeclaration() shouldBeEqualTo null
+            it?.hasInterfaceOrObjectDeclaration() shouldBeEqualTo false
+            it?.hasInterfaceOrObjectDeclaration { decl -> decl.name == "someName" } shouldBeEqualTo false
+            it?.hasInterfaceOrObjectDeclarationOf(FixtureClass::class) shouldBeEqualTo false
+            it?.asClassOrInterfaceOrObjectDeclaration() shouldBeInstanceOf KoClassDeclaration::class
+            it?.hasClassOrInterfaceOrObjectDeclaration() shouldBeEqualTo true
+            it?.hasClassOrInterfaceOrObjectDeclaration { decl -> decl.name == "FixtureCollection1" } shouldBeEqualTo true
+            it?.hasClassOrInterfaceOrObjectDeclaration { decl -> decl.name == "FixtureInterface" } shouldBeEqualTo false
+            it?.hasClassOrInterfaceOrObjectDeclarationOf(FixtureCollection1::class) shouldBeEqualTo true
+            it?.hasClassOrInterfaceOrObjectDeclarationOf(FixtureClass::class) shouldBeEqualTo false
+            it?.asTypeAliasDeclaration() shouldBeEqualTo null
+            it?.hasTypeAliasDeclaration() shouldBeEqualTo false
+            it?.asImportAliasDeclaration() shouldBeEqualTo null
+            it?.hasImportAliasDeclaration() shouldBeEqualTo false
+            it?.asKotlinTypeDeclaration() shouldBeEqualTo null
+            it?.hasKotlinTypeDeclaration() shouldBeEqualTo false
+            it?.hasKotlinTypeDeclarationOf(FixtureCollection1::class) shouldBeEqualTo false
+            it?.asKotlinBasicTypeDeclaration() shouldBeEqualTo null
+            it?.hasKotlinBasicTypeDeclaration() shouldBeEqualTo false
+            it?.hasKotlinBasicTypeDeclarationOf(FixtureCollection1::class) shouldBeEqualTo false
+            it?.asKotlinCollectionTypeDeclaration() shouldBeEqualTo null
+            it?.hasKotlinCollectionTypeDeclaration() shouldBeEqualTo false
+            it?.hasKotlinCollectionTypeDeclarationOf(FixtureCollection1::class) shouldBeEqualTo false
+            it?.asExternalDeclaration() shouldBeEqualTo null
+            it?.hasExternalDeclaration() shouldBeEqualTo false
+            it?.asTypeParameterDeclaration() shouldBeEqualTo null
+            it?.hasTypeParameterDeclaration() shouldBeEqualTo false
+        }
+    }
+
+    @Test
     fun `nullable-external-type`() {
         // given
         val sut =
@@ -1307,13 +1477,13 @@ class KoTypeDeclarationForKoDeclarationCastProviderTest {
 
         // then
         assertSoftly(sut) {
-            it?.isClass shouldBeEqualTo false
+            it?.isClass shouldBeEqualTo true
             it?.isObject shouldBeEqualTo false
             it?.isInterface shouldBeEqualTo false
-            it?.isClassOrObject shouldBeEqualTo false
-            it?.isClassOrInterface shouldBeEqualTo false
+            it?.isClassOrObject shouldBeEqualTo true
+            it?.isClassOrInterface shouldBeEqualTo true
             it?.isInterfaceOrObject shouldBeEqualTo false
-            it?.isClassOrInterfaceOrObject shouldBeEqualTo false
+            it?.isClassOrInterfaceOrObject shouldBeEqualTo true
             it?.isTypeAlias shouldBeEqualTo false
             it?.isImportAlias shouldBeEqualTo false
             it?.isKotlinType shouldBeEqualTo false
@@ -1385,13 +1555,13 @@ class KoTypeDeclarationForKoDeclarationCastProviderTest {
 
         // then
         assertSoftly(sut) {
-            it?.isClass shouldBeEqualTo false
+            it?.isClass shouldBeEqualTo true
             it?.isObject shouldBeEqualTo false
             it?.isInterface shouldBeEqualTo false
-            it?.isClassOrObject shouldBeEqualTo false
-            it?.isClassOrInterface shouldBeEqualTo false
+            it?.isClassOrObject shouldBeEqualTo true
+            it?.isClassOrInterface shouldBeEqualTo true
             it?.isInterfaceOrObject shouldBeEqualTo false
-            it?.isClassOrInterfaceOrObject shouldBeEqualTo false
+            it?.isClassOrInterfaceOrObject shouldBeEqualTo true
             it?.isTypeAlias shouldBeEqualTo false
             it?.isImportAlias shouldBeEqualTo false
             it?.isKotlinType shouldBeEqualTo false
@@ -1504,9 +1674,104 @@ class KoTypeDeclarationForKoDeclarationCastProviderTest {
         }
     }
 
+    @Test
+    fun `class-type-with-kotlin-type-name`() {
+        // given
+        val sut =
+            getSnippetFile("class-type-with-kotlin-type-name")
+                .classes()
+                .first()
+                .primaryConstructor
+                ?.parameters
+                ?.first()
+                ?.type
+
+        // then
+        assertSoftly(sut) {
+            it?.isClass shouldBeEqualTo true
+            it?.isKotlinType shouldBeEqualTo false
+            it?.asKotlinTypeDeclaration() shouldBeEqualTo null
+        }
+    }
+
+    @ParameterizedTest
+    @MethodSource("provideValuesForKindOfTypeDeclaredOutsideProject")
+    fun `kind-of-type-declared-outside-project`(
+        fileName: String,
+        isClass: Boolean,
+        isInterface: Boolean,
+        isObject: Boolean,
+    ) {
+        // given
+        val sut =
+            getSnippetFile(fileName)
+                .classes()
+                .first()
+                .primaryConstructor
+                ?.parameters
+                ?.first()
+                ?.type
+                ?.sourceDeclaration
+
+        // then
+        assertSoftly(sut) {
+            it?.isClass shouldBeEqualTo isClass
+            it?.isInterface shouldBeEqualTo isInterface
+            it?.isObject shouldBeEqualTo isObject
+            it?.asClassDeclaration() shouldBeEqualTo null
+            it?.asInterfaceDeclaration() shouldBeEqualTo null
+            it?.asObjectDeclaration() shouldBeEqualTo null
+            it?.hasClassDeclaration() shouldBeEqualTo false
+            it?.hasInterfaceDeclaration() shouldBeEqualTo false
+            it?.hasObjectDeclaration() shouldBeEqualTo false
+        }
+    }
+
+    @Test
+    fun `kind-of-type-not-on-classpath`() {
+        // given
+        val sut =
+            Konsist
+                .scopeFromFile(UNCOMPILED_PARENT_TEST_DATA_PATH)
+                .classes()
+                .first { it.name == "FixtureClassWithTypeNotOnClasspath" }
+                .primaryConstructor
+                ?.parameters
+                ?.first()
+                ?.type
+                ?.sourceDeclaration
+
+        // then
+        assertSoftly(sut) {
+            it?.isExternal shouldBeEqualTo true
+            it?.isClass shouldBeEqualTo false
+            it?.isInterface shouldBeEqualTo false
+            it?.isObject shouldBeEqualTo false
+        }
+    }
+
     private fun getSnippetFile(fileName: String) =
         TestSnippetProvider.getSnippetKoScope(
             "core/declaration/type/kotype/snippet/forkodeclarationcastprovider/",
             fileName,
         )
+
+    companion object {
+        private const val UNCOMPILED_PARENT_TEST_DATA_PATH =
+            "lib/src/integrationTest/resources/com/lemonappdev/konsist/testdata/UncompiledParentTestData.kt"
+
+        @Suppress("unused")
+        @JvmStatic
+        fun provideValuesForKindOfTypeDeclaredOutsideProject() =
+            listOf(
+                arguments("not-nullable-external-type", true, false, false),
+                arguments("external-interface-type", false, true, false),
+                arguments("external-object-type", false, false, true),
+                arguments("external-companion-object-type", false, false, true),
+                arguments("external-nested-interface-type", false, true, false),
+                arguments("not-nullable-kotlin-type", true, false, false),
+                arguments("kotlin-interface-type", false, true, false),
+                arguments("kotlin-object-type", false, false, true),
+            )
+    }
 }

@@ -4,6 +4,7 @@ import com.lemonappdev.konsist.api.provider.KoPathProvider
 import com.lemonappdev.konsist.core.ext.toOsSeparator
 import com.lemonappdev.konsist.core.filesystem.PathProvider
 import com.lemonappdev.konsist.core.util.LocationUtil
+import com.lemonappdev.konsist.core.util.PathUtil
 import org.jetbrains.kotlin.com.intellij.psi.PsiElement
 
 internal interface KoPathProviderCore :
@@ -20,22 +21,15 @@ internal interface KoPathProviderCore :
                 ?: ""
 
     override val projectPath: String
-        get() {
-            val rootPathProvider =
-                PathProvider
-                    .rootProjectPath
-                    .toOsSeparator()
+        get() = PathUtil.getProjectPath(path, PathProvider.rootProjectPath)
 
-            return path.removePrefix(rootPathProvider)
-        }
-
-    override fun resideInPath(
+    override fun residesInPath(
         path: String,
         absolutePath: Boolean,
     ): Boolean =
         if (absolutePath) {
-            LocationUtil.resideInLocation(path, this.path)
+            LocationUtil.residesInLocation(path, this.path)
         } else {
-            LocationUtil.resideInLocation(path, projectPath)
+            LocationUtil.residesInLocation(path, projectPath)
         }
 }

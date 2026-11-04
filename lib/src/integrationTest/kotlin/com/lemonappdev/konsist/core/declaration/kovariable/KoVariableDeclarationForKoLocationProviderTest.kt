@@ -1,12 +1,12 @@
 package com.lemonappdev.konsist.core.declaration.kovariable
 
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
-import com.lemonappdev.konsist.api.ext.list.enumConstants
 import com.lemonappdev.konsist.api.ext.list.getters
 import com.lemonappdev.konsist.api.ext.list.initBlocks
 import com.lemonappdev.konsist.api.ext.list.setters
 import com.lemonappdev.konsist.api.ext.list.variables
 import com.lemonappdev.konsist.api.provider.KoVariableProvider
+import com.lemonappdev.konsist.core.filesystem.PathProvider
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.params.ParameterizedTest
@@ -48,7 +48,7 @@ class KoVariableDeclarationForKoLocationProviderTest {
         // then
         val declaration = "Declaration:\nval fixtureVariable = \"\""
         assertSoftly(sut.locationWithText) {
-            startsWith("Location: /") shouldBeEqualTo true
+            startsWith("Location: ${PathProvider.rootProjectPath}") shouldBeEqualTo true
             contains(projectPath) shouldBeEqualTo true
             endsWith(declaration) shouldBeEqualTo true
         }
@@ -64,7 +64,6 @@ class KoVariableDeclarationForKoLocationProviderTest {
             listOf(
                 arguments(getSnippetFile("variable-in-function-location").functions(), "2:5"),
                 arguments(getSnippetFile("variable-in-init-block-location").classes().initBlocks, "3:9"),
-                arguments(getSnippetFile("variable-in-enum-constant-location").classes().enumConstants, "3:9"),
                 arguments(getSnippetFile("variable-in-getter-location").properties().getters, "3:9"),
                 arguments(getSnippetFile("variable-in-setter-location").properties().setters, "3:9"),
             )
@@ -75,7 +74,6 @@ class KoVariableDeclarationForKoLocationProviderTest {
             listOf(
                 arguments(getSnippetFile("variable-in-function-location-with-text").functions()),
                 arguments(getSnippetFile("variable-in-init-block-location-with-text").classes().initBlocks),
-                arguments(getSnippetFile("variable-in-enum-constant-location-with-text").classes().enumConstants),
                 arguments(getSnippetFile("variable-in-getter-location-with-text").properties().getters),
                 arguments(getSnippetFile("variable-in-setter-location-with-text").properties().setters),
             )

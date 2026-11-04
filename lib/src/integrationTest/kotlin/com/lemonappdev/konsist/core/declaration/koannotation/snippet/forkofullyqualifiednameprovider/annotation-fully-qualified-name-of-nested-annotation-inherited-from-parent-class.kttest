@@ -1,0 +1,11 @@
+package com.fixturepackage
+
+open class Parent {
+    annotation class FixtureAnnotation
+}
+
+class Child : Parent() {
+    @FixtureAnnotation
+    fun sampleFunction() {
+    }
+}

@@ -1,0 +1,4 @@
+import com.lemonappdev.konsist.externalfixture.FixtureExternalClass
+import com.lemonappdev.konsist.externalfixture.FixtureExternalInterface
+
+class FixtureClass : FixtureExternalClass(), FixtureExternalInterface

@@ -1,0 +1,1 @@
+inline fun <reified TestType : Any> fixtureFunction(): TestType? = null

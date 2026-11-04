@@ -1,6 +1,7 @@
 package com.lemonappdev.konsist.core.declaration.kosetter
 
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
+import com.lemonappdev.konsist.helper.ext.toOsSeparator
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
@@ -18,7 +19,7 @@ class KoSetterDeclarationForKoPathProviderTest {
         // then
         assertSoftly {
             sut?.path?.startsWith("//") shouldBeEqualTo false
-            sut?.path?.endsWith("kosetter/snippet/forkopathprovider/setter-file-path.kt") shouldBeEqualTo true
+            sut?.path?.endsWith("kosetter/snippet/forkopathprovider/setter-file-path.kt".toOsSeparator()) shouldBeEqualTo true
         }
     }
 
@@ -35,8 +36,10 @@ class KoSetterDeclarationForKoPathProviderTest {
         sut
             ?.projectPath
             .shouldBeEqualTo(
-                "/lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core/declaration/kosetter/snippet/" +
-                    "forkopathprovider/setter-project-file-path.kt",
+                (
+                    "/lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core/declaration/kosetter/snippet/" +
+                        "forkopathprovider/setter-project-file-path.kt"
+                ).toOsSeparator(),
             )
     }
 
@@ -51,10 +54,10 @@ class KoSetterDeclarationForKoPathProviderTest {
 
         // then
         assertSoftly {
-            sut?.resideInPath("..snippet..", true) shouldBeEqualTo true
-            sut?.resideInPath("..kosetter/snippet..", true) shouldBeEqualTo true
-            sut?.resideInPath("..kosetter..setter-reside-in-file-path.kt", true) shouldBeEqualTo true
-            sut?.resideInPath("kosetter/snippet/", true) shouldBeEqualTo false
+            sut?.residesInPath("..snippet..", true) shouldBeEqualTo true
+            sut?.residesInPath("..kosetter/snippet..", true) shouldBeEqualTo true
+            sut?.residesInPath("..kosetter..setter-reside-in-file-path.kt", true) shouldBeEqualTo true
+            sut?.residesInPath("kosetter/snippet/", true) shouldBeEqualTo false
         }
     }
 
@@ -69,10 +72,10 @@ class KoSetterDeclarationForKoPathProviderTest {
 
         // then
         assertSoftly {
-            sut?.resideInPath("..snippet..", false) shouldBeEqualTo true
-            sut?.resideInPath("..kosetter/snippet..", false) shouldBeEqualTo true
-            sut?.resideInPath("..kosetter..setter-reside-in-project-file-path.kt", false) shouldBeEqualTo true
-            sut?.resideInPath("kosetter/snippet/", false) shouldBeEqualTo false
+            sut?.residesInPath("..snippet..", false) shouldBeEqualTo true
+            sut?.residesInPath("..kosetter/snippet..", false) shouldBeEqualTo true
+            sut?.residesInPath("..kosetter..setter-reside-in-project-file-path.kt", false) shouldBeEqualTo true
+            sut?.residesInPath("kosetter/snippet/", false) shouldBeEqualTo false
         }
     }
 

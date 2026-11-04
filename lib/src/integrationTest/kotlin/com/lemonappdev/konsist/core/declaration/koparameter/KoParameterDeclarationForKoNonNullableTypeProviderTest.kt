@@ -106,7 +106,7 @@ class KoParameterDeclarationForKoNonNullableTypeProviderTest {
             it?.type?.name shouldBeEqualTo "ImportAlias"
             it?.hasType { type -> type.name == "ImportAlias" } shouldBeEqualTo true
             it?.hasType { type -> type.name == "Int" } shouldBeEqualTo false
-            it?.hasTypeOf(FixtureType::class) shouldBeEqualTo false
+            it?.hasTypeOf(FixtureType::class) shouldBeEqualTo true
             it?.hasTypeOf(Int::class) shouldBeEqualTo false
         }
     }
@@ -126,7 +126,7 @@ class KoParameterDeclarationForKoNonNullableTypeProviderTest {
             type.name shouldBeEqualTo "ImportAlias"
             hasType { type -> type.name == "ImportAlias" } shouldBeEqualTo true
             hasType { type -> type.name == "Int" } shouldBeEqualTo false
-            hasTypeOf(FixtureType::class) shouldBeEqualTo false
+            hasTypeOf(FixtureType::class) shouldBeEqualTo true
             hasTypeOf(Int::class) shouldBeEqualTo false
         }
     }
@@ -147,7 +147,7 @@ class KoParameterDeclarationForKoNonNullableTypeProviderTest {
             it?.type?.name shouldBeEqualTo "ImportAlias"
             it?.hasType { type -> type.name == "ImportAlias" } shouldBeEqualTo true
             it?.hasType { type -> type.name == "Int" } shouldBeEqualTo false
-            it?.hasTypeOf(FixtureType::class) shouldBeEqualTo false
+            it?.hasTypeOf(FixtureType::class) shouldBeEqualTo true
             it?.hasTypeOf(Int::class) shouldBeEqualTo false
         }
     }
@@ -167,7 +167,7 @@ class KoParameterDeclarationForKoNonNullableTypeProviderTest {
             type.name shouldBeEqualTo "ImportAlias"
             hasType { type -> type.name == "ImportAlias" } shouldBeEqualTo true
             hasType { type -> type.name == "Int" } shouldBeEqualTo false
-            hasTypeOf(FixtureType::class) shouldBeEqualTo false
+            hasTypeOf(FixtureType::class) shouldBeEqualTo true
             hasTypeOf(Int::class) shouldBeEqualTo false
         }
     }

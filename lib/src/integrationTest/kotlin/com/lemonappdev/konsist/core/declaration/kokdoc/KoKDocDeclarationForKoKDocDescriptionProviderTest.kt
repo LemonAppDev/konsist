@@ -76,6 +76,10 @@ class KoKDocDeclarationForKoKDocDescriptionProviderTest {
                 ),
                 arguments("class-without-description-and-with-tags", ""),
                 arguments("class-with-empty-kdoc", ""),
+                arguments("class-with-description-on-opening-line", "First line summary\nsecond line"),
+                arguments("class-with-description-on-closing-line", "First line\nText"),
+                arguments("class-with-at-sign-in-description", "Contact me at john@example.com"),
+                arguments("class-with-backticked-annotation-in-description", "Use with `@Composable` functions."),
             )
 
         @Suppress("unused")

@@ -1,0 +1,3 @@
+@file:Suppress("konsist.suppressed kotest test")
+
+class FixtureClass

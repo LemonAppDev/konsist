@@ -16,7 +16,7 @@ multiprocessing.set_start_method('fork')
 # Variables ============================================================================================================
 error_occurred = False
 kt_temp_files_dir = tempfile.mkdtemp()
-dummy_classes_path = os.path.join(project_root, "lib/src/snippet/kotlin/dummyclasses")
+dummy_classes_path = os.path.join(project_root, "lib/src/testsnippet/kotlin/dummyclasses")
 dummy_classes_jar_path = os.path.join(kt_temp_files_dir, "all_dummy_classes.jar")
 konsist_version = get_konsist_snapshot_version()
 success = "SUCCESS"
@@ -70,8 +70,8 @@ def compile_dummy_classes_jar(package_path, dummy_classes_jar_path):
     global error_occurred
     error_occurred = False
 
-    # Include Kotlin standard library and set JVM target 17
-    command = ["kotlinc", "-jvm-target", "17", "-include-runtime", "-d", dummy_classes_jar_path]
+    # Include Kotlin standard library and set JVM target 11
+    command = ["kotlinc", "-jvm-target", "11", "-include-runtime", "-d", dummy_classes_jar_path]
 
     # Get all Kotlin source files recursively
     kotlin_files = glob.glob(os.path.join(package_path, "**/*.kt"), recursive=True)
@@ -102,7 +102,7 @@ def compile_kotlin_file(file_path):
 
     snippet_command = [
         "kotlinc",
-        "-jvm-target", "17",
+        "-jvm-target", "11",
         "-cp", classpath,
         "-nowarn",
         "-d", temp_dir,

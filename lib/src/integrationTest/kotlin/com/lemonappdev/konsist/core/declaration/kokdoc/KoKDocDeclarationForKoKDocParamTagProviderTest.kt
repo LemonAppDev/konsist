@@ -29,6 +29,23 @@ class KoKDocDeclarationForKoKDocParamTagProviderTest {
         }
     }
 
+    @Test
+    fun `kdoc-with-bare-param-tag`() {
+        // given
+        val sut =
+            getSnippetFile("kdoc-with-bare-param-tag")
+                .classes()
+                .first()
+                .kDoc
+
+        // then
+        assertSoftly(sut) {
+            it?.paramTags shouldBeEqualTo emptyList()
+            it?.numParamTags shouldBeEqualTo 0
+            it?.hasParamTags shouldBeEqualTo false
+        }
+    }
+
     @ParameterizedTest
     @MethodSource("provideValues")
     @Suppress("detekt.LongParameterList")

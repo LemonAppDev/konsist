@@ -1,0 +1,6 @@
+/**
+ * Use with `@Composable` functions.
+ *
+ * @param T type
+ */
+class FixtureClass<T>

@@ -2,6 +2,7 @@ package com.lemonappdev.konsist.core.declaration.kokdoc
 
 import com.lemonappdev.konsist.TestSnippetProvider
 import com.lemonappdev.konsist.api.ext.list.kDocs
+import com.lemonappdev.konsist.core.filesystem.PathProvider
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
@@ -19,7 +20,7 @@ class KoKDocDeclarationTest {
         // then
         val declaration = "Declaration:\nThis is a fixture kdoc."
         assertSoftly(sut.toString()) {
-            startsWith("Location: /") shouldBeEqualTo true
+            startsWith("Location: ${PathProvider.rootProjectPath}") shouldBeEqualTo true
             endsWith(declaration) shouldBeEqualTo true
         }
     }

@@ -1,7 +1,6 @@
 package com.lemonappdev.konsist.core.declaration.kovariable
 
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
-import com.lemonappdev.konsist.api.ext.list.enumConstants
 import com.lemonappdev.konsist.api.ext.list.getters
 import com.lemonappdev.konsist.api.ext.list.initBlocks
 import com.lemonappdev.konsist.api.ext.list.setters
@@ -72,7 +71,6 @@ class KoVariableDeclarationForKoKDocProviderTest {
             listOf(
                 arguments(getSnippetFile("variable-in-function-without-kdoc").functions()),
                 arguments(getSnippetFile("variable-in-init-block-without-kdoc").classes().initBlocks),
-                arguments(getSnippetFile("variable-in-enum-constant-without-kdoc").classes().enumConstants),
                 arguments(getSnippetFile("variable-in-getter-without-kdoc").properties().getters),
                 arguments(getSnippetFile("variable-in-setter-without-kdoc").properties().setters),
             )
@@ -83,7 +81,6 @@ class KoVariableDeclarationForKoKDocProviderTest {
             listOf(
                 arguments(getSnippetFile("variable-in-function-with-kdoc").functions()),
                 arguments(getSnippetFile("variable-in-init-block-with-kdoc").classes().initBlocks),
-                arguments(getSnippetFile("variable-in-enum-constant-with-kdoc").classes().enumConstants),
                 arguments(getSnippetFile("variable-in-getter-with-kdoc").properties().getters),
                 arguments(getSnippetFile("variable-in-setter-with-kdoc").properties().setters),
             )
@@ -94,7 +91,6 @@ class KoVariableDeclarationForKoKDocProviderTest {
             listOf(
                 arguments(getSnippetFile("variable-in-function-with-one-line-kdoc").functions()),
                 arguments(getSnippetFile("variable-in-init-block-with-one-line-kdoc").classes().initBlocks),
-                arguments(getSnippetFile("variable-in-enum-constant-with-one-line-kdoc").classes().enumConstants),
                 arguments(getSnippetFile("variable-in-getter-with-one-line-kdoc").properties().getters),
                 arguments(getSnippetFile("variable-in-setter-with-one-line-kdoc").properties().setters),
             )

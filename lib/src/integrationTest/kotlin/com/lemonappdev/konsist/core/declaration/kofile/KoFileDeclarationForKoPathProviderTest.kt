@@ -1,6 +1,7 @@
 package com.lemonappdev.konsist.core.declaration.kofile
 
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
+import com.lemonappdev.konsist.helper.ext.toOsSeparator
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
@@ -17,7 +18,7 @@ class KoFileDeclarationForKoPathProviderTest {
         // then
         assertSoftly(sut.path) {
             startsWith("//") shouldBeEqualTo false
-            endsWith("kofile/snippet/forkopathprovider/file-path.kt") shouldBeEqualTo true
+            endsWith("kofile/snippet/forkopathprovider/file-path.kt".toOsSeparator()) shouldBeEqualTo true
         }
     }
 
@@ -33,8 +34,10 @@ class KoFileDeclarationForKoPathProviderTest {
         sut
             .projectPath
             .shouldBeEqualTo(
-                "/lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core/declaration/kofile/snippet/forkopathprovider/" +
-                    "file-project-path.kt",
+                (
+                    "/lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core/declaration/kofile/snippet/forkopathprovider/" +
+                        "file-project-path.kt"
+                ).toOsSeparator(),
             )
     }
 
@@ -48,10 +51,10 @@ class KoFileDeclarationForKoPathProviderTest {
 
         // then
         assertSoftly(sut) {
-            resideInPath("..snippet..", true) shouldBeEqualTo true
-            resideInPath("..kofile/snippet..", true) shouldBeEqualTo true
-            resideInPath("..kofile..reside-in-file-path.kt", true) shouldBeEqualTo true
-            resideInPath("kofile/snippet/", true) shouldBeEqualTo false
+            residesInPath("..snippet..", true) shouldBeEqualTo true
+            residesInPath("..kofile/snippet..", true) shouldBeEqualTo true
+            residesInPath("..kofile..reside-in-file-path.kt", true) shouldBeEqualTo true
+            residesInPath("kofile/snippet/", true) shouldBeEqualTo false
         }
     }
 
@@ -65,10 +68,10 @@ class KoFileDeclarationForKoPathProviderTest {
 
         // then
         assertSoftly(sut) {
-            resideInPath("..snippet..", false) shouldBeEqualTo true
-            resideInPath("..kofile/snippet..", false) shouldBeEqualTo true
-            resideInPath("..kofile..reside-in-project-file-path.kt", false) shouldBeEqualTo true
-            resideInPath("kofile/snippet/", false) shouldBeEqualTo false
+            residesInPath("..snippet..", false) shouldBeEqualTo true
+            residesInPath("..kofile/snippet..", false) shouldBeEqualTo true
+            residesInPath("..kofile..reside-in-project-file-path.kt", false) shouldBeEqualTo true
+            residesInPath("kofile/snippet/", false) shouldBeEqualTo false
         }
     }
 

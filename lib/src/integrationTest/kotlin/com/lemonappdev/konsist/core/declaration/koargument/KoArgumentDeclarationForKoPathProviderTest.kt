@@ -4,6 +4,7 @@ import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
 import com.lemonappdev.konsist.api.ext.list.annotations
 import com.lemonappdev.konsist.api.ext.list.arguments
 import com.lemonappdev.konsist.api.ext.list.enumConstants
+import com.lemonappdev.konsist.helper.ext.toOsSeparator
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
@@ -22,7 +23,7 @@ class KoArgumentDeclarationForKoPathProviderTest {
         // then
         assertSoftly(sut.path) {
             startsWith("//") shouldBeEqualTo false
-            endsWith("koargument/snippet/forkopathprovider/argument-in-enum-const-file-path.kt") shouldBeEqualTo true
+            endsWith("koargument/snippet/forkopathprovider/argument-in-enum-const-file-path.kt".toOsSeparator()) shouldBeEqualTo true
         }
     }
 
@@ -40,8 +41,10 @@ class KoArgumentDeclarationForKoPathProviderTest {
         sut
             .projectPath
             .shouldBeEqualTo(
-                "/lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core/declaration/koargument/snippet/" +
-                    "forkopathprovider/argument-in-enum-const-project-file-path.kt",
+                (
+                    "/lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core/declaration/koargument/snippet/" +
+                        "forkopathprovider/argument-in-enum-const-project-file-path.kt"
+                ).toOsSeparator(),
             )
     }
 
@@ -57,10 +60,10 @@ class KoArgumentDeclarationForKoPathProviderTest {
 
         // then
         assertSoftly(sut) {
-            resideInPath("..snippet..", true) shouldBeEqualTo true
-            resideInPath("..koargument/snippet..", true) shouldBeEqualTo true
-            resideInPath("..koargument..argument-in-enum-const-reside-in-file-path.kt", true) shouldBeEqualTo true
-            resideInPath("koargument/snippet/", true) shouldBeEqualTo false
+            residesInPath("..snippet..", true) shouldBeEqualTo true
+            residesInPath("..koargument/snippet..", true) shouldBeEqualTo true
+            residesInPath("..koargument..argument-in-enum-const-reside-in-file-path.kt", true) shouldBeEqualTo true
+            residesInPath("koargument/snippet/", true) shouldBeEqualTo false
         }
     }
 
@@ -76,10 +79,10 @@ class KoArgumentDeclarationForKoPathProviderTest {
 
         // then
         assertSoftly(sut) {
-            resideInPath("..snippet..", false) shouldBeEqualTo true
-            resideInPath("..koargument/snippet..", false) shouldBeEqualTo true
-            resideInPath("..koargument..argument-in-enum-const-reside-in-project-file-path.kt", false) shouldBeEqualTo true
-            resideInPath("koargument/snippet/", false) shouldBeEqualTo false
+            residesInPath("..snippet..", false) shouldBeEqualTo true
+            residesInPath("..koargument/snippet..", false) shouldBeEqualTo true
+            residesInPath("..koargument..argument-in-enum-const-reside-in-project-file-path.kt", false) shouldBeEqualTo true
+            residesInPath("koargument/snippet/", false) shouldBeEqualTo false
         }
     }
 
@@ -96,7 +99,7 @@ class KoArgumentDeclarationForKoPathProviderTest {
         // then
         assertSoftly(sut.path) {
             startsWith("//") shouldBeEqualTo false
-            endsWith("koargument/snippet/forkopathprovider/argument-in-annotation-file-path.kt") shouldBeEqualTo true
+            endsWith("koargument/snippet/forkopathprovider/argument-in-annotation-file-path.kt".toOsSeparator()) shouldBeEqualTo true
         }
     }
 
@@ -114,8 +117,10 @@ class KoArgumentDeclarationForKoPathProviderTest {
         sut
             .projectPath
             .shouldBeEqualTo(
-                "/lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core/declaration/koargument/snippet/" +
-                    "forkopathprovider/argument-in-annotation-project-file-path.kt",
+                (
+                    "/lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core/declaration/koargument/snippet/" +
+                        "forkopathprovider/argument-in-annotation-project-file-path.kt"
+                ).toOsSeparator(),
             )
     }
 
@@ -131,10 +136,10 @@ class KoArgumentDeclarationForKoPathProviderTest {
 
         // then
         assertSoftly(sut) {
-            resideInPath("..snippet..", true) shouldBeEqualTo true
-            resideInPath("..koargument/snippet..", true) shouldBeEqualTo true
-            resideInPath("..koargument..argument-in-annotation-reside-in-file-path.kt", true) shouldBeEqualTo true
-            resideInPath("koargument/snippet/", true) shouldBeEqualTo false
+            residesInPath("..snippet..", true) shouldBeEqualTo true
+            residesInPath("..koargument/snippet..", true) shouldBeEqualTo true
+            residesInPath("..koargument..argument-in-annotation-reside-in-file-path.kt", true) shouldBeEqualTo true
+            residesInPath("koargument/snippet/", true) shouldBeEqualTo false
         }
     }
 
@@ -150,10 +155,10 @@ class KoArgumentDeclarationForKoPathProviderTest {
 
         // then
         assertSoftly(sut) {
-            resideInPath("..snippet..", false) shouldBeEqualTo true
-            resideInPath("..koargument/snippet..", false) shouldBeEqualTo true
-            resideInPath("..koargument..argument-in-annotation-reside-in-project-file-path.kt", false) shouldBeEqualTo true
-            resideInPath("koargument/snippet/", false) shouldBeEqualTo false
+            residesInPath("..snippet..", false) shouldBeEqualTo true
+            residesInPath("..koargument/snippet..", false) shouldBeEqualTo true
+            residesInPath("..koargument..argument-in-annotation-reside-in-project-file-path.kt", false) shouldBeEqualTo true
+            residesInPath("koargument/snippet/", false) shouldBeEqualTo false
         }
     }
 

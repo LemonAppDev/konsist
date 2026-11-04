@@ -21,10 +21,10 @@ class KoImportAliasDeclarationForKoResideInPackageProviderTest {
 
         // then
         assertSoftly(sut) {
-            it?.resideInPackage("com..") shouldBeEqualTo true
-            it?.resideInPackage("com") shouldBeEqualTo false
-            it?.resideOutsidePackage("com..") shouldBeEqualTo false
-            it?.resideOutsidePackage("com") shouldBeEqualTo true
+            it?.residesInPackage("com..") shouldBeEqualTo true
+            it?.residesInPackage("com") shouldBeEqualTo false
+            it?.residesOutsidePackage("com..") shouldBeEqualTo false
+            it?.residesOutsidePackage("com") shouldBeEqualTo true
         }
     }
 

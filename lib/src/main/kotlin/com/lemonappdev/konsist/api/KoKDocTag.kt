@@ -2,6 +2,9 @@ package com.lemonappdev.konsist.api
 
 /**
  * Represents a KDoc tag.
+ *
+ * @property type The tag text, e.g. `@param`.
+ * @property isValued Whether the tag has a value (e.g. the parameter name of the `@param` tag).
  */
 enum class KoKDocTag(
     val type: String,

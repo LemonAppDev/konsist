@@ -1,0 +1,5 @@
+package com.lemonappdev.konsist.testdata
+
+import com.lemonappdev.konsist.testdata.testpackage.*
+
+class SampleClass(val sampleParameter: Type)

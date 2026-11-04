@@ -1,0 +1,4 @@
+@Suppress("assert-suppress-by-name-at-declaration-parent-level-when-declarations-are-type-arguments")
+class SampleClass {
+    val sampleProperty: List<String> = emptyList()
+}

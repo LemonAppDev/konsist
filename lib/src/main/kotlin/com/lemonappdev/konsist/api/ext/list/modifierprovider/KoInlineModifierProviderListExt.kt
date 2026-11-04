@@ -6,6 +6,7 @@ import com.lemonappdev.konsist.api.provider.modifier.KoInlineModifierProvider
  * List containing declarations with `inline` modifier.
  *
  * @return A list containing declarations with the `inline` modifier.
+ * @see KoInlineModifierProvider.hasInlineModifier
  */
 fun <T : KoInlineModifierProvider> List<T>.withInlineModifier(): List<T> = filter { it.hasInlineModifier }
 
@@ -13,5 +14,6 @@ fun <T : KoInlineModifierProvider> List<T>.withInlineModifier(): List<T> = filte
  * List containing declarations without `inline` modifier.
  *
  * @return A list containing declarations without the `inline` modifier.
+ * @see KoInlineModifierProvider.hasInlineModifier
  */
 fun <T : KoInlineModifierProvider> List<T>.withoutInlineModifier(): List<T> = filterNot { it.hasInlineModifier }

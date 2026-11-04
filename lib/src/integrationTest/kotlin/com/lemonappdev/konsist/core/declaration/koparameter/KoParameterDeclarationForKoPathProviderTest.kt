@@ -1,6 +1,7 @@
 package com.lemonappdev.konsist.core.declaration.koparameter
 
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
+import com.lemonappdev.konsist.helper.ext.toOsSeparator
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
@@ -20,7 +21,7 @@ class KoParameterDeclarationForKoPathProviderTest {
         // then
         assertSoftly(sut?.path) {
             it?.startsWith("//") shouldBeEqualTo false
-            it?.endsWith("koparameter/snippet/forkopathprovider/parameter-in-constructor-file-path.kt") shouldBeEqualTo true
+            it?.endsWith("koparameter/snippet/forkopathprovider/parameter-in-constructor-file-path.kt".toOsSeparator()) shouldBeEqualTo true
         }
     }
 
@@ -37,7 +38,8 @@ class KoParameterDeclarationForKoPathProviderTest {
         // then
         assertSoftly(sut.path) {
             startsWith("//") shouldBeEqualTo false
-            endsWith("koparameter/snippet/forkopathprovider/parameter-in-function-invocation-file-path.kt") shouldBeEqualTo true
+            endsWith("koparameter/snippet/forkopathprovider/parameter-in-function-invocation-file-path.kt".toOsSeparator()) shouldBeEqualTo
+                true
         }
     }
 
@@ -56,8 +58,10 @@ class KoParameterDeclarationForKoPathProviderTest {
         sut
             ?.projectPath
             .shouldBeEqualTo(
-                "/lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core/declaration/koparameter/snippet/" +
-                    "forkopathprovider/parameter-in-constructor-project-file-path.kt",
+                (
+                    "/lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core/declaration/koparameter/snippet/" +
+                        "forkopathprovider/parameter-in-constructor-project-file-path.kt"
+                ).toOsSeparator(),
             )
     }
 
@@ -75,8 +79,10 @@ class KoParameterDeclarationForKoPathProviderTest {
         sut
             .projectPath
             .shouldBeEqualTo(
-                "/lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core/declaration/koparameter/snippet/" +
-                    "forkopathprovider/parameter-in-function-invocation-project-file-path.kt",
+                (
+                    "/lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core/declaration/koparameter/snippet/" +
+                        "forkopathprovider/parameter-in-function-invocation-project-file-path.kt"
+                ).toOsSeparator(),
             )
     }
 
@@ -93,10 +99,10 @@ class KoParameterDeclarationForKoPathProviderTest {
 
         // then
         assertSoftly(sut) {
-            it?.resideInPath("..snippet..", true) shouldBeEqualTo true
-            it?.resideInPath("..koparameter/snippet..", true) shouldBeEqualTo true
-            it?.resideInPath("..koparameter..parameter-in-constructor-reside-in-file-path.kt", true) shouldBeEqualTo true
-            it?.resideInPath("koparameter/snippet/", true) shouldBeEqualTo false
+            it?.residesInPath("..snippet..", true) shouldBeEqualTo true
+            it?.residesInPath("..koparameter/snippet..", true) shouldBeEqualTo true
+            it?.residesInPath("..koparameter..parameter-in-constructor-reside-in-file-path.kt", true) shouldBeEqualTo true
+            it?.residesInPath("koparameter/snippet/", true) shouldBeEqualTo false
         }
     }
 
@@ -112,10 +118,10 @@ class KoParameterDeclarationForKoPathProviderTest {
 
         // then
         assertSoftly(sut) {
-            resideInPath("..snippet..", true) shouldBeEqualTo true
-            resideInPath("..koparameter/snippet..", true) shouldBeEqualTo true
-            resideInPath("..koparameter..parameter-in-function-invocation-reside-in-file-path.kt", true) shouldBeEqualTo true
-            resideInPath("koparameter/snippet/", true) shouldBeEqualTo false
+            residesInPath("..snippet..", true) shouldBeEqualTo true
+            residesInPath("..koparameter/snippet..", true) shouldBeEqualTo true
+            residesInPath("..koparameter..parameter-in-function-invocation-reside-in-file-path.kt", true) shouldBeEqualTo true
+            residesInPath("koparameter/snippet/", true) shouldBeEqualTo false
         }
     }
 
@@ -132,10 +138,10 @@ class KoParameterDeclarationForKoPathProviderTest {
 
         // then
         assertSoftly(sut) {
-            it?.resideInPath("..snippet..", false) shouldBeEqualTo true
-            it?.resideInPath("..koparameter/snippet..", false) shouldBeEqualTo true
-            it?.resideInPath("..koparameter..parameter-in-constructor-reside-in-project-file-path.kt", false) shouldBeEqualTo true
-            it?.resideInPath("koparameter/snippet/", false) shouldBeEqualTo false
+            it?.residesInPath("..snippet..", false) shouldBeEqualTo true
+            it?.residesInPath("..koparameter/snippet..", false) shouldBeEqualTo true
+            it?.residesInPath("..koparameter..parameter-in-constructor-reside-in-project-file-path.kt", false) shouldBeEqualTo true
+            it?.residesInPath("koparameter/snippet/", false) shouldBeEqualTo false
         }
     }
 
@@ -151,10 +157,10 @@ class KoParameterDeclarationForKoPathProviderTest {
 
         // then
         assertSoftly(sut) {
-            resideInPath("..snippet..", false) shouldBeEqualTo true
-            resideInPath("..koparameter/snippet..", false) shouldBeEqualTo true
-            resideInPath("..koparameter..parameter-in-function-invocation-reside-in-project-file-path.kt", false) shouldBeEqualTo true
-            resideInPath("koparameter/snippet/", false) shouldBeEqualTo false
+            residesInPath("..snippet..", false) shouldBeEqualTo true
+            residesInPath("..koparameter/snippet..", false) shouldBeEqualTo true
+            residesInPath("..koparameter..parameter-in-function-invocation-reside-in-project-file-path.kt", false) shouldBeEqualTo true
+            residesInPath("koparameter/snippet/", false) shouldBeEqualTo false
         }
     }
 

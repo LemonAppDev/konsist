@@ -104,7 +104,7 @@ class Architecture7Test {
     fun `passes when  using doesNotDependsOn (lambda scope)`() {
         // then
         scope
-            .assertArchitecture {
+            .assertArchitecture(allowFilesOutsideLayers = true) {
                 domain.doesNotDependOn(adapter, port)
             }
     }
@@ -114,7 +114,7 @@ class Architecture7Test {
         // then
         scope
             .files
-            .assertArchitecture {
+            .assertArchitecture(allowFilesOutsideLayers = true) {
                 domain.doesNotDependOn(adapter, port)
             }
     }
@@ -127,7 +127,7 @@ class Architecture7Test {
                 domain.doesNotDependOn(adapter, port)
             }
 
-        scope.assertArchitecture(layerDependencies)
+        scope.assertArchitecture(allowFilesOutsideLayers = true, layerDependenciesFunc = layerDependencies)
     }
 
     @Test
@@ -140,7 +140,7 @@ class Architecture7Test {
 
         scope
             .files
-            .assertArchitecture(layerDependencies)
+            .assertArchitecture(allowFilesOutsideLayers = true, layerDependenciesFunc = layerDependencies)
     }
     // endregion
 

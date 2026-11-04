@@ -5,7 +5,7 @@ package com.lemonappdev.konsist.api.provider
  */
 interface KoIsFunctionTypeProvider : KoBaseProvider {
     /**
-     * Determines whatever type is function type.
+     * Determines whether the type is a function type.
      */
     val isFunctionType: Boolean
 }

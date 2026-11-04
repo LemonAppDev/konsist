@@ -1,0 +1,7 @@
+interface Logger
+
+interface Tracer
+
+context(fixtureParameter1: Logger, fixtureParameter2: Tracer)
+val fixtureProperty: Int
+    get() = 0

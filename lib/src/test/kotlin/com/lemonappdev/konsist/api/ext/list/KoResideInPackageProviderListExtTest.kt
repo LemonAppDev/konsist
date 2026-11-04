@@ -78,11 +78,11 @@ class KoResideInPackageProviderListExtTest {
         val packagee = "com.fixture.fixturepackage"
         val declaration1: FixtureTestDeclaration =
             mockk {
-                every { resideInPackage(packagee) } returns true
+                every { residesInPackage(packagee) } returns true
             }
         val declaration2: FixtureTestDeclaration =
             mockk {
-                every { resideInPackage(packagee) } returns false
+                every { residesInPackage(packagee) } returns false
             }
         val declarations = listOf(declaration1, declaration2)
 
@@ -100,18 +100,18 @@ class KoResideInPackageProviderListExtTest {
         val package2 = "com.fixture.fixturepackage2"
         val declaration1: FixtureTestDeclaration =
             mockk {
-                every { resideInPackage(package1) } returns true
-                every { resideInPackage(package2) } returns true
+                every { residesInPackage(package1) } returns true
+                every { residesInPackage(package2) } returns true
             }
         val declaration2: FixtureTestDeclaration =
             mockk {
-                every { resideInPackage(package1) } returns false
-                every { resideInPackage(package2) } returns true
+                every { residesInPackage(package1) } returns false
+                every { residesInPackage(package2) } returns true
             }
         val declaration3: FixtureTestDeclaration =
             mockk {
-                every { resideInPackage(package1) } returns false
-                every { resideInPackage(package2) } returns false
+                every { residesInPackage(package1) } returns false
+                every { residesInPackage(package2) } returns false
             }
         val declarations = listOf(declaration1, declaration2, declaration3)
 
@@ -129,18 +129,18 @@ class KoResideInPackageProviderListExtTest {
         val package2 = "com.fixture.fixturepackage2"
         val declaration1: FixtureTestDeclaration =
             mockk {
-                every { resideInPackage(package1) } returns true
-                every { resideInPackage(package2) } returns true
+                every { residesInPackage(package1) } returns true
+                every { residesInPackage(package2) } returns true
             }
         val declaration2: FixtureTestDeclaration =
             mockk {
-                every { resideInPackage(package1) } returns false
-                every { resideInPackage(package2) } returns true
+                every { residesInPackage(package1) } returns false
+                every { residesInPackage(package2) } returns true
             }
         val declaration3: FixtureTestDeclaration =
             mockk {
-                every { resideInPackage(package1) } returns false
-                every { resideInPackage(package2) } returns false
+                every { residesInPackage(package1) } returns false
+                every { residesInPackage(package2) } returns false
             }
         val declarations = listOf(declaration1, declaration2, declaration3)
         val packages = listOf(package1, package2)
@@ -159,18 +159,18 @@ class KoResideInPackageProviderListExtTest {
         val package2 = "com.fixture.fixturepackage2"
         val declaration1: FixtureTestDeclaration =
             mockk {
-                every { resideInPackage(package1) } returns true
-                every { resideInPackage(package2) } returns true
+                every { residesInPackage(package1) } returns true
+                every { residesInPackage(package2) } returns true
             }
         val declaration2: FixtureTestDeclaration =
             mockk {
-                every { resideInPackage(package1) } returns false
-                every { resideInPackage(package2) } returns true
+                every { residesInPackage(package1) } returns false
+                every { residesInPackage(package2) } returns true
             }
         val declaration3: FixtureTestDeclaration =
             mockk {
-                every { resideInPackage(package1) } returns false
-                every { resideInPackage(package2) } returns false
+                every { residesInPackage(package1) } returns false
+                every { residesInPackage(package2) } returns false
             }
         val declarations = listOf(declaration1, declaration2, declaration3)
         val packages = setOf(package1, package2)
@@ -248,11 +248,11 @@ class KoResideInPackageProviderListExtTest {
         val packagee = "com.fixture.fixturepackage"
         val declaration1: FixtureTestDeclaration =
             mockk {
-                every { resideOutsidePackage(packagee) } returns false
+                every { residesOutsidePackage(packagee) } returns false
             }
         val declaration2: FixtureTestDeclaration =
             mockk {
-                every { resideOutsidePackage(packagee) } returns true
+                every { residesOutsidePackage(packagee) } returns true
             }
         val declarations = listOf(declaration1, declaration2)
 
@@ -270,18 +270,18 @@ class KoResideInPackageProviderListExtTest {
         val package2 = "com.fixture.fixturepackage2"
         val declaration1: FixtureTestDeclaration =
             mockk {
-                every { resideOutsidePackage(package1) } returns false
-                every { resideOutsidePackage(package2) } returns false
+                every { residesOutsidePackage(package1) } returns false
+                every { residesOutsidePackage(package2) } returns false
             }
         val declaration2: FixtureTestDeclaration =
             mockk {
-                every { resideOutsidePackage(package1) } returns true
-                every { resideOutsidePackage(package2) } returns false
+                every { residesOutsidePackage(package1) } returns true
+                every { residesOutsidePackage(package2) } returns false
             }
         val declaration3: FixtureTestDeclaration =
             mockk {
-                every { resideOutsidePackage(package1) } returns true
-                every { resideOutsidePackage(package2) } returns true
+                every { residesOutsidePackage(package1) } returns true
+                every { residesOutsidePackage(package2) } returns true
             }
         val declarations = listOf(declaration1, declaration2, declaration3)
 
@@ -299,18 +299,18 @@ class KoResideInPackageProviderListExtTest {
         val package2 = "com.fixture.fixturepackage2"
         val declaration1: FixtureTestDeclaration =
             mockk {
-                every { resideOutsidePackage(package1) } returns false
-                every { resideOutsidePackage(package2) } returns false
+                every { residesOutsidePackage(package1) } returns false
+                every { residesOutsidePackage(package2) } returns false
             }
         val declaration2: FixtureTestDeclaration =
             mockk {
-                every { resideOutsidePackage(package1) } returns true
-                every { resideOutsidePackage(package2) } returns false
+                every { residesOutsidePackage(package1) } returns true
+                every { residesOutsidePackage(package2) } returns false
             }
         val declaration3: FixtureTestDeclaration =
             mockk {
-                every { resideOutsidePackage(package1) } returns true
-                every { resideOutsidePackage(package2) } returns true
+                every { residesOutsidePackage(package1) } returns true
+                every { residesOutsidePackage(package2) } returns true
             }
         val declarations = listOf(declaration1, declaration2, declaration3)
         val packages = listOf(package1, package2)
@@ -329,18 +329,18 @@ class KoResideInPackageProviderListExtTest {
         val package2 = "com.fixture.fixturepackage2"
         val declaration1: FixtureTestDeclaration =
             mockk {
-                every { resideOutsidePackage(package1) } returns false
-                every { resideOutsidePackage(package2) } returns false
+                every { residesOutsidePackage(package1) } returns false
+                every { residesOutsidePackage(package2) } returns false
             }
         val declaration2: FixtureTestDeclaration =
             mockk {
-                every { resideOutsidePackage(package1) } returns true
-                every { resideOutsidePackage(package2) } returns false
+                every { residesOutsidePackage(package1) } returns true
+                every { residesOutsidePackage(package2) } returns false
             }
         val declaration3: FixtureTestDeclaration =
             mockk {
-                every { resideOutsidePackage(package1) } returns true
-                every { resideOutsidePackage(package2) } returns true
+                every { residesOutsidePackage(package1) } returns true
+                every { residesOutsidePackage(package2) } returns true
             }
         val declarations = listOf(declaration1, declaration2, declaration3)
         val packages = setOf(package1, package2)

@@ -18,7 +18,7 @@ interface KoEnumConstantProvider : KoBaseProvider {
     val numEnumConstants: Int
 
     /**
-     * Returns the number of enum constants that satisfies the specified predicate present in the declaration.
+     * Returns the number of enum constants that satisfy the specified predicate present in the declaration.
      *
      * @param predicate The predicate function to determine if an enum constant satisfies a condition.
      * @return The number of enum constants in the declaration.
@@ -26,7 +26,7 @@ interface KoEnumConstantProvider : KoBaseProvider {
     fun countEnumConstants(predicate: (KoEnumConstantDeclaration) -> Boolean): Int
 
     /**
-     * Determines whatever the declaration has any enum constant.
+     * Determines whether the declaration has any enum constant.
      *
      * @return `true` if the declaration has any enum constant, `false` otherwise.
      */
@@ -38,7 +38,7 @@ interface KoEnumConstantProvider : KoBaseProvider {
      * @param name the name of the enum constant to check.
      * @param names the names of the enum constants to check.
      * @param ignoreCase Specifies whether the comparison should ignore case.
-     *        If `true`, the prefix comparison will be case-insensitive.
+     *        If `true`, the comparison will be case-insensitive.
      *        If `false`, the comparison will consider case sensitivity.
      * @return `true` if there is a matching declaration, `false` otherwise.
      */
@@ -53,7 +53,7 @@ interface KoEnumConstantProvider : KoBaseProvider {
      *
      * @param names the names of the enum constants to check.
      * @param ignoreCase Specifies whether the comparison should ignore case.
-     *        If `true`, the prefix comparison will be case-insensitive.
+     *        If `true`, the comparison will be case-insensitive.
      *        If `false`, the comparison will consider case sensitivity.
      * @return `true` if there is a matching declaration, `false` otherwise.
      */
@@ -66,9 +66,9 @@ interface KoEnumConstantProvider : KoBaseProvider {
      * Determines whether the declaration has enum constants with all the specified names.
      *
      * @param name The name of the enum constant to check.
-     * @param names The names of the enum constants to check.
+     * @param names The names of additional enum constants to check.
      * @param ignoreCase Specifies whether the comparison should ignore case.
-     *        If `true`, the prefix comparison will be case-insensitive.
+     *        If `true`, the comparison will be case-insensitive.
      *        If `false`, the comparison will consider case sensitivity.
      * @return `true` if there are declarations with all the specified names, `false` otherwise.
      */
@@ -83,7 +83,7 @@ interface KoEnumConstantProvider : KoBaseProvider {
      *
      * @param names The names of the enum constants to check.
      * @param ignoreCase Specifies whether the comparison should ignore case.
-     *        If `true`, the prefix comparison will be case-insensitive.
+     *        If `true`, the comparison will be case-insensitive.
      *        If `false`, the comparison will consider case sensitivity.
      * @return `true` if there are declarations with all the specified names, `false` otherwise.
      */
@@ -101,9 +101,9 @@ interface KoEnumConstantProvider : KoBaseProvider {
     fun hasEnumConstant(predicate: (KoEnumConstantDeclaration) -> Boolean): Boolean
 
     /**
-     * Determines whatever the declaration has all enum constants with the specified predicate.
+     * Determines whether the declaration has all enum constants with the specified predicate.
      *
-     * Note that if the enum constants contains no elements, the function returns `true` because there are no elements in it
+     * Note that if the enum constants contain no elements, the function returns `true` because there are no elements in it
      * that do not match the predicate.
      *
      * @param predicate The predicate function to determine if an enum constant satisfies a condition.

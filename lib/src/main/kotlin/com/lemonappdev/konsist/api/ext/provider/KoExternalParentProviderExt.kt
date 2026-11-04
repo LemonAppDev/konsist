@@ -3,9 +3,9 @@ package com.lemonappdev.konsist.api.ext.provider
 import com.lemonappdev.konsist.api.provider.KoExternalParentProvider
 
 /**
- * Returns `true` if declaration represents the type of [T].
- * The external parent is a parent defined outside the project codebase (defined inside external library).
+ * Determines whether the declaration has an external parent of type [T].
+ * The external parent is a parent defined outside the project codebase (e.g. defined inside an external library).
  *
- * @return `true` if declaration represents the type of [T], `false` otherwise.
+ * @return `true` if the declaration has an external parent of type [T], `false` otherwise.
  */
 inline fun <reified T> KoExternalParentProvider.hasExternalParentOf(): Boolean = hasExternalParentOf(T::class)

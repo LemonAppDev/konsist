@@ -41,6 +41,21 @@ class KoNonNullableTypeProviderExtTest {
         }
     }
 
+    @Test
+    fun `declaration-has-generic-type`() {
+        // given
+        val sut =
+            getSnippetFile("declaration-has-generic-type")
+                .declarationsOf<KoNonNullableTypeProvider>()
+                .first()
+
+        // then
+        assertSoftly(sut) {
+            hasTypeOf<List<String>>() shouldBeEqualTo true
+            hasTypeOf<List<Int>>() shouldBeEqualTo false
+        }
+    }
+
     private fun getSnippetFile(fileName: String) =
         TestSnippetProvider.getSnippetKoScope("api/ext/provider/kononnullabletype/snippet/", fileName)
 }

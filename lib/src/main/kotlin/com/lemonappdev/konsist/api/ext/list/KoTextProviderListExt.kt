@@ -9,6 +9,7 @@ import com.lemonappdev.konsist.api.provider.KoTextProvider
  *
  * @param texts The text(s) to include.
  * @return A list containing declarations with the specified texts (or any text if [texts] is empty).
+ * @see KoTextProvider.text
  */
 fun <T : KoTextProvider> List<T>.withText(vararg texts: String): List<T> = withText(listOf(*texts))
 
@@ -17,6 +18,7 @@ fun <T : KoTextProvider> List<T>.withText(vararg texts: String): List<T> = withT
  *
  * @param texts The text(s) to include.
  * @return A list containing declarations with the specified texts (or any text if [texts] is empty).
+ * @see KoTextProvider.text
  */
 fun <T : KoTextProvider> List<T>.withText(texts: Collection<String>): List<T> =
     filter {
@@ -30,7 +32,8 @@ fun <T : KoTextProvider> List<T>.withText(texts: Collection<String>): List<T> =
  * List containing declarations without text.
  *
  * @param texts The text(s) to exclude.
- * @return A list containing declarations without the specified texts (or none text if [texts] is empty).
+ * @return A list containing declarations without the specified texts (or with empty text if [texts] is empty).
+ * @see KoTextProvider.text
  */
 fun <T : KoTextProvider> List<T>.withoutText(vararg texts: String): List<T> = withoutText(listOf(*texts))
 
@@ -38,7 +41,8 @@ fun <T : KoTextProvider> List<T>.withoutText(vararg texts: String): List<T> = wi
  * List containing declarations without text.
  *
  * @param texts The text(s) to exclude.
- * @return A list containing declarations without the specified texts (or none text if [texts] is empty).
+ * @return A list containing declarations without the specified texts (or with empty text if [texts] is empty).
+ * @see KoTextProvider.text
  */
 fun <T : KoTextProvider> List<T>.withoutText(texts: Collection<String>): List<T> =
     filter {
@@ -53,6 +57,7 @@ fun <T : KoTextProvider> List<T>.withoutText(texts: Collection<String>): List<T>
  *
  * @param predicate A function that defines the condition to be met by a declaration text.
  * @return A list containing declarations with the text matching the provided predicate.
+ * @see KoTextProvider.text
  */
 fun <T : KoTextProvider> List<T>.withText(predicate: (String) -> Boolean): List<T> = filter { predicate(it.text) }
 
@@ -61,15 +66,17 @@ fun <T : KoTextProvider> List<T>.withText(predicate: (String) -> Boolean): List<
  *
  * @param predicate A function that defines the condition to be met by a declaration text.
  * @return A list containing declarations without the text matching the provided predicate.
+ * @see KoTextProvider.text
  */
 fun <T : KoTextProvider> List<T>.withoutText(predicate: (String) -> Boolean): List<T> = filterNot { predicate(it.text) }
 
 /**
- * List containing declarations with text with any of the specified prefix.
+ * List containing declarations with text starting with any of the specified prefixes.
  *
  * @param prefix The prefix to include.
  * @param prefixes The prefixes to include.
  * @return A list containing declarations with texts starting with the specified prefixes.
+ * @see KoTextProvider.hasTextStartingWith
  */
 fun <T : KoTextProvider> List<T>.withTextStartingWith(
     prefix: String,
@@ -77,10 +84,11 @@ fun <T : KoTextProvider> List<T>.withTextStartingWith(
 ): List<T> = withTextStartingWith(listOf(prefix, *prefixes))
 
 /**
- * List containing declarations with text with any of the specified prefix.
+ * List containing declarations with text starting with any of the specified prefixes.
  *
  * @param prefixes The prefixes to include.
  * @return A list containing declarations with texts starting with the specified prefixes.
+ * @see KoTextProvider.hasTextStartingWith
  */
 fun <T : KoTextProvider> List<T>.withTextStartingWith(prefixes: Collection<String>): List<T> =
     filter {
@@ -91,11 +99,12 @@ fun <T : KoTextProvider> List<T>.withTextStartingWith(prefixes: Collection<Strin
     }
 
 /**
- * List containing declarations without text with any of the specified prefix.
+ * List containing declarations without text starting with any of the specified prefixes.
  *
  * @param prefix The prefix to exclude.
  * @param prefixes The prefixes to exclude.
  * @return A list containing declarations without texts starting with the specified prefixes.
+ * @see KoTextProvider.hasTextStartingWith
  */
 fun <T : KoTextProvider> List<T>.withoutTextStartingWith(
     prefix: String,
@@ -103,10 +112,11 @@ fun <T : KoTextProvider> List<T>.withoutTextStartingWith(
 ): List<T> = withoutTextStartingWith(listOf(prefix, *prefixes))
 
 /**
- * List containing declarations without text with any of the specified prefix.
+ * List containing declarations without text starting with any of the specified prefixes.
  *
  * @param prefixes The prefixes to exclude.
  * @return A list containing declarations without texts starting with the specified prefixes.
+ * @see KoTextProvider.hasTextStartingWith
  */
 fun <T : KoTextProvider> List<T>.withoutTextStartingWith(prefixes: Collection<String>): List<T> =
     filterNot {
@@ -117,11 +127,12 @@ fun <T : KoTextProvider> List<T>.withoutTextStartingWith(prefixes: Collection<St
     }
 
 /**
- * List containing declarations with text with any of the specified suffix.
+ * List containing declarations with text ending with any of the specified suffixes.
  *
  * @param suffix The suffix to include.
  * @param suffixes The suffixes to include.
  * @return A list containing declarations with texts ending with the specified suffixes.
+ * @see KoTextProvider.hasTextEndingWith
  */
 fun <T : KoTextProvider> List<T>.withTextEndingWith(
     suffix: String,
@@ -129,10 +140,11 @@ fun <T : KoTextProvider> List<T>.withTextEndingWith(
 ): List<T> = withTextEndingWith(listOf(suffix, *suffixes))
 
 /**
- * List containing declarations with text with any of the specified suffix.
+ * List containing declarations with text ending with any of the specified suffixes.
  *
  * @param suffixes The suffixes to include.
  * @return A list containing declarations with texts ending with the specified suffixes.
+ * @see KoTextProvider.hasTextEndingWith
  */
 fun <T : KoTextProvider> List<T>.withTextEndingWith(suffixes: Collection<String>): List<T> =
     filter {
@@ -143,11 +155,12 @@ fun <T : KoTextProvider> List<T>.withTextEndingWith(suffixes: Collection<String>
     }
 
 /**
- * List containing declarations without text with any of the specified suffix.
+ * List containing declarations without text ending with any of the specified suffixes.
  *
  * @param suffix The suffix to exclude.
  * @param suffixes The suffixes to exclude.
  * @return A list containing declarations without texts ending with the specified suffixes.
+ * @see KoTextProvider.hasTextEndingWith
  */
 fun <T : KoTextProvider> List<T>.withoutTextEndingWith(
     suffix: String,
@@ -155,10 +168,11 @@ fun <T : KoTextProvider> List<T>.withoutTextEndingWith(
 ): List<T> = withoutTextEndingWith(listOf(suffix, *suffixes))
 
 /**
- * List containing declarations without text with any of the specified suffix.
+ * List containing declarations without text ending with any of the specified suffixes.
  *
  * @param suffixes The suffixes to exclude.
  * @return A list containing declarations without texts ending with the specified suffixes.
+ * @see KoTextProvider.hasTextEndingWith
  */
 fun <T : KoTextProvider> List<T>.withoutTextEndingWith(suffixes: Collection<String>): List<T> =
     filterNot {
@@ -169,11 +183,12 @@ fun <T : KoTextProvider> List<T>.withoutTextEndingWith(suffixes: Collection<Stri
     }
 
 /**
- * List containing declarations with text containing any of the specified String.
+ * List containing declarations with text containing any of the specified texts.
  *
  * @param text The text to include.
  * @param texts The texts to include.
  * @return A list containing declarations with texts containing the specified texts.
+ * @see KoTextProvider.hasTextContaining
  */
 fun <T : KoTextProvider> List<T>.withTextContaining(
     text: String,
@@ -181,10 +196,11 @@ fun <T : KoTextProvider> List<T>.withTextContaining(
 ): List<T> = withTextContaining(listOf(text, *texts))
 
 /**
- * List containing declarations with text containing any of the specified String.
+ * List containing declarations with text containing any of the specified texts.
  *
  * @param texts The texts to include.
  * @return A list containing declarations with texts containing the specified texts.
+ * @see KoTextProvider.hasTextContaining
  */
 fun <T : KoTextProvider> List<T>.withTextContaining(texts: Collection<String>): List<T> =
     filter {
@@ -195,11 +211,12 @@ fun <T : KoTextProvider> List<T>.withTextContaining(texts: Collection<String>): 
     }
 
 /**
- * List containing declarations without text containing any of the specified String.
+ * List containing declarations without text containing any of the specified texts.
  *
  * @param text The text to exclude.
  * @param texts The texts to exclude.
  * @return A list containing declarations without texts containing the specified texts.
+ * @see KoTextProvider.hasTextContaining
  */
 fun <T : KoTextProvider> List<T>.withoutTextContaining(
     text: String,
@@ -207,10 +224,11 @@ fun <T : KoTextProvider> List<T>.withoutTextContaining(
 ): List<T> = withoutTextContaining(listOf(text, *texts))
 
 /**
- * List containing declarations without text containing any of the specified String.
+ * List containing declarations without text containing any of the specified texts.
  *
  * @param texts The texts to exclude.
  * @return A list containing declarations without texts containing the specified texts.
+ * @see KoTextProvider.hasTextContaining
  */
 fun <T : KoTextProvider> List<T>.withoutTextContaining(texts: Collection<String>): List<T> =
     filterNot {
@@ -221,11 +239,14 @@ fun <T : KoTextProvider> List<T>.withoutTextContaining(texts: Collection<String>
     }
 
 /**
- * List containing declarations with text matching any of the specified regex.
+ * List containing declarations with text matching any of the specified regular expressions.
+ *
+ * The regex must match the entire text, see [KoTextProvider.hasTextMatching].
  *
  * @param regex The regular expression to include.
  * @param regexes The regular expressions to include.
  * @return A list containing declarations with texts matching the specified regular expressions.
+ * @see KoTextProvider.hasTextMatching
  */
 fun <T : KoTextProvider> List<T>.withTextMatching(
     regex: Regex,
@@ -233,10 +254,13 @@ fun <T : KoTextProvider> List<T>.withTextMatching(
 ): List<T> = withTextMatching(listOf(regex, *regexes))
 
 /**
- * List containing declarations with text matching any of the specified regex.
+ * List containing declarations with text matching any of the specified regular expressions.
+ *
+ * The regex must match the entire text, see [KoTextProvider.hasTextMatching].
  *
  * @param regexes The regular expressions to include.
  * @return A list containing declarations with texts matching the specified regular expressions.
+ * @see KoTextProvider.hasTextMatching
  */
 fun <T : KoTextProvider> List<T>.withTextMatching(regexes: Collection<Regex>): List<T> =
     filter {
@@ -247,11 +271,14 @@ fun <T : KoTextProvider> List<T>.withTextMatching(regexes: Collection<Regex>): L
     }
 
 /**
- * List containing declarations without text matching any of the specified regex.
+ * List containing declarations without text matching any of the specified regular expressions.
+ *
+ * The regex must match the entire text, see [KoTextProvider.hasTextMatching].
  *
  * @param regex The regular expression to exclude.
  * @param regexes The regular expressions to exclude.
  * @return A list containing declarations without texts matching the specified regular expressions.
+ * @see KoTextProvider.hasTextMatching
  */
 fun <T : KoTextProvider> List<T>.withoutTextMatching(
     regex: Regex,
@@ -259,10 +286,13 @@ fun <T : KoTextProvider> List<T>.withoutTextMatching(
 ): List<T> = withoutTextMatching(listOf(regex, *regexes))
 
 /**
- * List containing declarations without text matching any of the specified regex.
+ * List containing declarations without text matching any of the specified regular expressions.
+ *
+ * The regex must match the entire text, see [KoTextProvider.hasTextMatching].
  *
  * @param regexes The regular expressions to exclude.
  * @return A list containing declarations without texts matching the specified regular expressions.
+ * @see KoTextProvider.hasTextMatching
  */
 fun <T : KoTextProvider> List<T>.withoutTextMatching(regexes: Collection<Regex>): List<T> =
     filterNot {

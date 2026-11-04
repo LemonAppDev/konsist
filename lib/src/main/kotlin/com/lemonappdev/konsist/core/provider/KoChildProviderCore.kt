@@ -1,11 +1,9 @@
 package com.lemonappdev.konsist.core.provider
 
 import com.lemonappdev.konsist.api.declaration.KoChildDeclaration
-import com.lemonappdev.konsist.api.declaration.KoSourceDeclaration
 import com.lemonappdev.konsist.api.provider.KoChildProvider
-import com.lemonappdev.konsist.api.provider.KoParentProvider
 import com.lemonappdev.konsist.core.model.DataCore
-import com.lemonappdev.konsist.core.util.KClassUtil.checkIfKClassOf
+import com.lemonappdev.konsist.core.util.TypeUtil
 import kotlin.reflect.KClass
 
 internal interface KoChildProviderCore :
@@ -13,14 +11,7 @@ internal interface KoChildProviderCore :
     KoContainingDeclarationProviderCore,
     KoContainingFileProviderCore,
     KoBaseProviderCore {
-    override fun children(indirectChildren: Boolean): List<KoChildDeclaration> {
-        val items: List<KoChildDeclaration> = DataCore.classes + DataCore.interfaces + DataCore.objects
-
-        return items.filter {
-            (it as? KoParentProvider)?.hasParent(indirectChildren) { parent -> parent.sourceDeclaration == (this as? KoSourceDeclaration) }
-                ?: false
-        }
-    }
+    override fun children(indirectChildren: Boolean): List<KoChildDeclaration> = DataCore.getChildren(this, indirectChildren)
 
     override fun numChildren(indirectChildren: Boolean): Int = children(indirectChildren).size
 
@@ -93,7 +84,7 @@ internal interface KoChildProviderCore :
         name: KClass<*>,
         vararg names: KClass<*>,
         indirectChildren: Boolean,
-    ): Boolean = hasChildOf(listOf(name, *names))
+    ): Boolean = hasChildOf(listOf(name, *names), indirectChildren)
 
     override fun hasChildOf(
         names: Collection<KClass<*>>,
@@ -101,14 +92,14 @@ internal interface KoChildProviderCore :
     ): Boolean =
         when {
             names.isEmpty() -> hasChildren(indirectChildren)
-            else -> names.any { checkIfKClassOf(it, children(indirectChildren)) }
+            else -> names.any { children(indirectChildren).any { child -> TypeUtil.matchesKClass(child.fullyQualifiedName, it) } }
         }
 
     override fun hasAllChildrenOf(
         name: KClass<*>,
         vararg names: KClass<*>,
         indirectChildren: Boolean,
-    ): Boolean = hasAllChildrenOf(listOf(name, *names))
+    ): Boolean = hasAllChildrenOf(listOf(name, *names), indirectChildren)
 
     override fun hasAllChildrenOf(
         names: Collection<KClass<*>>,
@@ -116,6 +107,6 @@ internal interface KoChildProviderCore :
     ): Boolean =
         when {
             names.isEmpty() -> hasChildren(indirectChildren)
-            else -> names.all { checkIfKClassOf(it, children(indirectChildren)) }
+            else -> names.all { children(indirectChildren).any { child -> TypeUtil.matchesKClass(child.fullyQualifiedName, it) } }
         }
 }

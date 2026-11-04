@@ -5,7 +5,7 @@ package com.lemonappdev.konsist.api.provider
  */
 interface KoIsNullableProvider : KoBaseProvider {
     /**
-     * Determines whatever declaration type is nullable.
+     * Determines whether the declaration type is nullable.
      */
     val isNullable: Boolean
 }

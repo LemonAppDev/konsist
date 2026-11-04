@@ -25,6 +25,23 @@ class KoKDocDeclarationForKoKDocPropertyTagProviderTest {
     }
 
     @Test
+    fun `kdoc-with-bare-property-tag`() {
+        // given
+        val sut =
+            getSnippetFile("kdoc-with-bare-property-tag")
+                .classes()
+                .first()
+                .kDoc
+
+        // then
+        assertSoftly(sut) {
+            it?.propertyTags shouldBeEqualTo emptyList()
+            it?.numPropertyTags shouldBeEqualTo 0
+            it?.hasPropertyTags shouldBeEqualTo false
+        }
+    }
+
+    @Test
     fun `class-with-property-tag`() {
         // given
         val sut =

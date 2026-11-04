@@ -4,62 +4,61 @@ import com.lemonappdev.konsist.api.declaration.KoTypeArgumentDeclaration
 import kotlin.reflect.KClass
 
 /**
- * An interface representing a Kotlin declaration that provides the declaration associated with this type.
+ * An interface representing a Kotlin declaration that provides access to its type arguments.
  */
 interface KoTypeArgumentProvider : KoBaseProvider {
     /**
-     * A list of type arguments associated with this declaration, if any.
-     * If there are no type arguments, this returns `null`.
+     * A list of type arguments associated with this declaration.
+     * If there are no type arguments, this returns an empty list.
      *
      * Type arguments are used to specify concrete types for generic type parameters.
      * They appear within angle brackets `<>` after a generic type name.
      * Every type argument may contain nested type arguments (`typeArguments` property).
      *
-     *
      * 1. In `List<String>`, `String` is a type argument for `List`.
      * 2. In `Map<String, Int>`, both `String` and `Int` are type arguments for `Map`.
      * 3. In `List<Set<String>>`, `Set<String>` is a type argument for `List`. It has a nested type argument `String`.
-     * 4. For a non-generic type like `String`, this property would return `null`.
+     * 4. For a non-generic type like `String`, this property returns an empty list.
      *
      * Kotlin snippet:
      * ```kotlin
-     * val sampleProperty: Map<String, Int> = emptyList()
-     *```
+     * val sampleProperty: Map<String, Int> = emptyMap()
+     * ```
      *
      * Konsist:
      * ```kotlin
      * Konsist
-     *     scopeFromProject()
+     *     .scopeFromProject()
      *     .properties()
      *     .first()
      *     .type
      *     ?.typeArguments
-     *     ?.map { it.name } // listOf("String", "Int")
+     *     .map { it.name } // listOf("String", "Int")
      * ```
      *
      * The flattened list of type arguments can be obtained using the `flatten` extension function:
      *
      * Kotlin snippet:
      * ```kotlin
-     * val sampleProperty: List<String, Map<Int, Boolean>> = emptyList()
-     *```
+     * val sampleProperty: Map<String, Map<Int, Boolean>> = emptyMap()
+     * ```
      *
      * Konsist:
      * ```kotlin
      * Konsist
-     *     scopeFromProject()
+     *     .scopeFromProject()
      *     .properties()
      *     .first()
      *     .type
-     *     .typeArguments // listOf("String", "Map<Int, Boolean>")
+     *     ?.typeArguments // listOf("String", "Map<Int, Boolean>")
      *     .flatten() // listOf("String", "Map", "Int", "Boolean")
      * ```
      * @see numTypeArguments
      *
      * @return A list of [KoTypeArgumentDeclaration] representing the type arguments,
-     *         or `null` if there are no type arguments.
+     *         or an empty list if there are no type arguments.
      */
-    val typeArguments: List<KoTypeArgumentDeclaration>?
+    val typeArguments: List<KoTypeArgumentDeclaration>
 
     /**
      * The number of type arguments.
@@ -79,7 +78,7 @@ interface KoTypeArgumentProvider : KoBaseProvider {
     fun countTypeArguments(predicate: (KoTypeArgumentDeclaration) -> Boolean): Int
 
     /**
-     * Determines whatever the declaration has type arguments.
+     * Determines whether the declaration has type arguments.
      *
      * @return `true` if the declaration has any type argument, `false` otherwise.
      */
@@ -91,7 +90,7 @@ interface KoTypeArgumentProvider : KoBaseProvider {
      * @param name The first name to check.
      * @param names Additional names to check.
      * @param ignoreCase Specifies whether the comparison should ignore case.
-     *        If `true`, the prefix comparison will be case-insensitive.
+     *        If `true`, the comparison will be case-insensitive.
      *        If `false`, the comparison will consider case sensitivity.
      * @return `true` if any type argument matches one of the names, otherwise `false`.
      */
@@ -106,7 +105,7 @@ interface KoTypeArgumentProvider : KoBaseProvider {
      *
      * @param names A collection of names to check.
      * @param ignoreCase Specifies whether the comparison should ignore case.
-     *        If `true`, the prefix comparison will be case-insensitive.
+     *        If `true`, the comparison will be case-insensitive.
      *        If `false`, the comparison will consider case sensitivity.
      * @return `true` if any type argument matches one of the names, otherwise `false`.
      */
@@ -116,14 +115,14 @@ interface KoTypeArgumentProvider : KoBaseProvider {
     ): Boolean
 
     /**
-     * Checks if all type arguments have one of the specified names.
+     * Checks if the declaration has type arguments with all the specified names.
      *
      * @param name The first name to check.
      * @param names Additional names to check.
      * @param ignoreCase Specifies whether the comparison should ignore case.
-     *        If `true`, the prefix comparison will be case-insensitive.
+     *        If `true`, the comparison will be case-insensitive.
      *        If `false`, the comparison will consider case sensitivity.
-     * @return `true` if all type arguments match one of the names, otherwise `false`.
+     * @return `true` if there are type arguments with all the specified names, otherwise `false`.
      */
     fun hasTypeArgumentsWithAllNames(
         name: String,
@@ -132,13 +131,13 @@ interface KoTypeArgumentProvider : KoBaseProvider {
     ): Boolean
 
     /**
-     * Checks if all type arguments have one of the specified names.
+     * Checks if the declaration has type arguments with all the specified names.
      *
      * @param names A collection of names to check.
      * @param ignoreCase Specifies whether the comparison should ignore case.
-     *        If `true`, the prefix comparison will be case-insensitive.
+     *        If `true`, the comparison will be case-insensitive.
      *        If `false`, the comparison will consider case sensitivity.
-     * @return `true` if all type arguments match one of the names, otherwise `false`.
+     * @return `true` if there are type arguments with all the specified names, otherwise `false`.
      */
     fun hasTypeArgumentsWithAllNames(
         names: Collection<String>,
@@ -146,7 +145,7 @@ interface KoTypeArgumentProvider : KoBaseProvider {
     ): Boolean
 
     /**
-     * Checks if any type argument is of the specified class.
+     * Checks if any type argument is of one of the specified classes.
      *
      * @param name The first class to check.
      * @param names Additional classes to check.
@@ -158,7 +157,7 @@ interface KoTypeArgumentProvider : KoBaseProvider {
     ): Boolean
 
     /**
-     * Checks if any type argument is of the specified class.
+     * Checks if any type argument is of one of the specified classes.
      *
      * @param names A collection of classes to check.
      * @return `true` if any type argument matches one of the classes, otherwise `false`.
@@ -166,11 +165,11 @@ interface KoTypeArgumentProvider : KoBaseProvider {
     fun hasTypeArgumentOf(names: Collection<KClass<*>>): Boolean
 
     /**
-     * Checks if all type arguments match the specified class.
+     * Checks if the declaration has type arguments of all the specified classes.
      *
      * @param name The first class to check.
      * @param names Additional classes to check.
-     * @return `true` if all type arguments match one of the classes, otherwise `false`.
+     * @return `true` if there are type arguments of all the specified classes, otherwise `false`.
      */
     fun hasAllTypeArgumentsOf(
         name: KClass<*>,
@@ -178,10 +177,10 @@ interface KoTypeArgumentProvider : KoBaseProvider {
     ): Boolean
 
     /**
-     * Checks if all type arguments match the specified class.
+     * Checks if the declaration has type arguments of all the specified classes.
      *
      * @param names A collection of classes to check.
-     * @return `true` if all type arguments match one of the classes, otherwise `false`.
+     * @return `true` if there are type arguments of all the specified classes, otherwise `false`.
      */
     fun hasAllTypeArgumentsOf(names: Collection<KClass<*>>): Boolean
 

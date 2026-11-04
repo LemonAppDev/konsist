@@ -1,0 +1,8 @@
+fun fixtureFunction(value: Int): Int {
+    // comment
+    if (value > 0) {
+        return value
+    }
+
+    return 0
+}

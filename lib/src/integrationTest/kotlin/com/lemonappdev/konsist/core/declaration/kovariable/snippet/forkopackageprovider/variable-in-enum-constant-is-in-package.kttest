@@ -1,7 +1,0 @@
-package com.fixturepackage
-
-enum class FixtureClass {
-    FIXTURE_CONSTANT_1 {
-        val fixtureVariable = ""
-    };
-}

@@ -1,0 +1,3 @@
+@file:Suppress("suppressed dynamic test")
+
+class FixtureClass

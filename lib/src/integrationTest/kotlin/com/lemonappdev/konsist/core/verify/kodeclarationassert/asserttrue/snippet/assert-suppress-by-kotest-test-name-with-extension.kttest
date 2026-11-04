@@ -1,0 +1,3 @@
+@file:Suppress("suppressed kotest test")
+
+class FixtureClass

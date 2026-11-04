@@ -4,6 +4,7 @@ import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoCompanionObjectDeclaration
 import com.lemonappdev.konsist.api.declaration.KoObjectDeclaration
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
+import com.lemonappdev.konsist.core.cache.KoPropertyCache
 import com.lemonappdev.konsist.core.provider.KoHasDefaultNameProviderCore
 import com.lemonappdev.konsist.core.util.CompanionUtil.COMPANION_NAME
 import org.jetbrains.kotlin.psi.KtObjectDeclaration
@@ -14,13 +15,18 @@ internal class KoCompanionObjectDeclarationCore(
 ) : KoObjectDeclarationCore(ktObjectDeclaration, containingDeclaration),
     KoCompanionObjectDeclaration,
     KoHasDefaultNameProviderCore {
-    override val name: String by lazy {
-        if (super<KoObjectDeclarationCore>.name == "") {
-            COMPANION_NAME
-        } else {
-            super<KoObjectDeclarationCore>.name
-        }
-    }
+    @Volatile
+    private var cachedName: Any? = KoPropertyCache.NOT_COMPUTED
+
+    override val name: String
+        get() =
+            KoPropertyCache.getOrCompute(cachedName, { cachedName = it }) {
+                if (super<KoObjectDeclarationCore>.name == "") {
+                    COMPANION_NAME
+                } else {
+                    super<KoObjectDeclarationCore>.name
+                }
+            }
 
     override fun toString(): String = name
 

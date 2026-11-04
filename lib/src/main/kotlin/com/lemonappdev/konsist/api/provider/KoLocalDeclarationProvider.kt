@@ -17,15 +17,15 @@ interface KoLocalDeclarationProvider : KoBaseProvider {
     val numLocalDeclarations: Int
 
     /**
-     * Returns the number of local declarations that satisfies the specified predicate present in the declaration.
+     * Returns the number of local declarations that satisfy the specified predicate present in the declaration.
      *
      * @param predicate The predicate function to determine if a local declaration satisfies a condition.
-     * @return The number of local declarations in the declaration.
+     * @return The number of matching local declarations in the declaration.
      */
     fun countLocalDeclarations(predicate: (KoBaseDeclaration) -> Boolean): Int
 
     /**
-     * Determines whatever the declaration has local declarations.
+     * Determines whether the declaration has local declarations.
      *
      * @return `true` if the declaration has any local declaration, `false` otherwise.
      */
@@ -42,7 +42,7 @@ interface KoLocalDeclarationProvider : KoBaseProvider {
     /**
      * Determines whether the declaration has all local declarations that satisfy the provided predicate.
      *
-     * Note that if the local declarations contains no elements, the function returns `true` because there are no elements in it
+     * Note that if the local declarations contain no elements, the function returns `true` because there are no elements in it
      * that do not match the predicate.
      *
      * @param predicate A function that defines the condition to be met by local declarations.

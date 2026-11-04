@@ -4,9 +4,17 @@ plugins {
 }
 
 dependencies {
-    implementation(libs.kotlinStdlibJdk8)
-    implementation(libs.kotlinCompilerEmbeddable)
-    implementation(libs.kotlinx.coroutines.core)
+    implementation(libs.kotlinStdlib)
+    implementation(libs.kotlinCompilerEmbeddable) {
+        // Compiler depends on kotlin-stdlib of the same version, use the lowest supported version instead
+        // (see DeveloperReadme.md "Kotlin Compatibility")
+        exclude(group = "org.jetbrains.kotlin", module = "kotlin-stdlib")
+    }
+    implementation(libs.kotlinx.coroutines.core.jvm)
+
+    // Test framework extensions (KoJUnitExtension, KoKotestExtension) are used only when the framework is on the classpath
+    compileOnly(libs.junitJupiterApi)
+    compileOnly(libs.kotestFrameworkEngine)
 
     testImplementation(libs.junitJupiterEngine)
     testImplementation(libs.junitJupiterParams)
@@ -50,7 +58,7 @@ testing {
             }
         }
 
-        register("snippet", JvmTestSuite::class) {
+        register("testsnippet", JvmTestSuite::class) {
             dependencies {
                 implementation(project(":lib")) // Konsist
                 implementation(libs.kotest)

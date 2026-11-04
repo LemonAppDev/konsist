@@ -1,0 +1,4 @@
+class SampleClass {
+    val fixtureProperty: List<Int>
+        field: MutableList<Int> = ArrayList()
+}

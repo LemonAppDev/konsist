@@ -9,27 +9,27 @@ interface KoVisibilityModifierProvider :
     KoBaseProvider,
     KoModifierProvider {
     /**
-     * Determines whatever the declaration has public modifier.
+     * Determines whether the declaration has the `public` modifier.
      */
     val hasPublicModifier: Boolean
 
     /**
-     * Determines whatever the declaration has public or no visibility modifier.
+     * Determines whether the declaration has the `public` modifier or no visibility modifier.
      */
     val hasPublicOrDefaultModifier: Boolean
 
     /**
-     * Determines whatever the declaration has private modifier.
+     * Determines whether the declaration has the `private` modifier.
      */
     val hasPrivateModifier: Boolean
 
     /**
-     * Determines whatever the declaration has protected modifier.
+     * Determines whether the declaration has the `protected` modifier.
      */
     val hasProtectedModifier: Boolean
 
     /**
-     * Determines whatever the declaration has internal modifier.
+     * Determines whether the declaration has the `internal` modifier.
      */
     val hasInternalModifier: Boolean
 }

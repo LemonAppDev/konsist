@@ -1,0 +1,6 @@
+interface Logger
+
+interface FixtureInterface {
+    context(fixtureParameter: Logger)
+    fun fixtureFunction()
+}

@@ -5,18 +5,18 @@ package com.lemonappdev.konsist.api.provider
  */
 interface KoResideInPackageProvider : KoBaseProvider {
     /**
-     * Determines whatever the declaration resides in a package.
+     * Determines whether the declaration resides in the specified package.
      *
      * @param name the package name to check.
      * @return `true` if the declaration resides in the specified package, `false` otherwise.
      */
-    fun resideInPackage(name: String): Boolean
+    fun residesInPackage(name: String): Boolean
 
     /**
-     * Determines whatever the declaration resides outside a package.
+     * Determines whether the declaration resides outside the specified package.
      *
      * @param name the package name to check.
      * @return `true` if the declaration resides outside the specified package, `false` otherwise.
      */
-    fun resideOutsidePackage(name: String): Boolean
+    fun residesOutsidePackage(name: String): Boolean
 }

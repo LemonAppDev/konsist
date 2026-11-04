@@ -14,7 +14,8 @@
 - Publish Public Snapshot `./gradlew publish -Pkonsist.releaseTarget=snapshot` publish to
   [snapshot repository](https://central.sonatype.com/repository/maven-snapshots/com/lemonappdev/konsist/)
   (snapshots are removed after 90 days)
-- Publish Release `./gradlew publish -Pkonsist.releaseTarget=release` upload to
+- Publish Release `./gradlew publish -Pkonsist.releaseTarget=release` (run by the
+  [Release](.github/workflows/release.yml) workflow after merge to `main`) upload to
   [Central Portal](https://central.sonatype.com/publishing/deployments). After validation, the artifact is:
   - automatically published to [maven central](https://central.sonatype.com/artifact/com.lemonappdev/konsist/versions).
   - eventually will be visible as [mvn repository](https://mvnrepository.com/artifact/com.lemonappdev/konsist) (third-party site that 
@@ -29,39 +30,111 @@ Snapshot and release publishing require these properties in `local.properties`:
 
 ## Production Release
 
-1. Run `/misc/scripts/create_release.py` script
-2. Select option `1` on the console
-3. (If needed) Remove deprecated API
-4. Run `./gradlew publish -Pkonsist.releaseTarget=release` on the `main` branch to release a new version 
-5. (If needed) Change `Fix versions` for unfinished tickets assigned to this release version
-6. (If needed) Change Kotlin dependency and coroutine dependnecy version in 
-   https://docs.konsist.lemonappdev.com/getting-started/getting-started#add-konsist-dependency (retrieve coroutines 
-   version from `./gradlew dependencies`)
-7. Notify the community about the release 
-8. Notify devs who have reported the issue or asked for the new feature (community links in original ticket)
+1. Merge `main` to `develop`
+2. Create `release/vX.Y.Z` branch from `develop`
+3. Update Konsist version
+    1. [gradle.properties](gradle.properties) file
+    2. [README.md](README.md) file
+4. Remove deprecated API
+5. Create a draft [GitHub release](https://github.com/LemonAppDev/konsist/releases/new) with release notes
+    1. set `vX.Y.Z` as release title (and tag version)
+    2. set `main` as target branch
+    3. save as draft
+6. Open PR targeting `main` and wait for all checks to pass (`Check Konsist Version Increased` and
+   `Check Release Notes Exist` checks run only for PRs targeting `main`, re-run `Check Release Notes Exist` after
+   creating the draft release)
+7. Release local artifact and test 3rd party projects using local artifact
+    1. [Android-showcase](https://github.com/igorwojda/android-showcase)
+    2. Mango (internal)
+    3. [CleanArchitectureForAndroid](https://github.com/EranBoudjnah/CleanArchitectureForAndroid)
+8. Merge PR to `main`. [Release](.github/workflows/release.yml) workflow publishes the release to Maven Central and
+   publishes the draft GitHub release (creates `vX.Y.Z` tag on the merge commit)
+9. Wait for the [Release](https://github.com/LemonAppDev/konsist/actions/workflows/release.yml) workflow to pass
+10. Update Konsist version in the
+    Konsist [Quick Start](https://app.gitbook.com/o/PQj191UX5M2C2XxCZuYO/s/RYeSMx6WDKivnwWx7PdP/getting-started/gettingstarted)
+    docs page
+11. Run `/scripts/deploy_snippets_to_kotlin_documentation_repo.py` snippet to generate PR with updated snippets for
+    Konsist Documentation
+12. Merge `main` to `develop` (`release` branch will have changes e.g. version, deprecated APi removed...)
+13. Notify the community about the release
+14. Notify devs who have reported the issue or asked for the new feature (community links in original ticket)
 
 ## Hotfix Release
 
 1. Create `hotfix/KON-XXX-...` branch from `main`
-2. Fix the bug and open PR targeting `main`
-3. Merge the PR
-4. Run `/misc/scripts/create_release.py` script
-5. Select option `2` on the console
-6. (If needed) Remove deprecated API
-7. Run `./gradlew publish -Pkonsist.releaseTarget=release` on the `main` branch to release a new version
-8. Notify the community about the release
-9. Notify devs who have reported the issue (community link in original ticket)
+2. Fix the bug and open PR targeting `mian`
+3. Fix the bug and open PR targeting `main`
+4. Merge the PR
+5. Create `release/vX.Y.Z` branch from `main`
+6. Update Konsist version
+    1. [gradle.properties](gradle.properties) file
+    2. [README.md](README.md) file
+    3. Sample projects
+7. Create a draft [GitHub release](https://github.com/LemonAppDev/konsist/releases/new) with release notes
+    1. set `vX.Y.Z` as release title (and tag version)
+    2. set `main` as target branch
+    3. save as draft
+8. Open the release PR targeting `main` and wait for all checks to pass
+9. Merge PR. [Release](.github/workflows/release.yml) workflow publishes the release to Maven Central and publishes
+   the draft GitHub release
+10. Wait for the [Release](https://github.com/LemonAppDev/konsist/actions/workflows/release.yml) workflow to pass
+11. Update Konsist version in the
+    Konsist [Quick Start](https://app.gitbook.com/o/PQj191UX5M2C2XxCZuYO/s/RYeSMx6WDKivnwWx7PdP/getting-started/getting-started)
+    docs page
+12. Run `/scripts/deploy_snippets_to_kotlin_documentation_repo.py` snippet to generate PR with updated snippets for Konsist Documentation
+13. Merge `main` to `develop`
+14. Upgrade `konist` version on `develop` branch
+15. Notify devs who have reported the issue (community link in original ticket)
 
+## Central Portal Links
 
-## Sonatype
+- [Artifact](https://mvnrepository.com/artifact/com.lemonappdev/konsist/) (public)
+- [Deployments](https://central.sonatype.com/publishing/deployments) (private)
+- [Namespaces](https://central.sonatype.com/publishing/namespaces) (private)
 
-- [Central Portal Deployments](https://central.sonatype.com/publishing/deployments)
-- [Central Portal Namespaces](https://central.sonatype.com/publishing/namespaces)
+## Kotlin Compatibility
 
-## Repositories Links
+Gradle projects using Kotlin 1.9+ can use Konsist, regardless of the Kotlin version used to build Konsist (Maven projects - see below).
+These versions are decoupled:
 
-- [mvnrepository.com](https://mvnrepository.com/artifact/com.lemonappdev/konsist/)
-- [central.sonatype.com](https://central.sonatype.com/artifact/com.lemonappdev/konsist/)
+| Version                                      | Where                                                     | Value   | Purpose                                                    |
+|----------------------------------------------|-----------------------------------------------------------|---------|------------------------------------------------------------|
+| `kotlinVersion`                              | `gradle/libs.versions.toml`                               | latest  | Kotlin Gradle Plugin and `kotlin-compiler-embeddable`      |
+| `apiVersion` / `languageVersion`             | `build-logic/.../KotlinConventionPlugin.kt`               | `2.0`   | Metadata version of Konsist classes, allowed stdlib API    |
+| `kotlinStdlibVersion`                        | `gradle/libs.versions.toml`                               | `2.0.x` | `kotlin-stdlib` version published as Konsist dependency    |
+| `coroutinesVersion`                          | `gradle/libs.versions.toml`                               | `1.9.0` | Built with Kotlin 2.0, depends on `kotlin-stdlib` 2.0      |
+
+### Why
+
+- Kotlin compiler can read metadata only up to one version newer than itself (e.g. Kotlin 2.2 reads up to 2.3
+  metadata, but fails on 2.4 with `metadata 2.4.0, compiler can read up to 2.3.0`).
+- `apiVersion` / `languageVersion` set the metadata version of Konsist classes (`2.0` is readable by Kotlin 1.9+) and
+  prevent Konsist from using `kotlin-stdlib` API newer than `kotlinStdlibVersion`.
+- `kotlin-compiler-embeddable` depends on `kotlin-stdlib` of the same version. Konsist excludes it
+  (`lib/build.gradle.kts`) and publishes `kotlinStdlibVersion` instead. Without this, the consumer `kotlin-stdlib` is
+  upgraded at runtime to `kotlinVersion`, and Android Gradle Plugin 8 (and AGP 9 with
+  `android.dependency.useConstraints=true`) copies this version into the test compile classpath. As a result Android
+  projects using Kotlin older than `kotlinVersion - 1` fail to compile tests.
+- `kotlinx-coroutines` versions are built with newer Kotlin and depend on newer `kotlin-stdlib`
+  (e.g. 1.10 depends on `kotlin-stdlib` 2.1), so upgrading it raises the minimum consumer Kotlin version.
+- `kotlinx-coroutines-core-jvm` is used instead of multiplatform `kotlinx-coroutines-core`, because Gradle publishes
+  the resolved version of multiplatform dependencies in POM, and `compileOnly` Kotest upgrades it on the compile
+  classpath (POM would contain a different version than Gradle module metadata).
+- Maven adds `runtime` scope dependencies to the test compile classpath, so `kotlin-compiler-embeddable` metadata is
+  checked by the consumer compiler. Maven projects require Kotlin `kotlinVersion - 1` (or
+  `-Xskip-metadata-version-check` compiler argument). Gradle projects are not affected.
+
+### Rules
+
+- Keep `apiVersion`, `languageVersion` and `kotlinStdlibVersion` aligned (same minor version).
+- `kotlinVersion` can be upgraded freely (Kotlin dependencies are excluded from Renovate updates - see `renovate.json`).
+- Do not upgrade `kotlinStdlibVersion`, `apiVersion`, `languageVersion` or `coroutinesVersion` unless the minimum
+  supported consumer Kotlin version is intentionally raised (breaking change - document it in release notes).
+- After upgrading `kotlinVersion`, verify `kotlin-compiler-embeddable` runs with `kotlinStdlibVersion` (the compiler may
+  start using newer `kotlin-stdlib` API, causing `NoSuchMethodError` or `NoClassDefFoundError` at runtime).
+- When `kotlinVersion`, `kotlinStdlibVersion`, `apiVersion`, `languageVersion` or `coroutinesVersion` changes, update
+  the [Compatibility](https://docs.konsist.lemonappdev.com/help/compatibility) documentation page (Kotlin
+  compatibility tables and dependency versions).
 
 ## Naming Conventions
 

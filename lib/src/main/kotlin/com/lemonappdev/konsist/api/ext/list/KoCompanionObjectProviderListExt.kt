@@ -6,20 +6,11 @@ import com.lemonappdev.konsist.api.declaration.KoCompanionObjectDeclaration
 import com.lemonappdev.konsist.api.provider.KoCompanionObjectProvider
 
 /**
- * Returns a list of direct companion objects from each declaration in this list.
- *
- * Only direct companion objects are included; nested companion objects are ignored.
- *
- * @return A list containing direct [KoCompanionObjectDeclaration] instances from the declarations in this list.
- */
-val <T : KoCompanionObjectProvider> List<T>.companionObjects: List<KoCompanionObjectDeclaration>
-    get() = mapNotNull { it.companionObject }
-
-/**
  * Returns a list of companion objects from each declaration in this list.
  *
  * @param includeNested Whether to include companion objects declared in nested declarations.
  * @return A list containing [KoCompanionObjectDeclaration] instances from the declarations in this list.
+ * @see KoCompanionObjectProvider.companionObjects
  */
 fun <T : KoCompanionObjectProvider> List<T>.companionObjects(includeNested: Boolean = true): List<KoCompanionObjectDeclaration> =
     flatMap { it.companionObjects(includeNested) }
@@ -28,6 +19,7 @@ fun <T : KoCompanionObjectProvider> List<T>.companionObjects(includeNested: Bool
  * Returns a list of declarations that have a direct companion object.
  *
  * @return A list containing declarations that directly declare a companion object.
+ * @see KoCompanionObjectProvider.hasCompanionObject
  */
 fun <T : KoCompanionObjectProvider> List<T>.withCompanionObject(): List<T> = filter { it.hasCompanionObject() }
 
@@ -35,6 +27,7 @@ fun <T : KoCompanionObjectProvider> List<T>.withCompanionObject(): List<T> = fil
  * Returns a list of declarations that do not have a direct companion object.
  *
  * @return A list containing declarations without any direct companion object.
+ * @see KoCompanionObjectProvider.hasCompanionObject
  */
 fun <T : KoCompanionObjectProvider> List<T>.withoutCompanionObject(): List<T> = filterNot { it.hasCompanionObject() }
 
@@ -43,6 +36,7 @@ fun <T : KoCompanionObjectProvider> List<T>.withoutCompanionObject(): List<T> = 
  *
  * @param includeNested Whether to include nested companion objects when checking.
  * @return A list containing declarations that have at least one companion object.
+ * @see KoCompanionObjectProvider.hasCompanionObjects
  */
 fun <T : KoCompanionObjectProvider> List<T>.withCompanionObjects(includeNested: Boolean = true): List<T> =
     filter { it.hasCompanionObjects(includeNested) }
@@ -52,6 +46,7 @@ fun <T : KoCompanionObjectProvider> List<T>.withCompanionObjects(includeNested: 
  *
  * @param includeNested Whether to include nested companion objects when checking.
  * @return A list containing declarations without any companion objects.
+ * @see KoCompanionObjectProvider.hasCompanionObjects
  */
 fun <T : KoCompanionObjectProvider> List<T>.withoutCompanionObjects(includeNested: Boolean = true): List<T> =
     filterNot { it.hasCompanionObjects(includeNested) }
@@ -62,6 +57,7 @@ fun <T : KoCompanionObjectProvider> List<T>.withoutCompanionObjects(includeNeste
  * @param includeNested Whether to include nested companion objects.
  * @param predicate A condition that a companion object must satisfy.
  * @return A list containing declarations with at least one companion object satisfying the [predicate].
+ * @see KoCompanionObjectProvider.hasCompanionObject
  */
 fun <T : KoCompanionObjectProvider> List<T>.withCompanionObject(
     includeNested: Boolean = true,
@@ -74,6 +70,7 @@ fun <T : KoCompanionObjectProvider> List<T>.withCompanionObject(
  * @param includeNested Whether to include nested companion objects.
  * @param predicate A condition that a companion object must satisfy.
  * @return A list containing declarations without any companion object satisfying the [predicate].
+ * @see KoCompanionObjectProvider.hasCompanionObject
  */
 fun <T : KoCompanionObjectProvider> List<T>.withoutCompanionObject(
     includeNested: Boolean = true,
@@ -86,6 +83,7 @@ fun <T : KoCompanionObjectProvider> List<T>.withoutCompanionObject(
  * @param includeNested Whether to include nested companion objects.
  * @param predicate A condition that all companion objects must satisfy.
  * @return A list containing declarations where all companion objects satisfy the [predicate].
+ * @see KoCompanionObjectProvider.hasAllCompanionObjects
  */
 fun <T : KoCompanionObjectProvider> List<T>.withAllCompanionObjects(
     includeNested: Boolean = true,
@@ -98,6 +96,7 @@ fun <T : KoCompanionObjectProvider> List<T>.withAllCompanionObjects(
  * @param includeNested Whether to include nested companion objects.
  * @param predicate A condition that all companion objects must satisfy.
  * @return A list containing declarations with at least one companion object that does not satisfy the [predicate].
+ * @see KoCompanionObjectProvider.hasAllCompanionObjects
  */
 fun <T : KoCompanionObjectProvider> List<T>.withoutAllCompanionObjects(
     includeNested: Boolean = true,
@@ -110,6 +109,7 @@ fun <T : KoCompanionObjectProvider> List<T>.withoutAllCompanionObjects(
  * @param includeNested Whether to include nested companion objects.
  * @param predicate A condition evaluated on the list of companion objects.
  * @return A list containing declarations whose list of companion objects satisfies the [predicate].
+ * @see KoCompanionObjectProvider.companionObjects
  */
 fun <T : KoCompanionObjectProvider> List<T>.withCompanionObjects(
     includeNested: Boolean = true,
@@ -122,6 +122,7 @@ fun <T : KoCompanionObjectProvider> List<T>.withCompanionObjects(
  * @param includeNested Whether to include nested companion objects.
  * @param predicate A condition evaluated on the list of companion objects.
  * @return A list containing declarations whose list of companion objects does not satisfy the [predicate].
+ * @see KoCompanionObjectProvider.companionObjects
  */
 fun <T : KoCompanionObjectProvider> List<T>.withoutCompanionObjects(
     includeNested: Boolean = true,
@@ -136,6 +137,7 @@ fun <T : KoCompanionObjectProvider> List<T>.withoutCompanionObjects(
  * @param includeNested Whether to include nested companion objects.
  * @param ignoreCase Whether name comparison should ignore case sensitivity.
  * @return A list containing declarations that have a companion object with one of the specified names.
+ * @see KoCompanionObjectProvider.hasCompanionObjectWithName
  */
 fun <T : KoCompanionObjectProvider> List<T>.withCompanionObjectNamed(
     name: String,
@@ -151,6 +153,7 @@ fun <T : KoCompanionObjectProvider> List<T>.withCompanionObjectNamed(
  * @param includeNested Whether to include nested companion objects.
  * @param ignoreCase Whether name comparison should ignore case sensitivity.
  * @return A list containing declarations that have a companion object with one of the specified names.
+ * @see KoCompanionObjectProvider.hasCompanionObjectWithName
  */
 fun <T : KoCompanionObjectProvider> List<T>.withCompanionObjectNamed(
     names: Collection<String>,
@@ -172,6 +175,7 @@ fun <T : KoCompanionObjectProvider> List<T>.withCompanionObjectNamed(
  * @param includeNested Whether to include nested companion objects.
  * @param ignoreCase Whether name comparison should ignore case sensitivity.
  * @return A list containing declarations that do not have a companion object with the specified names.
+ * @see KoCompanionObjectProvider.hasCompanionObjectWithName
  */
 fun <T : KoCompanionObjectProvider> List<T>.withoutCompanionObjectNamed(
     name: String,
@@ -187,6 +191,7 @@ fun <T : KoCompanionObjectProvider> List<T>.withoutCompanionObjectNamed(
  * @param includeNested Whether to include nested companion objects.
  * @param ignoreCase Whether name comparison should ignore case sensitivity.
  * @return A list containing declarations that do not have a companion object with the specified names.
+ * @see KoCompanionObjectProvider.hasCompanionObjectWithName
  */
 fun <T : KoCompanionObjectProvider> List<T>.withoutCompanionObjectNamed(
     names: Collection<String>,
@@ -208,6 +213,7 @@ fun <T : KoCompanionObjectProvider> List<T>.withoutCompanionObjectNamed(
  * @param includeNested Whether to include nested companion objects.
  * @param ignoreCase Whether name comparison should ignore case sensitivity.
  * @return A list containing declarations that have companion objects with all the specified names.
+ * @see KoCompanionObjectProvider.hasCompanionObjectsWithAllNames
  */
 fun <T : KoCompanionObjectProvider> List<T>.withAllCompanionObjectsNamed(
     name: String,
@@ -223,6 +229,7 @@ fun <T : KoCompanionObjectProvider> List<T>.withAllCompanionObjectsNamed(
  * @param includeNested Whether to include nested companion objects.
  * @param ignoreCase Whether name comparison should ignore case sensitivity.
  * @return A list containing declarations that have companion objects with all the specified names.
+ * @see KoCompanionObjectProvider.hasCompanionObjectsWithAllNames
  */
 fun <T : KoCompanionObjectProvider> List<T>.withAllCompanionObjectsNamed(
     names: Collection<String>,
@@ -244,6 +251,7 @@ fun <T : KoCompanionObjectProvider> List<T>.withAllCompanionObjectsNamed(
  * @param includeNested Whether to include nested companion objects.
  * @param ignoreCase Whether name comparison should ignore case sensitivity.
  * @return A list containing declarations that do not have companion objects with all the specified names.
+ * @see KoCompanionObjectProvider.hasCompanionObjectsWithAllNames
  */
 fun <T : KoCompanionObjectProvider> List<T>.withoutAllCompanionObjectsNamed(
     name: String,
@@ -259,6 +267,7 @@ fun <T : KoCompanionObjectProvider> List<T>.withoutAllCompanionObjectsNamed(
  * @param includeNested Whether to include nested companion objects.
  * @param ignoreCase Whether name comparison should ignore case sensitivity.
  * @return A list containing declarations that do not have companion objects with all the specified names.
+ * @see KoCompanionObjectProvider.hasCompanionObjectsWithAllNames
  */
 fun <T : KoCompanionObjectProvider> List<T>.withoutAllCompanionObjectsNamed(
     names: Collection<String>,

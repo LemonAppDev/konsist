@@ -1,5 +1,8 @@
 package com.lemonappdev.konsist.api.ext.list
 
+import com.lemonappdev.konsist.api.declaration.type.KoTypeDeclaration
+import com.lemonappdev.konsist.api.provider.KoDeclarationCastProvider
+import com.lemonappdev.konsist.api.provider.KoFullyQualifiedNameProvider
 import com.lemonappdev.konsist.api.provider.KoSourceTypeProvider
 import com.lemonappdev.konsist.testdata.FixtureClass1
 import com.lemonappdev.konsist.testdata.FixtureClass2
@@ -40,15 +43,15 @@ class KoSourceTypeProviderListExtTest {
     @Test
     fun `withSourceTypeOf(KClass) returns declaration with given source declaration`() {
         // given
-        val sourceType1 = "FixtureClass1"
-        val sourceType2 = "FixtureClass2"
-        val declaration1: KoSourceTypeProvider =
+        val fullyQualifiedName1 = "com.lemonappdev.konsist.testdata.FixtureClass1"
+        val fullyQualifiedName2 = "com.lemonappdev.konsist.testdata.FixtureClass2"
+        val declaration1: KoTypeDeclaration =
             mockk {
-                every { sourceType } returns sourceType1
+                every { sourceDeclaration } returns sourceDeclarationOf(fullyQualifiedName1)
             }
-        val declaration2: KoSourceTypeProvider =
+        val declaration2: KoTypeDeclaration =
             mockk {
-                every { sourceType } returns sourceType2
+                every { sourceDeclaration } returns sourceDeclarationOf(fullyQualifiedName2)
             }
         val declarations = listOf(declaration1, declaration2)
 
@@ -62,20 +65,20 @@ class KoSourceTypeProviderListExtTest {
     @Test
     fun `withSourceTypeOf(KClass) returns declarations with one of given source declarations`() {
         // given
-        val sourceType1 = "FixtureClass1"
-        val sourceType2 = "FixtureClass2"
-        val sourceType3 = "FixtureClass3"
-        val declaration1: KoSourceTypeProvider =
+        val fullyQualifiedName1 = "com.lemonappdev.konsist.testdata.FixtureClass1"
+        val fullyQualifiedName2 = "com.lemonappdev.konsist.testdata.FixtureClass2"
+        val fullyQualifiedName3 = "com.lemonappdev.konsist.testdata.FixtureClass3"
+        val declaration1: KoTypeDeclaration =
             mockk {
-                every { sourceType } returns sourceType1
+                every { sourceDeclaration } returns sourceDeclarationOf(fullyQualifiedName1)
             }
-        val declaration2: KoSourceTypeProvider =
+        val declaration2: KoTypeDeclaration =
             mockk {
-                every { sourceType } returns sourceType2
+                every { sourceDeclaration } returns sourceDeclarationOf(fullyQualifiedName2)
             }
-        val declaration3: KoSourceTypeProvider =
+        val declaration3: KoTypeDeclaration =
             mockk {
-                every { sourceType } returns sourceType3
+                every { sourceDeclaration } returns sourceDeclarationOf(fullyQualifiedName3)
             }
         val declarations = listOf(declaration1, declaration2, declaration3)
 
@@ -89,20 +92,20 @@ class KoSourceTypeProviderListExtTest {
     @Test
     fun `withSourceTypeOf(list of KClass) returns declarations with one of given source declarations`() {
         // given
-        val sourceType1 = "FixtureClass1"
-        val sourceType2 = "FixtureClass2"
-        val sourceType3 = "FixtureClass3"
-        val declaration1: KoSourceTypeProvider =
+        val fullyQualifiedName1 = "com.lemonappdev.konsist.testdata.FixtureClass1"
+        val fullyQualifiedName2 = "com.lemonappdev.konsist.testdata.FixtureClass2"
+        val fullyQualifiedName3 = "com.lemonappdev.konsist.testdata.FixtureClass3"
+        val declaration1: KoTypeDeclaration =
             mockk {
-                every { sourceType } returns sourceType1
+                every { sourceDeclaration } returns sourceDeclarationOf(fullyQualifiedName1)
             }
-        val declaration2: KoSourceTypeProvider =
+        val declaration2: KoTypeDeclaration =
             mockk {
-                every { sourceType } returns sourceType2
+                every { sourceDeclaration } returns sourceDeclarationOf(fullyQualifiedName2)
             }
-        val declaration3: KoSourceTypeProvider =
+        val declaration3: KoTypeDeclaration =
             mockk {
-                every { sourceType } returns sourceType3
+                every { sourceDeclaration } returns sourceDeclarationOf(fullyQualifiedName3)
             }
         val declarations = listOf(declaration1, declaration2, declaration3)
         val kClasses = listOf(FixtureClass1::class, FixtureClass2::class)
@@ -117,20 +120,20 @@ class KoSourceTypeProviderListExtTest {
     @Test
     fun `withSourceTypeOf(set of KClass) returns declarations with one of given source declarations`() {
         // given
-        val sourceType1 = "FixtureClass1"
-        val sourceType2 = "FixtureClass2"
-        val sourceType3 = "FixtureClass3"
-        val declaration1: KoSourceTypeProvider =
+        val fullyQualifiedName1 = "com.lemonappdev.konsist.testdata.FixtureClass1"
+        val fullyQualifiedName2 = "com.lemonappdev.konsist.testdata.FixtureClass2"
+        val fullyQualifiedName3 = "com.lemonappdev.konsist.testdata.FixtureClass3"
+        val declaration1: KoTypeDeclaration =
             mockk {
-                every { sourceType } returns sourceType1
+                every { sourceDeclaration } returns sourceDeclarationOf(fullyQualifiedName1)
             }
-        val declaration2: KoSourceTypeProvider =
+        val declaration2: KoTypeDeclaration =
             mockk {
-                every { sourceType } returns sourceType2
+                every { sourceDeclaration } returns sourceDeclarationOf(fullyQualifiedName2)
             }
-        val declaration3: KoSourceTypeProvider =
+        val declaration3: KoTypeDeclaration =
             mockk {
-                every { sourceType } returns sourceType3
+                every { sourceDeclaration } returns sourceDeclarationOf(fullyQualifiedName3)
             }
         val declarations = listOf(declaration1, declaration2, declaration3)
         val kClasses = setOf(FixtureClass1::class, FixtureClass2::class)
@@ -145,8 +148,8 @@ class KoSourceTypeProviderListExtTest {
     @Test
     fun `withoutSourceTypeOf(empty list) returns none declaration`() {
         // given
-        val declaration1: KoSourceTypeProvider = mockk()
-        val declaration2: KoSourceTypeProvider = mockk()
+        val declaration1: KoTypeDeclaration = mockk()
+        val declaration2: KoTypeDeclaration = mockk()
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -159,8 +162,8 @@ class KoSourceTypeProviderListExtTest {
     @Test
     fun `withoutSourceTypeOf(empty set) returns none declaration`() {
         // given
-        val declaration1: KoSourceTypeProvider = mockk()
-        val declaration2: KoSourceTypeProvider = mockk()
+        val declaration1: KoTypeDeclaration = mockk()
+        val declaration2: KoTypeDeclaration = mockk()
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -173,15 +176,15 @@ class KoSourceTypeProviderListExtTest {
     @Test
     fun `withoutSourceTypeOf(KClass) returns declaration without given source declaration`() {
         // given
-        val sourceType1 = "FixtureClass1"
-        val sourceType2 = "FixtureClass2"
-        val declaration1: KoSourceTypeProvider =
+        val fullyQualifiedName1 = "com.lemonappdev.konsist.testdata.FixtureClass1"
+        val fullyQualifiedName2 = "com.lemonappdev.konsist.testdata.FixtureClass2"
+        val declaration1: KoTypeDeclaration =
             mockk {
-                every { sourceType } returns sourceType1
+                every { sourceDeclaration } returns sourceDeclarationOf(fullyQualifiedName1)
             }
-        val declaration2: KoSourceTypeProvider =
+        val declaration2: KoTypeDeclaration =
             mockk {
-                every { sourceType } returns sourceType2
+                every { sourceDeclaration } returns sourceDeclarationOf(fullyQualifiedName2)
             }
         val declarations = listOf(declaration1, declaration2)
 
@@ -195,20 +198,20 @@ class KoSourceTypeProviderListExtTest {
     @Test
     fun `withoutSourceTypeOf(KClass) returns declaration without any of given source declarations`() {
         // given
-        val sourceType1 = "FixtureClass1"
-        val sourceType2 = "FixtureClass2"
-        val sourceType3 = "FixtureClass3"
-        val declaration1: KoSourceTypeProvider =
+        val fullyQualifiedName1 = "com.lemonappdev.konsist.testdata.FixtureClass1"
+        val fullyQualifiedName2 = "com.lemonappdev.konsist.testdata.FixtureClass2"
+        val fullyQualifiedName3 = "com.lemonappdev.konsist.testdata.FixtureClass3"
+        val declaration1: KoTypeDeclaration =
             mockk {
-                every { sourceType } returns sourceType1
+                every { sourceDeclaration } returns sourceDeclarationOf(fullyQualifiedName1)
             }
-        val declaration2: KoSourceTypeProvider =
+        val declaration2: KoTypeDeclaration =
             mockk {
-                every { sourceType } returns sourceType2
+                every { sourceDeclaration } returns sourceDeclarationOf(fullyQualifiedName2)
             }
-        val declaration3: KoSourceTypeProvider =
+        val declaration3: KoTypeDeclaration =
             mockk {
-                every { sourceType } returns sourceType3
+                every { sourceDeclaration } returns sourceDeclarationOf(fullyQualifiedName3)
             }
         val declarations = listOf(declaration1, declaration2, declaration3)
 
@@ -222,20 +225,20 @@ class KoSourceTypeProviderListExtTest {
     @Test
     fun `withoutSourceTypeOf(list of KClass) returns declaration without any of given source declarations`() {
         // given
-        val sourceType1 = "FixtureClass1"
-        val sourceType2 = "FixtureClass2"
-        val sourceType3 = "FixtureClass3"
-        val declaration1: KoSourceTypeProvider =
+        val fullyQualifiedName1 = "com.lemonappdev.konsist.testdata.FixtureClass1"
+        val fullyQualifiedName2 = "com.lemonappdev.konsist.testdata.FixtureClass2"
+        val fullyQualifiedName3 = "com.lemonappdev.konsist.testdata.FixtureClass3"
+        val declaration1: KoTypeDeclaration =
             mockk {
-                every { sourceType } returns sourceType1
+                every { sourceDeclaration } returns sourceDeclarationOf(fullyQualifiedName1)
             }
-        val declaration2: KoSourceTypeProvider =
+        val declaration2: KoTypeDeclaration =
             mockk {
-                every { sourceType } returns sourceType2
+                every { sourceDeclaration } returns sourceDeclarationOf(fullyQualifiedName2)
             }
-        val declaration3: KoSourceTypeProvider =
+        val declaration3: KoTypeDeclaration =
             mockk {
-                every { sourceType } returns sourceType3
+                every { sourceDeclaration } returns sourceDeclarationOf(fullyQualifiedName3)
             }
         val declarations = listOf(declaration1, declaration2, declaration3)
         val kClasses = listOf(FixtureClass1::class, FixtureClass2::class)
@@ -250,20 +253,20 @@ class KoSourceTypeProviderListExtTest {
     @Test
     fun `withoutSourceTypeOf(set of KClass) returns declaration without any of given source declarations`() {
         // given
-        val sourceType1 = "FixtureClass1"
-        val sourceType2 = "FixtureClass2"
-        val sourceType3 = "FixtureClass3"
-        val declaration1: KoSourceTypeProvider =
+        val fullyQualifiedName1 = "com.lemonappdev.konsist.testdata.FixtureClass1"
+        val fullyQualifiedName2 = "com.lemonappdev.konsist.testdata.FixtureClass2"
+        val fullyQualifiedName3 = "com.lemonappdev.konsist.testdata.FixtureClass3"
+        val declaration1: KoTypeDeclaration =
             mockk {
-                every { sourceType } returns sourceType1
+                every { sourceDeclaration } returns sourceDeclarationOf(fullyQualifiedName1)
             }
-        val declaration2: KoSourceTypeProvider =
+        val declaration2: KoTypeDeclaration =
             mockk {
-                every { sourceType } returns sourceType2
+                every { sourceDeclaration } returns sourceDeclarationOf(fullyQualifiedName2)
             }
-        val declaration3: KoSourceTypeProvider =
+        val declaration3: KoTypeDeclaration =
             mockk {
-                every { sourceType } returns sourceType3
+                every { sourceDeclaration } returns sourceDeclarationOf(fullyQualifiedName3)
             }
         val declarations = listOf(declaration1, declaration2, declaration3)
         val kClasses = setOf(FixtureClass1::class, FixtureClass2::class)
@@ -572,15 +575,15 @@ class KoSourceTypeProviderListExtTest {
     @Test
     fun `withBareSourceTypeOf(KClass) returns declaration with given source declaration`() {
         // given
-        val bareSourceType1 = "FixtureClass1"
-        val bareSourceType2 = "FixtureClass2"
-        val declaration1: KoSourceTypeProvider =
+        val fullyQualifiedName1 = "com.lemonappdev.konsist.testdata.FixtureClass1"
+        val fullyQualifiedName2 = "com.lemonappdev.konsist.testdata.FixtureClass2"
+        val declaration1: KoTypeDeclaration =
             mockk {
-                every { bareSourceType } returns bareSourceType1
+                every { sourceDeclaration } returns sourceDeclarationOf(fullyQualifiedName1)
             }
-        val declaration2: KoSourceTypeProvider =
+        val declaration2: KoTypeDeclaration =
             mockk {
-                every { bareSourceType } returns bareSourceType2
+                every { sourceDeclaration } returns sourceDeclarationOf(fullyQualifiedName2)
             }
         val declarations = listOf(declaration1, declaration2)
 
@@ -594,20 +597,20 @@ class KoSourceTypeProviderListExtTest {
     @Test
     fun `withBareSourceTypeOf(KClass) returns declarations with one of given source declarations`() {
         // given
-        val bareSourceType1 = "FixtureClass1"
-        val bareSourceType2 = "FixtureClass2"
-        val bareSourceType3 = "FixtureClass3"
-        val declaration1: KoSourceTypeProvider =
+        val fullyQualifiedName1 = "com.lemonappdev.konsist.testdata.FixtureClass1"
+        val fullyQualifiedName2 = "com.lemonappdev.konsist.testdata.FixtureClass2"
+        val fullyQualifiedName3 = "com.lemonappdev.konsist.testdata.FixtureClass3"
+        val declaration1: KoTypeDeclaration =
             mockk {
-                every { bareSourceType } returns bareSourceType1
+                every { sourceDeclaration } returns sourceDeclarationOf(fullyQualifiedName1)
             }
-        val declaration2: KoSourceTypeProvider =
+        val declaration2: KoTypeDeclaration =
             mockk {
-                every { bareSourceType } returns bareSourceType2
+                every { sourceDeclaration } returns sourceDeclarationOf(fullyQualifiedName2)
             }
-        val declaration3: KoSourceTypeProvider =
+        val declaration3: KoTypeDeclaration =
             mockk {
-                every { bareSourceType } returns bareSourceType3
+                every { sourceDeclaration } returns sourceDeclarationOf(fullyQualifiedName3)
             }
         val declarations = listOf(declaration1, declaration2, declaration3)
 
@@ -621,20 +624,20 @@ class KoSourceTypeProviderListExtTest {
     @Test
     fun `withBareSourceTypeOf(list of KClass) returns declarations with one of given source declarations`() {
         // given
-        val bareSourceType1 = "FixtureClass1"
-        val bareSourceType2 = "FixtureClass2"
-        val bareSourceType3 = "FixtureClass3"
-        val declaration1: KoSourceTypeProvider =
+        val fullyQualifiedName1 = "com.lemonappdev.konsist.testdata.FixtureClass1"
+        val fullyQualifiedName2 = "com.lemonappdev.konsist.testdata.FixtureClass2"
+        val fullyQualifiedName3 = "com.lemonappdev.konsist.testdata.FixtureClass3"
+        val declaration1: KoTypeDeclaration =
             mockk {
-                every { bareSourceType } returns bareSourceType1
+                every { sourceDeclaration } returns sourceDeclarationOf(fullyQualifiedName1)
             }
-        val declaration2: KoSourceTypeProvider =
+        val declaration2: KoTypeDeclaration =
             mockk {
-                every { bareSourceType } returns bareSourceType2
+                every { sourceDeclaration } returns sourceDeclarationOf(fullyQualifiedName2)
             }
-        val declaration3: KoSourceTypeProvider =
+        val declaration3: KoTypeDeclaration =
             mockk {
-                every { bareSourceType } returns bareSourceType3
+                every { sourceDeclaration } returns sourceDeclarationOf(fullyQualifiedName3)
             }
         val declarations = listOf(declaration1, declaration2, declaration3)
         val kClasses = listOf(FixtureClass1::class, FixtureClass2::class)
@@ -649,20 +652,20 @@ class KoSourceTypeProviderListExtTest {
     @Test
     fun `withBareSourceTypeOf(set of KClass) returns declarations with one of given source declarations`() {
         // given
-        val bareSourceType1 = "FixtureClass1"
-        val bareSourceType2 = "FixtureClass2"
-        val bareSourceType3 = "FixtureClass3"
-        val declaration1: KoSourceTypeProvider =
+        val fullyQualifiedName1 = "com.lemonappdev.konsist.testdata.FixtureClass1"
+        val fullyQualifiedName2 = "com.lemonappdev.konsist.testdata.FixtureClass2"
+        val fullyQualifiedName3 = "com.lemonappdev.konsist.testdata.FixtureClass3"
+        val declaration1: KoTypeDeclaration =
             mockk {
-                every { bareSourceType } returns bareSourceType1
+                every { sourceDeclaration } returns sourceDeclarationOf(fullyQualifiedName1)
             }
-        val declaration2: KoSourceTypeProvider =
+        val declaration2: KoTypeDeclaration =
             mockk {
-                every { bareSourceType } returns bareSourceType2
+                every { sourceDeclaration } returns sourceDeclarationOf(fullyQualifiedName2)
             }
-        val declaration3: KoSourceTypeProvider =
+        val declaration3: KoTypeDeclaration =
             mockk {
-                every { bareSourceType } returns bareSourceType3
+                every { sourceDeclaration } returns sourceDeclarationOf(fullyQualifiedName3)
             }
         val declarations = listOf(declaration1, declaration2, declaration3)
         val kClasses = setOf(FixtureClass1::class, FixtureClass2::class)
@@ -677,8 +680,8 @@ class KoSourceTypeProviderListExtTest {
     @Test
     fun `withoutBareSourceTypeOf(empty list) returns none declaration`() {
         // given
-        val declaration1: KoSourceTypeProvider = mockk()
-        val declaration2: KoSourceTypeProvider = mockk()
+        val declaration1: KoTypeDeclaration = mockk()
+        val declaration2: KoTypeDeclaration = mockk()
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -691,8 +694,8 @@ class KoSourceTypeProviderListExtTest {
     @Test
     fun `withoutBareSourceTypeOf(empty set) returns none declaration`() {
         // given
-        val declaration1: KoSourceTypeProvider = mockk()
-        val declaration2: KoSourceTypeProvider = mockk()
+        val declaration1: KoTypeDeclaration = mockk()
+        val declaration2: KoTypeDeclaration = mockk()
         val declarations = listOf(declaration1, declaration2)
 
         // when
@@ -705,15 +708,15 @@ class KoSourceTypeProviderListExtTest {
     @Test
     fun `withoutBareSourceTypeOf(KClass) returns declaration without given source declaration`() {
         // given
-        val bareSourceType1 = "FixtureClass1"
-        val bareSourceType2 = "FixtureClass2"
-        val declaration1: KoSourceTypeProvider =
+        val fullyQualifiedName1 = "com.lemonappdev.konsist.testdata.FixtureClass1"
+        val fullyQualifiedName2 = "com.lemonappdev.konsist.testdata.FixtureClass2"
+        val declaration1: KoTypeDeclaration =
             mockk {
-                every { bareSourceType } returns bareSourceType1
+                every { sourceDeclaration } returns sourceDeclarationOf(fullyQualifiedName1)
             }
-        val declaration2: KoSourceTypeProvider =
+        val declaration2: KoTypeDeclaration =
             mockk {
-                every { bareSourceType } returns bareSourceType2
+                every { sourceDeclaration } returns sourceDeclarationOf(fullyQualifiedName2)
             }
         val declarations = listOf(declaration1, declaration2)
 
@@ -727,20 +730,20 @@ class KoSourceTypeProviderListExtTest {
     @Test
     fun `withoutBareSourceTypeOf(KClass) returns declaration without any of given source declarations`() {
         // given
-        val bareSourceType1 = "FixtureClass1"
-        val bareSourceType2 = "FixtureClass2"
-        val bareSourceType3 = "FixtureClass3"
-        val declaration1: KoSourceTypeProvider =
+        val fullyQualifiedName1 = "com.lemonappdev.konsist.testdata.FixtureClass1"
+        val fullyQualifiedName2 = "com.lemonappdev.konsist.testdata.FixtureClass2"
+        val fullyQualifiedName3 = "com.lemonappdev.konsist.testdata.FixtureClass3"
+        val declaration1: KoTypeDeclaration =
             mockk {
-                every { bareSourceType } returns bareSourceType1
+                every { sourceDeclaration } returns sourceDeclarationOf(fullyQualifiedName1)
             }
-        val declaration2: KoSourceTypeProvider =
+        val declaration2: KoTypeDeclaration =
             mockk {
-                every { bareSourceType } returns bareSourceType2
+                every { sourceDeclaration } returns sourceDeclarationOf(fullyQualifiedName2)
             }
-        val declaration3: KoSourceTypeProvider =
+        val declaration3: KoTypeDeclaration =
             mockk {
-                every { bareSourceType } returns bareSourceType3
+                every { sourceDeclaration } returns sourceDeclarationOf(fullyQualifiedName3)
             }
         val declarations = listOf(declaration1, declaration2, declaration3)
 
@@ -754,20 +757,20 @@ class KoSourceTypeProviderListExtTest {
     @Test
     fun `withoutBareSourceTypeOf(list of KClass) returns declaration without any of given source declarations`() {
         // given
-        val bareSourceType1 = "FixtureClass1"
-        val bareSourceType2 = "FixtureClass2"
-        val bareSourceType3 = "FixtureClass3"
-        val declaration1: KoSourceTypeProvider =
+        val fullyQualifiedName1 = "com.lemonappdev.konsist.testdata.FixtureClass1"
+        val fullyQualifiedName2 = "com.lemonappdev.konsist.testdata.FixtureClass2"
+        val fullyQualifiedName3 = "com.lemonappdev.konsist.testdata.FixtureClass3"
+        val declaration1: KoTypeDeclaration =
             mockk {
-                every { bareSourceType } returns bareSourceType1
+                every { sourceDeclaration } returns sourceDeclarationOf(fullyQualifiedName1)
             }
-        val declaration2: KoSourceTypeProvider =
+        val declaration2: KoTypeDeclaration =
             mockk {
-                every { bareSourceType } returns bareSourceType2
+                every { sourceDeclaration } returns sourceDeclarationOf(fullyQualifiedName2)
             }
-        val declaration3: KoSourceTypeProvider =
+        val declaration3: KoTypeDeclaration =
             mockk {
-                every { bareSourceType } returns bareSourceType3
+                every { sourceDeclaration } returns sourceDeclarationOf(fullyQualifiedName3)
             }
         val declarations = listOf(declaration1, declaration2, declaration3)
         val kClasses = listOf(FixtureClass1::class, FixtureClass2::class)
@@ -782,20 +785,20 @@ class KoSourceTypeProviderListExtTest {
     @Test
     fun `withoutBareSourceTypeOf(set of KClass) returns declaration without any of given source declarations`() {
         // given
-        val bareSourceType1 = "FixtureClass1"
-        val bareSourceType2 = "FixtureClass2"
-        val bareSourceType3 = "FixtureClass3"
-        val declaration1: KoSourceTypeProvider =
+        val fullyQualifiedName1 = "com.lemonappdev.konsist.testdata.FixtureClass1"
+        val fullyQualifiedName2 = "com.lemonappdev.konsist.testdata.FixtureClass2"
+        val fullyQualifiedName3 = "com.lemonappdev.konsist.testdata.FixtureClass3"
+        val declaration1: KoTypeDeclaration =
             mockk {
-                every { bareSourceType } returns bareSourceType1
+                every { sourceDeclaration } returns sourceDeclarationOf(fullyQualifiedName1)
             }
-        val declaration2: KoSourceTypeProvider =
+        val declaration2: KoTypeDeclaration =
             mockk {
-                every { bareSourceType } returns bareSourceType2
+                every { sourceDeclaration } returns sourceDeclarationOf(fullyQualifiedName2)
             }
-        val declaration3: KoSourceTypeProvider =
+        val declaration3: KoTypeDeclaration =
             mockk {
-                every { bareSourceType } returns bareSourceType3
+                every { sourceDeclaration } returns sourceDeclarationOf(fullyQualifiedName3)
             }
         val declarations = listOf(declaration1, declaration2, declaration3)
         val kClasses = setOf(FixtureClass1::class, FixtureClass2::class)
@@ -1072,4 +1075,63 @@ class KoSourceTypeProviderListExtTest {
         // then
         sut shouldBeEqualTo listOf(declaration3)
     }
+
+    @Test
+    fun `withSourceTypeOf(KClass) does not return declaration with the same simple name in different package`() {
+        // given
+        val declaration: KoTypeDeclaration =
+            mockk {
+                every { sourceDeclaration } returns sourceDeclarationOf("com.lemonappdev.konsist.otherpackage.FixtureClass1")
+            }
+        val declarations = listOf(declaration)
+
+        // when
+        val sut = declarations.withSourceTypeOf(FixtureClass1::class)
+
+        // then
+        sut shouldBeEqualTo emptyList()
+    }
+
+    @Test
+    fun `withBareSourceTypeOf(KClass) does not return declaration with the same simple name in different package`() {
+        // given
+        val declaration: KoTypeDeclaration =
+            mockk {
+                every { sourceDeclaration } returns sourceDeclarationOf("com.lemonappdev.konsist.otherpackage.FixtureClass1")
+            }
+        val declarations = listOf(declaration)
+
+        // when
+        val sut = declarations.withBareSourceTypeOf(FixtureClass1::class)
+
+        // then
+        sut shouldBeEqualTo emptyList()
+    }
+
+    @Test
+    fun `withSourceTypeOf(KClass) returns declaration with unresolved source declaration matching bare source type`() {
+        // given
+        val declaration1: KoSourceTypeProvider =
+            mockk {
+                every { bareSourceType } returns "FixtureClass1"
+            }
+        val declaration2: KoSourceTypeProvider =
+            mockk {
+                every { bareSourceType } returns "FixtureClass2"
+            }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withSourceTypeOf(FixtureClass1::class)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    private fun sourceDeclarationOf(fullyQualifiedName: String): KoDeclarationCastProvider =
+        mockk(moreInterfaces = arrayOf(KoFullyQualifiedNameProvider::class)) {
+            every { asImportAliasDeclaration() } returns null
+            every { asTypeAliasDeclaration() } returns null
+            every { (this@mockk as KoFullyQualifiedNameProvider).fullyQualifiedName } returns fullyQualifiedName
+        }
 }

@@ -5,6 +5,8 @@ import com.lemonappdev.konsist.api.provider.KoLocalClassProvider
 
 /**
  * List containing local class declarations.
+ *
+ * @see KoLocalClassProvider.localClasses
  */
 val <T : KoLocalClassProvider> List<T>.localClasses: List<KoClassDeclaration>
     get() = flatMap { it.localClasses }
@@ -13,6 +15,7 @@ val <T : KoLocalClassProvider> List<T>.localClasses: List<KoClassDeclaration>
  * List containing declarations with any local class.
  *
  * @return A list containing declarations with any local class.
+ * @see KoLocalClassProvider.hasLocalClasses
  */
 fun <T : KoLocalClassProvider> List<T>.withLocalClasses(): List<T> = filter { it.hasLocalClasses() }
 
@@ -20,6 +23,7 @@ fun <T : KoLocalClassProvider> List<T>.withLocalClasses(): List<T> = filter { it
  * List containing declarations with no local classes.
  *
  * @return A list containing declarations with no local classes.
+ * @see KoLocalClassProvider.hasLocalClasses
  */
 fun <T : KoLocalClassProvider> List<T>.withoutLocalClasses(): List<T> = filterNot { it.hasLocalClasses() }
 
@@ -29,9 +33,10 @@ fun <T : KoLocalClassProvider> List<T>.withoutLocalClasses(): List<T> = filterNo
  * @param name The name of the local class to include.
  * @param names The names of additional local classes to include.
  * @param ignoreCase Specifies whether the comparison should ignore case.
- *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations with at least one of the specified local class(es).
+ * @see KoLocalClassProvider.hasLocalClassWithName
  */
 fun <T : KoLocalClassProvider> List<T>.withLocalClassNamed(
     name: String,
@@ -42,11 +47,12 @@ fun <T : KoLocalClassProvider> List<T>.withLocalClassNamed(
 /**
  * List containing declarations that have at least one local class with the specified name(s).
  *
- * @param names The names of additional local classes to include.
+ * @param names The names of the local classes to include.
  * @param ignoreCase Specifies whether the comparison should ignore case.
- *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations with at least one of the specified local class(es).
+ * @see KoLocalClassProvider.hasLocalClassWithName
  */
 fun <T : KoLocalClassProvider> List<T>.withLocalClassNamed(
     names: Collection<String>,
@@ -60,14 +66,15 @@ fun <T : KoLocalClassProvider> List<T>.withLocalClassNamed(
     }
 
 /**
- * List containing declarations without any of specified local classes.
+ * List containing declarations without any of the specified local classes.
  *
  * @param name The name of the local class to exclude.
  * @param names The names of additional local classes to exclude.
  * @param ignoreCase Specifies whether the comparison should ignore case.
- *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
- * @return A list containing declarations without any of specified local classes.
+ * @return A list containing declarations without any of the specified local classes.
+ * @see KoLocalClassProvider.hasLocalClassWithName
  */
 fun <T : KoLocalClassProvider> List<T>.withoutLocalClassNamed(
     name: String,
@@ -76,13 +83,14 @@ fun <T : KoLocalClassProvider> List<T>.withoutLocalClassNamed(
 ): List<T> = withoutLocalClassNamed(listOf(name, *names), ignoreCase)
 
 /**
- * List containing declarations without any of specified local classes.
+ * List containing declarations without any of the specified local classes.
  *
- * @param names The names of additional local classes to exclude.
+ * @param names The names of the local classes to exclude.
  * @param ignoreCase Specifies whether the comparison should ignore case.
- *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
- * @return A list containing declarations without any of specified local classes.
+ * @return A list containing declarations without any of the specified local classes.
+ * @see KoLocalClassProvider.hasLocalClassWithName
  */
 fun <T : KoLocalClassProvider> List<T>.withoutLocalClassNamed(
     names: Collection<String>,
@@ -99,11 +107,12 @@ fun <T : KoLocalClassProvider> List<T>.withoutLocalClassNamed(
  * List containing declarations that have all specified local classes.
  *
  * @param name The name of the local class to include.
- * @param names The name(s) of the local class(es) to include.
+ * @param names The names of additional local classes to include.
  * @param ignoreCase Specifies whether the comparison should ignore case.
- *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations with all specified local class(es).
+ * @see KoLocalClassProvider.hasLocalClassesWithAllNames
  */
 fun <T : KoLocalClassProvider> List<T>.withAllLocalClassesNamed(
     name: String,
@@ -114,11 +123,12 @@ fun <T : KoLocalClassProvider> List<T>.withAllLocalClassesNamed(
 /**
  * List containing declarations that have all specified local classes.
  *
- * @param names The name(s) of the local class(es) to include.
+ * @param names The names of the local classes to include.
  * @param ignoreCase Specifies whether the comparison should ignore case.
- *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations with all specified local class(es).
+ * @see KoLocalClassProvider.hasLocalClassesWithAllNames
  */
 fun <T : KoLocalClassProvider> List<T>.withAllLocalClassesNamed(
     names: Collection<String>,
@@ -135,11 +145,12 @@ fun <T : KoLocalClassProvider> List<T>.withAllLocalClassesNamed(
  * List containing declarations without all specified local classes.
  *
  * @param name The name of the local class to exclude.
- * @param names The name(s) of the local class(es) to exclude.
+ * @param names The names of additional local classes to exclude.
  * @param ignoreCase Specifies whether the comparison should ignore case.
- *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations without all specified local class(es).
+ * @see KoLocalClassProvider.hasLocalClassesWithAllNames
  */
 fun <T : KoLocalClassProvider> List<T>.withoutAllLocalClassesNamed(
     name: String,
@@ -150,11 +161,12 @@ fun <T : KoLocalClassProvider> List<T>.withoutAllLocalClassesNamed(
 /**
  * List containing declarations without all specified local classes.
  *
- * @param names The name(s) of the local class(es) to exclude.
+ * @param names The names of the local classes to exclude.
  * @param ignoreCase Specifies whether the comparison should ignore case.
- *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations without all specified local class(es).
+ * @see KoLocalClassProvider.hasLocalClassesWithAllNames
  */
 fun <T : KoLocalClassProvider> List<T>.withoutAllLocalClassesNamed(
     names: Collection<String>,
@@ -172,15 +184,17 @@ fun <T : KoLocalClassProvider> List<T>.withoutAllLocalClassesNamed(
  *
  * @param predicate A function that defines the condition to be met by a local class declaration.
  * @return A list containing declarations with at least one local class satisfying the predicate.
+ * @see KoLocalClassProvider.hasLocalClass
  */
 fun <T : KoLocalClassProvider> List<T>.withLocalClass(predicate: (KoClassDeclaration) -> Boolean): List<T> =
     filter { it.hasLocalClass(predicate) }
 
 /**
- * List containing declarations that not have local class satisfying the provided predicate.
+ * List containing declarations that do not have any local class satisfying the provided predicate.
  *
  * @param predicate A function that defines the condition to be met by a local class declaration.
- * @return A list containing declarations without local class satisfying the provided predicate.
+ * @return A list containing declarations without any local class satisfying the provided predicate.
+ * @see KoLocalClassProvider.hasLocalClass
  */
 fun <T : KoLocalClassProvider> List<T>.withoutLocalClass(predicate: (KoClassDeclaration) -> Boolean): List<T> =
     filterNot { it.hasLocalClass(predicate) }
@@ -189,7 +203,8 @@ fun <T : KoLocalClassProvider> List<T>.withoutLocalClass(predicate: (KoClassDecl
  * List containing declarations that have all local classes satisfying the provided predicate.
  *
  * @param predicate A function that defines the condition to be met by all local class declarations.
- * @return A filtered list containing declarations with all local classes satisfying the predicate.
+ * @return A list containing declarations with all local classes satisfying the predicate.
+ * @see KoLocalClassProvider.hasAllLocalClasses
  */
 fun <T : KoLocalClassProvider> List<T>.withAllLocalClasses(predicate: (KoClassDeclaration) -> Boolean): List<T> =
     filter { it.hasAllLocalClasses(predicate) }
@@ -199,6 +214,7 @@ fun <T : KoLocalClassProvider> List<T>.withAllLocalClasses(predicate: (KoClassDe
  *
  * @param predicate A function that defines the condition to be met by all local class declarations.
  * @return A list containing declarations that have at least one local class not satisfying the provided predicate.
+ * @see KoLocalClassProvider.hasAllLocalClasses
  */
 fun <T : KoLocalClassProvider> List<T>.withoutAllLocalClasses(predicate: (KoClassDeclaration) -> Boolean): List<T> =
     filterNot { it.hasAllLocalClasses(predicate) }
@@ -208,6 +224,7 @@ fun <T : KoLocalClassProvider> List<T>.withoutAllLocalClasses(predicate: (KoClas
  *
  * @param predicate A function that defines the condition to be met by the list of local class declarations.
  * @return A list containing declarations with local class declarations satisfying the predicate.
+ * @see KoLocalClassProvider.localClasses
  */
 fun <T : KoLocalClassProvider> List<T>.withLocalClasses(predicate: (List<KoClassDeclaration>) -> Boolean): List<T> =
     filter { predicate(it.localClasses) }
@@ -217,6 +234,7 @@ fun <T : KoLocalClassProvider> List<T>.withLocalClasses(predicate: (List<KoClass
  *
  * @param predicate A function that defines the condition to be met by the list of local class declarations.
  * @return A list containing declarations without local class declarations satisfying the predicate.
+ * @see KoLocalClassProvider.localClasses
  */
 fun <T : KoLocalClassProvider> List<T>.withoutLocalClasses(predicate: (List<KoClassDeclaration>) -> Boolean): List<T> =
     filterNot { predicate(it.localClasses) }

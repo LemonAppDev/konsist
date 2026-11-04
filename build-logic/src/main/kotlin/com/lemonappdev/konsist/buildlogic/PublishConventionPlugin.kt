@@ -4,6 +4,7 @@ import com.lemonappdev.konsist.buildlogic.config.ReleaseTarget
 import com.lemonappdev.konsist.buildlogic.ext.getFullKonsistVersion
 import com.lemonappdev.konsist.buildlogic.ext.getLocalPropertyOrGradleProperty
 import com.lemonappdev.konsist.buildlogic.ext.getReleaseTarget
+import com.lemonappdev.konsist.buildlogic.ext.requireReleaseTargetForNmcpPublishTasks
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.publish.PublishingExtension
@@ -23,6 +24,8 @@ class PublishConventionPlugin : Plugin<Project> {
             apply(plugin = "com.gradleup.nmcp")
 
             val konsistPublicationName = "konsist"
+
+            requireReleaseTargetForNmcpPublishTasks("AllPublications")
 
             configure<PublishingExtension> {
                 val releaseTarget = project.getReleaseTarget()

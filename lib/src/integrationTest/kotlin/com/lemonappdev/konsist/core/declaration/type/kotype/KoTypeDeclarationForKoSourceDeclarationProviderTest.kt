@@ -12,9 +12,13 @@ import com.lemonappdev.konsist.api.ext.list.modifierprovider.withoutModifiers
 import com.lemonappdev.konsist.api.ext.list.parameters
 import com.lemonappdev.konsist.api.provider.KoFullyQualifiedNameProvider
 import com.lemonappdev.konsist.externalfixture.FixtureExternalClass
+import com.lemonappdev.konsist.testdata.FixtureClass
 import com.lemonappdev.konsist.testdata.FixtureInterface
 import com.lemonappdev.konsist.testdata.FixtureObject
+import com.lemonappdev.konsist.testdata.FixtureObjectWithInitializer
+import com.lemonappdev.konsist.testdata.FixtureParentClassWithNestedDeclarations
 import com.lemonappdev.konsist.testdata.FixtureType
+import com.lemonappdev.konsist.testdata.testpackage.Type
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.amshove.kluent.shouldBeInstanceOf
@@ -23,6 +27,7 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments.arguments
 import org.junit.jupiter.params.provider.MethodSource
+import java.util.Date
 import kotlin.reflect.KClass
 
 @Suppress("detekt.LargeClass")
@@ -297,6 +302,74 @@ class KoTypeDeclarationForKoSourceDeclarationProviderTest {
         }
     }
 
+    @Test
+    fun `type-with-name-being-suffix-of-other-declaration-name`() {
+        // given
+        val sut =
+            getSnippetFile("type-with-name-being-suffix-of-other-declaration-name")
+                .classes()
+                .first()
+                .primaryConstructor
+                ?.parameters
+                ?.first()
+                ?.type
+
+        // then
+        assertSoftly(sut?.sourceDeclaration) {
+            it shouldBeInstanceOf KoExternalDeclaration::class
+            (it as? KoFullyQualifiedNameProvider)?.fullyQualifiedName shouldBeEqualTo
+                "com.lemonappdev.konsist.externalfixture.FixtureExternalClass"
+        }
+    }
+
+    @Test
+    fun `external types with the same name imported from different packages`() {
+        // given
+        val first =
+            getSnippetFile("external-type-with-the-same-name-imported-from-first-package")
+                .classes()
+                .first()
+                .primaryConstructor
+                ?.parameters
+                ?.first()
+                ?.type
+
+        val second =
+            getSnippetFile("external-type-with-the-same-name-imported-from-second-package")
+                .classes()
+                .first()
+                .primaryConstructor
+                ?.parameters
+                ?.first()
+                ?.type
+
+        // then
+        assertSoftly {
+            (first?.sourceDeclaration as? KoFullyQualifiedNameProvider)?.fullyQualifiedName shouldBeEqualTo "java.util.Timer"
+            (second?.sourceDeclaration as? KoFullyQualifiedNameProvider)?.fullyQualifiedName shouldBeEqualTo "javax.swing.Timer"
+        }
+    }
+
+    @Test
+    fun `external-type-with-static-initializer-from-wildcard-import`() {
+        // given
+        val sut =
+            getSnippetFile("external-type-with-static-initializer-from-wildcard-import")
+                .classes()
+                .first()
+                .primaryConstructor
+                ?.parameters
+                ?.first()
+                ?.type
+
+        // then
+        assertSoftly {
+            (sut?.sourceDeclaration as? KoFullyQualifiedNameProvider)?.fullyQualifiedName shouldBeEqualTo
+                "com.lemonappdev.konsist.testdata.FixtureObjectWithInitializer"
+            System.getProperty(FixtureObjectWithInitializer.INITIALIZED_PROPERTY) shouldBeEqualTo null
+        }
+    }
+
     private fun getSnippetFile(fileName: String) =
         TestSnippetProvider.getSnippetKoScope(
             "core/declaration/type/kotype/snippet/forkosourcedeclarationprovider/",
@@ -308,6 +381,142 @@ class KoTypeDeclarationForKoSourceDeclarationProviderTest {
         @JvmStatic
         fun provideValues() =
             listOf(
+                arguments(
+                    "class-type-from-wildcard-import",
+                    KoClassDeclaration::class,
+                    KoExternalDeclaration::class,
+                    FixtureClass::class,
+                    String::class,
+                    "com.lemonappdev.konsist.testdata.FixtureClass",
+                ),
+                arguments(
+                    "nested-class-type-with-qualified-name-from-import",
+                    KoClassDeclaration::class,
+                    KoExternalDeclaration::class,
+                    FixtureParentClassWithNestedDeclarations.FixtureNestedClass::class,
+                    String::class,
+                    "com.lemonappdev.konsist.testdata.FixtureParentClassWithNestedDeclarations.FixtureNestedClass",
+                ),
+                arguments(
+                    "nested-class-type-from-superclass",
+                    KoClassDeclaration::class,
+                    KoExternalDeclaration::class,
+                    FixtureParentClassWithNestedDeclarations.FixtureNestedClass::class,
+                    String::class,
+                    "com.lemonappdev.konsist.testdata.FixtureParentClassWithNestedDeclarations.FixtureNestedClass",
+                ),
+                arguments(
+                    "nested-class-type-from-indirect-superclass",
+                    KoClassDeclaration::class,
+                    KoExternalDeclaration::class,
+                    FixtureParentClassWithNestedDeclarations.FixtureNestedClass::class,
+                    String::class,
+                    "com.lemonappdev.konsist.testdata.FixtureParentClassWithNestedDeclarations.FixtureNestedClass",
+                ),
+                arguments(
+                    "nested-class-type-from-superclass-and-the-same-file",
+                    KoClassDeclaration::class,
+                    KoExternalDeclaration::class,
+                    FixtureParentClassWithNestedDeclarations.FixtureNestedClass::class,
+                    String::class,
+                    "com.lemonappdev.konsist.testdata.FixtureParentClassWithNestedDeclarations.FixtureNestedClass",
+                ),
+                arguments(
+                    "private-nested-class-type-from-superclass",
+                    KoClassDeclaration::class,
+                    KoExternalDeclaration::class,
+                    FixtureClass::class,
+                    String::class,
+                    "com.lemonappdev.konsist.testdata.FixtureClass",
+                ),
+                arguments(
+                    "nested-class-type-from-external-superclass",
+                    KoExternalDeclaration::class,
+                    KoClassDeclaration::class,
+                    java.util.AbstractMap.SimpleEntry::class,
+                    String::class,
+                    "java.util.AbstractMap.SimpleEntry",
+                ),
+                arguments(
+                    "nested-class-type-from-interface",
+                    KoClassDeclaration::class,
+                    KoExternalDeclaration::class,
+                    null,
+                    String::class,
+                    "SampleNestedClass",
+                ),
+                arguments(
+                    "external-nested-type-from-default-import",
+                    KoExternalDeclaration::class,
+                    KoKotlinTypeDeclaration::class,
+                    Thread.State::class,
+                    String::class,
+                    "java.lang.Thread.State",
+                ),
+                arguments(
+                    "class-type-with-kotlin-type-name-from-the-same-file",
+                    KoClassDeclaration::class,
+                    KoKotlinTypeDeclaration::class,
+                    null,
+                    Result::class,
+                    "com.fixturepackage.Result",
+                ),
+                arguments(
+                    "class-type-with-kotlin-type-name-from-the-same-package",
+                    KoClassDeclaration::class,
+                    KoKotlinTypeDeclaration::class,
+                    null,
+                    Result::class,
+                    "com.lemonappdev.konsist.testdata.Result",
+                ),
+                arguments(
+                    "class-type-with-kotlin-type-name-from-wildcard-import",
+                    KoClassDeclaration::class,
+                    KoKotlinTypeDeclaration::class,
+                    null,
+                    Pair::class,
+                    "com.lemonappdev.konsist.testdata.Pair",
+                ),
+                arguments(
+                    "class-type-with-java-lang-type-name-from-the-same-package",
+                    KoClassDeclaration::class,
+                    KoExternalDeclaration::class,
+                    null,
+                    Module::class,
+                    "com.lemonappdev.konsist.testdata.Module",
+                ),
+                arguments(
+                    "class-type-from-the-same-package-and-wildcard-import",
+                    KoClassDeclaration::class,
+                    KoExternalDeclaration::class,
+                    null,
+                    Type::class,
+                    "com.lemonappdev.konsist.testdata.Type",
+                ),
+                arguments(
+                    "kotlin-collection-type-with-java-util-wildcard-import",
+                    KoKotlinTypeDeclaration::class,
+                    KoExternalDeclaration::class,
+                    List::class,
+                    String::class,
+                    "kotlin.collections.List",
+                ),
+                arguments(
+                    "kotlin-type-with-import-of-kotlin-function-with-the-same-name",
+                    KoKotlinTypeDeclaration::class,
+                    KoExternalDeclaration::class,
+                    String::class,
+                    Int::class,
+                    "kotlin.String",
+                ),
+                arguments(
+                    "external-type-with-kotlin-type-name-from-import",
+                    KoExternalDeclaration::class,
+                    KoKotlinTypeDeclaration::class,
+                    Date::class,
+                    String::class,
+                    "java.util.Date",
+                ),
                 arguments(
                     "nullable-kotlin-type",
                     KoKotlinTypeDeclaration::class,
@@ -347,6 +556,22 @@ class KoTypeDeclarationForKoSourceDeclarationProviderTest {
                     FixtureType::class,
                     String::class,
                     "com.lemonappdev.konsist.testdata.FixtureType",
+                ),
+                arguments(
+                    "nullable-annotated-class-type",
+                    KoClassDeclaration::class,
+                    KoKotlinTypeDeclaration::class,
+                    FixtureType::class,
+                    String::class,
+                    "com.lemonappdev.konsist.testdata.FixtureType",
+                ),
+                arguments(
+                    "nullable-annotated-import-alias-type",
+                    KoImportAliasDeclaration::class,
+                    KoKotlinTypeDeclaration::class,
+                    null,
+                    String::class,
+                    null,
                 ),
                 arguments(
                     "not-nullable-class-type",

@@ -9,7 +9,7 @@ interface KoDataModifierProvider :
     KoBaseProvider,
     KoModifierProvider {
     /**
-     * Determines whatever declaration has `data` modifier.
+     * Determines whether the declaration has the `data` modifier.
      */
     val hasDataModifier: Boolean
 }

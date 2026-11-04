@@ -1,0 +1,5 @@
+import java.io.ByteArrayInputStream
+
+class FixtureClass : FixtureParentClass()
+
+open class FixtureParentClass : ByteArrayInputStream(byteArrayOf())

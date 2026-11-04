@@ -18,18 +18,18 @@ interface KoModifierProvider : KoBaseProvider {
     val numModifiers: Int
 
     /**
-     * Determines whatever the declaration has modifiers.
+     * Determines whether the declaration has any modifiers.
      *
-     * @return `true` if the declaration has modifier, `false` otherwise.
+     * @return `true` if the declaration has at least one modifier, `false` otherwise.
      */
     fun hasModifiers(): Boolean
 
     /**
-     * Determines whether the declaration has at least one specified modifier.
+     * Determines whether the declaration has at least one of the specified modifiers.
      *
      * @param modifier the modifier to check.
      * @param modifiers the modifiers to check.
-     * @return `true` if there is a matching declaration, `false` otherwise.
+     * @return `true` if the declaration has at least one of the specified modifiers, `false` otherwise.
      */
     fun hasModifier(
         modifier: KoModifier,
@@ -37,10 +37,10 @@ interface KoModifierProvider : KoBaseProvider {
     ): Boolean
 
     /**
-     * Determines whether the declaration has at least one specified modifier.
+     * Determines whether the declaration has at least one of the specified modifiers.
      *
      * @param modifiers the modifiers to check.
-     * @return `true` if there is a matching declaration, `false` otherwise.
+     * @return `true` if the declaration has at least one of the specified modifiers, `false` otherwise.
      */
     fun hasModifier(modifiers: Collection<KoModifier>): Boolean
 
@@ -49,7 +49,7 @@ interface KoModifierProvider : KoBaseProvider {
      *
      * @param modifier the modifier to check.
      * @param modifiers the modifiers to check.
-     * @return `true` if there are declarations with all the specified modifiers, `false` otherwise.
+     * @return `true` if the declaration has all the specified modifiers, `false` otherwise.
      */
     fun hasAllModifiers(
         modifier: KoModifier,
@@ -60,7 +60,7 @@ interface KoModifierProvider : KoBaseProvider {
      * Determines whether the declaration has all specified modifiers.
      *
      * @param modifiers the modifiers to check.
-     * @return `true` if there are declarations with all the specified modifiers, `false` otherwise.
+     * @return `true` if the declaration has all the specified modifiers, `false` otherwise.
      */
     fun hasAllModifiers(modifiers: Collection<KoModifier>): Boolean
 }

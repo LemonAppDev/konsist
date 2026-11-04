@@ -1,0 +1,3 @@
+val fixtureProperty1: List<Item2> = listOf()
+
+class Item2

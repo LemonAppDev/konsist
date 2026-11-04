@@ -5,6 +5,8 @@ import com.lemonappdev.konsist.api.architecture.LayerDependencies
 import com.lemonappdev.konsist.api.declaration.KoFileDeclaration
 import com.lemonappdev.konsist.api.ext.list.withPackage
 import com.lemonappdev.konsist.core.architecture.validator.LayerValidatorManager
+import com.lemonappdev.konsist.core.architecture.validator.ascii.AsciiTreeCreator
+import com.lemonappdev.konsist.core.architecture.validator.ascii.AsciiTreeNode
 import com.lemonappdev.konsist.core.exception.KoInvalidAssertArchitectureConfigurationException
 import com.lemonappdev.konsist.core.exception.KoPreconditionFailedException
 
@@ -38,19 +40,56 @@ internal class LayerDependenciesCore(
     }
 
     /**
-     * Validate that all the layers are not empty
+     * Validates that each non-optional layer contains at least one file.
      *
-     * @param files within the scope
+     * @param files The files within the scope.
      *
-     * @throws KoPreconditionFailedException Layers do not contain files
+     * @throws KoPreconditionFailedException if a non-optional layer does not contain any files.
      */
     fun checkLayersWithoutFiles(files: List<KoFileDeclaration>) {
         layers
             .firstOrNull { layer ->
-                files.withPackage(layer.rootPackage).isEmpty()
+                !layer.optional && files.withPackage(layer.rootPackage).isEmpty()
             }?.let { invalidLayer ->
                 throw KoPreconditionFailedException("Layer ${invalidLayer.name} doesn't contain any files.")
             }
+    }
+
+    /**
+     * Validates that each file belongs to at most one layer.
+     *
+     * Imports within a file's own layer are not checked, so a file matching more than one layer
+     * would silently hide dependencies between these layers.
+     *
+     * @param files The files within the scope.
+     *
+     * @throws KoPreconditionFailedException if a file belongs to more than one layer.
+     */
+    fun checkOverlappingLayers(files: List<KoFileDeclaration>) {
+        val overlappingFiles =
+            files
+                .sortedBy { it.path }
+                .groupBy { file -> layers.filter { file.hasPackage(it.rootPackage) } }
+                .filterKeys { it.size > 1 }
+
+        if (overlappingFiles.isEmpty()) {
+            return
+        }
+
+        val layerNodes =
+            overlappingFiles.map { (overlappingLayers, layerFiles) ->
+                val layerNames = overlappingLayers.joinToString { "'${it.name}'" }
+                val fileNodes = layerFiles.map { AsciiTreeNode(it, emptyList()) }
+
+                AsciiTreeNode("Layers $layerNames share files:", fileNodes)
+            }
+
+        val errorMessage =
+            AsciiTreeCreator().invoke(
+                AsciiTreeNode("Layers overlap. Each file must belong to only one layer:", layerNodes),
+            )
+
+        throw KoPreconditionFailedException(errorMessage)
     }
 
     override fun Layer.dependsOn(

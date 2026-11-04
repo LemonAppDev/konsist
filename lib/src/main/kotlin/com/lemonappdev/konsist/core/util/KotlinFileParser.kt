@@ -11,6 +11,7 @@ import org.jetbrains.kotlin.CoreEnvironmentDeprecation
 import org.jetbrains.kotlin.cli.jvm.compiler.EnvironmentConfigFiles
 import org.jetbrains.kotlin.cli.jvm.compiler.KotlinCoreEnvironment
 import org.jetbrains.kotlin.com.intellij.openapi.util.Disposer
+import org.jetbrains.kotlin.com.intellij.openapi.util.text.StringUtil
 import org.jetbrains.kotlin.com.intellij.psi.PsiManager
 import org.jetbrains.kotlin.com.intellij.testFramework.LightVirtualFile
 import org.jetbrains.kotlin.compiler.plugin.CompilerPluginRegistrar
@@ -21,6 +22,8 @@ import org.jetbrains.kotlin.psi.KtFile
 import java.io.File
 
 object KotlinFileParser {
+    private const val UTF8_BOM = "\uFEFF"
+
     @OptIn(CoreEnvironmentDeprecation::class, CompilerConfiguration.Internals::class)
     private val project by lazy {
         KotlinCoreEnvironment
@@ -57,14 +60,17 @@ object KotlinFileParser {
     }
 
     @Suppress("detekt.TooGenericExceptionCaught")
-    private fun getKtFile(file: File): KtFile {
+    internal fun getKtFile(file: File): KtFile {
         require(file.isKotlinFile || file.isKotlinSnippetFile) { "File must be a Kotlin file: ${file.path}" }
 
         try {
             val fileContent =
                 file
                     .readText()
-                    .replace(Regex(EndOfLine.WINDOWS.value), EndOfLine.UNIX.value)
+                    // Files saved by some editors (mostly on Windows) start with UTF-8 BOM that breaks package parsing
+                    .removePrefix(UTF8_BOM)
+                    // PSI documents accept only LF line endings, so CRLF and lone CR must be converted
+                    .let(StringUtil::convertLineSeparators)
 
             // Tests are using code snippets with txt extension that is messing up with Kotlin file parsing
             val filePath = file.path.replace(KOTLIN_TEST_SNIPPET, KOTLIN)
@@ -72,12 +78,22 @@ object KotlinFileParser {
             val psiFile = psiManager.findFile(lightVirtualFile)
             return psiFile as KtFile
         } catch (e: Exception) {
-            throw KoInternalException("Failed to parse Kotlin file: ${file.path}", e)
+            throw KoInternalException(getParseErrorMessage(file), e)
+        } catch (e: LinkageError) {
+            // Kotlin compiler classpath conflict may result in NoClassDefFoundError, NoSuchMethodError, etc.
+            throw KoInternalException(getParseErrorMessage(file), e)
         }
+    }
+
+    private fun getParseErrorMessage(file: File): String {
+        val message = "Failed to parse Kotlin file: ${file.path}"
+        val conflictMessage = KotlinCompilerClasspathUtil.getConflictMessage(javaClass.classLoader)
+
+        return if (conflictMessage == null) message else "$message\n$conflictMessage"
     }
 
     fun getKoFile(file: File): KoFileDeclaration {
         val ktFile = getKtFile(file)
-        return KoFileDeclarationCore(ktFile)
+        return KoFileDeclarationCore.getInstance(ktFile)
     }
 }

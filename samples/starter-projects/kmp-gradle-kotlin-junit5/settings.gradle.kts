@@ -1,21 +1,32 @@
+rootProject.name = "kmp-gradle-kotlin-junit5"
+
 pluginManagement {
     repositories {
-        google()
-        gradlePluginPortal()
+        google {
+            mavenContent {
+                includeGroupAndSubgroups("androidx")
+                includeGroupAndSubgroups("com.android")
+                includeGroupAndSubgroups("com.google")
+            }
+        }
         mavenCentral()
+        gradlePluginPortal()
     }
 }
 
 dependencyResolutionManagement {
     repositories {
-        google()
+        google {
+            mavenContent {
+                includeGroupAndSubgroups("androidx")
+                includeGroupAndSubgroups("com.android")
+                includeGroupAndSubgroups("com.google")
+            }
+        }
         mavenCentral()
     }
 }
 
-rootProject.name = "kmp-gradle-kotlin-junit5"
-
 include(":androidApp")
 include(":shared")
 include(":konsistTest")
-

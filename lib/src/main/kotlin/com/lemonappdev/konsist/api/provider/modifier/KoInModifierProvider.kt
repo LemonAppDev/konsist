@@ -9,7 +9,7 @@ interface KoInModifierProvider :
     KoBaseProvider,
     KoModifierProvider {
     /**
-     * Determines whatever the declaration has `in` modifier.
+     * Determines whether the declaration has the `in` modifier.
      */
     val hasInModifier: Boolean
 }

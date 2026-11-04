@@ -6,6 +6,7 @@ import com.lemonappdev.konsist.api.provider.modifier.KoOperatorModifierProvider
  * List containing declarations with `operator` modifier.
  *
  * @return A list containing declarations with the `operator` modifier.
+ * @see KoOperatorModifierProvider.hasOperatorModifier
  */
 fun <T : KoOperatorModifierProvider> List<T>.withOperatorModifier(): List<T> = filter { it.hasOperatorModifier }
 
@@ -13,5 +14,6 @@ fun <T : KoOperatorModifierProvider> List<T>.withOperatorModifier(): List<T> = f
  * List containing declarations without `operator` modifier.
  *
  * @return A list containing declarations without the `operator` modifier.
+ * @see KoOperatorModifierProvider.hasOperatorModifier
  */
 fun <T : KoOperatorModifierProvider> List<T>.withoutOperatorModifier(): List<T> = filterNot { it.hasOperatorModifier }

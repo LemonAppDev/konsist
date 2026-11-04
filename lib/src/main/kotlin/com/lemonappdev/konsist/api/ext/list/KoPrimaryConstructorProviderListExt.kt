@@ -5,20 +5,24 @@ import com.lemonappdev.konsist.api.provider.KoPrimaryConstructorProvider
 
 /**
  * List containing primary constructor declarations.
+ *
+ * @see KoPrimaryConstructorProvider.primaryConstructor
  */
 val <T : KoPrimaryConstructorProvider> List<T>.primaryConstructors: List<KoPrimaryConstructorDeclaration>
     get() = mapNotNull { it.primaryConstructor }
 
 /**
- * List containing declarations that have primary constructor.
+ * List containing declarations that have a primary constructor.
  *
- * @return A list containing declarations with primary constructor.
+ * @return A list containing declarations with a primary constructor.
+ * @see KoPrimaryConstructorProvider.hasPrimaryConstructor
  */
 fun <T : KoPrimaryConstructorProvider> List<T>.withPrimaryConstructor(): List<T> = filter { it.hasPrimaryConstructor }
 
 /**
- * List containing declarations that don't have primary constructor.
+ * List containing declarations that don't have a primary constructor.
  *
- * @return A list containing declarations without primary constructor.
+ * @return A list containing declarations without a primary constructor.
+ * @see KoPrimaryConstructorProvider.hasPrimaryConstructor
  */
 fun <T : KoPrimaryConstructorProvider> List<T>.withoutPrimaryConstructor(): List<T> = filterNot { it.hasPrimaryConstructor }

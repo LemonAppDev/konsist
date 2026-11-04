@@ -10,7 +10,7 @@ interface KoClassAndInterfaceProvider : KoBaseProvider {
      * The classes and interfaces present in the declaration.
      *
      * @param includeNested specifies whether to include nested classes and interfaces.
-     * @param includeLocal specifies whether to include local classes and interfaces.
+     * @param includeLocal specifies whether to include local classes.
      * @return a list of [KoClassAndInterfaceDeclaration] representing the classes and interfaces in the declaration.
      */
     fun classesAndInterfaces(
@@ -31,7 +31,7 @@ interface KoClassAndInterfaceProvider : KoBaseProvider {
     ): Int
 
     /**
-     * Returns the number of classes and interfaces that satisfies the specified predicate present in the declaration.
+     * Returns the number of classes and interfaces that satisfy the specified predicate present in the declaration.
      *
      * @param includeNested Specifies whether to include nested classes and interfaces in the count (optional, default is `true`).
      * @param includeLocal Specifies whether to include local classes in the count (optional, default is `true`).
@@ -45,7 +45,7 @@ interface KoClassAndInterfaceProvider : KoBaseProvider {
     ): Int
 
     /**
-     * Determines whatever the declaration has classes and interfaces.
+     * Determines whether the declaration has classes and interfaces.
      *
      * @param includeNested Specifies whether to include nested classes and interfaces in the check (optional, default is `true`).
      * @param includeLocal Specifies whether to include local classes in the check (optional, default is `true`).
@@ -64,7 +64,7 @@ interface KoClassAndInterfaceProvider : KoBaseProvider {
      * @param includeNested Specifies whether to include nested classes and interfaces in the check (optional, default is `true`).
      * @param includeLocal Specifies whether to include local classes in the check (optional, default is `true`).
      * @param ignoreCase Specifies whether the comparison should ignore case.
-     *        If `true`, the prefix comparison will be case-insensitive.
+     *        If `true`, the comparison will be case-insensitive.
      *        If `false`, the comparison will consider case sensitivity.
      * @return `true` if there is a matching declaration, `false` otherwise.
      */
@@ -83,7 +83,7 @@ interface KoClassAndInterfaceProvider : KoBaseProvider {
      * @param includeNested Specifies whether to include nested classes and interfaces in the check (optional, default is `true`).
      * @param includeLocal Specifies whether to include local classes in the check (optional, default is `true`).
      * @param ignoreCase Specifies whether the comparison should ignore case.
-     *        If `true`, the prefix comparison will be case-insensitive.
+     *        If `true`, the comparison will be case-insensitive.
      *        If `false`, the comparison will consider case sensitivity.
      * @return `true` if there is a matching declaration, `false` otherwise.
      */
@@ -98,11 +98,11 @@ interface KoClassAndInterfaceProvider : KoBaseProvider {
      * Determines whether the declaration has classes and interfaces with all the specified names.
      *
      * @param name The name of the class or interface to check.
-     * @param names The names of the classes and interfaces to check.
+     * @param names The names of additional classes and interfaces to check.
      * @param includeNested Specifies whether to include nested classes and interfaces in the check (optional, default is `true`).
      * @param includeLocal Specifies whether to include local classes in the check (optional, default is `true`).
      * @param ignoreCase Specifies whether the comparison should ignore case.
-     *        If `true`, the prefix comparison will be case-insensitive.
+     *        If `true`, the comparison will be case-insensitive.
      *        If `false`, the comparison will consider case sensitivity.
      * @return `true` if there are declarations with all the specified names, `false` otherwise.
      */
@@ -121,7 +121,7 @@ interface KoClassAndInterfaceProvider : KoBaseProvider {
      * @param includeNested Specifies whether to include nested classes and interfaces in the check (optional, default is `true`).
      * @param includeLocal Specifies whether to include local classes in the check (optional, default is `true`).
      * @param ignoreCase Specifies whether the comparison should ignore case.
-     *        If `true`, the prefix comparison will be case-insensitive.
+     *        If `true`, the comparison will be case-insensitive.
      *        If `false`, the comparison will consider case sensitivity.
      * @return `true` if there are declarations with all the specified names, `false` otherwise.
      */
@@ -149,7 +149,7 @@ interface KoClassAndInterfaceProvider : KoBaseProvider {
     /**
      * Determines whether the declaration has all classes and interfaces that satisfy the provided predicate.
      *
-     * Note that if the classes and interfaces contains no elements, the function returns `true` because there are no elements in it
+     * Note that if the classes and interfaces contain no elements, the function returns `true` because there are no elements in it
      * that do not match the predicate.
      *
      * @param includeNested Specifies whether to include nested classes and interfaces in the check (optional, default is `true`).

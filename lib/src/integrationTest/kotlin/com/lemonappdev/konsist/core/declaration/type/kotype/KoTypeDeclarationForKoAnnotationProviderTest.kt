@@ -429,6 +429,7 @@ class KoTypeDeclarationForKoAnnotationProviderTest {
                 arguments("generic-type-has-no-annotation"),
                 arguments("type-parameter-has-no-annotation"),
                 arguments("external-type-has-no-annotation"),
+                arguments("nullable-suspend-function-type-has-no-annotation"),
             )
 
         @Suppress("unused")
@@ -445,6 +446,9 @@ class KoTypeDeclarationForKoAnnotationProviderTest {
                 arguments("generic-type-has-annotation"),
                 arguments("type-parameter-has-annotation"),
                 arguments("external-type-has-annotation"),
+                arguments("nullable-class-type-has-annotation-inside-parentheses"),
+                arguments("nullable-function-type-has-annotation-inside-parentheses"),
+                arguments("nullable-function-type-has-annotation-outside-parentheses"),
             )
 
         @Suppress("unused")
@@ -461,6 +465,8 @@ class KoTypeDeclarationForKoAnnotationProviderTest {
                 arguments("generic-type-has-two-annotations"),
                 arguments("type-parameter-has-two-annotations"),
                 arguments("external-type-has-two-annotations"),
+                arguments("nullable-function-type-has-two-annotations-inside-parentheses"),
+                arguments("nullable-function-type-has-annotations-inside-and-outside-parentheses"),
             )
     }
 }

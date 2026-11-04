@@ -17,9 +17,9 @@ class LocationUtilTest {
 
         // then
         assertSoftly(sut) {
-            resideInLocation("..", currentPackage1) shouldBeEqualTo true
-            resideInLocation("..", currentPackage2) shouldBeEqualTo true
-            resideInLocation("..", currentPackage3) shouldBeEqualTo true
+            residesInLocation("..", currentPackage1) shouldBeEqualTo true
+            residesInLocation("..", currentPackage2) shouldBeEqualTo true
+            residesInLocation("..", currentPackage3) shouldBeEqualTo true
         }
     }
 
@@ -30,7 +30,7 @@ class LocationUtilTest {
         val sut = LocationUtil
 
         // then
-        val actual = { sut.resideInLocation("", currentPackage) }
+        val actual = { sut.residesInLocation("", currentPackage) }
         actual shouldThrow IllegalArgumentException::class withMessage "Location name is empty"
     }
 
@@ -41,7 +41,7 @@ class LocationUtilTest {
         val sut = LocationUtil
 
         // then
-        val actual = { sut.resideInLocation(".", currentPackage) }
+        val actual = { sut.residesInLocation(".", currentPackage) }
         actual shouldThrow IllegalArgumentException::class withMessage "Incorrect location format: ."
     }
 
@@ -53,20 +53,20 @@ class LocationUtilTest {
 
         // then
         assertSoftly(sut) {
-            resideInLocation("com", currentPackage) shouldBeEqualTo false
-            resideInLocation("..com..", currentPackage) shouldBeEqualTo true
-            resideInLocation("..com", currentPackage) shouldBeEqualTo false
-            resideInLocation("com..", currentPackage) shouldBeEqualTo true
-            resideInLocation("domain..", currentPackage) shouldBeEqualTo false
-            resideInLocation("..domain", currentPackage) shouldBeEqualTo false
-            resideInLocation("..domain..", currentPackage) shouldBeEqualTo true
-            resideInLocation("usecase..", currentPackage) shouldBeEqualTo false
-            resideInLocation("..usecase", currentPackage) shouldBeEqualTo true
-            resideInLocation("..usecase..", currentPackage) shouldBeEqualTo true
-            resideInLocation("..update", currentPackage) shouldBeEqualTo false
-            resideInLocation("update..", currentPackage) shouldBeEqualTo false
-            resideInLocation("..update..", currentPackage) shouldBeEqualTo true
-            resideInLocation("..nonexisting..", currentPackage) shouldBeEqualTo false
+            residesInLocation("com", currentPackage) shouldBeEqualTo false
+            residesInLocation("..com..", currentPackage) shouldBeEqualTo true
+            residesInLocation("..com", currentPackage) shouldBeEqualTo false
+            residesInLocation("com..", currentPackage) shouldBeEqualTo true
+            residesInLocation("domain..", currentPackage) shouldBeEqualTo false
+            residesInLocation("..domain", currentPackage) shouldBeEqualTo false
+            residesInLocation("..domain..", currentPackage) shouldBeEqualTo true
+            residesInLocation("usecase..", currentPackage) shouldBeEqualTo false
+            residesInLocation("..usecase", currentPackage) shouldBeEqualTo true
+            residesInLocation("..usecase..", currentPackage) shouldBeEqualTo true
+            residesInLocation("..update", currentPackage) shouldBeEqualTo false
+            residesInLocation("update..", currentPackage) shouldBeEqualTo false
+            residesInLocation("..update..", currentPackage) shouldBeEqualTo true
+            residesInLocation("..nonexisting..", currentPackage) shouldBeEqualTo false
         }
     }
 
@@ -78,10 +78,10 @@ class LocationUtilTest {
 
         // then
         assertSoftly(sut) {
-            resideInLocation("com.domain", currentPackage) shouldBeEqualTo false
-            resideInLocation("com.domain.update", currentPackage) shouldBeEqualTo false
-            resideInLocation("com.domain.update.usecase", currentPackage) shouldBeEqualTo true
-            resideInLocation("com.domain.usecase", currentPackage) shouldBeEqualTo false
+            residesInLocation("com.domain", currentPackage) shouldBeEqualTo false
+            residesInLocation("com.domain.update", currentPackage) shouldBeEqualTo false
+            residesInLocation("com.domain.update.usecase", currentPackage) shouldBeEqualTo true
+            residesInLocation("com.domain.usecase", currentPackage) shouldBeEqualTo false
         }
     }
 
@@ -93,10 +93,10 @@ class LocationUtilTest {
 
         // then
         assertSoftly(sut) {
-            resideInLocation("com..usecase", currentPackage) shouldBeEqualTo true
-            resideInLocation("..com..usecase", currentPackage) shouldBeEqualTo true
-            resideInLocation("com..usecase..", currentPackage) shouldBeEqualTo true
-            resideInLocation("..com..usecase..", currentPackage) shouldBeEqualTo true
+            residesInLocation("com..usecase", currentPackage) shouldBeEqualTo true
+            residesInLocation("..com..usecase", currentPackage) shouldBeEqualTo true
+            residesInLocation("com..usecase..", currentPackage) shouldBeEqualTo true
+            residesInLocation("..com..usecase..", currentPackage) shouldBeEqualTo true
         }
     }
 
@@ -108,10 +108,10 @@ class LocationUtilTest {
 
         // then
         assertSoftly(sut) {
-            resideInLocation("com.domain..", currentPackage) shouldBeEqualTo true
-            resideInLocation("com.domain.update..", currentPackage) shouldBeEqualTo true
-            resideInLocation("com.domain.update.usecase..", currentPackage) shouldBeEqualTo true
-            resideInLocation("com.domain.usecase..", currentPackage) shouldBeEqualTo false
+            residesInLocation("com.domain..", currentPackage) shouldBeEqualTo true
+            residesInLocation("com.domain.update..", currentPackage) shouldBeEqualTo true
+            residesInLocation("com.domain.update.usecase..", currentPackage) shouldBeEqualTo true
+            residesInLocation("com.domain.usecase..", currentPackage) shouldBeEqualTo false
         }
     }
 
@@ -123,14 +123,14 @@ class LocationUtilTest {
 
         // then
         assertSoftly(sut) {
-            resideInLocation("domain..usecase..", currentPackage) shouldBeEqualTo false
-            resideInLocation("com.domain..usecase..", currentPackage) shouldBeEqualTo true
-            resideInLocation("..domain..usecase", currentPackage) shouldBeEqualTo true
-            resideInLocation("..domain..usecase..", currentPackage) shouldBeEqualTo true
-            resideInLocation("..domain..update..", currentPackage) shouldBeEqualTo true
-            resideInLocation("com..domain..update..usecase", currentPackage) shouldBeEqualTo true
-            resideInLocation("domain..update..usecase", currentPackage) shouldBeEqualTo false
-            resideInLocation("..domain.update..", currentPackage) shouldBeEqualTo true
+            residesInLocation("domain..usecase..", currentPackage) shouldBeEqualTo false
+            residesInLocation("com.domain..usecase..", currentPackage) shouldBeEqualTo true
+            residesInLocation("..domain..usecase", currentPackage) shouldBeEqualTo true
+            residesInLocation("..domain..usecase..", currentPackage) shouldBeEqualTo true
+            residesInLocation("..domain..update..", currentPackage) shouldBeEqualTo true
+            residesInLocation("com..domain..update..usecase", currentPackage) shouldBeEqualTo true
+            residesInLocation("domain..update..usecase", currentPackage) shouldBeEqualTo false
+            residesInLocation("..domain.update..", currentPackage) shouldBeEqualTo true
         }
     }
 
@@ -142,8 +142,8 @@ class LocationUtilTest {
 
         // then
         assertSoftly(sut) {
-            resideInLocation("..domain..domain..update.usecase", currentPackage) shouldBeEqualTo false
-            resideInLocation("com..domain..update..com..usecase", currentPackage) shouldBeEqualTo false
+            residesInLocation("..domain..domain..update.usecase", currentPackage) shouldBeEqualTo false
+            residesInLocation("com..domain..update..com..usecase", currentPackage) shouldBeEqualTo false
         }
     }
 
@@ -155,8 +155,8 @@ class LocationUtilTest {
 
         // then
         assertSoftly(sut) {
-            resideInLocation("..update..domain..", currentPackage) shouldBeEqualTo false
-            resideInLocation("..usecase..domain..", currentPackage) shouldBeEqualTo false
+            residesInLocation("..update..domain..", currentPackage) shouldBeEqualTo false
+            residesInLocation("..usecase..domain..", currentPackage) shouldBeEqualTo false
         }
     }
 
@@ -166,7 +166,7 @@ class LocationUtilTest {
         val currentPackage = "com.lemonappdev.konsist.datasomething.FixtureType"
 
         // then
-        LocationUtil.resideInLocation("com.lemonappdev.konsist..data..", currentPackage) shouldBeEqualTo false
+        LocationUtil.residesInLocation("com.lemonappdev.konsist..data..", currentPackage) shouldBeEqualTo false
     }
 
     @Test
@@ -175,7 +175,7 @@ class LocationUtilTest {
         val currentPackage = "com.lemonappdev.konsist.somethingdata.FixtureType"
 
         // then
-        LocationUtil.resideInLocation("com.lemonappdev.konsist..data..", currentPackage) shouldBeEqualTo false
+        LocationUtil.residesInLocation("com.lemonappdev.konsist..data..", currentPackage) shouldBeEqualTo false
     }
 
     @Test
@@ -184,6 +184,6 @@ class LocationUtilTest {
         val currentPackage = "com.lemonappdev.konsist.somethingdatasomething.FixtureType"
 
         // then
-        LocationUtil.resideInLocation("com.lemonappdev.konsist..data..", currentPackage) shouldBeEqualTo false
+        LocationUtil.residesInLocation("com.lemonappdev.konsist..data..", currentPackage) shouldBeEqualTo false
     }
 }

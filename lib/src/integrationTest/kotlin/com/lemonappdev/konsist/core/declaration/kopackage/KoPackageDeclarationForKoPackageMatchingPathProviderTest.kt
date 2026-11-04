@@ -29,6 +29,42 @@ class KoPackageDeclarationForKoPackageMatchingPathProviderTest {
         sut.hasMatchingPath shouldBeEqualTo false
     }
 
+    @Test
+    fun `package-with-package-matching-parent-directory`() {
+        // given
+        val sut =
+            getSnippetFile("package-with-package-matching-parent-directory")
+                .packages
+                .first()
+
+        // then
+        sut.hasMatchingPath shouldBeEqualTo false
+    }
+
+    @Test
+    fun `package-with-package-matching-directory-name-prefix`() {
+        // given
+        val sut =
+            getSnippetFile("package-with-package-matching-directory-name-prefix")
+                .packages
+                .first()
+
+        // then
+        sut.hasMatchingPath shouldBeEqualTo false
+    }
+
+    @Test
+    fun `package-with-one-segment-package-matching-directory-name-suffix`() {
+        // given
+        val sut =
+            getSnippetFile("package-with-one-segment-package-matching-directory-name-suffix")
+                .packages
+                .first()
+
+        // then
+        sut.hasMatchingPath shouldBeEqualTo false
+    }
+
     private fun getSnippetFile(fileName: String) =
         TestSnippetProvider.getSnippetKoScope("core/declaration/kopackage/snippet/forkomatchingpathprovider/", fileName)
 }

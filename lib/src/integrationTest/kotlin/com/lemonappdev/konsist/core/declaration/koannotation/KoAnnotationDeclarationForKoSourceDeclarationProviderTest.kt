@@ -82,6 +82,13 @@ class KoAnnotationDeclarationForKoSourceDeclarationProviderTest {
                     "kotlin.Deprecated",
                 ),
                 arguments(
+                    "annotation-with-source-declaration-from-wildcard-import",
+                    KoClassDeclaration::class,
+                    KoExternalDeclaration::class,
+                    FixtureAnnotation::class,
+                    "com.lemonappdev.konsist.testdata.FixtureAnnotation",
+                ),
+                arguments(
                     "annotation-with-source-declaration-defined-in-the-file-with-package",
                     KoClassDeclaration::class,
                     KoInterfaceDeclaration::class,

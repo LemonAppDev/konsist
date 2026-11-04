@@ -9,7 +9,7 @@ interface KoTailrecModifierProvider :
     KoBaseProvider,
     KoModifierProvider {
     /**
-     * Determines whatever the declaration has `tailrec` modifier.
+     * Determines whether the declaration has the `tailrec` modifier.
      */
     val hasTailrecModifier: Boolean
 }

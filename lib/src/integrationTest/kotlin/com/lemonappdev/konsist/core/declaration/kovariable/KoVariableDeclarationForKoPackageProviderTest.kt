@@ -1,7 +1,6 @@
 package com.lemonappdev.konsist.core.declaration.kovariable
 
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
-import com.lemonappdev.konsist.api.ext.list.enumConstants
 import com.lemonappdev.konsist.api.ext.list.getters
 import com.lemonappdev.konsist.api.ext.list.initBlocks
 import com.lemonappdev.konsist.api.ext.list.setters
@@ -49,7 +48,6 @@ class KoVariableDeclarationForKoPackageProviderTest {
             listOf(
                 arguments(getSnippetFile("variable-in-function-is-not-in-package").functions()),
                 arguments(getSnippetFile("variable-in-init-block-is-not-in-package").classes().initBlocks),
-                arguments(getSnippetFile("variable-in-enum-constant-is-not-in-package").classes().enumConstants),
                 arguments(getSnippetFile("variable-in-getter-is-not-in-package").properties().getters),
                 arguments(getSnippetFile("variable-in-setter-is-not-in-package").properties().setters),
             )
@@ -60,7 +58,6 @@ class KoVariableDeclarationForKoPackageProviderTest {
             listOf(
                 arguments(getSnippetFile("variable-in-function-is-in-package").functions()),
                 arguments(getSnippetFile("variable-in-init-block-is-in-package").classes().initBlocks),
-                arguments(getSnippetFile("variable-in-enum-constant-is-in-package").classes().enumConstants),
                 arguments(getSnippetFile("variable-in-getter-is-in-package").properties().getters),
                 arguments(getSnippetFile("variable-in-setter-is-in-package").properties().setters),
             )

@@ -4,6 +4,7 @@ import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoPackageDeclaration
 import com.lemonappdev.konsist.api.provider.KoDeclarationCastProvider
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
+import com.lemonappdev.konsist.core.cache.KoPropertyCache
 import com.lemonappdev.konsist.core.declaration.type.KoBaseTypeDeclarationCore
 import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
 import com.lemonappdev.konsist.core.provider.KoContainingDeclarationProviderCore
@@ -32,19 +33,35 @@ internal class KoGenericTypeDeclarationCore private constructor(
     KoSourceSetProviderCore,
     KoTypeArgumentProviderCore,
     KoSourceDeclarationProviderCore {
-    override val psiElement: PsiElement by lazy { ktUserType }
+    override val psiElement: PsiElement
+        get() = ktUserType
 
-    override val ktElement: KtElement by lazy { ktUserType }
+    override val ktElement: KtElement
+        get() = ktUserType
 
-    override val ktTypeProjection: KtTypeProjection? by lazy { null }
+    override val ktTypeProjection: KtTypeProjection?
+        get() = null
 
-    override val name: String by lazy { ktUserType.text }
+    @Volatile
+    private var cachedName: Any? = KoPropertyCache.NOT_COMPUTED
 
-    override val packagee: KoPackageDeclaration? by lazy { containingFile.packagee }
+    override val name: String
+        get() = KoPropertyCache.getOrCompute(cachedName, { cachedName = it }) { ktUserType.text }
 
-    override val sourceDeclaration: KoDeclarationCastProvider? by lazy {
-        containingDeclaration as? KoDeclarationCastProvider
-    }
+    @Volatile
+    private var cachedPackagee: Any? = KoPropertyCache.NOT_COMPUTED
+
+    override val packagee: KoPackageDeclaration?
+        get() = KoPropertyCache.getOrCompute(cachedPackagee, { cachedPackagee = it }) { containingFile.packagee }
+
+    @Volatile
+    private var cachedSourceDeclaration: Any? = KoPropertyCache.NOT_COMPUTED
+
+    override val sourceDeclaration: KoDeclarationCastProvider?
+        get() =
+            KoPropertyCache.getOrCompute(cachedSourceDeclaration, { cachedSourceDeclaration = it }) {
+                containingDeclaration as? KoDeclarationCastProvider
+            }
 
     override fun toString(): String = name
 

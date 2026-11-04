@@ -1,52 +1,66 @@
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
-    alias(libs.plugins.androidLibrary)
+    alias(libs.plugins.androidMultiplatformLibrary)
+    alias(libs.plugins.composeMultiplatform)
+    alias(libs.plugins.composeCompiler)
 }
 
 kotlin {
-    androidTarget {
-        compilations.all {
-            kotlinOptions {
-                jvmTarget = "1.8"
-            }
-        }
-    }
-
     listOf(
-        iosX64(),
         iosArm64(),
         iosSimulatorArm64()
-    ).forEach {
-        it.binaries.framework {
-            baseName = "shared"
+    ).forEach { iosTarget ->
+        iosTarget.binaries.framework {
+            baseName = "Shared"
+            isStatic = true
         }
     }
-
+    
+    android {
+       namespace = "com.sample.shared"
+       compileSdk = libs.versions.android.compileSdk.get().toInt()
+       minSdk = libs.versions.android.minSdk.get().toInt()
+    
+       compilerOptions {
+           jvmTarget = JvmTarget.JVM_11
+       }
+       androidResources {
+           enable = true
+       }
+       withHostTest {
+           isIncludeAndroidResources = true
+       }
+       withDeviceTestBuilder {
+           sourceSetTreeName = "test"
+       }.configure {
+           instrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+       }
+    }
+    
     sourceSets {
-        commonTest {
-            dependencies {
-                implementation(kotlin("test-common"))
-                implementation(kotlin("test-annotations-common"))
-            }
+        androidMain.dependencies {
+            implementation(libs.compose.uiToolingPreview)
+            implementation(libs.compose.uiTooling)
         }
-        val androidUnitTest by getting {
-            dependencies {
-                implementation(kotlin("test-junit"))
-                implementation(libs.junit4)
-            }
+        commonMain.dependencies {
+            implementation(libs.compose.runtime)
+            implementation(libs.compose.foundation)
+            implementation(libs.compose.ui)
+            implementation(libs.compose.components.resources)
+            implementation(libs.compose.uiToolingPreview)
+        }
+        commonTest.dependencies {
+            implementation(libs.kotlin.test)
         }
     }
 }
 
-android {
-    compileSdk = 34
-    sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
-    defaultConfig {
-        minSdk = 21
-    }
-    namespace = "com.jetbrains.android"
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
-    }
+dependencies {
+    androidRuntimeClasspath(libs.compose.uiTooling)
+}
+
+compose.resources {
+    packageOfResClass = "com.sample.resources"
 }

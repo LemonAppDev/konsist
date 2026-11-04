@@ -3,6 +3,7 @@ package com.lemonappdev.konsist.core.declaration
 import com.lemonappdev.konsist.api.declaration.KoArgumentDeclaration
 import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
+import com.lemonappdev.konsist.core.cache.KoPropertyCache
 import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
 import com.lemonappdev.konsist.core.provider.KoContainingDeclarationProviderCore
 import com.lemonappdev.konsist.core.provider.KoContainingFileProviderCore
@@ -36,18 +37,26 @@ internal class KoArgumentDeclarationCore private constructor(
     KoResideInPackageProviderCore,
     KoPackageDeclarationProviderCore,
     KoTextProviderCore {
-    override val psiElement: PsiElement by lazy { ktValueArgument }
+    override val psiElement: PsiElement
+        get() = ktValueArgument
 
-    override val ktElement: KtElement by lazy { ktValueArgument }
+    override val ktElement: KtElement
+        get() = ktValueArgument
 
-    override val ktExpression: KtExpression? by lazy { ktValueArgument.getArgumentExpression() }
+    override val ktExpression: KtExpression?
+        get() = ktValueArgument.getArgumentExpression()
 
-    override val name: String by lazy {
-        ktValueArgument
-            .getArgumentName()
-            ?.text
-            ?: ""
-    }
+    @Volatile
+    private var cachedName: Any? = KoPropertyCache.NOT_COMPUTED
+
+    override val name: String
+        get() =
+            KoPropertyCache.getOrCompute(cachedName, { cachedName = it }) {
+                ktValueArgument
+                    .getArgumentName()
+                    ?.text
+                    ?: ""
+            }
 
     override fun toString(): String = locationWithText
 

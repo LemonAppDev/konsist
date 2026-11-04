@@ -1,0 +1,5 @@
+typealias FixtureTypeAlias = List<FixtureClass2>
+
+class FixtureClass1(val fixtureProperty1: FixtureClass2?)
+
+class FixtureClass2(val fixtureProperty2: FixtureTypeAlias)

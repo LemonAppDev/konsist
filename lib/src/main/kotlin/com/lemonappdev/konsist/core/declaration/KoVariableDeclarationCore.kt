@@ -3,6 +3,7 @@ package com.lemonappdev.konsist.core.declaration
 import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoVariableDeclaration
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
+import com.lemonappdev.konsist.core.cache.KoPropertyCache
 import com.lemonappdev.konsist.core.provider.KoAnnotationProviderCore
 import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
 import com.lemonappdev.konsist.core.provider.KoContainingDeclarationProviderCore
@@ -21,8 +22,6 @@ import com.lemonappdev.konsist.core.provider.KoSourceSetProviderCore
 import com.lemonappdev.konsist.core.provider.KoTacitTypeProviderCore
 import com.lemonappdev.konsist.core.provider.KoTextProviderCore
 import com.lemonappdev.konsist.core.provider.KoValueProviderCore
-import com.lemonappdev.konsist.core.provider.modifier.KoValModifierProviderCore
-import com.lemonappdev.konsist.core.provider.modifier.KoVarModifierProviderCore
 import com.lemonappdev.konsist.core.provider.packagee.KoPackageDeclarationProviderCore
 import org.jetbrains.kotlin.com.intellij.psi.PsiElement
 import org.jetbrains.kotlin.psi.KtAnnotationEntry
@@ -52,36 +51,39 @@ internal class KoVariableDeclarationCore private constructor(
     KoResideInPackageProviderCore,
     KoTextProviderCore,
     KoValueProviderCore,
-    KoValModifierProviderCore,
-    KoVarModifierProviderCore,
     KoTacitTypeProviderCore,
     KoIsValProviderCore,
     KoIsVarProviderCore {
-    override val ktAnnotationEntries: List<KtAnnotationEntry>? by lazy { ktProperty.annotationEntries }
+    override val ktAnnotationEntries: List<KtAnnotationEntry>?
+        get() = ktProperty.annotationEntries
 
-    override val ktCallableDeclaration: KtCallableDeclaration by lazy { ktProperty }
+    override val ktCallableDeclaration: KtCallableDeclaration
+        get() = ktProperty
 
-    override val psiElement: PsiElement by lazy { ktProperty }
+    override val psiElement: PsiElement
+        get() = ktProperty
 
-    override val ktElement: KtElement by lazy { ktProperty }
+    override val ktElement: KtElement
+        get() = ktProperty
 
-    override val ktExpression: KtExpression? by lazy {
-        ktProperty
-            .children
-            .filterNot { it is KtPropertyAccessor }
-            .filterIsInstance<KtExpression>()
-            .firstOrNull()
-    }
+    @Volatile
+    private var cachedKtExpression: Any? = KoPropertyCache.NOT_COMPUTED
 
-    @Deprecated("Will be removed in version 0.19.0", ReplaceWith("isVal"))
-    override val hasValModifier: Boolean by lazy { !ktProperty.isVar }
+    override val ktExpression: KtExpression?
+        get() =
+            KoPropertyCache.getOrCompute(cachedKtExpression, { cachedKtExpression = it }) {
+                ktProperty
+                    .children
+                    .filterNot { it is KtPropertyAccessor }
+                    .filterIsInstance<KtExpression>()
+                    .firstOrNull()
+            }
 
-    @Deprecated("Will be removed in version 0.19.0", ReplaceWith("isVar"))
-    override val hasVarModifier: Boolean by lazy { ktProperty.isVar }
+    override val isVal: Boolean
+        get() = !ktProperty.isVar
 
-    override val isVal: Boolean by lazy { !ktProperty.isVar }
-
-    override val isVar: Boolean by lazy { ktProperty.isVar }
+    override val isVar: Boolean
+        get() = ktProperty.isVar
 
     override fun toString(): String = name
 

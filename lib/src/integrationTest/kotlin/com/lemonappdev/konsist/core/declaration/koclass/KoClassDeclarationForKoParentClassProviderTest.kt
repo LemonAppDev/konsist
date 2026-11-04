@@ -1,6 +1,8 @@
 package com.lemonappdev.konsist.core.declaration.koclass
 
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
+import com.lemonappdev.konsist.api.Konsist
+import com.lemonappdev.konsist.api.ext.list.withParentClassOf
 import com.lemonappdev.konsist.api.provider.modifier.KoVisibilityModifierProvider
 import com.lemonappdev.konsist.testdata.FixtureClass
 import com.lemonappdev.konsist.testdata.FixtureParentClass
@@ -8,6 +10,9 @@ import com.lemonappdev.konsist.testdata.FixtureParentClass2
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.Arguments.arguments
+import org.junit.jupiter.params.provider.MethodSource
 
 @Suppress("detekt.LongMethod")
 class KoClassDeclarationForKoParentClassProviderTest {
@@ -425,5 +430,85 @@ class KoClassDeclarationForKoParentClassProviderTest {
         }
     }
 
+    @ParameterizedTest
+    @MethodSource("provideValuesForParentDeclaredOutsideProject")
+    fun `parent-declared-outside-project`(
+        fileName: String,
+        parentClassName: String?,
+        parentInterfaceNames: List<String>,
+    ) {
+        // given
+        val sut =
+            getSnippetFile(fileName)
+                .classes()
+                .first()
+
+        // then
+        assertSoftly(sut) {
+            parentClass?.name shouldBeEqualTo parentClassName
+            parentClasses().map { it.name } shouldBeEqualTo listOfNotNull(parentClassName)
+            hasParentClass() shouldBeEqualTo (parentClassName != null)
+            parentInterfaces().map { it.name } shouldBeEqualTo parentInterfaceNames
+        }
+    }
+
+    @ParameterizedTest
+    @MethodSource("provideValuesForParentNotOnClasspath")
+    fun `parent-not-on-classpath`(
+        className: String,
+        parentClassName: String?,
+        parentInterfaceNames: List<String>,
+    ) {
+        // given
+        val sut =
+            Konsist
+                .scopeFromFile(UNCOMPILED_PARENT_TEST_DATA_PATH)
+                .classes()
+                .first { it.name == className }
+
+        // then
+        assertSoftly(sut) {
+            parentClass?.name shouldBeEqualTo parentClassName
+            parentClasses().map { it.name } shouldBeEqualTo listOfNotNull(parentClassName)
+            parentInterfaces().map { it.name } shouldBeEqualTo parentInterfaceNames
+        }
+    }
+
+    @Test
+    fun `class-has-kotlin-type-parent-class`() {
+        // given
+        val sut = getSnippetFile("class-has-kotlin-type-parent-class").classes()
+
+        // then
+        assertSoftly(sut) {
+            first().hasParentClassOf(Throwable::class) shouldBeEqualTo true
+            withParentClassOf(Throwable::class).map { it.name } shouldBeEqualTo listOf("FixtureClass")
+        }
+    }
+
     private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/koclass/snippet/forkoparentclassprovider/", fileName)
+
+    companion object {
+        private const val UNCOMPILED_PARENT_TEST_DATA_PATH =
+            "lib/src/integrationTest/resources/com/lemonappdev/konsist/testdata/UncompiledParentTestData.kt"
+
+        @Suppress("unused")
+        @JvmStatic
+        fun provideValuesForParentDeclaredOutsideProject() =
+            listOf(
+                arguments("class-has-external-parent-class", "FixtureExternalClass", listOf("FixtureExternalInterface")),
+                arguments("class-has-kotlin-type-parent-class", "Throwable", emptyList<String>()),
+                arguments("class-has-typealias-parent-class", "FixtureTypeAlias", emptyList<String>()),
+                arguments("class-without-primary-constructor-has-kotlin-type-parent-class", "Exception", emptyList<String>()),
+            )
+
+        @Suppress("unused")
+        @JvmStatic
+        fun provideValuesForParentNotOnClasspath() =
+            listOf(
+                arguments("FixtureClassWithParentClassNotOnClasspath", "UnknownClass", listOf("UnknownInterface")),
+                arguments("FixtureClassWithDelegatedParentInterfaceNotOnClasspath", null, listOf("UnknownInterface")),
+                arguments("FixtureClassWithoutPrimaryConstructorWithParentClassNotOnClasspath", null, emptyList<String>()),
+            )
+    }
 }

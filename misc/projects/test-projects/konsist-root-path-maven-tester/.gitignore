@@ -1,0 +1,15 @@
+# Build Files #
+target/
+
+# IntelliJ IDEA Files
+.idea
+*.iws
+*.iml
+*.ipr
+
+# VS Code #
+.vscode/
+
+# Operating System Files
+**/.DS_Store
+Thumbs.db

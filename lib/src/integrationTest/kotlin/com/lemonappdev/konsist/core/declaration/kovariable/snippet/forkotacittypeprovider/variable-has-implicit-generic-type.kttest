@@ -1,0 +1,6 @@
+class SampleGenericType<T>
+
+fun fixtureFunction() {
+
+    val fixtureVariable = SampleGenericType<String>()
+}

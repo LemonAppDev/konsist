@@ -3,11 +3,12 @@ package com.lemonappdev.konsist.api.ext.list
 import com.lemonappdev.konsist.api.provider.KoFileExtensionProvider
 
 /**
- * List containing files with extension.
+ * List containing files with any of the specified extensions.
  *
  * @param extension The extension to include.
  * @param extensions The extensions to include.
  * @return A list containing files with extensions matching the specified extensions.
+ * @see KoFileExtensionProvider.hasExtension
  */
 fun <T : KoFileExtensionProvider> List<T>.withExtension(
     extension: String,
@@ -15,10 +16,11 @@ fun <T : KoFileExtensionProvider> List<T>.withExtension(
 ): List<T> = withExtension(listOf(extension, *extensions))
 
 /**
- * List containing files with extension.
+ * List containing files with any of the specified extensions.
  *
  * @param extensions The extensions to include.
  * @return A list containing files with extensions matching the specified extensions.
+ * @see KoFileExtensionProvider.hasExtension
  */
 fun <T : KoFileExtensionProvider> List<T>.withExtension(extensions: Collection<String>): List<T> =
     filter {
@@ -29,11 +31,12 @@ fun <T : KoFileExtensionProvider> List<T>.withExtension(extensions: Collection<S
     }
 
 /**
- * List containing files without extension.
+ * List containing files without any of the specified extensions.
  *
  * @param extension The extension to exclude.
  * @param extensions The extensions to exclude.
  * @return A list containing files without extensions matching the specified extensions.
+ * @see KoFileExtensionProvider.hasExtension
  */
 fun <T : KoFileExtensionProvider> List<T>.withoutExtension(
     extension: String,
@@ -41,10 +44,11 @@ fun <T : KoFileExtensionProvider> List<T>.withoutExtension(
 ): List<T> = withoutExtension(listOf(extension, *extensions))
 
 /**
- * List containing files without extension.
+ * List containing files without any of the specified extensions.
  *
  * @param extensions The extensions to exclude.
  * @return A list containing files without extensions matching the specified extensions.
+ * @see KoFileExtensionProvider.hasExtension
  */
 fun <T : KoFileExtensionProvider> List<T>.withoutExtension(extensions: Collection<String>): List<T> =
     filterNot {

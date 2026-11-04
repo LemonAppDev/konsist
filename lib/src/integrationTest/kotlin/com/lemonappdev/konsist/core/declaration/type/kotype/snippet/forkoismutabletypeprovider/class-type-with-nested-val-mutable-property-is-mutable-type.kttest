@@ -1,0 +1,5 @@
+class FixtureClass1(val fixtureProperty1: FixtureClass2?)
+
+class FixtureClass2(val fixtureProperty2: FixtureClass3)
+
+class FixtureClass3(val fixtureProperty3: MutableList<String>)

@@ -1,0 +1,7 @@
+import com.lemonappdev.konsist.testdata.FixtureClass
+
+class SampleClass(val sampleParameter: FixtureClass) : SampleParentClass()
+
+open class SampleParentClass {
+    private class FixtureClass
+}

@@ -1,0 +1,7 @@
+interface Logger
+
+class SampleClass
+
+context(fixtureParameter: Logger)
+fun SampleClass.fixtureFunction() {
+}

@@ -24,6 +24,14 @@ class Architecture1Test {
             "com.lemonappdev.konsist.architecture.assertarchitecture.architecture1.project.presentation..",
         )
 
+    // New instance on every access
+    private val domainFromGetter
+        get() =
+            Layer(
+                "Domain",
+                "com.lemonappdev.konsist.architecture.assertarchitecture.architecture1.project.domain..",
+            )
+
     // region passes when layers are independent
     @Test
     fun `passes when layers are independent (lambda scope)`() {
@@ -125,6 +133,18 @@ class Architecture1Test {
         scope
             .files
             .assertArchitecture(layerDependencies)
+    }
+    // endregion
+
+    // region passes when equal layer instances are used
+    @Test
+    fun `passes when equal layer instances are used (lambda scope)`() {
+        // then
+        scope
+            .assertArchitecture {
+                domainFromGetter.doesNotDependOn(presentation)
+                presentation.doesNotDependOn(domainFromGetter)
+            }
     }
     // endregion
 }

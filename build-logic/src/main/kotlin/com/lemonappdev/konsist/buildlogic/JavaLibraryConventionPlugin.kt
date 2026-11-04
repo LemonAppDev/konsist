@@ -1,5 +1,6 @@
 package com.lemonappdev.konsist.buildlogic
 
+import com.lemonappdev.konsist.buildlogic.config.jvmReleaseFor
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.plugins.JavaPluginExtension
@@ -17,14 +18,14 @@ class JavaLibraryConventionPlugin : Plugin<Project> {
                 // Generated sources.jar for the library jar
                 withSourcesJar()
 
-                /// Generated javadoc.jar for the library jar
+                // Generated javadoc.jar for the library jar
                 withJavadocJar()
             }
 
-            // Make Konsist artifact compatible with Java 17 (bytecode version 61.0)
+            // Make Konsist artifact compatible with Java 11 (bytecode version 55.0).
+            // Test source sets use Java 17, because JUnit Platform 6 requires it.
             tasks.withType<JavaCompile>().configureEach {
-                @Suppress("detekt.MagicNumber")
-                options.release.set(17)
+                options.release.set(jvmReleaseFor(name))
             }
         }
     }

@@ -1,0 +1,5 @@
+/**
+ * Sample description
+ */
+@Suppress("konsist.assert-suppress-by-konsist-and-name-at-declaration-parent-level-when-declarations-are-kdocs")
+class SampleClass

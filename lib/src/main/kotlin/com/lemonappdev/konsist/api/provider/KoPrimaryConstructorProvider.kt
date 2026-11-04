@@ -7,12 +7,12 @@ import com.lemonappdev.konsist.api.declaration.KoPrimaryConstructorDeclaration
  */
 interface KoPrimaryConstructorProvider : KoBaseProvider {
     /**
-     * The parent interfaces of the declaration.
+     * The primary constructor of the declaration.
      */
     val primaryConstructor: KoPrimaryConstructorDeclaration?
 
     /**
-     * Determines whatever declaration has primary constructor.
+     * Determines whether the declaration has a primary constructor.
      */
     val hasPrimaryConstructor: Boolean
 }

@@ -9,7 +9,7 @@ interface KoVarArgModifierProvider :
     KoBaseProvider,
     KoModifierProvider {
     /**
-     * Determines whatever the declaration has `vararg` modifier.
+     * Determines whether the declaration has the `vararg` modifier.
      */
     val hasVarArgModifier: Boolean
 }

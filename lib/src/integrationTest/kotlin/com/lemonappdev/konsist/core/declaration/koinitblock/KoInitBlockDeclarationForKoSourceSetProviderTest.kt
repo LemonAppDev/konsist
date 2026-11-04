@@ -1,6 +1,6 @@
 package com.lemonappdev.konsist.core.declaration.koinitblock
 
 class KoInitBlockDeclarationForKoSourceSetProviderTest {
-    // Konsist koInitBlock.sourceSetName and koInitBlock.resideInSourceSet() tests
-    // are implemented in the test\konsist-declaration-tester project.
+    // Konsist koInitBlock.sourceSetName and koInitBlock.residesInSourceSet() tests
+    // are implemented in the misc/projects/test-projects/konsist-declaration-tester project.
 }

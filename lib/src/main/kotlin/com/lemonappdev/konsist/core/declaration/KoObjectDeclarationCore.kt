@@ -34,17 +34,23 @@ internal open class KoObjectDeclarationCore(
      */
     KoNameProviderCore,
     KoParentClassProviderCore {
-    override val ktAnnotationEntries: List<KtAnnotationEntry>? by lazy { ktObjectDeclaration.annotationEntries }
+    override val ktAnnotationEntries: List<KtAnnotationEntry>?
+        get() = ktObjectDeclaration.annotationEntries
 
-    override val ktModifierListOwner: KtModifierListOwner by lazy { ktObjectDeclaration }
+    override val ktModifierListOwner: KtModifierListOwner
+        get() = ktObjectDeclaration
 
-    override val ktTypeParameterListOwner: KtTypeParameterListOwner by lazy { ktObjectDeclaration }
+    override val ktTypeParameterListOwner: KtTypeParameterListOwner
+        get() = ktObjectDeclaration
 
-    override val psiElement: PsiElement by lazy { ktObjectDeclaration }
+    override val psiElement: PsiElement
+        get() = ktObjectDeclaration
 
-    override val ktElement: KtElement by lazy { ktObjectDeclaration }
+    override val ktElement: KtElement
+        get() = ktObjectDeclaration
 
-    override val ktClassOrObject: KtClassOrObject by lazy { ktObjectDeclaration }
+    override val ktClassOrObject: KtClassOrObject
+        get() = ktObjectDeclaration
 
     override fun declarations(
         includeNested: Boolean,

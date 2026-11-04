@@ -158,16 +158,50 @@ class UniqueLayerRuleTest {
     }
 
     @Test
-    fun `validate throws when layers have both duplicate names and packages`() {
+    fun `validate passes for equal layer instances`() {
         // Given
         val layer1 = Layer("layer 1", "package1..")
-        val layer2 = Layer("layer 1", "package1..")
+        val layer1Copy = Layer("layer 1", "package1..")
+        val layer2 = Layer("layer 2", "package2..")
         val dependencies =
             setOf(
                 LayerDependency(
                     layer1 = layer1,
                     dependencyType = LayerDependencyType.DEPENDS_ON_LAYER,
                     layer2 = layer2,
+                ),
+                LayerDependency(
+                    layer1 = layer2,
+                    dependencyType = LayerDependencyType.DOES_NOT_DEPEND_ON_LAYER,
+                    layer2 = layer1Copy,
+                ),
+            )
+
+        // When
+        sut.validate(dependencies)
+
+        // Then
+        verify(exactly = 0) { asciiTreeNodeFactory.create(any()) }
+        verify(exactly = 0) { asciiTreeCreator.invoke(any()) }
+    }
+
+    @Test
+    fun `validate throws when layers have both duplicate names and packages`() {
+        // Given
+        val layer1 = Layer("layer 1", "package1..")
+        val layer2 = Layer("layer 1", "package2..")
+        val layer3 = Layer("layer 3", "package1..")
+        val dependencies =
+            setOf(
+                LayerDependency(
+                    layer1 = layer1,
+                    dependencyType = LayerDependencyType.DEPENDS_ON_LAYER,
+                    layer2 = layer2,
+                ),
+                LayerDependency(
+                    layer1 = layer1,
+                    dependencyType = LayerDependencyType.DEPENDS_ON_LAYER,
+                    layer2 = layer3,
                 ),
             )
 

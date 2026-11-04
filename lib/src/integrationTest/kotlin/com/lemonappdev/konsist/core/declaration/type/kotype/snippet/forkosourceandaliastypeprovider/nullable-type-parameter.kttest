@@ -1,1 +1,0 @@
-class FixtureClass <TestType>(fixtureProperty: TestType?) {}

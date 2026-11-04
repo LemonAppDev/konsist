@@ -9,7 +9,7 @@ interface KoOutModifierProvider :
     KoBaseProvider,
     KoModifierProvider {
     /**
-     * Determines whatever the declaration has `out` modifier.
+     * Determines whether the declaration has the `out` modifier.
      */
     val hasOutModifier: Boolean
 }

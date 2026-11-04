@@ -5,6 +5,8 @@ import com.lemonappdev.konsist.api.provider.KoImportAliasProvider
 
 /**
  * List containing import alias declarations.
+ *
+ * @see KoImportAliasProvider.importAliases
  */
 val <T : KoImportAliasProvider> List<T>.importAliases: List<KoImportAliasDeclaration>
     get() = flatMap { it.importAliases }
@@ -13,6 +15,7 @@ val <T : KoImportAliasProvider> List<T>.importAliases: List<KoImportAliasDeclara
  * List containing declarations with any import alias.
  *
  * @return A list containing declarations with any import alias.
+ * @see KoImportAliasProvider.hasImportAliases
  */
 fun <T : KoImportAliasProvider> List<T>.withImportAliases(): List<T> = filter { it.hasImportAliases() }
 
@@ -20,8 +23,8 @@ fun <T : KoImportAliasProvider> List<T>.withImportAliases(): List<T> = filter { 
  * List containing declarations with no import alias.
  *
  * @return A list containing declarations with no import alias.
+ * @see KoImportAliasProvider.hasImportAliases
  */
-
 fun <T : KoImportAliasProvider> List<T>.withoutImportAliases(): List<T> = filterNot { it.hasImportAliases() }
 
 /**
@@ -30,9 +33,10 @@ fun <T : KoImportAliasProvider> List<T>.withoutImportAliases(): List<T> = filter
  * @param name The name of the import alias to include.
  * @param names The names of additional import aliases to include.
  * @param ignoreCase Specifies whether the comparison should ignore case.
- *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations with at least one of the specified import alias(es).
+ * @see KoImportAliasProvider.hasImportAliasWithName
  */
 fun <T : KoImportAliasProvider> List<T>.withImportAliasNamed(
     name: String,
@@ -43,11 +47,12 @@ fun <T : KoImportAliasProvider> List<T>.withImportAliasNamed(
 /**
  * List containing declarations that have at least one import alias with the specified name(s).
  *
- * @param names The names of additional import aliases to include.
+ * @param names The names of the import aliases to include.
  * @param ignoreCase Specifies whether the comparison should ignore case.
- *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations with at least one of the specified import alias(es).
+ * @see KoImportAliasProvider.hasImportAliasWithName
  */
 fun <T : KoImportAliasProvider> List<T>.withImportAliasNamed(
     names: Collection<String>,
@@ -61,14 +66,15 @@ fun <T : KoImportAliasProvider> List<T>.withImportAliasNamed(
     }
 
 /**
- * List containing declarations without any of specified import aliases.
+ * List containing declarations without any of the specified import aliases.
  *
  * @param name The name of the import alias to exclude.
  * @param names The names of additional import aliases to exclude.
  * @param ignoreCase Specifies whether the comparison should ignore case.
- *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
- * @return A list containing declarations without any of specified import aliases.
+ * @return A list containing declarations without any of the specified import aliases.
+ * @see KoImportAliasProvider.hasImportAliasWithName
  */
 fun <T : KoImportAliasProvider> List<T>.withoutImportAliasNamed(
     name: String,
@@ -77,13 +83,14 @@ fun <T : KoImportAliasProvider> List<T>.withoutImportAliasNamed(
 ): List<T> = withoutImportAliasNamed(listOf(name, *names), ignoreCase)
 
 /**
- * List containing declarations without any of specified import aliases.
+ * List containing declarations without any of the specified import aliases.
  *
- * @param names The names of additional import aliases to exclude.
+ * @param names The names of the import aliases to exclude.
  * @param ignoreCase Specifies whether the comparison should ignore case.
- *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
- * @return A list containing declarations without any of specified import aliases.
+ * @return A list containing declarations without any of the specified import aliases.
+ * @see KoImportAliasProvider.hasImportAliasWithName
  */
 fun <T : KoImportAliasProvider> List<T>.withoutImportAliasNamed(
     names: Collection<String>,
@@ -100,11 +107,12 @@ fun <T : KoImportAliasProvider> List<T>.withoutImportAliasNamed(
  * List containing declarations that have all specified import aliases.
  *
  * @param name The name of the import alias to include.
- * @param names The name(s) of the import alias(es) to include.
+ * @param names The names of additional import aliases to include.
  * @param ignoreCase Specifies whether the comparison should ignore case.
- *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations with all specified import alias(es).
+ * @see KoImportAliasProvider.hasImportAliasesWithAllNames
  */
 fun <T : KoImportAliasProvider> List<T>.withAllImportAliasesNamed(
     name: String,
@@ -115,11 +123,12 @@ fun <T : KoImportAliasProvider> List<T>.withAllImportAliasesNamed(
 /**
  * List containing declarations that have all specified import aliases.
  *
- * @param names The name(s) of the import alias(es) to include.
+ * @param names The names of the import aliases to include.
  * @param ignoreCase Specifies whether the comparison should ignore case.
- *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations with all specified import alias(es).
+ * @see KoImportAliasProvider.hasImportAliasesWithAllNames
  */
 fun <T : KoImportAliasProvider> List<T>.withAllImportAliasesNamed(
     names: Collection<String>,
@@ -136,11 +145,12 @@ fun <T : KoImportAliasProvider> List<T>.withAllImportAliasesNamed(
  * List containing declarations without all specified import aliases.
  *
  * @param name The name of the import alias to exclude.
- * @param names The name(s) of the import alias(es) to exclude.
+ * @param names The names of additional import aliases to exclude.
  * @param ignoreCase Specifies whether the comparison should ignore case.
- *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations without all specified import alias(es).
+ * @see KoImportAliasProvider.hasImportAliasesWithAllNames
  */
 fun <T : KoImportAliasProvider> List<T>.withoutAllImportAliasesNamed(
     name: String,
@@ -151,11 +161,12 @@ fun <T : KoImportAliasProvider> List<T>.withoutAllImportAliasesNamed(
 /**
  * List containing declarations without all specified import aliases.
  *
- * @param names The name(s) of the import alias(es) to exclude.
+ * @param names The names of the import aliases to exclude.
  * @param ignoreCase Specifies whether the comparison should ignore case.
- *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations without all specified import alias(es).
+ * @see KoImportAliasProvider.hasImportAliasesWithAllNames
  */
 fun <T : KoImportAliasProvider> List<T>.withoutAllImportAliasesNamed(
     names: Collection<String>,
@@ -173,15 +184,17 @@ fun <T : KoImportAliasProvider> List<T>.withoutAllImportAliasesNamed(
  *
  * @param predicate A function that defines the condition to be met by an import alias declaration.
  * @return A list containing declarations with at least one import alias satisfying the predicate.
+ * @see KoImportAliasProvider.hasImportAlias
  */
 fun <T : KoImportAliasProvider> List<T>.withImportAlias(predicate: (KoImportAliasDeclaration) -> Boolean): List<T> =
     filter { it.hasImportAlias(predicate) }
 
 /**
- * List containing declarations that not have import alias satisfying the provided predicate.
+ * List containing declarations that do not have any import alias satisfying the provided predicate.
  *
  * @param predicate A function that defines the condition to be met by an import alias declaration.
- * @return A list containing declarations without import alias satisfying the provided predicate.
+ * @return A list containing declarations without any import alias satisfying the provided predicate.
+ * @see KoImportAliasProvider.hasImportAlias
  */
 fun <T : KoImportAliasProvider> List<T>.withoutImportAlias(predicate: (KoImportAliasDeclaration) -> Boolean): List<T> =
     filterNot { it.hasImportAlias(predicate) }
@@ -191,6 +204,7 @@ fun <T : KoImportAliasProvider> List<T>.withoutImportAlias(predicate: (KoImportA
  *
  * @param predicate A function that defines the condition to be met by all import alias declarations.
  * @return A filtered list containing declarations with all import aliases satisfying the predicate.
+ * @see KoImportAliasProvider.hasAllImportAliases
  */
 fun <T : KoImportAliasProvider> List<T>.withAllImportAliases(predicate: (KoImportAliasDeclaration) -> Boolean): List<T> =
     filter { it.hasAllImportAliases(predicate) }
@@ -200,6 +214,7 @@ fun <T : KoImportAliasProvider> List<T>.withAllImportAliases(predicate: (KoImpor
  *
  * @param predicate A function that defines the condition to be met by all import alias declarations.
  * @return A list containing declarations that have at least one import alias not satisfying the provided predicate.
+ * @see KoImportAliasProvider.hasAllImportAliases
  */
 fun <T : KoImportAliasProvider> List<T>.withoutAllImportAliases(predicate: (KoImportAliasDeclaration) -> Boolean): List<T> =
     filterNot { it.hasAllImportAliases(predicate) }
@@ -209,6 +224,7 @@ fun <T : KoImportAliasProvider> List<T>.withoutAllImportAliases(predicate: (KoIm
  *
  * @param predicate A function that defines the condition to be met by the list of import alias declarations.
  * @return A list containing declarations with import alias declarations satisfying the predicate.
+ * @see KoImportAliasProvider.importAliases
  */
 fun <T : KoImportAliasProvider> List<T>.withImportAliases(predicate: (List<KoImportAliasDeclaration>) -> Boolean): List<T> =
     filter { predicate(it.importAliases) }
@@ -218,6 +234,7 @@ fun <T : KoImportAliasProvider> List<T>.withImportAliases(predicate: (List<KoImp
  *
  * @param predicate A function that defines the condition to be met by the list of import alias declarations.
  * @return A list containing declarations without import alias declarations satisfying the predicate.
+ * @see KoImportAliasProvider.importAliases
  */
 fun <T : KoImportAliasProvider> List<T>.withoutImportAliases(predicate: (List<KoImportAliasDeclaration>) -> Boolean): List<T> =
     filterNot { predicate(it.importAliases) }

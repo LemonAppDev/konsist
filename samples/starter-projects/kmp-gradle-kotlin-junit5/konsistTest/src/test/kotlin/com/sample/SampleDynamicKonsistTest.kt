@@ -1,3 +1,5 @@
+package com.sample
+
 import com.lemonappdev.konsist.api.Konsist
 import com.lemonappdev.konsist.api.ext.list.withNameEndingWith
 import com.lemonappdev.konsist.api.verify.assertTrue
@@ -16,13 +18,13 @@ class SampleDynamicKonsistTest {
         .flatMap { useCase ->
             Stream.of(
                 dynamicTest("${useCase.name} should have test") {
-                    useCase.assertTrue {
+                    useCase.assertTrue(testName = "${useCase.name} should have test") {
                         it.hasTestClasses()
                     }
                 },
                 dynamicTest("${useCase.name} should reside in ..domain.usecase.. package") {
-                    useCase.assertTrue {
-                        it.resideInPackage("..domain.usecase..")
+                    useCase.assertTrue(testName = "${useCase.name} should reside in ..domain.usecase.. package") {
+                        it.residesInPackage("..domain.usecase..")
                     }
                 },
             )

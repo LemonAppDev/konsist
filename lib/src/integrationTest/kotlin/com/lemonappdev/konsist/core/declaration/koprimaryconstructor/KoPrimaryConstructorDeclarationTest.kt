@@ -1,6 +1,7 @@
 package com.lemonappdev.konsist.core.declaration.koprimaryconstructor
 
 import com.lemonappdev.konsist.TestSnippetProvider
+import com.lemonappdev.konsist.core.filesystem.PathProvider
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
@@ -18,7 +19,7 @@ class KoPrimaryConstructorDeclarationTest {
         // then
         val declaration = "Declaration:\n(val fixtureParameter: Int)"
         assertSoftly(sut?.toString()) {
-            it?.startsWith("Location: /") shouldBeEqualTo true
+            it?.startsWith("Location: ${PathProvider.rootProjectPath}") shouldBeEqualTo true
             it?.endsWith(declaration) shouldBeEqualTo true
         }
     }

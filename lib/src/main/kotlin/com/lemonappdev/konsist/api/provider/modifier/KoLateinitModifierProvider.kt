@@ -9,7 +9,7 @@ interface KoLateinitModifierProvider :
     KoBaseProvider,
     KoModifierProvider {
     /**
-     * Determines whatever the declaration has `lateinit` modifier.
+     * Determines whether the declaration has the `lateinit` modifier.
      */
     val hasLateinitModifier: Boolean
 }

@@ -1,6 +1,7 @@
 package com.lemonappdev.konsist.core.declaration.koimport
 
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
+import com.lemonappdev.konsist.helper.ext.toOsSeparator
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
@@ -17,7 +18,7 @@ class KoImportDeclarationForKoPathProviderTest {
         // then
         assertSoftly(sut.path) {
             startsWith("//") shouldBeEqualTo false
-            endsWith("koimport/snippet/forkopathprovider/import-file-path.kt") shouldBeEqualTo true
+            endsWith("koimport/snippet/forkopathprovider/import-file-path.kt".toOsSeparator()) shouldBeEqualTo true
         }
     }
 
@@ -33,8 +34,10 @@ class KoImportDeclarationForKoPathProviderTest {
         sut
             .projectPath
             .shouldBeEqualTo(
-                "/lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core/declaration/koimport/snippet/" +
-                    "forkopathprovider/import-project-file-path.kt",
+                (
+                    "/lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core/declaration/koimport/snippet/" +
+                        "forkopathprovider/import-project-file-path.kt"
+                ).toOsSeparator(),
             )
     }
 
@@ -48,10 +51,10 @@ class KoImportDeclarationForKoPathProviderTest {
 
         // then
         assertSoftly(sut) {
-            resideInPath("..snippet..", true) shouldBeEqualTo true
-            resideInPath("..koimport/snippet..", true) shouldBeEqualTo true
-            resideInPath("..koimport..import-reside-in-file-path.kt", true) shouldBeEqualTo true
-            resideInPath("koimport/snippet/", true) shouldBeEqualTo false
+            residesInPath("..snippet..", true) shouldBeEqualTo true
+            residesInPath("..koimport/snippet..", true) shouldBeEqualTo true
+            residesInPath("..koimport..import-reside-in-file-path.kt", true) shouldBeEqualTo true
+            residesInPath("koimport/snippet/", true) shouldBeEqualTo false
         }
     }
 
@@ -65,10 +68,10 @@ class KoImportDeclarationForKoPathProviderTest {
 
         // then
         assertSoftly(sut) {
-            resideInPath("..snippet..", false) shouldBeEqualTo true
-            resideInPath("..koimport/snippet..", false) shouldBeEqualTo true
-            resideInPath("..koimport..import-reside-in-project-file-path.kt", false) shouldBeEqualTo true
-            resideInPath("koimport/snippet/", false) shouldBeEqualTo false
+            residesInPath("..snippet..", false) shouldBeEqualTo true
+            residesInPath("..koimport/snippet..", false) shouldBeEqualTo true
+            residesInPath("..koimport..import-reside-in-project-file-path.kt", false) shouldBeEqualTo true
+            residesInPath("koimport/snippet/", false) shouldBeEqualTo false
         }
     }
 

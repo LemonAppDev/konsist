@@ -6,6 +6,7 @@ import com.lemonappdev.konsist.api.provider.modifier.KoDataModifierProvider
  * List containing declarations that have `data` modifier.
  *
  * @return A list containing declarations with the `data` modifier.
+ * @see KoDataModifierProvider.hasDataModifier
  */
 fun <T : KoDataModifierProvider> List<T>.withDataModifier(): List<T> = filter { it.hasDataModifier }
 
@@ -13,5 +14,6 @@ fun <T : KoDataModifierProvider> List<T>.withDataModifier(): List<T> = filter { 
  * List containing declarations that don't have `data` modifier.
  *
  * @return A list containing declarations without the `data` modifier.
+ * @see KoDataModifierProvider.hasDataModifier
  */
 fun <T : KoDataModifierProvider> List<T>.withoutDataModifier(): List<T> = filterNot { it.hasDataModifier }

@@ -825,11 +825,11 @@ class KoDeclarationCastProviderListExtTest {
         // given
         val declaration1: KoDeclarationCastProvider =
             mockk {
-                every { isClass } returns true
+                every { asClassDeclaration() } returns mockk()
             }
         val declaration2: KoDeclarationCastProvider =
             mockk {
-                every { isClass } returns false
+                every { asClassDeclaration() } returns null
             }
         val declarations = listOf(declaration1, declaration2)
 
@@ -919,11 +919,11 @@ class KoDeclarationCastProviderListExtTest {
         // given
         val declaration1: KoDeclarationCastProvider =
             mockk {
-                every { isClass } returns true
+                every { asClassDeclaration() } returns mockk()
             }
         val declaration2: KoDeclarationCastProvider =
             mockk {
-                every { isClass } returns false
+                every { asClassDeclaration() } returns null
             }
         val declarations = listOf(declaration1, declaration2)
 
@@ -1219,11 +1219,11 @@ class KoDeclarationCastProviderListExtTest {
         // given
         val declaration1: KoDeclarationCastProvider =
             mockk {
-                every { isObject } returns true
+                every { asObjectDeclaration() } returns mockk()
             }
         val declaration2: KoDeclarationCastProvider =
             mockk {
-                every { isObject } returns false
+                every { asObjectDeclaration() } returns null
             }
         val declarations = listOf(declaration1, declaration2)
 
@@ -1313,11 +1313,11 @@ class KoDeclarationCastProviderListExtTest {
         // given
         val declaration1: KoDeclarationCastProvider =
             mockk {
-                every { isObject } returns true
+                every { asObjectDeclaration() } returns mockk()
             }
         val declaration2: KoDeclarationCastProvider =
             mockk {
-                every { isObject } returns false
+                every { asObjectDeclaration() } returns null
             }
         val declarations = listOf(declaration1, declaration2)
 
@@ -1613,11 +1613,11 @@ class KoDeclarationCastProviderListExtTest {
         // given
         val declaration1: KoDeclarationCastProvider =
             mockk {
-                every { isInterface } returns true
+                every { asInterfaceDeclaration() } returns mockk()
             }
         val declaration2: KoDeclarationCastProvider =
             mockk {
-                every { isInterface } returns false
+                every { asInterfaceDeclaration() } returns null
             }
         val declarations = listOf(declaration1, declaration2)
 
@@ -1707,11 +1707,11 @@ class KoDeclarationCastProviderListExtTest {
         // given
         val declaration1: KoDeclarationCastProvider =
             mockk {
-                every { isInterface } returns true
+                every { asInterfaceDeclaration() } returns mockk()
             }
         val declaration2: KoDeclarationCastProvider =
             mockk {
-                every { isInterface } returns false
+                every { asInterfaceDeclaration() } returns null
             }
         val declarations = listOf(declaration1, declaration2)
 
@@ -2007,11 +2007,11 @@ class KoDeclarationCastProviderListExtTest {
         // given
         val declaration1: KoDeclarationCastProvider =
             mockk {
-                every { isClassOrObject } returns true
+                every { asClassOrObjectDeclaration() } returns mockk()
             }
         val declaration2: KoDeclarationCastProvider =
             mockk {
-                every { isClassOrObject } returns false
+                every { asClassOrObjectDeclaration() } returns null
             }
         val declarations = listOf(declaration1, declaration2)
 
@@ -2101,11 +2101,11 @@ class KoDeclarationCastProviderListExtTest {
         // given
         val declaration1: KoDeclarationCastProvider =
             mockk {
-                every { isClassOrObject } returns true
+                every { asClassOrObjectDeclaration() } returns mockk()
             }
         val declaration2: KoDeclarationCastProvider =
             mockk {
-                every { isClassOrObject } returns false
+                every { asClassOrObjectDeclaration() } returns null
             }
         val declarations = listOf(declaration1, declaration2)
 
@@ -2401,11 +2401,11 @@ class KoDeclarationCastProviderListExtTest {
         // given
         val declaration1: KoDeclarationCastProvider =
             mockk {
-                every { isClassOrInterface } returns true
+                every { asClassOrInterfaceDeclaration() } returns mockk()
             }
         val declaration2: KoDeclarationCastProvider =
             mockk {
-                every { isClassOrInterface } returns false
+                every { asClassOrInterfaceDeclaration() } returns null
             }
         val declarations = listOf(declaration1, declaration2)
 
@@ -2495,11 +2495,11 @@ class KoDeclarationCastProviderListExtTest {
         // given
         val declaration1: KoDeclarationCastProvider =
             mockk {
-                every { isClassOrInterface } returns true
+                every { asClassOrInterfaceDeclaration() } returns mockk()
             }
         val declaration2: KoDeclarationCastProvider =
             mockk {
-                every { isClassOrInterface } returns false
+                every { asClassOrInterfaceDeclaration() } returns null
             }
         val declarations = listOf(declaration1, declaration2)
 
@@ -2795,11 +2795,11 @@ class KoDeclarationCastProviderListExtTest {
         // given
         val declaration1: KoDeclarationCastProvider =
             mockk {
-                every { isInterfaceOrObject } returns true
+                every { asInterfaceOrObjectDeclaration() } returns mockk()
             }
         val declaration2: KoDeclarationCastProvider =
             mockk {
-                every { isInterfaceOrObject } returns false
+                every { asInterfaceOrObjectDeclaration() } returns null
             }
         val declarations = listOf(declaration1, declaration2)
 
@@ -2889,11 +2889,11 @@ class KoDeclarationCastProviderListExtTest {
         // given
         val declaration1: KoDeclarationCastProvider =
             mockk {
-                every { isInterfaceOrObject } returns true
+                every { asInterfaceOrObjectDeclaration() } returns mockk()
             }
         val declaration2: KoDeclarationCastProvider =
             mockk {
-                every { isInterfaceOrObject } returns false
+                every { asInterfaceOrObjectDeclaration() } returns null
             }
         val declarations = listOf(declaration1, declaration2)
 
@@ -3189,11 +3189,11 @@ class KoDeclarationCastProviderListExtTest {
         // given
         val declaration1: KoDeclarationCastProvider =
             mockk {
-                every { isClassOrInterfaceOrObject } returns true
+                every { asClassOrInterfaceOrObjectDeclaration() } returns mockk()
             }
         val declaration2: KoDeclarationCastProvider =
             mockk {
-                every { isClassOrInterfaceOrObject } returns false
+                every { asClassOrInterfaceOrObjectDeclaration() } returns null
             }
         val declarations = listOf(declaration1, declaration2)
 
@@ -3283,11 +3283,11 @@ class KoDeclarationCastProviderListExtTest {
         // given
         val declaration1: KoDeclarationCastProvider =
             mockk {
-                every { isClassOrInterfaceOrObject } returns true
+                every { asClassOrInterfaceOrObjectDeclaration() } returns mockk()
             }
         val declaration2: KoDeclarationCastProvider =
             mockk {
-                every { isClassOrInterfaceOrObject } returns false
+                every { asClassOrInterfaceOrObjectDeclaration() } returns null
             }
         val declarations = listOf(declaration1, declaration2)
 

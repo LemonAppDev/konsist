@@ -7,5 +7,5 @@ internal interface KoMatchesProviderCore :
     KoMatchesProvider,
     KoNameProviderCore,
     KoBaseProviderCore {
-    override fun matches(element: String): Boolean = LocationUtil.resideInLocation(element, name)
+    override fun matches(element: String): Boolean = LocationUtil.residesInLocation(element, name)
 }

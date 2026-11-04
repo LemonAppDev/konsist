@@ -9,7 +9,7 @@ interface KoAnnotationModifierProvider :
     KoBaseProvider,
     KoModifierProvider {
     /**
-     * Determines whatever declaration has `annotation` modifier.
+     * Determines whether the declaration has the `annotation` modifier.
      */
     val hasAnnotationModifier: Boolean
 }

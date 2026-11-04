@@ -13,7 +13,8 @@ internal class KoSecondaryConstructorDeclarationCore private constructor(
 ) : KoSecondaryConstructorDeclaration,
     KoConstructorDeclarationCore,
     KoKDocProviderCore {
-    override val ktConstructor: KtConstructor<*> by lazy { ktSecondaryConstructor }
+    override val ktConstructor: KtConstructor<*>
+        get() = ktSecondaryConstructor
 
     override fun toString(): String = locationWithText
 

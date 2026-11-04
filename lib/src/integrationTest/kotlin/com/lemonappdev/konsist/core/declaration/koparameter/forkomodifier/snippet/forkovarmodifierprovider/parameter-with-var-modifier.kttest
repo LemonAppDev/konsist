@@ -1,3 +1,0 @@
-import com.lemonappdev.konsist.testdata.FixtureType
-
-class FixtureClass(var fixtureParameter: FixtureType)

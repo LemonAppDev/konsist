@@ -1,0 +1,65 @@
+package com.lemonappdev.konsist
+
+import com.lemonappdev.konsist.api.Konsist
+import com.lemonappdev.konsist.api.architecture.KoArchitectureCreator.assertArchitecture
+import com.lemonappdev.konsist.api.architecture.Layer
+import com.lemonappdev.konsist.api.verify.assertTrue
+
+class ArchitectureTestSnippets {
+    fun `4 layer architecture has correct dependencies`() {
+        Konsist
+            .scopeFromProduction()
+            .assertArchitecture {
+                val presentation = Layer("Presentation", "com.myapp.presentation..")
+                val business = Layer("Business", "com.myapp.business..")
+                val persistence = Layer("Persistence", "com.myapp.persistence..")
+                val database = Layer("Database", "com.myapp.database..")
+
+                presentation.dependsOn(business)
+                business.dependsOn(persistence)
+                persistence.dependsOn(database)
+                database.dependsOnNothing()
+            }
+    }
+
+    fun `hexagonal architecture has correct dependencies`() {
+        Konsist
+            .scopeFromProduction()
+            .assertArchitecture {
+                val domain = Layer("Domain", "com.myapp.domain..")
+                val application = Layer("Application", "com.myapp.application..")
+                val inputAdapter = Layer("InputAdapter", "com.myapp.adapter.input..")
+                val outputAdapter = Layer("OutputAdapter", "com.myapp.adapter.output..")
+
+                domain.dependsOnNothing()
+                application.dependsOn(domain)
+                inputAdapter.dependsOn(application, domain)
+                outputAdapter.dependsOn(application, domain)
+            }
+    }
+
+    fun `every file in module resides in module-specific package`() {
+        Konsist
+            .scopeFromProject()
+            .files
+            .assertTrue { it.packagee?.name?.startsWith(it.moduleName) }
+    }
+
+    fun `files reside in package that is derived from module name`() {
+        Konsist.scopeFromProduction()
+            .files
+            .assertTrue {
+                /*
+                module -> package name:
+                feature_meal_planner -> mealplanner
+                feature_caloric_calculator -> caloriccalculator
+                 */
+                val featurePackageName = it
+                    .moduleName
+                    .removePrefix("feature_")
+                    .replace("_", "")
+
+                it.hasPackage("com.myapp.$featurePackageName..")
+            }
+    }
+}

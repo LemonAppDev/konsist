@@ -6,7 +6,7 @@ package com.lemonappdev.konsist.api.provider
  */
 interface KoIsConstructorDefinedProvider : KoBaseProvider {
     /**
-     * Determines whatever declaration is defined in constructor (true) or not (false).
+     * Determines whether the declaration is defined in a constructor (true) or not (false).
      *
      * e.g.
      * ```

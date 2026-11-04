@@ -1,0 +1,5 @@
+interface Logger
+
+context(fixtureParameter: Logger)
+suspend fun fixtureFunction() {
+}

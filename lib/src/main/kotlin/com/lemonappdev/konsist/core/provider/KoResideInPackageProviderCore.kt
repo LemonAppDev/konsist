@@ -8,7 +8,7 @@ internal interface KoResideInPackageProviderCore :
     KoResideInPackageProvider,
     KoPackageProviderCore,
     KoBaseProviderCore {
-    override fun resideInPackage(name: String): Boolean = this.packagee?.let { LocationUtil.resideInLocation(name, it.name) } ?: false
+    override fun residesInPackage(name: String): Boolean = this.packagee?.let { LocationUtil.residesInLocation(name, it.name) } ?: false
 
-    override fun resideOutsidePackage(name: String): Boolean = !resideInPackage(name)
+    override fun residesOutsidePackage(name: String): Boolean = !residesInPackage(name)
 }

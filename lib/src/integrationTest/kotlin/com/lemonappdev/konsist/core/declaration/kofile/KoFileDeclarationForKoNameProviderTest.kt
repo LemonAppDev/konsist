@@ -1,8 +1,11 @@
 package com.lemonappdev.konsist.core.declaration.kofile
 
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
+import com.lemonappdev.konsist.api.ext.list.withName
+import com.lemonappdev.konsist.api.ext.list.withoutName
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
+import org.amshove.kluent.shouldHaveSize
 import org.junit.jupiter.api.Test
 
 class KoFileDeclarationForKoNameProviderTest {
@@ -21,6 +24,40 @@ class KoFileDeclarationForKoNameProviderTest {
             hasName("wrong-name") shouldBeEqualTo false
             hasName("FILE-name", ignoreCase = false) shouldBeEqualTo false
             hasName("FILE-name", ignoreCase = true) shouldBeEqualTo true
+        }
+    }
+
+    @Test
+    fun `file-name-with-extension`() {
+        // given
+        val sut =
+            getSnippetFile("file-name")
+                .files
+                .first()
+
+        // then
+        assertSoftly(sut) {
+            hasName("file-name.kt") shouldBeEqualTo true
+            hasName("file-name.kts") shouldBeEqualTo false
+            hasName("wrong-name.kt") shouldBeEqualTo false
+            hasName("FILE-name.KT", ignoreCase = false) shouldBeEqualTo false
+            hasName("FILE-name.KT", ignoreCase = true) shouldBeEqualTo true
+        }
+    }
+
+    @Test
+    fun `files-with-name-with-extension`() {
+        // given
+        val sut =
+            getSnippetFile("file-name")
+                .files
+
+        // then
+        assertSoftly {
+            sut.withName("file-name.kt") shouldHaveSize 1
+            sut.withName("file-name") shouldHaveSize 1
+            sut.withName("wrong-name.kt") shouldHaveSize 0
+            sut.withoutName("file-name.kt") shouldHaveSize 0
         }
     }
 

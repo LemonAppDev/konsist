@@ -5,6 +5,8 @@ import com.lemonappdev.konsist.api.provider.KoUpperBoundsProvider
 
 /**
  * List containing upper bound declarations.
+ *
+ * @see KoUpperBoundsProvider.upperBounds
  */
 val <T : KoUpperBoundsProvider> List<T>.upperBounds: List<KoTypeDeclaration>
     get() = flatMap { it.upperBounds }
@@ -13,6 +15,7 @@ val <T : KoUpperBoundsProvider> List<T>.upperBounds: List<KoTypeDeclaration>
  * List containing declarations with any upper bound.
  *
  * @return A list containing declarations with any upper bound.
+ * @see KoUpperBoundsProvider.hasUpperBounds
  */
 fun <T : KoUpperBoundsProvider> List<T>.withUpperBounds(): List<T> = filter { it.hasUpperBounds() }
 
@@ -20,6 +23,7 @@ fun <T : KoUpperBoundsProvider> List<T>.withUpperBounds(): List<T> = filter { it
  * List containing declarations with no upper bounds.
  *
  * @return A list containing declarations with no upper bounds.
+ * @see KoUpperBoundsProvider.hasUpperBounds
  */
 fun <T : KoUpperBoundsProvider> List<T>.withoutUpperBounds(): List<T> = filterNot { it.hasUpperBounds() }
 
@@ -29,9 +33,10 @@ fun <T : KoUpperBoundsProvider> List<T>.withoutUpperBounds(): List<T> = filterNo
  * @param name The name of the upper bound to include.
  * @param names The names of additional upper bounds to include.
  * @param ignoreCase Specifies whether the comparison should ignore case.
- *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations with at least one of the specified upper bound(s).
+ * @see KoUpperBoundsProvider.hasUpperBoundWithName
  */
 fun <T : KoUpperBoundsProvider> List<T>.withUpperBoundNamed(
     name: String,
@@ -42,11 +47,12 @@ fun <T : KoUpperBoundsProvider> List<T>.withUpperBoundNamed(
 /**
  * List containing declarations that have at least one upper bound with the specified name(s).
  *
- * @param names The names of additional upper bounds to include.
+ * @param names The names of the upper bounds to include.
  * @param ignoreCase Specifies whether the comparison should ignore case.
- *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations with at least one of the specified upper bound(s).
+ * @see KoUpperBoundsProvider.hasUpperBoundWithName
  */
 fun <T : KoUpperBoundsProvider> List<T>.withUpperBoundNamed(
     names: Collection<String>,
@@ -60,14 +66,15 @@ fun <T : KoUpperBoundsProvider> List<T>.withUpperBoundNamed(
     }
 
 /**
- * List containing declarations without any of specified upper bounds.
+ * List containing declarations without any of the specified upper bounds.
  *
  * @param name The name of the upper bound to exclude.
  * @param names The names of additional upper bounds to exclude.
  * @param ignoreCase Specifies whether the comparison should ignore case.
- *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
- * @return A list containing declarations without any of specified upper bounds.
+ * @return A list containing declarations without any of the specified upper bounds.
+ * @see KoUpperBoundsProvider.hasUpperBoundWithName
  */
 fun <T : KoUpperBoundsProvider> List<T>.withoutUpperBoundNamed(
     name: String,
@@ -76,13 +83,14 @@ fun <T : KoUpperBoundsProvider> List<T>.withoutUpperBoundNamed(
 ): List<T> = withoutUpperBoundNamed(listOf(name, *names), ignoreCase = ignoreCase)
 
 /**
- * List containing declarations without any of specified upper bounds.
+ * List containing declarations without any of the specified upper bounds.
  *
- * @param names The names of additional upper bounds to exclude.
+ * @param names The names of the upper bounds to exclude.
  * @param ignoreCase Specifies whether the comparison should ignore case.
- *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
- * @return A list containing declarations without any of specified upper bounds.
+ * @return A list containing declarations without any of the specified upper bounds.
+ * @see KoUpperBoundsProvider.hasUpperBoundWithName
  */
 fun <T : KoUpperBoundsProvider> List<T>.withoutUpperBoundNamed(
     names: Collection<String>,
@@ -99,11 +107,12 @@ fun <T : KoUpperBoundsProvider> List<T>.withoutUpperBoundNamed(
  * List containing declarations that have all specified upper bounds.
  *
  * @param name The name of the upper bound to include.
- * @param names The name(s) of the upper bound(s) to include.
+ * @param names The names of additional upper bounds to include.
  * @param ignoreCase Specifies whether the comparison should ignore case.
- *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations with all specified upper bound(s).
+ * @see KoUpperBoundsProvider.hasUpperBoundsWithAllNames
  */
 fun <T : KoUpperBoundsProvider> List<T>.withAllUpperBoundsNamed(
     name: String,
@@ -114,11 +123,12 @@ fun <T : KoUpperBoundsProvider> List<T>.withAllUpperBoundsNamed(
 /**
  * List containing declarations that have all specified upper bounds.
  *
- * @param names The name(s) of the upper bound(s) to include.
+ * @param names The names of the upper bounds to include.
  * @param ignoreCase Specifies whether the comparison should ignore case.
- *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations with all specified upper bound(s).
+ * @see KoUpperBoundsProvider.hasUpperBoundsWithAllNames
  */
 fun <T : KoUpperBoundsProvider> List<T>.withAllUpperBoundsNamed(
     names: Collection<String>,
@@ -135,11 +145,12 @@ fun <T : KoUpperBoundsProvider> List<T>.withAllUpperBoundsNamed(
  * List containing declarations without all specified upper bounds.
  *
  * @param name The name of the upper bound to exclude.
- * @param names The name(s) of the upper bound(s) to exclude.
+ * @param names The names of additional upper bounds to exclude.
  * @param ignoreCase Specifies whether the comparison should ignore case.
- *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations without all specified upper bound(s).
+ * @see KoUpperBoundsProvider.hasUpperBoundsWithAllNames
  */
 fun <T : KoUpperBoundsProvider> List<T>.withoutAllUpperBoundsNamed(
     name: String,
@@ -150,11 +161,12 @@ fun <T : KoUpperBoundsProvider> List<T>.withoutAllUpperBoundsNamed(
 /**
  * List containing declarations without all specified upper bounds.
  *
- * @param names The name(s) of the upper bound(s) to exclude.
+ * @param names The names of the upper bounds to exclude.
  * @param ignoreCase Specifies whether the comparison should ignore case.
- *        If `true`, the prefix comparison will be case-insensitive.
+ *        If `true`, the comparison will be case-insensitive.
  *        If `false`, the comparison will consider case sensitivity.
  * @return A list containing declarations without all specified upper bound(s).
+ * @see KoUpperBoundsProvider.hasUpperBoundsWithAllNames
  */
 fun <T : KoUpperBoundsProvider> List<T>.withoutAllUpperBoundsNamed(
     names: Collection<String>,
@@ -170,8 +182,9 @@ fun <T : KoUpperBoundsProvider> List<T>.withoutAllUpperBoundsNamed(
 /**
  * List containing declarations that have at least one upper bound satisfying the provided predicate.
  *
- * @param predicate A function that defines the condition to be met by a upper bound declaration.
+ * @param predicate A function that defines the condition to be met by an upper bound declaration.
  * @return A list containing declarations with at least one upper bound satisfying the predicate.
+ * @see KoUpperBoundsProvider.hasUpperBound
  */
 fun <T : KoUpperBoundsProvider> List<T>.withUpperBound(predicate: (KoTypeDeclaration) -> Boolean): List<T> =
     filter {
@@ -179,10 +192,11 @@ fun <T : KoUpperBoundsProvider> List<T>.withUpperBound(predicate: (KoTypeDeclara
     }
 
 /**
- * List containing declarations that not have upper bound satisfying the provided predicate.
+ * List containing declarations that do not have an upper bound satisfying the provided predicate.
  *
- * @param predicate A function that defines the condition to be met by a upper bound declaration.
- * @return A list containing declarations without upper bound satisfying the provided predicate.
+ * @param predicate A function that defines the condition to be met by an upper bound declaration.
+ * @return A list containing declarations without an upper bound satisfying the provided predicate.
+ * @see KoUpperBoundsProvider.hasUpperBound
  */
 fun <T : KoUpperBoundsProvider> List<T>.withoutUpperBound(predicate: (KoTypeDeclaration) -> Boolean): List<T> =
     filterNot {
@@ -193,7 +207,8 @@ fun <T : KoUpperBoundsProvider> List<T>.withoutUpperBound(predicate: (KoTypeDecl
  * List containing declarations that have all upper bounds satisfying the provided predicate.
  *
  * @param predicate A function that defines the condition to be met by all upper bound declarations.
- * @return A filtered list containing declarations with all upper bounds satisfying the predicate.
+ * @return A list containing declarations with all upper bounds satisfying the predicate.
+ * @see KoUpperBoundsProvider.hasAllUpperBounds
  */
 fun <T : KoUpperBoundsProvider> List<T>.withAllUpperBounds(predicate: (KoTypeDeclaration) -> Boolean): List<T> =
     filter {
@@ -205,6 +220,7 @@ fun <T : KoUpperBoundsProvider> List<T>.withAllUpperBounds(predicate: (KoTypeDec
  *
  * @param predicate A function that defines the condition to be met by all upper bound declarations.
  * @return A list containing declarations that have at least one upper bound not satisfying the provided predicate.
+ * @see KoUpperBoundsProvider.hasAllUpperBounds
  */
 fun <T : KoUpperBoundsProvider> List<T>.withoutAllUpperBounds(predicate: (KoTypeDeclaration) -> Boolean): List<T> =
     filterNot {
@@ -216,6 +232,7 @@ fun <T : KoUpperBoundsProvider> List<T>.withoutAllUpperBounds(predicate: (KoType
  *
  * @param predicate A function that defines the condition to be met by the list of upper bound declarations.
  * @return A list containing declarations with upper bound declarations satisfying the predicate.
+ * @see KoUpperBoundsProvider.upperBounds
  */
 fun <T : KoUpperBoundsProvider> List<T>.withUpperBounds(predicate: (List<KoTypeDeclaration>) -> Boolean): List<T> =
     filter {
@@ -227,6 +244,7 @@ fun <T : KoUpperBoundsProvider> List<T>.withUpperBounds(predicate: (List<KoTypeD
  *
  * @param predicate A function that defines the condition to be met by the list of upper bound declarations.
  * @return A list containing declarations without upper bound declarations satisfying the predicate.
+ * @see KoUpperBoundsProvider.upperBounds
  */
 fun <T : KoUpperBoundsProvider> List<T>.withoutUpperBounds(predicate: (List<KoTypeDeclaration>) -> Boolean): List<T> =
     filterNot { predicate(it.upperBounds) }

@@ -1,0 +1,40 @@
+name: Check Konsist Version
+
+# Every merge to main is a release, so 'konsist.version' (gradle.properties) must be higher than the one on main.
+# Version is bumped manually.
+
+on:
+  pull_request:
+    branches: [ main ]
+    # 'edited' re-runs the check when the PR base branch is changed to main
+    types: [ opened, synchronize, reopened, edited ]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  check-konsist-version-increased:
+    name: Check Konsist Version Increased
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Fetch Base Branch
+        env:
+          BASE_REF: ${{ github.base_ref }}
+        run: git fetch --depth=1 origin "$BASE_REF"
+
+      - name: Set up Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: '3.x'
+
+      - name: Check Konsist Version Is Higher Than Base Branch Version
+        env:
+          BASE_REF: ${{ github.base_ref }}
+        run: python3 misc/scripts/check_konsist_version_increased.py "origin/$BASE_REF"

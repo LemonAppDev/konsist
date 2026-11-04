@@ -6,6 +6,7 @@ import com.lemonappdev.konsist.api.provider.tag.KoKDocReturnTagProvider
  * List containing declarations with return tag.
  *
  * @return A list containing declarations with return tag.
+ * @see KoKDocReturnTagProvider.hasReturnTag
  */
 fun <T : KoKDocReturnTagProvider> List<T>.withReturnTag(): List<T> = filter { it.hasReturnTag }
 
@@ -13,5 +14,6 @@ fun <T : KoKDocReturnTagProvider> List<T>.withReturnTag(): List<T> = filter { it
  * List containing declarations with no return tag.
  *
  * @return A list containing declarations with no return tag.
+ * @see KoKDocReturnTagProvider.hasReturnTag
  */
 fun <T : KoKDocReturnTagProvider> List<T>.withoutReturnTag(): List<T> = filterNot { it.hasReturnTag }

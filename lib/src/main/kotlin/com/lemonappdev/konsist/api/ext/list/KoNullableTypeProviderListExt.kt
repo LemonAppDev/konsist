@@ -6,6 +6,8 @@ import kotlin.reflect.KClass
 
 /**
  * List containing type declarations.
+ *
+ * @see KoNullableTypeProvider.type
  */
 val <T : KoNullableTypeProvider> List<T>.types: List<KoTypeDeclaration>
     get() = mapNotNull { it.type }
@@ -15,6 +17,7 @@ val <T : KoNullableTypeProvider> List<T>.types: List<KoTypeDeclaration>
  *
  * @param predicate The predicate function to determine if a declaration type satisfies a condition.
  * @return A list containing declarations with the specified type (or any type if [predicate] is null).
+ * @see KoNullableTypeProvider.type
  */
 fun <T : KoNullableTypeProvider> List<T>.withType(predicate: ((KoTypeDeclaration) -> Boolean)? = null): List<T> =
     filter {
@@ -28,7 +31,8 @@ fun <T : KoNullableTypeProvider> List<T>.withType(predicate: ((KoTypeDeclaration
  * List containing declarations without the specified type.
  *
  * @param predicate The predicate function to determine if a declaration type satisfies a condition.
- * @return A list containing declarations without the specified type (or none type if [predicate] is null).
+ * @return A list containing declarations without the specified type (or without any type if [predicate] is null).
+ * @see KoNullableTypeProvider.type
  */
 fun <T : KoNullableTypeProvider> List<T>.withoutType(predicate: ((KoTypeDeclaration) -> Boolean)? = null): List<T> =
     filterNot {
@@ -39,11 +43,12 @@ fun <T : KoNullableTypeProvider> List<T>.withoutType(predicate: ((KoTypeDeclarat
     }
 
 /**
- * List containing declarations with type of.
+ * List containing declarations with the type of the specified Kotlin class(es).
  *
  * @param kClass The Kotlin class representing the type to include.
  * @param kClasses The Kotlin class(es) representing the type(s) to include.
  * @return A list containing declarations with the type of the specified Kotlin class(es).
+ * @see KoNullableTypeProvider.hasTypeOf
  */
 fun <T : KoNullableTypeProvider> List<T>.withTypeOf(
     kClass: KClass<*>,
@@ -51,25 +56,27 @@ fun <T : KoNullableTypeProvider> List<T>.withTypeOf(
 ): List<T> = withTypeOf(listOf(kClass, *kClasses))
 
 /**
- * List containing declarations with type of.
+ * List containing declarations with the type of the specified Kotlin class(es).
  *
  * @param kClasses The Kotlin class(es) representing the type(s) to include.
  * @return A list containing declarations with the type of the specified Kotlin class(es).
+ * @see KoNullableTypeProvider.hasTypeOf
  */
 fun <T : KoNullableTypeProvider> List<T>.withTypeOf(kClasses: Collection<KClass<*>>): List<T> =
     filter {
         when {
-            kClasses.isEmpty() -> true
+            kClasses.isEmpty() -> it.hasType()
             else -> kClasses.any { kClass -> it.hasTypeOf(kClass) }
         }
     }
 
 /**
- * List containing declarations without type of.
+ * List containing declarations without the type of the specified Kotlin class(es).
  *
  * @param kClass The Kotlin class representing the type to exclude.
  * @param kClasses The Kotlin class(es) representing the type(s) to exclude.
- * @return A list containing declarations without type of the specified Kotlin class(es).
+ * @return A list containing declarations without the type of the specified Kotlin class(es).
+ * @see KoNullableTypeProvider.hasTypeOf
  */
 fun <T : KoNullableTypeProvider> List<T>.withoutTypeOf(
     kClass: KClass<*>,
@@ -77,15 +84,16 @@ fun <T : KoNullableTypeProvider> List<T>.withoutTypeOf(
 ): List<T> = withoutTypeOf(listOf(kClass, *kClasses))
 
 /**
- * List containing declarations without type of.
+ * List containing declarations without the type of the specified Kotlin class(es).
  *
  * @param kClasses The Kotlin class(es) representing the type(s) to exclude.
- * @return A list containing declarations without type of the specified Kotlin class(es).
+ * @return A list containing declarations without the type of the specified Kotlin class(es).
+ * @see KoNullableTypeProvider.hasTypeOf
  */
 fun <T : KoNullableTypeProvider> List<T>.withoutTypeOf(kClasses: Collection<KClass<*>>): List<T> =
     filterNot {
         when {
-            kClasses.isEmpty() -> true
+            kClasses.isEmpty() -> it.hasType()
             else -> kClasses.any { kClass -> it.hasTypeOf(kClass) }
         }
     }

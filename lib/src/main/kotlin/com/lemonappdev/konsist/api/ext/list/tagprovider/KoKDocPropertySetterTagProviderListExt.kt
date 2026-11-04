@@ -6,6 +6,7 @@ import com.lemonappdev.konsist.api.provider.tag.KoKDocPropertySetterTagProvider
  * List containing declarations with property setter tag.
  *
  * @return A list containing declarations with property setter tag.
+ * @see KoKDocPropertySetterTagProvider.hasPropertySetterTag
  */
 fun <T : KoKDocPropertySetterTagProvider> List<T>.withPropertySetterTag(): List<T> = filter { it.hasPropertySetterTag }
 
@@ -13,5 +14,6 @@ fun <T : KoKDocPropertySetterTagProvider> List<T>.withPropertySetterTag(): List<
  * List containing declarations with no property setter tag.
  *
  * @return A list containing declarations with no property setter tag.
+ * @see KoKDocPropertySetterTagProvider.hasPropertySetterTag
  */
 fun <T : KoKDocPropertySetterTagProvider> List<T>.withoutPropertySetterTag(): List<T> = filterNot { it.hasPropertySetterTag }

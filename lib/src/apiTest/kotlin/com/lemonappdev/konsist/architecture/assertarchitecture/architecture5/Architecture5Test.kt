@@ -5,7 +5,6 @@ import com.lemonappdev.konsist.api.architecture.KoArchitectureCreator.architectu
 import com.lemonappdev.konsist.api.architecture.KoArchitectureCreator.assertArchitecture
 import com.lemonappdev.konsist.api.architecture.Layer
 import com.lemonappdev.konsist.core.exception.KoAssertionFailedException
-import org.amshove.kluent.shouldNotThrow
 import org.amshove.kluent.shouldThrow
 import org.junit.jupiter.api.Test
 
@@ -104,7 +103,7 @@ class Architecture5Test {
     @Test
     fun `passes when  using doesNotDependsOn (lambda scope)`() {
         // then
-        scope.assertArchitecture {
+        scope.assertArchitecture(allowFilesOutsideLayers = true) {
             presentation.doesNotDependOn(domain, infrastructure)
         }
     }
@@ -114,7 +113,7 @@ class Architecture5Test {
         // then
         scope
             .files
-            .assertArchitecture {
+            .assertArchitecture(allowFilesOutsideLayers = true) {
                 presentation.doesNotDependOn(domain, infrastructure)
             }
     }
@@ -128,7 +127,7 @@ class Architecture5Test {
             }
 
         // then
-        scope.assertArchitecture(layerDependencies)
+        scope.assertArchitecture(allowFilesOutsideLayers = true, layerDependenciesFunc = layerDependencies)
     }
 
     @Test
@@ -142,14 +141,14 @@ class Architecture5Test {
         // then
         scope
             .files
-            .assertArchitecture(layerDependencies)
+            .assertArchitecture(allowFilesOutsideLayers = true, layerDependenciesFunc = layerDependencies)
     }
 
     // endregion
 
-    // region fails when bad dependency is set
+    // region fails when layer depends on not declared layer
     @Test
-    fun `fails when (lambda scope)`() {
+    fun `fails when layer depends on not declared layer (lambda scope)`() {
         // given
         val sut = {
             scope
@@ -162,11 +161,11 @@ class Architecture5Test {
         }
 
         // then
-        sut shouldNotThrow KoAssertionFailedException::class
+        sut shouldThrow KoAssertionFailedException::class
     }
 
     @Test
-    fun `fails when (lambda files)`() {
+    fun `fails when layer depends on not declared layer (lambda files)`() {
         // given
         val sut = {
             scope
@@ -180,11 +179,11 @@ class Architecture5Test {
         }
 
         // then
-        sut shouldNotThrow KoAssertionFailedException::class
+        sut shouldThrow KoAssertionFailedException::class
     }
 
     @Test
-    fun `fails when (parameter scope)`() {
+    fun `fails when layer depends on not declared layer (parameter scope)`() {
         // given
         val architecture =
             architecture {
@@ -199,11 +198,11 @@ class Architecture5Test {
         }
 
         // then
-        sut shouldNotThrow KoAssertionFailedException::class
+        sut shouldThrow KoAssertionFailedException::class
     }
 
     @Test
-    fun `fails when (parameter files)`() {
+    fun `fails when layer depends on not declared layer (parameter files)`() {
         // given
         val architecture =
             architecture {
@@ -220,7 +219,7 @@ class Architecture5Test {
         }
 
         // then
-        sut shouldNotThrow KoAssertionFailedException::class
+        sut shouldThrow KoAssertionFailedException::class
     }
 
     // endregion

@@ -9,7 +9,7 @@ interface KoActualModifierProvider :
     KoBaseProvider,
     KoModifierProvider {
     /**
-     * Determines whatever class has `actual` modifier.
+     * Determines whether the declaration has the `actual` modifier.
      */
     val hasActualModifier: Boolean
 }

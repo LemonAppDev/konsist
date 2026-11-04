@@ -1,0 +1,3 @@
+@file:kotlin.Suppress("konsist.suppress-text")
+
+class FixtureClassWithIncorrectSuffix

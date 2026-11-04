@@ -2,6 +2,7 @@ package com.lemonappdev.konsist.core.declaration.koinitblock
 
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
 import com.lemonappdev.konsist.api.ext.list.initBlocks
+import com.lemonappdev.konsist.helper.ext.toOsSeparator
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
@@ -19,7 +20,7 @@ class KoInitBlockDeclarationForKoPathProviderTest {
         // then
         assertSoftly {
             sut.path.startsWith("//") shouldBeEqualTo false
-            sut.path.endsWith("koinitblock/snippet/forkopathprovider/init-block-file-path.kt") shouldBeEqualTo true
+            sut.path.endsWith("koinitblock/snippet/forkopathprovider/init-block-file-path.kt".toOsSeparator()) shouldBeEqualTo true
         }
     }
 
@@ -36,8 +37,10 @@ class KoInitBlockDeclarationForKoPathProviderTest {
         sut
             .projectPath
             .shouldBeEqualTo(
-                "/lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core/declaration/koinitblock/snippet/" +
-                    "forkopathprovider/init-block-project-file-path.kt",
+                (
+                    "/lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core/declaration/koinitblock/snippet/" +
+                        "forkopathprovider/init-block-project-file-path.kt"
+                ).toOsSeparator(),
             )
     }
 
@@ -52,10 +55,10 @@ class KoInitBlockDeclarationForKoPathProviderTest {
 
         // then
         assertSoftly {
-            sut.resideInPath("..snippet..", true) shouldBeEqualTo true
-            sut.resideInPath("..koinitblock/snippet..", true) shouldBeEqualTo true
-            sut.resideInPath("..koinitblock..init-block-reside-in-file-path.kt", true) shouldBeEqualTo true
-            sut.resideInPath("koinitblock/snippet/", true) shouldBeEqualTo false
+            sut.residesInPath("..snippet..", true) shouldBeEqualTo true
+            sut.residesInPath("..koinitblock/snippet..", true) shouldBeEqualTo true
+            sut.residesInPath("..koinitblock..init-block-reside-in-file-path.kt", true) shouldBeEqualTo true
+            sut.residesInPath("koinitblock/snippet/", true) shouldBeEqualTo false
         }
     }
 
@@ -70,10 +73,10 @@ class KoInitBlockDeclarationForKoPathProviderTest {
 
         // then
         assertSoftly {
-            sut.resideInPath("..snippet..", false) shouldBeEqualTo true
-            sut.resideInPath("..koinitblock/snippet..", false) shouldBeEqualTo true
-            sut.resideInPath("..koinitblock..init-block-reside-in-project-file-path.kt", false) shouldBeEqualTo true
-            sut.resideInPath("koinitblock/snippet/", false) shouldBeEqualTo false
+            sut.residesInPath("..snippet..", false) shouldBeEqualTo true
+            sut.residesInPath("..koinitblock/snippet..", false) shouldBeEqualTo true
+            sut.residesInPath("..koinitblock..init-block-reside-in-project-file-path.kt", false) shouldBeEqualTo true
+            sut.residesInPath("koinitblock/snippet/", false) shouldBeEqualTo false
         }
     }
 

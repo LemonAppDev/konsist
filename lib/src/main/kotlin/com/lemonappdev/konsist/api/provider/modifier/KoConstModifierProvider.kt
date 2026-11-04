@@ -9,7 +9,7 @@ interface KoConstModifierProvider :
     KoBaseProvider,
     KoModifierProvider {
     /**
-     * Determines whatever the declaration has `const` modifier.
+     * Determines whether the declaration has the `const` modifier.
      */
     val hasConstModifier: Boolean
 }

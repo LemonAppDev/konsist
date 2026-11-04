@@ -37,7 +37,24 @@ class KoReturnProviderExtTest {
         // then
         assertSoftly(sut) {
             hasReturnTypeOf<String>() shouldBeEqualTo true
+            hasReturnTypeOf<String?>() shouldBeEqualTo false
             hasReturnTypeOf<Int>() shouldBeEqualTo false
+        }
+    }
+
+    @Test
+    fun `declaration-has-return-type-with-nullable-type`() {
+        // given
+        val sut =
+            getSnippetFile("declaration-has-return-type-with-nullable-type")
+                .declarationsOf<KoReturnProvider>()
+                .first()
+
+        // then
+        assertSoftly(sut) {
+            hasReturnTypeOf<String?>() shouldBeEqualTo true
+            hasReturnTypeOf<String>() shouldBeEqualTo true
+            hasReturnTypeOf<Int?>() shouldBeEqualTo false
         }
     }
 
@@ -162,6 +179,61 @@ class KoReturnProviderExtTest {
 
         // then
         sut.hasValidKDocReturnTag() shouldBeEqualTo true
+    }
+
+    @Test
+    fun `declaration-has-return-type-with-generic-type`() {
+        // given
+        val sut =
+            getSnippetFile("declaration-has-return-type-with-generic-type")
+                .declarationsOf<KoReturnProvider>()
+                .first()
+
+        // then
+        assertSoftly(sut) {
+            hasReturnTypeOf<List<Int>>() shouldBeEqualTo true
+            hasReturnTypeOf<List<*>>() shouldBeEqualTo true
+            hasReturnTypeOf(List::class) shouldBeEqualTo true
+            hasReturnTypeOf<List<String>>() shouldBeEqualTo false
+            hasReturnTypeOf<List<Int?>>() shouldBeEqualTo false
+            hasReturnTypeOf<List<List<Int>>>() shouldBeEqualTo false
+            hasReturnTypeOf<Set<Int>>() shouldBeEqualTo false
+            hasReturnTypeOf<Int>() shouldBeEqualTo false
+        }
+    }
+
+    @Test
+    fun `declaration-has-return-type-with-nested-generic-type`() {
+        // given
+        val sut =
+            getSnippetFile("declaration-has-return-type-with-nested-generic-type")
+                .declarationsOf<KoReturnProvider>()
+                .first()
+
+        // then
+        assertSoftly(sut) {
+            hasReturnTypeOf<Map<String, List<FixtureClass?>>>() shouldBeEqualTo true
+            hasReturnTypeOf<Map<String, *>>() shouldBeEqualTo true
+            hasReturnTypeOf<Map<String, List<FixtureClass>>>() shouldBeEqualTo false
+            hasReturnTypeOf<Map<String, Set<FixtureClass?>>>() shouldBeEqualTo false
+            hasReturnTypeOf<Map<Int, List<FixtureClass?>>>() shouldBeEqualTo false
+        }
+    }
+
+    @Test
+    fun `declaration-has-return-type-with-projected-generic-type`() {
+        // given
+        val sut =
+            getSnippetFile("declaration-has-return-type-with-projected-generic-type")
+                .declarationsOf<KoReturnProvider>()
+                .first()
+
+        // then
+        assertSoftly(sut) {
+            hasReturnTypeOf<MutableList<out Number>>() shouldBeEqualTo true
+            hasReturnTypeOf<MutableList<Number>>() shouldBeEqualTo false
+            hasReturnTypeOf<MutableList<in Number>>() shouldBeEqualTo false
+        }
     }
 
     private fun getSnippetFile(fileName: String) = TestSnippetProvider.getSnippetKoScope("api/ext/provider/koreturntype/snippet/", fileName)

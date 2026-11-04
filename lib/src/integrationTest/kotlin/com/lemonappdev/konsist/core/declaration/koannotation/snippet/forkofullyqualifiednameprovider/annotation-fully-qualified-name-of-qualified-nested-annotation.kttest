@@ -1,0 +1,9 @@
+package com.fixturepackage
+
+class Outer {
+    annotation class FixtureAnnotation
+}
+
+@Outer.FixtureAnnotation
+fun sampleFunction() {
+}

@@ -20,19 +20,37 @@ import com.lemonappdev.konsist.api.declaration.combined.KoInterfaceAndObjectDecl
 
 @Suppress("detekt.TooManyFunctions")
 class KoScopeCore(
-    private var koFiles: List<KoFileDeclaration>,
+    koFiles: List<KoFileDeclaration>,
 ) : KoScope {
     constructor(koFileDeclaration: KoFileDeclaration) : this(listOf(koFileDeclaration))
 
-    override val files: List<KoFileDeclaration> by lazy { koFiles.sortedBy { it.path } }
+    /*
+     * Files can be changed by `plusAssign` and `minusAssign` operators, so cached values are recreated with them.
+     * Files are deduplicated (file equality is path based), so a file added many times (e.g. `scope + scope` or
+     * overlapping directories) is present in the scope once and its declarations are not reported twice.
+     */
+    private var koFiles: List<KoFileDeclaration> = koFiles.distinct()
+        set(value) {
+            field = value.distinct()
+            cache = KoScopeCache(field)
+        }
 
-    override val imports: List<KoImportDeclaration> by lazy { koFiles.flatMap { it.imports } }
+    private var cache = KoScopeCache(this.koFiles)
 
-    override val annotations: List<KoAnnotationDeclaration> by lazy { koFiles.flatMap { it.annotations } }
+    override val files: List<KoFileDeclaration>
+        get() = cache.files
 
-    override val packages: List<KoPackageDeclaration> by lazy { koFiles.mapNotNull { it.packagee } }
+    override val imports: List<KoImportDeclaration>
+        get() = cache.imports
 
-    override val typeAliases: List<KoTypeAliasDeclaration> by lazy { koFiles.flatMap { it.typeAliases } }
+    override val annotations: List<KoAnnotationDeclaration>
+        get() = cache.annotations
+
+    override val packages: List<KoPackageDeclaration>
+        get() = cache.packages
+
+    override val typeAliases: List<KoTypeAliasDeclaration>
+        get() = cache.typeAliases
 
     override fun classes(
         includeNested: Boolean,
@@ -113,4 +131,18 @@ class KoScopeCore(
     override fun equals(other: Any?): Boolean = other is KoScope && files.toList() == other.files.toList()
 
     override fun hashCode(): Int = 31 * 7 + files.toList().hashCode()
+
+    private class KoScopeCache(
+        koFiles: List<KoFileDeclaration>,
+    ) {
+        val files: List<KoFileDeclaration> by lazy { koFiles.sortedBy { it.path } }
+
+        val imports: List<KoImportDeclaration> by lazy { koFiles.flatMap { it.imports } }
+
+        val annotations: List<KoAnnotationDeclaration> by lazy { koFiles.flatMap { it.annotations } }
+
+        val packages: List<KoPackageDeclaration> by lazy { koFiles.mapNotNull { it.packagee } }
+
+        val typeAliases: List<KoTypeAliasDeclaration> by lazy { koFiles.flatMap { it.typeAliases } }
+    }
 }

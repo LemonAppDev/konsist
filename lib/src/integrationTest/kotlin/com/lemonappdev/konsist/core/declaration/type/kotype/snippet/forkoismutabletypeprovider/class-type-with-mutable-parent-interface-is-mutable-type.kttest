@@ -1,0 +1,12 @@
+class FixtureClass1(val fixtureProperty1: FixtureClass2?)
+
+class FixtureClass2 : FixtureInterface {
+    override val fixtureProperty2: Int = 0
+}
+
+interface FixtureInterface {
+    val fixtureProperty2: Int
+    var fixtureProperty3: Int
+        get() = 0
+        set(value) {}
+}

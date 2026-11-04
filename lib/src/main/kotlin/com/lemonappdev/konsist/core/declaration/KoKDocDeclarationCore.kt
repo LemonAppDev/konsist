@@ -1,6 +1,8 @@
 package com.lemonappdev.konsist.core.declaration
 
+import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoKDocDeclaration
+import com.lemonappdev.konsist.core.cache.KoPropertyCache
 import com.lemonappdev.konsist.core.provider.KoKDocDescriptionProviderCore
 import com.lemonappdev.konsist.core.provider.KoLocationProviderCore
 import com.lemonappdev.konsist.core.provider.KoModuleProviderCore
@@ -25,12 +27,14 @@ import com.lemonappdev.konsist.core.provider.tag.KoKDocThrowsTagProviderCore
 import com.lemonappdev.konsist.core.provider.tag.KoKDocVersionTagProviderCore
 import com.lemonappdev.konsist.core.util.EndOfLine
 import org.jetbrains.kotlin.com.intellij.psi.PsiElement
-import org.jetbrains.kotlin.kdoc.psi.api.KDocElement
+import org.jetbrains.kotlin.kdoc.psi.api.KDoc
 import org.jetbrains.kotlin.kdoc.psi.impl.KDocSection
 import org.jetbrains.kotlin.kdoc.psi.impl.KDocTag
 
 internal class KoKDocDeclarationCore(
-    private val kDocElement: KDocElement,
+    private val kDocElement: KDoc,
+    // Declaration documented by this KDoc (e.g. used to check if the KDoc is suppressed by the declaration)
+    internal val documentedDeclaration: KoBaseDeclaration,
 ) : KoKDocDeclaration,
     KoKDocDescriptionProviderCore,
     KoKDocTagProviderCore,
@@ -54,42 +58,60 @@ internal class KoKDocDeclarationCore(
     KoKDocPropertySetterTagProviderCore,
     KoKDocConstructorTagProviderCore,
     KoKDocSinceTagProviderCore {
-    override val psiElement: PsiElement by lazy { kDocElement }
+    override val psiElement: PsiElement
+        get() = kDocElement
 
-    override val kDocTags: List<KDocTag> by lazy {
-        kDocElement
-            .children
-            .filterIsInstance<KDocSection>()
-            .flatMap { it.children.toList() }
-            .filterIsInstance<KDocTag>()
-    }
+    @Volatile
+    private var cachedKDocTags: Any? = KoPropertyCache.NOT_COMPUTED
 
-    override val text: String by lazy {
-        val splitKDoc =
-            kDocElement
-                .text
-                .split(EndOfLine.UNIX.value)
-                .toMutableList()
+    override val kDocTags: List<KDocTag>
+        get() =
+            KoPropertyCache.getOrCompute(cachedKDocTags, { cachedKDocTags = it }) {
+                kDocElement
+                    .children
+                    .filterIsInstance<KDocSection>()
+                    .flatMap { it.children.toList() }
+                    .filterIsInstance<KDocTag>()
+            }
 
-        if (splitKDoc.size == 1 && splitKDoc.first().startsWith("/**") && splitKDoc.first().endsWith("*/")) {
-            splitKDoc
-                .first()
-                .removePrefix("/**")
-                .removeSuffix("*/")
-                .trim()
-        } else {
-            splitKDoc
-                .also {
-                    it.removeFirst()
-                    it.removeLast()
-                }.joinToString("\n") {
-                    it
+    @Volatile
+    private var cachedText: Any? = KoPropertyCache.NOT_COMPUTED
+
+    override val text: String
+        get() =
+            KoPropertyCache.getOrCompute(cachedText, { cachedText = it }) {
+                kDocElement
+                    .text
+                    .removePrefix("/**")
+                    .removeSuffix("*/")
+                    .split(EndOfLine.UNIX.value)
+                    .joinToString(EndOfLine.UNIX.value) {
+                        it
+                            .trim()
+                            .removePrefix("*")
+                            .trim()
+                    }.trim()
+            }
+
+    @Volatile
+    private var cachedDescription: Any? = KoPropertyCache.NOT_COMPUTED
+
+    override val description: String
+        get() =
+            KoPropertyCache.getOrCompute(cachedDescription, { cachedDescription = it }) {
+                val content =
+                    kDocElement
+                        .getDefaultSection()
+                        .getContent()
                         .trim()
-                        .removePrefix("*")
-                        .trim()
+
+                // "/***" opener: parser treats the extra asterisk as content
+                if (kDocElement.text.startsWith("/***")) {
+                    content.removePrefix("*").trim()
+                } else {
+                    content
                 }
-        }
-    }
+            }
 
     override fun toString(): String = locationWithText
 }

@@ -92,7 +92,7 @@ class Architecture9Test {
             .message
             .shouldBeEqualTo(
                 "'fails when presentation depends on domain and strict is true (lambda scope)' test has failed. \n" +
-                    "Layer 'Presentation' does not depends on 'Domain' layer.",
+                    "'Presentation' layer is required to depend on 'Domain' layer (strict), but has no dependency on it.",
             )
     }
 
@@ -113,7 +113,7 @@ class Architecture9Test {
             .message
             .shouldBeEqualTo(
                 "'fails when presentation depends on domain and strict is true (lambda files)' test has failed. \n" +
-                    "Layer 'Presentation' does not depends on 'Domain' layer.",
+                    "'Presentation' layer is required to depend on 'Domain' layer (strict), but has no dependency on it.",
             )
     }
 
@@ -136,7 +136,7 @@ class Architecture9Test {
             .message
             .shouldBeEqualTo(
                 "'fails when presentation depends on domain and strict is true (parameter scope)' test has failed. \n" +
-                    "Layer 'Presentation' does not depends on 'Domain' layer.",
+                    "'Presentation' layer is required to depend on 'Domain' layer (strict), but has no dependency on it.",
             )
     }
 
@@ -161,7 +161,7 @@ class Architecture9Test {
             .message
             .shouldBeEqualTo(
                 "'fails when presentation depends on domain and strict is true (parameter files)' test has failed. \n" +
-                    "Layer 'Presentation' does not depends on 'Domain' layer.",
+                    "'Presentation' layer is required to depend on 'Domain' layer (strict), but has no dependency on it.",
             )
     }
 

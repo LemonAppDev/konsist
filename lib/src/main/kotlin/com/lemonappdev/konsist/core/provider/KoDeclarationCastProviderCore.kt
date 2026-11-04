@@ -18,6 +18,8 @@ import com.lemonappdev.konsist.api.declaration.type.KoKotlinTypeDeclaration
 import com.lemonappdev.konsist.api.declaration.type.KoStarProjectionDeclaration
 import com.lemonappdev.konsist.api.provider.KoDeclarationCastProvider
 import com.lemonappdev.konsist.core.declaration.KoSourceDeclarationCore
+import com.lemonappdev.konsist.core.util.TypeKind
+import com.lemonappdev.konsist.core.util.TypeKindUtil
 import com.lemonappdev.konsist.core.util.TypeUtil
 import kotlin.reflect.KClass
 
@@ -40,13 +42,13 @@ internal interface KoDeclarationCastProviderCore :
         get() = TypeUtil.isKotlinCollectionTypes(name)
 
     override val isClass: Boolean
-        get() = koDeclarationCastProviderDeclaration is KoClassDeclaration
+        get() = TypeKindUtil.getKind(koDeclarationCastProviderDeclaration) == TypeKind.CLASS
 
     override val isObject: Boolean
-        get() = koDeclarationCastProviderDeclaration is KoObjectDeclaration
+        get() = TypeKindUtil.getKind(koDeclarationCastProviderDeclaration) == TypeKind.OBJECT
 
     override val isInterface: Boolean
-        get() = koDeclarationCastProviderDeclaration is KoInterfaceDeclaration
+        get() = TypeKindUtil.getKind(koDeclarationCastProviderDeclaration) == TypeKind.INTERFACE
 
     override val isClassOrObject: Boolean
         get() = isClass || isObject
@@ -68,8 +70,7 @@ internal interface KoDeclarationCastProviderCore :
 
     override val isKotlinType: Boolean
         get() =
-            koDeclarationCastProviderDeclaration is KoKotlinTypeDeclaration ||
-                koDeclarationCastProviderDeclaration?.name?.let { TypeUtil.isKotlinType(it) } == true
+            koDeclarationCastProviderDeclaration is KoKotlinTypeDeclaration
 
     override val isTypeParameter: Boolean
         get() = koDeclarationCastProviderDeclaration is KoTypeParameterDeclaration
@@ -82,10 +83,6 @@ internal interface KoDeclarationCastProviderCore :
 
     override val isProperty: Boolean
         get() = koDeclarationCastProviderDeclaration is KoPropertyDeclaration
-
-    @Deprecated("Will be removed in version 0.19.0", ReplaceWith("isExternal"))
-    override val isExternalType: Boolean
-        get() = isExternal
 
     override val isStarProjection: Boolean
         get() = koDeclarationCastProviderDeclaration is KoStarProjectionDeclaration
@@ -134,16 +131,13 @@ internal interface KoDeclarationCastProviderCore :
 
     override fun asExternalDeclaration(): KoExternalDeclaration? = koDeclarationCastProviderDeclaration as? KoExternalDeclaration
 
-    @Deprecated("Will be removed in version 0.19.0", ReplaceWith("asExternalDeclaration"))
-    override fun asExternalTypeDeclaration(): KoExternalDeclaration? = asExternalDeclaration()
-
     override fun asFunctionDeclaration(): KoFunctionDeclaration? = koDeclarationCastProviderDeclaration as? KoFunctionDeclaration
 
     override fun asPropertyDeclaration(): KoPropertyDeclaration? = koDeclarationCastProviderDeclaration as? KoPropertyDeclaration
 
     override fun hasClassDeclaration(predicate: ((KoClassDeclaration) -> Boolean)?): Boolean =
         when (predicate) {
-            null -> isClass
+            null -> asClassDeclaration() != null
             else -> asClassDeclaration()?.let { predicate(it) } ?: false
         }
 
@@ -151,7 +145,7 @@ internal interface KoDeclarationCastProviderCore :
 
     override fun hasObjectDeclaration(predicate: ((KoObjectDeclaration) -> Boolean)?): Boolean =
         when (predicate) {
-            null -> isObject
+            null -> asObjectDeclaration() != null
             else -> asObjectDeclaration()?.let { predicate(it) } ?: false
         }
 
@@ -159,7 +153,7 @@ internal interface KoDeclarationCastProviderCore :
 
     override fun hasInterfaceDeclaration(predicate: ((KoInterfaceDeclaration) -> Boolean)?): Boolean =
         when (predicate) {
-            null -> isInterface
+            null -> asInterfaceDeclaration() != null
             else -> asInterfaceDeclaration()?.let { predicate(it) } ?: false
         }
 
@@ -208,7 +202,7 @@ internal interface KoDeclarationCastProviderCore :
         }
 
     override fun hasKotlinTypeDeclarationOf(kClass: KClass<*>): Boolean =
-        kClass.qualifiedName == asKotlinTypeDeclaration()?.fullyQualifiedName
+        TypeUtil.matchesKClass(asKotlinTypeDeclaration()?.fullyQualifiedName, kClass)
 
     override fun hasKotlinBasicTypeDeclaration(predicate: ((KoKotlinTypeDeclaration) -> Boolean)?): Boolean =
         when (predicate) {
@@ -217,7 +211,7 @@ internal interface KoDeclarationCastProviderCore :
         }
 
     override fun hasKotlinBasicTypeDeclarationOf(kClass: KClass<*>): Boolean =
-        kClass.qualifiedName == asKotlinBasicTypeDeclaration()?.fullyQualifiedName
+        TypeUtil.matchesKClass(asKotlinBasicTypeDeclaration()?.fullyQualifiedName, kClass)
 
     override fun hasKotlinCollectionTypeDeclaration(predicate: ((KoKotlinTypeDeclaration) -> Boolean)?): Boolean =
         when (predicate) {
@@ -226,7 +220,7 @@ internal interface KoDeclarationCastProviderCore :
         }
 
     override fun hasKotlinCollectionTypeDeclarationOf(kClass: KClass<*>): Boolean =
-        kClass.qualifiedName == asKotlinCollectionTypeDeclaration()?.fullyQualifiedName
+        TypeUtil.matchesKClass(asKotlinCollectionTypeDeclaration()?.fullyQualifiedName, kClass)
 
     override fun hasTypeParameterDeclaration(predicate: ((KoTypeParameterDeclaration) -> Boolean)?): Boolean =
         when (predicate) {
@@ -241,12 +235,6 @@ internal interface KoDeclarationCastProviderCore :
         }
 
     override fun hasExternalDeclarationOf(kClass: KClass<*>): Boolean = kClass.qualifiedName == asExternalDeclaration()?.fullyQualifiedName
-
-    @Deprecated("Will be removed in version 0.19.0", ReplaceWith("hasExternalDeclaration"))
-    override fun hasExternalTypeDeclaration(predicate: ((KoExternalDeclaration) -> Boolean)?): Boolean = hasExternalDeclaration()
-
-    @Deprecated("Will be removed in version 0.19.0", ReplaceWith("hasExternalDeclarationOf"))
-    override fun hasExternalTypeDeclarationOf(kClass: KClass<*>): Boolean = hasExternalDeclarationOf(kClass)
 
     override fun hasFunctionDeclaration(predicate: ((KoFunctionDeclaration) -> Boolean)?): Boolean =
         when (predicate) {

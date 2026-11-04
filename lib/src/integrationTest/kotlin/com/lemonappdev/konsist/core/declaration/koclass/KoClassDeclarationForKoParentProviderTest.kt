@@ -1,6 +1,7 @@
 package com.lemonappdev.konsist.core.declaration.koclass
 
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
+import com.lemonappdev.konsist.testdata.FixtureCollection1
 import com.lemonappdev.konsist.testdata.FixtureInterface
 import com.lemonappdev.konsist.testdata.FixtureParentClass
 import com.lemonappdev.konsist.testdata.FixtureParentInterface
@@ -9,6 +10,9 @@ import com.lemonappdev.konsist.testdata.FixtureParentInterface2
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
+import java.io.ByteArrayInputStream
+import java.io.Closeable
+import java.io.InputStream
 
 @Suppress("detekt.LongMethod")
 class KoClassDeclarationForKoParentProviderTest {
@@ -274,6 +278,79 @@ class KoClassDeclarationForKoParentProviderTest {
     }
 
     @Test
+    fun `class-has-indirect-library-parents`() {
+        // given
+        val sut =
+            getSnippetFile("class-has-indirect-library-parents")
+                .classes()
+                .first()
+
+        // then
+        assertSoftly(sut) {
+            parents(indirectParents = true).map { it.name } shouldBeEqualTo
+                listOf(
+                    "FixtureParentClass",
+                    "ByteArrayInputStream",
+                    "InputStream",
+                    "Closeable",
+                    "AutoCloseable",
+                )
+            parentClasses(indirectParents = true).map { it.name } shouldBeEqualTo
+                listOf("FixtureParentClass", "ByteArrayInputStream", "InputStream")
+            parentInterfaces(indirectParents = true).map { it.name } shouldBeEqualTo listOf("Closeable", "AutoCloseable")
+            externalParents(indirectParents = true).map { it.name } shouldBeEqualTo
+                listOf("ByteArrayInputStream", "InputStream", "Closeable")
+            hasParentOf(InputStream::class) shouldBeEqualTo false
+            hasParentOf(InputStream::class, indirectParents = true) shouldBeEqualTo true
+            hasParentOf(AutoCloseable::class, indirectParents = true) shouldBeEqualTo true
+            hasExternalParentOf(Closeable::class, indirectParents = true) shouldBeEqualTo true
+            hasParentClassOf(InputStream::class, indirectParents = true) shouldBeEqualTo true
+            hasParentInterfaceOf(Closeable::class, indirectParents = true) shouldBeEqualTo true
+            hasParentWithName("InputStream", indirectParents = true) shouldBeEqualTo true
+        }
+
+        assertSoftly(sut.parents(indirectParents = true).first { it.name == "InputStream" }) {
+            text shouldBeEqualTo "InputStream"
+            arguments shouldBeEqualTo emptyList()
+            typeArguments shouldBeEqualTo emptyList()
+            containingDeclaration shouldBeEqualTo sut.containingFile.classes().first { it.name == "FixtureParentClass" }
+            sourceDeclaration?.isExternal shouldBeEqualTo true
+            sourceDeclaration?.asExternalDeclaration()?.fullyQualifiedName shouldBeEqualTo "java.io.InputStream"
+        }
+    }
+
+    @Test
+    fun `class-has-indirect-kotlin-parents`() {
+        // given
+        val sut =
+            getSnippetFile("class-has-indirect-kotlin-parents")
+                .classes()
+                .first()
+
+        // then
+        assertSoftly(sut) {
+            parents(indirectParents = true).map { it.name } shouldBeEqualTo
+                listOf(
+                    "IllegalStateException",
+                    "Serializable",
+                    "RuntimeException",
+                    "Exception",
+                    "Throwable",
+                )
+            parentInterfaces(indirectParents = true).map { it.name } shouldBeEqualTo listOf("Serializable")
+            externalParents(indirectParents = true).map { it.name } shouldBeEqualTo listOf("Serializable")
+            hasParentOf(Throwable::class) shouldBeEqualTo false
+            hasParentOf(Throwable::class, indirectParents = true) shouldBeEqualTo true
+            hasParentClassOf(RuntimeException::class, Exception::class, indirectParents = true) shouldBeEqualTo true
+        }
+
+        assertSoftly(sut.parents(indirectParents = true).last()) {
+            sourceDeclaration?.isKotlinType shouldBeEqualTo true
+            sourceDeclaration?.asKotlinTypeDeclaration()?.fullyQualifiedName shouldBeEqualTo "kotlin.Throwable"
+        }
+    }
+
+    @Test
     fun `class-has-parent-defined-by-import-alias`() {
         // given
         val sut =
@@ -285,6 +362,43 @@ class KoClassDeclarationForKoParentProviderTest {
         assertSoftly(sut.parents().first()) {
             name shouldBeEqualTo "AliasParent"
             sourceDeclaration?.isImportAlias shouldBeEqualTo true
+        }
+
+        assertSoftly(sut) {
+            hasParentOf(FixtureParentInterface::class) shouldBeEqualTo true
+            hasParentOf(FixtureParentInterface::class, indirectParents = true) shouldBeEqualTo true
+            hasParentOf(FixtureInterface::class) shouldBeEqualTo false
+            hasAllParentsOf(FixtureParentInterface::class) shouldBeEqualTo true
+            hasAllParentsOf(listOf(FixtureParentInterface::class)) shouldBeEqualTo true
+        }
+    }
+
+    @Test
+    fun `class-has-indirect-parents-defined-by-import-alias`() {
+        // given
+        val sut =
+            getSnippetFile("class-has-indirect-parents-defined-by-import-alias")
+                .classes()
+
+        // then
+        assertSoftly(sut.first { it.name == "FixtureClass1" }) {
+            hasParentOf(FixtureCollection1::class) shouldBeEqualTo true
+            hasParentOf(Collection::class) shouldBeEqualTo false
+            hasParentOf(Collection::class, indirectParents = true) shouldBeEqualTo true
+            hasParentOf(Iterable::class, indirectParents = true) shouldBeEqualTo true
+            hasAllParentsOf(FixtureCollection1::class, Collection::class, Iterable::class, indirectParents = true) shouldBeEqualTo true
+        }
+
+        assertSoftly(sut.first { it.name == "FixtureClass2" }) {
+            hasParentOf(ByteArrayInputStream::class) shouldBeEqualTo true
+            hasParentOf(InputStream::class) shouldBeEqualTo false
+            hasParentOf(InputStream::class, indirectParents = true) shouldBeEqualTo true
+            hasParentOf(Closeable::class, indirectParents = true) shouldBeEqualTo true
+            hasAllParentsOf(
+                listOf(ByteArrayInputStream::class, InputStream::class, Closeable::class),
+                indirectParents = true,
+            ) shouldBeEqualTo
+                true
         }
     }
 
@@ -321,6 +435,47 @@ class KoClassDeclarationForKoParentProviderTest {
                 .sourceDeclaration
                 ?.asKotlinTypeDeclaration()
                 ?.fullyQualifiedName shouldBeEqualTo "kotlin.Comparable"
+        }
+    }
+
+    @Test
+    fun `class-has-kotlin-type-alias-parents`() {
+        // given
+        val sut =
+            getSnippetFile("class-has-kotlin-type-alias-parents")
+                .classes()
+                .first()
+
+        // then
+        assertSoftly(sut) {
+            hasParentOf(IllegalStateException::class) shouldBeEqualTo true
+            hasParentOf(IllegalStateException::class, indirectParents = true) shouldBeEqualTo true
+            hasParentOf(MutableList::class) shouldBeEqualTo true
+            hasParentOf(RuntimeException::class) shouldBeEqualTo false
+            hasAllParentsOf(IllegalStateException::class, MutableList::class) shouldBeEqualTo true
+            parents()
+                .first()
+                .sourceDeclaration
+                ?.hasKotlinTypeDeclarationOf(IllegalStateException::class) shouldBeEqualTo true
+        }
+    }
+
+    @Test
+    fun `class-has-kotlin-collection-type-alias-parent`() {
+        // given
+        val sut =
+            getSnippetFile("class-has-kotlin-collection-type-alias-parent")
+                .classes()
+                .first()
+
+        // then
+        assertSoftly(sut) {
+            hasParentOf(ArrayList::class) shouldBeEqualTo true
+            hasParentOf(HashSet::class) shouldBeEqualTo false
+            parents()
+                .first()
+                .sourceDeclaration
+                ?.hasKotlinCollectionTypeDeclarationOf(ArrayList::class) shouldBeEqualTo true
         }
     }
 

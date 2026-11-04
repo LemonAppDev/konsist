@@ -6,6 +6,7 @@ import com.lemonappdev.konsist.api.provider.tag.KoKDocSinceTagProvider
  * List containing declarations with since tag.
  *
  * @return A list containing declarations with since tag.
+ * @see KoKDocSinceTagProvider.hasSinceTag
  */
 fun <T : KoKDocSinceTagProvider> List<T>.withSinceTag(): List<T> = filter { it.hasSinceTag }
 
@@ -13,5 +14,6 @@ fun <T : KoKDocSinceTagProvider> List<T>.withSinceTag(): List<T> = filter { it.h
  * List containing declarations with no since tag.
  *
  * @return A list containing declarations with no since tag.
+ * @see KoKDocSinceTagProvider.hasSinceTag
  */
 fun <T : KoKDocSinceTagProvider> List<T>.withoutSinceTag(): List<T> = filterNot { it.hasSinceTag }

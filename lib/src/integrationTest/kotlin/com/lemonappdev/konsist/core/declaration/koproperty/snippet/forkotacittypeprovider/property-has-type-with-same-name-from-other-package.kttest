@@ -1,0 +1,3 @@
+class FixtureClass
+
+val fixtureProperty = FixtureClass()

@@ -9,7 +9,7 @@ interface KoNoInlineModifierProvider :
     KoBaseProvider,
     KoModifierProvider {
     /**
-     * Determines whatever the declaration has `noinline` modifier.
+     * Determines whether the declaration has the `noinline` modifier.
      */
     val hasNoInlineModifier: Boolean
 }

@@ -1,0 +1,1 @@
+val fixtureProperty by lazy(kotlin.LazyThreadSafetyMode.NONE) { 0 }

@@ -91,7 +91,7 @@ class Architecture8Test {
             .message
             .shouldBeEqualTo(
                 "'fails when domain depends on presentation and strict is true (lambda scope)' test has failed. \n" +
-                    "Layer 'Domain' does not depends on 'Presentation' layer.",
+                    "'Domain' layer is required to depend on 'Presentation' layer (strict), but has no dependency on it.",
             )
     }
 
@@ -112,7 +112,7 @@ class Architecture8Test {
             .message
             .shouldBeEqualTo(
                 "'fails when domain depends on presentation and strict is true (lambda files)' test has failed. \n" +
-                    "Layer 'Domain' does not depends on 'Presentation' layer.",
+                    "'Domain' layer is required to depend on 'Presentation' layer (strict), but has no dependency on it.",
             )
     }
 
@@ -135,7 +135,7 @@ class Architecture8Test {
             .message
             .shouldBeEqualTo(
                 "'fails when domain depends on presentation and strict is true (parameter scope)' test has failed. \n" +
-                    "Layer 'Domain' does not depends on 'Presentation' layer.",
+                    "'Domain' layer is required to depend on 'Presentation' layer (strict), but has no dependency on it.",
             )
     }
 
@@ -160,7 +160,7 @@ class Architecture8Test {
             .message
             .shouldBeEqualTo(
                 "'fails when domain depends on presentation and strict is true (parameter files)' test has failed. \n" +
-                    "Layer 'Domain' does not depends on 'Presentation' layer.",
+                    "'Domain' layer is required to depend on 'Presentation' layer (strict), but has no dependency on it.",
             )
     }
     // endregion

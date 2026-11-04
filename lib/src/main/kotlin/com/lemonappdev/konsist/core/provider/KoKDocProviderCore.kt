@@ -3,6 +3,7 @@ package com.lemonappdev.konsist.core.provider
 import com.lemonappdev.konsist.api.declaration.KoKDocDeclaration
 import com.lemonappdev.konsist.api.provider.KoKDocProvider
 import com.lemonappdev.konsist.core.declaration.KoKDocDeclarationCore
+import com.lemonappdev.konsist.core.ext.castToKoBaseDeclaration
 import org.jetbrains.kotlin.kdoc.psi.api.KDoc
 
 internal interface KoKDocProviderCore :
@@ -17,7 +18,7 @@ internal interface KoKDocProviderCore :
                     ?.filterIsInstance<KDoc>()
                     ?.firstOrNull()
 
-            return kDocElement?.let { KoKDocDeclarationCore(kDocElement) }
+            return kDocElement?.let { KoKDocDeclarationCore(kDocElement, this.castToKoBaseDeclaration()) }
         }
 
     override val hasKDoc: Boolean

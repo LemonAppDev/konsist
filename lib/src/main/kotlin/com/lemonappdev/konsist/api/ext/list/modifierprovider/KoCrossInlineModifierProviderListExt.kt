@@ -6,6 +6,7 @@ import com.lemonappdev.konsist.api.provider.modifier.KoCrossInlineModifierProvid
  * List containing declarations with `crossinline` modifier.
  *
  * @return A list containing declarations with the `crossinline` modifier.
+ * @see KoCrossInlineModifierProvider.hasCrossInlineModifier
  */
 fun <T : KoCrossInlineModifierProvider> List<T>.withCrossInlineModifier(): List<T> = filter { it.hasCrossInlineModifier }
 
@@ -13,5 +14,6 @@ fun <T : KoCrossInlineModifierProvider> List<T>.withCrossInlineModifier(): List<
  * List containing declarations without `crossinline` modifier.
  *
  * @return A list containing declarations without the `crossinline` modifier.
+ * @see KoCrossInlineModifierProvider.hasCrossInlineModifier
  */
 fun <T : KoCrossInlineModifierProvider> List<T>.withoutCrossInlineModifier(): List<T> = filterNot { it.hasCrossInlineModifier }

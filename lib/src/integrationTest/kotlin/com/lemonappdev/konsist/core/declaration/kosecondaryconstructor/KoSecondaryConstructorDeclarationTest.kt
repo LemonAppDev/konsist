@@ -1,6 +1,7 @@
 package com.lemonappdev.konsist.core.declaration.kosecondaryconstructor
 
 import com.lemonappdev.konsist.TestSnippetProvider
+import com.lemonappdev.konsist.core.filesystem.PathProvider
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
@@ -19,7 +20,7 @@ class KoSecondaryConstructorDeclarationTest {
         // then
         val declaration = "Declaration:\nconstructor(): this(6)"
         assertSoftly(sut.toString()) {
-            startsWith("Location: /") shouldBeEqualTo true
+            startsWith("Location: ${PathProvider.rootProjectPath}") shouldBeEqualTo true
             endsWith(declaration) shouldBeEqualTo true
         }
     }

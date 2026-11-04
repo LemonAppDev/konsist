@@ -6,54 +6,67 @@ import com.lemonappdev.konsist.api.declaration.KoFileDeclaration
 import com.lemonappdev.konsist.api.provider.KoAnnotationProvider
 import com.lemonappdev.konsist.api.provider.KoBaseProvider
 import com.lemonappdev.konsist.api.provider.KoContainingDeclarationProvider
+import com.lemonappdev.konsist.api.provider.KoContainingFileProvider
 import com.lemonappdev.konsist.api.provider.KoLocationProvider
 import com.lemonappdev.konsist.api.provider.KoNameProvider
+import com.lemonappdev.konsist.api.verify.KoAssertScope
+import com.lemonappdev.konsist.api.verify.KoRule
 import com.lemonappdev.konsist.core.architecture.validator.ascii.AsciiTreeCreator
 import com.lemonappdev.konsist.core.architecture.validator.ascii.AsciiTreeNode
+import com.lemonappdev.konsist.core.declaration.KoAnnotationDeclarationCore
+import com.lemonappdev.konsist.core.declaration.KoFileDeclarationCore
+import com.lemonappdev.konsist.core.declaration.KoKDocDeclarationCore
+import com.lemonappdev.konsist.core.declaration.KoKDocTagDeclarationCore
+import com.lemonappdev.konsist.core.declaration.KoTypeArgumentDeclarationCore
 import com.lemonappdev.konsist.core.exception.KoAssertionFailedException
 import com.lemonappdev.konsist.core.exception.KoException
 import com.lemonappdev.konsist.core.exception.KoInternalException
 import com.lemonappdev.konsist.core.exception.KoPreconditionFailedException
+import com.lemonappdev.konsist.core.provider.KoValueProviderCore
 import com.lemonappdev.konsist.core.util.HyperlinkUtil
+import org.jetbrains.kotlin.com.intellij.openapi.util.Key
+import org.jetbrains.kotlin.psi.KtEscapeStringTemplateEntry
+import org.jetbrains.kotlin.psi.KtStringTemplateExpression
+import org.jetbrains.kotlin.psi.psiUtil.collectDescendantsOfType
 
+private const val SUPPRESS_ANNOTATION_NAME = "Suppress"
+
+private val containsSuppressKey: Key<Boolean> = Key.create("KoContainsSuppress")
+
+@Suppress("detekt.LongParameterList")
 internal fun <E : KoBaseProvider> List<E?>.assert(
     strict: Boolean,
     additionalMessage: String?,
     testName: String?,
-    function: (E) -> Boolean?,
+    rule: KoRule?,
+    function: KoAssertScope.(E) -> Boolean?,
     positiveCheck: Boolean,
 ) {
     var lastDeclaration: KoBaseProvider? = null
 
     try {
-        val fifthIndexMethodName = getTestMethodNameFromFifthIndex()
+        val testNames = testName?.let { listOf(it) } ?: listOfNotNull(KoTestNameContext.current, getTestMethodNameFromFifthIndex())
+        val testMethodName = testNames.firstOrNull()
 
-        val testMethodName =
-            testName
-                ?: if (fifthIndexMethodName.contains("\$default")) {
-                    getTestMethodNameFromSixthIndex()
-                } else {
-                    fifthIndexMethodName
-                }
-
-        val assertMethodName = getTestMethodNameFromFourthIndex()
+        val assertMethodName = getAssertMethodNameFromFourthIndex()
 
         if (strict) {
             checkIfLocalListIsEmpty(this, assertMethodName)
             checkIfLocalListHasOnlyNullElements(this, assertMethodName)
         }
 
-        val localSuppressName = testName ?: testMethodName
+        val notSuppressedDeclarations = checkIfAnnotatedWithSuppress(this.filterNotNull(), testNames)
 
-        val notSuppressedDeclarations = checkIfAnnotatedWithSuppress(this.filterNotNull(), localSuppressName)
-
-        val result =
-            notSuppressedDeclarations.groupBy {
+        val failedItems =
+            notSuppressedDeclarations.mapNotNull {
                 lastDeclaration = it
-                function(it) ?: positiveCheck
+                val scope = KoAssertScopeCore()
+                val passed = (scope.function(it) ?: positiveCheck) == positiveCheck
+
+                if (passed) null else FailedItem(it, scope.failureReasons)
             }
 
-        getResult(notSuppressedDeclarations, result, positiveCheck, localSuppressName, additionalMessage)
+        getResult(failedItems, testMethodName, getCustomMessage(rule, additionalMessage))
     } catch (e: KoException) {
         throw e
     } catch (
@@ -63,39 +76,39 @@ internal fun <E : KoBaseProvider> List<E?>.assert(
     }
 }
 
+@Suppress("detekt.LongParameterList")
 internal fun <E : KoBaseProvider> List<E?>.assert(
     strict: Boolean,
     additionalMessage: String?,
     testName: String?,
+    rule: KoRule?,
     isEmptyOrNull: Boolean,
     onSingleElement: Boolean,
 ) {
     try {
-        val fifthIndexMethodName = getTestMethodNameFromFifthIndex()
+        val testNames = testName?.let { listOf(it) } ?: listOfNotNull(KoTestNameContext.current, getTestMethodNameFromFifthIndex())
+        val testMethodName = testNames.firstOrNull()
 
-        val testMethodName =
-            testName
-                ?: if (fifthIndexMethodName.contains("\$default")) {
-                    getTestMethodNameFromSixthIndex()
-                } else {
-                    fifthIndexMethodName
-                }
+        // Suppressed declarations count as passing. Filtering them out only helps `assertNull`/`assertEmpty`; for
+        // `assertNotNull`/`assertNotEmpty` it would turn a suppressed (non-null) declaration into a failure.
+        val declarations =
+            if (isEmptyOrNull) {
+                val declarationWithoutNull = filterNotNull()
 
-        val localSuppressName = testName ?: testMethodName
+                val suppressedDeclarations =
+                    declarationWithoutNull - checkIfAnnotatedWithSuppress(declarationWithoutNull, testNames).toSet()
 
-        val declarationWithoutNull = filterNotNull()
-
-        val suppressedDeclarations =
-            declarationWithoutNull - checkIfAnnotatedWithSuppress(declarationWithoutNull, localSuppressName).toSet()
-
-        val notSuppressedDeclarations = this - suppressedDeclarations.toSet()
+                this - suppressedDeclarations.toSet()
+            } else {
+                this
+            }
 
         if (!onSingleElement) {
-            val items = if (strict) notSuppressedDeclarations.filterNotNull() else notSuppressedDeclarations
+            val items = if (strict) declarations.filterNotNull() else declarations
 
-            getEmptyResult(items, additionalMessage, isEmptyOrNull, testMethodName)
+            getEmptyResult(items, getCustomMessage(rule, additionalMessage), isEmptyOrNull, testMethodName)
         } else {
-            getNullResult(notSuppressedDeclarations.firstOrNull(), additionalMessage, isEmptyOrNull, testMethodName)
+            getNullResult(declarations.firstOrNull(), getCustomMessage(rule, additionalMessage), isEmptyOrNull, testMethodName)
         }
     } catch (e: KoException) {
         throw e
@@ -138,19 +151,26 @@ fun checkIfLocalListIsEmpty(
 
 private fun <E : KoBaseProvider> checkIfAnnotatedWithSuppress(
     localList: List<E>,
-    suppressName: String,
+    suppressNames: List<String>,
 ): List<E> {
+    if (suppressNames.isEmpty()) {
+        return localList
+    }
+
     val declarations: MutableMap<E, Boolean> = mutableMapOf()
 
     // First we need to exclude (if exist) file suppress test annotation
     localList
         .filterNot {
             it is KoAnnotationDeclaration &&
-                (
-                    (it.name == "Suppress" && it.hasTextContaining("\"konsist.$suppressName\"")) ||
-                        it.hasTextContaining("\"$suppressName\"")
-                )
-        }.forEach { declarations[it] = checkIfDeclarationIsAnnotatedWithSuppress(it as KoBaseDeclaration, suppressName) }
+                it.name == SUPPRESS_ANNOTATION_NAME &&
+                suppressNames.any { suppressName ->
+                    it.hasTextContaining("\"konsist.$suppressName\"") || it.hasTextContaining("\"$suppressName\"")
+                }
+        }.forEach {
+            declarations[it] =
+                isInFileContainingSuppress(it) && checkIfDeclarationIsAnnotatedWithSuppress(it as KoBaseDeclaration, suppressNames)
+        }
 
     val withoutSuppress = mutableListOf<E>()
 
@@ -159,86 +179,135 @@ private fun <E : KoBaseProvider> checkIfAnnotatedWithSuppress(
     return withoutSuppress
 }
 
+/*
+ * Declaration can be suppressed only when its file contains the `Suppress` annotation, so annotations of declarations
+ * from other files (usually most of the files) are not checked. The result is stored in the user data of the file.
+ */
+private fun isInFileContainingSuppress(declaration: KoBaseProvider): Boolean {
+    var file = declaration
+
+    // File declaration is the last parent declaration (its containing declaration is the file itself)
+    while (file !is KoFileDeclaration) {
+        file = getParentDeclaration(file) ?: return true
+    }
+
+    val ktFile = (file as? KoFileDeclarationCore)?.ktFile ?: return true
+
+    // File content can be a rope (e.g. `ImmutableText`) with slow access to characters, so it is converted to string
+    return ktFile.getUserData(containsSuppressKey)
+        ?: ktFile.viewProvider.contents
+            .toString()
+            .contains(SUPPRESS_ANNOTATION_NAME)
+            .also { ktFile.putUserData(containsSuppressKey, it) }
+}
+
 private fun checkIfDeclarationIsAnnotatedWithSuppress(
     declaration: KoBaseDeclaration,
-    testMethodName: String,
+    testNames: List<String>,
 ): Boolean =
     when (declaration) {
         is KoFileDeclaration -> {
-            checkIfSuppressed(declaration, testMethodName)
+            checkIfSuppressed(declaration, testNames)
         }
 
         is KoAnnotationProvider -> {
-            checkIfSuppressed(declaration, testMethodName) ||
-                checkIfParentIsAnnotatedWithSuppress(declaration, testMethodName)
+            checkIfSuppressed(declaration, testNames) ||
+                checkIfParentIsAnnotatedWithSuppress(declaration, testNames)
         }
 
         else -> {
-            checkIfParentIsAnnotatedWithSuppress(declaration, testMethodName)
+            checkIfParentIsAnnotatedWithSuppress(declaration, testNames)
         }
     }
 
 private fun checkIfParentIsAnnotatedWithSuppress(
     declaration: KoBaseDeclaration,
-    testMethodName: String,
+    testNames: List<String>,
 ): Boolean =
-    if (declaration is KoContainingDeclarationProvider) {
-        checkIfDeclarationIsAnnotatedWithSuppress(declaration.containingDeclaration, testMethodName)
-    } else {
-        false
+    getParentDeclaration(declaration)
+        ?.let { checkIfDeclarationIsAnnotatedWithSuppress(it, testNames) }
+        ?: false
+
+/*
+ * Some declarations (e.g. annotations, KDocs or imports) do not provide the containing declaration, so their parent is
+ * the declaration they belong to (e.g. annotated declaration) or their file. These cases are checked before
+ * `KoContainingDeclarationProvider`, because e.g. annotation core implements it internally and returns the file.
+ */
+private fun getParentDeclaration(declaration: KoBaseProvider): KoBaseDeclaration? =
+    when (declaration) {
+        is KoAnnotationDeclarationCore -> declaration.annotatedDeclaration
+        is KoKDocDeclarationCore -> declaration.documentedDeclaration
+        is KoKDocTagDeclarationCore -> declaration.kDocDeclaration
+        is KoTypeArgumentDeclarationCore -> declaration.parentDeclaration
+        is KoContainingDeclarationProvider -> declaration.containingDeclaration
+        is KoContainingFileProvider -> declaration.containingFile
+        else -> null
     }
 
 private fun checkIfSuppressed(
     item: KoAnnotationProvider,
-    testMethodName: String,
+    testNames: List<String>,
 ): Boolean {
-    val annotationParameter =
+    val suppressedNames =
         item
             .annotations
-            .firstOrNull { it.name == "Suppress" }
-            ?.text
-            ?.removePrefix("@file:Suppress(")
-            ?.removePrefix("@Suppress(")
-            ?.substringBeforeLast(")")
-            ?.split(",")
-            ?.map { it.trim() }
-            ?.map { it.removePrefix("\"") }
-            ?.map { it.removeSuffix("\"") }
-            .orEmpty()
+            .filter { it.name == SUPPRESS_ANNOTATION_NAME }
+            .flatMap { it.getSuppressedNames() }
 
-    return annotationParameter.any { it == testMethodName } || annotationParameter.any { it == "konsist.$testMethodName" }
+    return testNames.any { it in suppressedNames || "konsist.$it" in suppressedNames }
 }
 
+/**
+ * Returns string values of all arguments, e.g. `@Suppress("a, b", "c")`, `@Suppress(names = ["a"])` or
+ * `@Suppress(*arrayOf("a"))`.
+ */
+private fun KoAnnotationDeclaration.getSuppressedNames(): List<String> =
+    arguments
+        .mapNotNull { (it as? KoValueProviderCore)?.ktExpression }
+        .flatMap { expression ->
+            if (expression is KtStringTemplateExpression) {
+                listOf(expression)
+            } else {
+                expression.collectDescendantsOfType<KtStringTemplateExpression>()
+            }
+        }.map { it.getContent() }
+
+private fun KtStringTemplateExpression.getContent(): String =
+    entries.joinToString("") { (it as? KtEscapeStringTemplateEntry)?.unescapedValue ?: it.text }
+
+private class FailedItem(
+    val item: Any,
+    val failureReasons: List<String>,
+)
+
 private fun getResult(
-    items: List<*>,
-    result: Map<Boolean, List<Any>>,
-    positiveCheck: Boolean,
-    testName: String,
+    failedItems: List<FailedItem>,
+    testName: String?,
     additionalMessage: String?,
 ): Unit {
-    val allChecksPassed = (result[positiveCheck]?.size ?: 0) == items.size
-
-    if (!allChecksPassed) {
-        val failedItems = result[!positiveCheck].orEmpty()
+    if (failedItems.isNotEmpty()) {
         throw KoAssertionFailedException(getCheckFailedMessage(failedItems, testName, additionalMessage))
     }
 }
 
 private fun getCheckFailedMessage(
-    failedItems: List<*>,
-    testName: String,
+    failedItems: List<FailedItem>,
+    testName: String?,
     additionalMessage: String?,
 ): String {
-    val (types, failedDeclarationsMessage) = processFailedItems(failedItems)
+    val (types, failedDeclarationsMessage) = processFailedItems(failedItems.map { it.item })
 
     val customMessage = additionalMessage?.let { "\n$it\n" } ?: " "
     val times = if (failedItems.size == 1) "time" else "times"
 
     val getRootMessage =
-        "Assert '$testName' was violated (${failedItems.size} $times).$customMessage" +
+        "Assert${testName.toMessageName("'")} was violated (${failedItems.size} $times).$customMessage" +
             "Invalid $types:"
 
-    val failedDeclarationAsciiTreeNodes = failedDeclarationsMessage.map { AsciiTreeNode(it, emptyList()) }
+    val failedDeclarationAsciiTreeNodes =
+        failedDeclarationsMessage.zip(failedItems) { declarationMessage, failedItem ->
+            AsciiTreeNode(declarationMessage, failedItem.failureReasons.map { AsciiTreeNode(it, emptyList()) })
+        }
 
     return AsciiTreeCreator().invoke(
         AsciiTreeNode(
@@ -295,7 +364,7 @@ private fun getEmptyResult(
     items: List<*>,
     additionalMessage: String?,
     isEmpty: Boolean,
-    testMethodName: String,
+    testMethodName: String?,
 ) {
     val itemsListIsEmpty = items.isEmpty()
 
@@ -327,7 +396,7 @@ private fun getEmptyResult(
         val customMessage = if (additionalMessage != null) "\n${additionalMessage}\n" else " "
 
         val getRootMessage =
-            "Assert '$testMethodName' failed.${customMessage}Declaration list is$negation empty.$values"
+            "Assert${testMethodName.toMessageName("'")} failed.${customMessage}Declaration list is$negation empty.$values"
 
         val failedDeclarationAsciiTreeNodes =
             items
@@ -366,7 +435,7 @@ private fun getNullResult(
     item: Any?,
     additionalMessage: String?,
     isNull: Boolean,
-    testMethodName: String,
+    testMethodName: String?,
 ) {
     val itemIsNull = item == null
 
@@ -376,7 +445,7 @@ private fun getNullResult(
         val customMessage = if (additionalMessage != null) "\n${additionalMessage}\n" else " "
 
         val getRootMessage =
-            "Assert `$testMethodName` failed.${customMessage}Declaration has$negation null value$value."
+            "Assert${testMethodName.toMessageName("`")} failed.${customMessage}Declaration has$negation null value$value."
 
         val failedDeclarationAsciiTreeNode: AsciiTreeNode? =
             item.createErrorOutput()?.let { string -> AsciiTreeNode(string, emptyList()) }
@@ -400,3 +469,8 @@ private fun Any.getDeclarationType(): String? =
         .simpleName
         ?.removePrefix("Ko")
         ?.removeSuffix("DeclarationCore")
+
+/**
+ * Test name can't be determined for some test frameworks (e.g. Kotest), so it is omitted from the message.
+ */
+private fun String?.toMessageName(quote: String) = this?.let { " $quote$it$quote" }.orEmpty()
