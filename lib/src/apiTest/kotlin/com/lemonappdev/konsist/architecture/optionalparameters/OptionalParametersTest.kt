@@ -551,8 +551,9 @@ class OptionalParametersTest {
                 scope.assertArchitecture(
                     rule =
                         KoRule(
+                            id = "RULE-1",
                             title = "Presentation must not depend on domain.",
-                            rationale = "Presentation is the outermost layer.",
+                            reason = "Presentation is the outermost layer.",
                             howToFix = "Move the dependency to the domain layer.",
                         ),
                 ) {
@@ -570,8 +571,9 @@ class OptionalParametersTest {
             .message
             .shouldBeEqualTo(
                 "'error message when rule is provided (scope)' test has failed. \n" +
+                    "ID: RULE-1\n" +
                     "RULE: Presentation must not depend on domain.\n" +
-                    "WHY: Presentation is the outermost layer.\n" +
+                    "REASON: Presentation is the outermost layer.\n" +
                     "HOW TO FIX: Move the dependency to the domain layer.\n" +
                     "'Presentation' layer should not depend on anything but has dependencies in files:\n" +
                     "└── File $filepath\n" +
@@ -589,8 +591,9 @@ class OptionalParametersTest {
                     additionalMessage = "SOME ADDITIONAL MESSAGE",
                     rule =
                         KoRule(
+                            id = "RULE-1",
                             title = "Presentation must not depend on domain.",
-                            rationale = "Presentation is the outermost layer.",
+                            reason = "Presentation is the outermost layer.",
                             howToFix = "Move the dependency to the domain layer.",
                         ),
                 ) {
@@ -608,8 +611,9 @@ class OptionalParametersTest {
             .message
             .shouldBeEqualTo(
                 "'error message when rule and additionalMessage are provided (files)' test has failed. \n" +
+                    "ID: RULE-1\n" +
                     "RULE: Presentation must not depend on domain.\n" +
-                    "WHY: Presentation is the outermost layer.\n" +
+                    "REASON: Presentation is the outermost layer.\n" +
                     "HOW TO FIX: Move the dependency to the domain layer.\n" +
                     "SOME ADDITIONAL MESSAGE\n" +
                     "'Presentation' layer should not depend on anything but has dependencies in files:\n" +
