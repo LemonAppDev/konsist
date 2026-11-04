@@ -14,7 +14,8 @@
 - Publish Public Snapshot `./gradlew publish -Pkonsist.releaseTarget=snapshot` publish to
   [snapshot repository](https://central.sonatype.com/repository/maven-snapshots/com/lemonappdev/konsist/)
   (snapshots are removed after 90 days)
-- Publish Release `./gradlew publish -Pkonsist.releaseTarget=release` upload to
+- Publish Release `./gradlew publish -Pkonsist.releaseTarget=release` (run by the
+  [Release](.github/workflows/release.yml) workflow after merge to `main`) upload to
   [Central Portal](https://central.sonatype.com/publishing/deployments). After validation, the artifact is:
   - automatically published to [maven central](https://central.sonatype.com/artifact/com.lemonappdev/konsist/versions).
   - eventually will be visible as [mvn repository](https://mvnrepository.com/artifact/com.lemonappdev/konsist) (third-party site that 
@@ -35,16 +36,20 @@ Snapshot and release publishing require these properties in `local.properties`:
     1. [gradle.properties](gradle.properties) file
     2. [README.md](README.md) file
 4. Remove deprecated API
-5. Open PR targeting `main` and wait for all checks to pass
-6. Release local artifact and test 3rd party projects using local artifact
+5. Create a draft [GitHub release](https://github.com/LemonAppDev/konsist/releases/new) with release notes
+    1. set `vX.Y.Z` as release title (and tag version)
+    2. set `main` as target branch
+    3. save as draft
+6. Open PR targeting `main` and wait for all checks to pass (`Check Konsist Version Increased` and
+   `Check Release Notes Exist` checks run only for PRs targeting `main`, re-run `Check Release Notes Exist` after
+   creating the draft release)
+7. Release local artifact and test 3rd party projects using local artifact
     1. [Android-showcase](https://github.com/igorwojda/android-showcase)
     2. Mango (internal)
     3. [CleanArchitectureForAndroid](https://github.com/EranBoudjnah/CleanArchitectureForAndroid)
-7. Merge PR to `main`
-8. Run `./gradlew publish -Pkonsist.releaseTarget=release` on the `main` branch to release a new version
-9. Create a new [GitHub release](https://github.com/LemonAppDev/konsist/releases/new)
-    1. set `vX.Y.Z` as tag version
-    2. set `vX.Y.Z` as release title
+8. Merge PR to `main`. [Release](.github/workflows/release.yml) workflow publishes the release to Maven Central and
+   publishes the draft GitHub release (creates `vX.Y.Z` tag on the merge commit)
+9. Wait for the [Release](https://github.com/LemonAppDev/konsist/actions/workflows/release.yml) workflow to pass
 10. Update Konsist version in the
     Konsist [Quick Start](https://app.gitbook.com/o/PQj191UX5M2C2XxCZuYO/s/RYeSMx6WDKivnwWx7PdP/getting-started/gettingstarted)
     docs page
@@ -65,20 +70,21 @@ Snapshot and release publishing require these properties in `local.properties`:
     1. [gradle.properties](gradle.properties) file
     2. [README.md](README.md) file
     3. Sample projects
-7. Open the release PR targeting `main` and wait for all checks to pass
-8. Merge PR
-9. Switch to the `main` branch and pull changes
-10. Run `./gradlew publish -Pkonsist.releaseTarget=release` on the `main` branch to release a new version
-11. Create a new [GitHub release](https://github.com/LemonAppDev/konsist/releases/new)
-    1. set `vX.Y.Z` as tag version
-    2. set `vX.Y.Z` as release title
-12. Update Konsist version in the
+7. Create a draft [GitHub release](https://github.com/LemonAppDev/konsist/releases/new) with release notes
+    1. set `vX.Y.Z` as release title (and tag version)
+    2. set `main` as target branch
+    3. save as draft
+8. Open the release PR targeting `main` and wait for all checks to pass
+9. Merge PR. [Release](.github/workflows/release.yml) workflow publishes the release to Maven Central and publishes
+   the draft GitHub release
+10. Wait for the [Release](https://github.com/LemonAppDev/konsist/actions/workflows/release.yml) workflow to pass
+11. Update Konsist version in the
     Konsist [Quick Start](https://app.gitbook.com/o/PQj191UX5M2C2XxCZuYO/s/RYeSMx6WDKivnwWx7PdP/getting-started/getting-started)
     docs page
-13. Run `/scripts/deploy_snippets_to_kotlin_documentation_repo.py` snippet to generate PR with updated snippets for Konsist Documentation
-14. Merge `main` to `develop`
-15. Upgrade `konist` version on `develop` branch
-16. Notify devs who have reported the issue (community link in original ticket)
+12. Run `/scripts/deploy_snippets_to_kotlin_documentation_repo.py` snippet to generate PR with updated snippets for Konsist Documentation
+13. Merge `main` to `develop`
+14. Upgrade `konist` version on `develop` branch
+15. Notify devs who have reported the issue (community link in original ticket)
 
 ## Central Portal Links
 

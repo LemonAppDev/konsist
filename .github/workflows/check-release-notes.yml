@@ -1,0 +1,39 @@
+name: Check Release Notes
+
+# Every merge to main is a release (see 'release.yml'), so draft GitHub release with 'v<konsist.version>' tag or title
+# and release notes must exist before merge. Release workflow publishes this draft release.
+# Draft releases don't trigger workflows, so re-run this check after creating the draft release.
+
+on:
+  pull_request:
+    branches: [ main ]
+    # 'edited' re-runs the check when the PR base branch is changed to main
+    types: [ opened, synchronize, reopened, edited ]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+# Draft releases are listed only for tokens with write access (token of PRs from forks is read-only)
+permissions:
+  contents: write
+
+jobs:
+  check-release-notes-exist:
+    name: Check Release Notes Exist
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+
+      - name: Set up Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: '3.x'
+
+      - name: Check Draft Release Notes Exist
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python3 misc/scripts/get_konsist_release_notes_draft.py
