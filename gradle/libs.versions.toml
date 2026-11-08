@@ -17,7 +17,7 @@ junitJupiterParams =  { module = "org.junit.jupiter:junit-jupiter-params", versi
 kotest =  { module = "io.kotest:kotest-runner-junit5", version.ref = "kotestVersion" }
 kotestFrameworkEngine =  { module = "io.kotest:kotest-framework-engine", version.ref = "kotestVersion" }
 kluent = "org.amshove.kluent:kluent:1.73"
-mockk = "io.mockk:mockk:1.14.11"
+mockk = "io.mockk:mockk:1.14.12"
 kotlinCompilerEmbeddable = { module = "org.jetbrains.kotlin:kotlin-compiler-embeddable", version.ref = "kotlinVersion" }
 # JVM artifact is used, because Gradle publishes the resolved version of multiplatform "kotlinx-coroutines-core" in POM
 # (compileOnly Kotest upgrades it on compile classpath), see DeveloperReadme.md "Kotlin Compatibility"
