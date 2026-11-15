@@ -15,7 +15,9 @@ import java.io.File
  *   "src" directory (e.g. "src/app/build" for module located in a directory named "src" and
  *   "app/src/test/resources/project/build" for Gradle test fixture project).
  *   Packages named "build" or "target" (e.g. "app/src/main/kotlin/com/build") and module directories named "build" or
- *   "target" (e.g. "feature/target") are not ignored.
+ *   "target" (e.g. "feature/target") are not ignored. A build output directory that looks like a module directory
+ *   (e.g. "app/build" containing the "src" directory or a build file) is not ignored either, so all its content is
+ *   scanned.
  *
  * [isModuleDirectory] returns true if the given directory is a module directory. It is called only for directories
  * named "build" or "target" and their parent directories, so other directories are not checked on the file system.

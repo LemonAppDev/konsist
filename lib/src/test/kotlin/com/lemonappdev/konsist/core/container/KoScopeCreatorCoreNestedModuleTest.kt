@@ -34,6 +34,7 @@ import java.io.File
  * ("src/tools/ToolsScript.kt" and "src/tools/src/test/testData/ToolsFixture.kt").
  * Module "app" contains Gradle test fixture projects located in resources ("app/src/functionalTest/resources/project")
  * and in the test source set ("app/src/test/testData/project"), which are not modules.
+ * Modules "platform/build" and "platform/target" are named like build output directories.
  * Runs in isolation, because it mocks global objects.
  */
 @Isolated
@@ -69,6 +70,9 @@ class KoScopeCreatorCoreNestedModuleTest {
                 APP_FIXTURE_PROJECT_MAIN,
                 APP_TEST_DATA_PROJECT_SCRIPT,
                 APP_TEST_DATA_PROJECT_MAIN,
+                PLATFORM_BUILD_MAIN,
+                PLATFORM_BUILD_TEST,
+                PLATFORM_TARGET_MAIN,
             ).filter { predicate(File(it)) }
                 .map { createKoFile(it) }
         }
@@ -249,6 +253,9 @@ class KoScopeCreatorCoreNestedModuleTest {
                 PAYMENT_TEST,
                 FEATURE_MAIN,
                 FEATURE_TEST,
+                PLATFORM_BUILD_MAIN,
+                PLATFORM_BUILD_TEST,
+                PLATFORM_TARGET_MAIN,
                 SRC_TOOLS_MAIN,
                 SRC_TOOLS_FIXTURE,
             )
@@ -531,6 +538,28 @@ class KoScopeCreatorCoreNestedModuleTest {
         func shouldThrow IllegalArgumentException::class
     }
 
+    @Test
+    fun `scopeFromModule for modules named build and target`() {
+        // when
+        val buildModule = sut.scopeFromModule(":platform:build").filePaths()
+        val targetModule = sut.scopeFromModule("platform/target").filePaths()
+
+        // then
+        buildModule shouldBeEqualTo listOf(PLATFORM_BUILD_MAIN, PLATFORM_BUILD_TEST)
+        targetModule shouldBeEqualTo listOf(PLATFORM_TARGET_MAIN)
+    }
+
+    @Test
+    fun `scopeFromProduction and scopeFromTest for module named build`() {
+        // when
+        val production = sut.scopeFromProduction(moduleName = ":platform:build").filePaths()
+        val test = sut.scopeFromTest(moduleName = ":platform:build").filePaths()
+
+        // then
+        production shouldBeEqualTo listOf(PLATFORM_BUILD_MAIN)
+        test shouldBeEqualTo listOf(PLATFORM_BUILD_TEST)
+    }
+
     private fun KoScope.filePaths() = files.map { it.path }
 
     private fun createKoFile(filePath: String): KoFileDeclaration {
@@ -572,6 +601,9 @@ class KoScopeCreatorCoreNestedModuleTest {
             "$PROJECT_ROOT_PATH/app/src/test/testData/project/TestDataProjectScript.kt"
         private const val APP_TEST_DATA_PROJECT_MAIN =
             "$PROJECT_ROOT_PATH/app/src/test/testData/project/src/main/kotlin/TestDataProjectMain.kt"
+        private const val PLATFORM_BUILD_MAIN = "$PROJECT_ROOT_PATH/platform/build/src/main/kotlin/PlatformBuildMain.kt"
+        private const val PLATFORM_BUILD_TEST = "$PROJECT_ROOT_PATH/platform/build/src/test/kotlin/PlatformBuildTest.kt"
+        private const val PLATFORM_TARGET_MAIN = "$PROJECT_ROOT_PATH/platform/target/src/main/kotlin/PlatformTargetMain.kt"
 
         // Module directories of directories containing files located outside the source root
         private val MODULE_DIRECTORIES =

@@ -159,6 +159,37 @@ class ProjectKotlinFileScannerTest {
     }
 
     @Test
+    fun `should return kotlin files from build output directory that looks like a module directory`(
+        @TempDir projectRootDir: File,
+    ) {
+        // given
+        createFiles(
+            projectRootDir,
+            "settings.gradle.kts",
+            "app/build.gradle.kts",
+            "app/src/main/kotlin/AppClass.kt",
+            "app/build/src/main/kotlin/OutputClass.kt",
+            "lib/pom.xml",
+            "lib/src/main/kotlin/LibClass.kt",
+            "lib/target/pom.xml",
+            "lib/target/OutputScript.kt",
+        )
+        val sut = ProjectKotlinFileScanner(projectRootDir)
+
+        // when
+        val actual = runBlocking { sut.scan() }
+
+        // then
+        actual.relativePaths(projectRootDir) shouldBeEqualTo
+            setOf(
+                "app/src/main/kotlin/AppClass.kt",
+                "app/build/src/main/kotlin/OutputClass.kt",
+                "lib/src/main/kotlin/LibClass.kt",
+                "lib/target/OutputScript.kt",
+            )
+    }
+
+    @Test
     fun `should return files in the same order as sequential walk`(
         @TempDir projectRootDir: File,
     ) {
