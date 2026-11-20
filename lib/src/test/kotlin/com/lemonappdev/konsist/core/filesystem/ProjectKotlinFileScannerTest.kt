@@ -131,6 +131,65 @@ class ProjectKotlinFileScannerTest {
     }
 
     @Test
+    fun `should return kotlin files from modules named build or target`(
+        @TempDir projectRootDir: File,
+    ) {
+        // given
+        createFiles(
+            projectRootDir,
+            "settings.gradle.kts",
+            "feature/build/build.gradle.kts",
+            "feature/build/src/main/kotlin/BuildFeatureClass.kt",
+            "feature/build/build/generated/ksp/main/kotlin/Generated.kt",
+            "feature/target/pom.xml",
+            "feature/target/src/main/kotlin/com/sample/target/TargetFeatureClass.kt",
+            "feature/target/target/generated-sources/Generated.kt",
+        )
+        val sut = ProjectKotlinFileScanner(projectRootDir)
+
+        // when
+        val actual = runBlocking { sut.scan() }
+
+        // then
+        actual.relativePaths(projectRootDir) shouldBeEqualTo
+            setOf(
+                "feature/build/src/main/kotlin/BuildFeatureClass.kt",
+                "feature/target/src/main/kotlin/com/sample/target/TargetFeatureClass.kt",
+            )
+    }
+
+    @Test
+    fun `should return kotlin files from build output directory that looks like a module directory`(
+        @TempDir projectRootDir: File,
+    ) {
+        // given
+        createFiles(
+            projectRootDir,
+            "settings.gradle.kts",
+            "app/build.gradle.kts",
+            "app/src/main/kotlin/AppClass.kt",
+            "app/build/src/main/kotlin/OutputClass.kt",
+            "lib/pom.xml",
+            "lib/src/main/kotlin/LibClass.kt",
+            "lib/target/pom.xml",
+            "lib/target/OutputScript.kt",
+        )
+        val sut = ProjectKotlinFileScanner(projectRootDir)
+
+        // when
+        val actual = runBlocking { sut.scan() }
+
+        // then
+        actual.relativePaths(projectRootDir) shouldBeEqualTo
+            setOf(
+                "app/src/main/kotlin/AppClass.kt",
+                "app/build/src/main/kotlin/OutputClass.kt",
+                "lib/src/main/kotlin/LibClass.kt",
+                "lib/target/OutputScript.kt",
+            )
+    }
+
+    @Test
     fun `should return files in the same order as sequential walk`(
         @TempDir projectRootDir: File,
     ) {
